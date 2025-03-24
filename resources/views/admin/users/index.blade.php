@@ -26,6 +26,10 @@
                     <td class="py-3 px-6">{{ $user->email }}</td>
                     <td class="py-3 px-6">{{ ucfirst($user->role) }}</td>
                     <td class="py-3 px-6 text-center flex justify-center space-x-2">
+                        <a href="{{ route('admin.users.edit', $user->id) }}" 
+                            class="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600">
+                             Edit
+                         </a>                                             
                         <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
                             @csrf @method('DELETE')
                             <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">

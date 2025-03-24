@@ -35,30 +35,41 @@ class UserController extends Controller {
         return redirect()->route('admin.users.index')->with('success', 'User berhasil ditambahkan');
     }
 
+    public function edit ($id){
+        $user = User::findOrFail($id);   
+        return view('admin.users.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id) {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'nullable|min:6',
+            'role' => 'required'
+        ]);
+
+        $user = User::findOrFail($id);
+
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role
+        ];
+
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $user->update($data);
+
+        return redirect()->route('admin.users.index')->with('success', 'Data pengguna berhasil diperbarui.');
+    }
+
+    
+
     public function destroy(User $user) {
         $user->delete();
         return redirect()->route('admin.users.index')->with('success', 'User berhasil dihapus');
     }
 
-    public function loginForm() {
-        return view('auth.login');
-    }
-
-    public function login(Request $request) {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('admin.dashboard')->with('success', 'Login berhasil');
-        }
-
-        return back()->withErrors(['email' => 'Email atau password salah']);
-    }
-
-    public function logout() {
-        Auth::logout();
-        return redirect()->route('login')->with('success', 'Logout berhasil');
-    }
 }
