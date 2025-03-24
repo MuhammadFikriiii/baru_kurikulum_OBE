@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 // Auth
+
 Route::get('/', [LoginController::class, 'loginForm'])->name('login');
 Route::post('/', [LoginController::class, 'login'])->name('login.post');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -21,6 +22,8 @@ Route::get('/validasi-forgot-password/{token}', [LoginController::class, 'valida
 Route::get('/reset-password/{token}', [LoginController::class, 'showResetPasswordForm'])
     ->name('show-reset-password-form');
 
+Route::get('/signup', [LoginController::class, 'signup'])->name('signup');
+
 // Grup Route Admin
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
@@ -30,4 +33,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+  
 });
