@@ -37,6 +37,7 @@ class JurusanController extends Controller
     public function update(Request $request, Jurusan $jurusan)
     {
         $request->validate([
+            'kode_jurusan' => 'required',
             'nama_jurusan' => 'required|string|max:50',
         ]);
 

@@ -1,5 +1,3 @@
-<!-- resources/views/admin/jurusan/create.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
