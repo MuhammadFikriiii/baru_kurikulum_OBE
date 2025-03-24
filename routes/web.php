@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JurusanController;
 use Illuminate\Support\Facades\Route;
 
 // Auth
@@ -33,5 +34,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-  
+    Route::get('/jurusan', [JurusanController::class, 'index'])->name('jurusan.index');
+    Route::get('/jurusan/create', [JurusanController::class, 'create'])->name('jurusan.create');
+    Route::post('/jurusan', [JurusanController::class, 'store'])->name('jurusan.store');
 });

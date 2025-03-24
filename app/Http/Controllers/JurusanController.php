@@ -10,12 +10,12 @@ class JurusanController extends Controller
     public function index()
     {
         $jurusans = Jurusan::all();
-        return view('jurusan.index', compact('jurusans'));
+        return view('admin.jurusan.index', compact('jurusans'));
     }
 
     public function create()
     {
-        return view('jurusan.create');
+        return view('admin.jurusan.create');
     }
 
     public function store(Request $request)
@@ -26,12 +26,12 @@ class JurusanController extends Controller
         ]);
 
         Jurusan::create($request->all());
-        return redirect()->route('jurusan.index')->with('success', 'Jurusan berhasil ditambahkan.');
+        return redirect()->route('admin.jurusan.index')->with('success', 'Jurusan berhasil ditambahkan.');
     }
 
     public function edit(Jurusan $jurusan)
     {
-        return view('jurusan.edit', compact('jurusan'));
+        return view('admin.jurusan.edit', compact('jurusan'));
     }
 
     public function update(Request $request, Jurusan $jurusan)
@@ -41,12 +41,12 @@ class JurusanController extends Controller
         ]);
 
         $jurusan->update($request->all());
-        return redirect()->route('jurusan.index')->with('success', 'Jurusan berhasil diperbarui.');
+        return redirect()->route('admin.jurusan.index')->with('success', 'Jurusan berhasil diperbarui.');
     }
 
     public function destroy(Jurusan $jurusan)
     {
         $jurusan->delete();
-        return redirect()->route('jurusan.index')->with('success', 'Jurusan berhasil dihapus.');
+        return redirect()->route('admin.jurusan.index')->with('success', 'Jurusan berhasil dihapus.');
     }
 }
