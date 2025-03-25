@@ -11,11 +11,11 @@ class PasswordResetToken extends Model
 
     protected $table = 'password_reset_tokens';
 
-    protected $primaryKey = 'token'; // Set primary key ke 'token'
-    public $incrementing = false; // Nonaktifkan auto-increment (karena token bukan angka)
-    protected $keyType = 'string'; // Pastikan primary key berupa string
+    protected $primaryKey = 'token';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     protected $fillable = ['email', 'token', 'created_at'];
 
-    public $timestamps = false; // Hindari error karena tidak ada 'updated_at'
+    public $timestamps = false;
 }

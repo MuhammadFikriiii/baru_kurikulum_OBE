@@ -27,6 +27,8 @@
                         <td class="border px-4 py-2">{{ $prodi->kode_prodi }}</td>
                         <td class="border px-4 py-2">{{ $prodi->nama_prodi }}</td>
                         <td class="border px-4 py-2">{{ $prodi->jurusan->nama_jurusan }}</td>
+                        <td><a href="{{ route('admin.prodi.edit', $prodi->kode_prodi) }}">Edit</a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

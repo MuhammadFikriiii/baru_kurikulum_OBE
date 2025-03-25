@@ -36,17 +36,18 @@ class ProdiController extends Controller
     public function edit(Prodi $prodi)
     {
         $jurusans = Jurusan::all();
-        return view('prodi.edit', compact('prodi', 'jurusans'));
+        return view('admin.prodi.edit', compact('prodi', 'jurusans'));
     }
 
     public function update(Request $request, Prodi $prodi)
     {
         $request->validate([
+            'kode_prodi' => 'required|string|max:10',
             'nama_prodi' => 'required|string|max:50',
         ]);
 
         $prodi->update($request->all());
-        return redirect()->route('prodi.index')->with('success', 'Prodi berhasil diperbarui.');
+        return redirect()->route('admin.prodi.index')->with('success', 'Prodi berhasil diperbarui.');
     }
 
     public function destroy(Prodi $prodi)

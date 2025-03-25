@@ -17,6 +17,8 @@ class LoginController extends Controller
     public function signup() {
         return view('auth.signup');
     }
+
+    
     public function loginForm() {
         return view('auth.login');
     }
