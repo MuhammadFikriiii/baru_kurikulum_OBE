@@ -9,9 +9,9 @@
         Tambah User
     </a>
 
-    <div class="mt-4 bg-white shadow-sm rounded-lg overflow-hidden">
+    <div class="mt-4 bg-white shadow-sm overflow-hidden">
         <table class="w-full border-collapse">
-            <thead class="bg-gray-100 text-gray-700 border-b">
+            <thead class="bg-green-800 text-white border-b">
                 <tr>
                     <th class="py-3 px-6 text-left">Nama</th>
                     <th class="py-3 px-6 text-left">Email</th>
