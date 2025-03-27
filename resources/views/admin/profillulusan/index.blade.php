@@ -36,6 +36,11 @@
                         <td class="border px-4 py-2">{{ $profillulusan->keterangan_pl }}</td>
                         <td class="border px-4 py-2">{{ $profillulusan->sumber_pl }}</td>
                         <td><a href="{{ route('admin.profillulusan.edit', $profillulusan->kode_pl) }}">Edit</a>
+                            <form action="{{ route('admin.profillulusan.destroy', $profillulusan->kode_pl) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

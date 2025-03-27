@@ -52,4 +52,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/profillulusan', [ProfilLulusanController::class, 'store'])->name('profillulusan.store');
     Route::get('/profillulusan/{profillulusan}/edit', [ProfilLulusanController::class, 'edit'])->name('profillulusan.edit');
     Route::put('/profillulusan/{profillulusan}', [ProfilLulusanController::class, 'update'])->name('profillulusan.update');
+    Route::delete('/profillulusan/{profillulusan}', [ProfilLulusanController::class, 'destroy'])->name('profillulusan.destroy');
 });

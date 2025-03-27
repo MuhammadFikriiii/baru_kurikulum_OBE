@@ -56,4 +56,11 @@ class ProfilLulusanController extends Controller
         $profillulusan->update($request->all());
         return redirect()->route('admin.profillulusan.index')->with('success', 'Prodi berhasil diperbarui.');
     }
+
+    public function destroy(ProfilLulusan $profillulusan)
+    {
+        $profillulusan->delete();
+        return redirect()->route('admin.profillulusan.index')->with('success','');
+
+    }
 }
