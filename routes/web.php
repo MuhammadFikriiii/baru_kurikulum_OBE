@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\ProfilLulusanController;
 use Illuminate\Support\Facades\Route;
 
 // Auth
@@ -46,4 +47,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/prodi', [ProdiController::class, 'store'])->name('prodi.store');
     Route::get('/prodi/{prodi}/edit', [ProdiController::class, 'edit'])->name('prodi.edit');
     Route::put('/prodi/{prodi}', [ProdiController::class, 'update'])->name('prodi.update');
+    Route::get('/profillulusan', [ProfilLulusanController::class, 'index'])->name('profillulusan.index');
+    Route::get('/profillulusan/create', [ProfilLulusanController::class, 'create'])->name('profillulusan.create');
+    Route::post('/profillulusan', [ProfilLulusanController::class, 'store'])->name('profillulusan.store');
 });

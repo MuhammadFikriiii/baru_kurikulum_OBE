@@ -20,6 +20,7 @@ return new class extends Migration
             $table->enum('keterangan_pl',['Kompetensi Utama Bidang','Kompetensi Utama', 'Kompetensi_tambahan']);
             $table->text('sumber_pl');
             $table->foreign('kode_prodi')->references('kode_prodi')->on('prodis')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
