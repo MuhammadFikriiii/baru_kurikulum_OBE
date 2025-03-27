@@ -22,6 +22,7 @@
                     <th class="border px-4 py-2">Unsur</th>
                     <th class="border px-4 py-2">Keterangan</th>
                     <th class="border px-4 py-2">Sumber</th>
+                    <th class="border px-4 py-2">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,9 +32,11 @@
                         <td class="border px-4 py-2">{{ $profillulusan->prodi->nama_prodi }}</td>
                         <td class="border px-4 py-2">{{ $profillulusan->deskripsi_pl }}</td>
                         <td class="border px-4 py-2">{{ $profillulusan->profesi_pl }}</td>
-                        <td class="border px-4 py-2">{{ $profillulusan->unser_pl }}</td>
+                        <td class="border px-4 py-2">{{ $profillulusan->unsur_pl }}</td>
                         <td class="border px-4 py-2">{{ $profillulusan->keterangan_pl }}</td>
                         <td class="border px-4 py-2">{{ $profillulusan->sumber_pl }}</td>
+                        <td><a href="{{ route('admin.profillulusan.edit', $profillulusan->kode_pl) }}">Edit</a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

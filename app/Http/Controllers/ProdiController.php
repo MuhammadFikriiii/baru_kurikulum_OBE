@@ -43,6 +43,7 @@ class ProdiController extends Controller
     {
         $request->validate([
             'kode_prodi' => 'required|string|max:10',
+            'kode_jurusan' => 'required|string|exists:jurusans,kode_jurusan',
             'nama_prodi' => 'required|string|max:50',
         ]);
 

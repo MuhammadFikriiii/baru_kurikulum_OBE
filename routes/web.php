@@ -50,4 +50,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/profillulusan', [ProfilLulusanController::class, 'index'])->name('profillulusan.index');
     Route::get('/profillulusan/create', [ProfilLulusanController::class, 'create'])->name('profillulusan.create');
     Route::post('/profillulusan', [ProfilLulusanController::class, 'store'])->name('profillulusan.store');
+    Route::get('/profillulusan/{profillulusan}/edit', [ProfilLulusanController::class, 'edit'])->name('profillulusan.edit');
+    Route::put('/profillulusan/{profillulusan}', [ProfilLulusanController::class, 'update'])->name('profillulusan.update');
 });
