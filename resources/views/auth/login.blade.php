@@ -6,77 +6,48 @@
     <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-indigo-600">
+<body class="h-screen flex items-center justify-center bg-blue-500">
+    
+    <div class="w-full max-w-4xl flex bg-white rounded-lg shadow-2xl overflow-hidden">
 
-    <div class="w-full max-w-3xl flex bg-white rounded-lg shadow-2xl overflow-hidden">
-        
-        <!-- Sisi Kiri -->
-        <div class="w-1/2 bg-red-500 flex items-center justify-center text-white text-3xl font-bold p-6">
-            Welcome Back! 👋
-        </div>
-
-        <!-- Form Login -->
-        <div class="w-1/2 p-8">
-            <h2 class="text-2xl font-bold text-center text-gray-700">Masuk & Akses</h2>
-            <p class="text-gray-500 text-center mb-6">Akses sistem lebih cepat dan efisien!</p>
-
-            <!-- Notifikasi Error -->
+        <div class="w-1/2 p-8 flex flex-col justify-center">
+            <h2 class="text-3xl font-bold text-center text-gray-700 mb-4">LOGIN</h2>
+            <hr class=" bg-blue-500 mx-auto border-none h-1 w-full mb-2">
+            <p class="text-center text-blue-600 font-semibold mb-6">Sistem Informasi Penyusun Kurikulum Berbasi OBE</p>
+            
             @if(session('error'))
                 <div class="bg-red-500 text-white p-3 rounded mb-4 text-center">
                     {{ session('error') }}
                 </div>
             @endif
-
+            
             <form action="{{ route('login.post') }}" method="POST" class="space-y-4">
                 @csrf
-
-                <!-- Input Email -->
                 <div>
                     <label class="block text-gray-700">Email</label>
-                    <div class="flex items-center border border-gray-300 rounded-lg px-3 py-2 mt-1 bg-gray-100">
-                        <span class="mr-2 text-gray-500">📧</span>
-                        <input type="email" name="email" class="w-full outline-none bg-transparent" required placeholder="Masukkan email">
-                    </div>
+                    <input type="email" name="email" class="w-full border border-gray-300 rounded-lg px-3 py-2 mt-1" required placeholder="Masukkan Gmail">
                 </div>
-
-                <!-- Input Password -->
                 <div>
                     <label class="block text-gray-700">Password</label>
-                    <div class="flex items-center border border-gray-300 rounded-lg px-3 py-2 mt-1 bg-gray-100">
-                        <span class="mr-2 text-gray-500">🔒</span>
-                        <input type="password" name="password" class="w-full outline-none bg-transparent" required placeholder="Masukkan password">
-                    </div>
+                    <input type="password" name="password" class="w-full border border-gray-300 rounded-lg px-3 py-2 mt-1" required placeholder="Masukkan Password">
                 </div>
-
-                <!-- Notifikasi Error -->
-                @if ($errors->any())
-                <div class="bg-red-500 text-white p-3 rounded mb-4 text-center">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-
-                <!-- Tombol Login -->
-                <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition-all">
-                    Masuk
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-all">
+                    Login
                 </button>
-
-                <!-- Lupa Password -->
-                <p class="text-center text-gray-500 mt-2">
-                    <a href="/forgot-password" class="text-blue-600 hover:underline">Lupa kata sandi?</a>
+                <p class="text-center mt-2">
+                    <a href="/forgot-password" class="text-blue-600 hover:underline">Forgot Password?</a>
                 </p>
-
-                <!-- Login dengan Google -->
-                <p class="text-center text-gray-500 mt-2">
-                    <a href="/signup" class="text-blue-600 hover:underline">Sign Up</a>
+                <p class="text-center mt-2">
+                    <a href="/signup" class="text-blue-600 hover:underline">sign up?</a>
                 </p>
             </form>
         </div>
 
+        <div class="w-1/2 bg-white flex items-center justify-center p-14">
+            <img src="/image/polibannew.png" alt="Poliban" class="w-full h-auto">
+        </div>
+        
     </div>
-
+    
 </body>
 </html>
