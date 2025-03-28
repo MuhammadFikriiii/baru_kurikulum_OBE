@@ -28,6 +28,11 @@
                         <td class="border px-4 py-2">{{ $prodi->nama_prodi }}</td>
                         <td class="border px-4 py-2">{{ $prodi->jurusan->nama_jurusan }}</td>
                         <td><a href="{{ route('admin.prodi.edit', $prodi->kode_prodi) }}">Edit</a>
+                            <form action="{{ route('admin.prodi.destroy', $prodi->kode_prodi) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

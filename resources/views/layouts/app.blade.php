@@ -21,7 +21,25 @@
             <li>
                 <a href="{{ route('admin.users.index') }}" class="flex items-center space-x-2 p-3 hover:bg-gray-700 rounded">
                     <span>👥</span>
-                    <span>Pemetaan CPL-PL</span>
+                    <span>Users</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.jurusan.index') }}" class="flex items-center space-x-2 p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
+                    <span>Jurusan</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.prodi.index') }}" class="flex items-center space-x-2 p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
+                    <span>Prodi</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.profillulusan.index') }}" class="flex items-center space-x-2 p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
+                    <span>Profil Lulusan</span>
                 </a>
             </li>
         </ul>
