@@ -3,127 +3,53 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <h1 class="text-4xl font-extrabold text-gray-800 font ml-28 mr-10 mb-10">Dashboard</h1>
-<p class="ml-28 mb-3 text-black font-extrabold">TABEL USERS</p>
-<div class="overflow-x-auto text-center ml-28 mr-28">
-    <div class="overflow-x-auto shadow-lg">
-        <table class="min-w-full border text-left border-black text-sm bg-white rounded-lg">
-            <thead class="bg-green-800 text-white">
-                <tr class=>
-                    <th class="py-3 px-4 w-1/5">Nama</th>
-                    <th class="py-3 px-4 w-1/5">Email</th>
-                    <th class="py-3 px-4 w-1/5">Role</th>
-                    <th class="py-3 px-4 w-1/5 pl-12">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($users as $index => $user)
-                <tr class="{{ $index % 2 == 0 ? 'bg-gray-100 opacity-90' : 'bg-white' }} hover:bg-gray-200 transition border-black">
-                    <td class="py-3 px-4">{{ $user->name }}</td>
-                    <td class="py-3 px-4">{{ $user->email }}</td>
-                    <td class="py-3 px-4 font-medium text-blue-600">{{ ucfirst($user->role) }}</td>
-                    <td class="py-3 px-6 flex space-x-2">
-                        <a href="{{ route('admin.users.edit', $user->id) }}" class="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600">
-                            ✏️
-                        </a>
-                        <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
-                            @csrf @method('DELETE')
-                            <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">
-                                🗑️
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-6">
+    <!-- Card 1 -->
+    <div class="bg-blue-400 text-white p-10 rounded-lg shadow-lg flex justify-between items-center">
+        <div>
+            <h2 class="text-lg font-semibold">Users</h2>
+            <p class="text-3xl font-bold">10</p>
+            <p class="text-sm">More Info</p>
+        </div>
+        <svg class="w-10 h-10 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+        </svg>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="bg-teal-400 text-white p-6 rounded-lg shadow-lg flex justify-between items-center">
+        <div>
+            <h2 class="text-lg font-semibold">Jurusan</h2>
+            <p class="text-3xl font-bold">7</p>
+            <p class="text-sm">More Info</p>
+        </div>
+        <svg class="w-10 h-10 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+        </svg>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="bg-orange-400 text-white p-6 rounded-lg shadow-lg flex justify-between items-center">
+        <div>
+            <h2 class="text-lg font-semibold">Widget Received</h2>
+            <p class="text-3xl font-bold">486</p>
+            <p class="text-sm">Completed Orders</p>
+        </div>
+        <svg class="w-10 h-10 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8.3-3.59 8-8-3.59-8-8-8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+        </svg>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="bg-red-400 text-white p-6 rounded-lg shadow-lg flex justify-between items-center">
+        <div>
+            <h2 class="text-lg font-semibold">Widget Received</h2>
+            <p class="text-3xl font-bold">486</p>
+            <p class="text-sm">Completed Orders</p>
+        </div>
+        <svg class="w-10 h-10 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8.3-3.59 8-8-3.59-8-8-8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+        </svg>
     </div>
 </div>
-
-<div class="mt-3 text-right">
-    <a href="{{ route('admin.users.index') }}" class="text-blue-600 hover:underline text-sm mr-28">
-        ➜ Lihat Semua Pengguna
-    </a>
-</div>
-
-    <p class="mb-3 ml-28 text-black font-extrabold">TABEL JURUSAN</p>
-        <div class="overflow-x-auto ml-28 mr-28">
-            <table class="min-w-full border border-black text-sm">
-                <thead class="bg-green-800 text-white text-left">
-                    <tr>
-                        <th class="py-2 px-4 w-1/5">Kode Jurusan</th>
-                        <th class="py-2 px-4 w-1/5">Nama Jurusan</th>
-                        <th class="py-2 px-4 w-1/5"></th>
-                        <th class="py-2 px-4 w-1/5 pl-12">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($jurusans as $index => $jurusan)
-                    <tr class="{{ $index % 2 == 0 ? 'bg-gray-100 opacity-90' : 'bg-white' }} hover:bg-gray-300 transition">
-                        <td class="py-2 px-4">{{ $jurusan->kode_jurusan }}</td>
-                        <td class="py-2 px-4">{{ $jurusan->nama_jurusan }}</td>
-                        <td class="py-2 px-4"></td>
-                        <td class="py-3 px-6 text-center flex space-x-2">
-                            <a href="{{ route('admin.jurusan.edit', $jurusan->kode_jurusan) }}" class="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600">
-                                ✏️
-                            </a>
-                            <form action="{{ route('admin.jurusan.destroy', $jurusan->kode_jurusan) }}" method="POST">
-                                @csrf @method('DELETE')
-                                <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">
-                                    🗑️
-                                </button>
-                            </form>
-                        </td>
-                        
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    
-    <div class="mt-3 text-right">
-        <a href="{{ route('admin.jurusan.index') }}" class="text-blue-600 hover:underline text-sm mr-28">
-            ➜ Lihat Semua Jurusan
-        </a>
-    </div>
-
-    <p class="mb-3 ml-28 text-black font-extrabold">TABEL PRODI</p>
-        <div class="overflow-x-auto ml-28 mr-28">
-            <table class="min-w-full border border-black text-sm">
-                <thead class="bg-green-800 text-white text-left">
-                    <tr>
-                        <th class="py-2 px-4 w-1/5">Kode Jurusan</th>
-                        <th class="py-2 px-4 w-1/5">Kode Prodi</th>
-                        <th class="py-2 px-4 w-1/5">Nama Prodi</th>
-                        <th class="py-2 px-4 w-1/5">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($prodis as $index => $prodi)
-                    <tr class="{{ $index % 2 == 0 ? 'bg-gray-100 opacity-90' : 'bg-white' }} hover:bg-gray-300 transition">
-                        <td class="py-2 px-4">{{ $prodi->kode_jurusan }}</td>
-                        <td class="py-2 px-4">{{ $prodi->kode_prodi }}</td>
-                        <td class="py-2 px-4">{{ $prodi->nama_prodi }}</td>
-                        <td class="py-3 px-6 text-center flex space-x-2">
-                            <a href="{{ route('admin.prodi.edit', $prodi->kode_prodi) }}" class="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600">
-                                ✏️
-                            </a>
-                            <form action="{{ route('admin.jurusan.destroy', $jurusan->kode_jurusan) }}" method="POST">
-                                @csrf @method('DELETE')
-                                <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">
-                                    🗑️
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-
-    <div class="mt-3 text-right">
-        <a href="{{ route('admin.prodi.index') }}" class="text-blue-600 hover:underline text-sm">
-            ➜ Lihat Semua Prodi
-        </a>
-    </div>
 @endsection
