@@ -6,7 +6,7 @@
     <title>Reset Password</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="h-screen flex items-center justify-center bg-gray-100">
+<body class="h-screen flex items-center justify-center bg-blue-500">
 
     <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
         <h2 class="text-2xl font-bold text-center text-gray-700">Reset Password</h2>
