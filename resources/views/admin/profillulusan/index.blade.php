@@ -1,20 +1,59 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2 class="text-2xl font-semibold mb-4">Daftar Profil Lulusan</h2>
-    
-    @if(session('success'))
-        <div class="bg-green-500 text-white p-3 rounded-md mb-4">
-            {{ session('success') }}
+<div class="mr-20 ml-20">
+    <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Daftar Profil Lulusan</h2>
+    <hr class="border-t-4 border-black my-8">
+        @if(session('success'))
+        <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
+            <span class="font-bold">{{ session('success') }}</span>
+            <button onclick="document.getElementById('alert').style.display='none'"
+                class="absolute top-1 right-3 text-white font-bold text-lg">
+                &times;
+            </button>
         </div>
-    @endif
+        @endif
+
+        @if(session('sukses'))
+        <div id="alert" class="bg-red-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
+            <span class="font-bold">{{ session('sukses') }}</span>
+            <button onclick="document.getElementById('alert').style.display='none'"
+                class="absolute top-1 right-3 text-white font-bold text-lg">
+                &times;
+            </button>
+        </div>
+        @endif
     
-    <a href="{{ route('admin.profillulusan.create') }}">Tambah Profil Lulusan</a>
+        <div class="flex justify-between mb-4">
+            <div class="space-x-2">
+                <a href="{{ route('admin.profillulusan.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                    👤 Tambah Profil Lulusan
+                </a>
+                <a href="" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
+                    📄 Ekspor ke Excel
+                </a>
+            </div>
+        </div>
     
-    <div class="">
-        <table class="">
-            <thead>
-                <tr class="bg-gray-200">
+        <div class="flex items-center justify-between mb-3">
+            <label for="entries" class="text-gray-600 mr-2">Show</label>
+            <select id="entries" class="border border-gray-300 px-3 py-2 rounded-md mr-2">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+            <span class="text-gray-600">entries</span>
+            <div class="ml-auto justify-between">
+                <input type="text" id="search" placeholder="Search..." 
+                    class="border border-gray-300 px-3 py-2 rounded-md">
+            </div>
+        </div>
+    
+        <div class="bg-white shadow-lg overflow-hidden">
+        <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
+            <thead class="bg-green-800 text-white border-b">
+                <tr>
                     <th class="border px-4 py-2">Kode Profil Lulusan</th>
                     <th class="border px-4 py-2">Prodi</th>
                     <th class="border px-4 py-2">Deskripsi Profill Lulusan</th>
@@ -47,5 +86,5 @@
             </tbody>
         </table>
     </div>
-
+</div>
 @endsection
