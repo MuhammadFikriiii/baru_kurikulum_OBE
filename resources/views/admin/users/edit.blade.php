@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="w-full bg-white container mr-20 ml-20">
-        <h1 class="font-extrabold text-4xl mb-6 text-center">Edit Pengguna</h1>
+        <h2 class="font-extrabold text-4xl mb-6 text-center">Edit Pengguna</21>
         <hr class="border border-black mb-4">
 
         <form action="{{ route('admin.users.update', $user->id) }}" method="POST">

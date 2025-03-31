@@ -3,7 +3,7 @@
 @section('title', 'Daftar Pengguna')
 
 @section('content')
-<div class="ml-5 mr-5">
+<div class="ml-20 mr-20">
     <h1 class="text-2xl font-bold text-gray-700 mb-4 text-center">DATA PENGGUNA</h1>
 
     <hr class="border-t-4 border-black my-8">

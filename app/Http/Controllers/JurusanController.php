@@ -48,6 +48,6 @@ class JurusanController extends Controller
     public function destroy(Jurusan $jurusan)
     {
         $jurusan->delete();
-        return redirect()->route('admin.jurusan.index')->with('success', 'Jurusan berhasil dihapus.');
+        return redirect()->route('admin.jurusan.index')->with('sukses', 'Jurusan berhasil dihapus.');
     }
 }
