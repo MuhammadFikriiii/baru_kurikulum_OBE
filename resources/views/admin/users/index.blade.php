@@ -7,6 +7,25 @@
     <h1 class="text-2xl font-bold text-gray-700 mb-4 text-center">DATA PENGGUNA</h1>
 
     <hr class="border-t-4 border-black my-8">
+        @if(session('success'))
+        <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
+            <span class="font-bold">{{ session('success') }}</span>
+            <button onclick="document.getElementById('alert').style.display='none'"
+                class="absolute top-1 right-3 text-white font-bold text-lg">
+                &times;
+            </button>
+        </div>
+        @endif
+
+        @if(session('sukses'))
+        <div id="alert" class="bg-red-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
+            <span class="font-bold">{{ session('sukses') }}</span>
+            <button onclick="document.getElementById('alert').style.display='none'"
+                class="absolute top-1 right-3 text-white font-bold text-lg">
+                &times;
+            </button>
+        </div>
+        @endif
 
     <div class="flex justify-between mb-4">
         <div class="space-x-2">
