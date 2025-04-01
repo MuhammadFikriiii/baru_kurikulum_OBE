@@ -42,6 +42,12 @@
                     <span>Profil Lulusan</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.capaianprofillulusan.index') }}" class="flex items-center space-x-2 p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
+                    <span>Capaian Profil Lulusan</span>
+                </a>
+            </li>
         </ul>
     </aside>
 

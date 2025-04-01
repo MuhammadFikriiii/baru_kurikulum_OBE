@@ -12,7 +12,6 @@ class ProfilLulusan extends Model
     protected $primaryKey = 'kode_pl';
     public $incrementing = false;
     protected $keyType = 'string';
-
     protected $fillable = [
         'kode_pl',
         'kode_prodi',
@@ -26,5 +25,8 @@ class ProfilLulusan extends Model
     public function prodi() {
         return $this->belongsTo(Prodi::class, 'kode_prodi', 'kode_prodi');
     }
-
+    public function capaianProfilLulusans()
+    {
+        return $this->belongsToMany(CapaianProfilLulusan::class, 'cpl_pl', 'kode_pl', 'kode_cpl');
+    }
 }
