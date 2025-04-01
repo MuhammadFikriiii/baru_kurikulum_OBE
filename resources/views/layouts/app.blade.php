@@ -48,6 +48,12 @@
                     <span>Capaian Profil Lulusan</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.pemetaancplpl.index') }}" class="flex items-center space-x-2 p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
+                    <span>Pemetaan CPL-PL</span>
+                </a>
+            </li>
         </ul>
     </aside>
 

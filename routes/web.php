@@ -8,6 +8,7 @@ use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfilLulusanController;
 use App\Http\Controllers\CapaianProfilLulusanController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PemetaanCplPlController;
 
 // Auth
 Route::get('/', [LoginController::class, 'loginForm'])->name('login');
@@ -60,4 +61,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/capaianprofillulusan/{capaianprofillulusan}/edit', [CapaianProfilLulusanController::class, 'edit'])->name('capaianprofillulusan.edit');
     Route::put('/capaianprofillulusan/{capaianprofillulusan}', [CapaianProfilLulusanController::class, 'update'])->name('capaianprofillulusan.update');
     Route::delete('/capaianprofillulusan/{capaianprofillulusan}', [CapaianProfilLulusanController::class, 'destroy'])->name('capaianprofillulusan.destroy');
+    Route::get('/pemetaancplpl', [PemetaanCplPlController::class, 'index'])->name('pemetaancplpl.index');
+    Route::post('/pemetaancplpl', [PemetaanCplPlController::class, 'store'])->name('pemetaancplpl.store');
 });

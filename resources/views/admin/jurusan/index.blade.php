@@ -6,7 +6,7 @@
 
     <hr class="border-t-4 border-black my-8">
 
-    @if(session('success'))
+        @if(session('success'))
         <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
             <span class="font-bold">{{ session('success') }}</span>
             <button onclick="document.getElementById('alert').style.display='none'"
