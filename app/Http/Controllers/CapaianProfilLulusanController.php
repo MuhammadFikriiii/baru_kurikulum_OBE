@@ -28,4 +28,26 @@ class CapaianProfilLulusanController extends Controller
         CapaianProfilLulusan::create($request->all());
         return redirect()->route('admin.capaianprofillulusan.index')->with('success', 'Capaian Profil lulusan berhasil ditambahkan.');
     }
+
+    public function edit(CapaianProfilLulusan $capaianprofillulusan)
+    {
+        return view('admin.capaianprofillulusan.edit' , compact('capaianprofillulusan'));
+    }
+
+    public function update(Request $request, CapaianProfilLulusan $capaianprofillulusan)
+    {
+        request()->validate([
+            'kode_cpl'=> 'required',
+            'deskripsi_cpl'=> 'required',
+            'status_cpl'=> 'required|in:Kompetensi Utama Bidang,Kompetensi Tambahan'
+        ]);
+        $capaianprofillulusan->update($request->all());
+        return redirect()->route('admin.capaianprofillulusan.index')->with('success', 'Capaian Profil lulusan berhasil diperbaharui.');
+    }
+
+    public function destroy(CapaianProfilLulusan $capaianprofillulusan)
+    {
+        $capaianprofillulusan->delete();
+        return redirect()->route('admin.capaianprofillulusan.index')->with('sukses','Capaian Profil Lulusan Ini Berhasil Di Hapus');
+    }
 }

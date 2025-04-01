@@ -57,4 +57,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/capaianprofillulusan', [CapaianProfilLulusanController::class, 'index'])->name('capaianprofillulusan.index');
     Route::get('/capaianprofillulusan/create', [CapaianProfilLulusanController::class, 'create'])->name('capaianprofillulusan.create');
     Route::post('/capaianprofillulusan', [CapaianProfilLulusanController::class, 'store'])->name('capaianprofillulusan.store');
+    Route::get('/capaianprofillulusan/{capaianprofillulusan}/edit', [CapaianProfilLulusanController::class, 'edit'])->name('capaianprofillulusan.edit');
+    Route::put('/capaianprofillulusan/{capaianprofillulusan}', [CapaianProfilLulusanController::class, 'update'])->name('capaianprofillulusan.update');
+    Route::delete('/capaianprofillulusan/{capaianprofillulusan}', [CapaianProfilLulusanController::class, 'destroy'])->name('capaianprofillulusan.destroy');
 });

@@ -26,8 +26,8 @@
     
         <div class="flex justify-between mb-4">
             <div class="space-x-2">
-                <a href="{{ route('admin.profillulusan.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-                    👤 Tambah Profil Lulusan
+                <a href="{{ route('admin.capaianprofillulusan.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                    👤 Tambah Capaian Profil Lulusan
                 </a>
                 <a href="" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
                     📄 Ekspor ke Excel
@@ -69,8 +69,8 @@
                         <td class="py-3 px-6 w-1/8 text-center">{{ $capaianprofillulusan->status_cpl }}</td>
                         <td class="py-3 px-6 flex justify-center items-center space-x-2">
                             <a href="#" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
-                            <a href="#" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
-                            <form action="#" method="POST">
+                            <a href="{{ route('admin.capaianprofillulusan.edit', $capaianprofillulusan->kode_cpl) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
+                            <form action="{{ route('admin.capaianprofillulusan.destroy',$capaianprofillulusan->kode_cpl ) }}" method="POST">
                                 @csrf @method('DELETE')
                                 <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">
                                     🗑️ Hapus
