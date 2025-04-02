@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cpl_pl', function (Blueprint $table) {
-            $table->string('kode_pl');
+        Schema::create("cpl_bk", function (Blueprint $table) {
             $table->string('kode_cpl');
-            $table->foreign('kode_pl')->references('kode_pl')->on('profil_lulusans')->onDelete('cascade');
+            $table->string('kode_bk');
             $table->foreign('kode_cpl')->references('kode_cpl')->on('capaian_profil_lulusans')->onDelete('cascade');
+            $table->foreign('kode_bk')->references('kode_bk')->on('bahan_kajians')->onDelete('cascade');
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cpl_pl');
+        Schema::dropIfExists('cpl_bk');
     }
 };
