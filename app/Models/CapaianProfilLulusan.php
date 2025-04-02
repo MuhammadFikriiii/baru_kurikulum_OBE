@@ -18,6 +18,11 @@ class CapaianProfilLulusan extends Model
     ];
     public function profilLulusans()
     {
-        return $this->belongsToMany(ProfilLulusan::class, 'profil_lulusan_capaian_profil_lulusan', 'kode_cpl', 'kode_pl');
+        return $this->belongsToMany(ProfilLulusan::class, 'cpl_pl', 'kode_cpl', 'kode_pl');
+    }
+
+    public function bahankajians()
+    {
+        return $this->belongsTo(Bahankajian::class,'cpl_bk','kode_cpl','kode_bk');
     }
 }

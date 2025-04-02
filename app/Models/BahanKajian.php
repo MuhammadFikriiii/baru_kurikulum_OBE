@@ -21,4 +21,8 @@ class BahanKajian extends Model
         'max_bk',
         'min_bk'
     ];
+    public function capaianprofilLulusans()
+    {
+        return $this->belongsToMany(CapaianProfilLulusan::class, 'cpl_bk', 'kode_bk', 'kode_cpl');
+    }
 }
