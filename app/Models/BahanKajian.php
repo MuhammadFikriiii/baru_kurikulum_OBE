@@ -11,13 +11,14 @@ class BahanKajian extends Model
     protected $table = 'bahan_kajians';
     protected $primaryKey = 'kode_bk';
     public $incrementing = false;
+    public $timestamps = true;
     protected $fillable = [
         'kode_bk',
         'nama_bk',
         'deskripsi_bk',
         'referensi_bk',
         'status_bk',
-        'knowlede_area',
+        'knowledge_area',
         'max_bk',
         'min_bk'
     ];

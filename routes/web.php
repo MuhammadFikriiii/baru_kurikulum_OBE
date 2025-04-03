@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfilLulusanController;
 use App\Http\Controllers\CapaianProfilLulusanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PemetaanCplPlController;
+use App\Http\Controllers\BahanKajianController;
 
 // Auth
 Route::get('/', [LoginController::class, 'loginForm'])->name('login');
@@ -63,4 +64,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/capaianprofillulusan/{capaianprofillulusan}', [CapaianProfilLulusanController::class, 'destroy'])->name('capaianprofillulusan.destroy');
     Route::get('/pemetaancplpl', [PemetaanCplPlController::class, 'index'])->name('pemetaancplpl.index');
     Route::post('/pemetaancplpl', [PemetaanCplPlController::class, 'store'])->name('pemetaancplpl.store');
+    Route::get('/bahankajian', [BahankajianController::class, 'index'])->name('bahankajian.index');
+    Route::get('/bahankajian/create', [BahankajianController::class, 'create'])->name('bahankajian.create');
+    Route::post('/bahankajian', [BahankajianController::class, 'store'])->name('bahankajian.store');
+    Route::get('/bahankajian/{bahankajian}/edit', [BahankajianController::class, 'edit'])->name('bahankajian.edit');
+    Route::put('/bahankajian/{bahankajian}', [BahankajianController::class, 'update'])->name('bahankajian.update');
 });

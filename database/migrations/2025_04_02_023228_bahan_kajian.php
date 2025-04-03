@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text("knowledge_area")->nullable();
             $table->integer("max_bk")->nullable();
             $table->integer("min_bk")->nullable();
+            $table->timestamps();
         });
     }
 
