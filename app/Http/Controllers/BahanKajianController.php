@@ -53,4 +53,10 @@ class BahanKajianController extends Controller
         $bahankajian->update($request->all());
         return redirect()->route('admin.bahankajian.index')->with('success', 'Bahan Kajian berhasil diperbaharui.');
     }
+
+    public function destroy(BahanKajian $bahankajian)
+    {
+        $bahankajian->delete();
+        return redirect()->route('admin.bahankajian.index')->with('success','Bahan Kajian Berhasil Di Hapus');
+    }
 }

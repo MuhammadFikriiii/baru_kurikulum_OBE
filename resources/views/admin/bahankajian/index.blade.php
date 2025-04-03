@@ -60,9 +60,9 @@
                     <td class="py-3 px-6 w-1/8 text-center">{{ $bahankajian->max_bk }}</td>
                     <td class="py-3 px-6 w-1/8 text-center">{{ $bahankajian->min_bk }}</td>
                     <td class="py-3 px-6 flex justify-center items-center space-x-2">
-                        <a href="3"class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
+                        <a href="#"class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
                         <a href="{{ route('admin.bahankajian.edit', $bahankajian->kode_bk) }}"  class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
-                        <form action="#" method="POST">
+                        <form action="{{ route('admin.bahankajian.destroy', $bahankajian->kode_bk) }}" method="POST">
                             @csrf @method('DELETE')
                             <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">
                                 🗑️ Hapus

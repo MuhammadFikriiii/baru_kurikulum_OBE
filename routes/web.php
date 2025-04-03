@@ -69,4 +69,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/bahankajian', [BahankajianController::class, 'store'])->name('bahankajian.store');
     Route::get('/bahankajian/{bahankajian}/edit', [BahankajianController::class, 'edit'])->name('bahankajian.edit');
     Route::put('/bahankajian/{bahankajian}', [BahankajianController::class, 'update'])->name('bahankajian.update');
+    Route::delete('/bahankajian/{bahankajian}', [BahankajianController::class,'destroy'])->name('bahankajian.destroy');
 });
