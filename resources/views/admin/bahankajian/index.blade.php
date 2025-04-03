@@ -3,8 +3,7 @@
 @section('content')
 <div class="mr-20 ml-20">
     
-    <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Daftar Bahan Kajian</h2>
-    <hr class="border-t-4 border-black my-8">
+   <hr class="border-t-4 border-black my-8">
 
     <div class="flex justify-between mb-4">
         <div class="space-x-2">
@@ -15,7 +14,8 @@
                 📄 Ekspor ke Excel
             </a>
         </div>
-    </div>
+    </div> <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Daftar Bahan Kajian</h2>
+    
 
     <div class="flex items-center justify-between mb-3">
         <label for="entries" class="text-gray-600 mr-2">Show</label>
