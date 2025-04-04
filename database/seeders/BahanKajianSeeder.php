@@ -35,7 +35,7 @@ class BahanKajianSeeder extends Seeder
                 'min_bk'=>'40'
             ],
             [
-                'kode_bk'=>'BK02',
+                'kode_bk'=>'BK03',
                 'nama_bk'=> 'Architecture and Organization (AR)',
                 'deskripsi_bk'=> '-',
                 'referensi_bk'=> 'CSC2023',
