@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             ProdiSeeder::class,
             ProfilLulusanSeeder::class,
             CapaianProfilLulusanSeeder::class,
+            BahanKajianSeeder::class,
         ]);
     }
 }

@@ -60,6 +60,12 @@
                     <span>Bahan Kajian</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.pemetaancplbk.index') }}" class="flex items-center space-x-2 p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
+                    <span>Pemetaan CPL - BK</span>
+                </a>
+            </li>
         </ul>
     </aside>
 

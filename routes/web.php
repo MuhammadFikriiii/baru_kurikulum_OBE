@@ -10,6 +10,7 @@ use App\Http\Controllers\CapaianProfilLulusanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PemetaanCplPlController;
 use App\Http\Controllers\BahanKajianController;
+use App\Http\Controllers\PemetaanCplBkController;
 
 // Auth
 Route::get('/', [LoginController::class, 'loginForm'])->name('login');
@@ -70,4 +71,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/bahankajian/{bahankajian}/edit', [BahankajianController::class, 'edit'])->name('bahankajian.edit');
     Route::put('/bahankajian/{bahankajian}', [BahankajianController::class, 'update'])->name('bahankajian.update');
     Route::delete('/bahankajian/{bahankajian}', [BahankajianController::class,'destroy'])->name('bahankajian.destroy');
+    Route::get('/pemetaancplbk', [PemetaanCplBkController::class, 'index'])->name('pemetaancplbk.index');
+    Route::post('/pemetaancplbk', [PemetaanCplBkController::class, 'store'])->name('pemetaancplbk.store');
 });

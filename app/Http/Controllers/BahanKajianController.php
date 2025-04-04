@@ -31,6 +31,7 @@ class BahanKajianController extends Controller
             'min_bk' => 'integer|max:100|required',
         ]);
         BahanKajian::create($request->all());
+        return redirect()->route('admin.bahankajian.index')->with('success', 'Bahan Kajian berhasil diperbaharui.');
     }
 
     public function edit(Bahankajian $bahankajian)
