@@ -38,7 +38,6 @@ class PemetaanCplPlController extends Controller
             }
         }
 
-        // Redirect kembali dengan pesan sukses
         return redirect()->route('admin.pemetaancplpl.index')->with('success', 'Pemetaan CPL-PL berhasil disimpan.');
     }
 }
