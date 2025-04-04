@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PemetaanCplPlController;
 use App\Http\Controllers\BahanKajianController;
 use App\Http\Controllers\PemetaanCplBkController;
+use App\Http\Controllers\MataKuliahController;
 
 // Auth
 Route::get('/', [LoginController::class, 'loginForm'])->name('login');
@@ -73,4 +74,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/bahankajian/{bahankajian}', [BahankajianController::class,'destroy'])->name('bahankajian.destroy');
     Route::get('/pemetaancplbk', [PemetaanCplBkController::class, 'index'])->name('pemetaancplbk.index');
     Route::post('/pemetaancplbk', [PemetaanCplBkController::class, 'store'])->name('pemetaancplbk.store');
+    Route::get('/matakuliah', [MataKuliahController::class, 'index'])->name('matakuliah.index');
+    Route::get('/matakuliah/create', [MataKuliahController::class, 'create'])->name('matakuliah.create');
+    Route::post('/matakuliah', [MataKuliahController::class, 'store'])->name('matakuliah.store');
 });
