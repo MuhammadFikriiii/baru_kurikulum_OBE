@@ -9,7 +9,8 @@ class MataKuliahController extends Controller
 {
     public function index()
     {
-        return view("admin.matakuliah.index");
+        $mata_kuliahs = MataKuliah::all();
+        return view("admin.matakuliah.index", compact("mata_kuliahs"));
     }
 
     public function create()

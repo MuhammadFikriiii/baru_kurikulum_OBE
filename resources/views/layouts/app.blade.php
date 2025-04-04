@@ -66,6 +66,18 @@
                     <span>Pemetaan CPL - BK</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.matakuliah.index') }}" class="flex items-center space-x-2 p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
+                    <span>Mata Kuliah</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.pemetaancplbk.index') }}" class="flex items-center space-x-2 p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
+                    <span>Pemetaan CPL - MK</span>
+                </a>
+            </li>
         </ul>
     </aside>
 
