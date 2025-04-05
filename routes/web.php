@@ -77,4 +77,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/matakuliah', [MataKuliahController::class, 'index'])->name('matakuliah.index');
     Route::get('/matakuliah/create', [MataKuliahController::class, 'create'])->name('matakuliah.create');
     Route::post('/matakuliah', [MataKuliahController::class, 'store'])->name('matakuliah.store');
+    Route::get('/matakuliah/{matakuliah}/edit', [MataKuliahController::class, 'edit'])->name('matakuliah.edit');
+    Route::put('/matakuliah/{matakuliah}', [MataKuliahController::class, 'update'])->name('matakuliah.update');
+    Route::delete('/matakuliah/{matakuliah}', [MataKuliahController::class, 'destroy'])->name('matakuliah.destroy');
 });

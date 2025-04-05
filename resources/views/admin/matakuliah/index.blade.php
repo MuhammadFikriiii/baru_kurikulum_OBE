@@ -57,16 +57,15 @@
             <td class="py-3 px-6 text-center">{{ $mata_kuliah->kompetensi_mk }}</td>
             <td class="py-3 px-6 flex justify-center items-center space-x-2">
                 <a href="#" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
-                <a href="#" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
-                <form action="#" method="POST">
+                <a href="{{ route('admin.matakuliah.edit',$mata_kuliah->kode_mk) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
+                <form action="{{ route('admin.matakuliah.destroy',$mata_kuliah->kode_mk) }}" method="POST">
                     @csrf @method('DELETE')
-                <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus jurusan ini?')">
+                <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus jurusan ini?')">
                     🗑️ Hapus
                 </button>
                 </form>
             </td>
-        </tr>
-            
+        </tr> 
         @endforeach
     </tbody>
 </table>
