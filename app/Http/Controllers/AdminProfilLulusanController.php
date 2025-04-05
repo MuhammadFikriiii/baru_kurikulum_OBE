@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ProfilLulusan;
 use App\Models\Prodi;
 
-class ProfilLulusanController extends Controller
+class AdminProfilLulusanController extends Controller
 {
     public function index()
     {

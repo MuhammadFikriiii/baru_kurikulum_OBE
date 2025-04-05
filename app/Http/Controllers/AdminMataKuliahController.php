@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MataKuliah;
 use Illuminate\Http\Request;
 
-class MataKuliahController extends Controller
+class AdminMataKuliahController extends Controller
 {
     public function index()
     {

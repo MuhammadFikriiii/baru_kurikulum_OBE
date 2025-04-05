@@ -6,7 +6,7 @@ use App\Models\Prodi;
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
 
-class ProdiController extends Controller
+class AdminProdiController extends Controller
 {
     public function index()
     {

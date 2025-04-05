@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\CapaianProfilLulusan;
 
-class CapaianProfilLulusanController extends Controller
+class AdminCapaianProfilLulusanController extends Controller
 {
     public function index()
     {
