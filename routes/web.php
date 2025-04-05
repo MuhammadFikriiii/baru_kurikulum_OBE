@@ -12,6 +12,7 @@ use App\Http\Controllers\PemetaanCplPlController;
 use App\Http\Controllers\AdminBahanKajianController;
 use App\Http\Controllers\PemetaanCplBkController;
 use App\Http\Controllers\AdminMataKuliahController;
+use App\Http\Controllers\AdminPemetaanCplMkController;
 
 // Auth
 Route::get('/', [LoginController::class, 'loginForm'])->name('login');
@@ -80,4 +81,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/matakuliah/{matakuliah}/edit', [AdminMataKuliahController::class, 'edit'])->name('matakuliah.edit');
     Route::put('/matakuliah/{matakuliah}', [AdminMataKuliahController::class, 'update'])->name('matakuliah.update');
     Route::delete('/matakuliah/{matakuliah}', [AdminMataKuliahController::class, 'destroy'])->name('matakuliah.destroy');
+    Route::get('/pemetaancplmk', [AdminPemetaanCplMkController::class, 'index'])->name('pemetaancplmk.index');
+    Route::post('/pemetaancplmk', [AdminPemetaanCplMkController::class, 'store'])->name('pemetaancplmk.store');
 });

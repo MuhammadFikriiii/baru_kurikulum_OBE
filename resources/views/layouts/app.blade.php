@@ -73,7 +73,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('admin.pemetaancplbk.index') }}" class="flex items-center space-x-2 p-3 hover:bg-gray-700 rounded">
+                <a href="{{ route('admin.pemetaancplmk.index') }}" class="flex items-center space-x-2 p-3 hover:bg-gray-700 rounded">
                     <span>👥</span>
                     <span>Pemetaan CPL - MK</span>
                 </a>
