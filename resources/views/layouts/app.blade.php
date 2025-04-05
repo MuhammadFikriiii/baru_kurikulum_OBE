@@ -78,6 +78,12 @@
                     <span>Pemetaan CPL - MK</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.pemetaanbkmk.index') }}" class="flex items-center space-x-2 p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
+                    <span>Pemetaan BK - MK</span>
+                </a>
+            </li>
         </ul>
     </aside>
 

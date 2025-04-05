@@ -26,4 +26,9 @@ class BahanKajian extends Model
     {
         return $this->belongsToMany(CapaianProfilLulusan::class, 'cpl_bk', 'kode_bk', 'kode_cpl');
     }
+
+    public function matakuliahs()
+    {
+        return $this->belongsToMany(MataKuliah::class, 'mk_bk', 'kode_bk', 'kode_mk');
+    }
 }
