@@ -24,11 +24,17 @@ class MataKuliah extends Model
 
     public function bahankajians()
     {
-        return $this->belongsToMany(BahanKajian::class,'cpl_mk','kode_cpl','kode_mk');
+        return $this->belongsToMany(BahanKajian::class, 'mk_bk', 'kode_mk', 'kode_bk');
     }
 
     public function capaianprofilLulusans()
     {
         return $this->belongsToMany(CapaianProfilLulusan::class, 'cpl_mk', 'kode_mk', 'kode_cpl');
     }
+
+    public function cplMkBks()
+    {
+        return $this->hasMany(CplMkBk::class, 'kode_mk', 'kode_mk');
+    }
+
 }

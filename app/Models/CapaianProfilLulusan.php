@@ -26,13 +26,14 @@ class CapaianProfilLulusan extends Model
         return $this->belongsToMany(BahanKajian::class,'cpl_bk','kode_cpl','kode_bk');
     }
 
-    public function MataKuliah()
+    public function MataKuliahs()
     {
         return $this->belongsToMany(MataKuliah::class,'cpl_mk','kode_cpl','kode_mk');
     }
 
-    public function matakuliahs()
+    public function cplMkBks()
     {
-        return $this->belongsToMany(MataKuliah::class,'cpl_mk','kode_cpl','kode_mk');
+        return $this->hasMany(CplMkBk::class, 'kode_cpl', 'kode_cpl');
     }
+
 }

@@ -31,4 +31,10 @@ class BahanKajian extends Model
     {
         return $this->belongsToMany(MataKuliah::class, 'mk_bk', 'kode_bk', 'kode_mk');
     }
+
+    public function cplMkBks()
+    {
+        return $this->hasMany(CplMkBk::class, 'kode_bk', 'kode_bk');
+    }
+
 }
