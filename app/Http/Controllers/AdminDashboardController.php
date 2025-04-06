@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Jurusan;
 use App\Models\Prodi;
 
-class DashboardController extends Controller
+class AdminDashboardController extends Controller
 {
     public function dashboard()
     {

@@ -7,7 +7,7 @@ use App\Models\CapaianProfilLulusan;
 use App\Models\ProfilLulusan;
 use Illuminate\Support\Facades\DB;
 
-class PemetaanCplPlController extends Controller
+class AdminPemetaanCplPlController extends Controller
 {
     public function index()
     {

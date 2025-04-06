@@ -7,7 +7,7 @@ use App\Models\CapaianProfilLulusan;
 use App\Models\BahanKajian;
 use Illuminate\Support\Facades\DB;
 
-class PemetaanCplBkController extends Controller
+class AdminPemetaanCplBkController extends Controller
 {
     public function index()
     {
