@@ -39,6 +39,76 @@ class BahanKajianSeeder extends Seeder
                 'nama_bk'=> 'Architecture and Organization (AR)',
                 'deskripsi_bk'=> '-',
                 'referensi_bk'=> 'CSC2023',
+                'status_bk'=> 'core',
+                'knowledge_area'=> '-',
+                'max_bk'=> '60',
+                'min_bk'=>'40'
+            ],
+            [
+                'kode_bk'=>'BK04',
+                'nama_bk'=> 'Data Management (DM)',
+                'deskripsi_bk'=> '-',
+                'referensi_bk'=> 'CSC2023',
+                'status_bk'=> 'elective',
+                'knowledge_area'=> '-',
+                'max_bk'=> '60',
+                'min_bk'=>'40'
+            ],
+            [
+                'kode_bk'=>'BK05',
+                'nama_bk'=> 'Foundations of Programming Languages (FPL)',
+                'deskripsi_bk'=> '-',
+                'referensi_bk'=> 'CSC2023',
+                'status_bk'=> 'core',
+                'knowledge_area'=> '-',
+                'max_bk'=> '60',
+                'min_bk'=>'40'
+            ],
+            [
+                'kode_bk'=>'BK06',
+                'nama_bk'=> 'Human-Computer Interaction (HCI)',
+                'deskripsi_bk'=> '-',
+                'referensi_bk'=> 'CSC2023',
+                'status_bk'=> 'elective',
+                'knowledge_area'=> '-',
+                'max_bk'=> '60',
+                'min_bk'=>'40'
+            ],
+            [
+                'kode_bk'=>'BK07',
+                'nama_bk'=> 'Mathematical and Statistical Foundations (MSF)',
+                'deskripsi_bk'=> '-',
+                'referensi_bk'=> 'CSC2023',
+                'status_bk'=> 'core',
+                'knowledge_area'=> '-',
+                'max_bk'=> '60',
+                'min_bk'=>'40'
+            ],
+            [
+                'kode_bk'=>'BK08',
+                'nama_bk'=> 'Networking and Communication (NC)',
+                'deskripsi_bk'=> '-',
+                'referensi_bk'=> 'CSC2023',
+                'status_bk'=> 'elective',
+                'knowledge_area'=> '-',
+                'max_bk'=> '60',
+                'min_bk'=>'40'
+            ],
+            [
+                'kode_bk'=>'BK09',
+                'nama_bk'=> 'Operating Systems (OS)',
+                'deskripsi_bk'=> '-',
+                'referensi_bk'=> 'CSC2023',
+                'status_bk'=> 'core',
+                'knowledge_area'=> '-',
+                'max_bk'=> '60',
+                'min_bk'=>'40'
+            ],
+            [
+                'kode_bk'=>'BK10',
+                'nama_bk'=> 'Software Development Fundamentals (SDF)',
+                'deskripsi_bk'=> '-',
+                'referensi_bk'=> 'CSC2023',
                 'status_bk'=> 'elective',
                 'knowledge_area'=> '-',
                 'max_bk'=> '60',

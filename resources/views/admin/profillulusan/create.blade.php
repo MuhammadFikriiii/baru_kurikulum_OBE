@@ -39,7 +39,7 @@
 <select name="keterangan_pl" required>
     <option value="Kompetensi Utama Bidang">Kompetensi Utama Bidang</option>
     <option value="Kompetensi Utama">Kompetensi Utama</option>
-    <option value="Kompetensi_tambahan">Kompetensi Tambahan</option>
+    <option value="Kompetensi Tambahan">Kompetensi Tambahan</option>
 </select>
 <br>
 
