@@ -22,7 +22,7 @@ class ProdiSeeder extends Seeder
             [
                 'kode_jurusan'=>'J0102',
                 'kode_prodi'=>'F0105',
-                'nama_prodi'=>'Teknik Pertambangan'
+                'nama_prodi'=>'Teknik Listrik'
             ],
         ]);
     }

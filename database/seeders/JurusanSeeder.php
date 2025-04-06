@@ -22,6 +22,10 @@ class JurusanSeeder extends Seeder
                     'kode_jurusan'=> 'J0102',
                     'nama_jurusan'=> 'Jurusan Teknik Sipil',
                 ],
+                [
+                    'kode_jurusan'=> 'J0103',
+                    'nama_jurusan'=> 'Jurusan Teknik Informatika',
+                ],
         ]);
     }
 }

@@ -9,14 +9,10 @@
 
 <body>
   
-  <div class="min-h-screen py-40" style="background-image: linear-gradient(115deg, #e7c9ae, #ebeae6)">
-    <div class="min-h-screen py-40 flex items-center justify-center" style="background-image: linear-gradient(115deg, #e7c9ae, #ebeae6)">
+ 
+    <div class="min-h-screen py-50 flex items-center justify-center" style="background-image: linear-gradient(115deg, rgb(238, 203, 157), #ebeae6)">
       <div class="w-8/12 bg-white rounded-xl shadow-lg overflow-hidden flex flex-row-reverse">
-        
-        <!-- Bagian Gambar -->
-        <div class="w-1/2 bg-cover bg-center" style="background-image: url('/storage/image/poliban.jpeg');">
-        </div>
-    
+      
         <!-- Bagian Form -->
         <div class="w-1/2 py-16 px-12">
           <h2 class="text-3xl mb-4">Sign-Up</h2>
@@ -26,11 +22,17 @@
               <input type="text" placeholder="First Name" class="border border-gray-400 py-1 px-2">
               <input type="text" placeholder="Last Name" class="border border-gray-400 py-1 px-2">
             </div>
+            
             <div class="mt-5">
               <input type="text" placeholder="Email" class="border border-gray-400 py-1 px-2 w-full">
+            </div>
+            <div class="mt-5">
               <input type="password" placeholder="Password" class="border border-gray-400 py-1 px-2 w-full">
+            </div>
+            <div class="mt-5">
               <input type="password" placeholder="Confirm Password" class="border border-gray-400 py-1 px-2 w-full">
             </div>
+          
             <div class="mt-5">
               <input type="checkbox" class="border border-gray-400">
               <span>
@@ -43,11 +45,14 @@
             </div>
           </form>
         </div>
-    
-      </div>
+
+      <!-- Bagian Gambar -->
+      <div class="w-1/2 bg-cover bg-center" style="background-image: url('/image/poliban.jpeg');"> </div>
+     </div>
+
     </div>    
       
-  </div>
+  
 
 </body>
 
