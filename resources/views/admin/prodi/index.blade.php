@@ -65,7 +65,7 @@
                 @foreach($prodis as $index => $prodi)
                     <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
                         <td class="py-3 px-6 w-16 text-center">{{ $index + 1 }}</td>
-                        <td class="bpy-3 px-6 w-16 text-center">{{ $prodi->jurusan->nama_jurusan }}</td>
+                        <td class="bpy-3 px-6 w-16 text-center">{{ $prodi->jurusan->nama_jurusan ?? '-'}}</td>
                         <td class="bpy-3 px-6 w-16 text-center">{{ $prodi->kode_prodi }}</td>
                         <td class="bpy-3 px-6 w-16 text-center">{{ $prodi->nama_prodi }}</td>
                         <td class="py-3 px-6 flex justify-center items-center space-x-2">

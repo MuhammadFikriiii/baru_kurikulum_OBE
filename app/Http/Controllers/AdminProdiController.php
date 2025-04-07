@@ -43,7 +43,7 @@ class AdminProdiController extends Controller
     public function update(Request $request, Prodi $prodi)
     {
         $request->validate([
-            'kode_prodi' => ['required',Rule::unique('prodis','kode_prodi')->ignore($prodi->kode_prodi, 'kode_prodi')],
+            'kode_prodi' => ['required','string','max:10',Rule::unique('prodis','kode_prodi')->ignore($prodi->kode_prodi, 'kode_prodi')],
             'kode_jurusan' => 'required|string|exists:jurusans,kode_jurusan',
             'nama_prodi' => 'required|string|max:50',
         ]);

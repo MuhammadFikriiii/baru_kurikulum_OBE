@@ -1,11 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-@if (session('success'))
-<p style="color: green;">{{ session('success') }}</p>
-@endif
 
 <h2>Tambah Profil Lulusan</h2>
+
+@if ($errors->any())
+    <div style="color: red;">
+       <ul>
+            @foreach ($errors->all() as $error)
+                 <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 <form action="{{ route('admin.profillulusan.store') }}" method="POST">
 @csrf

@@ -68,7 +68,7 @@
                     @foreach($profillulusans as $profillulusan)
                         <tr class="align-top">
                             <td class="px-4 py-2 w-28 text-center">{{ $profillulusan->kode_pl }}</td>
-                            <td class="px-4 py-2 w-20 text-center">{{ $profillulusan->prodi->nama_prodi }}</td>
+                            <td class="px-4 py-2 w-20 text-center">{{ $profillulusan->prodi->nama_prodi ?? '-' }}</td>
                             <td class="px-4 py-2 w-48 whitespace-pre-line">{{ $profillulusan->deskripsi_pl }}</td>
                             <td class="px-4 py-2 w-96 whitespace-pre-line">{{ $profillulusan->profesi_pl }}</td>
                             <td class="px-4 py-2 w-32 text-center">{{ $profillulusan->unsur_pl }}</td>

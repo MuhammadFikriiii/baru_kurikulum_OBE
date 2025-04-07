@@ -60,7 +60,7 @@ class AdminProfilLulusanController extends Controller
     public function destroy(ProfilLulusan $profillulusan)
     {
         $profillulusan->delete();
-        return redirect()->route('admin.profillulusan.index')->with('success','');
+        return redirect()->route('admin.profillulusan.index')->with('sukses','Profil Lulusan Berhasil Dihapus');
 
     }
 }
