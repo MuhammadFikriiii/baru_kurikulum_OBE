@@ -2,8 +2,18 @@
 
 @section('content')
 <div class=" ml-20  mr-20 container w-full">
-    <h2 class="font-extrabold text-4xl mb-6 text-center">Tambah Jurusan</h2>
+    <h2 class="font-extrabold text-4xl mb-6 text-center">Tambah MataKuliah</h2>
     <hr class="w-full border border-black mb-4">
+
+    @if ($errors->any())
+     <div style="color: red;">
+       <ul>
+            @foreach ($errors->all() as $error)
+                 <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+     </div>
+    @endif
 
     <form action="{{ route ('admin.matakuliah.store') }}" method="POST">
         @csrf

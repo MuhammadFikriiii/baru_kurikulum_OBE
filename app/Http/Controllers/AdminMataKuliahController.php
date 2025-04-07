@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MataKuliah;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AdminMataKuliahController extends Controller
 {
@@ -40,7 +41,7 @@ class AdminMataKuliahController extends Controller
     public function update(Request $request, MataKuliah  $matakuliah)
     {
         request()->validate([
-            'kode_mk'=>'required|string|max:10',
+            'kode_mk'=>['required','string','max:10',Rule::unique('mata_kuliahs','kode_mk')->ignore($matakuliah->kode_mk,'kode_mk')],
             'nama_mk'=> 'required|string|max:50',
             'jenis_mk'=> 'required|string|max:50',
             'sks_mk'=> 'required|integer',

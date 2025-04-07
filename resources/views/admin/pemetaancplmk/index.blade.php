@@ -3,6 +3,16 @@
 @section('content')
 <h2 class="text-2xl font-bold mb-4">Pemetaan CPL - MK</h2>
 
+@if(session('success'))
+    <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
+        <span class="font-bold">{{ session('success') }}</span>
+        <button onclick="document.getElementById('alert').style.display='none'"
+            class="absolute top-1 right-3 text-white font-bold text-lg">
+            &times;
+         </button>
+    </div>
+@endif
+
 <form action="{{ route('admin.pemetaancplmk.store') }}" method="POST">
     @csrf
     <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
