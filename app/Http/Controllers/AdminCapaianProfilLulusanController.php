@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CapaianProfilLulusan;
+use Illuminate\Validation\Rule;
 
 class AdminCapaianProfilLulusanController extends Controller
 {
@@ -37,7 +38,7 @@ class AdminCapaianProfilLulusanController extends Controller
     public function update(Request $request, CapaianProfilLulusan $capaianprofillulusan)
     {
         request()->validate([
-            'kode_cpl'=> 'required',
+            'kode_cpl'=> ['required','string','max:10',Rule::unique('capaian_profil_lulusans','kode_cpl')->ignore($capaianprofillulusan->kode_cpl,'kode_cpl')],
             'deskripsi_cpl'=> 'required',
             'status_cpl'=> 'required|in:Kompetensi Utama Bidang,Kompetensi Tambahan'
         ]);

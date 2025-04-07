@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProfilLulusan;
 use App\Models\Prodi;
+use Illuminate\Validation\Rule;
 
 class AdminProfilLulusanController extends Controller
 {
@@ -44,7 +45,7 @@ class AdminProfilLulusanController extends Controller
     public function update(Request $request, ProfilLulusan $profillulusan)
     {
         $request->validate([
-            'kode_pl' => 'required|string|max:10',
+            'kode_pl' => ['required','string','max:10',Rule::unique('profil_lulusans', 'kode_pl')->ignore($profillulusan->kode_pl,'kode_pl')],
             'kode_prodi' => 'required|string|max:10',
             'deskripsi_pl' => 'required',
             'profesi_pl' => 'required',
