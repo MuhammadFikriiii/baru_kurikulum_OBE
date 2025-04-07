@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class AdminUserController extends Controller {
     public function index() {
@@ -45,9 +46,10 @@ class AdminUserController extends Controller {
     }
 
     public function update(Request $request, $id) {
+        $user = User::findOrFail($id);
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
             'password' => 'nullable|min:6',
             'role' => 'required'
         ]);

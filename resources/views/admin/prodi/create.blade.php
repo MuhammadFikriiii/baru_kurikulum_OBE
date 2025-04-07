@@ -4,6 +4,15 @@
 <div class="mr-20 ml-20">
     <h2 class="font-extrabold text-4xl mb-6 text-center">Tambah Prodi</h2>
     <hr class="w-full border border-black mb-4">
+    @if ($errors->any())
+        <div style="color: red;">
+        <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('admin.prodi.store') }}" method="POST">
         @csrf
         <div class="mb-3">

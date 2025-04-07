@@ -7,6 +7,16 @@
         <h2 class="font-extrabold text-4xl mb-6 text-center">Edit Pengguna</21>
         <hr class="border border-black mb-4">
 
+        @if ($errors->any())
+            <div style="color: red;">
+            <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
             @csrf
             @method('PUT')

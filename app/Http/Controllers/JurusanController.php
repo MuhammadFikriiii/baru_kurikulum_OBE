@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class JurusanController extends Controller
 {
@@ -37,7 +38,7 @@ class JurusanController extends Controller
     public function update(Request $request, Jurusan $jurusan)
     {
         $request->validate([
-            'kode_jurusan' => 'required',
+            'kode_jurusan' => ['required',Rule::unique('jurusans', 'kode_jurusan')->ignore($jurusan->kode_jurusan,'kode_jurusan'),],
             'nama_jurusan' => 'required|string|max:50',
         ]);
 

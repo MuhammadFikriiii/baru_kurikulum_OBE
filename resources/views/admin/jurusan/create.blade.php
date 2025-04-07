@@ -5,13 +5,15 @@
     <h2 class="font-extrabold text-4xl mb-6 text-center">Tambah Jurusan</h2>
     <hr class="w-full border border-black mb-4">
 
-    @if($errors->any())
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
+@if ($errors->any())
+    <div style="color: red;">
+       <ul>
+            @foreach ($errors->all() as $error)
+                 <li>{{ $error }}</li>
             @endforeach
         </ul>
-    @endif
+    </div>
+@endif
 
     <form action="{{ route('admin.jurusan.store') }}" method="POST">
         @csrf
