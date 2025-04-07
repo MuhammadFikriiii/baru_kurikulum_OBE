@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BahanKajian;
+use Illuminate\Validation\Rule;
 
 class AdminBahanKajianController extends Controller
 {
@@ -42,7 +43,7 @@ class AdminBahanKajianController extends Controller
     public function update(Request $request, BahanKajian $bahankajian)
     {
         request()->validate([
-            'kode_bk' => 'required|string|max:10',
+            'kode_bk' => ['required','string','max:10',Rule::unique('bahan_kajians','kode_bk')->ignore($bahankajian->kode_bk,'kode_bk')],
             'nama_bk' => 'required|string|max:50',
             'deskripsi_bk' => 'nullable|string',
             'referensi_bk' => 'required|string|max:50',
