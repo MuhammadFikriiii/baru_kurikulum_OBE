@@ -35,7 +35,7 @@ class AdminUserController extends Controller {
             'role.in' => 'Role tidak valid.',
         ]);
 
-        User::create($request->all);
+        User::create($request->all());
 
         return redirect()->route('admin.users.index')->with('success', 'User berhasil ditambahkan');
     }
