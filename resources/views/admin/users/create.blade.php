@@ -16,29 +16,27 @@
     @endif
     <form action="{{ route('admin.users.store') }}" method="POST">
         @csrf
-        <div class="mb-3">
             <label for="name" class="text-2xl">Nama</label>
-            <input type="text" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500" id="name" name="name" required>
-        </div>
-        <div class="mb-3">
+            <input type="text" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500 mb-3" id="name" name="name" required>
+
             <label for="email" class="text-2xl">Email</label>
-            <input type="email" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500" id="email" name="email" required>
-        </div>
-        <div class="mb-3">
+            <input type="email" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500 mb-3" id="email" name="email" required>
+
+
             <label for="password" class="text-2xl">Password</label>
-            <input type="password" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500" id="password" name="password" required>
-        </div>
-        <div class="mb-3">
-            <label for="role" class="block mt-1 text-2xl">Role</label>
+            <input type="password" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500 mb-3" id="password" name="password" required>
+
+            <label for="role" class=" text-2xl">Role</label>
             <select id="role" name="role" required
-                class="w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                class="w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500 mb-3">
+                <option value="" selected disabled>Pilih Role</option>
                 <option value="admin">Admin</option>
                 <option value="wadir1">Wadir 1</option>
                 <option value="kaprodi">Kaprodi</option>
                 <option value="tim">Tim</option>
-            </select>
-        </div>        
-        <button type="submit" class="btn btn-primary bg-green-400 hover:bg-green-800 mt-3 px-5 py-2 rounded-lg">Simpan</button>
+            </select>      
+        <button type="submit" class="bg-green-400 hover:bg-green-800 mt-3 px-5 py-2 rounded-lg">Simpan</button>
+        <a href="{{ route('admin.users.index') }}" class="bg-blue-400 hover:bg-blue-800 mt-3 px-5 py-2 rounded-lg">Kembali</a>
     </form>
 </div>
 </div>

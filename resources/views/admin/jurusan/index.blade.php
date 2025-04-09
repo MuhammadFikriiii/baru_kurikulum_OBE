@@ -55,19 +55,19 @@
     <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
         <thead class="bg-green-800 text-white border-b">
             <tr>
-                <th class="py-3 px-4 text-center w-1/12 font-bold uppercase">No</th>
-                <th class="py-3 px-4 text-center w-16 font-bold uppercase">Kode Jurusan</th>
-                <th class="py-3 px-4 text-center w-16 font-bold uppercase">Nama Jurusan</th>
-                <th class="py-3 px-4 text-center w-16 font-bold uppercase">Aksi</th>
+                <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">No</th>
+                <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Kode Jurusan</th>
+                <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Nama Jurusan</th>
+                <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Aksi</th>
             </tr>
         </thead>
         <tbody>
             @foreach($jurusans as $index => $jurusan)
                 <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
-                    <td class="py-3 px-6 w-16 text-center">{{ $index + 1 }}</td>
-                    <td class="py-3 px-6 w-16 text-center">{{ $jurusan->kode_jurusan }}</td>
-                    <td class="py-3 px-6 w-16 text-center">{{ $jurusan->nama_jurusan }}</td>
-                    <td class="py-3 px-6 flex justify-center items-center space-x-2">
+                    <td class="py-3 px-6 min-w-[10px] text-center">{{ $index + 1 }}</td>
+                    <td class="py-3 px-6 min-w-[10px] text-center">{{ $jurusan->kode_jurusan }}</td>
+                    <td class="py-3 px-6 min-w-[10px] text-center">{{ $jurusan->nama_jurusan }}</td>
+                    <td class="py-3 px-6 min-w-[10px] flex justify-center items-center space-x-2">
                         <a href="#" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
                         <a href="{{ route('admin.jurusan.edit', $jurusan->kode_jurusan) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
                         <form action="{{ route('admin.jurusan.destroy', $jurusan->kode_jurusan) }}" method="POST">

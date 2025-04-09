@@ -18,6 +18,7 @@
         <div class="mb-3">
             <label for="kode_jurusan" class="text-2xl">Jurusan:</label>
             <select name="kode_jurusan" id="kode_jurusan" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                <option value="" selected disabled>Pilih Jurusan</option>
                 @foreach ($jurusans as $jurusan)
                     <option value="{{ $jurusan->kode_jurusan }}">{{ $jurusan->nama_jurusan }}</option>
                 @endforeach

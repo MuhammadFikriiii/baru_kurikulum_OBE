@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Daftar Pengguna')
-
 @section('content')
 <div class="ml-20 mr-20">
     <h1 class="text-2xl font-bold text-gray-700 mb-4 text-center">DATA PENGGUNA</h1>
@@ -56,20 +54,20 @@
         <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
             <thead class="bg-green-800 text-white border-b">
                 <tr>
-                    <th class="py-3 px-4 text-center w-16 font-bold uppercase ">No.</th>
-                    <th class="py-3 px-6 text-center w-1/3 font-bold uppercase">Nama</th>
-                    <th class="py-3 px-6 text-center w-1/4 font-bold uppercase">Email</th>
-                    <th class="py-3 px-6 text-center w-1/6 font-bold uppercase">Role</th>
-                    <th class="py-3 px-6 w-1/4 font-bold uppercase text-center">Aksi</th>
+                    <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase ">No.</th>
+                    <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Nama</th>
+                    <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Email</th>
+                    <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Role</th>
+                    <th class="py-3 px-6 min-w-[10px] font-bold uppercase text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($users as $index => $user)
                 <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
-                    <td class="py-3 px-6 w-16 text-center">{{ $index + 1 }}</td>
-                    <td class="py-3 px-6 w-1/4 text-center">{{ $user->name }}</td>
-                    <td class="py-3 px-6 w-1/4 text-center">{{ $user->email }}</td>
-                    <td class="py-3 px-6 w-1/8 text-center">{{ ucfirst($user->role) }}</td>
+                    <td class="py-3 px-6 min-w-[10px] text-center">{{ $index + 1 }}</td>
+                    <td class="py-3 px-6 min-w-[10px] text-center">{{ $user->name }}</td>
+                    <td class="py-3 px-6 min-w-[10px] text-center">{{ $user->email }}</td>
+                    <td class="py-3 px-6 min-w-[10px] text-center">{{ ucfirst($user->role) }}</td>
                     <td class="py-3 px-6 flex justify-center items-center space-x-2">
                         <a href="#" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
                         <a href="{{ route('admin.users.edit', $user->id) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>

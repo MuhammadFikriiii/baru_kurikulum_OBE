@@ -2,7 +2,9 @@
 
 @section('content')
 
-<h2>Edit Bahan Kajian</h2>
+<div class="ml-20 mr-20">
+<h2 class="text-4xl text-center font-extrabold mb-4">Edit Bahan Kajian</h2>
+<hr class="w-full border border-black mb-4">
 
 @if ($errors->any())
     <div style="color: red;">
@@ -54,8 +56,8 @@
     <input type="number" name="min_bk" id="min_bk" value="{{ old('min_bk', $bahankajian->min_bk) }}" required class="border border-black p-3 w-full mt-1 mb-3 rounded-lg">
     <br>
     
-    <button type="submit" class="btn btn-primary bg-green-400 hover:bg-green-800 px-5 py-2 rounded-lg">Update</button>
-
+    <button type="submit" class="btn btn-primary bg-green-400 hover:bg-green-800 px-5 py-2 rounded-lg">Simpan</button>
+    <a href="{{ route('admin.bahankajian.index') }}" class="bg-blue-400 hover:bg-blue-800 px-5 py-2 rounded-lg">Kembali</a>
 </form>
-
+</div>
 @endsection

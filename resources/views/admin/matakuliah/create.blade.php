@@ -19,23 +19,24 @@
         @csrf
         <div class="mt-3">
             <label for="kode_mk" class="text-2xl">Kode Mata Kuliah</label>
-            <input type="text" name="kode_mk" id="kode_mk" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500">
+            <input type="text" name="kode_mk" id="kode_mk" class="mt-1 w-full p-3 border border-black rounded-lg ">
         </div>
         <div class="mt-3">
             <label for="nama_mk" class="text-2xl">Nama Mata Kuliah</label>
-            <input type="text" name="nama_mk" id="nama_mk" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500">
+            <input type="text" name="nama_mk" id="nama_mk" class="mt-1 w-full p-3 border border-black rounded-lg ">
         </div>
         <div class="mt-3">
             <label for="jenis_mk" class="text-2xl">Jenis MataKuliah</label>
-            <input type="text" name="jenis_mk" id="jenis_mk" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500">
+            <input type="text" name="jenis_mk" id="jenis_mk" class="mt-1 w-full p-3 border border-black rounded-lg ">
         </div>
         <div class="mt-3">
             <label for="sks_mk" class="text-2xl">SKS MataKuliah</label>
-            <input type="number" name="sks_mk" id="sks_mk" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500">
+            <input type="number" name="sks_mk" id="sks_mk" class="mt-1 w-full p-3 border border-black rounded-lg ">
         </div>
         <div class="mt-3">
             <label for="semester_mk" class="text-2xl">Semester MataKuliah</label>
-            <select name="semester_mk" id="semester_mk" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500">
+            <select name="semester_mk" id="semester_mk" class="mt-1 w-full p-3 border border-black rounded-lg ">
+                <option value="" disabled selected>Pilih Semester</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -47,14 +48,16 @@
             </select>
         </div>
         <div class="mt-3">
-            <label for="kompetensi_mk">kompetensi MataKuliahk</label>
-            <select name="kompetensi_mk" id="kompetensi_mk" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500">
+            <label for="kompetensi_mk" class="text-2xl">kompetensi MataKuliah</label>
+            <select name="kompetensi_mk" id="kompetensi_mk" class="mt-1 w-full p-3 border border-black rounded-lg mb-3">
+                <option value="" selected disabled>Pilih Kompetensi MK</option>
                 <option value="pendukung">pendukung</option>
                 <option value="utama">utama</option>
             </select>
         </div>
         <div>
-            <button type="submit" class="btn btn-primary bg-green-400 hover:bg-green-800 mt-3 px-5 py-2 rounded-lg">Simpan</button>
+            <button type="submit" class="bg-green-400 hover:bg-green-800 mt-3 px-5 py-2 rounded-lg">Simpan</button>
+            <a href="{{ route('admin.matakuliah.index') }}" class="bg-blue-400 hover:bg-blue-800 px-5 py-2 rounded-lg">Kembali</a>
         </div>
     </form>
 

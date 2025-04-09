@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<h2 class="text-2xl font-bold mb-4">Pemetaan CPL - PL</h2>
+<div class="mr-20 ml-20">
+<h2 class="text-4xl font-extrabold text-center mb-4">Pemetaan CPL - PL</h2>
+<hr class="w-full border border-black mb-4">
 
 @if(session('success'))
     <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
@@ -42,5 +44,5 @@
     <button type="submit" class="mt-4 px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Simpan</button>
 </form>
 
-<a href="{{ route('admin.dashboard') }}" class="inline-block mt-4 px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Kembali</a>
+</div>
 @endsection

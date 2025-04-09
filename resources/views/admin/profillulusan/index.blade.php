@@ -54,26 +54,26 @@
             <table class="w-full table-fixed shadow-md rounded-lg overflow-hidden">
                 <thead class="bg-green-800 text-white">
                     <tr class="text-center">
-                        <th class="px-4 py-2 w-16">Kode Profil Lulusan</th>
-                        <th class="px-4 py-2 w-16">Prodi</th>
-                        <th class="px-4 py-2 w-48">Deskripsi Profil Lulusan</th>
-                        <th class="px-4 py-2 w-96">Profesi</th>
-                        <th class="px-4 py-2 w-20">Unsur</th>
-                        <th class="px-4 py-2 w-20">Keterangan</th>
-                        <th class="px-4 py-2 w-32">Sumber</th>
-                        <th class="px-4 py-2 w-52">Aksi</th>
+                        <th class="px-4 py-2 text-center w-16">Kode Profil Lulusan</th>
+                        <th class="px-4 py-2 text-center w-24">Prodi</th>
+                        <th class="px-4 py-2 text-center w-48">Deskripsi Profil Lulusan</th>
+                        <th class="px-4 py-2 text-center w-96">Profesi</th>
+                        <th class="px-4 py-2 text-center w-20">Unsur</th>
+                        <th class="px-4 py-2 text-center w-20">Keterangan</th>
+                        <th class="px-4 py-2 text-center w-32">Sumber</th>
+                        <th class="px-4 py-2 text-center w-52">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($profillulusans as $profillulusan)
                         <tr class="align-top">
                             <td class="px-4 py-2 w-28 text-center">{{ $profillulusan->kode_pl }}</td>
-                            <td class="px-4 py-2 w-20 text-center">{{ $profillulusan->prodi->nama_prodi ?? '-' }}</td>
-                            <td class="px-4 py-2 w-48 whitespace-pre-line">{{ $profillulusan->deskripsi_pl }}</td>
+                            <td class="px-4 py-2 w-24 text-center">{{ $profillulusan->prodi->nama_prodi ?? '-' }}</td>
+                            <td class="px-4 py-2 w-48 whitespace-pre-line text-justify">{{ $profillulusan->deskripsi_pl }}</td>
                             <td class="px-4 py-2 w-96 whitespace-pre-line">{{ $profillulusan->profesi_pl }}</td>
-                            <td class="px-4 py-2 w-32 text-center">{{ $profillulusan->unsur_pl }}</td>
+                            <td class="px-4 py-2 w-32 text-justify">{{ $profillulusan->unsur_pl }}</td>
                             <td class="px-4 py-2 w-28 text-center">{{ $profillulusan->keterangan_pl }}</td>
-                            <td class="px-4 py-2 w-44">{{ $profillulusan->sumber_pl }}</td>
+                            <td class="px-4 py-2 w-44 text-justify">{{ $profillulusan->sumber_pl }}</td>
                             <td class="py-3 px-6 flex justify-center items-center space-x-2">
                                 <a href="#" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
                                 <a href="{{ route('admin.profillulusan.edit', $profillulusan->kode_pl) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
