@@ -11,7 +11,9 @@ class AdminMataKuliahController extends Controller
     public function index()
     {
         $mata_kuliahs = MataKuliah::all();
-        return view("admin.matakuliah.index", compact("mata_kuliahs"));
+        $semesters = $mata_kuliahs->pluck('semester_mk')->unique()->sort()->values();
+
+        return view("admin.matakuliah.index", compact("mata_kuliahs", "semesters"));
     }
 
     public function create()
