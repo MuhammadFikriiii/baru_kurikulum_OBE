@@ -14,6 +14,7 @@ use App\Http\Controllers\AdminPemetaanCplBkController;
 use App\Http\Controllers\AdminMataKuliahController;
 use App\Http\Controllers\AdminPemetaanCplMkController;
 use App\Http\Controllers\AdminPemetaanBkMkController;
+use App\Http\Controllers\AdminPemetaanCplMkBkController;
 
 // Auth
 Route::get('/', [LoginController::class, 'loginForm'])->name('login');
@@ -86,4 +87,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/pemetaancplmk', [AdminPemetaanCplMkController::class, 'store'])->name('pemetaancplmk.store');
     Route::get('/pemetaanbkmk', [AdminPemetaanBkMkController::class, 'index'])->name('pemetaanbkmk.index');
     Route::post('/pemetaanbkmk', [AdminPemetaanBkMkController::class, 'store'])->name('pemetaanbkmk.store');
+    Route::get('/pemetaancplmkbk', [AdminPemetaanCplMkBkController::class, 'index'])->name('pemetaancplmkbk.index');
+    Route::post('/pemetaancplmkbk', [AdminPemetaanCplMkBkController::class, 'store'])->name('pemetaancplmkbk.store');
 });
