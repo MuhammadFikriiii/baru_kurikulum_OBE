@@ -49,7 +49,7 @@ class AdminMataKuliahController extends Controller
             'kompetensi_mk'=> 'required|string|in:pendukung,utama',
         ]);
         $matakuliah->update($request->all());
-        return redirect()->route('admin.matakuliah.index')->with('sukses', 'matakuliah berhasil diperbaharui');
+        return redirect()->route('admin.matakuliah.index')->with('success', 'matakuliah berhasil diperbaharui');
     }
 
     public function destroy(MataKuliah $matakuliah)
