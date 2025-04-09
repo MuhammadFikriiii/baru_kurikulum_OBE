@@ -59,6 +59,6 @@ class AdminBahanKajianController extends Controller
     public function destroy(BahanKajian $bahankajian)
     {
         $bahankajian->delete();
-        return redirect()->route('admin.bahankajian.index')->with('success','Bahan Kajian Berhasil Di Hapus');
+        return redirect()->route('admin.bahankajian.index')->with('sukses','Bahan Kajian Berhasil Di Hapus');
     }
 }

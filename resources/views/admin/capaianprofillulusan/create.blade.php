@@ -5,7 +5,7 @@
 <p style="color: green;">{{ session('success') }}</p>
 @endif
 
-<h2>Tambah Profil Lulusan</h2>
+<h2>Tambah Capaian Profil Lulusan</h2>
 
 @if ($errors->any())
     <div style="color: red;">

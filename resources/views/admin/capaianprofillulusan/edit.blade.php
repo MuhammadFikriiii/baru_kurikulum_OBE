@@ -27,13 +27,13 @@
     <br>
 
     <label for="status_cpl">Status CPL:</label>
-    <select name="status_cpl" id="status_cpl" required>
+    <select name="status_cpl" id="status_cpl" class="border border-black p-3 mt-1 w-full rounded-lg mb-3" required>
         <option value="Kompetensi Utama Bidang" {{ $capaianprofillulusan->status_cpl == "Kompetensi Utama Bidang" ? 'selected' : '' }}>Kompetensi Utama Bidang</option>
         <option value="Kompetensi Tambahan" {{ $capaianprofillulusan->status_cpl == "Kompetensi Tambahan" ? 'selected' : '' }}>Kompetensi Tambahan</option>
     </select>
     <br>
-    <button type="submit">Update</button>
+    <button type="submit" class="btn btn-primary bg-green-400 hover:bg-green-800 px-5 py-2 rounded-lg">Update</button>
+    <a href="{{ route('admin.capaianprofillulusan.index') }}" class="bg-blue-400 hover:bg-blue-800 rounded-lg py-2 px-5">Kembali</a>
 </form>
 
-<a href="{{ route('admin.capaianprofillulusan.index') }}">Kembali</a>
 @endsection
