@@ -19,11 +19,11 @@
     @method('PUT')
 
     <label for="kode_cpl">Kode Capaian Profil Lulusan:</label>
-    <input type="text" name="kode_cpl" id="kode_cpl" value="{{ old('kode_cpl', $capaianprofillulusan->kode_cpl) }}" required>
+    <input type="text" name="kode_cpl" id="kode_cpl" class="border border-black w-full rounded-lg p-3 mt-1" value="{{ old('kode_cpl', $capaianprofillulusan->kode_cpl) }}" required>
     <br>
 
     <label for="deskripsi_cpl">Deskripsi Capaian Profil Lulusan:</label>
-    <input type="text" name="deskripsi_cpl" id="deskripsi_cpl" value="{{ old('deskripsi_cpl', $capaianprofillulusan->deskripsi_cpl) }}" required>
+    <textarea type="text" name="deskripsi_cpl" id="deskripsi_cpl" class="border border-black w-full rounded-lg p-3" required>{{ old('deskripsi_cpl', $capaianprofillulusan->deskripsi_cpl) }}</textarea>
     <br>
 
     <label for="status_cpl">Status CPL:</label>
