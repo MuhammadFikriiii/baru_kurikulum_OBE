@@ -61,7 +61,7 @@
 <textarea id="sumber_pl" name="sumber_pl" class="mt-1 w-full p-3 border border-black rounded-lg mb-3" required></textarea>
 <br>
 
-<button type="submit" class="btn btn-primary bg-green-400 hover:bg-green-800 mt-3 px-5 py-2 rounded-lg">Simpan</button>
+<button type="submit" class="bg-green-400 hover:bg-green-800 mt-3 px-5 py-2 rounded-lg">Simpan</button>
 <a href="{{ route('admin.profillulusan.index') }}" class="bg-blue-400 hover:bg-blue-800 mt-3 px-5 py-2 rounded-lg">kembali</a>
 </form>
 </div>

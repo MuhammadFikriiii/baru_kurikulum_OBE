@@ -65,8 +65,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($profillulusans as $profillulusan)
-                        <tr class="align-top">
+                    @foreach($profillulusans as $index => $profillulusan)
+                        <tr class="align-top {{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
                             <td class="px-4 py-2 w-28 text-center">{{ $profillulusan->kode_pl }}</td>
                             <td class="px-4 py-2 w-24 text-center">{{ $profillulusan->prodi->nama_prodi ?? '-' }}</td>
                             <td class="px-4 py-2 w-48 whitespace-pre-line text-justify">{{ $profillulusan->deskripsi_pl }}</td>
