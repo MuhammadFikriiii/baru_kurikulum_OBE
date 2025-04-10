@@ -24,8 +24,8 @@
 
 <label for="kode_prodi" class="text-2xl">kode prodi</label>
 <select id="kode_prodi" name="kode_prodi" class="mt-1 w-full p-3 border border-black rounded-lg mb-3" required>
+    <option value="" class="placeholder" selected disabled>Pilih Prodi</option>
     @foreach($prodis as $prodi)
-        <option value="" class="placeholder" selected disabled>Pilih Prodi</option>
         <option value="{{ $prodi->kode_prodi }}">{{ $prodi->nama_prodi }}</option>
     @endforeach
 </select>

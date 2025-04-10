@@ -12,14 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create("profil_lulusans", function (Blueprint $table) {
-            $table->string('kode_pl', 10)->primary();
-            $table->string('kode_prodi', 10)->nullable();
+            $table->id('id_pl');
+            $table->string('kode_pl', 10);
+            $table->string('kode_prodi', 10);
             $table->text('deskripsi_pl');
             $table->text('profesi_pl');
             $table->enum('unsur_pl',['Pengetahuan','Keterampilan Khusus', 'Sikap dan Keterampilan Umum']);
             $table->enum('keterangan_pl',['Kompetensi Utama Bidang','Kompetensi Utama', 'Kompetensi Tambahan']);
             $table->text('sumber_pl');
-            $table->foreign('kode_prodi')->references('kode_prodi')->on('prodis')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('kode_prodi')->references('kode_prodi')->on('prodis')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

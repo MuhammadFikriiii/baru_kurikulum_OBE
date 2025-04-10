@@ -24,7 +24,7 @@ class AdminProfilLulusanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode_pl' => 'required|string|max:10|unique:profil_lulusans,kode_pl',
+            'kode_pl' => 'required|string|max:10|',
             'kode_prodi' => 'required|string|max:10',
             'deskripsi_pl' => 'required',
             'profesi_pl' => 'required',
@@ -36,16 +36,17 @@ class AdminProfilLulusanController extends Controller
         return redirect()->route('admin.profillulusan.index')->with('success', 'Profil lulusan berhasil ditambahkan.');
     }
 
-    public function edit (ProfilLulusan $profillulusan)
+    public function edit ($id_pl)
     {
         $prodis = Prodi::all();
+        $profillulusan = ProfilLulusan::findOrFail($id_pl);
         return view('admin.profillulusan.edit', compact('profillulusan', 'prodis'));
     }
 
-    public function update(Request $request, ProfilLulusan $profillulusan)
+    public function update(Request $request, $id_pl)
     {
         $request->validate([
-            'kode_pl' => ['required','string','max:10',Rule::unique('profil_lulusans', 'kode_pl')->ignore($profillulusan->kode_pl,'kode_pl')],
+            'kode_pl' => 'required|string|max:10',
             'kode_prodi' => 'required|string|max:10',
             'deskripsi_pl' => 'required',
             'profesi_pl' => 'required',
@@ -54,6 +55,7 @@ class AdminProfilLulusanController extends Controller
             'sumber_pl' => 'required',
         ]);
 
+        $profillulusan = ProfilLulusan::findOrFail($id_pl);
         $profillulusan->update($request->all());
         return redirect()->route('admin.profillulusan.index')->with('success', 'Profil Lulusan berhasil diperbarui.');
     }

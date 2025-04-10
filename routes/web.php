@@ -58,9 +58,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/profillulusan', [AdminProfilLulusanController::class, 'index'])->name('profillulusan.index');
     Route::get('/profillulusan/create', [AdminProfilLulusanController::class, 'create'])->name('profillulusan.create');
     Route::post('/profillulusan', [AdminProfilLulusanController::class, 'store'])->name('profillulusan.store');
-    Route::get('/profillulusan/{profillulusan}/edit', [AdminProfilLulusanController::class, 'edit'])->name('profillulusan.edit');
-    Route::put('/profillulusan/{profillulusan}', [AdminProfilLulusanController::class, 'update'])->name('profillulusan.update');
-    Route::delete('/profillulusan/{profillulusan}', [AdminProfilLulusanController::class, 'destroy'])->name('profillulusan.destroy');
+    Route::get('/profillulusan/{id_pl}/edit', [AdminProfilLulusanController::class, 'edit'])->name('profillulusan.edit');
+    Route::put('/profillulusan/{id_pl}', [AdminProfilLulusanController::class, 'update'])->name('profillulusan.update');
+    Route::delete('/profillulusan/{id_pl}', [AdminProfilLulusanController::class, 'destroy'])->name('profillulusan.destroy');
     Route::get('/capaianprofillulusan', [AdminCapaianProfilLulusanController::class, 'index'])->name('capaianprofillulusan.index');
     Route::get('/capaianprofillulusan/create', [AdminCapaianProfilLulusanController::class, 'create'])->name('capaianprofillulusan.create');
     Route::post('/capaianprofillulusan', [AdminCapaianProfilLulusanController::class, 'store'])->name('capaianprofillulusan.store');

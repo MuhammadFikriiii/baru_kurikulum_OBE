@@ -9,9 +9,8 @@ class ProfilLulusan extends Model
 {
     use HasFactory;
     protected $table = 'profil_lulusans';
-    protected $primaryKey = 'kode_pl';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    protected $primaryKey = 'id_pl';
+    public $incrementing = true;
     protected $fillable = [
         'kode_pl',
         'kode_prodi',

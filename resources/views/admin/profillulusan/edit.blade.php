@@ -16,7 +16,7 @@
     </div>
 @endif
 
-<form action="{{ route('admin.profillulusan.update', $profillulusan->kode_pl) }}" method="POST">
+<form action="{{ route('admin.profillulusan.update', $profillulusan->id_pl) }}" method="POST">
     
     @csrf
     @method('PUT')
