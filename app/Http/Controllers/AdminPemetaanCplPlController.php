@@ -15,7 +15,7 @@ class AdminPemetaanCplPlController extends Controller
         $pls = ProfilLulusan::all(); // Ambil semua PL dari database
         
         // Ambil semua relasi CPL & PL dalam bentuk array
-        $relasi = DB::table('cpl_pl')->get()->groupBy('kode_pl');
+        $relasi = DB::table('cpl_pl')->get()->groupBy('id_pl');
 
         return view('admin.pemetaancplpl.index', compact('cpls', 'pls', 'relasi'));
     }
@@ -29,10 +29,10 @@ class AdminPemetaanCplPlController extends Controller
         DB::table('cpl_pl')->delete();
 
         // Menyimpan data relasi baru
-        foreach ($relasi as $kode_pl => $kode_cpls) {
+        foreach ($relasi as $id_pl => $kode_cpls) {
             foreach ($kode_cpls as $kode_cpl) {
                 DB::table('cpl_pl')->insert([
-                    'kode_pl' => $kode_pl,
+                    'id_pl' => $id_pl,
                     'kode_cpl' => $kode_cpl,
                 ]);
             }
