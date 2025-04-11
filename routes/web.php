@@ -41,7 +41,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/users', [AdminUserController::class, 'store'])->name('users.store');
     Route::get('/users/{id}/edit', [AdminUserController::class, 'edit'])->name('users.edit');
     Route::put('/users/{id}', [AdminUserController::class, 'update'])->name('users.update');
-    Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('users.destroy');
+    Route::get('/users/{id}/detail', [AdminUserController::class,'details'])->name('users.detail');
+    Route::delete('/users/{id}', [AdminUserController::class, 'destroy'])->name('users.destroy');
     Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/jurusan', [JurusanController::class, 'index'])->name('jurusan.index');
     Route::get('/jurusan/create', [JurusanController::class, 'create'])->name('jurusan.create');

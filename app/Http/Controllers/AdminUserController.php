@@ -71,7 +71,11 @@ class AdminUserController extends Controller {
         return redirect()->route('admin.users.index')->with('success', 'Data pengguna berhasil diperbarui.');
     }
 
-    
+    public function details($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.users.detail', compact('user'));
+    }
 
     public function destroy(User $user) {
         $user->delete();
