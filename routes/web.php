@@ -15,6 +15,7 @@ use App\Http\Controllers\AdminMataKuliahController;
 use App\Http\Controllers\AdminPemetaanCplMkController;
 use App\Http\Controllers\AdminPemetaanBkMkController;
 use App\Http\Controllers\AdminPemetaanCplMkBkController;
+use App\Http\Controllers\Wadir1UserController;
 
 // Auth
 Route::get('/', [LoginController::class, 'loginForm'])->name('login');
@@ -90,4 +91,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/pemetaanbkmk', [AdminPemetaanBkMkController::class, 'store'])->name('pemetaanbkmk.store');
     Route::get('/pemetaancplmkbk', [AdminPemetaanCplMkBkController::class, 'index'])->name('pemetaancplmkbk.index');
     Route::post('/pemetaancplmkbk', [AdminPemetaanCplMkBkController::class, 'store'])->name('pemetaancplmkbk.store');
+});
+
+Route::prefix('wadir1')->name('wadir1')->group(function(){
+    Route::get('/users', [Wadir1UserController::class, 'index'])->name('.users.index');
+    Route::get('/users/{id}/detail', [Wadir1UserController::class, 'detail'])->name('.users.detail');
 });
