@@ -71,8 +71,8 @@
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->status_cpl }}</td>
                         <td class="py-3 px-6 min-w-[10px] flex justify-center items-center space-x-2">
                             <a href="#" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
-                            <a href="{{ route('admin.capaianprofillulusan.edit', $capaianprofillulusan->kode_cpl) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
-                            <form action="{{ route('admin.capaianprofillulusan.destroy',$capaianprofillulusan->kode_cpl ) }}" method="POST">
+                            <a href="{{ route('admin.capaianprofillulusan.edit', $capaianprofillulusan->id_cpl) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
+                            <form action="{{ route('admin.capaianprofillulusan.destroy',$capaianprofillulusan->id_cpl ) }}" method="POST">
                                 @csrf @method('DELETE')
                                 <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">
                                     🗑️ Hapus

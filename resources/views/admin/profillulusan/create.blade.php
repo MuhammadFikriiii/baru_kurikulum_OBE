@@ -52,7 +52,6 @@
 <select id="keterangan_pl" name="keterangan_pl" class="mt-1 w-full p-3 border border-black rounded-lg mb-3" required>
     <option value=""selected disabled>Pilih Keterangan</option>
     <option value="Kompetensi Utama Bidang">Kompetensi Utama Bidang</option>
-    <option value="Kompetensi Utama">Kompetensi Utama</option>
     <option value="Kompetensi Tambahan">Kompetensi Tambahan</option>
 </select>
 <br>

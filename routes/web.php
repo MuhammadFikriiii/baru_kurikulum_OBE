@@ -64,9 +64,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/capaianprofillulusan', [AdminCapaianProfilLulusanController::class, 'index'])->name('capaianprofillulusan.index');
     Route::get('/capaianprofillulusan/create', [AdminCapaianProfilLulusanController::class, 'create'])->name('capaianprofillulusan.create');
     Route::post('/capaianprofillulusan', [AdminCapaianProfilLulusanController::class, 'store'])->name('capaianprofillulusan.store');
-    Route::get('/capaianprofillulusan/{capaianprofillulusan}/edit', [AdminCapaianProfilLulusanController::class, 'edit'])->name('capaianprofillulusan.edit');
-    Route::put('/capaianprofillulusan/{capaianprofillulusan}', [AdminCapaianProfilLulusanController::class, 'update'])->name('capaianprofillulusan.update');
-    Route::delete('/capaianprofillulusan/{capaianprofillulusan}', [AdminCapaianProfilLulusanController::class, 'destroy'])->name('capaianprofillulusan.destroy');
+    Route::get('/capaianprofillulusan/{id_cpl}/edit', [AdminCapaianProfilLulusanController::class, 'edit'])->name('capaianprofillulusan.edit');
+    Route::put('/capaianprofillulusan/{id_cpl}', [AdminCapaianProfilLulusanController::class, 'update'])->name('capaianprofillulusan.update');
+    Route::delete('/capaianprofillulusan/{id_cpl}', [AdminCapaianProfilLulusanController::class, 'destroy'])->name('capaianprofillulusan.destroy');
     Route::get('/pemetaancplpl', [AdminPemetaanCplPlController::class, 'index'])->name('pemetaancplpl.index');
     Route::post('/pemetaancplpl', [AdminPemetaanCplPlController::class, 'store'])->name('pemetaancplpl.store');
     Route::get('/bahankajian', [AdminBahankajianController::class, 'index'])->name('bahankajian.index');

@@ -54,7 +54,6 @@
     <label for="keterangan_pl" class="text-2xl">Keterangan:</label>
     <select name="keterangan_pl" id="keterangan_pl" class="mt-1 p-3 border border-black rounded-lg w-full mb-3" required>
         <option value="Kompetensi Utama Bidang" {{ $profillulusan->keterangan_pl == "Kompetensi Utama Bidang" ? 'selected' : '' }}>Kompetensi Utama Bidang</option>
-        <option value="Kompetensi Utama" {{ $profillulusan->keterangan_pl == "Kompetensi Utama" ? 'selected' : '' }}>Kompetensi Utama</option>
         <option value="Kompetensi Tambahan" {{ $profillulusan->keterangan_pl == "Kompetensi Tambahan" ? 'selected' : '' }}>Kompetensi Tambahan</option>
     </select>
     <br>

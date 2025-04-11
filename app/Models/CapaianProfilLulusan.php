@@ -9,8 +9,9 @@ class CapaianProfilLulusan extends Model
 {
     use HasFactory;
     protected $table = 'capaian_profil_lulusans';
-    protected $primaryKey = 'kode_cpl';
-    public $incrementing = false;
+    protected $primaryKey = 'id_cpl';
+    protected $keyType = 'int';
+    public $incrementing = true;
     protected $fillable = [
         'kode_cpl',
         'deskripsi_cpl',

@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create("capaian_profil_lulusans", function (Blueprint $table) {
-            $table->string("kode_cpl", 10)->primary();
+            $table->id('id_cpl');
+            $table->string("kode_cpl", 10);
             $table->text("deskripsi_cpl");
             $table->enum("status_cpl",['Kompetensi Utama Bidang', 'Kompetensi Tambahan']);
             $table->timestamps();

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('deskripsi_pl');
             $table->text('profesi_pl');
             $table->enum('unsur_pl',['Pengetahuan','Keterampilan Khusus', 'Sikap dan Keterampilan Umum']);
-            $table->enum('keterangan_pl',['Kompetensi Utama Bidang','Kompetensi Utama', 'Kompetensi Tambahan']);
+            $table->enum('keterangan_pl',['Kompetensi Utama Bidang', 'Kompetensi Tambahan']);
             $table->text('sumber_pl');
             $table->foreign('kode_prodi')->references('kode_prodi')->on('prodis')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

@@ -29,7 +29,7 @@ class AdminProfilLulusanController extends Controller
             'deskripsi_pl' => 'required',
             'profesi_pl' => 'required',
             'unsur_pl' => 'required|in:Pengetahuan,Keterampilan Khusus,Sikap dan Keterampilan Umum',
-            'keterangan_pl' => 'required|in:Kompetensi Utama Bidang,Kompetensi Utama,Kompetensi Tambahan',
+            'keterangan_pl' => 'required|in:Kompetensi Utama Bidang,Kompetensi Tambahan',
             'sumber_pl' => 'required',
         ]);
         ProfilLulusan::create($request->all());
@@ -51,7 +51,7 @@ class AdminProfilLulusanController extends Controller
             'deskripsi_pl' => 'required',
             'profesi_pl' => 'required',
             'unsur_pl' => 'required|in:Pengetahuan,Keterampilan Khusus,Sikap dan Keterampilan Umum',
-            'keterangan_pl' => 'required|in:Kompetensi Utama Bidang,Kompetensi Utama,Kompetensi Tambahan',
+            'keterangan_pl' => 'required|in:Kompetensi Utama Bidang,Kompetensi Tambahan',
             'sumber_pl' => 'required',
         ]);
 

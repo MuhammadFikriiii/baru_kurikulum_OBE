@@ -11,8 +11,8 @@ class AdminPemetaanCplPlController extends Controller
 {
     public function index()
     {
-        $cpls = CapaianProfilLulusan::all(); // Ambil semua CPL dari database
-        $pls = ProfilLulusan::all(); // Ambil semua PL dari database
+        $cpls = CapaianProfilLulusan::all();
+        $pls = ProfilLulusan::all();
         
         // Ambil semua relasi CPL & PL dalam bentuk array
         $relasi = DB::table('cpl_pl')->get()->groupBy('id_pl');
@@ -25,15 +25,16 @@ class AdminPemetaanCplPlController extends Controller
         // Mengambil data relasi yang dipilih
         $relasi = $request->input('relasi', []);
 
+
         // Hapus semua data relasi sebelumnya (opsional, jika Anda ingin mereset data)
         DB::table('cpl_pl')->delete();
 
         // Menyimpan data relasi baru
-        foreach ($relasi as $id_pl => $kode_cpls) {
-            foreach ($kode_cpls as $kode_cpl) {
+        foreach ($relasi as $id_pl => $id_cpls) {
+            foreach ($id_cpls as $id_cpl) {
                 DB::table('cpl_pl')->insert([
                     'id_pl' => $id_pl,
-                    'kode_cpl' => $kode_cpl,
+                    'id_cpl' => $id_cpl,
                 ]);
             }
         }
