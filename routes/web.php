@@ -51,6 +51,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/jurusan', [JurusanController::class, 'store'])->name('jurusan.store');
     Route::get('/jurusan/{jurusan}/edit', [JurusanController::class, 'edit'])->name('jurusan.edit');
     Route::put('/jurusan/{jurusan}', [JurusanController::class, 'update'])->name('jurusan.update');
+    Route::get('/jurusan/{jurusan}/detail', [JurusanController::class, 'detail'])->name('jurusan.detail');
     Route::delete('/jurusan/{jurusan}', [JurusanController::class, 'destroy'])->name('jurusan.destroy');
     Route::get('/prodi', [AdminProdiController::class, 'index'])->name('prodi.index');
     Route::get('/prodi/create', [AdminProdiController::class, 'create'])->name('prodi.create');

@@ -46,6 +46,11 @@ class JurusanController extends Controller
         return redirect()->route('admin.jurusan.index')->with('success', 'Jurusan berhasil diperbarui.');
     }
 
+    public function detail(Jurusan $jurusan)
+    {
+        return view('admin.jurusan.detail', compact('jurusan'));
+    }
+
     public function destroy(Jurusan $jurusan)
     {
         $jurusan->delete();

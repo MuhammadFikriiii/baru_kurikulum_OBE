@@ -68,7 +68,7 @@
                     <td class="py-3 px-6 min-w-[10px] text-center">{{ $jurusan->kode_jurusan }}</td>
                     <td class="py-3 px-6 min-w-[10px] text-center">{{ $jurusan->nama_jurusan }}</td>
                     <td class="py-3 px-6 min-w-[10px] flex justify-center items-center space-x-2">
-                        <a href="#" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
+                        <a href="{{ route('admin.jurusan.detail', $jurusan->kode_jurusan) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
                         <a href="{{ route('admin.jurusan.edit', $jurusan->kode_jurusan) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
                         <form action="{{ route('admin.jurusan.destroy', $jurusan->kode_jurusan) }}" method="POST">
                             @csrf @method('DELETE')
