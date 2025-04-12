@@ -5,7 +5,7 @@
     <h2 class="text-4xl font-extrabold text-center mb-4">Detail Jurusan</h2>
     <hr class="w-full border border-black mb-4">
 
-    <label for="jurusan" class="block text-xl font-semibold">Nama</label>
+    <label for="jurusan" class="block text-xl font-semibold">Kode Jurusan</label>
     <input type="text" jurusan="jurusan" id="jurusan" value="{{ $jurusan->kode_jurusan }}" readonly
         class="w-full p-3 border border-black rounded-lg mb-4 bg-gray-100">
 
