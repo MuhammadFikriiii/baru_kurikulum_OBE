@@ -21,7 +21,7 @@ class SignUpController extends Controller
         $request->validate([
             'name'      => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:userprodis,email',
-            'password'  => 'required|string|min:6|confirmed',
+            'password'  => 'required|string|min:6',
             'role'     => 'required|in:kaprodi,tim',
             'kode_prodi'  => 'required|exists:prodis,kode_prodi',
         ]);

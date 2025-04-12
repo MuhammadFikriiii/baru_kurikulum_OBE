@@ -35,10 +35,6 @@
             </div>
 
             <div class="mt-5">
-              <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" required class="border border-gray-400 py-1 px-2 w-full">
-            </div>
-
-            <div class="mt-5">
               <label for="kode_prodi" class="form-label">Program Studi</label>
               <select name="kode_prodi" class="form-select" required class="border border-gray-400">
                   <option value="">-- Pilih Prodi --</option>
