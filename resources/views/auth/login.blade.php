@@ -19,10 +19,14 @@
             <hr class=" bg-blue-500 mx-auto border-none h-1 w-full mb-2">
             <p class="text-center text-blue-600 font-semibold mb-6">Sistem Informasi Penyusun Kurikulum Berbasi OBE</p>
             
-            @if(session('error'))
-                <div class="bg-red-500 text-white p-3 rounded mb-4 text-center">
-                    {{ session('error') }}
-                </div>
+            @if(session('sukses'))
+            <div id="alert" class="bg-red-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
+                <span class="font-bold">{{ session('sukses') }}</span>
+                <button onclick="document.getElementById('alert').style.display='none'"
+                    class="absolute top-1 right-3 text-white font-bold text-lg">
+                    &times;
+                </button>
+            </div>
             @endif
             
             <form action="{{ route('login.post') }}" method="POST" class="space-y-4">

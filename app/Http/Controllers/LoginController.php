@@ -35,18 +35,33 @@ class LoginController extends Controller
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
 
+            if ($user->status === 'pending') {
+                Auth::logout();
+                return redirect()->route('login')->withErrors(['email' => 'Akun Anda masih dalam status pending.']);
+            }
+
             if ($user->role === 'admin') {
                 return redirect()->route('admin.dashboard')->with('success', 'Login berhasil');
-            }else if ($user->role === 'tim') {
-                return redirect()->route('admin.dashboard')->with('success', 'Login berhasil');
-            }else if ($user->role === 'kaprodi') {
-                return redirect()->route('admin.dashboard')->with('succes', 'Login Berhasil');
-            }else if ($user->role === 'wadir1'){
-                return redirect()->route('wadir1.dashboard')->with('succes', 'Login Berhasil');
+            } elseif ($user->role === 'wadir1') {
+                return redirect()->route('wadir1.dashboard')->with('success', 'Login berhasil');
             }
         }
 
+        if (Auth::guard('userprodi')->attempt($request->only('email', 'password'))) {
+            $userProdi = Auth::guard('userprodi')->user();
 
+            if ($userProdi->status === 'pending') {
+                Auth::guard('userprodi')->logout();
+                return redirect()->route('login')->with('sukses', 'Akun Anda belum Disetujui Oleh Admin.');
+            }
+    
+            if ($userProdi->role === 'kaprodi') {
+                return redirect()->route('kaprodi.dashboard')->with('success', 'Login berhasil');
+            } elseif ($userProdi->role === 'tim') {
+            return redirect()->route('admin.dashboard')->with('success', 'Login berhasil');
+            }
+        }
+    
         return back()->withErrors(['email' => 'Email atau password salah'])->withInput();
     }
 
@@ -56,11 +71,14 @@ class LoginController extends Controller
     
 
     public function forgotPassword(Request $request) {
-        $request->validate([
-            'email' => 'required|email|exists:users,email'
-        ], [
-            'email.exists' => 'Email tidak ditemukan dalam sistem'
-        ]);
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            $user = \App\Models\UserProdi::where('email', $request->email)->first();
+            if (!$user) {
+                return back()->withErrors(['email' => 'Email tidak ditemukan dalam sistem']);
+            }
+        }
+
 
         $token = Str::random(60);
 
@@ -111,6 +129,10 @@ class LoginController extends Controller
         }
         
         $user = User::where('email', $passwordReset->email)->first();
+        if (!$user) {
+            $user = \App\Models\UserProdi::where('email', $passwordReset->email)->first();
+        }
+
         
         if (!$user) {
             Log::error('User dengan email ini tidak ditemukan:', ['email' => $passwordReset->email]);

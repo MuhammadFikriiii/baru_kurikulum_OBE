@@ -19,6 +19,10 @@ class Prodi extends Model {
     public function profillulusans() {
         return $this->hasMany(ProfilLulusan::class, 'kode_pl', 'kode_pl');
     }
+
+    public function userprodis() {
+        return $this->HasMany(UserProdi::class, 'kode_prodi', 'kode_prodi');
+    }
     
 }
 

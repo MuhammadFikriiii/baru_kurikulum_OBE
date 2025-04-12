@@ -17,21 +17,47 @@
         <div class="w-1/2 py-16 px-12">
           <h2 class="text-3xl mb-4">Sign-Up</h2>
           <p class="mb-4">Create your account.</p>
-          <form action="#">
-            <div class="grid grid-cols-2 gap-5">
-              <input type="text" placeholder="First Name" class="border border-gray-400 py-1 px-2">
-              <input type="text" placeholder="Last Name" class="border border-gray-400 py-1 px-2">
+          <form action="{{ route('signup.store') }}" method="POST">
+            @csrf
+            <div class="mt-5">
+              <input type="text" name="name" placeholder="Nama Lengkap" class="border border-gray-400 py-1 px-2 w-full"
+                value="{{ old('name') }}" required>
             </div>
             
             <div class="mt-5">
-              <input type="text" placeholder="Email" class="border border-gray-400 py-1 px-2 w-full">
+              <input type="text" name="email" placeholder="Email" class="border border-gray-400 py-1 px-2 w-full"
+                value="{{ old('email') }}" required>
             </div>
+
             <div class="mt-5">
-              <input type="password" placeholder="Password" class="border border-gray-400 py-1 px-2 w-full">
+              <input type="text" name="password" placeholder="Masukkan Password" class="border border-gray-400 py-1 px-2 w-full"
+                value="{{ old('password') }}" required>
             </div>
+
             <div class="mt-5">
-              <input type="password" placeholder="Confirm Password" class="border border-gray-400 py-1 px-2 w-full">
+              <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" required class="border border-gray-400 py-1 px-2 w-full">
             </div>
+
+            <div class="mt-5">
+              <label for="kode_prodi" class="form-label">Program Studi</label>
+              <select name="kode_prodi" class="form-select" required class="border border-gray-400">
+                  <option value="">-- Pilih Prodi --</option>
+                  @foreach($prodis as $prodi)
+                      <option value="{{ $prodi->kode_prodi }}" {{ old('kode_prodi') == $prodi->kode_prodi ? 'selected' : '' }}>
+                          {{ $prodi->nama_prodi }}
+                      </option>
+                  @endforeach
+              </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Peran</label>
+            <select name="role" class="form-select @error('role') is-invalid @enderror" required>
+                <option value="">-- Pilih Peran --</option>
+                <option value="kaprodi" {{ old('role') == 'kaprodi' ? 'selected' : '' }}>Kaprodi</option>
+                <option value="tim" {{ old('role') == 'tim' ? 'selected' : '' }}>Tim</option>
+            </select>
+        </div>
           
             <div class="mt-5">
               <input type="checkbox" class="border border-gray-400">
@@ -41,7 +67,8 @@
               </span>
             </div>
             <div class="mt-5">
-              <button class="w-full bg-orange-400 text-white py-2">Sign-Up</button>
+              <button type="submit" class="">Daftar</button>
+              <a href="{{ route('login') }}" class="">Sudah punya akun?</a>
             </div>
           </form>
         </div>
@@ -51,9 +78,6 @@
      </div>
 
     </div>    
-      
-  
-
 </body>
 
 </html>

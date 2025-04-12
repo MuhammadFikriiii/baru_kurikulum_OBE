@@ -17,6 +17,7 @@ use App\Http\Controllers\AdminPemetaanBkMkController;
 use App\Http\Controllers\AdminPemetaanCplMkBkController;
 use App\Http\Controllers\Wadir1UserController;
 use App\Http\Controllers\Wadir1DashboardController;
+use App\Http\Controllers\SignUpController;
 
 // Auth
 Route::get('/', [LoginController::class, 'loginForm'])->name('login');
@@ -34,7 +35,8 @@ Route::get('/validasi-forgot-password/{token}', [LoginController::class, 'valida
 Route::get('/reset-password/{token}', [LoginController::class, 'showResetPasswordForm'])
     ->name('show-reset-password-form');
 
-Route::get('/signup', [LoginController::class, 'signup'])->name('signup');
+Route::get('/signup', [SignUpController::class, 'create'])->name('signup');
+Route::post('/signup', [SignUpController::class, 'store'])->name('signup.store');
 
 // Grup Route Admin
 Route::prefix('admin')->name('admin.')->group(function () {
