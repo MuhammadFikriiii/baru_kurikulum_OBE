@@ -60,6 +60,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/prodi', [AdminProdiController::class, 'store'])->name('prodi.store');
     Route::get('/prodi/{prodi}/edit', [AdminProdiController::class, 'edit'])->name('prodi.edit');
     Route::put('/prodi/{prodi}', [AdminProdiController::class, 'update'])->name('prodi.update');
+    Route::get('/prodi/{prodi}/detail', [AdminProdiController::class, 'detail'])->name('prodi.detail');
     Route::delete('/prodi/{prodi}', [AdminProdiController::class, 'destroy'])->name('prodi.destroy');
     Route::get('/profillulusan', [AdminProfilLulusanController::class, 'index'])->name('profillulusan.index');
     Route::get('/profillulusan/create', [AdminProfilLulusanController::class, 'create'])->name('profillulusan.create');

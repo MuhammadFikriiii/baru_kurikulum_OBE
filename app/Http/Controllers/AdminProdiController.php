@@ -52,6 +52,11 @@ class AdminProdiController extends Controller
         return redirect()->route('admin.prodi.index')->with('success', 'Prodi berhasil diperbarui.');
     }
 
+    public function detail(Prodi $prodi)
+    {
+        return view('admin.prodi.detail', compact('prodi'));
+    }
+
     public function destroy(Prodi $prodi)
     {
         $prodi->delete();
