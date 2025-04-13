@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create("cpl_mk_bk", function(Blueprint $table){
             $table->unsignedBigInteger('id_cpl');
             $table->string('kode_mk');
-            $table->string('kode_bk');
+            $table->unsignedBigInteger('id_bk');
             $table->foreign('id_cpl')->references('id_cpl')->on('capaian_profil_lulusans')->onDelete('cascade');
             $table->foreign('kode_mk')->references('kode_mk')->on('mata_kuliahs')->onDelete('cascade');
-            $table->foreign('kode_bk')->references('kode_bk')->on('bahan_kajians')->onDelete('cascade');
+            $table->foreign('id_bk')->references('id_bk')->on('bahan_kajians')->onDelete('cascade');
         });
     }
 

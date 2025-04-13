@@ -79,9 +79,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/bahankajian', [AdminBahankajianController::class, 'index'])->name('bahankajian.index');
     Route::get('/bahankajian/create', [AdminBahankajianController::class, 'create'])->name('bahankajian.create');
     Route::post('/bahankajian', [AdminBahankajianController::class, 'store'])->name('bahankajian.store');
-    Route::get('/bahankajian/{bahankajian}/edit', [AdminBahankajianController::class, 'edit'])->name('bahankajian.edit');
-    Route::put('/bahankajian/{bahankajian}', [AdminBahankajianController::class, 'update'])->name('bahankajian.update');
-    Route::delete('/bahankajian/{bahankajian}', [AdminBahankajianController::class,'destroy'])->name('bahankajian.destroy');
+    Route::get('/bahankajian/{id_bk}/edit', [AdminBahankajianController::class, 'edit'])->name('bahankajian.edit');
+    Route::put('/bahankajian/{id_bk}', [AdminBahankajianController::class, 'update'])->name('bahankajian.update');
+    Route::delete('/bahankajian/{id_bk}', [AdminBahankajianController::class,'destroy'])->name('bahankajian.destroy');
     Route::get('/pemetaancplbk', [AdminPemetaanCplBkController::class, 'index'])->name('pemetaancplbk.index');
     Route::post('/pemetaancplbk', [AdminPemetaanCplBkController::class, 'store'])->name('pemetaancplbk.store');
     Route::get('/matakuliah', [AdminMataKuliahController::class, 'index'])->name('matakuliah.index');

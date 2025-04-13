@@ -61,8 +61,6 @@
                     <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Referensi BK</th>
                     <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Status BK</th>
                     <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Knowledge Area</th>
-                    <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Max BK</th>
-                    <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Min BK</th>
                     <th class="py-3 px-6 font-bold uppercase text-center min-w-[10px]">Aksi</th>
                 </tr>
             </thead>
@@ -76,12 +74,10 @@
                     <td class="py-3 px-6 text-center min-w-[10px]">{{ $bahankajian->referensi_bk }}</td>
                     <td class="py-3 px-6 text-center min-w-[10px]">{{ $bahankajian->status_bk }}</td>
                     <td class="py-3 px-6 text-center min-w-[10px]">{{ $bahankajian->knowledge_area }}</td>
-                    <td class="py-3 px-6 text-center min-w-[10px]">{{ $bahankajian->max_bk }}</td>
-                    <td class="py-3 px-6 text-center min-w-[10px]">{{ $bahankajian->min_bk }}</td>
                     <td class="py-3 px-6 flex justify-center min-w-[10px] items-center space-x-2">
                         <a href="#"class="bg-green-500 font-bold text-white px-5 py-2 rounded-md hover:bg-green-600">🛈</a>
-                        <a href="{{ route('admin.bahankajian.edit', $bahankajian->kode_bk) }}"  class="bg-yellow-500 text-white font-bold px-5 py-2 rounded-md hover:bg-yellow-600">✏️</a>
-                        <form action="{{ route('admin.bahankajian.destroy', $bahankajian->kode_bk) }}" method="POST">
+                        <a href="{{ route('admin.bahankajian.edit', $bahankajian->id_bk) }}"  class="bg-yellow-500 text-white font-bold px-5 py-2 rounded-md hover:bg-yellow-600">✏️</a>
+                        <form action="{{ route('admin.bahankajian.destroy', $bahankajian->id_bk) }}" method="POST">
                             @csrf @method('DELETE')
                             <button class="bg-red-500 text-white px-5 py-2 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">
                                 🗑️

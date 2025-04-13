@@ -45,14 +45,6 @@
     <input id="knowledge_area" type="text" name="knowledge_area" class="border border-black p-3 w-full mt-1 mb-3 rounded-lg" required>
     <br>
 
-    <label for="max_bk">Max Bahan Kajian:</label>
-    <input id="max_bk" type="number" name="max_bk" class="border border-black p-3 w-full mt-1 mb-3 rounded-lg" required>
-    <br>
-
-    <label for="min_bk">Min Bahan Kajian:</label>
-    <input id="min_bk" type="number" name="min_bk" class="border border-black p-3 w-full mt-1 mb-3 rounded-lg" required>
-    <br>
-
     <button type="submit" class="btn btn-primary bg-green-400 hover:bg-green-800 px-5 py-2 rounded-lg">Simpan</button>
     <a href="{{ route('admin.bahankajian.index') }}" class="bg-blue-400 hover:bg-blue-800 rounded-lg px-5 py-2">Kembali</a>
 </form>

@@ -16,7 +16,7 @@
     </div>
 @endif
 
-<form action="{{ route('admin.bahankajian.update', $bahankajian->kode_bk) }}" method="POST">
+<form action="{{ route('admin.bahankajian.update', $bahankajian->id_bk) }}" method="POST">
     
     @csrf
     @method('PUT')
@@ -46,14 +46,6 @@
 
     <label for="knowledge_area">Area Pengetahuan:</label>
     <input type="text" name="knowledge_area" id="knowledge_area" value="{{ old('knowledge_area', $bahankajian->knowledge_area) }}" required class="border border-black p-3 w-full mt-1 mb-3 rounded-lg">
-    <br>
-
-    <label for="max_bk">Maksimal Bahan Kajian:</label>
-    <input type="number" name="max_bk" id="max_bk" value="{{ old('max_bk', $bahankajian->max_bk) }}" required class="border border-black p-3 w-full mt-1 mb-3 rounded-lg">
-    <br>
-
-    <label for="min_bk">Minimal Bahan Kajian:</label>
-    <input type="number" name="min_bk" id="min_bk" value="{{ old('min_bk', $bahankajian->min_bk) }}" required class="border border-black p-3 w-full mt-1 mb-3 rounded-lg">
     <br>
     
     <button type="submit" class="btn btn-primary bg-green-400 hover:bg-green-800 px-5 py-2 rounded-lg">Simpan</button>

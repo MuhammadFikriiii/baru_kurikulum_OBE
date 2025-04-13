@@ -22,43 +22,42 @@ class AdminBahanKajianController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode_bk' => 'required|string|max:10|unique:bahan_kajians,kode_bk',
+            'kode_bk' => 'required|string|max:10',
             'nama_bk' => 'required|string|max:50',
             'deskripsi_bk' => 'nullable|string',
             'referensi_bk' => 'required|string|max:50',
             'status_bk' => 'required|in:core,elective',
             'knowledge_area' => 'required|string',
-            'max_bk' => 'integer|max:100|required',
-            'min_bk' => 'integer|max:100|required',
         ]);
         BahanKajian::create($request->all());
         return redirect()->route('admin.bahankajian.index')->with('success', 'Bahan Kajian berhasil diperbaharui.');
     }
 
-    public function edit(Bahankajian $bahankajian)
+    public function edit($id_bk)
     {
+        $bahankajian = BahanKajian::findOrFail($id_bk);
         return view('admin.bahankajian.edit', compact('bahankajian'));
     }
 
-    public function update(Request $request, BahanKajian $bahankajian)
+    public function update(Request $request, $id_bk)
     {
         request()->validate([
-            'kode_bk' => ['required','string','max:10',Rule::unique('bahan_kajians','kode_bk')->ignore($bahankajian->kode_bk,'kode_bk')],
+            'kode_bk' => 'required|string|max:10',
             'nama_bk' => 'required|string|max:50',
             'deskripsi_bk' => 'nullable|string',
             'referensi_bk' => 'required|string|max:50',
             'status_bk' => 'required|in:core,elective',
             'knowledge_area' => 'required|string',
-            'max_bk' => 'integer|max:100|required',
-            'min_bk' => 'integer|max:100|required',
         ]);
+        $bahankajian = BahanKajian::findOrFail($id_bk);
         $bahankajian->update($request->all());
         return redirect()->route('admin.bahankajian.index')->with('success', 'Bahan Kajian berhasil diperbaharui.');
     }
 
-    public function destroy(BahanKajian $bahankajian)
+    public function destroy($id_bk)
     {
-        $bahankajian->delete();
+        $id_bk = BahanKajian::findOrFail($id_bk);
+        $id_bk->delete();
         return redirect()->route('admin.bahankajian.index')->with('sukses','Bahan Kajian Berhasil Di Hapus');
     }
 }

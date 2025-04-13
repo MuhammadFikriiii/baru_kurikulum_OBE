@@ -12,14 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create("bahan_kajians", function (Blueprint $table) {
-            $table->string("kode_bk", 10)->primary();
+            $table->id("id_bk");
+            $table->string("kode_bk", 10);
             $table->string("nama_bk",50);
             $table->text("deskripsi_bk")->nullable();
             $table->string("referensi_bk",50)->nullable();
             $table->enum("status_bk", ['core','elective']);
             $table->text("knowledge_area")->nullable();
-            $table->integer("max_bk")->nullable();
-            $table->integer("min_bk")->nullable();
             $table->timestamps();
         });
     }

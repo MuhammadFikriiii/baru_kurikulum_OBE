@@ -9,8 +9,8 @@ class BahanKajian extends Model
 {
     use HasFactory;
     protected $table = 'bahan_kajians';
-    protected $primaryKey = 'kode_bk';
-    public $incrementing = false;
+    protected $primaryKey = 'id_bk';
+    public $incrementing = true;
     public $timestamps = true;
     protected $fillable = [
         'kode_bk',
@@ -24,17 +24,17 @@ class BahanKajian extends Model
     ];
     public function capaianprofilLulusans()
     {
-        return $this->belongsToMany(CapaianProfilLulusan::class, 'cpl_bk', 'kode_bk', 'kode_cpl');
+        return $this->belongsToMany(CapaianProfilLulusan::class, 'cpl_bk', 'id_bk', 'kode_cpl');
     }
 
     public function matakuliahs()
     {
-        return $this->belongsToMany(MataKuliah::class, 'mk_bk', 'kode_bk', 'kode_mk');
+        return $this->belongsToMany(MataKuliah::class, 'mk_bk', 'id_bk', 'kode_mk');
     }
 
     public function cplMkBks()
     {
-        return $this->hasMany(CplMkBk::class, 'kode_bk', 'kode_bk');
+        return $this->hasMany(CplMkBk::class, 'id_bk', 'id_bk');
     }
 
 }

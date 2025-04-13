@@ -21,8 +21,6 @@ class BahanKajianSeeder extends Seeder
                 'referensi_bk'=> 'CSC2023',
                 'status_bk'=> 'core',
                 'knowledge_area'=> '-',
-                'max_bk'=> '60',
-                'min_bk'=>'40'
             ],
             [
                 'kode_bk'=>'BK02',
@@ -31,8 +29,6 @@ class BahanKajianSeeder extends Seeder
                 'referensi_bk'=> 'CSC2023',
                 'status_bk'=> 'elective',
                 'knowledge_area'=> '-',
-                'max_bk'=> '60',
-                'min_bk'=>'40'
             ],
             [
                 'kode_bk'=>'BK03',
@@ -41,8 +37,6 @@ class BahanKajianSeeder extends Seeder
                 'referensi_bk'=> 'CSC2023',
                 'status_bk'=> 'core',
                 'knowledge_area'=> '-',
-                'max_bk'=> '60',
-                'min_bk'=>'40'
             ],
             [
                 'kode_bk'=>'BK04',
@@ -51,8 +45,6 @@ class BahanKajianSeeder extends Seeder
                 'referensi_bk'=> 'CSC2023',
                 'status_bk'=> 'elective',
                 'knowledge_area'=> '-',
-                'max_bk'=> '60',
-                'min_bk'=>'40'
             ],
             [
                 'kode_bk'=>'BK05',
@@ -61,8 +53,6 @@ class BahanKajianSeeder extends Seeder
                 'referensi_bk'=> 'CSC2023',
                 'status_bk'=> 'core',
                 'knowledge_area'=> '-',
-                'max_bk'=> '60',
-                'min_bk'=>'40'
             ],
             [
                 'kode_bk'=>'BK06',
@@ -71,8 +61,6 @@ class BahanKajianSeeder extends Seeder
                 'referensi_bk'=> 'CSC2023',
                 'status_bk'=> 'elective',
                 'knowledge_area'=> '-',
-                'max_bk'=> '60',
-                'min_bk'=>'40'
             ],
             [
                 'kode_bk'=>'BK07',
@@ -81,8 +69,6 @@ class BahanKajianSeeder extends Seeder
                 'referensi_bk'=> 'CSC2023',
                 'status_bk'=> 'core',
                 'knowledge_area'=> '-',
-                'max_bk'=> '60',
-                'min_bk'=>'40'
             ],
             [
                 'kode_bk'=>'BK08',
@@ -91,8 +77,6 @@ class BahanKajianSeeder extends Seeder
                 'referensi_bk'=> 'CSC2023',
                 'status_bk'=> 'elective',
                 'knowledge_area'=> '-',
-                'max_bk'=> '60',
-                'min_bk'=>'40'
             ],
             [
                 'kode_bk'=>'BK09',
@@ -101,8 +85,6 @@ class BahanKajianSeeder extends Seeder
                 'referensi_bk'=> 'CSC2023',
                 'status_bk'=> 'core',
                 'knowledge_area'=> '-',
-                'max_bk'=> '60',
-                'min_bk'=>'40'
             ],
             [
                 'kode_bk'=>'BK10',
@@ -111,8 +93,6 @@ class BahanKajianSeeder extends Seeder
                 'referensi_bk'=> 'CSC2023',
                 'status_bk'=> 'elective',
                 'knowledge_area'=> '-',
-                'max_bk'=> '60',
-                'min_bk'=>'40'
             ],
         ]);
     }
