@@ -40,6 +40,11 @@
                     <span class="ml-2">Jurusan</span></a>
             </li>
             <li>
+                <a href="{{ route('wadir1.prodi.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
+                    <span class="ml-2">Prodi</span></a>
+            </li>
+            <li>
                 <a href="/" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <span>👥</span>
                     <span class="ml-2">Logout</span></a>

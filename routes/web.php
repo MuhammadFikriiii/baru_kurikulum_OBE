@@ -7,6 +7,7 @@ use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\AdminProdiController;
 use App\Http\Controllers\AdminProfilLulusanController;
 use App\Http\Controllers\AdminCapaianProfilLulusanController;
+use App\Http\Controllers\Wadir1ProdiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPemetaanCplPlController;
 use App\Http\Controllers\AdminBahanKajianController;
@@ -105,4 +106,6 @@ Route::prefix('wadir1')->name('wadir1.')->group(function(){
     Route::get('/dashboard', [Wadir1DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/jurusan', [Wadir1JurusanController::class, 'index'])->name('jurusan.index');
     Route::get('/jurusan/{jurusan}/detail', [Wadir1JurusanController::class, 'detail'])->name('jurusan.detail');
+    Route::get('/prodi', [Wadir1ProdiController::class, 'index'])->name('prodi.index');
+    Route::get('/prodi/{prodi}/detail', [Wadir1ProdiController::class,'detail'])->name('prodi.detail');
 });
