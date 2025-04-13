@@ -38,8 +38,6 @@
                     class="mt-1 w-full p-3 border border-black rounded-lg mb-3">
                     <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
                     <option value="wadir1" {{ $user->role === 'wadir1' ? 'selected' : '' }}>Wadir 1</option>
-                    <option value="kaprodi" {{ $user->role === 'kaprodi' ? 'selected' : '' }}>Kaprodi</option>
-                    <option value="tim" {{ $user->role === 'tim' ? 'selected' : '' }}>Tim</option>
                 </select>
 
                 <button type="submit" class="bg-green-400 px-5 py-2 rounded-lg hover:bg-green-800 mt-4">

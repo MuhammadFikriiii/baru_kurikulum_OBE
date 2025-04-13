@@ -32,8 +32,6 @@
                 <option value="" selected disabled>Pilih Role</option>
                 <option value="admin">Admin</option>
                 <option value="wadir1">Wadir 1</option>
-                <option value="kaprodi">Kaprodi</option>
-                <option value="tim">Tim</option>
             </select>      
         <button type="submit" class="bg-green-400 hover:bg-green-800 mt-3 px-5 py-2 rounded-lg">Simpan</button>
         <a href="{{ route('admin.users.index') }}" class="bg-blue-400 hover:bg-blue-800 mt-3 px-5 py-2 rounded-lg">Kembali</a>
