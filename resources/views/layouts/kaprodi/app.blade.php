@@ -18,7 +18,7 @@
     <aside id="sidebar" class="w-64 bg-gray-800 text-white p-5 space-y-6 fixed top-0 left-0 h-full transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40">
         <!-- Header -->
         <div class="flex items-center justify-between mb-4">
-            <h2 class="text-xl font-bold">Dashboard Wadir</h2>
+            <h2 class="text-xl font-bold">Dashboard Kaprodi</h2>
             <button class="md:hidden" onclick="toggleSidebar()">✖</button>
         </div>
 
@@ -30,29 +30,9 @@
         <!-- Navigation -->
         <ul class="space-y-1">
             <li>
-                <a href="{{ route('wadir1.dashboard') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <span>🏠</span>
+                <a href="{{ route('kaprodi.dashboard') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
                     <span class="ml-2">Dashboard</span></a>
-            </li>
-            <li>
-                <a href="{{ route('wadir1.users.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <span>👥</span>
-                    <span class="ml-2">Users</span></a>
-            </li>
-            <li>
-                <a href="{{ route('wadir1.jurusan.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <span>👥</span>
-                    <span class="ml-2">Jurusan</span></a>
-            </li>
-            <li>
-                <a href="{{ route('wadir1.prodi.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <span>👥</span>
-                    <span class="ml-2">Prodi</span></a>
-            </li>
-            <li>
-                <a href="/" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <span>👥</span>
-                    <span class="ml-2">Logout</span></a>
             </li>
         </ul>
     </aside>

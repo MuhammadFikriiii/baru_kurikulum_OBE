@@ -20,6 +20,7 @@ use App\Http\Controllers\Wadir1UserController;
 use App\Http\Controllers\Wadir1DashboardController;
 use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\Wadir1JurusanController;
+use App\Http\Controllers\KaprodiDashboardController;
 
 // Auth
 Route::get('/', [LoginController::class, 'loginForm'])->name('login');
@@ -108,4 +109,8 @@ Route::prefix('wadir1')->name('wadir1.')->group(function(){
     Route::get('/jurusan/{jurusan}/detail', [Wadir1JurusanController::class, 'detail'])->name('jurusan.detail');
     Route::get('/prodi', [Wadir1ProdiController::class, 'index'])->name('prodi.index');
     Route::get('/prodi/{prodi}/detail', [Wadir1ProdiController::class,'detail'])->name('prodi.detail');
+});
+
+Route::prefix('kaprodi')->name('kaprodi.')->group(function(){
+    Route::get('/dashboard', [KaprodiDashboardController::class, 'dashboard'])->name('dashboard');
 });
