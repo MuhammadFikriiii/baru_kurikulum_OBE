@@ -18,6 +18,7 @@ use App\Http\Controllers\AdminPemetaanCplMkBkController;
 use App\Http\Controllers\Wadir1UserController;
 use App\Http\Controllers\Wadir1DashboardController;
 use App\Http\Controllers\SignUpController;
+use App\Http\Controllers\Wadir1JurusanController;
 
 // Auth
 Route::get('/', [LoginController::class, 'loginForm'])->name('login');
@@ -98,8 +99,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/pemetaancplmkbk', [AdminPemetaanCplMkBkController::class, 'store'])->name('pemetaancplmkbk.store');
 });
 
-Route::prefix('wadir1')->name('wadir1')->group(function(){
-    Route::get('/users', [Wadir1UserController::class, 'index'])->name('.users.index');
-    Route::get('/users/{id}/detail', [Wadir1UserController::class, 'detail'])->name('.users.detail');
-    Route::get('/dashboard', [Wadir1DashboardController::class, 'dashboard'])->name('.dashboard');
+Route::prefix('wadir1')->name('wadir1.')->group(function(){
+    Route::get('/users', [Wadir1UserController::class, 'index'])->name('users.index');
+    Route::get('/users/{id}/detail', [Wadir1UserController::class, 'detail'])->name('users.detail');
+    Route::get('/dashboard', [Wadir1DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/jurusan', [Wadir1JurusanController::class, 'index'])->name('jurusan.index');
+    Route::get('/jurusan/{jurusan}/detail', [Wadir1JurusanController::class, 'detail'])->name('jurusan.detail');
 });
