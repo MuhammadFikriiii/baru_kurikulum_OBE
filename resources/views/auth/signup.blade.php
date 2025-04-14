@@ -1,79 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SignUp</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-gradient-to-br from-orange-200 to-gray-100">
 
-<body>
-  
- 
-    <div class="min-h-screen py-50 flex items-center justify-center" style="background-image: linear-gradient(115deg, rgb(238, 203, 157), #ebeae6)">
-      <div class="w-8/12 bg-white rounded-xl shadow-lg overflow-hidden flex flex-row-reverse">
+  <div class="min-h-screen flex items-center justify-center py-6 px-4">
+    <div class="w-full max-w-4xl bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
       
-        <!-- Bagian Form -->
-        <div class="w-1/2 py-16 px-12">
-          <h2 class="text-3xl mb-4">Sign-Up</h2>
-          <p class="mb-4">Create your account.</p>
-          <form action="{{ route('signup.store') }}" method="POST">
-            @csrf
-            <div class="mt-5">
-              <input type="text" name="name" placeholder="Nama Lengkap" class="border border-gray-400 py-1 px-2 w-full"
-                value="{{ old('name') }}" required>
-            </div>
-            
-            <div class="mt-5">
-              <input type="text" name="email" placeholder="Email" class="border border-gray-400 py-1 px-2 w-full"
-                value="{{ old('email') }}" required>
-            </div>
-
-            <div class="mt-5">
-              <input type="text" name="password" placeholder="Masukkan Password" class="border border-gray-400 py-1 px-2 w-full"
-                value="{{ old('password') }}" required>
-            </div>
-
-            <div class="mt-5">
-              <label for="kode_prodi" class="form-label">Program Studi</label>
-              <select name="kode_prodi" class="form-select" required class="border border-gray-400">
-                  <option value="">-- Pilih Prodi --</option>
-                  @foreach($prodis as $prodi)
-                      <option value="{{ $prodi->kode_prodi }}" {{ old('kode_prodi') == $prodi->kode_prodi ? 'selected' : '' }}>
-                          {{ $prodi->nama_prodi }}
-                      </option>
-                  @endforeach
-              </select>
+     <!-- Gambar Sign Up -->
+      <div class="md:w-1/2 w-full h-64 md:h-auto bg-cover bg-center relative" style="background-image: url('/image/poliban.jpeg');">
+        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+      </div>
+      
+      <!-- Form -->
+      <div class="md:w-1/2 w-full py-8 px-6 sm:px-12">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">Sign-Up</h2>
+        <p class="mb-6 text-gray-600">Buat akunmu sekarang.</p>
+        <form action="{{ route('signup.store') }}" method="POST">
+          @csrf
+          <div class="mb-4">
+            <input type="text" name="name" placeholder="Nama Lengkap" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-orange-300" value="{{ old('name') }}" required>
           </div>
 
-          <div class="mb-3">
-            <label class="form-label">Peran</label>
-            <select name="role" class="form-select @error('role') is-invalid @enderror" required>
-                <option value="">-- Pilih Peran --</option>
-                <option value="kaprodi" {{ old('role') == 'kaprodi' ? 'selected' : '' }}>Kaprodi</option>
-                <option value="tim" {{ old('role') == 'tim' ? 'selected' : '' }}>Tim</option>
+          <div class="mb-4">
+            <input type="text" name="email" placeholder="Email" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-orange-300" value="{{ old('email') }}" required>
+          </div>
+
+          <div class="mb-4">
+            <input type="password" name="password" placeholder="Masukkan Password" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-orange-300" required>
+          </div>
+
+          <div class="mb-4">
+            <label class="block mb-1 text-gray-700">Program Studi</label>
+            <select name="kode_prodi" class="w-full border border-gray-300 py-2 px-3 rounded focus:outline-none focus:ring-2 focus:ring-orange-300" required>
+              <option value="">-- Pilih Prodi --</option>
+              @foreach($prodis as $prodi)
+                <option value="{{ $prodi->kode_prodi }}" {{ old('kode_prodi') == $prodi->kode_prodi ? 'selected' : '' }}>{{ $prodi->nama_prodi }}</option>
+              @endforeach
             </select>
-        </div>
-          
-            <div class="mt-5">
-              <input type="checkbox" class="border border-gray-400">
-              <span>
-                Saya menerima Ketentuan <a href="#" class="text-orange-300 font-semibold">Penggunaan</a> & 
-                <a href="#" class="text-orange-300 font-semibold">Kebijakan Privasi</a>
-              </span>
-            </div>
-            <div class="mt-5">
-              <button type="submit" class="">Daftar</button>
-              <a href="{{ route('login') }}" class="">Sudah punya akun?</a>
-            </div>
-          </form>
-        </div>
+          </div>
 
-      <!-- Bagian Gambar -->
-      <div class="w-1/2 bg-cover bg-center" style="background-image: url('/image/poliban.jpeg');"> </div>
-     </div>
+          <div class="mb-4">
+            <label class="block mb-1 text-gray-700">Peran</label>
+            <select name="role" class="w-full border border-gray-300 py-2 px-3 rounded focus:outline-none focus:ring-2 focus:ring-orange-300" required>
+              <option value="">-- Pilih Peran --</option>
+              <option value="kaprodi" {{ old('role') == 'kaprodi' ? 'selected' : '' }}>Kaprodi</option>
+              <option value="tim" {{ old('role') == 'tim' ? 'selected' : '' }}>Tim</option>
+            </select>
+          </div>
 
-    </div>    
+          <div class="mb-4 flex items-start gap-2">
+            <input type="checkbox" class="mt-1">
+            <p class="text-sm text-gray-600">
+              Saya menerima <a href="#" class="text-orange-500 font-semibold">Ketentuan Penggunaan</a> & 
+              <a href="#" class="text-orange-500 font-semibold">Kebijakan Privasi</a>.
+            </p>
+          </div>
+
+          <div class="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <button type="submit" class="bg-orange-400 hover:bg-orange-500 text-white font-semibold py-2 px-6 rounded transition duration-300 w-full sm:w-auto">
+              Daftar
+            </button>
+            <a href="{{ route('login') }}" class="text-sm text-orange-500 hover:underline text-center sm:text-left">Sudah punya akun?</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 </body>
-
 </html>
