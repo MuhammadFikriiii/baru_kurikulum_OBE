@@ -43,6 +43,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('admin.userprodi.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="bi bi-people"></i>
+                    <span class="ml-2">User Prodi</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('admin.jurusan.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-building"></i>
                     <span class="ml-2">Jurusan</span>

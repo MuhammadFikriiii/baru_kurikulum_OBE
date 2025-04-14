@@ -21,6 +21,7 @@ use App\Http\Controllers\Wadir1DashboardController;
 use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\Wadir1JurusanController;
 use App\Http\Controllers\KaprodiDashboardController;
+use App\http\Controllers\AdminUserProdiController;
 
 // Auth
 Route::get('/', [LoginController::class, 'loginForm'])->name('login');
@@ -50,6 +51,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/users/{id}', [AdminUserController::class, 'update'])->name('users.update');
     Route::get('/users/{id}/detail', [AdminUserController::class,'details'])->name('users.detail');
     Route::delete('/users/{id}', [AdminUserController::class, 'destroy'])->name('users.destroy');
+    Route::get('/userprodi', [AdminUserProdiController::class, 'index'])->name('userprodi.index');
     Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/jurusan', [JurusanController::class, 'index'])->name('jurusan.index');
     Route::get('/jurusan/create', [JurusanController::class, 'create'])->name('jurusan.create');
