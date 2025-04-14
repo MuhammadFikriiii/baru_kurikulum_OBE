@@ -15,7 +15,7 @@ class AdminPemetaanCplBkController extends Controller
         $bks = BahanKajian::all();
         
         // Ambil semua relasi CPL & bk dalam bentuk array
-        $relasi = DB::table('cpl_bk')->get()->groupBy('kode_bk');
+        $relasi = DB::table('cpl_bk')->get()->groupBy('id_bk');
 
         return view('admin.pemetaancplbk.index', compact('cpls', 'bks', 'relasi'));
     }
@@ -29,11 +29,11 @@ class AdminPemetaanCplBkController extends Controller
         DB::table('cpl_bk')->delete();
 
         // Menyimpan data relasi baru
-        foreach ($relasi as $kode_bk => $kode_cpls) {
-            foreach ($kode_cpls as $kode_cpl) {
+        foreach ($relasi as $id_bk => $id_cpls) {
+            foreach ($id_cpls as $id_cpl) {
                 DB::table('cpl_bk')->insert([
-                    'kode_bk' => $kode_bk,
-                    'kode_cpl' => $kode_cpl,
+                    'id_bk' => $id_bk,
+                    'id_cpl' => $id_cpl,
                 ]);
             }
         }

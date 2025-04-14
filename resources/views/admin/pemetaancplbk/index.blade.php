@@ -32,8 +32,8 @@
                     <td class="px-4 py-2">{{ $cpl->kode_cpl }}</td>
                     @foreach ($bks as $bk)
                         <td class="px-4 py-2 text-center">
-                            <input type="checkbox" name="relasi[{{ $bk->kode_bk }}][]" value="{{ $cpl->kode_cpl }}" 
-                                {{ isset($relasi[$bk->kode_bk]) && in_array($cpl->kode_cpl, $relasi[$bk->kode_bk]->pluck('kode_cpl')->toArray()) ? 'checked' : '' }} 
+                            <input type="checkbox" name="relasi[{{ $bk->id_bk }}][]" value="{{ $cpl->id_cpl }}" 
+                                {{ isset($relasi[$bk->id_bk]) && in_array($cpl->id_cpl, $relasi[$bk->id_bk]->pluck('id_cpl')->toArray()) ? 'checked' : '' }} 
                                 class="form-checkbox h-5 w-5 text-blue-600 mx-auto">
                         </td>
                     @endforeach
