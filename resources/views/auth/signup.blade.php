@@ -6,7 +6,7 @@
   <title>SignUp</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br from-orange-200 to-gray-100">
+<body class="bg-gradient-to-br  from-blue-300 to-gray-100">
 
   <div class="min-h-screen flex items-center justify-center py-6 px-4">
     <div class="w-full max-w-4xl bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
@@ -56,16 +56,16 @@
           <div class="mb-4 flex items-start gap-2">
             <input type="checkbox" class="mt-1">
             <p class="text-sm text-gray-600">
-              Saya menerima <a href="#" class="text-orange-500 font-semibold">Ketentuan Penggunaan</a> & 
-              <a href="#" class="text-orange-500 font-semibold">Kebijakan Privasi</a>.
+              Saya menerima <a href="#" class="text-[#5460B5] font-semibold">Ketentuan Penggunaan</a> & 
+              <a href="#" class="text-[#5460B5]  font-semibold">Kebijakan Privasi</a>.
             </p>
           </div>
 
           <div class="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <button type="submit" class="bg-orange-400 hover:bg-orange-500 text-white font-semibold py-2 px-6 rounded transition duration-300 w-full sm:w-auto">
+            <button type="submit" class="bg-[#5460B5] hover:bg-[#363b63] text-white font-semibold py-2 px-6 rounded transition duration-300 w-full sm:w-auto">
               Daftar
             </button>
-            <a href="{{ route('login') }}" class="text-sm text-orange-500 hover:underline text-center sm:text-left">Sudah punya akun?</a>
+            <a href="{{ route('login') }}" class="text-sm text-[#5460B5] hover:underline text-center sm:text-left">Sudah punya akun?</a>
           </div>
         </form>
       </div>
