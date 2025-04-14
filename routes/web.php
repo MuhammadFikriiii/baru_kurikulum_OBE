@@ -25,6 +25,7 @@ use App\http\Controllers\AdminUserProdiController;
 use App\Http\Controllers\KaprodiProfilLulusanController;
 use App\Http\Controllers\TimDashboardController;
 use App\Http\Controllers\TimProfilLulusanController;
+use App\Http\Controllers\TimCapaianPembelajaranLulusanController;
 
 // Auth
 Route::get('/', [LoginController::class, 'loginForm'])->name('login');
@@ -127,4 +128,7 @@ route::prefix('tim')->name('tim.')->group(function(){
     Route::get('/profillulusan', [TimProfilLulusanController::class, 'index'])->name('profillulusan.index');
     Route::get('/profillulusan/create', [TimProfilLulusanController::class, 'create'])->name('profillulusan.create');
     Route::post('/profillulusan', [TimProfilLulusanController::class, 'store'])->name('profillulusan.store');
+    Route::get('/capaianpembelajaranlulusan', [TimCapaianPembelajaranLulusanController::class, 'index'])->name('capaianpembelajaranlulusan.index');
+    Route::get('/capaianpembelajaranlulusan/create', [TimCapaianPembelajaranLulusanController::class, 'create'])->name('capaianpembelajaranlulusan.create');
+    Route::post('/capaianpembelajaranlulusan', [TimCapaianPembelajaranLulusanController::class, 'store'])->name('capaianpembelajaranlulusan.store');
 });
