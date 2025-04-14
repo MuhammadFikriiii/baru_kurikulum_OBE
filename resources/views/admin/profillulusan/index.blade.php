@@ -64,29 +64,36 @@
                         <th class="px-4 py-2 text-center w-52">Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach($profillulusans as $index => $profillulusan)
-                        <tr class="align-top {{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
-                            <td class="px-4 py-2 w-28 text-center">{{ $profillulusan->kode_pl }}</td>
-                            <td class="px-4 py-2 w-24 text-center">{{ $profillulusan->prodi->nama_prodi ?? '-' }}</td>
-                            <td class="px-4 py-2 w-48 whitespace-pre-line text-justify">{{ $profillulusan->deskripsi_pl }}</td>
-                            <td class="px-4 py-2 w-96 whitespace-pre-line">{{ $profillulusan->profesi_pl }}</td>
-                            <td class="px-4 py-2 w-32 text-justify">{{ $profillulusan->unsur_pl }}</td>
-                            <td class="px-4 py-2 w-28 text-center">{{ $profillulusan->keterangan_pl }}</td>
-                            <td class="px-4 py-2 w-44 text-justify">{{ $profillulusan->sumber_pl }}</td>
-                            <td class="py-3 px-6 flex justify-center items-center space-x-2">
-                                <a href="{{ route('admin.profillulusan.detail', $profillulusan->id_pl) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
-                                <a href="{{ route('admin.profillulusan.edit', $profillulusan->id_pl) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
-                                <form action="{{ route('admin.profillulusan.destroy', $profillulusan->kode_pl) }}" method="POST">
-                                    @csrf @method('DELETE')
-                                    <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">
-                                        🗑️ Hapus
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full table-auto">
+                        <tbody>
+                            @foreach($profillulusans as $index => $profillulusan)
+                                <tr class="align-top {{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
+                                    <td class="px-4 py-2 text-center text-sm w-28 break-words">{{ $profillulusan->kode_pl }}</td>
+                                    <td class="px-4 py-2 text-center text-sm w-24 break-words">{{ $profillulusan->prodi->nama_prodi ?? '-' }}</td>
+                                    <td class="px-4 py-2 text-sm w-48 break-words whitespace-normal ">
+                                        {{ $profillulusan->deskripsi_pl }}
+                                    </td>
+                                    <td class="px-4 py-2 text-sm w-96 break-words whitespace-pre-line">{{ $profillulusan->profesi_pl }}</td>
+                                    <td class="px-4 py-2 text-sm w-32 break-words">{{ $profillulusan->unsur_pl }}</td>
+                                    <td class="px-4 py-2 text-sm w-28 text-center break-words">{{ $profillulusan->keterangan_pl }}</td>
+                                    <td class="px-4 py-2 text-sm w-44 break-words">{{ $profillulusan->sumber_pl }}</td>
+                                    <td class="py-3 px-4 flex flex-col sm:flex-row sm:justify-center sm:items-center gap-2">
+                                        <a href="{{ route('admin.profillulusan.detail', $profillulusan->id_pl) }}" class="bg-green-500 text-white px-3 py-1 rounded-md text-sm font-semibold hover:bg-green-600 text-center">🛈 Detail</a>
+                                        <a href="{{ route('admin.profillulusan.edit', $profillulusan->id_pl) }}" class="bg-yellow-500 text-white px-3 py-1 rounded-md text-sm font-semibold hover:bg-yellow-600 text-center">✏️ Ubah</a>
+                                        <form action="{{ route('admin.profillulusan.destroy', $profillulusan->kode_pl) }}" method="POST" onsubmit="return confirm('Hapus user ini?')" class="text-center">
+                                            @csrf @method('DELETE')
+                                            <button class="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600">
+                                                🗑️ Hapus
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                        
+                    </table>
+                </div>
             </table>            
     </div>
 </div>

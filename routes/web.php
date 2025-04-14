@@ -43,6 +43,10 @@ Route::get('/reset-password/{token}', [LoginController::class, 'showResetPasswor
 Route::get('/signup', [SignUpController::class, 'create'])->name('signup');
 Route::post('/signup', [SignUpController::class, 'store'])->name('signup.store');
 
+Route::get('/homepage', function () {
+    return view('auth.homepage');
+});
+
 // Grup Route Admin
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
