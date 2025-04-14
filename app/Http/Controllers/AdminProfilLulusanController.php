@@ -60,6 +60,11 @@ class AdminProfilLulusanController extends Controller
         return redirect()->route('admin.profillulusan.index')->with('success', 'Profil Lulusan berhasil diperbarui.');
     }
 
+    public function detail(ProfilLulusan $id_pl)
+    {
+        return view('admin.profillulusan.detail', compact('id_pl'));
+    }
+
     public function destroy(ProfilLulusan $profillulusan)
     {
         $profillulusan->delete();
