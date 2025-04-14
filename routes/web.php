@@ -23,6 +23,8 @@ use App\Http\Controllers\Wadir1JurusanController;
 use App\Http\Controllers\KaprodiDashboardController;
 use App\http\Controllers\AdminUserProdiController;
 use App\Http\Controllers\KaprodiProfilLulusanController;
+use App\Http\Controllers\TimDashboardController;
+use App\Http\Controllers\TimProfilLulusanController;
 
 // Auth
 Route::get('/', [LoginController::class, 'loginForm'])->name('login');
@@ -118,4 +120,11 @@ Route::prefix('wadir1')->name('wadir1.')->group(function(){
 Route::prefix('kaprodi')->name('kaprodi.')->group(function(){
     Route::get('/dashboard', [KaprodiDashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/profillulusan', [KaprodiProfilLulusanController::class, 'index'])->name('profillulusan.index');
+});
+
+route::prefix('tim')->name('tim.')->group(function(){
+    Route::get('/dashboard', [TimDashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/profillulusan', [TimProfilLulusanController::class, 'index'])->name('profillulusan.index');
+    Route::get('/profillulusan/create', [TimProfilLulusanController::class, 'create'])->name('profillulusan.create');
+    Route::post('/profillulusan', [TimProfilLulusanController::class, 'store'])->name('profillulusan.store');
 });
