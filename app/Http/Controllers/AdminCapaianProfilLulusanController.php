@@ -24,19 +24,31 @@ class AdminCapaianProfilLulusanController extends Controller
 
     public function create()
     {
-        return view("admin.capaianprofillulusan.create");
+        $profilLulusans = DB::table('profil_lulusans')->get();
+        return view("admin.capaianprofillulusan.create", compact("profilLulusans"));
     }
 
     public function store(Request $request)
     {
-        request()->validate([
+        $request->validate([
             'kode_cpl'=> 'required|string|max:10',
             'deskripsi_cpl'=> 'required',
-            'status_cpl'=>'required|in:Kompetensi Utama Bidang,Kompetensi Tambahan',
+            'status_cpl'=> 'required|in:Kompetensi Utama Bidang,Kompetensi Tambahan',
+            'id_pls' => 'required|array'
         ]);
-        CapaianProfilLulusan::create($request->all());
+
+        $cpl = CapaianProfilLulusan::create($request->only(['kode_cpl', 'deskripsi_cpl', 'status_cpl']));
+
+        foreach ($request->id_pls as $id_pl) {
+            DB::table('cpl_pl')->insert([
+                'id_cpl' => $cpl->id_cpl,
+                'id_pl' => $id_pl
+            ]);
+        }
+
         return redirect()->route('admin.capaianprofillulusan.index')->with('success', 'Capaian Profil lulusan berhasil ditambahkan.');
     }
+
 
     public function edit($id_cpl)
     {
