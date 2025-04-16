@@ -15,6 +15,7 @@
       <li><a href="#" class="hover:text-yellow-400">Beranda</a></li>
       <li><a href="#" class="hover:text-yellow-400">Tentang</a></li>
       <li><a href="#" class="hover:text-yellow-400">Kontak</a></li>
+      <li><a href="{{ route('login') }}" class="hover:text-yellow-400">Masuk</a></li>
     </ul>
   </nav>
 

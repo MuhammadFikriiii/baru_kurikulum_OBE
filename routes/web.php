@@ -29,8 +29,8 @@ use App\Http\Controllers\TimCapaianPembelajaranLulusanController;
 use App\Http\Controllers\TimPemetaanCplPlController;
 
 // Auth
-Route::get('/', [LoginController::class, 'loginForm'])->name('login');
-Route::post('/', [LoginController::class, 'login'])->name('login.post');
+Route::get('/login', [LoginController::class, 'loginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/forgot-password', [LoginController::class, 'forgotPassword'])->name('forgot-password.post');
 Route::get('/forgot-password', [LoginController::class, 'showForgotPasswordForm'])->name('forgot-password');
@@ -47,7 +47,7 @@ Route::get('/reset-password/{token}', [LoginController::class, 'showResetPasswor
 Route::get('/signup', [SignUpController::class, 'create'])->name('signup');
 Route::post('/signup', [SignUpController::class, 'store'])->name('signup.store');
 
-Route::get('/homepage', function () {
+Route::get('/', function () {
     return view('auth.homepage');
 });
 

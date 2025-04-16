@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-4xl mx-auto mt-10">
+<div class="w-full mt-10">
     <h1 class="text-2xl font-bold mb-4">Daftar Pengguna Belum Disetujui</h1>
     <table class="w-full border border-gray-300">
         <thead>
-            <tr class="bg-gray-100">
+            <tr class="bg-green-600">
                 <th class="p-2 border">Nama</th>
                 <th class="p-2 border">Email</th>
                 <th class="p-2 border">Role</th>
