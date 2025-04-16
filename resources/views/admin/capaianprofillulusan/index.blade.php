@@ -66,7 +66,7 @@
                     <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $index + 1 }}</td>
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->nama_prodi ?? 'Tidak ada prodi' }}</td>                        </td>
-                        <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->kode_cpl }}</td>
+                        <td class="px-5 py-2 text-sm">{{ $capaianprofillulusan->kode_cpl }}</td>
                         <td class="px-4 py-2 text-sm w-96 break-words whitespace-pre-line">{{ $capaianprofillulusan->deskripsi_cpl }}</td>
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->status_cpl }}</td>
                         <td class="py-3 px-6 min-w-[10px] flex justify-center items-center space-x-2">
