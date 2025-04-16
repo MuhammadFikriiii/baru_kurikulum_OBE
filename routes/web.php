@@ -106,6 +106,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/pemetaanbkmk', [AdminPemetaanBkMkController::class, 'store'])->name('pemetaanbkmk.store');
     Route::get('/pemetaancplmkbk', [AdminPemetaanCplMkBkController::class, 'index'])->name('pemetaancplmkbk.index');
     Route::post('/pemetaancplmkbk', [AdminPemetaanCplMkBkController::class, 'store'])->name('pemetaancplmkbk.store');
+    Route::get('/pendingusers', [SignUpController::class, 'pendingUsers'])->name('pendingusers.index');
+    Route::put('/pendingusers/{id}/approve', [SignUpController::class, 'approveUser'])->name('pendingusers.approve');
+    Route::delete('/pendingusers/{id}/reject', [SignUpController::class, 'rejectUser'])->name('pendingusers.reject');
+
 });
 
 Route::prefix('wadir1')->name('wadir1.')->group(function(){

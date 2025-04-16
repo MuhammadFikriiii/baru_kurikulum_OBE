@@ -37,4 +37,27 @@ class SignUpController extends Controller
 
         return redirect()->route('login')->with('success', 'Pendaftaran berhasil. Menunggu persetujuan admin.');
     }
+
+    public function pendingUsers()
+    {
+        $pendingUsers = UserProdi::where('status', 'pending')->with('prodi')->get();
+        return view('admin.pendingusers.index', compact('pendingUsers'));
+    }
+
+    public function approveUser($id)
+    {
+        $user = UserProdi::findOrFail($id);
+        $user->status = 'approved';
+        $user->save();
+
+        return redirect()->route('admin.pendingusers.index')->with('success', 'User berhasil disetujui.');
+    }
+
+    public function rejectUser($id)
+    {
+        $user = UserProdi::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('admin.pendingusers.index')->with('success', 'User berhasil ditolak dan dihapus.');
+    }
 }
