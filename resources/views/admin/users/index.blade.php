@@ -27,11 +27,11 @@
 
     <div class="flex justify-between mb-4">
         <div class="space-x-2">
-            <a href="{{ route('admin.users.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-                👤 Tambah User
+            <a href="{{ route('admin.users.create') }}" class="bg-[#4e70bb] text-white px-4 py-2 rounded-md  hover:bg-blue-900">
+                <i class="bi bi-person-plus"></i> Tambah User
             </a>
-            <a href="" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
-                📄 Ekspor ke Excel
+            <a href="" class="bg-[#44a35c] text-white px-4 py-2 rounded-md hover:bg-green-800">
+                <i class="bi bi-file-earmark-spreadsheet"></i> Ekspor ke Excel
             </a>
         </div>
     </div>
@@ -69,12 +69,16 @@
                     <td class="py-3 px-6 min-w-[10px] text-center">{{ $user->email }}</td>
                     <td class="py-3 px-6 min-w-[10px] text-center">{{ ucfirst($user->role) }}</td>
                     <td class="py-3 px-6 flex justify-center items-center space-x-2">
-                        <a href="{{ route('admin.users.detail',$user->id) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
-                        <a href="{{ route('admin.users.edit', $user->id) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
+                        <a href="{{ route('admin.users.detail',$user->id) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">
+                            <i class="bi bi-info-circle"></i> Detail 
+                        </a>
+                        <a href="{{ route('admin.users.edit', $user->id) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">
+                            <i class="bi bi-pencil"></i>  Ubah 
+                        </a>
                         <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
                             @csrf @method('DELETE')
                             <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">
-                                🗑️ Hapus
+                                <i class="bi bi-trash"></i> Hapus
                             </button>
                         </form>
                     </td>
