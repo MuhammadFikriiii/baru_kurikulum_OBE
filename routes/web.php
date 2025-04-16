@@ -26,6 +26,7 @@ use App\Http\Controllers\KaprodiProfilLulusanController;
 use App\Http\Controllers\TimDashboardController;
 use App\Http\Controllers\TimProfilLulusanController;
 use App\Http\Controllers\TimCapaianPembelajaranLulusanController;
+use App\Http\Controllers\TimPemetaanCplPlController;
 
 // Auth
 Route::get('/', [LoginController::class, 'loginForm'])->name('login');
@@ -89,7 +90,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/capaianprofillulusan/{id_cpl}', [AdminCapaianProfilLulusanController::class, 'update'])->name('capaianprofillulusan.update');
     Route::delete('/capaianprofillulusan/{id_cpl}', [AdminCapaianProfilLulusanController::class, 'destroy'])->name('capaianprofillulusan.destroy');
     Route::get('/pemetaancplpl', [AdminPemetaanCplPlController::class, 'index'])->name('pemetaancplpl.index');
-    Route::post('/pemetaancplpl', [AdminPemetaanCplPlController::class, 'store'])->name('pemetaancplpl.store');
     Route::get('/bahankajian', [AdminBahankajianController::class, 'index'])->name('bahankajian.index');
     Route::get('/bahankajian/create', [AdminBahankajianController::class, 'create'])->name('bahankajian.create');
     Route::post('/bahankajian', [AdminBahankajianController::class, 'store'])->name('bahankajian.store');
@@ -139,4 +139,6 @@ route::prefix('tim')->name('tim.')->group(function(){
     Route::get('/capaianpembelajaranlulusan', [TimCapaianPembelajaranLulusanController::class, 'index'])->name('capaianpembelajaranlulusan.index');
     Route::get('/capaianpembelajaranlulusan/create', [TimCapaianPembelajaranLulusanController::class, 'create'])->name('capaianpembelajaranlulusan.create');
     Route::post('/capaianpembelajaranlulusan', [TimCapaianPembelajaranLulusanController::class, 'store'])->name('capaianpembelajaranlulusan.store');
+    Route::get('/pemetaancplpl', [TimPemetaanCplPlController::class, 'index'])->name('pemetaancplpl.index');
+    Route::post('/pemetaancplpl', [TimPemetaanCplPlController::class, 'store'])->name('pemetaancplpl.store');
 });

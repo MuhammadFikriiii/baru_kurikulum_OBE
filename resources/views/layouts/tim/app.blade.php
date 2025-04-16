@@ -44,6 +44,11 @@
                     <span>👥</span>
                     <span class="ml-2">Capaian Pembelajaran Lulusan</span></a>
             </li>
+            <li>
+                <a href="{{ route('tim.pemetaancplpl.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
+                    <span class="ml-2">Pemetaan Cpl Pl</span></a>
+            </li>
         </ul>
     </aside>
 

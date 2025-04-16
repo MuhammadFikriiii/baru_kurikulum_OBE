@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.tim.app')
 
 @section('content')
 <div class="mr-20 ml-20">
@@ -15,19 +15,8 @@
     </div>
 @endif
 
-<style>
-    input[type="checkbox"]:checked::before {
-        content: "✔";
-        color: white;
-        font-size: 1rem;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -55%);
-    }
-    </style>
-    
-<form>
+<form action="{{ route('tim.pemetaancplpl.store') }}" method="POST">
+    @csrf
     <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-visible">
         <thead class="bg-green-500">
             <tr>
@@ -56,15 +45,16 @@
                     </td>                    
                     @foreach ($pls as $pl)
                         <td class="px-4 py-2 text-center">
-                            <input type="checkbox" disabled 
-                            {{ isset($relasi[$pl->id_pl]) && in_array($cpl->id_cpl, $relasi[$pl->id_pl]->pluck('id_cpl')->toArray()) ? 'checked' : '' }} 
-                            class="h-5 w-5 mx-auto appearance-none rounded border-2 border-blue-600 bg-white checked:bg-white-600 checked:border-blue-600 disabled:opacity-100 disabled:cursor-default relative">
+                            <input type="checkbox" name="relasi[{{ $pl->id_pl }}][]" value="{{ $cpl->id_cpl }}" 
+                                {{ isset($relasi[$pl->id_pl]) && in_array($cpl->id_cpl, $relasi[$pl->id_pl]->pluck('id_cpl')->toArray()) ? 'checked' : '' }} 
+                                class="form-checkbox h-5 w-5 text-blue-600 mx-auto">
                         </td>
                     @endforeach
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <button type="submit" class="mt-4 px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Simpan</button>
 </form>
 
 </div>
