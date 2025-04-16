@@ -67,7 +67,7 @@
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $index + 1 }}</td>
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->nama_prodi ?? 'Tidak ada prodi' }}</td>                        </td>
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->kode_cpl }}</td>
-                        <td class="py-3 px-6 min-w-[10px] text-justify">{{ $capaianprofillulusan->deskripsi_cpl }}</td>
+                        <td class="px-4 py-2 text-sm w-96 break-words whitespace-pre-line">{{ $capaianprofillulusan->deskripsi_cpl }}</td>
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->status_cpl }}</td>
                         <td class="py-3 px-6 min-w-[10px] flex justify-center items-center space-x-2">
                             <a href="#" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>

@@ -20,14 +20,15 @@
 <form action="{{ route('admin.capaianprofillulusan.store') }}" method="POST">
 @csrf
 
-<label for="id_pls" class="text-2xl">Profil Lulusan Terkait:</label>
-<select id="id_pls" name="id_pls[]" class="border border-black p-3 w-full rounded-lg mt-1 mb-3" multiple required>
-    <option value="" disabled selected>Pilih PL</option>
+<label for="id_pls" class="text-2xl font-semibold mb-2">Profil Lulusan Terkait:</label>
+<select id="id_pls" name="id_pls[]" class="border border-gray-300 p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]" multiple required>
     @foreach($profilLulusans as $pl)
-        <option value="{{ $pl->id_pl }}">{{ $pl->kode_pl }} - {{ $pl->deskripsi_pl }}</option>
+        <option value="{{ $pl->id_pl }}" title="{{ $pl->kode_pl }} - {{ $pl->deskripsi_pl }}">
+    {{ $pl->kode_pl }} - {{ $pl->deskripsi_pl }}
+</option>
     @endforeach
 </select>
-<p class="text-sm text-gray-500 mt-1">Tekan Ctrl (Windows) atau Cmd (Mac) untuk memilih lebih dari satu.</p>
+<p class="text-sm text-gray-500 mb-2">Tekan shift/Tahan Klik mouseuntuk memilih lebih dari satu.</p>
 
 <label for="kode_cpl" class="text-2xl">Kode CPL:</label>
 <input type="text" id="kode_cpl" name="kode_cpl" class="border border-black p-3 w-full rounded-lg mt-1 mb-3" required></input>
