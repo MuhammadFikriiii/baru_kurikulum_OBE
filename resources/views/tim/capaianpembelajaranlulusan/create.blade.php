@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.tim.app')
 
 @section('content')
 
@@ -17,18 +17,8 @@
     </div>
 @endif
 
-<form action="{{ route('admin.capaianprofillulusan.store') }}" method="POST">
+<form action="{{ route('tim.capaianpembelajaranlulusan.store') }}" method="POST">
 @csrf
-
-<label for="id_pls" class="text-2xl">Profil Lulusan Terkait:</label>
-<select id="id_pls" name="id_pls[]" class="border border-black p-3 w-full rounded-lg mt-1 mb-3" multiple required>
-    <option value="" disabled selected>Pilih PL</option>
-    @foreach($profilLulusans as $pl)
-        <option value="{{ $pl->id_pl }}">{{ $pl->kode_pl }} - {{ $pl->deskripsi_pl }}</option>
-    @endforeach
-</select>
-<p class="text-sm text-gray-500 mt-1">Tekan Ctrl (Windows) atau Cmd (Mac) untuk memilih lebih dari satu.</p>
-
 <label for="kode_cpl" class="text-2xl">Kode CPL:</label>
 <input type="text" id="kode_cpl" name="kode_cpl" class="border border-black p-3 w-full rounded-lg mt-1 mb-3" required></input>
 <br>
@@ -46,7 +36,7 @@
 <br>
 
 <button type="submit" class="bg-green-400 hover:bg-green-800 mt-2 rounded-lg px-5 py-2">Simpan</button>
-<a href="{{ route('admin.capaianprofillulusan.index') }}" class="bg-blue-400 hover:bg-blue-800 px-5 py-2 rounded-lg">Kembali</a>
+<a href="{{ route('tim.capaianpembelajaranlulusan.index') }}" class="bg-blue-400 hover:bg-blue-800 px-5 py-2 rounded-lg">Kembali</a>
 </form>
 </div>
 @endsection

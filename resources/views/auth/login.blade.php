@@ -42,6 +42,16 @@
                 </button>
             </div>
             @endif
+
+            @if(session('register'))
+            <div id="alert" class="bg-green-500 text-white px-6 py-2 rounded-md mb-4 text-center relative">
+                <span class="font-bold">{{ session('register') }}</span>
+                <button onclick="document.getElementById('alert').style.display='none'"
+                    class="absolute top-1 right-3 text-white font-bold text-lg">
+                    &times;
+                </button>
+            </div>
+        @endif
             
             <form action="{{ route('login.post') }}" method="POST" class="space-y-4">
                 @csrf

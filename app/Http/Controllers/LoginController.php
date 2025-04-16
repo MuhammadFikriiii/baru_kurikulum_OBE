@@ -58,7 +58,7 @@ class LoginController extends Controller
             if ($userProdi->role === 'kaprodi') {
                 return redirect()->route('kaprodi.dashboard')->with('success', 'Login berhasil');
             } elseif ($userProdi->role === 'tim') {
-            return redirect()->route('admin.dashboard')->with('success', 'Login berhasil');
+            return redirect()->route('tim.dashboard')->with('success', 'Login berhasil');
             }
         }
     
