@@ -21,6 +21,19 @@
     @csrf
     @method('PUT')
 
+    <label for="id_cpls" class="text-2xl font-semibold mb-2">Profil Lulusan Terkait:</label>
+    <select id="id_cpls" name="id_cpls[]" class="border border-gray-300 p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]" multiple required>
+        @foreach($capaianprofillulusans as $cpl)
+            <option value="{{ $cpl->id_cpl }}"
+                @if(in_array($cpl->id_cpl, old('id_cpls', $selectedCapaianProfilLulusans ?? []))) selected @endif
+                title="{{ $cpl->kode_cpl }} - {{ $cpl->deskripsi_cpl }}">
+                {{ $cpl->kode_cpl }} - {{ $cpl->deskripsi_cpl }}
+            </option>
+        @endforeach
+    </select>
+    <p class="text-sm text-gray-500 mb-2">Tekan shift/Tahan Klik mouse untuk memilih lebih dari satu.</p>
+    <br>
+
     <label for="kode_bk">Kode Bahan Kajian:</label>
     <input type="text" name="kode_bk" id="kode_bk" value="{{ old('kode_bk', $bahankajian->kode_bk) }}" class="border border-black p-3 w-full mt-1 mb-3 rounded-lg" required>
     <br>
