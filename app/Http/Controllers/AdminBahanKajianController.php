@@ -18,18 +18,9 @@ class AdminBahanKajianController extends Controller
         ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
         ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
         ->select(
-            'bk.id_bk',
-            'bk.nama_bk',
-            'bk.kode_bk',
-            'bk.deskripsi_bk',
-            'bk.referensi_bk',
-            'bk.status_bk',
-            'bk.knowledge_area',
-            'cpl.id_cpl',
-            'cpl.kode_cpl',
-            'cpl.deskripsi_cpl',
-            'pl.id_pl',
-            'pl.deskripsi_pl',
+            'bk.id_bk','bk.nama_bk','bk.kode_bk','bk.deskripsi_bk','bk.referensi_bk','bk.status_bk','bk.knowledge_area',
+            'cpl.id_cpl','cpl.kode_cpl','cpl.deskripsi_cpl',
+            'pl.id_pl','pl.deskripsi_pl',
             'prodis.nama_prodi'
         )
         ->get();
