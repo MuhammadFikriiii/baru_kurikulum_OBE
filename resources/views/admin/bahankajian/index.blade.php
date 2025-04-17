@@ -55,6 +55,7 @@
             <thead class="bg-green-800 text-white border-b">
                 <tr>
                     <th class="py-3 px-4 text-center min-w-[10px] font-bold uppercase ">No.</th>
+                    <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Prodi</th>
                     <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Kode BK</th>
                     <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Nama BK</th>
                     <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Deskripsi BK</th>
@@ -68,6 +69,7 @@
                 @foreach ($bahankajians as $index => $bahankajian)
                 <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
                     <td class="py-3 px-6 text-center min-w-[10px]">{{ $index + 1 }}</td>
+                    <td class="py-3 px-6 text-center min-w-[10px]">{{ $bahankajian->nama_prodi }}</td>
                     <td class="py-3 px-6 text-center min-w-[10px]">{{ $bahankajian->kode_bk }}</td>
                     <td class="py-3 px-6 text-center min-w-[10px]">{{ $bahankajian->nama_bk }}</td>
                     <td class="py-3 px-6 text-center min-w-[10px]">{{ $bahankajian->deskripsi_bk }}</td>

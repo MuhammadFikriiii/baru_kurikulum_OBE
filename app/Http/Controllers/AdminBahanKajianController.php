@@ -11,7 +11,28 @@ class AdminBahanKajianController extends Controller
 {
     public function index()
     {
-        $bahankajians = BahanKajian::all();
+        $bahankajians = DB::table('bahan_kajians as bk')
+        ->join('cpl_bk', 'bk.id_bk', '=', 'cpl_bk.id_bk')
+        ->join('capaian_profil_lulusans as cpl', 'cpl_bk.id_cpl', '=', 'cpl.id_cpl')
+        ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+        ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+        ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
+        ->select(
+            'bk.id_bk',
+            'bk.nama_bk',
+            'bk.kode_bk',
+            'bk.deskripsi_bk',
+            'bk.referensi_bk',
+            'bk.status_bk',
+            'bk.knowledge_area',
+            'cpl.id_cpl',
+            'cpl.kode_cpl',
+            'cpl.deskripsi_cpl',
+            'pl.id_pl',
+            'pl.deskripsi_pl',
+            'prodis.nama_prodi'
+        )
+        ->get();
         return view('admin.bahankajian.index', compact('bahankajians'));
     }
 
