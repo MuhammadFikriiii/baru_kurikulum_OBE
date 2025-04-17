@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\BahanKajian;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class AdminBahanKajianController extends Controller
 {
@@ -16,7 +17,8 @@ class AdminBahanKajianController extends Controller
 
     public function create()
     {
-        return view('admin.bahankajian.create');
+        $capaianProfilLulusans = DB::table('capaian_profil_lulusans')->get();
+        return view('admin.bahankajian.create', compact('capaianProfilLulusans'));
     }
 
     public function store(Request $request)
@@ -29,7 +31,15 @@ class AdminBahanKajianController extends Controller
             'status_bk' => 'required|in:core,elective',
             'knowledge_area' => 'required|string',
         ]);
-        BahanKajian::create($request->all());
+
+        $bk = BahanKajian::create($request->only(['kode_bk', 'nama_bk', 'deskripsi_bk', 'referensi_bk', 'status_bk', 'knowledge_area']));
+
+        foreach ($request->id_cpls as $id_cpl) {
+            DB::table('cpl_bk')->insert([
+                'id_bk' => $bk->id_bk,
+                'id_cpl' => $id_cpl
+            ]);
+        }
         return redirect()->route('admin.bahankajian.index')->with('success', 'Bahan Kajian berhasil diperbaharui.');
     }
 

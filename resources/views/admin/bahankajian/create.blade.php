@@ -18,6 +18,17 @@
 
 <form action="{{ route('admin.bahankajian.store') }}" method="POST">
     @csrf
+
+    <label for="id_cpls" class="text-2xl font-semibold mb-2">Profil Lulusan Terkait:</label>
+    <select id="id_cpls" name="id_cpls[]" class="border border-gray-300 p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]" multiple required>
+    @foreach($capaianProfilLulusans as $cpl)
+        <option value="{{ $cpl->id_cpl }}" title="{{ $cpl->kode_cpl }} - {{ $cpl->deskripsi_cpl }}">
+    {{ $cpl->kode_cpl }} - {{ $cpl->deskripsi_cpl }}
+    </option>
+    @endforeach
+    </select>
+    <p class="text-sm text-gray-500 mb-2">Tekan shift/Tahan Klik mouseuntuk memilih lebih dari satu.</p>
+
     <label for="kode_bk">Kode Bahan Kajian:</label>
     <input id="kode_bk" type="text" name="kode_bk" class="border border-black p-3 w-full mt-1 mb-3 rounded-lg" required>
     <br>
