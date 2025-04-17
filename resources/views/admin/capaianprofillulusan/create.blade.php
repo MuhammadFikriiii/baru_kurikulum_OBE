@@ -4,7 +4,7 @@
 
 <div class="mr-20 ml-20">
 
-<h2 class="text-4xl font-extrabold mb-4 text-center">Tambah Capaian Profil Lulusan</h2>
+<h2 class="text-4xl font-extrabold mb-4 text-center">Tambah Capaian Pembelajaran Lulusan</h2>
 <hr class="w-full border border-black mb-4">
 
 @if ($errors->any())

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="mr-20 ml-20">
-    <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Daftar Capaian Profil Lulusan</h2>
+    <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Daftar Capaian Pembelajaran Lulusan</h2>
     <hr class="border-t-4 border-black my-8">
         @if(session('success'))
         <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
@@ -70,7 +70,7 @@
                         <td class="px-4 py-2 text-sm w-96 break-words whitespace-pre-line">{{ $capaianprofillulusan->deskripsi_cpl }}</td>
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->status_cpl }}</td>
                         <td class="py-3 px-6 min-w-[10px] flex justify-center items-center space-x-2">
-                            <a href="#" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
+                            <a href="{{ route('admin.capaianprofillulusan.detail',$capaianprofillulusan->id_cpl) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
                             <a href="{{ route('admin.capaianprofillulusan.edit', $capaianprofillulusan->id_cpl) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
                             <form action="{{ route('admin.capaianprofillulusan.destroy',$capaianprofillulusan->id_cpl ) }}" method="POST">
                                 @csrf @method('DELETE')

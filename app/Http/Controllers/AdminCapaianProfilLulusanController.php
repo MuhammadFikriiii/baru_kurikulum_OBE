@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CapaianProfilLulusan;
+use App\Models\ProfilLulusan;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
@@ -53,7 +54,13 @@ class AdminCapaianProfilLulusanController extends Controller
     public function edit($id_cpl)
     {
         $capaianprofillulusan = CapaianProfilLulusan::findOrFail($id_cpl);
-        return view('admin.capaianprofillulusan.edit' , compact('capaianprofillulusan'));
+
+        $profilLulusans = ProfilLulusan::all();
+        $selectedProfilLulusans = DB::table('cpl_pl')
+            ->where('id_cpl', $id_cpl)
+            ->pluck('id_pl')
+            ->toArray();
+        return view('admin.capaianprofillulusan.edit' , compact('capaianprofillulusan', 'profilLulusans'));
     }
 
     public function update(Request $request, $id_cpl)
@@ -65,8 +72,36 @@ class AdminCapaianProfilLulusanController extends Controller
         ]);
 
         $capaianprofillulusan = CapaianProfilLulusan::findOrFail($id_cpl);
+
         $capaianprofillulusan->update($request->all());
+
+        DB::table('cpl_pl')->where('id_cpl', $id_cpl)->delete();
+
+        if ($request->has('id_pls')) {
+            foreach ($request->id_pls as $id_pl) {
+                DB::table('cpl_pl')->insert([
+                    'id_cpl' => $id_cpl,
+                    'id_pl' => $id_pl
+                ]);
+            }
+        }
         return redirect()->route('admin.capaianprofillulusan.index')->with('success', 'Capaian Profil lulusan berhasil diperbaharui.');
+    }
+
+    public function detail(CapaianProfilLulusan $id_cpl)
+    {
+        $selectedPlIds = DB::table('cpl_pl')
+        ->where('id_cpl', $id_cpl->id_cpl)
+        ->pluck('id_pl')
+        ->toArray();
+
+    $profilLulusans = ProfilLulusan::whereIn('id_pl', $selectedPlIds)->get();
+
+    return view('admin.capaianprofillulusan.detail', [
+        'id_cpl' => $id_cpl,
+        'selectedProfilLulusans' => $selectedPlIds,
+        'profilLulusans' => $profilLulusans
+    ]);
     }
 
     public function destroy(CapaianProfilLulusan $capaianprofillulusan)
