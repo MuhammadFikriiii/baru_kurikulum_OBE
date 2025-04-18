@@ -96,6 +96,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/bahankajian', [AdminBahankajianController::class, 'store'])->name('bahankajian.store');
     Route::get('/bahankajian/{id_bk}/edit', [AdminBahankajianController::class, 'edit'])->name('bahankajian.edit');
     Route::put('/bahankajian/{id_bk}', [AdminBahankajianController::class, 'update'])->name('bahankajian.update');
+    Route::get('/bahankajian/{id_bk}/detail', [AdminBahankajianController::class, 'detail'])->name('bahankajian.detail');
     Route::delete('/bahankajian/{id_bk}', [AdminBahankajianController::class,'destroy'])->name('bahankajian.destroy');
     Route::get('/pemetaancplbk', [AdminPemetaanCplBkController::class, 'index'])->name('pemetaancplbk.index');
     Route::post('/pemetaancplbk', [AdminPemetaanCplBkController::class, 'store'])->name('pemetaancplbk.store');

@@ -100,4 +100,20 @@ class AdminBahanKajianController extends Controller
         $id_bk->delete();
         return redirect()->route('admin.bahankajian.index')->with('sukses','Bahan Kajian Berhasil Di Hapus');
     }
+
+    public function detail(BahanKajian $id_bk)
+    {
+        $selectedCplIds = DB::table('cpl_bk')
+            ->where('id_bk', $id_bk->id_bk)
+            ->pluck('id_cpl')
+            ->toArray();
+
+        $capaianprofillulusans = CapaianProfilLulusan::whereIn('id_cpl', $selectedCplIds)->get();
+
+        return view('admin.bahankajian.detail', [
+            'id_bk' => $id_bk,
+            'selectedCapaianProfilLulusans' => $selectedCplIds,
+            'capaianprofillulusans' => $capaianprofillulusans
+        ]);
+    }
 }
