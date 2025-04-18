@@ -29,6 +29,7 @@ use App\Http\Controllers\TimCapaianPembelajaranLulusanController;
 use App\Http\Controllers\TimPemetaanCplPlController;
 use App\Http\Controllers\Wadir1ProfilLulusanController;
 use App\Http\Controllers\Wadir1CapaianPembelajaranLulusanController;
+use App\Http\Controllers\Wadir1CplPlController;
 
 // Auth
 Route::get('/login', [LoginController::class, 'loginForm'])->name('login');
@@ -130,8 +131,9 @@ Route::prefix('wadir1')->name('wadir1.')->group(function(){
     Route::get('/prodi/{prodi}/detail', [Wadir1ProdiController::class,'detail'])->name('prodi.detail');
     Route::get('/profillulusan', [Wadir1ProfilLulusanController::class, 'index'])->name('profillulusan.index');
     Route::get('/profillulusan/{id_pl}/detail', [Wadir1ProfilLulusanController::class, 'detail'])->name('profillulusan.detail');
-    ROute::get('/capaianpembelajaranlulusan', [Wadir1CapaianPembelajaranLulusanController::class, 'index'])->name('capaianpembelajaranlulusan.index');
+    Route::get('/capaianpembelajaranlulusan', [Wadir1CapaianPembelajaranLulusanController::class, 'index'])->name('capaianpembelajaranlulusan.index');
     Route::get('/capaianpembelajaranlulusan/{id_cpl}/detail', [Wadir1CapaianPembelajaranLulusanController::class, 'detail'])->name('capaianpembelajaranlulusan.detail');
+    Route::get('/pemetaancplpl', [Wadir1CplPlController::class, 'index'])->name('pemetaancplpl.index');
 });
 
 Route::prefix('kaprodi')->name('kaprodi.')->group(function(){
