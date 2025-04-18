@@ -27,6 +27,7 @@ use App\Http\Controllers\TimDashboardController;
 use App\Http\Controllers\TimProfilLulusanController;
 use App\Http\Controllers\TimCapaianPembelajaranLulusanController;
 use App\Http\Controllers\TimPemetaanCplPlController;
+use App\Http\Controllers\Wadir1ProfilLulusanController;
 
 // Auth
 Route::get('/login', [LoginController::class, 'loginForm'])->name('login');
@@ -126,6 +127,7 @@ Route::prefix('wadir1')->name('wadir1.')->group(function(){
     Route::get('/jurusan/{jurusan}/detail', [Wadir1JurusanController::class, 'detail'])->name('jurusan.detail');
     Route::get('/prodi', [Wadir1ProdiController::class, 'index'])->name('prodi.index');
     Route::get('/prodi/{prodi}/detail', [Wadir1ProdiController::class,'detail'])->name('prodi.detail');
+    Route::get('/profillulusan', [Wadir1ProfilLulusanController::class, 'index'])->name('profillulusan.index');
 });
 
 Route::prefix('kaprodi')->name('kaprodi.')->group(function(){
