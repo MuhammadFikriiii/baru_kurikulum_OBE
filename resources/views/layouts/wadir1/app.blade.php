@@ -55,6 +55,11 @@
                     <span class="ml-2">Profil Lulusan</span></a>
             </li>
             <li>
+                <a href="{{ route('wadir1.capaianpembelajaranlulusan.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
+                    <span class="ml-2">Capaian Pembelajaran Lulusan</span></a>
+            </li>
+            <li>
                 <a href="/" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <span>👥</span>
                     <span class="ml-2">Logout</span></a>
