@@ -29,19 +29,29 @@
 
 <form action="{{ route('admin.pemetaancplbk.store') }}" method="POST">
     @csrf
-    <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
+    <table class="w-full border border-gray-300 shadow-md rounded-lg">
         <thead class="bg-green-500">
             <tr>
                 <th class="px-4 py-2 text-left"></th> 
                 @foreach ($bks as $bk)
-                    <th class="px-4 py-2 text-center">{{ $bk->kode_bk }}</th>
+                <th class="px-2 py-2 relative group">
+                    <span class="cursor-help">{{ $bk->kode_bk }}</span>
+                    <div class="mt-9 absolute left-1/2 -translate-x-[60%] top-full hidden group-hover:block w-64 bg-gray-700 text-white text-sm rounded p-2 z-50 text-center">
+                        {{ $bk->nama_bk }}
+                    </div>
+                </th>
                 @endforeach
             </tr>
         </thead>
         <tbody>
             @foreach ($cpls as $cpl)
                 <tr class="border-b">
-                    <td class="px-4 py-2">{{ $cpl->kode_cpl }}</td>
+                    <td class="px-4 py-2 relative group">
+                        <span class="cursor-help">{{ $cpl->kode_cpl }}</span>
+                        <div class="absolute -mt-10 left-1/2 -translate-x-2 top-full hidden group-hover:block w-64 bg-gray-700 text-white text-sm rounded p-2 z-50 text-center">
+                            {{ $cpl->deskripsi_cpl }}
+                        </div>
+                    </td> 
                     @foreach ($bks as $bk)
                         <td class="px-4 py-2 text-center">
                             <input type="checkbox" disabled 
