@@ -130,6 +130,7 @@ Route::prefix('wadir1')->name('wadir1.')->group(function(){
     Route::get('/prodi/{prodi}/detail', [Wadir1ProdiController::class,'detail'])->name('prodi.detail');
     Route::get('/profillulusan', [Wadir1ProfilLulusanController::class, 'index'])->name('profillulusan.index');
     ROute::get('/capaianpembelajaranlulusan', [Wadir1CapaianPembelajaranLulusanController::class, 'index'])->name('capaianpembelajaranlulusan.index');
+    Route::get('/capaianpembelajaranlulusan/{id_cpl}/detail', [Wadir1CapaianPembelajaranLulusanController::class, 'detail'])->name('capaianpembelajaranlulusan.detail');
 });
 
 Route::prefix('kaprodi')->name('kaprodi.')->group(function(){

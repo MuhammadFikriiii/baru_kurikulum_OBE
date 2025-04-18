@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\CapaianProfilLulusan;
+use App\Models\ProfilLulusan;
 use Illuminate\Support\Facades\DB;
 
 class Wadir1CapaianPembelajaranLulusanController extends Controller
@@ -18,5 +20,21 @@ class Wadir1CapaianPembelajaranLulusanController extends Controller
             ->get();
 
         return view("wadir1.capaianpembelajaranlulusan.index", compact("capaianprofillulusans"));
+    }
+
+    public function detail(CapaianProfilLulusan $id_cpl)
+    {
+        $selectedPlIds = DB::table('cpl_pl')
+        ->where('id_cpl', $id_cpl->id_cpl)
+        ->pluck('id_pl')
+        ->toArray();
+
+    $profilLulusans = ProfilLulusan::whereIn('id_pl', $selectedPlIds)->get();
+
+    return view('wadir1.capaianpembelajaranlulusan.detail', [
+        'id_cpl' => $id_cpl,
+        'selectedProfilLulusans' => $selectedPlIds,
+        'profilLulusans' => $profilLulusans
+    ]);
     }
 }
