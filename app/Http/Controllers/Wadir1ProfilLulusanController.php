@@ -14,4 +14,8 @@ class Wadir1ProfilLulusanController extends Controller
         return view('wadir1.profillulusan.index', compact('profillulusans'));
     }
 
+    public function detail (ProfilLulusan $id_pl)
+    {
+        return view('wadir1.profillulusan.detail', compact('id_pl'));
+    }
 }

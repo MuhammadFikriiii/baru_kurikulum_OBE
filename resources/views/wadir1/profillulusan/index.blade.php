@@ -76,7 +76,7 @@
                                     <td class="px-4 py-2 text-sm w-28 text-center break-words">{{ $profillulusan->keterangan_pl }}</td>
                                     <td class="px-4 py-2 text-sm w-44 break-words">{{ $profillulusan->sumber_pl }}</td>
                                     <td class="py-3 px-4 flex flex-col sm:flex-row sm:justify-center sm:items-center gap-2">
-                                        <a href="#" class="bg-green-500 text-white px-3 py-1 rounded-md text-sm font-semibold hover:bg-green-600 text-center">🛈 Detail</a>
+                                        <a href="{{ route('wadir1.profillulusan.detail', $profillulusan->id_pl) }}" class="bg-green-500 text-white px-3 py-1 rounded-md text-sm font-semibold hover:bg-green-600 text-center">🛈 Detail</a>
                                     </td>
                                 </tr>
                             @endforeach
