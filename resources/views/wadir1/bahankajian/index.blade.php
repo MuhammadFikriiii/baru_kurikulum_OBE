@@ -74,7 +74,7 @@
                     <td class="py-3 px-6 text-center min-w-[10px]">{{ $bahankajian->status_bk }}</td>
                     <td class="py-3 px-6 text-center min-w-[10px]">{{ $bahankajian->knowledge_area }}</td>
                     <td class="py-3 px-6 flex justify-center min-w-[10px] items-center space-x-2">
-                        <a href="#"class="bg-green-500 font-bold text-white px-5 py-2 rounded-md hover:bg-green-600">🛈</a>
+                        <a href="{{ route('wadir1.bahankajian.detail', $bahankajian->id_bk) }}"class="bg-green-500 font-bold text-white px-5 py-2 rounded-md hover:bg-green-600">🛈</a>
                     </td>
                 </tr>
                 @endforeach
