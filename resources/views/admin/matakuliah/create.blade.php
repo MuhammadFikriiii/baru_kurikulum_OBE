@@ -27,7 +27,17 @@
     @endforeach
     </select>
     <p class="text-sm text-gray-500 mb-2">Tekan shift/Tahan Klik mouseuntuk memilih lebih dari satu.</p>
-    
+
+    <label for="id_bks" class="text-2xl font-semibold mb-2">Profil Lulusan Terkait:</label>
+    <select id="id_bks" name="id_bks[]" class="border border-gray-300 p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]" multiple required>
+    @foreach($bahanKajians as $bk)
+        <option value="{{ $bk->id_bk }}" title="{{ $bk->kode_bk }} - {{ $bk->nama_bk }}">
+    {{ $bk->kode_bk }} - {{ $bk->nama_bk }}
+    </option>
+    @endforeach
+    </select>
+    <p class="text-sm text-gray-500 mb-2">Tekan shift/Tahan Klik mouseuntuk memilih lebih dari satu.</p>
+
         <div class="mt-3">
             <label for="kode_mk" class="text-2xl">Kode Mata Kuliah</label>
             <input type="text" name="kode_mk" id="kode_mk" class="mt-1 w-full p-3 border border-black rounded-lg ">

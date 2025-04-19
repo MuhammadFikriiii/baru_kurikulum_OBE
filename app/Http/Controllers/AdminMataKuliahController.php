@@ -11,16 +11,28 @@ class AdminMataKuliahController extends Controller
 {
     public function index()
     {
-        $mata_kuliahs = MataKuliah::all();
-        $semesters = $mata_kuliahs->pluck('semester_mk')->unique()->sort()->values();
+        $mata_kuliahs = DB::table('mata_kuliahs as mk')
+            ->select(
+                'mk.kode_mk', 'mk.nama_mk', 'mk.jenis_mk', 'mk.sks_mk',
+                'mk.semester_mk', 'mk.kompetensi_mk', 'prodis.nama_prodi'
+            )
+            ->leftJoin('cpl_mk', 'mk.kode_mk', '=', 'cpl_mk.kode_mk')
+            ->leftJoin('capaian_profil_lulusans as cpl', 'cpl_mk.id_cpl', '=', 'cpl.id_cpl')
+            ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
+            ->groupBy('mk.kode_mk', 'mk.nama_mk', 'mk.jenis_mk', 'mk.sks_mk', 'mk.semester_mk', 'mk.kompetensi_mk', 'prodis.nama_prodi')
+            ->get();
 
-        return view("admin.matakuliah.index", compact("mata_kuliahs", "semesters"));
+        return view("admin.matakuliah.index", compact("mata_kuliahs"));
     }
+
 
     public function create()
     {
         $capaianProfilLulusans = DB::table('capaian_profil_lulusans')->get();
-        return view("admin.matakuliah.create",  compact("capaianProfilLulusans"));
+        $bahanKajians = DB::table('bahan_kajians')->get();
+        return view("admin.matakuliah.create",  compact("capaianProfilLulusans", "bahanKajians"));
     }
 
     public function store(Request $request)
@@ -39,6 +51,13 @@ class AdminMataKuliahController extends Controller
             DB::table('cpl_mk')->insert([
                 'kode_mk' => $mk->kode_mk,
                 'id_cpl' => $id_cpl
+            ]);
+        }
+
+        foreach ($request->id_bks as $id_bk) {
+            DB::table('bk_mk')->insert([
+                'kode_mk' => $mk->kode_mk,
+                'id_bk' => $id_bk
             ]);
         }
         return redirect()->route('admin.matakuliah.index')->with('success', 'Mata kuliah berhasil ditambahkan!');
