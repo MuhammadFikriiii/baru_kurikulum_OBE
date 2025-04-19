@@ -31,6 +31,7 @@ use App\Http\Controllers\Wadir1BahanKajianController;
 use App\Http\Controllers\Wadir1ProfilLulusanController;
 use App\Http\Controllers\Wadir1CapaianPembelajaranLulusanController;
 use App\Http\Controllers\Wadir1CplPlController;
+use App\Http\Controllers\Wadir1PemetaanCplBkController;
 
 // Auth
 Route::get('/login', [LoginController::class, 'loginForm'])->name('login');
@@ -137,6 +138,7 @@ Route::prefix('wadir1')->name('wadir1.')->group(function(){
     Route::get('/pemetaancplpl', [Wadir1CplPlController::class, 'index'])->name('pemetaancplpl.index');
     Route::get('/bahankajian', [Wadir1BahanKajianController::class, 'index'])->name('bahankajian.index');
     Route::get('/bahankajian/{id_bk}/detail', [Wadir1BahanKajianController::class, 'detail'])->name('bahankajian.detail');
+    Route::get('/pemetaancplbk', [Wadir1PemetaanCplBkController::class, 'index'])->name('pemetaancplbk.index');
 });
 
 Route::prefix('kaprodi')->name('kaprodi.')->group(function(){

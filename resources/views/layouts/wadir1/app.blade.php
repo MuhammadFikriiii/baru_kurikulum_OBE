@@ -70,6 +70,11 @@
                     <span class="ml-2">Bahan Kajian</span></a>
             </li>
             <li>
+                <a href="{{ route('wadir1.pemetaancplbk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
+                    <span class="ml-2">Pemetaan CPL - BK</span></a>
+            </li>
+            <li>
                 <a href="/" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <span>👥</span>
                     <span class="ml-2">Logout</span></a>
