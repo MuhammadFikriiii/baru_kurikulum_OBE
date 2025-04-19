@@ -24,7 +24,9 @@ class TimPemetaanCplPlController extends Controller
                   ->from('cpl_pl')
                   ->join('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
                   ->where('profil_lulusans.kode_prodi', $kodeProdi);
-        })->get();
+        })
+        ->orderBy('kode_cpl', 'asc')
+        ->get();
 
         $relasi = DB::table('cpl_pl')->get()->groupBy('id_pl');
 
