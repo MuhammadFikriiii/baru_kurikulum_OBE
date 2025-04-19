@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MataKuliah;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class AdminMataKuliahController extends Controller
 {
@@ -18,7 +19,8 @@ class AdminMataKuliahController extends Controller
 
     public function create()
     {
-        return view("admin.matakuliah.create");
+        $capaianProfilLulusans = DB::table('capaian_profil_lulusans')->get();
+        return view("admin.matakuliah.create",  compact("capaianProfilLulusans"));
     }
 
     public function store(Request $request)
@@ -31,7 +33,14 @@ class AdminMataKuliahController extends Controller
             'semester_mk'=> 'required|integer|in:1,2,3,4,5,6,7,8',
             'kompetensi_mk'=> 'required|string|in:pendukung,utama',
         ]);
-        MataKuliah::create($request->all());
+        $mk = MataKuliah::create($request->only(['kode_mk', 'nama_mk', 'jenis_mk', 'sks_mk', 'semester_mk', 'kompetensi_mk']));
+
+        foreach ($request->id_cpls as $id_cpl) {
+            DB::table('cpl_mk')->insert([
+                'kode_mk' => $mk->kode_mk,
+                'id_cpl' => $id_cpl
+            ]);
+        }
         return redirect()->route('admin.matakuliah.index')->with('success', 'Mata kuliah berhasil ditambahkan!');
     }
 
