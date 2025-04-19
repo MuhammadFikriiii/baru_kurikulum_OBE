@@ -19,6 +19,17 @@
 
 <form action="{{ route('tim.capaianpembelajaranlulusan.store') }}" method="POST">
 @csrf
+
+<label for="id_pls" class="text-2xl font-semibold mb-2">Profil Lulusan Terkait ({{ auth()->user()->prodi->nama_prodi ?? '' }}):</label>
+<select id="id_pls" name="id_pls[]" class="border border-gray-300 p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]" multiple required>
+    @foreach($profilLulusans as $pl)
+        <option value="{{ $pl->id_pl }}" title="{{ $pl->kode_pl }} - {{ $pl->deskripsi_pl }}">
+            {{ $pl->kode_pl }} - {{ $pl->deskripsi_pl }}
+        </option>
+    @endforeach
+</select>
+<p class="text-sm text-gray-500 mb-2">Tekan shift/Tahan Klik mouse untuk memilih lebih dari satu.</p>
+
 <label for="kode_cpl" class="text-2xl">Kode CPL:</label>
 <input type="text" id="kode_cpl" name="kode_cpl" class="border border-black p-3 w-full rounded-lg mt-1 mb-3" required></input>
 <br>
