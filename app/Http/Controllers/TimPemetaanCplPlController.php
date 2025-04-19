@@ -30,29 +30,4 @@ class TimPemetaanCplPlController extends Controller
 
         return view('tim.pemetaancplpl.index', compact('cpls', 'pls', 'relasi'));
     }
-
-    public function store(Request $request)
-    {
-        $user = Auth::guard('userprodi')->user();
-        
-        if (!$user || !$user->kode_prodi) {
-            abort(404);
-        }
-        
-        $relasi = $request->input('relasi', []);
-
-        DB::table('cpl_pl')->delete();
-
-        // Menyimpan data relasi baru
-        foreach ($relasi as $id_pl => $id_cpls) {
-            foreach ($id_cpls as $id_cpl) {
-                DB::table('cpl_pl')->insert([
-                    'id_pl' => $id_pl,
-                    'id_cpl' => $id_cpl,
-                ]);
-            }
-        }
-
-        return redirect()->route('tim.pemetaancplpl.index')->with('success', 'Pemetaan CPL-PL berhasil disimpan.');
-    }
 }

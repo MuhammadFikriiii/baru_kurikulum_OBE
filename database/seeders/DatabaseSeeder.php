@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             ProfilLulusanSeeder::class,
             CapaianProfilLulusanSeeder::class,
             BahanKajianSeeder::class,
+            CplPlSeeder::class,
+            CplBkSeeder::class,
             MataKuliahSeeder::class,
         ]);
     }

@@ -52,20 +52,28 @@ class TimCapaianPembelajaranLulusanController extends Controller
         $user = Auth::guard('userprodi')->user();
 
         if (!$user || !$user->kode_prodi) {
-            abort(403, 'Akses ditolak');
+            abort(404);
         }
-        
-        $prodiId = $user->kode_prodi;
 
-        $profilLulusans = ProfilLulusan::where('kode_prodi', $prodiId)->get();
+        $request->merge(['kode_prodi' => $user->kode_prodi]);
 
         request()->validate([
             'kode_cpl'=> 'required|string|max:10',
             'deskripsi_cpl'=> 'required',
             'status_cpl'=>'required|in:Kompetensi Utama Bidang,Kompetensi Tambahan',
+            'id_pls' => 'required|array'
         ]);
-        CapaianProfilLulusan::create($request->all());
-        return redirect()->route('tim.capaianpembelajaranlulusan.index', compact('profilLulusan'))->with('success', 'Capaian Profil lulusan berhasil ditambahkan.',);
+        
+        $cpl = CapaianProfilLulusan::create($request->only(['kode_cpl', 'deskripsi_cpl', 'status_cpl']));
+
+        foreach ($request->id_pls as $id_pl) {
+            DB::table('cpl_pl')->insert([
+                'id_cpl' => $cpl->id_cpl,
+                'id_pl' => $id_pl
+            ]);
+        }
+        
+        return redirect()->route('tim.capaianpembelajaranlulusan.index')->with('success', 'Capaian Profil lulusan berhasil ditambahkan.',);
     }
 
 }

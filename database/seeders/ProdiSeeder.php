@@ -24,6 +24,11 @@ class ProdiSeeder extends Seeder
                 'kode_prodi'=>'F0105',
                 'nama_prodi'=>'Teknik Listrik'
             ],
+            [
+                'kode_jurusan'=>'J0101',
+                'kode_prodi'=>'C0505',
+                'nama_prodi'=>'Sistem Informasi Kota Cerdas'
+            ],
         ]);
     }
 
