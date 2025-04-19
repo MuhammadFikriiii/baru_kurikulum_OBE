@@ -49,6 +49,20 @@
                     <span>👥</span>
                     <span class="ml-2">Pemetaan Cpl Pl</span></a>
             </li>
+            <li>
+                <a href="{{ route('tim.bahankajian.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
+                    <span class="ml-2">Bahan Kajian</span></a>
+            </li>
+            <li>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="w-full flex items-center p-3 hover:bg-gray-700 rounded text-left">
+                        <span>👥</span>
+                        <span class="ml-2">Logout</span>
+                    </button>
+                </form>
+            </li>            
         </ul>
     </aside>
 
