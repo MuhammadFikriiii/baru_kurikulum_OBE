@@ -54,7 +54,7 @@
 
     <label for="knowledge_area">knowledge Area Bahan Kajian:</label>
     <input id="knowledge_area" type="text" name="knowledge_area" class="border border-black p-3 w-full mt-1 mb-3 rounded-lg" required>
-    <br>
+    <br> 
 
     <button type="submit" class="btn btn-primary bg-green-400 hover:bg-green-800 px-5 py-2 rounded-lg">Simpan</button>
     <a href="{{ route('admin.bahankajian.index') }}" class="bg-blue-400 hover:bg-blue-800 rounded-lg px-5 py-2">Kembali</a>

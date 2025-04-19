@@ -43,7 +43,7 @@
             <option value="25">25</option>
             <option value="50">50</option>
             <option value="100">100</option>
-        </select>
+        </select> 
         <span class="text-gray-600">entries</span>
         <div class="ml-auto justify-between">
             <input type="text" id="search" placeholder="Search..." 
