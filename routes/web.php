@@ -27,6 +27,7 @@ use App\Http\Controllers\TimDashboardController;
 use App\Http\Controllers\TimProfilLulusanController;
 use App\Http\Controllers\TimCapaianPembelajaranLulusanController;
 use App\Http\Controllers\TimPemetaanCplPlController;
+use App\Http\Controllers\Wadir1BahanKajianController;
 use App\Http\Controllers\Wadir1ProfilLulusanController;
 use App\Http\Controllers\Wadir1CapaianPembelajaranLulusanController;
 use App\Http\Controllers\Wadir1CplPlController;
@@ -134,6 +135,7 @@ Route::prefix('wadir1')->name('wadir1.')->group(function(){
     Route::get('/capaianpembelajaranlulusan', [Wadir1CapaianPembelajaranLulusanController::class, 'index'])->name('capaianpembelajaranlulusan.index');
     Route::get('/capaianpembelajaranlulusan/{id_cpl}/detail', [Wadir1CapaianPembelajaranLulusanController::class, 'detail'])->name('capaianpembelajaranlulusan.detail');
     Route::get('/pemetaancplpl', [Wadir1CplPlController::class, 'index'])->name('pemetaancplpl.index');
+    Route::get('/bahankajian', [Wadir1BahanKajianController::class, 'index'])->name('bahankajian.index');
 });
 
 Route::prefix('kaprodi')->name('kaprodi.')->group(function(){
