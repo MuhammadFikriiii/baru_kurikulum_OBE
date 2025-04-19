@@ -158,4 +158,6 @@ route::prefix('tim')->name('tim.')->group(function(){
     Route::get('/pemetaancplpl', [TimPemetaanCplPlController::class, 'index'])->name('pemetaancplpl.index');
     Route::post('/pemetaancplpl', [TimPemetaanCplPlController::class, 'store'])->name('pemetaancplpl.store');
     Route::get('/bahankajian', [TimBahanKajianController::class, 'index'])->name('bahankajian.index');
+    Route::get('/bahankajian/create', [TimBahanKajianController::class, 'create'])->name('bahankajian.create');
+    Route::post('/bahankajian', [TimBahanKajianController::class, 'store'])->name('bahankajian.store');
 });

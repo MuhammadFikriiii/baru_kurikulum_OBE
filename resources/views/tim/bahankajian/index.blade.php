@@ -27,7 +27,7 @@
 
     <div class="flex justify-between mb-4">
         <div class="space-x-2">
-            <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+            <a href="{{ route('tim.bahankajian.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
                 👤 Tambah Bahan Kajian
             </a>
             <a href="" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
