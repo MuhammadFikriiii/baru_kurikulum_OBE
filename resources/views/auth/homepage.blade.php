@@ -21,15 +21,15 @@
       </a>
       <!-- Desktop Menu -->
       <nav class="hidden md:flex space-x-6 items-center">
-        <a href="#top" class="text-gray-700 font-medium hover:text-blue-800">Beranda</a>
-        <a href="#services" class="text-gray-700 hover:text-blue-600">Profil</a>
-        <a href="#about" class="text-gray-700 hover:text-blue-600">Program Studi</a>
-        <a href="#portfolio" class="text-gray-700 hover:text-blue-600">Mata Kuliah</a>
-        <a href="#video" class="text-gray-700 hover:text-blue-600">Akademik</a>
-        <a href="#contact" class="text-gray-700 hover:text-blue-600">Contact Us</a>
-        <a href="{{ route('login') }}" class="bg-[#5460B5] text-white px-4 py-2 rounded hover:bg-blue-600 transition">
-          <i class="bi bi-person"></i>
-          <span class="ml-1">Login</span>
+        <a href="#top" class="text-gray-700 font-medium hover:text-blue-600">Beranda</a>
+        <a href="#services" class="text-gray-700 font-medium hover:text-blue-600">Profil</a>
+        <a href="#about" class="text-gray-700 font-medium hover:text-blue-600">Program Studi</a>
+        <a href="#portfolio" class="text-gray-700 font-medium hover:text-blue-600">Mata Kuliah</a>
+        <a href="#video" class="text-gray-700 font-medium hover:text-blue-600">Akademik</a>
+        <a href="#contact" class="text-gray-700 font-medium hover:text-blue-600">Contact Us</a>
+        <a href="{{ route('login') }}" class="bg-[#5460B5] text-white font-medium px-4 py-2 rounded-lg hover:bg-[#323861]  transition flex items-center">
+          <i class="bi bi-person text-white opacity-80"></i>
+          <span class="ml-2">Login</span>
         </a>
       </nav>
 
@@ -44,19 +44,19 @@
             d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
-      
+
     </div>
 
     <!-- Mobile Menu -->
     <div class="md:hidden mt-2" x-show="open" @click.away="open = false" x-transition>
       <nav class="flex flex-col space-y-2">
-        <a href="#top" class="text-blue-600 font-medium">Beranda</a>
-        <a href="#services" class="text-gray-700">Profil</a>
-        <a href="#about" class="text-gray-700">Program Studi</a>
-        <a href="#portfolio" class="text-gray-700">Mata Kuliah</a>
-        <a href="#video" class="text-gray-700">Akademik</a>
-        <a href="#contact" class="text-gray-700">Contact Us</a>
-        <a href="{{ route('login') }}" class="bg-[#5460B5] text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+        <a href="#top" class="text-gray-700 font-medium hover:text-blue-600">Beranda</a>
+        <a href="#services" class="text-gray-700 font-medium hover:text-blue-600">Profil</a>
+        <a href="#about" class="text-gray-700 font-medium hover:text-blue-600">Program Studi</a>
+        <a href="#portfolio" class="text-gray-700 font-medium hover:text-blue-600">Mata Kuliah</a>
+        <a href="#video" class="text-gray-700 font-medium hover:text-blue-600">Akademik</a>
+        <a href="#contact" class="text-gray-700 font-medium hover:text-blue-600">Contact Us</a>
+        <a href="{{ route('login') }}" class="bg-[#5460B5] text-white px-4 py-2 rounded-lg hover:bg-[#4e5692] transition">
           <i class="bi bi-person"></i>
           <span class="ml-1">Login</span>
         </a>
@@ -65,7 +65,6 @@
   </div>
 </header>
 
-
   <section class="w-full h-[500px] bg-cover bg-center flex items-center justify-center text-white" style="background-image: url('/image/poliban.jpeg'); background-position: center;">
     <div class="bg-black bg-opacity-50 p-10 rounded-lg text-center shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
       <h2 class="text-5xl font-bold mb-4 text-gradient bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-red-600 animate__animated animate__fadeIn">Selamat Datang di Sistem Kurikulum</h2>
@@ -73,6 +72,37 @@
       <a href="#daftar-prodi" class="inline-block px-6 py-3 text-lg font-semibold bg-yellow-500 rounded-full hover:bg-yellow-600 transition duration-300">Lihat Program Studi</a>
     </div>
   </section>
+
+  <!-- Beranda -->
+  <div class="homepage pb-16">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-10 pt-20">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-semibold leading-tight mb-10">
+            Profil Kurikulum OBE <span class="text-sky-500">Poliban</span>
+          </h1>
+          <p class="text-base text-gray-700 leading-relaxed mb-6">
+            Politeknik Negeri Banjarmasin (POLIBAN) merupakan perguruan tinggi vokasi di Kalimantan Selatan 
+            yang berfokus pada pendidikan terapan. Kampus ini memiliki berbagai jurusan dan program studi unggulan yang 
+            mendukung perkembangan teknologi dan industri di Indonesia. POLIBAN berperan aktif dalam mendukung pertumbuhan sektor 
+            industri, teknologi, dan pembangunan daerah melalui pendidikan berbasis praktik, inovasi, serta kerja sama dengan berbagai 
+            mitra industri baik di dalam maupun luar negeri.
+          </p>
+          <a href="#" class="inline-flex items-center bg-sky-500 hover:bg-sky-700 text-white mt-4 px-5 py-3 rounded-full shadow transition">
+            Tentang Website <i class="ri-eye-line ms-2"></i>
+          </a>
+        </div>
+  
+        <div className="flex justify-end">
+          <img src="/image/profil.png" alt="Hero Image" className="w-full max-w-md h-auto ml-auto" />
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+  
+
 
   <!-- Informasi Kampus -->
   <section class="py-12 px-6 md:px-20 bg-white">
@@ -150,8 +180,7 @@
   </section>
 
   <!-- Footer -->
- 
-  <footer class="bg-gray-800 text-white py-10">
+  <footer class="bg-gray-800 text-white py-14">
     <div class="container mx-auto px-6">
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
         <!-- About Section -->
@@ -210,7 +239,7 @@
   
       </div>
       
-      <hr class="mt-7">
+      <hr class="mt-10 border-gray-400">
       <!-- Copyright Section -->
       <div class="text-center text-sm text-gray-400 mt-8">
         <p>Copyright &copy; 2025 Fikri & Habibie., All Rights Reserved.</p>
