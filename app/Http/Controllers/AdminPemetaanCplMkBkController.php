@@ -12,43 +12,24 @@ class AdminPemetaanCplMkBkController extends Controller
 {
     public function index()
     {
-        $cpl = CapaianProfilLulusan::all(); 
-        $bk = BahanKajian::all(); 
-        $mataKuliah = MataKuliah::all();
+        $cpls = CapaianProfilLulusan::orderBy('id_cpl')->get();
+        $bks = BahanKajian::orderBy('id_bk')->get();
 
-        $pemetaan = DB::table('cpl_mk_bk')
-            ->get()
-            ->groupBy(function ($item) {
-                return $item->kode_cpl . '-' . $item->kode_bk;
-            });
+        // Ambil data relasi CPL - BK melalui MK
+        $mkCplBk = DB::table('mata_kuliahs as mk')
+            ->leftJoin('cpl_mk', 'mk.kode_mk', '=', 'cpl_mk.kode_mk')
+            ->leftJoin('bk_mk', 'mk.kode_mk', '=', 'bk_mk.kode_mk')
+            ->select('cpl_mk.id_cpl', 'bk_mk.id_bk', 'mk.nama_mk')
+            ->get();
 
-        return view('admin.pemetaancplmkbk.index', compact('cpl', 'bk', 'mataKuliah', 'pemetaan'));
-    }
-
-
-    public function store(Request $request)
-    {
-        $data = $request->input('pemetaan');
-
-        DB::table('cpl_mk_bk')->delete();
-
-        foreach ($data as $kode_cpl => $bks) {
-            foreach ($bks as $kode_bk => $kode_mk) {
-                if (!empty($kode_mk)) {
-                    DB::table('cpl_mk_bk')->updateOrInsert(
-                        [
-                            'kode_cpl' => $kode_cpl,
-                            'kode_bk' => $kode_bk,
-                        ],
-                        [
-                            'kode_mk' => $kode_mk,
-                        ]
-                    );
-                }
+        // Bangun matriks: CPL x BK => daftar nama mata kuliah
+        $matrix = [];
+        foreach ($mkCplBk as $row) {
+            if ($row->id_cpl && $row->id_bk) {
+                $matrix[$row->id_cpl][$row->id_bk][] = $row->nama_mk;
             }
         }
 
-        return redirect()->route('admin.pemetaancplmkbk.index')->with('success', 'Pemetaan berhasil disimpan.');
+        return view('admin.pemetaancplmkbk.index', compact('cpls', 'bks', 'matrix'));
     }
-
 }

@@ -1,57 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="">
-    <h4 class="mb-4">Pemetaan BK - CPL - MK</h4>
-
-@if(session('success'))
-    <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
-        <span class="font-bold">{{ session('success') }}</span>
-        <button onclick="document.getElementById('alert').style.display='none'"
-            class="absolute top-1 right-3 text-white font-bold text-lg">
-            &times;
-         </button>
-    </div>
-@endif
-
-    <form action="{{ route('admin.pemetaancplmkbk.store') }}" method="POST">
-        @csrf
-
-        <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
-            <thead class="bg-green-500 text-white">
+<div class=" mr-20 ml-20">
+    <h2 class="text-4xl font-extrabold text-center mb-4">Pemetaan CPL - BK - MK</h2>
+    <hr class="border border-black mb-4">
+    <div class="w-full border border-gray-300 shadow-md rounded-lg">
+        <table class="table table-bordered">
+            <thead class="text-center bg-green-500">
                 <tr>
-                    <th class="px-2 py-2 roubded-lg">CPL</th>
-                    @foreach ($bk as $b)
-                        <th class="px-2 py-2">{{ $b->kode_bk }}</th>
+                    <th>CPL / BK</th>
+                    @foreach($bks as $bk)
+                        <th>{{ $bk->kode_bk ?? $bk->id_bk }}</th>
                     @endforeach
                 </tr>
             </thead>
             <tbody>
-                @foreach ($cpl as $c)
-                    <tr class="border-b">
-                        <td class="text-center">{{ $c->kode_cpl }}</td>
-                        @foreach ($bk as $b)
-                            <td class="px-2 py-2">
-                                @php
-                                    $key = $c->kode_cpl . '-' . $b->kode_bk;
-                                    $selectedKodeMk = $pemetaan[$key][0]->kode_mk ?? '';
-                                @endphp
-                                <select name="pemetaan[{{ $c->kode_cpl }}][{{ $b->kode_bk }}]" class="form-select text-center text-sm px-1 py-1 w-32">
-                                    <option value="" disabled selected >Pilih MK</option>
-                                    @foreach ($mataKuliah as $mk)
-                                        <option value="{{ $mk->kode_mk }}" {{ $selectedKodeMk == $mk->kode_mk ? 'selected' : '' }}>
-                                            {{ $mk->nama_mk }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                @foreach($cpls as $cpl)
+                    <tr>
+                        <td><strong>{{ $cpl->kode_cpl ?? $cpl->id_cpl }}</strong></td>
+                        @foreach($bks as $bk)
+                            <td>
+                                @if(isset($matrix[$cpl->id_cpl][$bk->id_bk]))
+                                    <ul class="mb-0 ps-3">
+                                        @foreach(array_unique($matrix[$cpl->id_cpl][$bk->id_bk]) as $mk)
+                                            <li>{{ $mk }}</li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    -
+                                @endif
                             </td>
                         @endforeach
                     </tr>
                 @endforeach
             </tbody>
         </table>
-
-        <button type="submit" class="btn btn-primary mt-3">Simpan</button>
-    </form>
+    </div>
 </div>
 @endsection
