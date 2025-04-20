@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="mx-5 md:mx-20 my-10">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-6 text-[#5460B5]">Pemetaan CPL - BK - MK</h2>
-    <hr class="border-t-2 border-[#5460B5] mb-6 w-24 mx-auto">
+<h2 class="text-4xl font-extrabold text-center mb-4">Pemetaan CPL - BK - MK</h2>
+<hr class="border border-black mb-4">
 
-    <div class="overflow-auto border border-gray-300 rounded-lg shadow-md">
+    <div class="overflow-auto border">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-green-500 text-white text-sm text-center">
                 <tr>
