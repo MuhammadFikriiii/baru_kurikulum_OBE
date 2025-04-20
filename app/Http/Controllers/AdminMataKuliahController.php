@@ -88,4 +88,17 @@ class AdminMataKuliahController extends Controller
         return redirect()->route('admin.matakuliah.index')->with('sukses', 'matakuliah berhasil dihapus');
     }
     
+    public function organisasi_mk()
+    {
+        $matakuliah = MataKuliah::orderBy('semester_mk')->get();
+        $organisasiMK = $matakuliah->groupBy('semester_mk')->map(function ($items, $semester_mk) {
+            return [
+                'semester_mk' => $semester_mk,
+                'sks_mk' => $items->sum('sks_mk'),
+                'jumlah_mk' => $items->count(),
+                'kode_mk' => $items->pluck('kode_mk')->toArray(),
+            ];
+        });
+        return view('admin.matakuliah.organisasimk', compact('organisasiMK'));
+    }
 }
