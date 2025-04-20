@@ -54,6 +54,38 @@ class MataKuliahSeeder extends Seeder
                 'semester_mk'=>'1',
                 'kompetensi_mk'=>'utama',
             ],
+            [
+                'kode_mk'=>'C0320301',
+                'nama_mk'=>'Probabilitas dan Statistik',
+                'jenis_mk'=>'Matematika',
+                'sks_mk'=>'2',
+                'semester_mk'=>'3',
+                'kompetensi_mk'=>'utama',
+            ],
+            [
+                'kode_mk'=>'C03203208',
+                'nama_mk'=>'Arsitektur Komputer',
+                'jenis_mk'=>'Dasar TI',
+                'sks_mk'=>'2',
+                'semester_mk'=>'2',
+                'kompetensi_mk'=>'utama',
+            ],
+            [
+                'kode_mk'=>'C0320208',
+                'nama_mk'=>'Organisasi Komputer',
+                'jenis_mk'=>'Dasar TI',
+                'sks_mk'=>'2',
+                'semester_mk'=>'2',
+                'kompetensi_mk'=>'utama',
+            ],
+            [
+                'kode_mk'=>'C0320103',
+                'nama_mk'=>'Sistem Informasi',
+                'jenis_mk'=>'Dasar TI',
+                'sks_mk'=>'3',
+                'semester_mk'=>'2',
+                'kompetensi_mk'=>'utama',
+            ],
        ]);
     }
 }
