@@ -19,25 +19,4 @@ class AdminPemetaanBkMkController extends Controller
 
         return view('admin.pemetaanbkmk.index', compact('bks', 'mks', 'relasi'));
     }
-
-    public function store(Request $request)
-    {
-        // Mengambil data relasi yang dipilih
-        $relasi = $request->input('relasi', []);
-
-        // Hapus semua data relasi sebelumnya (opsional, jika Anda ingin mereset data)
-        DB::table('bk_mk')->delete();
-
-        // Menyimpan data relasi baru
-        foreach ($relasi as $kode_bk => $kode_mks) {
-            foreach ($kode_mks as $kode_mk) {
-                DB::table('bk_mk')->insert([
-                    'kode_bk' => $kode_bk,
-                    'kode_mk' => $kode_mk,
-                ]);
-            }
-        }        
-
-        return redirect()->route('admin.pemetaanbkmk.index')->with('success', 'Pemetaan CPL-MK berhasil disimpan.');
-    }
 }
