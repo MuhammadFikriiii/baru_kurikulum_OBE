@@ -18,7 +18,6 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['admin', 'wadir1']);
-            $table->enum('status', ['pending', 'approved'])->default('approved');
             $table->rememberToken();
             $table->timestamps();
         });

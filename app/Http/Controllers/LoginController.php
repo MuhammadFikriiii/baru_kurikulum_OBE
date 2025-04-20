@@ -35,11 +35,6 @@ class LoginController extends Controller
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
 
-            if ($user->status === 'pending') {
-                Auth::logout();
-                return redirect()->route('login')->withErrors(['email' => 'Akun Anda masih dalam status pending.']);
-            }
-
             if ($user->role === 'admin') {
                 return redirect()->route('admin.dashboard')->with('success', 'Login berhasil');
             } elseif ($user->role === 'wadir1') {
