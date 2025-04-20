@@ -47,12 +47,17 @@
             <li>
                 <a href="{{ route('tim.pemetaancplpl.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <span>👥</span>
-                    <span class="ml-2">Pemetaan Cpl Pl</span></a>
+                    <span class="ml-2">Pemetaan CPL PL</span></a>
             </li>
             <li>
                 <a href="{{ route('tim.bahankajian.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <span>👥</span>
                     <span class="ml-2">Bahan Kajian</span></a>
+            </li>
+            <li>
+                <a href="{{ route('tim.pemetaancplbk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
+                    <span class="ml-2">Pemetaan CPL BK</span></a>
             </li>
             <li>
                 <form action="{{ route('logout') }}" method="POST">

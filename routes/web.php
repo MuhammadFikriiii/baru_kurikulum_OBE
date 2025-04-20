@@ -33,6 +33,7 @@ use App\Http\Controllers\Wadir1CapaianPembelajaranLulusanController;
 use App\Http\Controllers\Wadir1CplPlController;
 use App\Http\Controllers\Wadir1PemetaanCplBkController;
 use App\Http\Controllers\TimBahanKajianController;
+use App\Http\Controllers\TimPemetaanCplBkController;
 
 // Auth
 Route::get('/login', [LoginController::class, 'loginForm'])->name('login');
@@ -161,4 +162,5 @@ route::prefix('tim')->name('tim.')->group(function(){
     Route::get('/bahankajian', [TimBahanKajianController::class, 'index'])->name('bahankajian.index');
     Route::get('/bahankajian/create', [TimBahanKajianController::class, 'create'])->name('bahankajian.create');
     Route::post('/bahankajian', [TimBahanKajianController::class, 'store'])->name('bahankajian.store');
+    Route::get('/pemetaancplbk', [TimPemetaanCplBkController::class, 'index'])->name('pemetaancplbk.index');
 });

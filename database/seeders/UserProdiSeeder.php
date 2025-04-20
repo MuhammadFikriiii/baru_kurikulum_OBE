@@ -26,7 +26,7 @@ class UserProdiSeeder extends Seeder
             [
                 'name'=> 'timtl1',
                 'email'=> 'timtl1@gmail.com',
-                'kode_prodi'=> 'C0303',
+                'kode_prodi'=> 'F0105',
                 'password'=> bcrypt('123456'),
                 'role' => 'tim',
                 'status' => 'approved',
