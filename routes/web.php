@@ -35,6 +35,7 @@ use App\Http\Controllers\Wadir1PemetaanCplBkController;
 use App\Http\Controllers\TimBahanKajianController;
 use App\Http\Controllers\TimPemetaanCplBkController;
 use App\Http\Controllers\TimMataKuliahController;
+use App\Http\Controllers\AdminCapaianPembelajaranMataKuliahController;
 
 // Auth
 Route::get('/login', [LoginController::class, 'loginForm'])->name('login');
@@ -124,7 +125,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/pendingusers', [SignUpController::class, 'pendingUsers'])->name('pendingusers.index');
     Route::put('/pendingusers/{id}/approve', [SignUpController::class, 'approveUser'])->name('pendingusers.approve');
     Route::delete('/pendingusers/{id}/reject', [SignUpController::class, 'rejectUser'])->name('pendingusers.reject');
-
+    Route::get('/capaianpembelajaranmatakuliah', [AdminCapaianPembelajaranMataKuliahController::class, 'index'])->name('admin.capaianpembelajaranmatakuliah.index');
+    Route::get('/capaianpembelajaranmatakuliah/create', [AdminCapaianPembelajaranMatakuliahController::class, 'create'])->name('capaianpembelajaranmatakuliah.create');
+    Route::post('/capaianpembelajaranmatakuliah', [AdminCapaianPembelajaranMatakuliahController::class, 'store'])->name('capaianpembelajaranmatakuliah.store');
 });
 
 Route::prefix('wadir1')->name('wadir1.')->group(function(){
