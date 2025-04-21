@@ -19,22 +19,21 @@ class CapaianProfilLulusan extends Model
     ];
     public function profilLulusans()
     {
-        return $this->belongsToMany(ProfilLulusan::class, 'cpl_pl', 'kode_cpl', 'kode_pl');
+        return $this->belongsToMany(ProfilLulusan::class, 'cpl_pl', 'id_cpl', 'id_pl');
     }
 
     public function bahankajians()
     {
-        return $this->belongsToMany(BahanKajian::class,'cpl_bk','kode_cpl','kode_bk');
+        return $this->belongsToMany(BahanKajian::class,'cpl_bk','id_cpl','id_bk');
     }
 
     public function MataKuliahs()
     {
-        return $this->belongsToMany(MataKuliah::class,'cpl_mk','kode_cpl','kode_mk');
+        return $this->belongsToMany(MataKuliah::class,'cpl_mk','id_cpl','kode_mk');
     }
 
-    public function cplMkBks()
+    public function CapaianPembelajaranMataKuliahs()
     {
-        return $this->hasMany(CplMkBk::class, 'kode_cpl', 'kode_cpl');
+        return $this->belongsToMany(CapaianPembelajaranMataKuliah::class, 'cpl_cpmk', 'kode_cpl', 'kode_cpmk');
     }
-
 }
