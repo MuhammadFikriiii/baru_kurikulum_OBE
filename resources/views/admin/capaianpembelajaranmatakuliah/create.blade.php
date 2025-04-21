@@ -20,11 +20,11 @@
         <p class="text-sm text-gray-500 mb-2">Tekan shift/Tahan Klik mouseuntuk memilih lebih dari satu.</p>
         
         <label for="kode_cpmk">Kode CPMK</label>
-        <input type="text" name="kode_cpmk" id="kode_cpmk" required>
+        <input type="text" name="kode_cpmk" id="kode_cpmk" class="border border-black p-3 w-full rounded-lg mt-1 mb-3" required>
 
         <label for="deskripsi_cpmk">Deskripsi CPMK</label>
-        <input type="text" name="deskripsi_cpmk" id="deskripsi_cpmk" required>
+        <input type="text" name="deskripsi_cpmk" id="deskripsi_cpmk" class="border border-black p-3 w-full rounded-lg mt-1 mb-3" required>
 
-        <button type="submit" class="px-4 py-2 bg-green-400">simpan</button>
+        <button type="submit" class="px-4 py-2 bg-green-400 rounded-lg hover:bg-green-600 mt-4">simpan</button>
     </form>
 @endsection

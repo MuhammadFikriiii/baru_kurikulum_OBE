@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('capaian_pembelajaran_mata_kuliah', function (Blueprint $table) {
+        Schema::create('capaian_pembelajaran_mata_kuliahs', function (Blueprint $table) {
             $table->id('id_cpmk');
             $table->string('kode_cpmk', 10);
             $table->text('deskripsi_cpmk');

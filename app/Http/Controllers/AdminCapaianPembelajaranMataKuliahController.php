@@ -10,7 +10,7 @@ class AdminCapaianPembelajaranMataKuliahController extends Controller
 {
     public function index()
     {
-        $cpmk = DB::table('capaian_pembelajaran_mata_kuliah as cpmk')
+        $cpmks = DB::table('capaian_pembelajaran_mata_kuliahs as cpmk')
             ->select(
                 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk'
             )
@@ -19,9 +19,10 @@ class AdminCapaianPembelajaranMataKuliahController extends Controller
             ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
-            ->groupBy('cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk',)
+            ->select('cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk', 'prodis.nama_prodi')
+            ->groupBy('cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk', 'prodis.nama_prodi')
             ->get();
-        return view('admin.capaianpembelajaranmatakuliah.index', compact('cpmk'));
+        return view('admin.capaianpembelajaranmatakuliah.index', compact('cpmks'));
     }
     public function create()
     {
@@ -44,8 +45,7 @@ class AdminCapaianPembelajaranMataKuliahController extends Controller
                 'id_cpmk' => $id_cpmk,
                 'id_cpl' => $id_cpl,
             ]);
-        }
-        dd($data)
-;        return redirect()->route('admin.capaianpembelajaranmatakuliah.index')->with('success', 'Capaian Pembelajaran Mata Kuliah berhasil ditambahkan.');
+        };
+        return redirect()->route('admin.capaianpembelajaranmatakuliah.index')->with('success', 'Capaian Pembelajaran Mata Kuliah berhasil ditambahkan.');
     }
 }

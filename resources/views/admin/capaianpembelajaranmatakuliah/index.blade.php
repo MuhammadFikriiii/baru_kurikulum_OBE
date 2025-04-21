@@ -12,34 +12,33 @@
     </a>
 
     <!-- Tabel data Capaian Pembelajaran Mata Kuliah -->
-    <table class="w-full border-collapse">
-        <thead>
+    <table class="w-full table-fixed shadow-md rounded-lg overflow-hidden">
+        <thead class="bg-green-800 text-white border-b uppercase">
             <tr>
-                <th class="border px-4 py-2">Kode CPMK</th>
-                <th class="border px-4 py-2">Deskripsi CPMK</th>
-                <th class="border px-4 py-2">Profil Lulusan Terkait</th>
-                <th class="border px-4 py-2">Aksi</th>
+                <th class="py-3 px-6 text-center">No</th>
+                <th class="py-3 px-6 text-center">prodi</th>
+                <th class="py-3 px-6 text-center">Kode CPMK</th>
+                <th class="py-3 px-6 text-center">Deskripsi CPMK</th>
+                <th class="py-3 px-6 text-center">Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($cpmks as $cpmk)
-                <tr>
-                    <td class="border px-4 py-2">{{ $cpmk->kode_cpmk }}</td>
-                    <td class="border px-4 py-2">{{ $cpmk->deskripsi_cpmk }}</td>
-                    <td class="border px-4 py-2">
-                        @foreach($cpmk->capaianProfilLulusan as $cpl)
-                            <p>{{ $cpl->kode_cpl }} - {{ $cpl->deskripsi_cpl }}</p>
-                        @endforeach
-                    </td>
-                    <td class="border px-4 py-2">
-                        <!-- Aksi seperti Edit dan Hapus bisa ditambahkan di sini -->
-                        <a href="{{ route('admin.capaianpembelajaranmatakuliah.edit', $cpmk->id) }}" class="text-blue-500">Edit</a> |
-                        <form action="{{ route('admin.capaianpembelajaranmatakuliah.destroy', $cpmk->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-500">Hapus</button>
-                        </form>
-                    </td>
+            @foreach($cpmks as $index => $cpmk)
+                <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
+                    <td class="py-3 px-6 text-center">{{ $index + 1 }}</td>
+                    <td class="py-3 px-6 text-center">{{ $cpmk->nama_prodi ?? 'Tidak ada prodi' }}</td>
+                    <td class="py-3 px-6 text-center">{{ $cpmk->kode_cpmk }}</td>
+                    <td class="py-3 px-6 text-center">{{ $cpmk->deskripsi_cpmk }}</td>
+                        <td class="py-2 px-3 flex justify-center items-center space-x-2">
+                            <a href="#" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈</a>
+                            <a href="#" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️</a>
+                            <form action="#" method="POST">
+                                @csrf @method('DELETE')
+                            <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus jurusan ini?')">
+                                🗑️
+                            </button>
+                            </form>
+                        </td>
                 </tr>
             @endforeach
         </tbody>

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('cpmk_mk', function (Blueprint $table) {
             $table->unsignedBigInteger('id_cpmk');
             $table->string('kode_mk');
-            $table->foreign('id_cpmk')->references('id_cpmk')->on('capaian_pembelajaran_mata_kuliah')->onDelete('cascade');
+            $table->foreign('id_cpmk')->references('id_cpmk')->on('capaian_pembelajaran_mata_kuliahs')->onDelete('cascade');
             $table->foreign('kode_mk')->references('kode_mk')->on('mata_kuliahs')->onDelete('cascade');
         });
     }

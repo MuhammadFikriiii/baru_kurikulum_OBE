@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_cpl');
             $table->unsignedBigInteger('id_cpmk');
             $table->foreign('id_cpl')->references('id_cpl')->on('capaian_profil_lulusans')->onDelete('cascade');
-            $table->foreign('id_cpmk')->references('id_cpmk')->on('capaian_pembelajaran_mata_kuliah')->onDelete('cascade');
+            $table->foreign('id_cpmk')->references('id_cpmk')->on('capaian_pembelajaran_mata_kuliahs')->onDelete('cascade');
         });
     }
 

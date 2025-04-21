@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CapaianPembelajaranMataKuliah extends Model
 {
-    protected $table = 'capaian_pembelajaran_mata_kuliah';
+    protected $table = 'capaian_pembelajaran_mata_kuliahs';
 
     protected $primaryKey = 'id_cpmk';
 
@@ -17,12 +17,12 @@ class CapaianPembelajaranMataKuliah extends Model
 
     public function mataKuliah()
     {
-        return $this->belongsToMany(MataKuliah::class, 'id_mk', 'id_mk');
+        return $this->belongsToMany(MataKuliah::class, 'cpmk_mk', 'id_cpmk', 'id_cpmk');
     }
 
     public function prodi()
     {
-        return $this->belongsToMany(Prodi::class, 'id_prodi', 'kode_prodi');
+        return $this->belongsToMany(Prodi::class, 'prodi');
     }
 
     public function capaianProfilLulusan()
