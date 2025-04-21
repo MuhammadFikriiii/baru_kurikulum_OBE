@@ -21,12 +21,30 @@
       </a>
       <!-- Desktop Menu -->
       <nav class="hidden md:flex space-x-6 items-center">
-        <a href="#top" class="text-gray-700 font-medium hover:text-blue-600">Beranda</a>
-        <a href="#services" class="text-gray-700 font-medium hover:text-blue-600">Profil</a>
-        <a href="#about" class="text-gray-700 font-medium hover:text-blue-600">Program Studi</a>
-        <a href="#portfolio" class="text-gray-700 font-medium hover:text-blue-600">Mata Kuliah</a>
-        <a href="#video" class="text-gray-700 font-medium hover:text-blue-600">Akademik</a>
-        <a href="#contact" class="text-gray-700 font-medium hover:text-blue-600">Contact Us</a>
+        <a href="#" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
+        before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
+        before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
+        Beranda </a>
+        <a href="#services" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
+        before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
+        before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
+        Profil</a>
+        <a href="#about" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
+        before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
+        before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
+        Program Studi</a>
+        <a href="#portfolio" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
+        before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
+        before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
+        Mata Kuliah</a>
+        <a href="#video" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
+        before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
+        before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
+        Akademik</a>
+        <a href="#contact" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
+        before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
+        before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
+        Contact Us</a>
         <a href="{{ route('login') }}" class="bg-[#5460B5] text-white font-medium px-4 py-2 rounded-lg hover:bg-[#323861]  transition flex items-center">
           <i class="bi bi-person text-white opacity-80"></i>
           <span class="ml-2">Login</span>
