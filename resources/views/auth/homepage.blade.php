@@ -67,26 +67,26 @@
 
     <!-- Mobile Menu -->
     <div class="md:hidden" x-show="open" @click.away="open = false" x-transition>
-      <nav class="flex flex-col bg-[#5460B5] text-white p-3 mb-6 mt-1 mx-5 rounded-3xl space-y-1">
-        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#41477a] rounded-2xl border-b border-[#313874]">
+      <nav class="flex flex-col bg-[#6988db] text-white p-3 mb-6 mt-1 mx-5 rounded-3xl space-y-1">
+        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
           </i><span>Beranda</span>
         </a>
-        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#41477a] rounded-2xl border-b border-[#313874]">
+        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
           </i><span>Profil</span>
         </a>
-        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#41477a] rounded-2xl border-b border-[#313874]">
+        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
         </i><span>Program Studi</span>
         </a>
-        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#41477a] rounded-2xl border-b border-[#313874]">
+        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
         </i><span>Mata Kuliah</span>
         </a>
-        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#41477a] rounded-2xl border-b border-[#313874]">
+        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
         </i><span>Akademik</span>
         </a>
-        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#41477a] rounded-2xl border-b border-[#313874]">
+        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
         </i><span>Contact Us</span>
         </a>
-        <a href="{{ route('login') }}" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#41477a] rounded-2xl border-b border-[#313874]">
+        <a href="{{ route('login') }}" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7]rounded-2xl border-b border-[#313874]">
           <i class="bi bi-person text-white opacity-70"></i>
           <span class="ml-1">Login</span>
         </a>

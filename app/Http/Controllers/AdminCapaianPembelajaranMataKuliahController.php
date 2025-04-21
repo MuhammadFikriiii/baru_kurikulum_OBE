@@ -10,7 +10,7 @@ class AdminCapaianPembelajaranMataKuliahController extends Controller
 {
     public function index()
     {
-        $cpmk = DB::table('capaian_pembelajaran_mata_kuliahs as cpmk')
+        $cpmk = DB::table('capaian_pembelajaran_mata_kuliah as cpmk')
             ->select(
                 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk'
             )

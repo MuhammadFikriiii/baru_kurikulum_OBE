@@ -32,8 +32,8 @@ class CapaianProfilLulusan extends Model
         return $this->belongsToMany(MataKuliah::class,'cpl_mk','id_cpl','kode_mk');
     }
 
-    public function CapaianPembelajaranMataKuliahs()
+    public function capaianPembelajaranMataKuliah()
     {
-        return $this->belongsToMany(CapaianPembelajaranMataKuliah::class, 'cpl_cpmk', 'kode_cpl', 'kode_cpmk');
+        return $this->belongsToMany(CapaianPembelajaranMataKuliah::class, 'cpl_cpmk', 'id_cpl', 'id_cpmk');
     }
 }

@@ -109,25 +109,35 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/bahankajian/{id_bk}', [AdminBahankajianController::class,'destroy'])->name('bahankajian.destroy');
     Route::get('/pemetaancplbk', [AdminPemetaanCplBkController::class, 'index'])->name('pemetaancplbk.index');
     Route::post('/pemetaancplbk', [AdminPemetaanCplBkController::class, 'store'])->name('pemetaancplbk.store');
+    
     Route::get('/matakuliah', [AdminMataKuliahController::class, 'index'])->name('matakuliah.index');
     Route::get('/matakuliah/create', [AdminMataKuliahController::class, 'create'])->name('matakuliah.create');
     Route::post('/matakuliah', [AdminMataKuliahController::class, 'store'])->name('matakuliah.store');
     Route::get('/matakuliah/{matakuliah}/edit', [AdminMataKuliahController::class, 'edit'])->name('matakuliah.edit');
     Route::put('/matakuliah/{matakuliah}', [AdminMataKuliahController::class, 'update'])->name('matakuliah.update');
     Route::delete('/matakuliah/{matakuliah}', [AdminMataKuliahController::class, 'destroy'])->name('matakuliah.destroy');
+
     Route::get('/organisasimk', [AdminMataKuliahController::class, 'organisasi_mk'])->name('matakuliah.organisasimk');
+
     Route::get('/pemetaancplmk', [AdminPemetaanCplMkController::class, 'index'])->name('pemetaancplmk.index');
     Route::post('/pemetaancplmk', [AdminPemetaanCplMkController::class, 'store'])->name('pemetaancplmk.store');
+
     Route::get('/pemetaanbkmk', [AdminPemetaanBkMkController::class, 'index'])->name('pemetaanbkmk.index');
     Route::post('/pemetaanbkmk', [AdminPemetaanBkMkController::class, 'store'])->name('pemetaanbkmk.store');
+
     Route::get('/pemetaancplmkbk', [AdminPemetaanCplMkBkController::class, 'index'])->name('pemetaancplmkbk.index');
     Route::post('/pemetaancplmkbk', [AdminPemetaanCplMkBkController::class, 'store'])->name('pemetaancplmkbk.store');
+
     Route::get('/pendingusers', [SignUpController::class, 'pendingUsers'])->name('pendingusers.index');
     Route::put('/pendingusers/{id}/approve', [SignUpController::class, 'approveUser'])->name('pendingusers.approve');
     Route::delete('/pendingusers/{id}/reject', [SignUpController::class, 'rejectUser'])->name('pendingusers.reject');
-    Route::get('/capaianpembelajaranmatakuliah', [AdminCapaianPembelajaranMataKuliahController::class, 'index'])->name('admin.capaianpembelajaranmatakuliah.index');
-    Route::get('/capaianpembelajaranmatakuliah/create', [AdminCapaianPembelajaranMatakuliahController::class, 'create'])->name('capaianpembelajaranmatakuliah.create');
-    Route::post('/capaianpembelajaranmatakuliah', [AdminCapaianPembelajaranMatakuliahController::class, 'store'])->name('capaianpembelajaranmatakuliah.store');
+
+    // Route::get('/capaianpembelajaranmatakuliah', [AdminCapaianPembelajaranMataKuliahController::class, 'index'])->name('admin.capaianpembelajaranmatakuliah.index');
+    // Route::get('/capaianpembelajaranmatakuliah/create', [AdminCapaianPembelajaranMatakuliahController::class, 'create'])->name('capaianpembelajaranmatakuliah.create');
+    // Route::post('/capaianpembelajaranmatakuliah', [AdminCapaianPembelajaranMatakuliahController::class, 'store'])->name('capaianpembelajaranmatakuliah.store');
+    Route::get('/capaianpembelajaranmatakuliah', [AdminCapaianPembelajaranMataKuliahController::class, 'index'])->name('capaianpembelajaranmatakuliah.index');
+    Route::get('/capaianpembelajaranmatakuliah/create', [AdminCapaianPembelajaranMataKuliahController::class, 'create'])->name('capaianpembelajaranmatakuliah.create');
+    Route::post('/capaianpembelajaranmatakuliah', [AdminCapaianPembelajaranMataKuliahController::class, 'store'])->name('capaianpembelajaranmatakuliah.store');
 });
 
 Route::prefix('wadir1')->name('wadir1.')->group(function(){

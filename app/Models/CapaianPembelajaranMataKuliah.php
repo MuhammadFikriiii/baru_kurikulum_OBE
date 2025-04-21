@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CapaianPembelajaranMataKuliah extends Model
 {
-    protected $table = 'capaian_pembelajaran_mata_kuliahs';
+    protected $table = 'capaian_pembelajaran_mata_kuliah';
+
     protected $primaryKey = 'id_cpmk';
 
     protected $fillable = [
@@ -23,4 +24,11 @@ class CapaianPembelajaranMataKuliah extends Model
     {
         return $this->belongsToMany(Prodi::class, 'id_prodi', 'kode_prodi');
     }
+
+    public function capaianProfilLulusan()
+    {
+        return $this->belongsToMany(CapaianProfilLulusan::class, 'cpl_cpmk', 'id_cpmk', 'id_cpl');
+    }
+    
+
 }
