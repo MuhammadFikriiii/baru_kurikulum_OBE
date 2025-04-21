@@ -48,20 +48,33 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div class="md:hidden mt-2" x-show="open" @click.away="open = false" x-transition>
-      <nav class="flex flex-col space-y-2">
-        <a href="#top" class="text-gray-700 font-medium hover:text-blue-600">Beranda</a>
-        <a href="#services" class="text-gray-700 font-medium hover:text-blue-600">Profil</a>
-        <a href="#about" class="text-gray-700 font-medium hover:text-blue-600">Program Studi</a>
-        <a href="#portfolio" class="text-gray-700 font-medium hover:text-blue-600">Mata Kuliah</a>
-        <a href="#video" class="text-gray-700 font-medium hover:text-blue-600">Akademik</a>
-        <a href="#contact" class="text-gray-700 font-medium hover:text-blue-600">Contact Us</a>
-        <a href="{{ route('login') }}" class="bg-[#5460B5] text-white px-4 py-2 rounded-lg hover:bg-[#4e5692] transition">
-          <i class="bi bi-person"></i>
+    <div class="md:hidden" x-show="open" @click.away="open = false" x-transition>
+      <nav class="flex flex-col bg-[#5460B5] text-white p-3 mb-6 mt-1 mx-5 rounded-3xl space-y-1">
+        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#41477a] rounded-2xl border-b border-[#313874]">
+          </i><span>Beranda</span>
+        </a>
+        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#41477a] rounded-2xl border-b border-[#313874]">
+          </i><span>Profil</span>
+        </a>
+        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#41477a] rounded-2xl border-b border-[#313874]">
+        </i><span>Program Studi</span>
+        </a>
+        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#41477a] rounded-2xl border-b border-[#313874]">
+        </i><span>Mata Kuliah</span>
+        </a>
+        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#41477a] rounded-2xl border-b border-[#313874]">
+        </i><span>Akademik</span>
+        </a>
+        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#41477a] rounded-2xl border-b border-[#313874]">
+        </i><span>Contact Us</span>
+        </a>
+        <a href="{{ route('login') }}" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#41477a] rounded-2xl border-b border-[#313874]">
+          <i class="bi bi-person text-white opacity-70"></i>
           <span class="ml-1">Login</span>
         </a>
       </nav>
     </div>
+    
   </div>
 </header>
 

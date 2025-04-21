@@ -12,6 +12,9 @@
             sidebar.classList.toggle('-translate-x-full');
         }
     </script>
+
+    {{-- Togle --}}
+    
 </head>
 <body class="bg-white min-h-screen flex">
 
