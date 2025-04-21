@@ -72,7 +72,7 @@ class AdminCapaianProfilLulusanController extends Controller
             ->where('id_cpl', $id_cpl)
             ->pluck('id_pl')
             ->toArray();
-        return view('admin.capaianprofillulusan.edit' , compact('capaianprofillulusan', 'profilLulusans'));
+        return view('admin.capaianprofillulusan.edit' , compact('capaianprofillulusan', 'profilLulusans', 'selectedProfilLulusans'));
     }
 
     public function update(Request $request, $id_cpl)

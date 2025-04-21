@@ -21,6 +21,24 @@
     @csrf
     @method('PUT')
 
+    @if($selectedProfilLulusans)
+    <div class="mt-4 mb-4">
+        <h3 class="text-xl font-semibold mb-2">Profil Lulusan yang sebelumnya terkait Terkait:</h3>
+        <ul class="list-disc pl-5 text-gray-700">
+            @foreach($selectedProfilLulusans as $id_pl)
+                @php
+                    $plDetail = $profilLulusans->firstWhere('id_pl', $id_pl);
+                @endphp
+                @if($plDetail)
+                    <li>
+                        <strong>{{ $plDetail->kode_pl }}</strong>: {{ $plDetail->deskripsi_pl }}
+                    </li>
+                @endif
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
     <label for="id_pls" class="text-2xl font-semibold mb-2">Profil Lulusan Terkait:</label>
     <select id="id_pls" name="id_pls[]" class="border border-gray-300 p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]" multiple required>
         @foreach($profilLulusans as $pl)
