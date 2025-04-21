@@ -9,10 +9,19 @@ use Illuminate\Validation\Rule;
 
 class AdminProfilLulusanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $profillulusans = ProfilLulusan::with('prodi')->get();
-        return view('admin.profillulusan.index', compact('profillulusans'));
+        $prodis = Prodi::all();
+        $kode_prodi = $request->get('kode_prodi');
+        if ($kode_prodi && $kode_prodi != 'all') {
+            $profillulusans = ProfilLulusan::where('kode_prodi', $kode_prodi)->with('prodi')->get();
+        } elseif ($kode_prodi == 'all') {
+            $profillulusans = ProfilLulusan::with('prodi')->get();
+        }
+        else {
+            $profillulusans = [];
+        }
+        return view('admin.profillulusan.index', compact('profillulusans', 'prodis', 'kode_prodi'));
     }
 
     public function create()

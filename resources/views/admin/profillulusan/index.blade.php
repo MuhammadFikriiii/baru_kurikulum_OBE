@@ -33,6 +33,17 @@
                     📄 Ekspor ke Excel
                 </a>
             </div>
+            <form method="GET" action="{{ route('admin.profillulusan.index') }}" class="flex items-center">
+                <select id="prodi" name="kode_prodi" class="border border-gray-300 px-3 py-2 rounded-md mr-2" onchange="this.form.submit()">
+                    <option value="" disabled selected>Pilih Prodi</option>
+                    <option value="all" {{ $kode_prodi == 'all' ? 'selected' : '' }}>All</option>
+                    @foreach($prodis as $prodi)
+                        <option value="{{ $prodi->kode_prodi }}" {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
+                            {{ $prodi->nama_prodi }}
+                        </option>
+                    @endforeach
+                </select>
+            </form>
         </div>
     
         <div class="flex items-center justify-between mb-3">
@@ -49,7 +60,8 @@
                     class="border border-gray-300 px-3 py-2 rounded-md">
             </div>
         </div>
-    
+        
+        @if($kode_prodi)        
         <div class="bg-white shadow-lg overflow-hidden">
             <table class="w-full table-fixed shadow-md rounded-lg overflow-hidden">
                 <thead class="bg-green-800 text-white">
@@ -91,10 +103,12 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                        
-                    </table>
+ </table>
                 </div>
             </table>            
     </div>
+    @else
+    <p class="text-center text-gray-500">Belum ada prodi yang dipilih</p>
+@endif
 </div>
 @endsection
