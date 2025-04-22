@@ -27,12 +27,13 @@ class AdminCapaianPembelajaranMataKuliahController extends Controller
     public function create()
     {
         $capaianProfilLulusans = DB::table('capaian_profil_lulusans')->get();
-        return view('admin.capaianpembelajaranmatakuliah.create',compact('capaianProfilLulusans'));
+        $mataKuliahs = DB::table('mata_kuliahs')->get();
+        return view('admin.capaianpembelajaranmatakuliah.create',compact('capaianProfilLulusans', 'mataKuliahs'));
     }
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $request->validate([
             'kode_cpmk' => 'required|string|max:10',
             'deskripsi_cpmk' => 'required|string|max:255',
             'id_cpls' => 'required|array',
@@ -46,6 +47,12 @@ class AdminCapaianPembelajaranMataKuliahController extends Controller
                 'id_cpl' => $id_cpl,
             ]);
         };
+        foreach ($request->kode_mks as $kode_mk){
+            DB::table('cpmk_mk')->insert([
+                'id_cpmk' => $id_cpmk,
+                'kode_mk' => $kode_mk,
+            ]);
+        }
         return redirect()->route('admin.capaianpembelajaranmatakuliah.index')->with('success', 'Capaian Pembelajaran Mata Kuliah berhasil ditambahkan.');
     }
 }

@@ -18,6 +18,16 @@
         @endforeach
         </select>
         <p class="text-sm text-gray-500 mb-2">Tekan shift/Tahan Klik mouseuntuk memilih lebih dari satu.</p>
+
+        <label for="kode_mks" class="text-2xl font-semibold mb-2">Profil Lulusan Terkait:</label>
+        <select id="kode_mks" name="kode_mks[]" class="border border-gray-300 p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]" multiple required>
+        @foreach($mataKuliahs as $mk)
+            <option value="{{ $mk->kode_mk }}" title="{{ $mk->nama_mk }}">
+        {{ $mk->kode_mk }} - {{ $mk->nama_mk }}
+        </option>
+        @endforeach
+        </select>
+        <p class="text-sm text-gray-500 mb-2">Tekan shift/Tahan Klik mouseuntuk memilih lebih dari satu.</p>
         
         <label for="kode_cpmk">Kode CPMK</label>
         <input type="text" name="kode_cpmk" id="kode_cpmk" class="border border-black p-3 w-full rounded-lg mt-1 mb-3" required>
