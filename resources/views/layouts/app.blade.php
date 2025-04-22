@@ -136,6 +136,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('admin.pemetaancplcpmkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="bi bi-folder2-open"></i>
+                    <span class="ml-2">PEMETAAN CPL-CPMK-MK</span>
+                </a>
+            </li>
+            <li>
                 <a href="/" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-box-arrow-right"></i>
                     <span class="ml-2">Logout</span>

@@ -37,6 +37,9 @@ use App\Http\Controllers\TimPemetaanCplBkController;
 use App\Http\Controllers\TimMataKuliahController;
 use App\Http\Controllers\AdminCapaianPembelajaranMataKuliahController;
 use App\Http\Controllers\AdminPemetaanCplCpmkController;
+use App\Http\Controllers\AdminPemetaanCplCpmkMkController;
+use App\Http\Controllers\TimPemetaanBkMkController;
+use App\Http\Controllers\TimPemetaanCplMkController;
 
 // Auth
 Route::get('/login', [LoginController::class, 'loginForm'])->name('login');
@@ -138,6 +141,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/capaianpembelajaranmatakuliah', [AdminCapaianPembelajaranMataKuliahController::class, 'store'])->name('capaianpembelajaranmatakuliah.store');
 
     Route::get('/pemetaancplcpmk',[AdminPemetaanCplCpmkController::class, 'index'])->name('pemetaancplcpmk.index');
+    Route::get('/pemetaancplcpmkmk',[AdminPemetaanCplCpmkMkController::class, 'index'])->name('pemetaancplcpmkmk.index');
 });
 
 Route::prefix('wadir1')->name('wadir1.')->group(function(){
@@ -178,4 +182,6 @@ route::prefix('tim')->name('tim.')->group(function(){
     Route::post('/bahankajian', [TimBahanKajianController::class, 'store'])->name('bahankajian.store');
     Route::get('/pemetaancplbk', [TimPemetaanCplBkController::class, 'index'])->name('pemetaancplbk.index');
     Route::get('/matakuliah', [TimMataKuliahController::class, 'index'])->name('matakuliah.index');
+    Route::get('/pemetaancplmk', [TimPemetaanCplMkController::class, 'index'])->name('pemetaancplmk.index');
+    Route::get('/pemetaanbkmk', [TimPemetaanBkMkController::class, 'index'])->name('pemetaanbkmk.index');
 });

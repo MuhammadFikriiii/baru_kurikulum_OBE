@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CapaianProfilLulusan;
-use App\Models\BahanKajian;
+use App\Models\MataKuliah;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-class TimPemetaanCplBkController extends Controller
+class TimPemetaanCplMkController extends Controller
 {
     public function index()
     {
@@ -28,19 +28,19 @@ class TimPemetaanCplBkController extends Controller
         ->orderBy('kode_cpl', 'asc')
         ->get();
         
-        $bks = BahanKajian::whereIn('id_bk', function ($query) use ($kodeProdi) {
-            $query->select('id_bk')
-                ->from('cpl_bk')
-                ->join('capaian_profil_lulusans', 'cpl_bk.id_cpl', '=', 'capaian_profil_lulusans.id_cpl')
+        $mks = MataKuliah::whereIn('kode_mk', function ($query) use ($kodeProdi) {
+            $query->select('kode_mk')
+                ->from('cpl_mk')
+                ->join('capaian_profil_lulusans', 'cpl_mk.id_cpl', '=', 'capaian_profil_lulusans.id_cpl')
                 ->join('cpl_pl', 'capaian_profil_lulusans.id_cpl', '=', 'cpl_pl.id_cpl')
                 ->join('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
                 ->where('profil_lulusans.kode_prodi', $kodeProdi);
         })
-        ->orderBy('kode_bk', 'asc')
+        ->orderBy('kode_mk', 'asc')
         ->get();        
         
-        $relasi = DB::table('cpl_bk')->get()->groupBy('id_bk');
+        $relasi = DB::table('cpl_mk')->get()->groupBy('kode_mk');
 
-        return view('tim.pemetaancplbk.index', compact('cpls', 'bks', 'relasi', 'prodi'));
+        return view('tim.pemetaancplmk.index', compact('cpls', 'mks', 'relasi', 'prodi'));
     }
 }

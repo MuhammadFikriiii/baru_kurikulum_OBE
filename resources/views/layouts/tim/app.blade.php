@@ -65,6 +65,16 @@
                     <span class="ml-2">Mata Kuliah</span></a>
             </li>
             <li>
+                <a href="{{ route('tim.pemetaancplmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
+                    <span class="ml-2">PEMETAAN CPL - MK</span></a>
+            </li>
+            <li>
+                <a href="{{ route('tim.pemetaanbkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <span>👥</span>
+                    <span class="ml-2">PEMETAAN BK - MK</span></a>
+            </li>
+            <li>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="w-full flex items-center p-3 hover:bg-gray-700 rounded text-left">
