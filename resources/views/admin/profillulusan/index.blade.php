@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="mr-20 ml-20">
     <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Daftar Profil Lulusan</h2>
     <hr class="border-t-4 border-black my-8">
@@ -60,6 +61,7 @@
         <table class="w-full table-fixed shadow-md rounded-lg overflow-hidden">
             <thead class="bg-green-800 text-white">
                 <tr class="text-center">
+                    <th class="px-4 py-2 text-center w-28">No</th>
                     <th class="px-4 py-2 text-center w-16">Kode Profil Lulusan</th>
                     <th class="px-4 py-2 text-center w-24">Prodi</th>
                     <th class="px-4 py-2 text-center w-48">Deskripsi Profil Lulusan</th>
@@ -73,6 +75,7 @@
             <tbody>
                 @foreach($profillulusans as $index => $profillulusan)
                     <tr class="align-top {{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
+                        <td class="px-4 py-2 text-center text-sm w-28 break-words">{{ $index + 1 }}</td>
                         <td class="px-4 py-2 text-center text-sm w-28 break-words">{{ $profillulusan->kode_pl }}</td>
                         <td class="px-4 py-2 text-center text-sm w-24 break-words">{{ $profillulusan->prodi->nama_prodi ?? '-' }}</td>
                         <td class="px-4 py-2 text-sm w-48 break-words whitespace-normal ">{{ $profillulusan->deskripsi_pl }}</td>
@@ -104,53 +107,4 @@
     @endif
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.getElementById('search');
-        const table = document.querySelector('table');
-        const rows = table.querySelectorAll('tbody tr');
-
-        let debounceTimer;
-
-        searchInput.addEventListener('keyup', function() {
-            clearTimeout(debounceTimer);
-            const searchTerm = searchInput.value.toLowerCase();
-
-            debounceTimer = setTimeout(function () {
-            let anyVisible = 1;
-            let visibleIndex = 1;
-
-            rows.forEach(function (row) {
-                const cells = row.getElementsByTagName('td');
-                let found = false;
-
-                for (let i = 0; i < cells.length - 1; i++) {
-                    const cellText = cells[i].textContent || cells[i].innerText;
-                    const lowerCaseCellText = cellText.toLowerCase();
-
-                    if (lowerCaseCellText.includes(searchTerm)) {
-                        found = true;
-                        const regex = new RegExp(`(${searchTerm})`, 'gi');
-                        cells[i].innerHTML = cellText.replace(regex, '<span class="bg-yellow-300">$1</span>');
-                    } else {
-                        cells[i].innerHTML = cellText;
-                    }
-                }
-
-                if (found) {
-                    row.style.display = '';
-                    cells[0].textContent = visibleIndex++;
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-
-            const noResultsDiv = document.getElementById('noResults');
-            if (noResultsDiv) {
-                noResultsDiv.classList.toggle('hidden', anyVisible);
-            }
-        }, 300);// tunda 300 milidetik setelah pengguna berhenti mengetik
-        });
-    });
-</script>
 @endsection

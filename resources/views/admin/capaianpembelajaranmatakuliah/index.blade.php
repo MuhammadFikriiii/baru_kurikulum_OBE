@@ -11,6 +11,20 @@
         Tambah Capaian Pembelajaran Matakuliah
     </a>
 
+    <div class="flex items-center justify-between mb-3">
+        <label for="entries" class="text-gray-600 mr-2">Show</label>
+        <select id="entries" class="border border-gray-300 px-3 py-2 rounded-md mr-2">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+        <span class="text-gray-600">entries</span>
+        <div class="ml-auto justify-between">
+            <input type="text" id="search" placeholder="Search..." class="border border-gray-300 px-3 py-2 rounded-md">
+        </div>
+    </div>
+    
     <!-- Tabel data Capaian Pembelajaran Mata Kuliah -->
     <table class="w-full table-fixed shadow-md rounded-lg overflow-hidden">
         <thead class="bg-green-800 text-white border-b uppercase">
