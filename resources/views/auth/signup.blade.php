@@ -23,20 +23,20 @@
         <form action="{{ route('signup.store') }}" method="POST">
           @csrf
           <div class="mb-4">
-            <input type="text" name="name" placeholder="Nama Lengkap" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-orange-300" value="{{ old('name') }}" required>
+            <input type="text" name="name" placeholder="Nama Lengkap" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#3094c6] " value="{{ old('name') }}" required>
           </div>
 
           <div class="mb-4">
-            <input type="text" name="email" placeholder="Email" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-orange-300" value="{{ old('email') }}" required>
+            <input type="text" name="email" placeholder="Email" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#3094c6] " value="{{ old('email') }}" required>
           </div>
 
           <div class="mb-4">
-            <input type="password" name="password" placeholder="Masukkan Password" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-orange-300" required>
+            <input type="password" name="password" placeholder="Masukkan Password" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#3094c6]  required>
           </div>
 
           <div class="mb-4">
             <label class="block mb-1 text-gray-700">Program Studi</label>
-            <select name="kode_prodi" class="w-full border border-gray-300 py-2 px-3 rounded focus:outline-none focus:ring-2 focus:ring-orange-300" required>
+            <select name="kode_prodi" class="w-full border border-gray-300 py-2 px-3 rounded focus:outline-none focus:ring-2 focus:ring-[#3094c6] " required>
               <option value="">-- Pilih Prodi --</option>
               @foreach($prodis as $prodi)
                 <option value="{{ $prodi->kode_prodi }}" {{ old('kode_prodi') == $prodi->kode_prodi ? 'selected' : '' }}>{{ $prodi->nama_prodi }}</option>
@@ -46,7 +46,7 @@
 
           <div class="mb-4">
             <label class="block mb-1 text-gray-700">Peran</label>
-            <select name="role" class="w-full border border-gray-300 py-2 px-3 rounded focus:outline-none focus:ring-2 focus:ring-orange-300" required>
+            <select name="role" class="w-full border border-gray-300 py-2 px-3 rounded focus:outline-none focus:ring-2 focus:ring-[#3094c6] " required>
               <option value="">-- Pilih Peran --</option>
               <option value="kaprodi" {{ old('role') == 'kaprodi' ? 'selected' : '' }}>Kaprodi</option>
               <option value="tim" {{ old('role') == 'tim' ? 'selected' : '' }}>Tim</option>
@@ -56,16 +56,16 @@
           <div class="mb-4 flex items-start gap-2">
             <input type="checkbox" class="mt-1">
             <p class="text-sm text-gray-600">
-              Saya menerima <a href="#" class="text-[#5460B5] font-semibold">Ketentuan Penggunaan</a> & 
-              <a href="#" class="text-[#5460B5]  font-semibold">Kebijakan Privasi</a>.
+              Saya menerima <a href="#" class="text-[#3094c6] font-semibold">Ketentuan Penggunaan</a> & 
+              <a href="#" class="text-[#3094c6]  font-semibold">Kebijakan Privasi</a>.
             </p>
           </div>
 
           <div class="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <button type="submit" class="bg-[#5460B5] hover:bg-[#363b63] text-white font-semibold py-2 px-6 rounded transition duration-300 w-full sm:w-auto">
+            <button type="submit" class="bg-[#3094c6] hover:bg-[rgb(29,99,134)]  text-white font-semibold py-2 px-7 rounded-lg transition duration-300 w-full sm:w-auto">
               Daftar
             </button>
-            <a href="{{ route('login') }}" class="text-sm text-[#5460B5] hover:underline text-center sm:text-left">Sudah punya akun?</a>
+            <a href="{{ route('login') }}" class="text-sm text-[#3094c6] hover:underline text-center sm:text-left">Sudah punya akun?</a>
           </div>
         </form>
       </div>
