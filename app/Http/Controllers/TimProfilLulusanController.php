@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProfilLulusan;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Prodi;
 
 class TimProfilLulusanController extends Controller
 {
@@ -37,7 +38,7 @@ class TimProfilLulusanController extends Controller
         $user = Auth::guard('userprodi')->user();
 
         if (!$user || !$user->kode_prodi) {
-            abort(404);
+            abort(403);
         }
 
         $request->merge(['kode_prodi' => $user->kode_prodi]);
@@ -57,4 +58,54 @@ class TimProfilLulusanController extends Controller
         return redirect()->route('tim.profillulusan.index')->with('success', 'Profil Lulusan berhasil ditambahkan!');
     }
 
+    public function edit ($id_pl)
+    {
+        $user = Auth::guard('userprodi')->user();
+
+        $profillulusan = ProfilLulusan::where('id_pl', $id_pl)
+            ->where('kode_prodi', $user->kode_prodi)
+            ->first();
+
+    if (!$profillulusan) {
+        abort(403, 'Akses ditolak');
+    }
+        $prodis = Prodi::all();
+        $profillulusan = ProfilLulusan::findOrFail($id_pl);
+        return view('tim.profillulusan.edit', compact('profillulusan', 'prodis'));
+    }
+
+    public function update(Request $request, $id_pl)
+    {
+        $user = Auth::guard('userprodi')->user();
+
+        if (!$user || !$user->kode_prodi) {
+            abort(403);
+        }
+        $profillulusan = ProfilLulusan::where('id', $id_pl)
+        ->where('kode_prodi', $user->kode_prodi)
+        ->first();
+
+        if (!$profillulusan) {
+            abort(403, 'Akses ditolak');
+        }
+        $request->merge(['kode_prodi' => $user->kode_prodi]);
+        $request->validate([
+            'kode_pl' => 'required|string|max:10',
+            'kode_prodi' => 'required|string|max:10',
+            'deskripsi_pl' => 'required',
+            'profesi_pl' => 'required',
+            'unsur_pl' => 'required|in:Pengetahuan,Keterampilan Khusus,Sikap dan Keterampilan Umum',
+            'keterangan_pl' => 'required|in:Kompetensi Utama Bidang,Kompetensi Tambahan',
+            'sumber_pl' => 'required',
+        ]);
+
+        $profillulusan->update($request->all());
+        return redirect()->route('tim.profillulusan.index')->with('success', 'Profil Lulusan berhasil diperbarui.');
+    }
+
+    public function destroy(ProfilLulusan $profillulusan)
+    {
+        $profillulusan->delete();
+        return redirect()->route('admin.profillulusan.index')->with('sukses','Profil Lulusan Berhasil Dihapus');
+    }
 }

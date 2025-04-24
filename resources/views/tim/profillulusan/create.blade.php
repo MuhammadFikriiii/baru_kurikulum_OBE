@@ -57,7 +57,7 @@
 <br>
 
 <button type="submit" class="bg-green-400 hover:bg-green-800 mt-3 px-5 py-2 rounded-lg">Simpan</button>
-<a href="{{ route('admin.profillulusan.index') }}" class="bg-blue-400 hover:bg-blue-800 mt-3 px-5 py-2 rounded-lg">kembali</a>
+<a href="{{ route('tim.profillulusan.index') }}" class="bg-blue-400 hover:bg-blue-800 mt-3 px-5 py-2 rounded-lg">kembali</a>
 </form>
 </div>
 @endsection

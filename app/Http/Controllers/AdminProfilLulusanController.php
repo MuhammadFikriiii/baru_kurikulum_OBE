@@ -74,10 +74,9 @@ class AdminProfilLulusanController extends Controller
         return view('admin.profillulusan.detail', compact('id_pl'));
     }
 
-    public function destroy(ProfilLulusan $profillulusan)
+    public function destroy(ProfilLulusan $id_pl)
     {
-        $profillulusan->delete();
+        $id_pl->delete();
         return redirect()->route('admin.profillulusan.index')->with('sukses','Profil Lulusan Berhasil Dihapus');
-
     }
 }

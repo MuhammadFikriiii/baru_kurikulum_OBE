@@ -116,9 +116,9 @@ class AdminCapaianProfilLulusanController extends Controller
     ]);
     }
 
-    public function destroy(CapaianProfilLulusan $capaianprofillulusan)
+    public function destroy(CapaianProfilLulusan $id_cpl)
     {
-        $capaianprofillulusan->delete();
+        $id_cpl->delete();
         return redirect()->route('admin.capaianprofillulusan.index')->with('sukses','Capaian Profil Lulusan Ini Berhasil Di Hapus');
     }
 }

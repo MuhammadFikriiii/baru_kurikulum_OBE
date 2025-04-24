@@ -74,7 +74,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/users/{id}/detail', [AdminUserController::class,'details'])->name('users.detail');
     Route::delete('/users/{id}', [AdminUserController::class, 'destroy'])->name('users.destroy');
     Route::get('/userprodi', [AdminUserProdiController::class, 'index'])->name('userprodi.index');
+    
     Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
+
     Route::get('/jurusan', [JurusanController::class, 'index'])->name('jurusan.index');
     Route::get('/jurusan/create', [JurusanController::class, 'create'])->name('jurusan.create');
     Route::post('/jurusan', [JurusanController::class, 'store'])->name('jurusan.store');
@@ -82,6 +84,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/jurusan/{jurusan}', [JurusanController::class, 'update'])->name('jurusan.update');
     Route::get('/jurusan/{jurusan}/detail', [JurusanController::class, 'detail'])->name('jurusan.detail');
     Route::delete('/jurusan/{jurusan}', [JurusanController::class, 'destroy'])->name('jurusan.destroy');
+    
     Route::get('/prodi', [AdminProdiController::class, 'index'])->name('prodi.index');
     Route::get('/prodi/create', [AdminProdiController::class, 'create'])->name('prodi.create');
     Route::post('/prodi', [AdminProdiController::class, 'store'])->name('prodi.store');
@@ -89,6 +92,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/prodi/{prodi}', [AdminProdiController::class, 'update'])->name('prodi.update');
     Route::get('/prodi/{prodi}/detail', [AdminProdiController::class, 'detail'])->name('prodi.detail');
     Route::delete('/prodi/{prodi}', [AdminProdiController::class, 'destroy'])->name('prodi.destroy');
+
     Route::get('/profillulusan', [AdminProfilLulusanController::class, 'index'])->name('profillulusan.index');
     Route::get('/profillulusan/create', [AdminProfilLulusanController::class, 'create'])->name('profillulusan.create');
     Route::post('/profillulusan', [AdminProfilLulusanController::class, 'store'])->name('profillulusan.store');
@@ -96,6 +100,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/profillulusan/{id_pl}', [AdminProfilLulusanController::class, 'update'])->name('profillulusan.update');
     Route::get('/profillulusan/{id_pl}/detail', [AdminProfilLulusanController::class, 'detail'])->name('profillulusan.detail');
     Route::delete('/profillulusan/{id_pl}', [AdminProfilLulusanController::class, 'destroy'])->name('profillulusan.destroy');
+
     Route::get('/capaianprofillulusan', [AdminCapaianProfilLulusanController::class, 'index'])->name('capaianprofillulusan.index');
     Route::get('/capaianprofillulusan/create', [AdminCapaianProfilLulusanController::class, 'create'])->name('capaianprofillulusan.create');
     Route::post('/capaianprofillulusan', [AdminCapaianProfilLulusanController::class, 'store'])->name('capaianprofillulusan.store');
@@ -103,7 +108,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/capaianprofillulusan/{id_cpl}', [AdminCapaianProfilLulusanController::class, 'update'])->name('capaianprofillulusan.update');
     Route::get('/capaianprofillulusan/{id_cpl}/detail', [AdminCapaianProfilLulusanController::class, 'detail'])->name('capaianprofillulusan.detail');
     Route::delete('/capaianprofillulusan/{id_cpl}', [AdminCapaianProfilLulusanController::class, 'destroy'])->name('capaianprofillulusan.destroy');
+    
     Route::get('/pemetaancplpl', [AdminPemetaanCplPlController::class, 'index'])->name('pemetaancplpl.index');
+
     Route::get('/bahankajian', [AdminBahankajianController::class, 'index'])->name('bahankajian.index');
     Route::get('/bahankajian/create', [AdminBahankajianController::class, 'create'])->name('bahankajian.create');
     Route::post('/bahankajian', [AdminBahankajianController::class, 'store'])->name('bahankajian.store');
@@ -111,6 +118,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/bahankajian/{id_bk}', [AdminBahankajianController::class, 'update'])->name('bahankajian.update');
     Route::get('/bahankajian/{id_bk}/detail', [AdminBahankajianController::class, 'detail'])->name('bahankajian.detail');
     Route::delete('/bahankajian/{id_bk}', [AdminBahankajianController::class,'destroy'])->name('bahankajian.destroy');
+
     Route::get('/pemetaancplbk', [AdminPemetaanCplBkController::class, 'index'])->name('pemetaancplbk.index');
     Route::post('/pemetaancplbk', [AdminPemetaanCplBkController::class, 'store'])->name('pemetaancplbk.store');
     

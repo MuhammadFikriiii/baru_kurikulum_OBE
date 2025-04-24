@@ -86,7 +86,7 @@
                         <td class="py-3 px-4 flex flex-col sm:flex-row sm:justify-center sm:items-center gap-2">
                             <a href="{{ route('admin.profillulusan.detail', $profillulusan->id_pl) }}" class="bg-green-500 text-white px-3 py-1 rounded-md text-sm font-semibold hover:bg-green-600 text-center">🛈 Detail</a>
                             <a href="{{ route('admin.profillulusan.edit', $profillulusan->id_pl) }}" class="bg-yellow-500 text-white px-3 py-1 rounded-md text-sm font-semibold hover:bg-yellow-600 text-center">✏️ Ubah</a>
-                            <form action="{{ route('admin.profillulusan.destroy', $profillulusan->kode_pl) }}" method="POST" onsubmit="return confirm('Hapus user ini?')" class="text-center">
+                            <form action="{{ route('admin.profillulusan.destroy', $profillulusan->id_pl) }}" method="POST" onsubmit="return confirm('Hapus user ini?')" class="text-center">
                                 @csrf @method('DELETE')
                                 <button class="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600">
                                     🗑️ Hapus

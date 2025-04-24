@@ -21,7 +21,7 @@
       </a>
       <!-- Desktop Menu -->
       <nav class="hidden md:flex space-x-6 items-center">
-        <a href="#" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
+        <a href="#beranda" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
         before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
         before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
         Beranda </a>
@@ -45,8 +45,8 @@
         before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
         before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
         Contact Us</a>
-        <a href="{{ route('login') }}" class="bg-[#5460B5] text-white font-medium px-4 py-2 rounded-lg hover:bg-[#323861]  transition flex items-center">
-          <i class="bi bi-person text-white opacity-80"></i>
+        <a href="{{ route('login') }}" class="text-[#3094c6] font-medium px-3 py-1 rounded-xl border-2 border-[#3094c6] hover:bg-[#3094c6] hover:text-white transition flex items-center">
+          <i class="bi bi-person"></i>
           <span class="ml-2">Login</span>
         </a>
       </nav>
@@ -96,16 +96,22 @@
   </div>
 </header>
 
-  <section class="w-full h-[500px] bg-cover bg-center flex items-center justify-center text-white" style="background-image: url('/image/poliban.jpeg'); background-position: center;">
-    <div class="bg-black bg-opacity-50 p-10 rounded-lg text-center shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-      <h2 class="text-5xl font-bold mb-4 text-gradient bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-red-600 animate__animated animate__fadeIn">Selamat Datang di Sistem Kurikulum</h2>
-      <p class="text-xl font-light mb-5">Politeknik Negeri Banjarmasin</p>
-      <a href="#daftar-prodi" class="inline-block px-6 py-3 text-lg font-semibold bg-yellow-500 rounded-full hover:bg-yellow-600 transition duration-300">Lihat Program Studi</a>
-    </div>
-  </section>
+ <!-- Page Home -->
+ <section class="w-full h-[500px] bg-cover bg-center flex items-center justify-center text-white" style="background-image: url('/image/poliban.jpeg'); background-position: center;">
+  <div class="bg-[#0f172a]/60 p-10 rounded-xl text-center shadow-lg backdrop-blur-md transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+    <h2 class="text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-700 animate__animated animate__fadeIn">
+      Selamat Datang di Sistem Kurikulum
+    </h2>
+    <p class="text-xl font-light mb-5 text-blue-100">Politeknik Negeri Banjarmasin</p>
+    <a href="#daftar-prodi" class="inline-block px-6 py-3 text-lg font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-full transition duration-300 shadow-md">
+      Lihat Program Studi
+    </a>
+  </div>
+</section>
+
 
   <!-- Beranda -->
-  <div class="homepage pb-16">
+  <div id="beranda" class="homepage pb-16">
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-10 pt-20">
         <div>
@@ -123,25 +129,74 @@
             Tentang Website <i class="ri-eye-line ms-2"></i>
           </a>
         </div>
-  
         <div className="flex justify-end">
           <img src="/image/profil.png" alt="Hero Image" className="w-full max-w-md h-auto ml-auto" />
         </div>
-
       </div>
     </div>
   </div>
   
   
 
+<!-- Section: Profil Pengajar -->
+<!-- Section: Profil Pengajar -->
+<section id="pengajar" class="bg-white py-16">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-semibold text-center text-gray-800">Profil Pengajar</h2>
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Pengajar 1 -->
+      <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
+        <img src="https://via.placeholder.com/150" alt="Pengajar 1" class="w-32 h-32 mx-auto rounded-full">
+        <h3 class="mt-4 text-xl font-semibold text-gray-800">Dr. Andi Susanto</h3>
+        <p class="text-gray-600 mt-2">Dosen Matematika dan Teknologi Pendidikan</p>
+        <p class="text-gray-600 mt-2">Pengalaman lebih dari 10 tahun di bidang pendidikan dan penelitian.</p>
+      </div>
 
-  <!-- Informasi Kampus -->
-  <section class="py-12 px-6 md:px-20 bg-white">
-    <h3 class="text-2xl font-bold text-center text-[#201F31] mb-6">Tentang Politeknik Negeri Banjarmasin</h3>
-    <p class="text-center text-gray-700 max-w-3xl mx-auto">
-      Politeknik Negeri Banjarmasin (POLIBAN) merupakan perguruan tinggi vokasi di Kalimantan Selatan yang berfokus pada pendidikan terapan. Kampus ini memiliki berbagai jurusan dan program studi unggulan yang mendukung perkembangan teknologi dan industri di Indonesia.
-    </p>
-  </section>
+      <!-- Pengajar 2 -->
+      <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
+        <img src="https://via.placeholder.com/150" alt="Pengajar 2" class="w-32 h-32 mx-auto rounded-full">
+        <h3 class="mt-4 text-xl font-semibold text-gray-800">Prof. Siti Nurhasanah</h3>
+        <p class="text-gray-600 mt-2">Dosen Ilmu Komputer</p>
+        <p class="text-gray-600 mt-2">Berfokus pada pengembangan kurikulum berbasis teknologi informasi.</p>
+      </div>
+
+      <!-- Pengajar 3 -->
+      <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
+        <img src="https://via.placeholder.com/150" alt="Pengajar 3" class="w-32 h-32 mx-auto rounded-full">
+        <h3 class="mt-4 text-xl font-semibold text-gray-800">Budi Setiawan</h3>
+        <p class="text-gray-600 mt-2">Instruktur Bahasa Inggris</p>
+        <p class="text-gray-600 mt-2">Mengajarkan Bahasa Inggris untuk komunikasi profesional dan akademik.</p>
+      </div>
+
+      <!-- Pengajar 4 -->
+      <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
+        <img src="https://via.placeholder.com/150" alt="Pengajar 4" class="w-32 h-32 mx-auto rounded-full">
+        <h3 class="mt-4 text-xl font-semibold text-gray-800">Dr. Sarah Lestari</h3>
+        <p class="text-gray-600 mt-2">Dosen Kimia</p>
+        <p class="text-gray-600 mt-2">Mempunyai keahlian di bidang kimia organik dan sintesis bahan baru.</p>
+      </div>
+
+      <!-- Pengajar 5 -->
+      <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
+        <img src="https://via.placeholder.com/150" alt="Pengajar 5" class="w-32 h-32 mx-auto rounded-full">
+        <h3 class="mt-4 text-xl font-semibold text-gray-800">Ir. Joko Santoso</h3>
+        <p class="text-gray-600 mt-2">Dosen Teknik Elektro</p>
+        <p class="text-gray-600 mt-2">Berfokus pada penelitian dan pengembangan teknologi elektronika.</p>
+      </div>
+
+      <!-- Pengajar 6 -->
+      <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
+        <img src="https://via.placeholder.com/150" alt="Pengajar 6" class="w-32 h-32 mx-auto rounded-full">
+        <h3 class="mt-4 text-xl font-semibold text-gray-800">Maya Kusuma</h3>
+        <p class="text-gray-600 mt-2">Instruktur Desain Grafis</p>
+        <p class="text-gray-600 mt-2">Mengajarkan desain grafis dan multimedia untuk seni dan komunikasi visual.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
 
   <!-- Daftar Kurikulum dan Program Studi -->
   <section class="py-12 px-6 md:px-20">
