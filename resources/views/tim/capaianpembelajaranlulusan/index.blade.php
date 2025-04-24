@@ -62,17 +62,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($capaianprofillulusans as $index => $capaianprofillulusan)
+                    @foreach ($capaianpembelajaranlulusans as $index => $capaianpembelajaranlulusan)
                     <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $index + 1 }}</td>
-                        <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->nama_prodi ?? 'Tidak ada prodi' }}</td>                        </td>
-                        <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->kode_cpl }}</td>
-                        <td class="py-3 px-6 min-w-[10px] text-justify">{{ $capaianprofillulusan->deskripsi_cpl }}</td>
-                        <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->status_cpl }}</td>
+                        <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianpembelajaranlulusan->nama_prodi ?? 'Tidak ada prodi' }}</td>                        </td>
+                        <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianpembelajaranlulusan->kode_cpl }}</td>
+                        <td class="py-3 px-6 min-w-[10px] text-justify">{{ $capaianpembelajaranlulusan->deskripsi_cpl }}</td>
+                        <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianpembelajaranlulusan->status_cpl }}</td>
                         <td class="py-3 px-6 min-w-[10px] flex justify-center items-center space-x-2">
-                            <a href="#" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
-                            <a href="#" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
-                            <form action="#" method="POST">
+                            <a href="{{ route('tim.capaianpembelajaranlulusan.detail', $capaianpembelajaranlulusan->id_cpl) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
+                            <a href="{{ route('tim.capaianpembelajaranlulusan.edit', $capaianpembelajaranlulusan->id_cpl) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
+                            <form action="{{ route('tim.capaianpembelajaranlulusan.destroy', $capaianpembelajaranlulusan->id_cpl) }}" method="POST">
                                 @csrf @method('DELETE')
                                 <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">
                                     🗑️ Hapus

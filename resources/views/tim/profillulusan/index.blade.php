@@ -75,8 +75,14 @@
                             <td class="px-4 py-2 w-28 text-center">{{ $profillulusan->keterangan_pl }}</td>
                             <td class="px-4 py-2 w-40 text-justify">{{ $profillulusan->sumber_pl }}</td>
                             <td class="py-2 px-4 flex justify-center items-center">
-                                <a href="#" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
+                                <a href="{{ route('tim.profillulusan.detail', $profillulusan->id_pl) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
                                 <a href="{{ route('tim.profillulusan.edit', $profillulusan->id_pl) }}" class="bg-yellow-500 text-white px-3 py-1 rounded-md text-sm font-semibold hover:bg-yellow-600 text-center">✏️ Ubah</a>
+                                <form action="{{ route('tim.profillulusan.destroy',$profillulusan->id_pl) }}" method="POST">
+                                    @csrf @method('DELETE')
+                                    <button class="bg-red-500 text-white px-5 py-2 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">
+                                        🗑️
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

@@ -181,10 +181,16 @@ route::prefix('tim')->name('tim.')->group(function(){
     Route::get('/profillulusan/create', [TimProfilLulusanController::class, 'create'])->name('profillulusan.create');
     Route::post('/profillulusan', [TimProfilLulusanController::class, 'store'])->name('profillulusan.store');
     Route::get('/profillulusan/{id_pl}/edit',[TimProfilLulusanController::class,'edit'])->name('profillulusan.edit');
-    Route::put('/profillulusan/{id_pl)',[TimProfilLulusanController::class, 'update'])->name('profillulusan.update');
+    Route::put('/profillulusan/{id_pl}',[TimProfilLulusanController::class, 'update'])->name('profillulusan.update');
+    Route::get('/profillulusan/{id_pl}/detail',[TimProfilLulusanController::class, 'detail'])->name('profillulusan.detail');
+    Route::delete('/profillulusan/{id_pl}',[TimProfilLulusanController::class,'destroy'])->name('profillulusan.destroy');
     Route::get('/capaianpembelajaranlulusan', [TimCapaianPembelajaranLulusanController::class, 'index'])->name('capaianpembelajaranlulusan.index');
     Route::get('/capaianpembelajaranlulusan/create', [TimCapaianPembelajaranLulusanController::class, 'create'])->name('capaianpembelajaranlulusan.create');
     Route::post('/capaianpembelajaranlulusan', [TimCapaianPembelajaranLulusanController::class, 'store'])->name('capaianpembelajaranlulusan.store');
+    Route::get('/capaianpembelajaranlulusan/{id_cpl}/edit', [TimCapaianPembelajaranLulusanController::class, 'edit'])->name('capaianpembelajaranlulusan.edit');
+    Route::put('/capaianpembelajaranlulusan/{id_cpl}', [TimCapaianPembelajaranLulusanController::class, 'update'])->name('capaianpembelajaranlulusan.update');
+    Route::get('/capaianpembelajaranlulusan/{id_cpl}/detail', [TimCapaianPembelajaranLulusanController::class, 'detail'])->name('capaianpembelajaranlulusan.detail');
+    Route::delete('/capaianpembelajaranlulusan/{id_cpl}', [TimCapaianPembelajaranLulusanController::class, 'destroy'])->name('capaianpembelajaranlulusan.destroy');
     Route::get('/pemetaancplpl', [TimPemetaanCplPlController::class, 'index'])->name('pemetaancplpl.index');
     Route::post('/pemetaancplpl', [TimPemetaanCplPlController::class, 'store'])->name('pemetaancplpl.store');
     Route::get('/bahankajian', [TimBahanKajianController::class, 'index'])->name('bahankajian.index');

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.tim.app')
 
 @section('content')
 
@@ -38,7 +38,7 @@
         class="w-full p-3 border border-black rounded-lg mb-10 bg-gray-100">
         <br>
 
-    <a href="{{ route('admin.capaianprofillulusan.index') }}" class="bg-blue-500 hover:bg-blue-800 px-4 py-2 rounded-lg">Kembali</a>
+    <a href="{{ route('tim.capaianpembelajaranlulusan.index') }}" class="bg-blue-500 hover:bg-blue-800 px-4 py-2 rounded-lg">Kembali</a>
 </div>
 
 @endsection
