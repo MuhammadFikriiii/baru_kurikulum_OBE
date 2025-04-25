@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Kurikulum OBE')</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/js/app.js'])
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');

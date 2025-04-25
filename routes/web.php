@@ -196,6 +196,10 @@ route::prefix('tim')->name('tim.')->group(function(){
     Route::get('/bahankajian', [TimBahanKajianController::class, 'index'])->name('bahankajian.index');
     Route::get('/bahankajian/create', [TimBahanKajianController::class, 'create'])->name('bahankajian.create');
     Route::post('/bahankajian', [TimBahanKajianController::class, 'store'])->name('bahankajian.store');
+    Route::get('/bahankajian/{id_bk}/edit', [TimBahanKajianController::class, 'edit'])->name('bahankajian.edit');
+    Route::put('/bahankajian/{id_bk}', [TimBahanKajianController::class, 'update'])->name('bahankajian.update');
+    Route::get('/bahankajian/{id_bk}/detail', [TimBahanKajianController::class, 'detail'])->name('bahankajian.detail');
+    Route::delete('/bahankajian/{id_bk}', [TimBahanKajianController::class, 'destroy'])->name('bahankajian.destroy');
     Route::get('/pemetaancplbk', [TimPemetaanCplBkController::class, 'index'])->name('pemetaancplbk.index');
     Route::get('/matakuliah', [TimMataKuliahController::class, 'index'])->name('matakuliah.index');
     Route::get('/pemetaancplmk', [TimPemetaanCplMkController::class, 'index'])->name('pemetaancplmk.index');

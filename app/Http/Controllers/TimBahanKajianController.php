@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\BahanKajian;   
+use App\Models\CapaianProfilLulusan;
 
 class TimBahanKajianController extends Controller
 {
@@ -83,5 +84,90 @@ public function create()
             ]);
         }
         return redirect()->route('tim.bahankajian.index')->with('success', 'Bahan Kajian berhasil ditambahkan.');
+    }
+
+    public function edit($id_bk)
+    {
+        $user = Auth::guard('userprodi')->user();
+
+        if (!$user || !$user->kode_prodi) {
+            abort(403, 'Akses ditolak');
+        }
+
+        $bahankajian = BahanKajian::findOrFail($id_bk);
+
+        $capaianprofillulusans = DB::table('capaian_profil_lulusans as cpl')
+        ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+        ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+        ->where('pl.kode_prodi', $user->kode_prodi)
+        ->select('cpl.id_cpl', 'cpl.kode_cpl', 'cpl.deskripsi_cpl')
+        ->distinct()
+        ->get();
+
+        $selectedCapaianProfilLulusans = DB::table('cpl_bk')
+            ->where('id_bk', $id_bk)
+            ->pluck('id_cpl')
+            ->toArray();
+
+        return view('tim.bahankajian.edit', compact('bahankajian', 'capaianprofillulusans', 'selectedCapaianProfilLulusans'));
+    }
+    public function update(Request $request, $id_bk)
+    {
+        $user = Auth::guard('userprodi')->user();
+
+        if (!$user || !$user->kode_prodi) {
+            abort(403, 'Akses ditolak');
+        }
+
+        $request->validate([
+            'kode_bk' => 'required|string|max:10',
+            'nama_bk' => 'required|string|max:50',
+            'deskripsi_bk' => 'nullable|string',
+            'referensi_bk' => 'required|string|max:50',
+            'status_bk' => 'required|in:core,elective',
+            'knowledge_area' => 'required|string',
+        ]);
+
+        $bahankajian = BahanKajian::findOrFail($id_bk);
+        $bahankajian->update($request->all());
+
+        DB::table('cpl_bk')->where('id_bk', $id_bk)->delete();
+
+        foreach ($request->id_cpls as $id_cpl) {
+            DB::table('cpl_bk')->insert([
+                'id_bk' => $bahankajian->id_bk,
+                'id_cpl' => $id_cpl
+            ]);
+        }
+
+        return redirect()->route('tim.bahankajian.index')->with('success', 'Bahan Kajian berhasil diperbarui.');
+    }
+
+    public function detail(BahanKajian $id_bk)
+    {
+        $user = Auth::guard('userprodi')->user();
+
+        if (!$user || !$user->kode_prodi) {
+            abort(403, 'Akses ditolak');
+        }
+
+        $selectedCapaianProfilLulusans = DB::table('cpl_bk')
+            ->where('id_bk', $id_bk->id_bk)
+            ->pluck('id_cpl')
+            ->toArray();
+
+            $capaianprofillulusans = CapaianProfilLulusan::whereIn('id_cpl', $selectedCapaianProfilLulusans)->get();
+
+        if (empty($selectedCapaianProfilLulusans)) {
+            abort(403, 'Akses ditolak');
+        }
+
+        return view('tim.bahankajian.detail', compact('id_bk', 'capaianprofillulusans', 'selectedCapaianProfilLulusans'));
+    }
+
+    public function destroy(BahanKajian $id_bk)
+    {
+        $id_bk->delete();
+        return redirect()->route('tim.bahankajian.index')->with('sukses', 'Bahan Kajian Berhasil Di Hapus');
     }
 }
