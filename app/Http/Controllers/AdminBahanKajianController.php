@@ -67,7 +67,8 @@ class AdminBahanKajianController extends Controller
             ->where('id_bk', $id_bk)
             ->pluck('id_cpl')
             ->toArray();
-        return view('admin.bahankajian.edit', compact('bahankajian','capaianprofillulusans'));
+            
+        return view('admin.bahankajian.edit', compact('bahankajian','capaianprofillulusans','selectedCapaianProfilLulusans'));
     }
 
     public function update(Request $request, $id_bk)

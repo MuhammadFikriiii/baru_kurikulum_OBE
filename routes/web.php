@@ -204,4 +204,6 @@ route::prefix('tim')->name('tim.')->group(function(){
     Route::get('/matakuliah', [TimMataKuliahController::class, 'index'])->name('matakuliah.index');
     Route::get('/pemetaancplmk', [TimPemetaanCplMkController::class, 'index'])->name('pemetaancplmk.index');
     Route::get('/pemetaanbkmk', [TimPemetaanBkMkController::class, 'index'])->name('pemetaanbkmk.index');
+    Route::get('/matakuliah/create', [TimMataKuliahController::class, 'create'])->name('matakuliah.create');
+    Route::post('/matakuliah', [TimMataKuliahController::class, 'store'])->name('matakuliah.store');
 });

@@ -21,6 +21,24 @@
     @csrf
     @method('PUT')
 
+    @if($selectedCapaianProfilLulusans)
+    <div class="mt-4 mb-4">
+        <h3 class="text-xl font-semibold mb-2">Profil Lulusan yang sebelumnya terkait Terkait:</h3>
+        <ul class="list-disc pl-5 text-gray-700" disabled>
+            @foreach($selectedCapaianProfilLulusans as $id_cpl)
+                @php
+                    $cplDetail = $capaianprofillulusans->firstWhere('id_cpl', $id_cpl);
+                @endphp
+                @if($cplDetail)
+                    <li>
+                        <strong>{{ $cplDetail->kode_cpl }}</strong>: {{ $cplDetail->deskripsi_cpl }}
+                    </li>
+                @endif
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    
     <label for="id_cpls" class="text-2xl font-semibold mb-2">Profil Lulusan Terkait:</label>
     <select id="id_cpls" name="id_cpls[]" class="border border-gray-300 p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]" multiple required>
         @foreach($capaianprofillulusans as $cpl)

@@ -55,7 +55,7 @@
                     @foreach ($mks as $mk)
                         <td class="px-4 py-2 text-center">
                             <input type="checkbox" disabled 
-                                {{ isset($relasi[$mk->kode_mk]) && in_array($bk->id_bk, $relasi[$mk->kode_mk]->pluck('id_bk')->toArray()) ? 'checked' : '' }} 
+                                {{ isset($relasi[$bk->id_bk]) && in_array($mk->kode_mk, $relasi[$bk->id_bk]->pluck('kode_mk')->toArray()) ? 'checked' : '' }}   
                                 class="h-5 w-5 mx-auto appearance-none rounded border-2 border-blue-600 bg-white checked:bg-white-600 checked:border-blue-600 disabled:opacity-100 disabled:cursor-default relative">
                         </td>
                     @endforeach
