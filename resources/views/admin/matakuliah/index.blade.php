@@ -86,7 +86,7 @@
                 @endfor
             <td class="py-2 px-3 text-center">{{ $mata_kuliah->kompetensi_mk }}</td>
             <td class="py-2 px-3 flex justify-center items-center space-x-2">
-                <a href="#" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈</a>
+                <a href="{{ route('admin.matakuliah.detail', $mata_kuliah->kode_mk) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈</a>
                 <a href="{{ route('admin.matakuliah.edit',$mata_kuliah->kode_mk) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️</a>
                 <form action="{{ route('admin.matakuliah.destroy',$mata_kuliah->kode_mk) }}" method="POST">
                     @csrf @method('DELETE')

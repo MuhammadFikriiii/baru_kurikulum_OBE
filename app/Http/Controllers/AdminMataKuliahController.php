@@ -6,6 +6,8 @@ use App\Models\MataKuliah;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use App\Models\CapaianProfilLulusan;
+use App\Models\BahanKajian;
 
 class AdminMataKuliahController extends Controller
 {
@@ -80,6 +82,24 @@ class AdminMataKuliahController extends Controller
         ]);
         $matakuliah->update($request->all());
         return redirect()->route('admin.matakuliah.index')->with('success', 'matakuliah berhasil diperbaharui');
+    }
+
+    public function detail(MataKuliah $matakuliah)
+    {
+        $selectedCplIds = DB::table('cpl_mk')
+            ->where('kode_mk', $matakuliah->kode_mk)
+            ->pluck('id_cpl')
+            ->toArray();
+
+            $capaianprofillulusans = CapaianProfilLulusan::whereIn('id_cpl', $selectedCplIds)->get();
+
+        $selectedBksIds = DB::table('bk_mk')
+            ->where('kode_mk', $matakuliah->kode_mk)
+            ->pluck('id_bk')
+            ->toArray();
+            $bahanKajians = BahanKajian::whereIn('id_bk', $selectedBksIds)->get();
+
+        return view('admin.matakuliah.detail',['matakuliah'=>$matakuliah, 'selectedCplIds' =>$selectedCplIds, 'selectedBksIds'=>$selectedBksIds, 'capaianprofillulusans'=>$capaianprofillulusans,  'bahanKajians'=>$bahanKajians]);
     }
 
     public function destroy(MataKuliah $matakuliah)
