@@ -32,7 +32,8 @@ class AdminMataKuliahController extends Controller
 
     public function create()
     {
-        $capaianProfilLulusans = DB::table('capaian_profil_lulusans')->get();
+        $capaianProfilLulusans = CapaianProfilLulusan::orderBy('kode_cpl', 'asc')->get();
+
         $bahanKajians = DB::table('bahan_kajians')->get();
         return view("admin.matakuliah.create",  compact("capaianProfilLulusans", "bahanKajians"));
     }

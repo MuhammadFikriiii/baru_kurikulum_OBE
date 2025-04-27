@@ -106,4 +106,87 @@ class TimMataKuliahController extends Controller
         }
         return redirect()->route('tim.matakuliah.index')->with('success', 'Mata kuliah berhasil ditambahkan!');
     }
+
+    public function edit(MataKuliah $matakuliah)
+    {
+        $user = Auth::guard('userprodi')->user();
+
+        if (!$user || !$user->kode_prodi) {
+            abort(403, 'Akses ditolak');
+        }
+
+        $kodeProdi = $user->kode_prodi;
+
+        $capaianprofillulusans = DB::table('capaian_profil_lulusans as cpl')
+            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->where('pl.kode_prodi', $kodeProdi)
+            ->select('cpl.id_cpl', 'cpl.kode_cpl', 'cpl.deskripsi_cpl')
+            ->distinct()
+            ->get();
+        $bahankajians = DB::table('bahan_kajians as bk')
+            ->select(
+                'bk.id_bk', 'bk.nama_bk', 'bk.kode_bk', 'bk.deskripsi_bk',
+                'bk.referensi_bk', 'bk.status_bk', 'bk.knowledge_area'
+            )
+            ->leftJoin('cpl_bk', 'bk.id_bk', '=', 'cpl_bk.id_bk')
+            ->leftJoin('capaian_profil_lulusans as cpl', 'cpl_bk.id_cpl', '=', 'cpl.id_cpl')
+            ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
+            ->where('prodis.kode_prodi', '=', $kodeProdi)
+            ->groupBy('bk.id_bk', 'bk.nama_bk', 'bk.kode_bk', 'bk.deskripsi_bk',
+                'bk.referensi_bk', 'bk.status_bk', 'bk.knowledge_area')
+            ->get();
+
+            $selectedCapaianProfilLulusan = DB::table('cpl_mk')
+            ->where('kode_mk', $matakuliah->kode_mk)
+            ->pluck('id_cpl')
+            ->toArray();
+
+            $selectedBahanKajian = DB::table('bk_mk')
+            ->where('kode_mk', $matakuliah->kode_mk)
+            ->pluck('id_bk')
+            ->toArray();
+
+        return view("tim.matakuliah.edit", compact('matakuliah',            'capaianprofillulusans', 'bahankajians','selectedCapaianProfilLulusan', 'selectedBahanKajian'));
+    }
+
+    public function update(Request $request, MataKuliah $matakuliah)
+    {
+        $user = Auth::guard('userprodi')->user();
+
+        if (!$user || !$user->kode_prodi) {
+            abort(403, 'Akses ditolak');
+        }
+
+        $request->validate([
+            'kode_mk'=> 'required|string|max:10',
+            'nama_mk'=> 'required|string|max:50',
+            'jenis_mk'=> 'required|string|max:50',
+            'sks_mk'=> 'required|integer',
+            'semester_mk'=> 'required|integer|in:1,2,3,4,5,6,7,8',
+            'kompetensi_mk'=> 'required|string|in:pendukung,utama',
+        ]);
+
+        $matakuliah->update($request->only(['kode_mk', 'nama_mk', 'jenis_mk', 'sks_mk', 'semester_mk', 'kompetensi_mk']));
+
+        DB::table('cpl_mk')->where('kode_mk', $matakuliah->kode_mk)->delete();
+        foreach ($request->id_cpls as $id_cpl) {
+            DB::table('cpl_mk')->insert([
+                'kode_mk' => $matakuliah->kode_mk,
+                'id_cpl' => $id_cpl
+            ]);
+        }
+
+        DB::table('bk_mk')->where('kode_mk', $matakuliah->kode_mk)->delete();
+        foreach ($request->id_bks as $id_bk) {
+            DB::table('bk_mk')->insert([
+                'kode_mk' => $matakuliah->kode_mk,
+                'id_bk' => $id_bk
+            ]);
+        }
+
+        return redirect()->route('tim.matakuliah.index')->with('success', 'Mata kuliah berhasil diperbarui!');
+    }
 }
