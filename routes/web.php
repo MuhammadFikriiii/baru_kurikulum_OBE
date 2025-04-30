@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminProdiController;
 use App\Http\Controllers\AdminProfilLulusanController;
 use App\Http\Controllers\AdminCapaianProfilLulusanController;
 use App\Http\Controllers\Wadir1ProdiController;
+use App\Models\AdminCapaianPembelajaranMataKuliah;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPemetaanCplPlController;
 use App\Http\Controllers\AdminBahanKajianController;
@@ -147,6 +148,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/capaianpembelajaranmatakuliah', [AdminCapaianPembelajaranMataKuliahController::class, 'index'])->name('capaianpembelajaranmatakuliah.index');
     Route::get('/capaianpembelajaranmatakuliah/create', [AdminCapaianPembelajaranMataKuliahController::class, 'create'])->name('capaianpembelajaranmatakuliah.create');
     Route::post('/capaianpembelajaranmatakuliah', [AdminCapaianPembelajaranMataKuliahController::class, 'store'])->name('capaianpembelajaranmatakuliah.store');
+    Route::get('/capaianpembelajaranmatakuliah/{id_cpmk}/edit', [AdminCapaianPembelajaranMataKuliahController::class, 'edit'])->name('capaianpembelajaranmatakuliah.edit');
+    Route::put('/capaianpembelajaranmatakuliah/{id_cpmk}', [AdminCapaianPembelajaranMataKuliahController::class, 'update'])->name('capaianpembelajaranmatakuliah.update');
 
     Route::get('/pemetaancplcpmk',[AdminPemetaanCplCpmkController::class, 'index'])->name('pemetaancplcpmk.index');
     Route::get('/pemetaancplcpmkmk',[AdminPemetaanCplCpmkMkController::class, 'index'])->name('pemetaancplcpmkmk.index');

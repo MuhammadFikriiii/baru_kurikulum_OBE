@@ -45,7 +45,7 @@
                     <td class="py-3 px-6 text-center">{{ $cpmk->deskripsi_cpmk }}</td>
                         <td class="py-2 px-3 flex justify-center items-center space-x-2">
                             <a href="#" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈</a>
-                            <a href="#" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️</a>
+                            <a href="{{ route('admin.capaianpembelajaranmatakuliah.edit', $cpmk->id_cpmk) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️</a>
                             <form action="#" method="POST">
                                 @csrf @method('DELETE')
                             <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus jurusan ini?')">
