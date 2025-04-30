@@ -11,16 +11,17 @@ class AdminProfilLulusanController extends Controller
 {
     public function index(Request $request)
     {
-        $prodis = Prodi::all();
         $kode_prodi = $request->get('kode_prodi');
+        $prodis = Prodi::all();
+
+        $query = ProfilLulusan::with('prodi');
+
         if ($kode_prodi && $kode_prodi != 'all') {
-            $profillulusans = ProfilLulusan::where('kode_prodi', $kode_prodi)->with('prodi')->get();
-        } elseif ($kode_prodi == 'all') {
-            $profillulusans = ProfilLulusan::with('prodi')->get();
+            $query->where('kode_prodi', $kode_prodi);
         }
-        else {
-            $profillulusans = [];
-        }
+
+        $profillulusans = $query->get();
+
         return view('admin.profillulusan.index', compact('profillulusans', 'prodis', 'kode_prodi'));
     }
 

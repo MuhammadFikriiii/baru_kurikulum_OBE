@@ -11,9 +11,12 @@ use App\Models\BahanKajian;
 
 class AdminMataKuliahController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $mata_kuliahs = DB::table('mata_kuliahs as mk')
+        $kode_prodi = $request->get('kode_prodi');
+        $prodis = DB::table('prodis')->get();
+
+        $query = DB::table('mata_kuliahs as mk')
             ->select(
                 'mk.kode_mk', 'mk.nama_mk', 'mk.jenis_mk', 'mk.sks_mk',
                 'mk.semester_mk', 'mk.kompetensi_mk', 'prodis.nama_prodi'
@@ -23,10 +26,15 @@ class AdminMataKuliahController extends Controller
             ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
-            ->groupBy('mk.kode_mk', 'mk.nama_mk', 'mk.jenis_mk', 'mk.sks_mk', 'mk.semester_mk', 'mk.kompetensi_mk', 'prodis.nama_prodi')
-            ->get();
+            ->groupBy('mk.kode_mk', 'mk.nama_mk', 'mk.jenis_mk', 'mk.sks_mk', 'mk.semester_mk', 'mk.kompetensi_mk', 'prodis.nama_prodi');
 
-        return view("admin.matakuliah.index", compact("mata_kuliahs"));
+            if ($kode_prodi && $kode_prodi !== 'all') {
+                $query->where('prodis.kode_prodi', $kode_prodi);
+                $mata_kuliahs = $query->get();
+            }
+            $mata_kuliahs = $query->get();
+
+        return view("admin.matakuliah.index", compact("mata_kuliahs", 'kode_prodi', 'prodis'));
     }
 
 

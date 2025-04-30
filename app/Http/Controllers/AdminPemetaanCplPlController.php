@@ -11,7 +11,7 @@ class AdminPemetaanCplPlController extends Controller
 {
     public function index(Request $request)
     {
-        $kode_prodi = $request->get('kode_prodi','null');
+        $kode_prodi = $request->get('kode_prodi');
 
         $prodis = DB::table('prodis')->get();
 

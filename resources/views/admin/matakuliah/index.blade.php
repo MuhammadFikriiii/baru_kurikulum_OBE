@@ -35,6 +35,16 @@
             📄 Ekspor ke Excel
         </a>
     </div>
+    <form method="GET" action="{{ route('admin.matakuliah.index') }}">
+        <select name="kode_prodi" onchange="this.form.submit()" class="border border-gray-300 px-3 py-2 rounded-md mr-2">
+            <option value="all" {{ $kode_prodi == 'all' ? 'selected' : '' }}>All</option>
+            @foreach($prodis as $prodi)
+                <option value="{{ $prodi->kode_prodi }}" {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
+                    {{ $prodi->nama_prodi }}
+                </option>
+            @endforeach
+        </select>
+    </form>  
 </div>
 
 <div class="flex items-center justify-between mb-3">

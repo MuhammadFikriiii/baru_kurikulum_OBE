@@ -24,10 +24,6 @@ class AdminCapaianProfilLulusanController extends Controller
             if ($kode_prodi && $kode_prodi !== 'all') {
                 $query->where('prodis.kode_prodi', $kode_prodi);
                 $capaianprofillulusans = $query->get();
-            } elseif ($kode_prodi === 'all') {
-                $capaianprofillulusans = $query->get();
-            } else {
-                $capaianprofillulusans = [];
             }
         
             $capaianprofillulusans = $query->get();

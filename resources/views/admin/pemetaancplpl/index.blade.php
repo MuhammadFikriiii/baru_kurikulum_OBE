@@ -7,7 +7,6 @@
 
 <form method="GET" action="{{ route('admin.pemetaancplpl.index') }}">
     <select name="kode_prodi" onchange="this.form.submit()" class="border border-gray-300 px-3 py-2 rounded-md mr-2">
-        <option value="" disabled selected>Pilih Prodi</option>
         <option value="all" {{ $kode_prodi == 'all' ? 'selected' : '' }}>All</option>
         @foreach($prodis as $prodi)
             <option value="{{ $prodi->kode_prodi }}" {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
@@ -38,9 +37,6 @@
         transform: translate(-50%, -55%);
     }
     </style>
-@if ($cpls->isEmpty() || $pls->isEmpty())
-<p class="text-center text-gray-500 my-6">Belum ada prodi yang dipilih.</p>
-@else
 <form>
     <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-visible">
         <thead class="bg-green-500">
@@ -80,6 +76,5 @@
         </tbody>
     </table>
 </form>
-@endif
 </div>
 @endsection
