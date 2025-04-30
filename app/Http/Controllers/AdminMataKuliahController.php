@@ -109,17 +109,41 @@ class AdminMataKuliahController extends Controller
         return redirect()->route('admin.matakuliah.index')->with('sukses', 'matakuliah berhasil dihapus');
     }
     
-    public function organisasi_mk()
+    public function organisasi_mk(Request $request)
     {
-        $matakuliah = MataKuliah::orderBy('semester_mk')->get();
+        $prodis = DB::table('prodis')->get();
+        
+        $kode_prodi = $request->input('kode_prodi', 'all');
+        
+        $query = DB::table('mata_kuliahs as mk')
+            ->select(
+                'mk.kode_mk', 'mk.nama_mk', 'mk.jenis_mk', 'mk.sks_mk', 
+                'mk.semester_mk', 'mk.kompetensi_mk', 'prodis.nama_prodi', 'prodis.kode_prodi'
+            )
+            ->leftJoin('cpl_mk', 'mk.kode_mk', '=', 'cpl_mk.kode_mk')
+            ->leftJoin('capaian_profil_lulusans as cpl', 'cpl_mk.id_cpl', '=', 'cpl.id_cpl')
+            ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
+            ->groupBy('mk.kode_mk', 'mk.nama_mk', 'mk.jenis_mk', 'mk.sks_mk', 
+                    'mk.semester_mk', 'mk.kompetensi_mk', 'prodis.nama_prodi', 'prodis.kode_prodi');
+        
+        if ($kode_prodi != 'all') {
+            $query->where('prodis.kode_prodi', $kode_prodi);
+        }
+        
+        $matakuliah = $query->get();
+        
         $organisasiMK = $matakuliah->groupBy('semester_mk')->map(function ($items, $semester_mk) {
             return [
                 'semester_mk' => $semester_mk,
                 'sks_mk' => $items->sum('sks_mk'),
                 'jumlah_mk' => $items->count(),
                 'kode_mk' => $items->pluck('kode_mk')->toArray(),
+                'mata_kuliah' => $items,
             ];
         });
-        return view('admin.matakuliah.organisasimk', compact('organisasiMK'));
+        
+        return view('admin.matakuliah.organisasimk', compact('organisasiMK', 'prodis', 'kode_prodi'));
     }
 }
