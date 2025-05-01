@@ -16,6 +16,9 @@ class BkMkSeeder extends Seeder
         $data = [
             ['id_bk' => '1', 'kode_mk' => 'C0320101'],
             ['id_bk' => '2', 'kode_mk' => 'C0320201'],
+            ['id_bk' => '2', 'kode_mk' => 'C0320104'],
+            ['id_bk' => '2', 'kode_mk' => 'C0320207'],
+            ['id_bk' => '2', 'kode_mk' => 'C0320406'],
             ['id_bk' => '3', 'kode_mk' => 'C0320201'],
             ['id_bk' => '4', 'kode_mk' => 'C0320202'],
             ['id_bk' => '5', 'kode_mk' => 'C0320303'],

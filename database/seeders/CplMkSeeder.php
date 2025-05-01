@@ -15,9 +15,11 @@ class CplMkSeeder extends Seeder
     {
         $data = [
             ['id_cpl' => '1', 'kode_mk' => 'C0320101'],
+            ['id_cpl' => '1', 'kode_mk' => 'C0320104'],
             ['id_cpl' => '1', 'kode_mk' => 'C0320201'],
             ['id_cpl' => '2', 'kode_mk' => 'C0320201'],
             ['id_cpl' => '3', 'kode_mk' => 'C0320202'],
+            ['id_cpl' => '1', 'kode_mk' => 'C0320207'],
             ['id_cpl' => '4', 'kode_mk' => 'C0320303'],
             ['id_cpl' => '5', 'kode_mk' => 'C0320101'],
             ['id_cpl' => '5', 'kode_mk' => 'C0320102'],
@@ -26,6 +28,7 @@ class CplMkSeeder extends Seeder
             ['id_cpl' => '7', 'kode_mk' => 'C0320303'],
             ['id_cpl' => '8', 'kode_mk' => 'C0320202'],
             ['id_cpl' => '9', 'kode_mk' => 'C0320201'],
+            ['id_cpl' => '1', 'kode_mk' => 'C0320406'],
             //prodilain
             ['id_cpl' => '10', 'kode_mk' => 'C0320301'],
             ['id_cpl' => '11', 'kode_mk' => 'C0320301'],
