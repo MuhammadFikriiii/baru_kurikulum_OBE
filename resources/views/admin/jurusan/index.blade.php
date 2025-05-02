@@ -31,8 +31,8 @@
                 <a href="{{ route('admin.jurusan.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
                     👤 Tambah Jurusan
                 </a>
-                <a href="" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
-                    📄 Ekspor ke Excel
+                <a href="" class="a href="{{ route('admin.jurusan.exportWord') }}" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
+                    📄 Ekspor ke World
                 </a>
             </div>
         </div>

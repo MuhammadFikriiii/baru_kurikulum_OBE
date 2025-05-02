@@ -42,6 +42,8 @@ use App\Http\Controllers\AdminPemetaanCplCpmkMkController;
 use App\Http\Controllers\TimPemetaanBkMkController;
 use App\Http\Controllers\TimPemetaanCplMkController;
 
+use App\Http\Controllers\ExportController;
+
 // Auth
 Route::get('/login', [LoginController::class, 'loginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
@@ -151,8 +153,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/capaianpembelajaranmatakuliah/{id_cpmk}/edit', [AdminCapaianPembelajaranMataKuliahController::class, 'edit'])->name('capaianpembelajaranmatakuliah.edit');
     Route::put('/capaianpembelajaranmatakuliah/{id_cpmk}', [AdminCapaianPembelajaranMataKuliahController::class, 'update'])->name('capaianpembelajaranmatakuliah.update');
 
-    Route::get('/pemetaancplcpmk',[AdminPemetaanCplCpmkController::class, 'index'])->name('pemetaancplcpmk.index');
-    Route::get('/pemetaancplcpmkmk',[AdminPemetaanCplCpmkMkController::class, 'index'])->name('pemetaancplcpmkmk.index');
+    Route::get('/export-profil-lulusan', [ExportController::class, 'exportProfilLulusanToWord']);
+    
 });
 
 Route::prefix('wadir1')->name('wadir1.')->group(function(){
