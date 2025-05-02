@@ -17,7 +17,8 @@ class AdminPemetaanCplPlController extends Controller
 
         $pls = ProfilLulusan::when($kode_prodi && $kode_prodi !== 'all', function ($query) use ($kode_prodi) {
             $query->where('kode_prodi', $kode_prodi);
-        })->get();
+        })
+        ->get();
 
         $plIds = $pls->pluck('id_pl');
 
@@ -27,15 +28,16 @@ class AdminPemetaanCplPlController extends Controller
                 ->pluck('id_cpl')
                 ->unique();
 
-            $cpls = CapaianProfilLulusan::whereIn('id_cpl', $cplIds)->get();
+            $cpls = CapaianProfilLulusan::whereIn('id_cpl', $cplIds)->orderBy('id_cpl', 'asc')->get();
         } else {
             $cpls = collect();
         }
         $relasi = DB::table('cpl_pl')
             ->whereIn('id_pl', $plIds)
+            ->orderBy('id_pl', 'asc')
             ->get()
             ->groupBy('id_pl');
-
+            
         return view('admin.pemetaancplpl.index', compact('cpls', 'pls', 'relasi', 'kode_prodi', 'prodis'));
     }
 }

@@ -9,13 +9,33 @@ use Illuminate\Support\Facades\DB;
 
 class AdminPemetaanCplMkController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $cpls = CapaianProfilLulusan::all();
+        $prodis = DB::table('prodis')->get();
+        $kode_prodi = $request->get('kode_prodi');
+        
+        // Query for CPLs based on prodi selection
+        $query = DB::table('cpl_pl as cp')
+            ->join('capaian_profil_lulusans as cpl', 'cp.id_cpl', '=', 'cpl.id_cpl')
+            ->join('profil_lulusans as pl', 'cp.id_pl', '=', 'pl.id_pl')
+            ->select('cpl.*')
+            ->OrderBy('id_cpl', 'asc');
+        
+        // Only apply the where clause if a specific prodi is selected
+        if ($kode_prodi && $kode_prodi !== 'all') {
+            $query->where('pl.kode_prodi', $kode_prodi);
+        }
+        
+        $cpls = $query->get();
+        $cplIds = $cpls->pluck('id_cpl');
+        
+        $relasi = DB::table('cpl_mk')
+            ->whereIn('id_cpl', $cplIds)
+            ->get()
+            ->groupBy('kode_mk');
+        
         $mks = MataKuliah::all();
         
-        $relasi = DB::table('cpl_mk')->get()->groupBy('kode_mk');
-
-        return view('admin.pemetaancplmk.index', compact('cpls', 'mks', 'relasi'));
+        return view('admin.pemetaancplmk.index', compact('cpls', 'mks', 'relasi', 'kode_prodi', 'prodis'));
     }
 }

@@ -153,6 +153,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/pemetaancplcpmk',[AdminPemetaanCplCpmkController::class, 'index'])->name('pemetaancplcpmk.index');
     Route::get('/pemetaancplcpmkmk',[AdminPemetaanCplCpmkMkController::class, 'index'])->name('pemetaancplcpmkmk.index');
+
+    Route::get('/pemenuhancpl',[AdminCapaianProfilLulusanController::class, 'peta_pemenuhan_cpl'])->name('pemenuhancpl.index');
 });
 
 Route::prefix('wadir1')->name('wadir1.')->group(function(){
