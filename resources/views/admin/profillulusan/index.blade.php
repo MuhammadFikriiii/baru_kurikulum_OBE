@@ -25,7 +25,7 @@
             <a href="{{ route('admin.profillulusan.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
                 👤 Tambah Profil Lulusan
             </a>
-            <a href="" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
+            <a href="{{ url('/export/profil-lulusan') }}" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
                 📄 Ekspor ke Excel
             </a>
         </div>
