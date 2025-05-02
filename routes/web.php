@@ -153,7 +153,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/capaianpembelajaranmatakuliah/{id_cpmk}/edit', [AdminCapaianPembelajaranMataKuliahController::class, 'edit'])->name('capaianpembelajaranmatakuliah.edit');
     Route::put('/capaianpembelajaranmatakuliah/{id_cpmk}', [AdminCapaianPembelajaranMataKuliahController::class, 'update'])->name('capaianpembelajaranmatakuliah.update');
 
-    Route::get('/export-profil-lulusan', [ExportController::class, 'exportProfilLulusanToWord']);
+    Route::get('/export-profil-lulusan', [ExportController::class, 'exportProfilLulusanToWord'])->name('export.profil_lulusan.word');
     
 });
 
