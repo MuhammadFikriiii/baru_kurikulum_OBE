@@ -9,6 +9,29 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $(".owl-banner").owlCarousel({
+      loop: true,
+      margin: 30,
+      nav: false,
+      dots: true,
+      items: 1,
+      autoplay: true,
+      autoplayTimeout: 5000,
+      autoplayHoverPause: true
+    });
+  });
+</script>
+
 </head>
 <body class="bg-gray-100 text-gray-800">
   
@@ -97,17 +120,90 @@
 </header>
 
  <!-- Page Home -->
- <section class="w-full h-[500px] bg-cover bg-center flex items-center justify-center text-white" style="background-image: url('/image/poliban.jpeg'); background-position: center;">
-  <div class="bg-[#0f172a]/60 p-10 rounded-xl text-center shadow-lg backdrop-blur-md transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-    <h2 class="text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-700 animate__animated animate__fadeIn">
-      Selamat Datang di Sistem Kurikulum
-    </h2>
-    <p class="text-xl font-light mb-5 text-blue-100">Politeknik Negeri Banjarmasin</p>
-    <a href="#daftar-prodi" class="inline-block px-6 py-3 text-lg font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-full transition duration-300 shadow-md">
-      Lihat Program Studi
-    </a>
+ <section class="w-full h-[500px] bg-cover bg-center flex items-center justify-center text-white" style="background-image: url('/image/poliban.jpeg'); background-position: center;" id="top">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="row">
+          <div class="col-lg-6 align-self-center">
+            <div class="owl-carousel owl-banner owl-loaded owl-drag">
+              <div class="owl-stage-outer">
+                <div class="owl-stage" style="transform: translate3d(-1824px, 0px, 0px); transition: 0.25s; width: 3192px;">
+                  <!-- Slide 1 -->
+                  <div class="owl-item" style="width: 456px;">
+                    <div class="item header-text">
+                      <!-- Judul dengan ukuran besar dan efek -->
+                      <h6 class="text-3xl font-semibold text-white">Poliban</h6>
+                      <h2 class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-700">
+                        lorem <em>lorem lorem</em> lorem <span>lorem lorem</span>
+                      </h2>
+                      <p class="text-lg text-blue-100 mb-6">
+                        loremloremloremloremloremloremloremloremloremloremlorem.
+                      </p>
+                      
+                      <!-- Tombol dengan background bulat dan animasi -->
+                      <div class="down-buttons space-x-4">
+                        <div class="main-blue-button-hover rounded-full py-2 px-6 bg-blue-600 text-white shadow-lg hover:bg-blue-700 transform transition-all duration-300 hover:scale-110">
+                          <a href="#services" class="text-lg font-semibold">STart</a>
+                        </div>
+                        <div class="call-button rounded-full py-2 px-6 bg-green-600 text-white shadow-lg hover:bg-green-700 transform transition-all duration-300 hover:scale-110">
+                          <a href="#" class="text-lg font-semibold"><i class="fa fa-phone"></i> loremlorem</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Slide 2 -->
+                  <div class="owl-item active" style="width: 456px;">
+                    <div class="item header-text">
+                      <h6>loremloremlorem</h6>
+                      <h2>loremlorem<em>loremlorem</em> loremlorem<span>loremlorem</span></h2>
+                      <p>Please <a rel="nofollow" href="https://www.paypal.me/templatemo" target="_blank">support us</a> a little via PayPal if this digital marketing HTML template is useful for you. Thank you.</p>
+                      <div class="down-buttons">
+                        <div class="main-blue-button-hover">
+                          <a href="#video">loremloremlorem</a>
+                        </div>
+                        <div class="call-button">
+                          <a href="#"><i class="fa fa-phone"></i> loremloremlorem</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Slide 3 -->
+                  <div class="owl-item" style="width: 456px;">
+                    <div class="item header-text">
+                      <h6>Welcome to Onix Digital</h6>
+                      <h2>asdfadada <em>loremlorem</em> lorem <span>lorem</span>lorem</h2>
+                      <p>loremloremloremloremlorem</p>
+                      <div class="down-buttons">
+                        <div class="main-blue-button-hover">
+                          <a href="#contact">Message Us Now</a>
+                        </div>
+                        <div class="call-button">
+                          <a href="#"><i class="fa fa-phone"></i> 010-020-0340</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="owl-nav disabled">
+                <button type="button" role="presentation" class="owl-prev"><span aria-label="Previous">‹</span></button>
+                <button type="button" role="presentation" class="owl-next"><span aria-label="Next">›</span></button>
+              </div>
+              <div class="owl-dots">
+                <button role="button" class="owl-dot"><span></span></button>
+                <button role="button" class="owl-dot"><span></span></button>
+                <button role="button" class="owl-dot active"><span></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
+
 
 
   <!-- Beranda -->
