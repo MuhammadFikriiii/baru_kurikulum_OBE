@@ -58,6 +58,8 @@
                     <th class="py-3 px-4 text-center w-1/6 font-bold uppercase">Jurusan</th>
                     <th class="py-3 px-4 text-center w-1/6 font-bold uppercase">Kode Prodi</th>
                     <th class="py-3 px-4 text-center w-1/6 font-bold uppercase">Nama Prodi</th>
+                    <th class="py-3 px-4 text-center w-1/6 font-bold uppercase">Jenjang Pendidikan</th>
+                    <th class="py-3 px-4 text-center w-1/6 font-bold uppercase">Akreditasi Prodi</th>
                     <th class="py-3 px-4 text-center w-1/6 font-bold uppercase">Aksi</th>
                 </tr>
             </thead>
@@ -68,6 +70,8 @@
                         <td class="bpy-3 px-6 w-16 text-center">{{ $prodi->jurusan->nama_jurusan ?? '-'}}</td>
                         <td class="bpy-3 px-6 w-16 text-center">{{ $prodi->kode_prodi }}</td>
                         <td class="bpy-3 px-6 w-16 text-center">{{ $prodi->nama_prodi }}</td>
+                        <td class="py-3 px-4 text-center">{{ $prodi->jenjang_pendidikan ?? '-' }}</td>
+                        <td class="py-3 px-4 text-center">{{ $prodi->peringkat_akreditasi ?? '-' }}</td>
                         <td class="py-3 px-6 flex justify-center items-center space-x-2">
                             <a href="{{ route('admin.prodi.detail', $prodi->kode_prodi) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
                             <a href="{{ route('admin.prodi.edit', $prodi->kode_prodi) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>

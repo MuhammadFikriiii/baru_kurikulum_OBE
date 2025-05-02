@@ -28,7 +28,7 @@
 
         <div class="flex justify-between mb-4">
             <div class="space-x-2">
-                <a href="{{ route('admin.jurusan.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                <a href="" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
                     👤 Tambah Jurusan
                 </a>
                 <a href="" class="a href="{{ route('admin.jurusan.exportWord') }}" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">

@@ -117,4 +117,42 @@ class AdminCapaianProfilLulusanController extends Controller
         $id_cpl->delete();
         return redirect()->route('admin.capaianprofillulusan.index')->with('sukses','Capaian Profil Lulusan Ini Berhasil Di Hapus');
     }
+
+    public function peta_pemenuhan_cpl(Request $request)
+{
+    $kode_prodi = $request->get('kode_prodi', 'all');
+
+    $query = DB::table('cpl_mk as cmk')
+    ->join('mata_kuliahs as mk', 'cmk.kode_mk', '=', 'mk.kode_mk')
+    ->join('capaian_profil_lulusans as cpl', 'cmk.id_cpl', '=', 'cpl.id_cpl')
+    ->join('cpl_pl as cplpl', 'cpl.id_cpl', '=', 'cplpl.id_cpl') // pivot
+    ->join('profil_lulusans as pl', 'cplpl.id_pl', '=', 'pl.id_pl') // join ke profil lulusan
+    ->join('prodis as ps', 'pl.kode_prodi', '=', 'ps.kode_prodi') // prodi dari PL
+    ->select('cpl.kode_cpl', 'mk.semester_mk', 'mk.kode_mk', 'ps.kode_prodi');
+
+
+    if ($kode_prodi !== 'all') {
+        $query->where('ps.kode_prodi', $kode_prodi);
+    }
+
+    $data = $query
+        ->orderBy('cpl.kode_cpl', 'asc')
+        ->orderBy('mk.semester_mk', 'asc')
+        ->get();
+
+    $petaCPL = [];
+
+    foreach ($data as $row) {
+        $cpl = $row->kode_cpl;
+        $semester = 'Semester ' . $row->semester_mk;
+        $kodeMk = $row->kode_mk;
+
+        $petaCPL[$cpl][$semester][] = $kodeMk;
+    }
+
+    $prodis = DB::table('prodis')->get();
+
+    return view('admin.pemenuhancpl.index', compact('petaCPL', 'prodis', 'kode_prodi'));
+}
+
 }

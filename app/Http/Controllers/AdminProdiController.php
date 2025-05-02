@@ -26,8 +26,23 @@ class AdminProdiController extends Controller
     {
         $request->validate([
             'kode_prodi' => 'required|string|max:10|unique:prodis,kode_prodi',
-            'kode_jurusan' => 'required|string|exists:jurusans,kode_jurusan',
-            'nama_prodi' => 'required|string|max:50',
+            'kode_jurusan' => 'nullable|string|exists:jurusans,kode_jurusan',
+            'nama_prodi' => 'required|string|max:100',
+            'fakultas_prodi' => 'required|string|max:100',
+            'pt_prodi' => 'required|string|max:100',
+            'tgl_berdiri_prodi' => 'required|date',
+            'penyelenggaraan_prodi' => 'required|date',
+            'nomor_sk' => 'required|string',
+            'tanggal_sk' => 'required|date',
+            'peringkat_akreditasi' => 'required|string',
+            'nomor_sk_banpt' => 'required|string',
+            'jenjang_pendidikan' => 'required|string',
+            'gelar_lulusan' => 'required|string',
+            'alamat_prodi' => 'required|string',
+            'telepon_prodi' => 'nullable|string',
+            'faksimili_prodi' => 'nullable|string',
+            'website_prodi' => 'nullable|string',
+            'email_prodi' => 'nullable|email',
         ]);
 
         Prodi::create($request->all());
@@ -43,9 +58,24 @@ class AdminProdiController extends Controller
     public function update(Request $request, Prodi $prodi)
     {
         $request->validate([
-            'kode_prodi' => ['required','string','max:10',Rule::unique('prodis','kode_prodi')->ignore($prodi->kode_prodi, 'kode_prodi')],
-            'kode_jurusan' => 'required|string|exists:jurusans,kode_jurusan',
-            'nama_prodi' => 'required|string|max:50',
+            'kode_prodi' => ['required', 'string', 'max:10', Rule::unique('prodis', 'kode_prodi')->ignore($prodi->kode_prodi, 'kode_prodi')],
+            'kode_jurusan' => 'nullable|string|exists:jurusans,kode_jurusan',
+            'nama_prodi' => 'required|string|max:100',
+            'fakultas_prodi' => 'required|string|max:100',
+            'pt_prodi' => 'required|string|max:100',
+            'tgl_berdiri_prodi' => 'required|date',
+            'penyelenggaraan_prodi' => 'required|date',
+            'nomor_sk' => 'required|string',
+            'tanggal_sk' => 'required|date',
+            'peringkat_akreditasi' => 'required|string',
+            'nomor_sk_banpt' => 'required|string',
+            'jenjang_pendidikan' => 'required|string',
+            'gelar_lulusan' => 'required|string',
+            'alamat_prodi' => 'required|string',
+            'telepon_prodi' => 'nullable|string',
+            'faksimili_prodi' => 'nullable|string',
+            'website_prodi' => 'nullable|string',
+            'email_prodi' => 'nullable|email',
         ]);
 
         $prodi->update($request->all());

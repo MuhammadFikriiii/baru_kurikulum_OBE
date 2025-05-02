@@ -199,71 +199,70 @@
 
 
   <!-- Daftar Kurikulum dan Program Studi -->
-  <section class="py-12 px-6 md:px-20">
-    <h3 class="text-2xl font-semibold mb-8 text-center text-[#201F31]">Daftar Jurusan dan Program Studi</h3>
-
-    <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-      <!-- Jurusan Teknik Informatika -->
-      <div class="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition">
-        <h4 class="text-lg font-bold text-[#201F31]">Jurusan Teknik Informatika</h4>
-        <div class="mt-2">
-          <h5 class="text-md font-semibold">Program Studi:</h5>
-          <ul class="mt-2 text-sm text-gray-600 list-disc list-inside">
-            <li>Teknik Informatika</li>
-            <li>Sistem Informasi Kota Cerdas</li>
+  <section class="bg-gray-100 py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center text-blue-700 mb-10">Jurusan & Program Studi di Poliban</h2>
+  
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card: Teknik Sipil -->
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-blue-600 mb-3">🏗️ Teknik Sipil</h3>
+          <ul class="list-disc pl-5 text-gray-700 space-y-1">
+            <li>D3 Teknik Sipil</li>
+            <li>D4 Teknik Bangunan Rawa</li>
+            <li>D3 Teknik Geodesi</li>
+            <li>D3 Teknik Pertambangan</li>
+            <li>D4 Rekayasa Konstruksi Jalan & Jembatan</li>
           </ul>
         </div>
-      </div>
-
-      <!-- Jurusan Teknik Elektronika -->
-      <div class="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition">
-        <h4 class="text-lg font-bold text-[#201F31]">Jurusan Teknik Elektronika</h4>
-        <div class="mt-2">
-          <h5 class="text-md font-semibold">Program Studi:</h5>
-          <ul class="mt-2 text-sm text-gray-600 list-disc list-inside">
-            <li>Teknik Elektronika</li>
-            <li>Teknologi Rekayasa Elektronika</li>
+  
+        <!-- Card: Teknik Mesin -->
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-red-600 mb-3">⚙️ Teknik Mesin</h3>
+          <ul class="list-disc pl-5 text-gray-700 space-y-1">
+            <li>D3 Teknik Mesin</li>
+            <li>D3 Teknik Mesin Otomotif</li>
+            <li>D3 Alat Berat</li>
           </ul>
         </div>
-      </div>
-
-      <!-- Jurusan Teknik Sipil -->
-      <div class="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition">
-        <h4 class="text-lg font-bold text-[#201F31]">Jurusan Teknik Sipil</h4>
-        <div class="mt-2">
-          <h5 class="text-md font-semibold">Program Studi:</h5>
-          <ul class="mt-2 text-sm text-gray-600 list-disc list-inside">
-            <li>Teknik Sipil</li>
-            <li>Manajemen Rekayasa Konstruksi</li>
+  
+        <!-- Card: Teknik Elektro -->
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-yellow-600 mb-3">💡 Teknik Elektro</h3>
+          <ul class="list-disc pl-5 text-gray-700 space-y-1">
+            <li>D3 Teknik Listrik</li>
+            <li>D3 Elektronika</li>
+            <li>D3 Teknik Informatika</li>
+            <li>D4 Sistem Informasi Kota Cerdas</li>
+            <li>D4 Rekayasa Pembangkit Energi</li>
           </ul>
         </div>
-      </div>
-
-      <!-- Jurusan Akuntansi -->
-      <div class="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition">
-        <h4 class="text-lg font-bold text-[#201F31]">Jurusan Akuntansi</h4>
-        <div class="mt-2">
-          <h5 class="text-md font-semibold">Program Studi:</h5>
-          <ul class="mt-2 text-sm text-gray-600 list-disc list-inside">
-            <li>Akuntansi</li>
-            <li>Keuangan dan Perbankan</li>
+  
+        <!-- Card: Akuntansi -->
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-green-600 mb-3">📊 Akuntansi</h3>
+          <ul class="list-disc pl-5 text-gray-700 space-y-1">
+            <li>D3 Akuntansi</li>
+            <li>D3 Komputerisasi Akuntansi</li>
+            <li>D4 Akuntansi Lembaga Keuangan Syariah</li>
           </ul>
         </div>
-      </div>
-
-      <!-- Jurusan Administrasi Bisnis -->
-      <div class="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition">
-        <h4 class="text-lg font-bold text-[#201F31]">Jurusan Administrasi Bisnis</h4>
-        <div class="mt-2">
-          <h5 class="text-md font-semibold">Program Studi:</h5>
-          <ul class="mt-2 text-sm text-gray-600 list-disc list-inside">
-            <li>Administrasi Bisnis</li>
-            <li>Manajemen Informatika</li>
+  
+        <!-- Card: Administrasi Bisnis -->
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold text-purple-600 mb-3">💼 Administrasi Bisnis</h3>
+          <ul class="list-disc pl-5 text-gray-700 space-y-1">
+            <li>D3 Administrasi Bisnis</li>
+            <li>D3 Manajemen Informatika</li>
+            <li>D4 Bisnis Digital</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
+  
+
+
 
   <!-- Footer -->
   <footer class="bg-gray-800 text-white py-14">
