@@ -26,6 +26,6 @@ class ProfilLulusan extends Model
     }
     public function capaianProfilLulusans()
     {
-        return $this->belongsToMany(CapaianProfilLulusan::class, 'cpl_pl', 'kode_pl', 'kode_cpl');
+        return $this->belongsToMany(CapaianProfilLulusan::class, 'cpl_pl', 'id_pl', 'id_cpl');
     }
 }
