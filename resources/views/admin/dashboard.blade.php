@@ -125,6 +125,14 @@
                                 <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
                                 MK ({{ $prodi->progress_mk }}%)
                             </span>
+                            <span class="flex items-center">
+                                <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+                                CPMK ({{ $prodi->progress_cpmk }}%)
+                            </span>
+                            <span class="flex items-center">
+                                <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+                                SUB_CPMK ({{ $prodi->progress_subcpmk }}%)
+                            </span>
                         </div>
                         <a href="#" class="text-blue-500 hover:text-blue-700">Detail</a>
                     </div>
