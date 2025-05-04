@@ -135,28 +135,30 @@
 </header>
 
  <!-- Page Home -->
- <section class="w-full h-[500px] bg-cover bg-center flex items-center justify-center text-white" style="background-image: url('/image/poliban.jpeg'); background-position: center;" id="top">
+ <section class="w-full h-[500px] bg-cover bg-center flex items-center justify-center text-white" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/image/poliban.jpeg'); background-position: center;" id="top">
   <div class="container">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-1mn2">
         <div class="row">
           <div class="col-lg-6 align-self-center">
-                 <div class="owl-carousel owl-banner">
+                 <div class="owl-carousel owl-banner ">
                     <!-- Slide 1 -->
                     <div class="item header-text">
                       <h6 class="text-2xl font-semibold text-white">KURIKULUM OBE</h6>
-                      <h2 class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-700">
-                        lorem <em>lorem lorem</em> lorem <span>lorem lorem</span>
+                      <h2 class="text-5xl font-bold">
+                        <span class="text-[#f3f3f3]">Politeknik</span>
+                        <em class="text-[#3094c6]">Negeri</em>
+                        <span class="text-[#f3f3f3]">Banjarmasin</span>
                       </h2>
-                      <p class="text-lg text-blue-100 mb-6">
-                        loremloremloremloremloremloremloremloremloremloremlorem.
+                      <p class="text-lg text-blue-100 mb-6 mt-3">
+                        Selamat Datang di Website Kurikulum berbasis OBE
                       </p>
-                      <div class="down-buttons space-x-4">
-                        <div class="main-blue-button-hover rounded-full py-2 px-6 bg-blue-600 text-white shadow-lg hover:bg-blue-700 transform transition-all duration-300 hover:scale-110">
-                          <a href="#services" class="text-lg font-semibold">STart</a>
+                      <div class="down-buttons">
+                        <div class="ml-1 main-blue-button-hover bg-blue-600 text-white shadow-lg hover:bg-blue-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
+                          <a href="#services" class="text-lg font-semibold py-2 px-10 inline-block">Start</a>
                         </div>
-                        <div class="call-button rounded-full py-2 px-6 bg-green-600 text-white shadow-lg hover:bg-green-700 transform transition-all duration-300 hover:scale-110">
-                          <a href="#" class="text-lg font-semibold"><i class="fa fa-phone"></i> loremlorem</a>
+                        <div class="ml-5 call-button bg-green-600 text-white shadow-lg hover:bg-green-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
+                          <a href="#" class="text-lg font-semibold py-2 px-8 inline-block"><i class="fa fa-envelope mr-3"></i>Email</a>
                         </div>
                       </div>
                     </div>
@@ -190,7 +192,8 @@
                     </div>
                 </div>
               </div>
-              <div class="flex justify-center gap-2 mt-4">
+              <!-- tombol slide -->
+              <div class="flex justify-left gap-2 mt-2">
                 <button class="owl-dot group w-10 h-10 border-2 border-white text-white rounded-full flex justify-center items-center font-bold text-base cursor-pointer transition-all duration-300 ease-in-out">
                   <span class="group-hover:text-blue-500">1</span>
                 </button>
