@@ -9,29 +9,44 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      const owl = $(".owl-banner");
   
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
-<script>
-  $(document).ready(function(){
-    $(".owl-banner").owlCarousel({
-      loop: true,
-      margin: 30,
-      nav: false,
-      dots: true,
-      items: 1,
-      autoplay: true,
-      autoplayTimeout: 5000,
-      autoplayHoverPause: true
+      // Inisialisasi owl carousel
+      owl.owlCarousel({
+        loop: true,
+        margin: 30,
+        nav: false,
+        dots: true,
+        items: 1,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: true
+      });
+  
+      // Mengatur angka pada dots
+      owl.on('initialized.owl.carousel', function(event) {
+        setTimeout(function() {
+          $('.owl-dot').each(function(index) {
+            $(this).find('span').text(index + 1);  // Menambahkan angka pada dots
+          });
+        }, 100);
+      });
+  
+      // Menambahkan klik event pada tombol (1, 2, 3) untuk berpindah slide
+      $('.owl-dot').on('click', function() {
+        var index = $(this).index(); // Mendapatkan indeks tombol yang diklik
+        owl.trigger('to.owl.carousel', [index]); // Berpindah ke slide yang sesuai dengan indeks
+      });
     });
-  });
-</script>
-
+  </script>
+  
 </head>
 <body class="bg-gray-100 text-gray-800">
   
@@ -126,22 +141,16 @@
       <div class="col-lg-12">
         <div class="row">
           <div class="col-lg-6 align-self-center">
-            <div class="owl-carousel owl-banner owl-loaded owl-drag">
-              <div class="owl-stage-outer">
-                <div class="owl-stage" style="transform: translate3d(-1824px, 0px, 0px); transition: 0.25s; width: 3192px;">
-                  <!-- Slide 1 -->
-                  <div class="owl-item" style="width: 456px;">
+                 <div class="owl-carousel owl-banner">
+                    <!-- Slide 1 -->
                     <div class="item header-text">
-                      <!-- Judul dengan ukuran besar dan efek -->
-                      <h6 class="text-3xl font-semibold text-white">Poliban</h6>
+                      <h6 class="text-2xl font-semibold text-white">KURIKULUM OBE</h6>
                       <h2 class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-700">
                         lorem <em>lorem lorem</em> lorem <span>lorem lorem</span>
                       </h2>
                       <p class="text-lg text-blue-100 mb-6">
                         loremloremloremloremloremloremloremloremloremloremlorem.
                       </p>
-                      
-                      <!-- Tombol dengan background bulat dan animasi -->
                       <div class="down-buttons space-x-4">
                         <div class="main-blue-button-hover rounded-full py-2 px-6 bg-blue-600 text-white shadow-lg hover:bg-blue-700 transform transition-all duration-300 hover:scale-110">
                           <a href="#services" class="text-lg font-semibold">STart</a>
@@ -151,13 +160,11 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <!-- Slide 2 -->
-                  <div class="owl-item active" style="width: 456px;">
+                    <!-- Slide 2 -->
                     <div class="item header-text">
                       <h6>loremloremlorem</h6>
                       <h2>loremlorem<em>loremlorem</em> loremlorem<span>loremlorem</span></h2>
-                      <p>Please <a rel="nofollow" href="https://www.paypal.me/templatemo" target="_blank">support us</a> a little via PayPal if this digital marketing HTML template is useful for you. Thank you.</p>
+                      <p>Some text here for slide 2.</p>
                       <div class="down-buttons">
                         <div class="main-blue-button-hover">
                           <a href="#video">loremloremlorem</a>
@@ -167,9 +174,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <!-- Slide 3 -->
-                  <div class="owl-item" style="width: 456px;">
+                     <!-- Slide 3 -->
                     <div class="item header-text">
                       <h6>Welcome to Onix Digital</h6>
                       <h2>asdfadada <em>loremlorem</em> lorem <span>lorem</span>lorem</h2>
@@ -183,28 +188,25 @@
                         </div>
                       </div>
                     </div>
-                  </div>
                 </div>
               </div>
-              <div class="owl-nav disabled">
-                <button type="button" role="presentation" class="owl-prev"><span aria-label="Previous">‹</span></button>
-                <button type="button" role="presentation" class="owl-next"><span aria-label="Next">›</span></button>
+              <div class="flex justify-center gap-2 mt-4">
+                <button class="owl-dot group w-10 h-10 border-2 border-white text-white rounded-full flex justify-center items-center font-bold text-base cursor-pointer transition-all duration-300 ease-in-out">
+                  <span class="group-hover:text-blue-500">1</span>
+                </button>
+                <button class="owl-dot group w-10 h-10 border-2 border-white text-white rounded-full flex justify-center items-center font-bold text-base cursor-pointer transition-all duration-300 ease-in-out">
+                  <span class="group-hover:text-blue-500">2</span>
+                </button>
+                <button class="owl-dot group w-10 h-10 border-2 border-white text-white rounded-full flex justify-center items-center font-bold text-base cursor-pointer transition-all duration-300 ease-in-out">
+                  <span class="group-hover:text-blue-500">3</span>
+                </button>
               </div>
-              <div class="owl-dots">
-                <button role="button" class="owl-dot"><span></span></button>
-                <button role="button" class="owl-dot"><span></span></button>
-                <button role="button" class="owl-dot active"><span></span></button>
-              </div>
-            </div>
-          </div>
+              
         </div>
       </div>
     </div>
   </div>
 </section>
-
-
-
 
   <!-- Beranda -->
   <div id="beranda" class="homepage pb-16">
@@ -231,68 +233,63 @@
       </div>
     </div>
   </div>
+
   
-  
-
 <!-- Section: Profil Pengajar -->
-<!-- Section: Profil Pengajar -->
-<section id="pengajar" class="bg-white py-16">
-  <div class="container mx-auto px-4">
-    <h2 class="text-3xl font-semibold text-center text-gray-800">Profil Pengajar</h2>
-    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Pengajar 1 -->
-      <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
-        <img src="https://via.placeholder.com/150" alt="Pengajar 1" class="w-32 h-32 mx-auto rounded-full">
-        <h3 class="mt-4 text-xl font-semibold text-gray-800">Dr. Andi Susanto</h3>
-        <p class="text-gray-600 mt-2">Dosen Matematika dan Teknologi Pendidikan</p>
-        <p class="text-gray-600 mt-2">Pengalaman lebih dari 10 tahun di bidang pendidikan dan penelitian.</p>
-      </div>
+  <section id="pengajar" class="bg-white py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-semibold text-center text-gray-800">Profil Pengajar</h2>
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Pengajar 1 -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
+          <img src="https://via.placeholder.com/150" alt="Pengajar 1" class="w-32 h-32 mx-auto rounded-full">
+          <h3 class="mt-4 text-xl font-semibold text-gray-800">Dr. Andi Susanto</h3>
+          <p class="text-gray-600 mt-2">Dosen Matematika dan Teknologi Pendidikan</p>
+          <p class="text-gray-600 mt-2">Pengalaman lebih dari 10 tahun di bidang pendidikan dan penelitian.</p>
+        </div>
 
-      <!-- Pengajar 2 -->
-      <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
-        <img src="https://via.placeholder.com/150" alt="Pengajar 2" class="w-32 h-32 mx-auto rounded-full">
-        <h3 class="mt-4 text-xl font-semibold text-gray-800">Prof. Siti Nurhasanah</h3>
-        <p class="text-gray-600 mt-2">Dosen Ilmu Komputer</p>
-        <p class="text-gray-600 mt-2">Berfokus pada pengembangan kurikulum berbasis teknologi informasi.</p>
-      </div>
+        <!-- Pengajar 2 -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
+          <img src="https://via.placeholder.com/150" alt="Pengajar 2" class="w-32 h-32 mx-auto rounded-full">
+          <h3 class="mt-4 text-xl font-semibold text-gray-800">Prof. Siti Nurhasanah</h3>
+          <p class="text-gray-600 mt-2">Dosen Ilmu Komputer</p>
+          <p class="text-gray-600 mt-2">Berfokus pada pengembangan kurikulum berbasis teknologi informasi.</p>
+        </div>
 
-      <!-- Pengajar 3 -->
-      <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
-        <img src="https://via.placeholder.com/150" alt="Pengajar 3" class="w-32 h-32 mx-auto rounded-full">
-        <h3 class="mt-4 text-xl font-semibold text-gray-800">Budi Setiawan</h3>
-        <p class="text-gray-600 mt-2">Instruktur Bahasa Inggris</p>
-        <p class="text-gray-600 mt-2">Mengajarkan Bahasa Inggris untuk komunikasi profesional dan akademik.</p>
-      </div>
+        <!-- Pengajar 3 -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
+          <img src="https://via.placeholder.com/150" alt="Pengajar 3" class="w-32 h-32 mx-auto rounded-full">
+          <h3 class="mt-4 text-xl font-semibold text-gray-800">Budi Setiawan</h3>
+          <p class="text-gray-600 mt-2">Instruktur Bahasa Inggris</p>
+          <p class="text-gray-600 mt-2">Mengajarkan Bahasa Inggris untuk komunikasi profesional dan akademik.</p>
+        </div>
 
-      <!-- Pengajar 4 -->
-      <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
-        <img src="https://via.placeholder.com/150" alt="Pengajar 4" class="w-32 h-32 mx-auto rounded-full">
-        <h3 class="mt-4 text-xl font-semibold text-gray-800">Dr. Sarah Lestari</h3>
-        <p class="text-gray-600 mt-2">Dosen Kimia</p>
-        <p class="text-gray-600 mt-2">Mempunyai keahlian di bidang kimia organik dan sintesis bahan baru.</p>
-      </div>
+        <!-- Pengajar 4 -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
+          <img src="https://via.placeholder.com/150" alt="Pengajar 4" class="w-32 h-32 mx-auto rounded-full">
+          <h3 class="mt-4 text-xl font-semibold text-gray-800">Dr. Sarah Lestari</h3>
+          <p class="text-gray-600 mt-2">Dosen Kimia</p>
+          <p class="text-gray-600 mt-2">Mempunyai keahlian di bidang kimia organik dan sintesis bahan baru.</p>
+        </div>
 
-      <!-- Pengajar 5 -->
-      <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
-        <img src="https://via.placeholder.com/150" alt="Pengajar 5" class="w-32 h-32 mx-auto rounded-full">
-        <h3 class="mt-4 text-xl font-semibold text-gray-800">Ir. Joko Santoso</h3>
-        <p class="text-gray-600 mt-2">Dosen Teknik Elektro</p>
-        <p class="text-gray-600 mt-2">Berfokus pada penelitian dan pengembangan teknologi elektronika.</p>
-      </div>
+        <!-- Pengajar 5 -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
+          <img src="https://via.placeholder.com/150" alt="Pengajar 5" class="w-32 h-32 mx-auto rounded-full">
+          <h3 class="mt-4 text-xl font-semibold text-gray-800">Ir. Joko Santoso</h3>
+          <p class="text-gray-600 mt-2">Dosen Teknik Elektro</p>
+          <p class="text-gray-600 mt-2">Berfokus pada penelitian dan pengembangan teknologi elektronika.</p>
+        </div>
 
-      <!-- Pengajar 6 -->
-      <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
-        <img src="https://via.placeholder.com/150" alt="Pengajar 6" class="w-32 h-32 mx-auto rounded-full">
-        <h3 class="mt-4 text-xl font-semibold text-gray-800">Maya Kusuma</h3>
-        <p class="text-gray-600 mt-2">Instruktur Desain Grafis</p>
-        <p class="text-gray-600 mt-2">Mengajarkan desain grafis dan multimedia untuk seni dan komunikasi visual.</p>
+        <!-- Pengajar 6 -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
+          <img src="https://via.placeholder.com/150" alt="Pengajar 6" class="w-32 h-32 mx-auto rounded-full">
+          <h3 class="mt-4 text-xl font-semibold text-gray-800">Maya Kusuma</h3>
+          <p class="text-gray-600 mt-2">Instruktur Desain Grafis</p>
+          <p class="text-gray-600 mt-2">Mengajarkan desain grafis dan multimedia untuk seni dan komunikasi visual.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-
-
-
+  </section>
 
   <!-- Daftar Kurikulum dan Program Studi -->
   <section class="bg-gray-100 py-12">
@@ -357,9 +354,6 @@
     </div>
   </section>
   
-
-
-
   <!-- Footer -->
   <footer class="bg-gray-800 text-white py-14">
     <div class="container mx-auto px-6">
