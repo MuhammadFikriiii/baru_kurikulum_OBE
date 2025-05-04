@@ -6,6 +6,9 @@ use App\Models\Prodi;
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Models\ProfilLulusan;
+use App\Models\CapaianProfilLulusan;
+use Illuminate\Support\Facades\DB;
 
 class AdminProdiController extends Controller
 {
@@ -87,9 +90,29 @@ class AdminProdiController extends Controller
         return view('admin.prodi.detail', compact('prodi'));
     }
 
-    public function destroy(Prodi $prodi)
+    public function destroy($kode_prodi)
     {
-        $prodi->delete();
-        return redirect()->route('admin.prodi.index')->with('sukses', 'Prodi berhasil dihapus.');
+        $plIds = DB::table('profil_lulusans')
+            ->where('kode_prodi', $kode_prodi)
+            ->pluck('id_pl');
+
+        $cplIds = DB::table('cpl_pl')
+            ->whereIn('id_pl', $plIds)
+            ->pluck('id_cpl')
+            ->unique();
+
+        DB::table('cpl_pl')->whereIn('id_pl', $plIds)->delete();
+
+        ProfilLulusan::whereIn('id_pl', $plIds)->delete();
+
+        foreach ($cplIds as $id_cpl) {
+            $stillHasRelation = DB::table('cpl_pl')->where('id_cpl', $id_cpl)->exists();
+            if (!$stillHasRelation) {
+                CapaianProfilLulusan::where('id_cpl', $id_cpl)->delete();
+            }
+        }
+        DB::table('prodis')->where('kode_prodi', $kode_prodi)->delete();
+
+        return redirect()->route('admin.prodi.index')->with('sukses', 'Prodi Berhasil Dihapus Beserta Data Terkait Juga');
     }
 }
