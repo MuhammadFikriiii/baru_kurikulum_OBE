@@ -58,7 +58,6 @@ class KaprodiDashboardController extends Controller
                 ->whereIn('cpl_pl.id_pl', $plIds)
                 ->distinct()
                 ->count('sub_cpmks.id_sub_cpmk');
-            
 
             $target_pl = 4;
             $target_cpl = 9;
