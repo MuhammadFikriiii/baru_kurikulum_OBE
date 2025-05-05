@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -10,12 +11,14 @@ use Illuminate\Validation\Rule;
 
 class AdminUserController extends Controller {
     public function index() {
-        $users = User::all();
+
+        $users = User::with('prodi')->get();
         return view('admin.users.index', compact('users'));
     }
 
     public function create() {
-        return view('admin.users.create');
+        $prodis = Prodi::all();
+        return view('admin.users.create',compact('prodis'));
     }
 
     public function store(Request $request) {
@@ -23,17 +26,27 @@ class AdminUserController extends Controller {
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'role' => 'required|in:admin,wadir1'
+            'role' => 'required|in:admin,wadir1,tim,kaprodi',
+            'status' => 'required|in:approved,pending'
         ]);
+
+        if (in_array($request->role, ['kaprodi', 'tim']) && !$request->kode_prodi) {
+            return back()->withErrors(['kode_prodi' => 'Prodi wajib dipilih untuk role ini.'])->withInput();
+        }
+    
+        if (in_array($request->role, ['admin', 'wadir1'])) {
+            $request->merge(['kode_prodi' => null]);
+        }
 
         User::create($request->all());
 
         return redirect()->route('admin.users.index')->with('success', 'User berhasil ditambahkan');
     }
 
-    public function edit ($id){
-        $user = User::findOrFail($id);   
-        return view('admin.users.edit', compact('user'));
+    public function edit($id) {
+        $user = User::findOrFail($id);
+        $prodis = Prodi::all();
+        return view('admin.users.edit', compact('user','prodis'));
     }
 
     public function update(Request $request, $id) {
@@ -42,7 +55,8 @@ class AdminUserController extends Controller {
             'name' => 'required',
             'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
             'password' => 'nullable|min:6',
-            'role' => 'required'
+            'role' => 'required|in:admin,wadir1,tim,kaprodi',
+            'status' => 'required|in:approved,pending'
         ]);
 
         $user = User::findOrFail($id);
@@ -50,27 +64,57 @@ class AdminUserController extends Controller {
         $data = [
             'name' => $request->name,
             'email' => $request->email,
-            'role' => $request->role
+            'role' => $request->role,
+            'status' => $request->status
         ];
 
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->password);
         }
 
+        if (in_array($request->role, ['kaprodi', 'tim'])) {
+            if (!$request->kode_prodi) {
+                return back()->withErrors(['kode_prodi' => 'Prodi wajib dipilih untuk role ini.'])->withInput();
+            }
+            $data['kode_prodi'] = $request->kode_prodi;
+        }
+        
+        if (in_array($request->role, ['admin', 'wadir1'])) {
+            $data['kode_prodi'] = null;
+        }        
+
         $user->update($data);
 
         return redirect()->route('admin.users.index')->with('success', 'Data pengguna berhasil diperbarui.');
     }
 
-    public function details($id)
-    {
+    public function details($id) {
         $user = User::findOrFail($id);
         return view('admin.users.detail', compact('user'));
     }
 
-    public function destroy(User $user) {
+    public function destroy($id) {
+        $user = User::findOrFail($id);
         $user->delete();
         return redirect()->route('admin.users.index')->with('sukses', 'User berhasil dihapus');
     }
 
+    public function pendingUsers() {
+        $pendingUsers = User::where('status', 'pending')->get();
+        return view('admin.pendingusers.index', compact('pendingUsers'));
+    }
+
+
+    public function approveUser($id) {
+        $user = User::findOrFail($id);
+        $user->status = 'approved';
+        $user->save();
+        return redirect()->route('admin.pendingusers.index')->with('success', 'Pengguna berhasil disetujui');
+    }
+
+    public function rejectUser($id) {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('admin.pendingusers.index')->with('success', 'Pengguna berhasil ditolak');
+    }
 }

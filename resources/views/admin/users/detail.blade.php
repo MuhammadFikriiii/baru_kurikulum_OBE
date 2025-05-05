@@ -17,6 +17,14 @@
     <input type="text" name="role" id="role" value="{{ $user->role }}" readonly
         class="w-full p-3 border border-black rounded-lg mb-8 bg-gray-100">
 
+    <label for="prodi" class="block text-xl font-semibold">Prodi</label>
+    <input type="text" name="prodi" id="prodi" value="{{ $user->prodi->nama_prodi ?? '' }}" readonly
+        class="w-full p-3 border border-black rounded-lg mb-8 bg-gray-100">
+
+    <label for="status" class="block text-xl font-semibold">Status</label>
+    <input type="text" name="status" id="status" value="{{ $user->status }}" readonly
+        class="w-full p-3 border border-black rounded-lg mb-8 bg-gray-100">
+
     <a href="{{ route('admin.users.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
         Kembali
     </a>

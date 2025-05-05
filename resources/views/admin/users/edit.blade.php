@@ -38,6 +38,25 @@
                     class="mt-1 w-full p-3 border border-black rounded-lg mb-3">
                     <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
                     <option value="wadir1" {{ $user->role === 'wadir1' ? 'selected' : '' }}>Wadir 1</option>
+                    <option value="tim" {{ $user->role === 'tim' ? 'selected' : '' }}>tim</option>
+                    <option value="kaprodi" {{ $user->role === 'kaprodi' ? 'selected' : '' }}>kaprodi</option>
+                </select>
+
+                <label for="kode_prodi" class="text-2xl">Prodi</label>
+                <select name="kode_prodi" id="kode_prodi"
+                    class="w-full p-3 border border-black rounded-lg mb">
+                    <option value="">Pilih Prodi</option>
+                    @foreach ($prodis as $prodi)
+                        <option value="{{ $prodi->kode_prodi }}" @if(old('kode_prodi', $user->kode_prodi) == $prodi->kode_prodi) selected @endif>{{ $prodi->nama_prodi }}</option>
+                    @endforeach
+                </select>
+                <p class="italic text-red-500">*kosongkan bila user admin/wadir1, jika tetap dipilih prodi tetap dinull kan</p>
+
+                <label for="status" class="text-2xl">Status User</label>
+                <select name="status" id="status" class="w-full p-3 border border-black rounded-lg mb-3" required>
+                    <option value="" disabled {{ old('status', $user->status) == '' ? 'selected' : '' }}>Pilih Status</option>
+                    <option value="approved" {{ old('status', $user->status) == 'approved' ? 'selected' : '' }}>Approved</option>
+                    <option value="pending" {{ old('status', $user->status) == 'pending' ? 'selected' : '' }}>Pending</option>
                 </select>
 
                 <button type="submit" class="bg-green-400 px-5 py-2 rounded-lg hover:bg-green-800 mt-4">

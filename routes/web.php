@@ -74,7 +74,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/users/{id}', [AdminUserController::class, 'update'])->name('users.update');
     Route::get('/users/{id}/detail', [AdminUserController::class,'details'])->name('users.detail');
     Route::delete('/users/{id}', [AdminUserController::class, 'destroy'])->name('users.destroy');
-    Route::get('/userprodi', [AdminUserProdiController::class, 'index'])->name('userprodi.index');
     
     Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
 
@@ -141,9 +140,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/pemetaancplmkbk', [AdminPemetaanCplMkBkController::class, 'index'])->name('pemetaancplmkbk.index');
     Route::post('/pemetaancplmkbk', [AdminPemetaanCplMkBkController::class, 'store'])->name('pemetaancplmkbk.store');
 
-    Route::get('/pendingusers', [SignUpController::class, 'pendingUsers'])->name('pendingusers.index');
-    Route::put('/pendingusers/{id}/approve', [SignUpController::class, 'approveUser'])->name('pendingusers.approve');
-    Route::delete('/pendingusers/{id}/reject', [SignUpController::class, 'rejectUser'])->name('pendingusers.reject');
+    Route::get('/pendingusers', [AdminUserController::class, 'pendingUsers'])->name('pendingusers.index');
+    Route::put('/pendingusers/{id}/approve', [AdminUserController::class, 'approveUser'])->name('pendingusers.approve');
+    Route::delete('/pendingusers/{id}/reject', [AdminUserController::class, 'rejectUser'])->name('pendingusers.reject');
 
     Route::get('/capaianpembelajaranmatakuliah', [AdminCapaianPembelajaranMataKuliahController::class, 'index'])->name('capaianpembelajaranmatakuliah.index');
     Route::get('/capaianpembelajaranmatakuliah/create', [AdminCapaianPembelajaranMataKuliahController::class, 'create'])->name('capaianpembelajaranmatakuliah.create');
