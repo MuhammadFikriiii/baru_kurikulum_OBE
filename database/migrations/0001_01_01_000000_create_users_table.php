@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('password');
             $table->enum('role', ['admin', 'wadir1', 'kaprodi', 'tim']);
             $table->string('kode_prodi')->nullable();
-            $table->foreign('kode_prodi')->references('kode_prodi')->on('prodis')->onDelete('cascade');
             $table->enum('status', ['pending', 'approved'])->default('approved');
             $table->rememberToken();
             $table->timestamps();

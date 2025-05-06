@@ -68,7 +68,7 @@ class ProdiSeeder extends Seeder
                 'penyelenggaraan_prodi' => '2021-01-01',
                 'nomor_sk' => '321/SK/DIKTI/2020',
                 'tanggal_sk' => '2020-08-15',
-                'peringkat_akreditasi' => 'Baik',
+                'peringkat_akreditasi' => 'B',
                 'nomor_sk_banpt' => '987/BAN-PT/Ak/X/2022',
                 'jenjang_pendidikan' => 'Diploma IV',
                 'gelar_lulusan' => 'S.Tr.SI',
