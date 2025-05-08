@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\CapaianProfilLulusan;
 use App\Models\ProfilLulusan;
+use App\Models\Prodi;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 class AdminPemetaanCplPlController extends Controller
@@ -13,9 +14,9 @@ class AdminPemetaanCplPlController extends Controller
     {
         $kode_prodi = $request->get('kode_prodi');
 
-        $prodis = DB::table('prodis')->get();
+        $prodis = Prodi::all();
 
-        $pls = ProfilLulusan::when($kode_prodi && $kode_prodi !== 'all', function ($query) use ($kode_prodi) {
+        $pls = ProfilLulusan::when($kode_prodi, function ($query) use ($kode_prodi) {
             $query->where('kode_prodi', $kode_prodi);
         })
         ->get();
@@ -37,6 +38,11 @@ class AdminPemetaanCplPlController extends Controller
             ->orderBy('id_pl', 'asc')
             ->get()
             ->groupBy('id_pl');
+
+            if (empty($kode_prodi)) {
+                $pls = collect(); // Jika prodi belum dipilih, tampilkan data kosong
+                $cpls = collect(); // Kosongkan data CPL
+            }
             
         return view('admin.pemetaancplpl.index', compact('cpls', 'pls', 'relasi', 'kode_prodi', 'prodis'));
     }

@@ -16,13 +16,13 @@ class AdminProfilLulusanController extends Controller
     
         $query = ProfilLulusan::with('prodi');
     
-        if ($kode_prodi && $kode_prodi != 'all') {
+        if ($kode_prodi) {
             $query->where('kode_prodi', $kode_prodi);
         }
     
         $profillulusans = $query->orderBy('kode_pl', 'asc')->get();
     
-        if (empty($kode_prodi) || $kode_prodi == 'all') {
+        if (empty($kode_prodi)) {
             $profillulusans = collect();
         }
     

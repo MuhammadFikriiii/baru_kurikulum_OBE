@@ -5,16 +5,16 @@
 <h2 class="text-4xl font-extrabold text-center mb-4">Pemetaan CPL - PL</h2>
 <hr class="w-full border border-black mb-4">
 
-<form method="GET" action="{{ route('admin.pemetaancplpl.index') }}">
-    <select name="kode_prodi" onchange="this.form.submit()" class="border border-gray-300 px-3 py-2 rounded-md mr-2">
-        <option value="all" {{ $kode_prodi == 'all' ? 'selected' : '' }}>All</option>
+<form method="GET" action="{{ route('admin.pemetaancplpl.index') }}" class="flex items-center mb-5">
+    <select id="prodi" name="kode_prodi" class="border border-gray-300 px-3 py-2 rounded-md mr-2" onchange="this.form.submit()">
+        <option value="" {{ empty($kode_prodi) ? 'selected' : '' }} disabled selected>Pilih Prodi</option>
         @foreach($prodis as $prodi)
             <option value="{{ $prodi->kode_prodi }}" {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
                 {{ $prodi->nama_prodi }}
             </option>
         @endforeach
     </select>
-</form>       
+</form>  
 
 @if(session('success'))
     <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
@@ -56,6 +56,17 @@
             </tr>
         </thead>
         <tbody>
+            @if(empty($kode_prodi))
+            <tr>
+                <td colspan="9" class="text-center text-black py-4">Silakan pilih prodi terlebih dahulu.</td>
+            </tr>
+            @elseif($pls->isEmpty())
+            <tr>
+                <td colspan="9" class="text-center text-black py-4">
+                    Data belum dibuat untuk prodi ini.
+                </td>
+            </tr>
+            @else
             @foreach ($cpls as $cpl)
                 <tr class="border-b">
                     <td class="px-4 py-2 relative group">
@@ -74,6 +85,7 @@
                 </tr>
             @endforeach
         </tbody>
+        @endif
     </table>
 </form>
 </div>

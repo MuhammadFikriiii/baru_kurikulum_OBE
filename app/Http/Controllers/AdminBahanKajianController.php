@@ -15,6 +15,9 @@ class AdminBahanKajianController extends Controller
     {
         $kode_prodi = $request->get('kode_prodi');
         $prodis = DB::table('prodis')->get();
+        if (!$kode_prodi) {
+            return view("admin.bahankajian.index", compact("prodis", "kode_prodi"));
+        }
 
         $query = DB::table('bahan_kajians as bk')
             ->select(
@@ -32,14 +35,15 @@ class AdminBahanKajianController extends Controller
                 'bk.referensi_bk', 'bk.status_bk', 'bk.knowledge_area', 'prodis.nama_prodi'
             );
 
-            if ($kode_prodi && $kode_prodi !== 'all') {
+            if ($kode_prodi) {
                 $query->where('prodis.kode_prodi', $kode_prodi);
-                $bahankajians = $query->get();
             }
 
         $bahankajians = $query->get();
 
-        return view('admin.bahankajian.index', compact('bahankajians', 'prodis', 'kode_prodi'));
+        $dataKosong = $bahankajians->isEmpty() && $kode_prodi;
+
+        return view('admin.bahankajian.index', compact('bahankajians', 'prodis', 'kode_prodi', 'dataKosong'));
     }
 
 
