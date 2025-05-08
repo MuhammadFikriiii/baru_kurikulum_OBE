@@ -6,37 +6,37 @@
     <hr class="border border-black mb-4">
 
     <div class="overflow-auto border">
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-green-500 text-white text-sm text-center">
+        <table class="min-w-full divide-y divide-gray-200 text-sm">
+            <thead class="bg-green-500 text-white">
                 <tr>
-                    <th class="px-4 py-3 border-r border-white text-left">CPL / CPMK</th>
-                    @foreach($cpmks as $cpmk)
-                        <th class="px-4 py-3 border-r border-white">
-                            {{ $cpmk->kode_cpmk ?? $cpmk->id_cpmk }}
-                        </th>
-                    @endforeach
+                    <th class="border px-4 py-2">Kode CPL</th>
+                    <th class="border px-4 py-2">Deskripsi CPL</th>
+                    <th class="border px-4 py-2">Kode CPMK</th>
+                    <th class="border px-4 py-2">Deskripsi CPMK</th>
+                    <th class="border px-4 py-2">Mata Kuliah</th>
                 </tr>
             </thead>
-            <tbody class="bg-white text-sm text-gray-700 text-center">
-                @foreach($cpls as $cpl)
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-4 py-3 font-semibold border border-gray-200">
-                            {{ $cpl->kode_cpl ?? $cpl->id_cpl }}
-                        </td>
-                        @foreach($cpmks as $cpmk)
-                            <td class="px-4 py-3 border border-gray-200">
-                                @if(isset($matrix[$cpl->id_cpl][$cpmk->id_cpmk]))
-                                    <ul class="list-disc pl-5 space-y-1">
-                                        @foreach(array_unique($matrix[$cpl->id_cpl][$cpmk->id_cpmk]) as $mk)
-                                            <li>{{ $mk }}</li>
-                                        @endforeach
-                                    </ul>
-                                @else
-                                    <span class="text-gray-400">-</span>
-                                @endif
-                            </td>
-                        @endforeach
-                    </tr>
+            <tbody class="bg-white text-gray-700">
+                @foreach($matrix as $kode_cpl => $cpl)
+                    @php $rowspan = count($cpl['cpmk']); $first = true; @endphp
+                    @foreach($cpl['cpmk'] as $kode_cpmk => $cpmk)
+                        <tr>
+                            @if($first)
+                                <td class="border px-4 py-2" rowspan="{{ $rowspan }}">{{ $kode_cpl }}</td>
+                                <td class="border px-4 py-2" rowspan="{{ $rowspan }}">{{ $cpl['deskripsi'] }}</td>
+                                @php $first = false; @endphp
+                            @endif
+                            <td class="border px-4 py-2">{{ $kode_cpmk }}</td>
+                            <td class="border px-4 py-2">{{ $cpmk['deskripsi'] }}</td>
+                            <td class="border px-4 py-2 w-64">
+                                <ul class="list-disc pl-5 space-y-1 text-left">
+                                    @foreach(array_unique($cpmk['mk']) as $mk)
+                                        <li>{{ $mk }}</li>
+                                    @endforeach
+                                </ul>
+                            </td>                            
+                        </tr>
+                    @endforeach
                 @endforeach
             </tbody>
         </table>

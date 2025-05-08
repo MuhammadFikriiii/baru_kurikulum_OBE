@@ -47,13 +47,18 @@
                     <td class="py-2 px-3 text-center">{{ $data['jumlah_mk'] }}</td>
                     <td class="py-2 px-3">
                         @if (count($data['nama_mk']) > 0)
-                            @foreach ($data['nama_mk'] as $kode)
-                                {{ $kode }}&nbsp;
-                            @endforeach
+                            <div class="flex flex-wrap gap-2">
+                                @foreach ($data['nama_mk'] as $kode)
+                                    <span class="border border-gray-400 px-2 py-1 rounded">
+                                        {{ $kode }}
+                                    </span>
+                                @endforeach
+                            </div>
                         @else
                             -
                         @endif
                     </td>
+                    
                 </tr>
             @endfor
 
