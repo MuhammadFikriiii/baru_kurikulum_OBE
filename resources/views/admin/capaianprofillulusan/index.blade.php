@@ -33,16 +33,16 @@
                     📄 Ekspor ke Excel
                 </a>
             </div>
-                <form method="GET" action="{{ route('admin.capaianprofillulusan.index') }}">
-                    <select name="kode_prodi" onchange="this.form.submit()" class="border border-gray-300 px-3 py-2 rounded-md mr-2">
-                        <option value="all" {{ $kode_prodi == 'all' ? 'selected' : '' }}>All</option>
-                        @foreach($prodis as $prodi)
-                            <option value="{{ $prodi->kode_prodi }}" {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
-                                {{ $prodi->nama_prodi }}
-                            </option>
-                        @endforeach
-                    </select>
-                </form>                
+            <form method="GET" action="{{ route('admin.capaianprofillulusan.index') }}" class="flex items-center">
+                <select id="prodi" name="kode_prodi" class="border border-gray-300 px-3 py-2 rounded-md mr-2" onchange="this.form.submit()">
+                    <option value="" {{ empty($kode_prodi) ? 'selected' : '' }} disabled selected>Pilih Prodi</option>
+                    @foreach($prodis as $prodi)
+                        <option value="{{ $prodi->kode_prodi }}" {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
+                            {{ $prodi->nama_prodi }}
+                        </option>
+                    @endforeach
+                </select>
+            </form>                        
         </div>
     
         <div class="flex items-center justify-between mb-3">
@@ -72,10 +72,21 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if(empty($kode_prodi))
+                    <tr>
+                        <td colspan="9" class="text-center text-black py-4">Silakan pilih prodi terlebih dahulu.</td>
+                    </tr>
+                    @elseif($dataKosong)
+                    <tr>
+                        <td colspan="9" class="text-center text-black py-4">
+                            <strong>Data belum dibuat untuk prodi ini.</strong>
+                        </td>
+                    </tr>
+                    @else
                     @foreach ($capaianprofillulusans as $index => $capaianprofillulusan)
                     <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $index + 1 }}</td>
-                        <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->nama_prodi ?? 'Tidak ada prodi' }}</td>                        </td>
+                        <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->nama_prodi ?? 'Tidak ada prodi' }}</td>
                         <td class="px-5 py-2 text-sm">{{ $capaianprofillulusan->kode_cpl }}</td>
                         <td class="px-4 py-2 text-sm w-96 break-words whitespace-pre-line">{{ $capaianprofillulusan->deskripsi_cpl }}</td>
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->status_cpl }}</td>
@@ -91,7 +102,8 @@
                         </td>
                     </tr>
                     @endforeach
-                </tbody>
+                    @endif
+                </tbody>                  
             </table>
         </div>
 @endsection
