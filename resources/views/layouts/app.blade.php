@@ -48,14 +48,8 @@
             </li>
             <li>
                 <a href="{{ route('admin.pendingusers.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="bi bi-person-plus""></i>
+                    <i class="bi bi-person-plus"></i>
                     <span class="ml-2">Register User</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('admin.userprodi.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="bi bi-people"></i>
-                    <span class="ml-2">User Prodi</span>
                 </a>
             </li>
             <li>

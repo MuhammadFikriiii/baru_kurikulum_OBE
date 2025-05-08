@@ -34,8 +34,8 @@ class Prodi extends Model {
         return $this->hasMany(ProfilLulusan::class, 'kode_prodi', 'kode_prodi');
     }
 
-    public function userprodis() {
-        return $this->HasMany(UserProdi::class, 'kode_prodi', 'kode_prodi');
+    public function user() {
+        return $this->HasMany(User::class, 'kode_prodi', 'kode_prodi');
     }
     
 }

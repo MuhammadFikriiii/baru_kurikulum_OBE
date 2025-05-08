@@ -11,27 +11,15 @@
     </div>
 
     <!-- Filter dan Pencarian -->
-    <div class="flex flex-col md:flex-row justify-between mb-6">
-        <div class="flex space-x-2 mb-3 md:mb-0">
-            <select class="bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option value="">Semua Fakultas</option>
-                <option value="fmipa">FMIPA</option>
-                <option value="ft">Fakultas Teknik</option>
-                <option value="feb">FEB</option>
-                <option value="fk">Fakultas Kedokteran</option>
-            </select>
-            <select class="bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option value="">Semua Semester</option>
-                <option value="ganjil">Ganjil 2024/2025</option>
-                <option value="genap">Genap 2024/2025</option>
-            </select>
-        </div>
-        <div class="relative">
-            <input type="text" id="search-prodi-dashboard" placeholder="Search..." 
+    <div class="mb-6">
+        <div class="flex justify-end w-full md:w-auto">
+            <div class="relative">
+                <input type="text" id="search-prodi-dashboard" placeholder="Search..." 
                     class="border border-gray-300 px-3 py-2 rounded-md">
-            <span class="absolute left-3 top-2.5 text-gray-400">
-                <i class="fas fa-search"></i>
-            </span>
+                <span class="absolute left-3 top-2.5 text-gray-400">
+                    <i class="fas fa-search"></i>
+                </span>
+            </div>
         </div>
     </div>
 

@@ -122,13 +122,14 @@ class AdminCapaianProfilLulusanController extends Controller
 {
     $kode_prodi = $request->get('kode_prodi', 'all');
 
-    $query = DB::table('cpl_mk as cmk')
-    ->join('mata_kuliahs as mk', 'cmk.kode_mk', '=', 'mk.kode_mk')
-    ->join('capaian_profil_lulusans as cpl', 'cmk.id_cpl', '=', 'cpl.id_cpl')
-    ->join('cpl_pl as cplpl', 'cpl.id_cpl', '=', 'cplpl.id_cpl') // pivot
-    ->join('profil_lulusans as pl', 'cplpl.id_pl', '=', 'pl.id_pl') // join ke profil lulusan
-    ->join('prodis as ps', 'pl.kode_prodi', '=', 'ps.kode_prodi') // prodi dari PL
-    ->select('cpl.kode_cpl', 'mk.semester_mk', 'mk.kode_mk', 'ps.kode_prodi');
+    $query = DB::table('capaian_profil_lulusans as cpl')
+    ->join('cpl_pl as cplpl', 'cpl.id_cpl', '=', 'cplpl.id_cpl')
+    ->join('profil_lulusans as pl', 'cplpl.id_pl', '=', 'pl.id_pl')
+    ->join('prodis as ps', 'pl.kode_prodi', '=', 'ps.kode_prodi')
+    ->leftJoin('cpl_mk as cmk', 'cpl.id_cpl', '=', 'cmk.id_cpl')
+    ->leftJoin('mata_kuliahs as mk', 'cmk.kode_mk', '=', 'mk.kode_mk')
+    ->select('cpl.id_cpl','cpl.kode_cpl', 'mk.semester_mk', 'mk.kode_mk', 'ps.kode_prodi')
+    ->distinct();
 
 
     if ($kode_prodi !== 'all') {
@@ -140,15 +141,15 @@ class AdminCapaianProfilLulusanController extends Controller
         ->orderBy('mk.semester_mk', 'asc')
         ->get();
 
-    $petaCPL = [];
+        $petaCPL = [];
 
-    foreach ($data as $row) {
-        $cpl = $row->kode_cpl;
-        $semester = 'Semester ' . $row->semester_mk;
-        $kodeMk = $row->kode_mk;
-
-        $petaCPL[$cpl][$semester][] = $kodeMk;
-    }
+        foreach ($data as $row) {
+            $semester = 'Semester ' . $row->semester_mk;
+            $kodeMk = $row->kode_mk;
+        
+            $petaCPL[$row->id_cpl]['label'] = $row->kode_cpl; // yang ditampilkan
+            $petaCPL[$row->id_cpl]['semester'][$semester][] = $kodeMk; // pengelompokan tetap pakai id
+        }        
 
     $prodis = DB::table('prodis')->get();
 

@@ -19,21 +19,37 @@ class UserSeeder extends Seeder
                 'name'=> 'Admin',
                 'email'=> 'admin@gmail.com',
                 'password'=> bcrypt('123456'),
+                'kode_prodi' => null,
                 'role' => 'admin',
             ],
             [
                 'name'=> 'Muhammad Fikri',
                 'email'=> 'tpublicml@gmail.com',
                 'password'=> bcrypt('123456'),
+                'kode_prodi' => null,
                 'role' => 'admin',
             ],
             [
                 'name'=>'Habibie Nugraha',
                 'email'=>'nugraha21@gmail.com',
                 'password'=> bcrypt('123456'),
+                'kode_prodi' => null,
                 'role'=> 'admin',
-
-            ]
+            ],
+            [
+                'name'=>'wadir1',
+                'email'=>'wadir1@gmail.com',
+                'password'=> bcrypt('123456'),
+                'kode_prodi' => null,
+                'role'=> 'wadir1',
+            ],
+            [
+                'name'=>'timti1',
+                'email'=>'timti1@gmail.com',
+                'password'=> bcrypt('123456'),
+                'kode_prodi'=>'C0303',
+                'role'=> 'tim',
+            ],
         ]);
     }
 }

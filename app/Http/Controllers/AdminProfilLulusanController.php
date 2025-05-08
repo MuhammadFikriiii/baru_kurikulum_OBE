@@ -20,7 +20,7 @@ class AdminProfilLulusanController extends Controller
             $query->where('kode_prodi', $kode_prodi);
         }
 
-        $profillulusans = $query->get();
+        $profillulusans = $query->orderBy('kode_pl','asc')->get();
 
         return view('admin.profillulusan.index', compact('profillulusans', 'prodis', 'kode_prodi'));
     }

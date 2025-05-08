@@ -25,20 +25,21 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($petaCPL as $cpl => $semesters)
-            <tr>
-                <td class="border border-b">{{ $cpl }}</td>
-                @for ($i = 1; $i <= 8; $i++)
-                    <td class="border border-b">
-                        @if (!empty($semesters['Semester '.$i]))
-                            {!! implode('<br>', $semesters['Semester '.$i]) !!}
-                        @else
-                            -
-                        @endif
-                    </td>
-                @endfor
-            </tr>
-        @endforeach
+        @foreach ($petaCPL as $item)
+    <tr>
+        <td class="border border-b">{{ $item['label'] }}</td>
+        @for ($i = 1; $i <= 8; $i++)
+            <td class="border border-b">
+                @if (!empty($item['semester']['Semester '.$i]))
+                    {!! implode('<br>', $item['semester']['Semester '.$i]) !!}
+                @else
+                    -
+                @endif
+            </td>
+        @endfor
+    </tr>
+@endforeach
+
     </tbody>
 </table>
 </div>

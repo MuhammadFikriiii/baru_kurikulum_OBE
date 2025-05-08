@@ -57,7 +57,9 @@
                     <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase ">No.</th>
                     <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Nama</th>
                     <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Email</th>
+                    <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Prodi</th>
                     <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Role</th>
+                    <th class="py-3 px-6 text-center min-w-[10px] font-bold uppercase">Status</th>
                     <th class="py-3 px-6 min-w-[10px] font-bold uppercase text-center">Aksi</th>
                 </tr>
             </thead>
@@ -67,6 +69,8 @@
                     <td class="py-3 px-6 min-w-[10px] text-center">{{ $index + 1 }}</td>
                     <td class="py-3 px-6 min-w-[10px] text-center">{{ $user->name }}</td>
                     <td class="py-3 px-6 min-w-[10px] text-center">{{ $user->email }}</td>
+                    <td class="py-3 px-6 min-w-[10px] text-center">{{ $user->prodi->nama_prodi ?? '-' }}</td>
+                    <td class="py-3 px-6 min-w-[10px] text-center">{{ $user->status }}</td>
                     <td class="py-3 px-6 min-w-[10px] text-center">{{ ucfirst($user->role) }}</td>
                     <td class="py-3 px-6 flex justify-center items-center space-x-2">
                         <a href="{{ route('admin.users.detail',$user->id) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">

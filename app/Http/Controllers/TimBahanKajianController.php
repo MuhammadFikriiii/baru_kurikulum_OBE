@@ -12,7 +12,7 @@ class TimBahanKajianController extends Controller
 {
     public function index()
 {
-    $user = Auth::guard('userprodi')->user();
+    $user = Auth::user();
 
         if (!$user || !$user->kode_prodi) {
             abort(403);
@@ -40,7 +40,7 @@ class TimBahanKajianController extends Controller
 
 public function create()
     {
-        $user = Auth::guard('userprodi')->user();
+        $user = Auth::user();
 
         if (!$user || !$user->kode_prodi) {
             abort(403, 'Akses ditolak');
@@ -60,7 +60,7 @@ public function create()
 
     public function store(Request $request)
     {
-        $user = Auth::guard('userprodi')->user();
+        $user = Auth::user();
 
         if (!$user || !$user->kode_prodi) {
             abort(403, 'Akses ditolak');
