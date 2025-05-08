@@ -10,7 +10,7 @@ class Prodi extends Model {
     protected $primaryKey = 'kode_prodi';
     public $incrementing = false;
     protected $keyType = 'string';
-    protected $fillable = ['kode_prodi', 'kode_jurusan', 'nama_prodi','fakultas_prodi',
+    protected $fillable = ['kode_prodi', 'id_jurusan', 'nama_prodi',
     'pt_prodi',
     'tgl_berdiri_prodi',
     'penyelenggaraan_prodi',
@@ -20,14 +20,13 @@ class Prodi extends Model {
     'nomor_sk_banpt',
     'jenjang_pendidikan',
     'gelar_lulusan',
-    'alamat_prodi',
     'telepon_prodi',
     'faksimili_prodi',
     'website_prodi',
     'email_prodi',];
 
     public function jurusan() {
-        return $this->belongsTo(Jurusan::class, 'kode_jurusan', 'kode_jurusan');
+        return $this->belongsTo(Jurusan::class, 'id_jurusan', 'id_jurusan');
     }
 
     public function profillulusans() {

@@ -42,11 +42,6 @@
             </div>
 
             <div>
-                <label class="text-xl font-semibold">Fakultas Prodi:</label>
-                <input type="text" name="fakultas_prodi" value="{{ old('fakultas_prodi', $prodi->fakultas_prodi) }}" class="w-full p-3 border border-black rounded-lg" required>
-            </div>
-
-            <div>
                 <label class="text-xl font-semibold">Perguruan Tinggi:</label>
                 <input type="text" name="pt_prodi" value="{{ old('pt_prodi', $prodi->pt_prodi) }}" class="w-full p-3 border border-black rounded-lg" required>
             </div>
@@ -89,11 +84,6 @@
             <div>
                 <label class="text-xl font-semibold">Gelar/Sebutan Lulusan:</label>
                 <input type="text" name="gelar_lulusan" value="{{ old('gelar_lulusan', $prodi->gelar_lulusan) }}" class="w-full p-3 border border-black rounded-lg" required>
-            </div>
-
-            <div class="md:col-span-2">
-                <label class="text-xl font-semibold">Alamat Prodi:</label>
-                <textarea name="alamat_prodi" rows="2" class="w-full p-3 border border-black rounded-lg" required>{{ old('alamat_prodi', $prodi->alamat_prodi) }}</textarea>
             </div>
 
             <div>

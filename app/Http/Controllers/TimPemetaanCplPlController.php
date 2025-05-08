@@ -11,7 +11,7 @@ class TimPemetaanCplPlController extends Controller
 {
     public function index()
     {
-        $user = Auth::guard('userprodi')->user();
+        $user = Auth::user();
 
         if (!$user || !$user->kode_prodi) {
             abort(404);

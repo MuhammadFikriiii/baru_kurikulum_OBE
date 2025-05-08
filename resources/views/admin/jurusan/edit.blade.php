@@ -13,12 +13,9 @@
         </ul>
     </div>
 @endif
-<form action="{{ route('admin.jurusan.update', $jurusan->kode_jurusan) }}" method="POST">
+<form action="{{ route('admin.jurusan.update', $jurusan->id_jurusan) }}" method="POST">
     @csrf
     @method('PUT')
-
-    <label for="kode_jurusan" class="text-2xl">Kode Jurusan:</label>
-    <input type="text" class="mt-1 w-full p-3 border border-black rounded-lg mb-3" name="kode_jurusan" id="kode_jurusan" value="{{ old('kode_jurusan', $jurusan->kode_jurusan) }}" required>
 
     <label for="nama_jurusan" class="text-2xl">Nama Jurusan:</label>
     <input type="text" class="mt-1 w-full p-3 border border-black rounded-lg mb-3" name="nama_jurusan" id="nama_jurusan" value="{{ old('nama_jurusan', $jurusan->nama_jurusan) }}" required>

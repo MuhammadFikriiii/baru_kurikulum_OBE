@@ -19,12 +19,12 @@
         @csrf
         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
             <div>
-                <label for="kode_jurusan" class="text-xl font-semibold">Jurusan:</label>
-                <select name="kode_jurusan" id="kode_jurusan" required
+                <label for="id_jurusan" class="text-xl font-semibold">Jurusan:</label>
+                <select name="id_jurusan" id="id_jurusan" required
                     class="w-full mt-1 p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500">
                     <option value="" selected disabled>Pilih Jurusan</option>
                     @foreach ($jurusans as $jurusan)
-                        <option value="{{ $jurusan->kode_jurusan }}">{{ $jurusan->nama_jurusan }}</option>
+                        <option value="{{ $jurusan->id_jurusan }}">{{ $jurusan->nama_jurusan }}</option>
                     @endforeach
                 </select>
             </div>
@@ -39,11 +39,6 @@
                 <label for="nama_prodi" class="text-xl font-semibold">Nama Prodi:</label>
                 <input type="text" name="nama_prodi" id="nama_prodi" required
                     class="w-full mt-1 p-3 border border-black rounded-lg">
-            </div>
-
-            <div>
-                <label class="text-xl font-semibold">Fakultas Prodi:</label>
-                <input type="text" name="fakultas_prodi" required class="w-full p-3 border border-black rounded-lg">
             </div>
 
             <div>
@@ -73,7 +68,7 @@
 
             <div>
                 <label class="text-xl font-semibold">Peringkat Akreditasi:</label>
-                <input type="text" name="peringkat_akreditasi" required class="w-full p-3 border border-black rounded-lg">
+                <input type="text" name="peringkat_akreditasi" class="w-full p-3 border border-black rounded-lg">
             </div>
 
             <div>
@@ -83,17 +78,12 @@
 
             <div>
                 <label class="text-xl font-semibold">Jenjang Pendidikan:</label>
-                <input type="text" name="jenjang_pendidikan" required class="w-full p-3 border border-black rounded-lg">
+                <input type="text" name="jenjang_pendidikan"  class="w-full p-3 border border-black rounded-lg">
             </div>
 
             <div>
                 <label class="text-xl font-semibold">Gelar/Sebutan Lulusan:</label>
-                <input type="text" name="gelar_lulusan" required class="w-full p-3 border border-black rounded-lg">
-            </div>
-
-            <div class="md:col-span-2">
-                <label class="text-xl font-semibold">Alamat Prodi:</label>
-                <textarea name="alamat_prodi" rows="2" required class="w-full p-3 border border-black rounded-lg"></textarea>
+                <input type="text" name="gelar_lulusan"  class="w-full p-3 border border-black rounded-lg">
             </div>
 
             <div>
@@ -115,6 +105,7 @@
                 <label class="text-xl font-semibold">Email:</label>
                 <input type="email" name="email_prodi" class="w-full p-3 border border-black rounded-lg">
             </div>
+
         </div>
 
         <div class="mt-6">

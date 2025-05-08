@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Jurusan extends Model {
     use HasFactory;
-    protected $primaryKey = 'kode_jurusan';
-    public $incrementing = false;
+    protected $primaryKey = 'id_jurusan';
+    public $incrementing = true;
     protected $keyType = 'string';
-    protected $fillable = ['kode_jurusan', 'nama_jurusan'];
+    protected $fillable = ['nama_jurusan'];
 
     public function prodis() {
-        return $this->hasMany(Prodi::class, 'kode_jurusan', 'kode_jurusan');
+        return $this->hasMany(Prodi::class, 'id_jurusan', 'id_jurusan');
     }
 }

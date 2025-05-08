@@ -35,7 +35,7 @@
                         'semester_mk' => $i,
                         'sks_mk' => 0,
                         'jumlah_mk' => 0,
-                        'kode_mk' => [],
+                        'nama_mk' => [],
                     ]);
 
                     $totalSks += $data['sks_mk'];
@@ -46,8 +46,8 @@
                     <td class="py-2 px-3 text-center">{{ $data['sks_mk'] }}</td>
                     <td class="py-2 px-3 text-center">{{ $data['jumlah_mk'] }}</td>
                     <td class="py-2 px-3">
-                        @if (count($data['kode_mk']) > 0)
-                            @foreach ($data['kode_mk'] as $kode)
+                        @if (count($data['nama_mk']) > 0)
+                            @foreach ($data['nama_mk'] as $kode)
                                 {{ $kode }}&nbsp;
                             @endforeach
                         @else

@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('prodis', function (Blueprint $table) {
             $table->string('kode_prodi', 10)->primary();
-            $table->string('kode_jurusan', 10)->nullable();
+            $table->unsignedBigInteger('id_jurusan');
             $table->string('nama_prodi', 50);
-            $table->string('fakultas_prodi', 100);
             $table->string('pt_prodi', 100);
             $table->date('tgl_berdiri_prodi');
             $table->date('penyelenggaraan_prodi');
@@ -25,12 +24,11 @@ return new class extends Migration
             $table->string('nomor_sk_banpt');
             $table->string('jenjang_pendidikan');
             $table->string('gelar_lulusan');
-            $table->string('alamat_prodi');
-            $table->string('telepon_prodi');
-            $table->string('faksimili_prodi');
-            $table->string('website_prodi');
-            $table->string('email_prodi');
-            $table->foreign('kode_jurusan')->references('kode_jurusan')->on('jurusans')->onUpdate('cascade')->onDelete('set null');
+            $table->string('telepon_prodi')->nullable();
+            $table->string('faksimili_prodi')->nullable();
+            $table->string('website_prodi')->nullable();
+            $table->string('email_prodi')->nullable();
+            $table->foreign('id_jurusan')->references('id_jurusan')->on('jurusans')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

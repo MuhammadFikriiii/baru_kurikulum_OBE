@@ -15,15 +15,12 @@ class JurusanSeeder extends Seeder
     {
         Jurusan::insert([
                 [
-                    'kode_jurusan'=>'J0101',
                     'nama_jurusan'=> 'Jurusan Teknik Elektro',
                 ],
                 [
-                    'kode_jurusan'=> 'J0102',
                     'nama_jurusan'=> 'Jurusan Teknik Sipil',
                 ],
                 [
-                    'kode_jurusan'=> 'J0103',
                     'nama_jurusan'=> 'Jurusan Teknik Informatika',
                 ],
         ]);

@@ -147,7 +147,7 @@ class AdminMataKuliahController extends Controller
                 'semester_mk' => $semester_mk,
                 'sks_mk' => $items->sum('sks_mk'),
                 'jumlah_mk' => $items->count(),
-                'kode_mk' => $items->pluck('kode_mk')->toArray(),
+                'nama_mk' => $items->pluck('nama_mk')->toArray(),
                 'mata_kuliah' => $items,
             ];
         });

@@ -18,10 +18,6 @@
     <form action="{{ route('admin.jurusan.store') }}" method="POST">
         @csrf
         <div class="mb-3">
-        <label for="kode_jurusan" class="text-2xl">Kode Jurusan:</label>
-        <input type="text" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500" name="kode_jurusan" id="kode_jurusan" required>
-        </div>
-        <div class="mb-3">
         <label for="nama_jurusan" class="text-2xl">Nama Jurusan:</label>
         <input type="text" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500" name="nama_jurusan" id="nama_jurusan" required>
        </div>

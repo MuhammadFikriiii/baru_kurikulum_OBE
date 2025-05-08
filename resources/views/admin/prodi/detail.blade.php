@@ -25,12 +25,6 @@
         </div>
 
         <div>
-            <label for="fakultas_prodi" class="block text-xl font-semibold">Fakultas Prodi</label>
-            <input type="text" id="fakultas_prodi" value="{{ $prodi->fakultas_prodi }}" readonly
-                class="w-full p-3 border border-black rounded-lg bg-gray-100">
-        </div>
-
-        <div>
             <label for="pt_prodi" class="block text-xl font-semibold">PT Prodi</label>
             <input type="text" id="pt_prodi" value="{{ $prodi->pt_prodi }}" readonly
                 class="w-full p-3 border border-black rounded-lg bg-gray-100">
@@ -81,12 +75,6 @@
         <div>
             <label for="gelar_lulusan" class="block text-xl font-semibold">Gelar Lulusan</label>
             <input type="text" id="gelar_lulusan" value="{{ $prodi->gelar_lulusan }}" readonly
-                class="w-full p-3 border border-black rounded-lg bg-gray-100">
-        </div>
-
-        <div>
-            <label for="alamat_prodi" class="block text-xl font-semibold">Alamat Prodi</label>
-            <input type="text" id="alamat_prodi" value="{{ $prodi->alamat_prodi }}" readonly
                 class="w-full p-3 border border-black rounded-lg bg-gray-100">
         </div>
 

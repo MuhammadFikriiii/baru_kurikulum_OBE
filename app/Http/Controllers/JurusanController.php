@@ -22,7 +22,6 @@ class JurusanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode_jurusan' => 'required|string|max:10|unique:jurusans,kode_jurusan',
             'nama_jurusan' => 'required|string|max:50',
         ]);
 
@@ -38,7 +37,6 @@ class JurusanController extends Controller
     public function update(Request $request, Jurusan $jurusan)
     {
         $request->validate([
-            'kode_jurusan' => ['required','string','max:10',Rule::unique('jurusans', 'kode_jurusan')->ignore($jurusan->kode_jurusan,'kode_jurusan'),],
             'nama_jurusan' => 'required|string|max:50',
         ]);
 

@@ -33,7 +33,7 @@ class AdminCapaianProfilLulusanController extends Controller
 
     public function create()
     {
-        $profilLulusans = DB::table('profil_lulusans')->get();
+        $profilLulusans = DB::table('profil_lulusans')->orderBy('kode_pl','asc')->get();
         return view("admin.capaianprofillulusan.create", compact("profilLulusans"));
     }
 
@@ -128,7 +128,7 @@ class AdminCapaianProfilLulusanController extends Controller
     ->join('prodis as ps', 'pl.kode_prodi', '=', 'ps.kode_prodi')
     ->leftJoin('cpl_mk as cmk', 'cpl.id_cpl', '=', 'cmk.id_cpl')
     ->leftJoin('mata_kuliahs as mk', 'cmk.kode_mk', '=', 'mk.kode_mk')
-    ->select('cpl.id_cpl','cpl.kode_cpl', 'mk.semester_mk', 'mk.kode_mk', 'ps.kode_prodi')
+    ->select('cpl.id_cpl','cpl.kode_cpl', 'mk.semester_mk', 'mk.kode_mk','mk.nama_mk', 'ps.kode_prodi')
     ->distinct();
 
 
@@ -145,10 +145,10 @@ class AdminCapaianProfilLulusanController extends Controller
 
         foreach ($data as $row) {
             $semester = 'Semester ' . $row->semester_mk;
-            $kodeMk = $row->kode_mk;
+            $namamk = $row->nama_mk;
         
             $petaCPL[$row->id_cpl]['label'] = $row->kode_cpl; // yang ditampilkan
-            $petaCPL[$row->id_cpl]['semester'][$semester][] = $kodeMk; // pengelompokan tetap pakai id
+            $petaCPL[$row->id_cpl]['semester'][$semester][] = $namamk; // pengelompokan tetap pakai id
         }        
 
     $prodis = DB::table('prodis')->get();
