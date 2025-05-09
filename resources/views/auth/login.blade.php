@@ -63,7 +63,7 @@
                     <label class="block text-gray-700">Password</label>
                     <input type="password" name="password" class="w-full border border-gray-300 rounded-lg px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-[#3094c6]" required placeholder="Masukkan Password">
                 </div>
-                <button type="submit" class="w-full bg-[#3094c6] text-white py-2 rounded-lg hover:bg-[rgb(29,99,134)] transition-all">
+                <button href="/login" type="submit" class="w-full bg-[#3094c6] text-white py-2 rounded-lg hover:bg-[rgb(29,99,134)] transition-all">
                     Login
                 </button>
                 <p class="text-center mt-2">
