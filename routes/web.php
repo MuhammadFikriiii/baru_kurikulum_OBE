@@ -22,7 +22,7 @@ use App\Http\Controllers\Wadir1DashboardController;
 use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\Wadir1JurusanController;
 use App\Http\Controllers\KaprodiDashboardController;
-use App\http\Controllers\AdminUserProdiController;
+use App\Http\Controllers\AdminSubCpmkController;
 use App\Http\Controllers\KaprodiProfilLulusanController;
 use App\Http\Controllers\TimDashboardController;
 use App\Http\Controllers\TimProfilLulusanController;
@@ -149,6 +149,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/capaianpembelajaranmatakuliah', [AdminCapaianPembelajaranMataKuliahController::class, 'store'])->name('capaianpembelajaranmatakuliah.store');
     Route::get('/capaianpembelajaranmatakuliah/{id_cpmk}/edit', [AdminCapaianPembelajaranMataKuliahController::class, 'edit'])->name('capaianpembelajaranmatakuliah.edit');
     Route::put('/capaianpembelajaranmatakuliah/{id_cpmk}', [AdminCapaianPembelajaranMataKuliahController::class, 'update'])->name('capaianpembelajaranmatakuliah.update');
+
+    Route::get('/subcpmk', [AdminSubCpmkController::class, 'index'])->name('subcpmk.index');
+    Route::get('/subcpmk/create', [AdminSubCpmkController::class, 'create'])->name('subcpmk.create');
+    Route::post('/subcpmk', [AdminSubCpmkController::class, 'store'])->name('subcpmk.store');
+    Route::get('/subcpmk/{subcpmk}/edit', [AdminSubCpmkController::class, 'edit'])->name('subcpmk.edit');
+    Route::put('/subcpmk/{subcpmk}',[AdminSubCpmkController::class, 'update'])->name('subcpmk.update');
+    Route::delete('/subcpmk/{subcpmk}', [AdminSubCpmkController::class, 'destroy'])->name('subcpmk.destroy');
 
     Route::get('/pemetaancplcpmk',[AdminPemetaanCplCpmkController::class, 'index'])->name('pemetaancplcpmk.index');
     Route::get('/pemetaancplcpmkmk',[AdminPemetaanCplCpmkMkController::class, 'index'])->name('pemetaancplcpmkmk.index');

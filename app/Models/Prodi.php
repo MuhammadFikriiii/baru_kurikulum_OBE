@@ -36,6 +36,11 @@ class Prodi extends Model {
     public function user() {
         return $this->HasMany(User::class, 'kode_prodi', 'kode_prodi');
     }
+
+    public function subcpmk()
+    {
+        return $this->hasMany(SubCpmk::class, 'id_subcpmk', 'id_subcpmk');
+    }
     
 }
 

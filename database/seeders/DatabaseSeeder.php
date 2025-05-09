@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             CapaianPembelajaranMataKuliahSeeder::class,
             CplCpmkSeeder::class,
             CpmkMkSeeder::class,
+            SubcpmkSeeder::class,
         ]);
     }
 }
