@@ -6,7 +6,7 @@
 
     <hr class="border border-black mb-4">
 
-    <div class="w-full max-w-[1350px] h-[80vh] overflow-auto border">
+    <div class="w-full max-w-[1650px] h-[80vh] overflow-auto border">
 
         <table class="min-w-max table-auto divide-y divide-gray-200">
             <thead class="bg-green-500 text-white text-sm text-center">

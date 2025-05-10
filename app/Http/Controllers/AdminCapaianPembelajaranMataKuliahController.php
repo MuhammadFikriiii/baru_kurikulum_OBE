@@ -102,6 +102,28 @@ class AdminCapaianPembelajaranMataKuliahController extends Controller
                 'kode_mk' => $kode_mk,
             ]);
         }
-        return redirect()->route('admin.capaianpembelajaranmatakuliah.index')->with('success', 'Data berhasil diperbarui.');
+        return redirect()->route('admin.capaianpembelajaranmatakuliah.index')->with('success', 'CPMK berhasil diperbarui.');
+    }
+
+    public function detail($id_cpmk)
+    {
+        $cpmk = DB::table('capaian_pembelajaran_mata_kuliahs as cpmk')
+            ->where('cpmk.id_cpmk', $id_cpmk)
+            ->select('cpmk.id_cpmk', 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk')
+            ->first();
+
+        $cpls = DB::table('cpl_cpmk')
+            ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
+            ->where('cpl_cpmk.id_cpmk', $id_cpmk)
+            ->select('cpl.id_cpl', 'cpl.deskripsi_cpl')
+            ->get();
+
+        $mks = DB::table('cpmk_mk')
+            ->join('mata_kuliahs as mk', 'cpmk_mk.kode_mk', '=', 'mk.kode_mk')
+            ->where('cpmk_mk.id_cpmk', $id_cpmk)
+            ->select('mk.kode_mk', 'mk.nama_mk')
+            ->get();
+
+        return view('admin.capaianpembelajaranmatakuliah.detail', compact('cpmk', 'cpls', 'mks'));
     }
 }

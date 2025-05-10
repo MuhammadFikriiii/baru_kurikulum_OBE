@@ -6,7 +6,25 @@
     <h2 class="text-4xl font-extrabold text-center mb-4">Daftar Capaian Pembelajaran Matakuliah</h2>
     <hr class="w-full border border-black mb-4">
 
-    <!-- Link untuk menambah data -->
+    @if(session('success'))
+        <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
+            <span class="font-bold">{{ session('success') }}</span>
+            <button onclick="document.getElementById('alert').style.display='none'"
+                class="absolute top-1 right-3 text-white font-bold text-lg">
+                &times;
+            </button>
+        </div>
+        @endif
+
+        @if(session('sukses'))
+        <div id="alert" class="bg-red-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
+            <span class="font-bold">{{ session('sukses') }}</span>
+            <button onclick="document.getElementById('alert').style.display='none'"
+                class="absolute top-1 right-3 text-white font-bold text-lg">
+                &times;
+            </button>
+        </div>
+        @endif
     <a href="{{ route('admin.capaianpembelajaranmatakuliah.create') }}" class="px-4 py-2 bg-blue-500 text-white rounded-lg mb-4 inline-block">
         Tambah Capaian Pembelajaran Matakuliah
     </a>
@@ -44,7 +62,7 @@
                     <td class="py-3 px-6 text-center">{{ $cpmk->kode_cpmk }}</td>
                     <td class="py-3 px-6 text-center">{{ $cpmk->deskripsi_cpmk }}</td>
                         <td class="py-2 px-3 flex justify-center items-center space-x-2">
-                            <a href="#" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈</a>
+                            <a href="{{ route('admin.capaianpembelajaranmatakuliah.detail', $cpmk->id_cpmk) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈</a>
                             <a href="{{ route('admin.capaianpembelajaranmatakuliah.edit', $cpmk->id_cpmk) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️</a>
                             <form action="#" method="POST">
                                 @csrf @method('DELETE')
