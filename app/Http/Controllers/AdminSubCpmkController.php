@@ -54,4 +54,8 @@ class AdminSubCpmkController extends Controller
         return redirect()->route('admin.subcpmk.index')->with('success', 'Sub CPMK berhasil dihapus');
     }
 
+    public function detail(SubCpmk $subcpmk)
+    {
+        return view('admin.subcpmk.detail', compact('subcpmk'));
+    }
 }
