@@ -107,10 +107,7 @@ class AdminCapaianPembelajaranMataKuliahController extends Controller
 
     public function detail($id_cpmk)
     {
-        $cpmk = DB::table('capaian_pembelajaran_mata_kuliahs as cpmk')
-            ->where('cpmk.id_cpmk', $id_cpmk)
-            ->select('cpmk.id_cpmk', 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk')
-            ->first();
+        $cpmk = CapaianPembelajaranMataKuliah::findOrFail($id_cpmk);
 
         $cpls = DB::table('cpl_cpmk')
             ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
@@ -124,6 +121,6 @@ class AdminCapaianPembelajaranMataKuliahController extends Controller
             ->select('mk.kode_mk', 'mk.nama_mk')
             ->get();
 
-        return view('admin.capaianpembelajaranmatakuliah.detail', compact('cpmk', 'cpls', 'mks'));
+        return view('admin.capaianpembelajaranmatakuliah.detail', compact( 'cpls', 'mks', 'cpmk'));
     }
 }
