@@ -71,9 +71,14 @@
                 <tr class="border-b">
                     <td class="px-4 py-2 relative group">
                         <span class="cursor-help">{{ $cpl->kode_cpl }}</span>
-                        <div class="absolute -mt-10 left-1/2 -translate-x-2 top-full hidden group-hover:block w-64 bg-gray-700 text-white text-sm rounded p-2 z-50 text-center">
+                        <div class="mt-9 absolute left-1/2 -translate-x-[60%] top-full hidden group-hover:block w-64 bg-gray-700 text-white text-sm rounded p-2 z-50 text-center">
                             {{ $cpl->deskripsi_cpl }}
                         </div>
+                        @if (isset($prodiByCpl[$cpl->id_cpl]))
+                        <div class="absolute left-1/2 -translate-x-[60%] top-full hidden group-hover:block w-64 bg-gray-700 text-white text-sm rounded p-2 z-50 text-center">
+                            {{ $prodiByCpl[$cpl->id_cpl] }}
+                        </div>
+                    @endif
                     </td>                    
                     @foreach ($pls as $pl)
                         <td class="px-4 py-2 text-center">

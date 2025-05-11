@@ -46,24 +46,32 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($cpls as $cpl)
-                <tr class="border-b">
-                    <td class="px-4 py-2 relative group">
-                        <span class="cursor-help">{{ $cpl->kode_cpl }}</span>
-                        <div class="absolute -mt-10 left-1/2 -translate-x-2 top-full hidden group-hover:block w-64 bg-gray-700 text-white text-sm rounded p-2 z-50 text-center">
-                            {{ $cpl->deskripsi_cpl }}
-                        </div>
-                    </td>                    
-                    @foreach ($pls as $pl)
-                        <td class="px-4 py-2 text-center">
-                            <input type="checkbox" disabled 
-                            {{ isset($relasi[$pl->id_pl]) && in_array($cpl->id_cpl, $relasi[$pl->id_pl]->pluck('id_cpl')->toArray()) ? 'checked' : '' }} 
-                            class="h-5 w-5 mx-auto appearance-none rounded border-2 border-blue-600 bg-white checked:bg-white-600 checked:border-blue-600 disabled:opacity-100 disabled:cursor-default relative">
-                        </td>
-                    @endforeach
-                </tr>
+    @foreach ($cpls as $cpl)
+        <tr class="border-b">
+            <td class="px-4 py-2 relative group">
+                <span class="cursor-help">{{ $cpl->kode_cpl }}</span>
+
+                <div class="mt-9 absolute left-1/2 -translate-x-[60%] top-full hidden group-hover:block w-64 bg-gray-700 text-white text-sm rounded p-2 z-50 text-center">
+                    {{ $cpl->deskripsi_cpl }}
+                </div>
+
+                @if (isset($prodiByCpl[$cpl->id_cpl]))
+                    <div class="absolute left-1/2 -translate-x-[60%] top-full hidden group-hover:block w-64 bg-gray-700 text-white text-sm rounded p-2 z-50 text-center">
+                        {{ $prodiByCpl[$cpl->id_cpl] }}
+                    </div>
+                @endif
+            </td>
+
+            @foreach ($pls as $pl)
+                <td class="px-4 py-2 text-center">
+                    <input type="checkbox" disabled 
+                    {{ isset($relasi[$pl->id_pl]) && in_array($cpl->id_cpl, $relasi[$pl->id_pl]->pluck('id_cpl')->toArray()) ? 'checked' : '' }} 
+                    class="h-5 w-5 mx-auto appearance-none rounded border-2 border-blue-600 bg-white checked:bg-white-600 checked:border-blue-600 disabled:opacity-100 disabled:cursor-default relative">
+                </td>
             @endforeach
-        </tbody>
+        </tr>
+    @endforeach
+</tbody>
     </table>
 </form>
 

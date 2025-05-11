@@ -43,7 +43,18 @@ class AdminPemetaanCplPlController extends Controller
                 $pls = collect(); // Jika prodi belum dipilih, tampilkan data kosong
                 $cpls = collect(); // Kosongkan data CPL
             }
+
+        $prodiByCpl = DB::table('cpl_pl')
+            ->join('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
+            ->join('prodis', 'profil_lulusans.kode_prodi', '=', 'prodis.kode_prodi')
+            ->select('cpl_pl.id_cpl', 'prodis.nama_prodi')
+            ->get()
+            ->groupBy('id_cpl')
+            ->map(function ($items) {
+                return $items->first()->nama_prodi ?? '-';
+            })
+            ;
             
-        return view('admin.pemetaancplpl.index', compact('cpls', 'pls', 'relasi', 'kode_prodi', 'prodis'));
+        return view('admin.pemetaancplpl.index', compact('cpls', 'pls', 'relasi', 'kode_prodi', 'prodis', 'prodiByCpl'));
     }
 }

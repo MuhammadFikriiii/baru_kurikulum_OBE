@@ -37,10 +37,20 @@ class TimPemetaanCplBkController extends Controller
                 ->where('profil_lulusans.kode_prodi', $kodeProdi);
         })
         ->orderBy('kode_bk', 'asc')
-        ->get();        
+        ->get();   
+        
+         $prodiByCpl = DB::table('cpl_pl')
+        ->join('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
+        ->join('prodis', 'profil_lulusans.kode_prodi', '=', 'prodis.kode_prodi')
+        ->select('cpl_pl.id_cpl', 'prodis.nama_prodi')
+        ->get()
+        ->groupBy('id_cpl')
+        ->map(function ($items) {
+            return $items->first()->nama_prodi ?? '-';
+        });
         
         $relasi = DB::table('cpl_bk')->get()->groupBy('id_bk');
 
-        return view('tim.pemetaancplbk.index', compact('cpls', 'bks', 'relasi', 'prodi'));
+        return view('tim.pemetaancplbk.index', compact('cpls', 'bks', 'relasi', 'prodi', 'prodiByCpl'));
     }
 }
