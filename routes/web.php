@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminProfilLulusanController;
 use App\Http\Controllers\AdminCapaianProfilLulusanController;
 use App\Http\Controllers\Wadir1ProdiController;
 use App\Models\AdminCapaianPembelajaranMataKuliah;
+use App\Http\Controllers\AdminPenilaianController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPemetaanCplPlController;
 use App\Http\Controllers\AdminBahanKajianController;
@@ -163,6 +164,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/pemetaancplcpmkmk',[AdminPemetaanCplCpmkMkController::class, 'index'])->name('pemetaancplcpmkmk.index');
 
     Route::get('/pemenuhancpl',[AdminCapaianProfilLulusanController::class, 'peta_pemenuhan_cpl'])->name('pemenuhancpl.index');
+    Route::get('/penilaian/create', [AdminPenilaianController::class, 'create'])->name('penilaian.create');
+    Route::post('/penilaian', [AdminPenilaianController::class, 'store'])->name('penilaian.store');
 });
 
 Route::prefix('wadir1')->name('wadir1.')->group(function(){

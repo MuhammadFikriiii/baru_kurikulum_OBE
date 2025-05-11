@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('kode_mk');
             $table->unsignedBigInteger('id_cpmk');
             $table->integer('kuis');
-            $table->integer('Observasi');
+            $table->integer('observasi');
             $table->integer('presentasi');
             $table->integer('uts');
             $table->integer('uas');
