@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Kurikulum OBE')</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
     @vite(['resources/js/app.js'])
     <script>
         function toggleSidebar() {
@@ -32,54 +33,63 @@
         <ul class="space-y-1">
             <li>
                 <a href="{{ route('tim.dashboard') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <span>👥</span>
-                    <span class="ml-2">Dashboard</span></a>
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span class="ml-2">Dashboard</span>
+                </a>
             </li>
             <li>
                 <a href="{{ route('tim.profillulusan.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <span>👥</span>
-                    <span class="ml-2">Profil Lulusan</span></a>
+                    <i class="fas fa-user-graduate"></i>
+                    <span class="ml-2">Profil Lulusan</span>
+                </a>
             </li>
             <li>
                 <a href="{{ route('tim.capaianpembelajaranlulusan.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <span>👥</span>
-                    <span class="ml-2">Capaian Pembelajaran Lulusan</span></a>
+                    <i class="fas fa-book-open"></i>
+                    <span class="ml-2">Capaian Pembelajaran Lulusan</span>
+                </a>
             </li>
             <li>
                 <a href="{{ route('tim.pemetaancplpl.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <span>👥</span>
-                    <span class="ml-2">Pemetaan CPL PL</span></a>
+                    <i class="fas fa-project-diagram"></i>
+                    <span class="ml-2">Pemetaan CPL PL</span>
+                </a>
             </li>
             <li>
                 <a href="{{ route('tim.bahankajian.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <span>👥</span>
-                    <span class="ml-2">Bahan Kajian</span></a>
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span class="ml-2">Bahan Kajian</span>
+                </a>
             </li>
             <li>
                 <a href="{{ route('tim.pemetaancplbk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <span>👥</span>
-                    <span class="ml-2">Pemetaan CPL BK</span></a>
+                    <i class="fas fa-link"></i>
+                    <span class="ml-2">Pemetaan CPL BK</span>
+                </a>
             </li>
             <li>
                 <a href="{{ route('tim.matakuliah.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <span>👥</span>
-                    <span class="ml-2">Mata Kuliah</span></a>
+                    <i class="fas fa-book"></i>
+                    <span class="ml-2">Mata Kuliah</span>
+                </a>
             </li>
             <li>
                 <a href="{{ route('tim.pemetaancplmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <span>👥</span>
-                    <span class="ml-2">PEMETAAN CPL - MK</span></a>
+                    <i class="fas fa-stream"></i>
+                    <span class="ml-2">Pemetaan CPL - MK</span>
+                </a>
             </li>
             <li>
                 <a href="{{ route('tim.pemetaanbkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <span>👥</span>
-                    <span class="ml-2">PEMETAAN BK - MK</span></a>
+                    <i class="fas fa-share-alt"></i>
+                    <span class="ml-2">Pemetaan BK - MK</span>
+                </a>
             </li>
             <li>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="w-full flex items-center p-3 hover:bg-gray-700 rounded text-left">
-                        <span>👥</span>
+                        <i class="fas fa-sign-out-alt"></i>
                         <span class="ml-2">Logout</span>
                     </button>
                 </form>

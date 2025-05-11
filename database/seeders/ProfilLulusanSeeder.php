@@ -19,10 +19,10 @@ class ProfilLulusanSeeder extends Seeder
                 'kode_prodi'=>'C0303',
                 'deskripsi_pl'=>'(IABEE) Lulusan menguasai konsep dasar persoalan computing serta menerapkan prinsip-prinsip computing dan disiplin ilmu relevan lainnya untuk mengidentifikasi solusi bagi organisasi. (Pengetahuan)',
                 'profesi_pl'=>'- PROGRAMMING AND SOFTWARE DEVELOPMENT (programmer, SUPERVISOR PEMROGRAM DATABASE,dll) 
-                                - Network dan Infrastruktur (NETWORK SERVICES ADMINISTRATOR) 
-                                - INTEGRATION APPLICATION SYSTEM (APPLICATION MANAGEMENT SUPERVISOR, ENTERPRISE RESOURCE PLANNING (ERP) - DEVELOPER)
-                                - IT MOBILITY AND INTERNET OF THIGS(INTERNET DEVELOPER, WEB SITE DESIGNER)
-                                - dll',
+- Network dan Infrastruktur (NETWORK SERVICES ADMINISTRATOR) 
+- INTEGRATION APPLICATION SYSTEM (APPLICATION MANAGEMENT SUPERVISOR, ENTERPRISE RESOURCE PLANNING (E- DEVELOPER)
+- IT MOBILITY AND INTERNET OF THIGS(INTERNET DEVELOPER, WEB SITE DESIGNER)
+- dll',
                 'unsur_pl'=>'Pengetahuan',
                 'keterangan_pl'=>'Kompetensi Utama Bidang',
                 'sumber_pl'=>'19 Jan 2023 V 1.1 - PANDUAN KURIKULUM BERBASIS OBE INFORMATIKA Hal.65'
@@ -32,10 +32,10 @@ class ProfilLulusanSeeder extends Seeder
                 'kode_prodi'=>'C0303',
                 'deskripsi_pl'=>'(IABEE) Lulusan memiliki kemampuan untuk mendesain dan mengimplementasikan solusi menggunakan perangkat lunak yang memenuhi kebutuhan pengguna dengan pendekatan yang sesuai di bidang industri pengolahan. (Keterampilan Khusus)',
                 'profesi_pl'=>'- PROGRAMMING AND SOFTWARE DEVELOPMENT (programmer, SUPERVISOR PEMROGRAM DATABASE,dll) 
-                                - Network dan Infrastruktur (NETWORK SERVICES ADMINISTRATOR) 
-                                - INTEGRATION APPLICATION SYSTEM (APPLICATION MANAGEMENT SUPERVISOR, ENTERPRISE RESOURCE PLANNING (ERP) - DEVELOPER)
-                                - IT MOBILITY AND INTERNET OF THIGS(INTERNET DEVELOPER, WEB SITE DESIGNER)
-                                - dll',
+- Network dan Infrastruktur (NETWORK SERVICES ADMINISTRATOR) 
+- INTEGRATION APPLICATION SYSTEM (APPLICATION MANAGEMENT SUPERVISOR, ENTERPRISE RESOURCE PLANNING (ERP) - DEVELOPER)
+- IT MOBILITY AND INTERNET OF THIGS(INTERNET DEVELOPER, WEB SITE DESIGNER)
+- dll',
                 'unsur_pl'=>'Keterampilan Khusus',
                 'keterangan_pl'=>'Kompetensi Utama Bidang',
                 'sumber_pl'=>'19 Jan 2023 V 1.1 - PANDUAN KURIKULUM BERBASIS OBE INFORMATIKA Hal.66'
@@ -45,10 +45,10 @@ class ProfilLulusanSeeder extends Seeder
                 'kode_prodi'=>'C0303',
                 'deskripsi_pl'=>'(IABEE) Lulusan memiliki kemampuan untuk mendesain dan mengimplementasikan solusi permasalahan pada sistem jaringan di bidang industri pengolahan. (Keterampilan Khusus)',
                 'profesi_pl'=>'- PROGRAMMING AND SOFTWARE DEVELOPMENT (programmer, SUPERVISOR PEMROGRAM DATABASE,dll) 
-                                - Network dan Infrastruktur (NETWORK SERVICES ADMINISTRATOR) 
-                                - INTEGRATION APPLICATION SYSTEM (APPLICATION MANAGEMENT SUPERVISOR, ENTERPRISE RESOURCE PLANNING (ERP) - DEVELOPER)
-                                - IT MOBILITY AND INTERNET OF THIGS(INTERNET DEVELOPER, WEB SITE DESIGNER)
-                                - dll',
+- Network dan Infrastruktur (NETWORK SERVICES ADMINISTRATOR) 
+- INTEGRATION APPLICATION SYSTEM (APPLICATION MANAGEMENT SUPERVISOR, ENTERPRISE RESOURCE PLANNIN- DEVELOPER)
+- IT MOBILITY AND INTERNET OF THIGS(INTERNET DEVELOPER, WEB SITE DESIGNER)
+- dll',
                 'unsur_pl'=>'Keterampilan Khusus',
                 'keterangan_pl'=>'Kompetensi Tambahan',
                 'sumber_pl'=>'Permen No. 53 Tahun 2023 dan PENGEMBANGAN KURIKULUM KKNI BERDASARKAN OBE - BIDANG ILMU INFORMATIKA DAN KOMPUTER 2019 Hal. 26'
@@ -58,10 +58,10 @@ class ProfilLulusanSeeder extends Seeder
                 'kode_prodi'=>'C0303',
                 'deskripsi_pl'=>'(KKNI) Lulusan mampu bekerjasama, berkomunikasi, dan berinovasi dalam perkerjaannya.',
                 'profesi_pl'=>'- PROGRAMMING AND SOFTWARE DEVELOPMENT (programmer, SUPERVISOR PEMROGRAM DATABASE,dll) 
-                                - Network dan Infrastruktur (NETWORK SERVICES ADMINISTRATOR) 
-                                - INTEGRATION APPLICATION SYSTEM (APPLICATION MANAGEMENT SUPERVISOR, ENTERPRISE RESOURCE PLANNING (ERP) - DEVELOPER)
-                                - IT MOBILITY AND INTERNET OF THIGS(INTERNET DEVELOPER, WEB SITE DESIGNER)
-                                - dll',
+- Network dan Infrastruktur (NETWORK SERVICES ADMINISTRATOR) 
+- INTEGRATION APPLICATION SYSTEM (APPLICATION MANAGEMENT SUPERVISOR, ENTERPRISE RESOURCE PLANNIN- DEVELOPER)
+- IT MOBILITY AND INTERNET OF THIGS(INTERNET DEVELOPER, WEB SITE DESIGNER)
+- dll',
                 'unsur_pl'=>'Sikap dan Keterampilan Umum',
                 'keterangan_pl'=>'Kompetensi Tambahan',
                 'sumber_pl'=>'PENGEMBANGAN KURIKULUM KKNI BERDASARKAN OBE - BIDANG ILMU INFORMATIKA DAN KOMPUTER 2019 Hal. 26'
@@ -85,10 +85,10 @@ class ProfilLulusanSeeder extends Seeder
                 'kode_prodi'=>'F0105',
                 'deskripsi_pl'=>'(IABEE) Lulusan memiliki kemampuan untuk mendesain dan mengimplementasikan solusi menggunakan perangkat lunak yang memenuhi kebutuhan pengguna dengan pendekatan yang sesuai di bidang industri pengolahan. (Keterampilan Khusus)',
                 'profesi_pl'=>'- PROGRAMMING AND SOFTWARE DEVELOPMENT (programmer, SUPERVISOR PEMROGRAM DATABASE,dll) 
-                                - Network dan Infrastruktur (NETWORK SERVICES ADMINISTRATOR) 
-                                - INTEGRATION APPLICATION SYSTEM (APPLICATION MANAGEMENT SUPERVISOR, ENTERPRISE RESOURCE PLANNING (ERP) - DEVELOPER)
-                                - IT MOBILITY AND INTERNET OF THIGS(INTERNET DEVELOPER, WEB SITE DESIGNER)
-                                - dll',
+- Network dan Infrastruktur (NETWORK SERVICES ADMINISTRATOR) 
+- INTEGRATION APPLICATION SYSTEM (APPLICATION MANAGEMENT SUPERVISOR, ENTERPRISE RESOURCE PLANNIN- DEVELOPER)
+- IT MOBILITY AND INTERNET OF THIGS(INTERNET DEVELOPER, WEB SITE DESIGNER)
+- dll',
                 'unsur_pl'=>'Keterampilan Khusus',
                 'keterangan_pl'=>'Kompetensi Utama Bidang',
                 'sumber_pl'=>'19 Jan 2023 V 1.1 - PANDUAN KURIKULUM BERBASIS OBE INFORMATIKA Hal.66'
@@ -98,10 +98,10 @@ class ProfilLulusanSeeder extends Seeder
                 'kode_prodi'=>'F0105',
                 'deskripsi_pl'=>'(IABEE) Lulusan memiliki kemampuan untuk mendesain dan mengimplementasikan solusi permasalahan pada sistem jaringan di bidang industri pengolahan. (Keterampilan Khusus)',
                 'profesi_pl'=>'- PROGRAMMING AND SOFTWARE DEVELOPMENT (programmer, SUPERVISOR PEMROGRAM DATABASE,dll) 
-                                - Network dan Infrastruktur (NETWORK SERVICES ADMINISTRATOR) 
-                                - INTEGRATION APPLICATION SYSTEM (APPLICATION MANAGEMENT SUPERVISOR, ENTERPRISE RESOURCE PLANNING (ERP) - DEVELOPER)
-                                - IT MOBILITY AND INTERNET OF THIGS(INTERNET DEVELOPER, WEB SITE DESIGNER)
-                                - dll',
+- Network dan Infrastruktur (NETWORK SERVICES ADMINISTRATOR) 
+- INTEGRATION APPLICATION SYSTEM (APPLICATION MANAGEMENT SUPERVISOR, ENTERPRISE RESOURCE PLANNIN- DEVELOPER)
+- IT MOBILITY AND INTERNET OF THIGS(INTERNET DEVELOPER, WEB SITE DESIGNER)
+- dll',
                 'unsur_pl'=>'Keterampilan Khusus',
                 'keterangan_pl'=>'Kompetensi Tambahan',
                 'sumber_pl'=>'Permen No. 53 Tahun 2023 dan PENGEMBANGAN KURIKULUM KKNI BERDASARKAN OBE - BIDANG ILMU INFORMATIKA DAN KOMPUTER 2019 Hal. 26'
@@ -110,11 +110,7 @@ class ProfilLulusanSeeder extends Seeder
                 'kode_pl'=>'PL04',
                 'kode_prodi'=>'F0105',
                 'deskripsi_pl'=>'(KKNI) Lulusan mampu bekerjasama, berkomunikasi, dan berinovasi dalam perkerjaannya.',
-                'profesi_pl'=>'- PROGRAMMING AND SOFTWARE DEVELOPMENT (programmer, SUPERVISOR PEMROGRAM DATABASE,dll) 
-                                - Network dan Infrastruktur (NETWORK SERVICES ADMINISTRATOR) 
-                                - INTEGRATION APPLICATION SYSTEM (APPLICATION MANAGEMENT SUPERVISOR, ENTERPRISE RESOURCE PLANNING (ERP) - DEVELOPER)
-                                - IT MOBILITY AND INTERNET OF THIGS(INTERNET DEVELOPER, WEB SITE DESIGNER)
-                                - dll',
+                'profesi_pl'=>'- PROGRAMMING AND SOFTWARE DEVELOPMENT (programmer, SUPERVISOR PEMROGRAM DATABASE,dll) - Network dan Infrastruktur (NETWORK SERVICES ADMINISTRATOR) - INTEGRATION APPLICATION SYSTEM (APPLICATION MANAGEMENT SUPERVISOR, ENTERPRISE RESOURCE PLANNI- DEVELOPER)- IT MOBILITY AND INTERNET OF THIGS(INTERNET DEVELOPER, WEB SITE DESIGNER)- dll',
                 'unsur_pl'=>'Sikap dan Keterampilan Umum',
                 'keterangan_pl'=>'Kompetensi Tambahan',
                 'sumber_pl'=>'PENGEMBANGAN KURIKULUM KKNI BERDASARKAN OBE - BIDANG ILMU INFORMATIKA DAN KOMPUTER 2019 Hal. 26'

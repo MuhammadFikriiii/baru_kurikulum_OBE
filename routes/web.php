@@ -40,6 +40,7 @@ use App\Http\Controllers\TimMataKuliahController;
 use App\Http\Controllers\AdminCapaianPembelajaranMataKuliahController;
 use App\Http\Controllers\AdminPemetaanCplCpmkController;
 use App\Http\Controllers\AdminPemetaanCplCpmkMkController;
+use App\Http\Controllers\TimExportController;
 use App\Http\Controllers\TimPemetaanBkMkController;
 use App\Http\Controllers\TimPemetaanCplMkController;
 
@@ -224,4 +225,5 @@ route::prefix('tim')->name('tim.')->group(function(){
     Route::post('/matakuliah', [TimMataKuliahController::class, 'store'])->name('matakuliah.store');
     Route::get('/matakuliah/{matakuliah}/edit', [TimMataKuliahController::class, 'edit'])->name('matakuliah.edit');
     Route::put('/matakuliah/{matakuliah}', [TimMataKuliahController::class, 'update'])->name('matakuliah.update');
+    Route::get('/export/excel', [TimExportController::class, 'export'])->name('export.excel');
 });
