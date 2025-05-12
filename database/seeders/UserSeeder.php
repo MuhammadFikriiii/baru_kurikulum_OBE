@@ -22,21 +22,7 @@ class UserSeeder extends Seeder
                 'kode_prodi' => null,
                 'role' => 'admin',
             ],
-            [
-                'name'=> 'Muhammad Fikri',
-                'email'=> 'tpublicml@gmail.com',
-                'password'=> bcrypt('123456'),
-                'kode_prodi' => null,
-                'role' => 'admin',
-            ],
-            [
-                'name'=>'Habibie Nugraha',
-                'email'=>'nugraha21@gmail.com',
-                'password'=> bcrypt('123456'),
-                'kode_prodi' => null,
-                'role'=> 'admin',
-            ],
-            [
+             [
                 'name'=>'wadir1',
                 'email'=>'wadir1@gmail.com',
                 'password'=> bcrypt('123456'),
@@ -44,11 +30,32 @@ class UserSeeder extends Seeder
                 'role'=> 'wadir1',
             ],
             [
-                'name'=>'timti1',
-                'email'=>'timti1@gmail.com',
+                'name'=>'Kaprodi TI',
+                'email'=>'kaproditi@gmail.com',
+                'password'=> bcrypt('123456'),
+                'kode_prodi' => 'C0303',
+                'role'=> 'kaprodi',
+            ],
+            [
+                'name'=>'Tim TI',
+                'email'=>'timti@gmail.com',
                 'password'=> bcrypt('123456'),
                 'kode_prodi'=>'C0303',
                 'role'=> 'tim',
+            ],
+            [
+                'name'=> 'Kaprodi TL',
+                'email'=> 'kaproditl@gmail.com',
+                'password'=> bcrypt('123456'),
+                'kode_prodi' => 'F0105',
+                'role' => 'kaprodi',
+            ],
+                        [
+                'name'=> 'Tim TL',
+                'email'=> 'timtl@gmail.com',
+                'password'=> bcrypt('123456'),
+                'kode_prodi' => 'F0105',
+                'role' => 'tim',
             ],
         ]);
     }
