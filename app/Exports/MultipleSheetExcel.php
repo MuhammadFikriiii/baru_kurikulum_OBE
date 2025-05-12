@@ -20,6 +20,7 @@ class MultipleSheetExcel implements WithMultipleSheets
         return [
             'Profil Lulusan' => new TimProfilLulusanExport($this->kodeProdi),
             'CPL' => new TimCapaianPembelajaranLulusanExport($this->kodeProdi),
+            'Pemetaan CPL-PL' => new TimPemetaanCplPlExport($this->kodeProdi),
         ];
     }
 }
