@@ -54,7 +54,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
-      <a href="index.html" class="flex items-center">
+      <a href="index.html" class="flex items-start">
         <img src="/image/Logo.png" alt="Logo" class="h-10">
       </a>
       <!-- Desktop Menu -->

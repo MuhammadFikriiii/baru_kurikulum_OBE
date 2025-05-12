@@ -9,7 +9,7 @@
     <div class="w-full max-w-[1650px] h-[80vh] overflow-auto border">
 
         <table class="min-w-max table-auto divide-y divide-gray-200">
-            <thead class="bg-green-500 text-white text-sm text-center">
+            <thead class="bg-green-500 sticky top-0  text-white text-sm text-center">
             <tr>
                 <th class="px-4 py-3 border-r border-white text-left  bg-green-500">CPL / BK</th>
                 @foreach($bks as $bk)
