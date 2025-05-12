@@ -22,6 +22,7 @@ class MultipleSheetExcel implements WithMultipleSheets
             'CPL' => new TimCapaianPembelajaranLulusanExport($this->kodeProdi),
             'Pemetaan CPL-PL' => new TimPemetaanCplPlExport($this->kodeProdi),
             'Bahan Kajian' => new BahanKajianExport($this->kodeProdi),
+            'Pemetaan CPL-BK' => new PemetaanCplBkExport($this->kodeProdi),
         ];
     }
 }
