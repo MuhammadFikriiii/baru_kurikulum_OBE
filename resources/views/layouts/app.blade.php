@@ -55,11 +55,19 @@
             <span class="font-bold text-xl uppercase">Poliban OBE</span>
         </div>
         <div class="hidden md:flex space-x-6 items-center">
-            <a href="#" class="hover:text-gray-300">Home</a>
-            <a href="#" class="hover:text-gray-300">Link</a>
+            <a href="#" class="relative group hover:text-gray-300">
+                Home
+                <span class="absolute left-0 bottom-0 block w-0 h-[2px] bg-white group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <a href="#" class="relative group hover:text-gray-300">
+                Link
+                <span class="absolute left-0 bottom-0 block w-0 h-[2px] bg-white group-hover:w-full transition-all duration-300"></span>
+            </a>
+            
            <div class="relative">
-                <button onclick="toggleDropdown()" class="hover:text-gray-300 flex items-center">
-                    <span class="mr-2">Download File</span>
+                <button onclick="toggleDropdown()" class="relative group hover:text-gray-300 flex items-center">
+                    <span class="mr-1">Download File</span>
+                    <span class="absolute left-0 bottom-0 block w-0 h-[2px] bg-white group-hover:w-full transition-all duration-300"></span>
                     <i class="bi bi-chevron-down"></i>
                 </button>
                 <div id="dropdownMenu" class="absolute hidden bg-white text-gray-900 rounded-lg shadow-md mt-2 w-32 z-50 border border-gray-300">
