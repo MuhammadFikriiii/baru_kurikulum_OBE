@@ -11,17 +11,37 @@
     </div>
 
     <!-- Filter dan Pencarian -->
-    <div class="mb-6">
-        <div class="flex justify-end w-full md:w-auto">
-            <div class="relative">
-                <input type="text" id="search-prodi-dashboard" placeholder="Search..." 
-                    class="border border-gray-300 px-3 py-2 rounded-md">
-                <span class="absolute left-3 top-2.5 text-gray-400">
-                    <i class="fas fa-search"></i>
-                </span>
-            </div>
+    <!-- Filter dan Pencarian -->
+<div class="mb-6">
+    <div class="flex flex-col md:flex-row justify-between items-center w-full space-y-2 md:space-y-0 md:space-x-4">
+        
+        <!-- Search Input -->
+        <div class="relative w-full md:w-auto">
+            <input type="text" id="search-prodi-dashboard" placeholder="Search..." 
+                class="border border-gray-300 pl-10 pr-3 py-2 rounded-md w-full md:w-64">
+            <span class="absolute left-3 top-2.5 text-gray-400">
+                <i class="fas fa-search"></i>
+            </span>
         </div>
+
+        <!-- Export Form (Hanya Admin) -->
+        @if(Auth::user()->role === 'admin' && isset($prodis))
+           <form action="{{ route('tim.export.excel') }}" method="GET" class="flex items-center gap-4">
+                <select name="kode_prodi" required class="border border-gray-300 rounded-md py-2">
+                    <option value="" class="text-center">Pilih Prodi</option>
+                    @foreach($prodis as $prodi)
+                        <option value="{{ $prodi->kode_prodi }}">{{ $prodi->nama_prodi }}</option>
+                    @endforeach
+                </select>
+                <button type="submit" class="bg-green-600 text-white px-5 py-2 rounded-md hover:bg-green-700">
+                    📄 Export PL + CPL
+                </button>
+            </form>
+        @endif
+
     </div>
+</div>
+
 
     <!-- Summary Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
