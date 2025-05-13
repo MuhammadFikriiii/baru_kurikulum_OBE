@@ -55,27 +55,10 @@
             <span class="font-bold text-xl uppercase">Poliban OBE</span>
         </div>
         <div class="hidden md:flex space-x-6 items-center">
-            <a href="#" class="relative group hover:text-gray-300">
-                Home
-                <span class="absolute left-0 bottom-0 block w-0 h-[2px] bg-white group-hover:w-full transition-all duration-300"></span>
-            </a>
-            <a href="#" class="relative group hover:text-gray-300">
-                Link
-                <span class="absolute left-0 bottom-0 block w-0 h-[2px] bg-white group-hover:w-full transition-all duration-300"></span>
-            </a>
-            
-           <div class="relative">
-                <button onclick="toggleDropdown()" class="relative group hover:text-gray-300 flex items-center">
-                    <span class="mr-1">Download File</span>
-                    <span class="absolute left-0 bottom-0 block w-0 h-[2px] bg-white group-hover:w-full transition-all duration-300"></span>
-                    <i class="bi bi-chevron-down"></i>
-                </button>
-                <div id="dropdownMenu" class="absolute hidden bg-white text-gray-900 rounded-lg shadow-md mt-2 w-32 z-50 border border-gray-300">
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-300 rounded-lg">PDF</a>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-300 rounded-lg">DOCX</a>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-300 rounded-lg">Excel</a>
-                </div>
-            </div>
+             <span class="relative group text-2xl">
+                {{ auth()->user()->name }}
+                <span class="absolute left-0 bottom-0 block w-0 h-[2px] bg-white"></span>
+            </span>
 
             <div class="relative p-4">
                 <button onclick="toggleDropdownProfil()" class="flex items-center space-x-2 focus:outline-none">
@@ -233,10 +216,14 @@
                 </a>
             </li>
             <li>
-                <a href="/" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span class="ml-2">Logout</span></a>
-            </li>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="w-full flex items-center p-3 hover:bg-gray-700 rounded text-left">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span class="ml-2">Logout</span>
+                    </button>
+                </form>
+            </li>  
         </ul>
         
     </aside>
