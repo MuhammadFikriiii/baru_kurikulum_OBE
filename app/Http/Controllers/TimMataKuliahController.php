@@ -11,12 +11,7 @@ class TimMataKuliahController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-
-            if (!$user || !$user->kode_prodi) {
-                abort(403);
-            }
-            $kodeProdi = $user->kode_prodi;
+        $kodeProdi = Auth::user()->kode_prodi;
 
         $mata_kuliahs = DB::table('mata_kuliahs as mk')
             ->select(
@@ -39,13 +34,7 @@ class TimMataKuliahController extends Controller
 
     public function create()
     {
-        $user = Auth::user();
-
-        if (!$user || !$user->kode_prodi) {
-            abort(403, 'Akses ditolak');
-        }
-
-        $kodeProdi = $user->kode_prodi;
+        $kodeProdi = Auth::user()->kode_prodi;
 
         $capaianProfilLulusans = DB::table('capaian_profil_lulusans as cpl')
             ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
@@ -70,17 +59,10 @@ class TimMataKuliahController extends Controller
             ->get();
 
         return view('tim.matakuliah.create', compact('capaianProfilLulusans', 'bahanKajians'));
-
     }
 
     public function store(Request $request)
     {
-        $user = Auth::user();
-
-        if (!$user || !$user->kode_prodi) {
-            abort(403, 'Akses ditolak');
-        }
-
         $request->validate([
             'kode_mk'=> 'required|string|max:10|unique:mata_kuliahs,kode_mk',
             'nama_mk'=> 'required|string|max:50',
@@ -110,6 +92,19 @@ class TimMataKuliahController extends Controller
     public function edit(MataKuliah $matakuliah)
     {
         $kodeProdi = Auth::user()->kode_prodi;
+
+        $matakuliah = DB::table('mata_kuliahs as mk')
+            ->leftJoin('cpl_mk', 'mk.kode_mk', '=', 'cpl_mk.kode_mk')
+            ->leftJoin('capaian_profil_lulusans as cpl', 'cpl_mk.id_cpl', '=', 'cpl.id_cpl')
+            ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
+            ->where('mk.kode_mk', $matakuliah->kode_mk)
+            ->where('prodis.kode_prodi', '=', $kodeProdi)
+            ->first();
+            if(!$matakuliah) {
+                abort(403, 'akses ditolak');
+            }
 
         $capaianprofillulusans = DB::table('capaian_profil_lulusans as cpl')
             ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')

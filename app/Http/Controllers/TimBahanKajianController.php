@@ -12,12 +12,7 @@ class TimBahanKajianController extends Controller
 {
     public function index()
 {
-    $user = Auth::user();
-
-        if (!$user || !$user->kode_prodi) {
-            abort(403);
-        }
-        $kodeProdi = $user->kode_prodi;
+    $kodeProdi = Auth::user()->kode_prodi;
 
     $bahankajians = DB::table('bahan_kajians as bk')
         ->select(
@@ -33,6 +28,7 @@ class TimBahanKajianController extends Controller
         ->where('prodis.kode_prodi', '=', $kodeProdi)
         ->groupBy('bk.id_bk', 'bk.nama_bk', 'bk.kode_bk', 'bk.deskripsi_bk', 
                  'bk.referensi_bk', 'bk.status_bk', 'bk.knowledge_area', 'prodis.nama_prodi')
+                 ->orderBy('bk.kode_bk', 'asc')
         ->get();
 
     return view('tim.bahankajian.index', compact('bahankajians'));
@@ -40,13 +36,7 @@ class TimBahanKajianController extends Controller
 
 public function create()
     {
-        $user = Auth::user();
-
-        if (!$user || !$user->kode_prodi) {
-            abort(403, 'Akses ditolak');
-        }
-
-        $kodeProdi = $user->kode_prodi;
+        $kodeProdi = Auth::user()->kode_prodi;
         
         $capaianProfilLulusans = DB::table('capaian_profil_lulusans as cpl')
         ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
@@ -54,18 +44,13 @@ public function create()
         ->where('pl.kode_prodi', $kodeProdi)
         ->select('cpl.id_cpl', 'cpl.kode_cpl', 'cpl.deskripsi_cpl')
         ->distinct()
+        ->orderBy('cpl.kode_cpl', 'asc')
         ->get();
         return view('tim.bahankajian.create', compact('capaianProfilLulusans'));
     }
 
     public function store(Request $request)
     {
-        $user = Auth::user();
-
-        if (!$user || !$user->kode_prodi) {
-            abort(403, 'Akses ditolak');
-        }
-        
         $request->validate([
             'kode_bk' => 'required|string|max:10',
             'nama_bk' => 'required|string|max:50',
@@ -88,20 +73,27 @@ public function create()
 
     public function edit($id_bk)
     {
-        $user = Auth::guard('userprodi')->user();
+        $kodeProdi = Auth::user()->kode_prodi;
 
-        if (!$user || !$user->kode_prodi) {
+        $bahankajian = DB::table('bahan_kajians as bk')
+    ->join('cpl_bk', 'bk.id_bk', '=', 'cpl_bk.id_bk')
+    ->join('capaian_profil_lulusans as cpl', 'cpl_bk.id_cpl', '=', 'cpl.id_cpl')
+    ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+    ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+    ->where('bk.id_bk', $id_bk)
+    ->where('pl.kode_prodi', $kodeProdi)
+    ->first();
+        if (! $bahankajian) {
             abort(403, 'Akses ditolak');
         }
-
-        $bahankajian = BahanKajian::findOrFail($id_bk);
 
         $capaianprofillulusans = DB::table('capaian_profil_lulusans as cpl')
         ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
         ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
-        ->where('pl.kode_prodi', $user->kode_prodi)
+        ->where('pl.kode_prodi', Auth::user()->kode_prodi)
         ->select('cpl.id_cpl', 'cpl.kode_cpl', 'cpl.deskripsi_cpl')
         ->distinct()
+        ->orderBy('cpl.kode_cpl', 'asc')
         ->get();
 
         $selectedCapaianProfilLulusans = DB::table('cpl_bk')
@@ -113,12 +105,6 @@ public function create()
     }
     public function update(Request $request, $id_bk)
     {
-        $user = Auth::guard('userprodi')->user();
-
-        if (!$user || !$user->kode_prodi) {
-            abort(403, 'Akses ditolak');
-        }
-
         $request->validate([
             'kode_bk' => 'required|string|max:10',
             'nama_bk' => 'required|string|max:50',
@@ -145,11 +131,7 @@ public function create()
 
     public function detail(BahanKajian $id_bk)
     {
-        $user = Auth::guard('userprodi')->user();
-
-        if (!$user || !$user->kode_prodi) {
-            abort(403, 'Akses ditolak');
-        }
+        $user = Auth::user()->kode_prodi;
 
         $selectedCapaianProfilLulusans = DB::table('cpl_bk')
             ->where('id_bk', $id_bk->id_bk)
