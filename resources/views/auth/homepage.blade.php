@@ -63,7 +63,7 @@
         before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
         before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
         Beranda </a>
-        <a href="#services" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
+        <a href="#services"  class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
         before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
         before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
         Profil</a>

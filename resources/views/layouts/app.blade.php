@@ -79,7 +79,7 @@
 
             <div class="relative p-4">
                 <button onclick="toggleDropdownProfil()" class="flex items-center space-x-2 focus:outline-none">
-                    <img src="https://i.pravatar.cc/40" alt="User" class="w-10 h-10 rounded-full">
+                    <i class="bi bi-person text-white text-xl"></i>
                     <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414L10 13.414 5.293 8.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
                     </svg>
@@ -104,7 +104,7 @@
    
 
     <!-- Sidebar -->
-    <aside id="sidebar" class="w-64 bg-[#201F31] text-white p-5  mt-20 space-y-6 fixed top-0 left-0 h-full overflow-y-auto transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40">
+    <aside id="sidebar" class="w-64 bg-[#201F31] text-white p-5  mt-16 space-y-6 fixed top-0 left-0 h-full overflow-y-auto transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40">
         <!-- Header -->
         <div class="flex items-center justify-between mb-4 pt-2 ">
             <h2 class="text-xl font-bold">Dashboard Admin</h2>
