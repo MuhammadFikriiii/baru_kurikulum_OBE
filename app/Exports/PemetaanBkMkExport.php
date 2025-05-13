@@ -57,7 +57,7 @@ class PemetaanBkMkExport implements FromCollection, WithHeadings, WithCustomStar
 
         foreach ($mks as $mk) {
             $row = [
-                'Prodi' => $this->namaProdi,  // ✅ Menggunakan nama_prodi
+                'Prodi' => $this->namaProdi,
                 'Kode' => $mk->kode_mk,
                 'Jenis' => $mk->jenis_mk ?? '',
                 'Mata Kuliah' => $mk->nama_mk,
@@ -87,17 +87,27 @@ class PemetaanBkMkExport implements FromCollection, WithHeadings, WithCustomStar
                 ->where('profil_lulusans.kode_prodi', $this->kodeProdi);
         })->orderBy('kode_bk')->get();
 
-        $headers = ['Prodi', 'Kode', 'Jenis', 'Mata Kuliah', 'Wajib'];
+        // Row 1: Judul
+        $row1 = ['6. Pemetaan BK-MK', '', '', '', ''];
         foreach ($bks as $bk) {
-            $headers[] = $bk->kode_bk;
+            $row1[] = '';
+        }
+        
+        // Row 2: Header kolom
+        $row2 = ['Prodi', 'Kode', 'Jenis', 'Mata Kuliah', 'Wajib'];
+        foreach ($bks as $bk) {
+            $row2[] = $bk->kode_bk;
         }
 
-        return $headers;
+        return [
+            $row1,
+            $row2
+        ];
     }
 
     public function startCell(): string
     {
-        return 'A2';
+        return 'A1';
     }
 
     public function title(): string
@@ -107,22 +117,67 @@ class PemetaanBkMkExport implements FromCollection, WithHeadings, WithCustomStar
 
     public function styles(Worksheet $sheet)
     {
-        $totalCols = count($this->headings());
+        $totalCols = count($this->headings()[1]);  // Jumlah kolom dari header baris kedua
         $lastColumn = Coordinate::stringFromColumnIndex($totalCols);
+        $lastRow = $sheet->getHighestRow();
 
-        // ✅ Judul baris 1
-        $sheet->setCellValue('A1', '6. Pemetaan BK-MK');
+        // Styling untuk judul (baris 1)
         $sheet->mergeCells("A1:{$lastColumn}1");
+        $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(12);
+        $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+        
+        // Styling untuk header (baris 2)
+        $sheet->getStyle("A2:{$lastColumn}2")->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'color' => ['rgb' => 'FFFFFF'],
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => '2F6739'],  // Dark green seperti MataKuliahExport
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                ],
+            ],
+        ]);
+        
+        // Styling untuk konten (baris 3 dan seterusnya)
+        $sheet->getStyle("A3:{$lastColumn}{$lastRow}")->applyFromArray([
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                ],
+            ],
+            'alignment' => [
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ],
+        ]);
+        
+        // Center align untuk sebagian besar kolom, kecuali "Mata Kuliah" dan "Prodi"
+        $sheet->getStyle("B3:B{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Kode
+        $sheet->getStyle("C3:C{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Jenis
+        $sheet->getStyle("E3:{$lastColumn}{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Wajib & BK
+        
+        // Left align untuk kolom "Prodi" dan "Mata Kuliah"
+        $sheet->getStyle("A3:A{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT); // Prodi
+        $sheet->getStyle("D3:D{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT); // Mata Kuliah
+        
+        // Border untuk seluruh tabel
+        $sheet->getStyle("A1:{$lastColumn}{$lastRow}")->applyFromArray([
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                ],
+            ],
+        ]);
 
-        $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
-        $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle('A1')->getFill()->setFillType(Fill::FILL_SOLID)
-            ->getStartColor()->setRGB('FFFFFF');
-
-        return [
-            1 => ['font' => ['bold' => true, 'size' => 14]],
-            2 => ['font' => ['bold' => true]],  // ✅ Header berada di baris 2
-        ];
+        return $sheet;
     }
 
     public function registerEvents(): array
@@ -130,57 +185,20 @@ class PemetaanBkMkExport implements FromCollection, WithHeadings, WithCustomStar
         return [
             AfterSheet::class => function (AfterSheet $event) {
                 $sheet = $event->sheet->getDelegate();
-
-                $totalCols = count($this->headings());
-                $totalRows = count($this->collection()) + 2;  // ✅ Data mulai baris 3
+                $totalCols = count($this->headings()[1]);  // Jumlah kolom dari header baris kedua
                 $lastColumn = Coordinate::stringFromColumnIndex($totalCols);
-
-                // ✅ Header styling baris 2
-                $sheet->getStyle("A2:{$lastColumn}2")->applyFromArray([
-                    'font' => [
-                        'bold' => true,
-                        'color' => ['rgb' => 'FFFFFF'],
-                    ],
-                    'alignment' => [
-                        'horizontal' => Alignment::HORIZONTAL_CENTER,
-                        'vertical' => Alignment::VERTICAL_CENTER,
-                    ],
-                    'fill' => [
-                        'fillType' => Fill::FILL_SOLID,
-                        'startColor' => ['rgb' => '1E5631'],
-                    ],
-                    'borders' => [
-                        'allBorders' => [
-                            'borderStyle' => Border::BORDER_THIN,
-                            'color' => ['rgb' => '000000'],
-                        ],
-                    ],
-                ]);
-
-                // ✅ Isi tabel dari baris 3 ke bawah
-                $sheet->getStyle("A3:{$lastColumn}{$totalRows}")->applyFromArray([
-                    'alignment' => [
-                        'vertical' => Alignment::VERTICAL_CENTER,
-                        'horizontal' => Alignment::HORIZONTAL_CENTER,
-                        'wrapText' => true,
-                    ],
-                    'borders' => [
-                        'allBorders' => [
-                            'borderStyle' => Border::BORDER_THIN,
-                            'color' => ['rgb' => '000000'],
-                        ],
-                    ],
-                ]);
-
-                // Auto width
-                for ($i = 1; $i <= $totalCols; $i++) {
+                
+                // Set lebar kolom
+                $sheet->getColumnDimension('A')->setWidth(20); // Prodi
+                $sheet->getColumnDimension('B')->setWidth(15); // Kode
+                $sheet->getColumnDimension('C')->setWidth(15); // Jenis
+                $sheet->getColumnDimension('D')->setWidth(35); // Mata Kuliah
+                $sheet->getColumnDimension('E')->setWidth(10); // Wajib
+                
+                // Set lebar untuk kolom kode bahan kajian
+                for ($i = 6; $i <= $totalCols; $i++) {
                     $col = Coordinate::stringFromColumnIndex($i);
-                    $sheet->getColumnDimension($col)->setAutoSize(true);
-                }
-
-                // Auto height untuk semua baris
-                for ($i = 2; $i <= $totalRows; $i++) {
-                    $sheet->getRowDimension($i)->setRowHeight(-1);
+                    $sheet->getColumnDimension($col)->setWidth(8);
                 }
             },
         ];
