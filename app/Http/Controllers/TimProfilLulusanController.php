@@ -24,7 +24,7 @@ class TimProfilLulusanController extends Controller
 
     public function create()
     {
-        $user = Auth::guard('userprodi')->user();
+        $user = Auth::user();
 
         if (!$user || !$user->kode_prodi) {
             abort(404);
@@ -35,7 +35,7 @@ class TimProfilLulusanController extends Controller
 
     public function store(Request $request)
     {
-        $user = Auth::guard('userprodi')->user();
+        $user = Auth::user();
 
         if (!$user || !$user->kode_prodi) {
             abort(403);
@@ -60,7 +60,7 @@ class TimProfilLulusanController extends Controller
 
     public function edit ($id_pl)
     {
-        $user = Auth::guard('userprodi')->user();
+        $user = Auth::user();
 
         $profillulusan = ProfilLulusan::where('id_pl', $id_pl)
             ->where('kode_prodi', $user->kode_prodi)
@@ -76,7 +76,7 @@ class TimProfilLulusanController extends Controller
 
     public function update(Request $request, $id_pl)
     {
-        $user = Auth::guard('userprodi')->user();
+        $user = Auth::user();
 
         if (!$user || !$user->kode_prodi) {
             abort(403);
@@ -105,7 +105,7 @@ class TimProfilLulusanController extends Controller
 
     public function detail(ProfilLulusan $id_pl)
     {
-        $user = Auth::guard('userprodi')->user();
+        $user = Auth::user();
 
     if (!$user || !$user->kode_prodi || $id_pl->kode_prodi !== $user->kode_prodi) {
         abort(403, 'Akses ditolak');

@@ -21,7 +21,7 @@
 
 <label class="text-2xl">Program Studi:</label>
 <input type="text" class="mt-1 w-full p-3 border border-gray-400 rounded-lg mb-3 bg-gray-100" 
-       value="{{ Auth::guard('userprodi')->user()->prodi->nama_prodi }}" readonly>
+       value="{{ Auth::user()->prodi->nama_prodi }}" readonly>
        
 <label for="kode_pl" class="text-2xl">Kode PL:</label>
 <input type="text" id="kode_pl" name="kode_pl" class="mt-1 w-full p-3 border border-black rounded-lg mb-3" required>

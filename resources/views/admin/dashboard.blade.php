@@ -26,7 +26,8 @@
 
         <!-- Export Form (Hanya Admin) -->
         @if(Auth::user()->role === 'admin' && isset($prodis))
-           <form action="{{ route('tim.export.excel') }}" method="GET" class="flex items-center gap-4">
+            <form action="{{ route(Auth::user()->role === 'admin' ? 'admin.export.excel' : 'tim.export.excel') }}" method="GET" class="flex items-center gap-4">
+
                 <select name="kode_prodi" required class="border border-gray-300 rounded-md py-2">
                     <option value="" class="text-center">Pilih Prodi</option>
                     @foreach($prodis as $prodi)
