@@ -173,6 +173,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pemenuhancpl',[AdminCapaianProfilLulusanController::class, 'peta_pemenuhan_cpl'])->name('pemenuhancpl.index');
         Route::get('/penilaian/create', [AdminPenilaianController::class, 'create'])->name('penilaian.create');
         Route::post('/penilaian', [AdminPenilaianController::class, 'store'])->name('penilaian.store');
+                Route::get('/export/excel', [TimExportController::class, 'export'])->name('export.excel');
     });
 
     // Grup Route Wadir1
