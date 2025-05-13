@@ -43,6 +43,9 @@ class LoginController extends Controller
                 return redirect()->route('tim.dashboard')->with('success', 'Login berhasil');
             } elseif ($user->role === 'kaprodi') {
                 return redirect()->route('kaprodi.dashboard')->with('success', 'Login berhasil');
+            }else {
+                Auth::logout(); // pastikan user tidak tetap login
+                return redirect()->route('login')->withErrors(['role' => 'Role tidak dikenali. Hubungi admin.']);
             }
         }
     
