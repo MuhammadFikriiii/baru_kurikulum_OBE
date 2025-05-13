@@ -42,7 +42,7 @@
         <ul class="list-disc pl-5 text-gray-700" disabled>
             @foreach($selectedBahanKajian as $id_bk)
                 @php
-                    $bkDetail = $bahankajian->firstWhere('id_bk', $id_bk);
+                    $bkDetail = $bahankajians->firstWhere('id_bk', $id_bk);
                 @endphp
                 @if($bkDetail)
                     <li>

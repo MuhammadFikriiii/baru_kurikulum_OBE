@@ -109,13 +109,7 @@ class TimMataKuliahController extends Controller
 
     public function edit(MataKuliah $matakuliah)
     {
-        $user = Auth::guard('userprodi')->user();
-
-        if (!$user || !$user->kode_prodi) {
-            abort(403, 'Akses ditolak');
-        }
-
-        $kodeProdi = $user->kode_prodi;
+        $kodeProdi = Auth::user()->kode_prodi;
 
         $capaianprofillulusans = DB::table('capaian_profil_lulusans as cpl')
             ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
@@ -149,17 +143,11 @@ class TimMataKuliahController extends Controller
             ->pluck('id_bk')
             ->toArray();
 
-        return view("tim.matakuliah.edit", compact('matakuliah',            'capaianprofillulusans', 'bahankajians','selectedCapaianProfilLulusan', 'selectedBahanKajian'));
+        return view("tim.matakuliah.edit", compact('matakuliah','capaianprofillulusans', 'bahankajians','selectedCapaianProfilLulusan', 'selectedBahanKajian'));
     }
 
     public function update(Request $request, MataKuliah $matakuliah)
     {
-        $user = Auth::guard('userprodi')->user();
-
-        if (!$user || !$user->kode_prodi) {
-            abort(403, 'Akses ditolak');
-        }
-
         $request->validate([
             'kode_mk'=> 'required|string|max:10',
             'nama_mk'=> 'required|string|max:50',
