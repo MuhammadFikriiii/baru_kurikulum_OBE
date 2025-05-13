@@ -112,11 +112,22 @@ class TimCapaianPembelajaranLulusanController extends Controller
 
     public function detail(CapaianProfilLulusan $id_cpl)
     {
+        $kodeProdi = Auth::user()->kode_prodi;
+
         $selectedProfilLulusans = DB::table('cpl_pl')
         ->where('id_cpl', $id_cpl->id_cpl)
         ->pluck('id_pl')
         ->toArray();
 
+        $capaianpembelajaranlulusan = DB::table('capaian_profil_lulusans as cpl')
+        ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+        ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+        ->where('cpl.id_cpl', $id_cpl->id_cpl)
+        ->where('pl.kode_prodi', $kodeProdi)
+        ->first();
+        if (!$capaianpembelajaranlulusan){
+            abort(403, 'akses ditolak');
+        }
     $profilLulusans = ProfilLulusan::whereIn('id_pl', $selectedProfilLulusans)->get();
         
         return view('tim.capaianpembelajaranlulusan.detail', compact('id_cpl', 'selectedProfilLulusans', 'profilLulusans'));
