@@ -43,6 +43,7 @@ use App\Http\Controllers\AdminPemetaanCplCpmkMkController;
 use App\Http\Controllers\TimExportController;
 use App\Http\Controllers\TimPemetaanBkMkController;
 use App\Http\Controllers\TimPemetaanCplMkController;
+use App\Http\Controllers\TimPemetaanCplMkBkController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -235,6 +236,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/matakuliah', [TimMataKuliahController::class, 'store'])->name('matakuliah.store');
         Route::get('/matakuliah/{matakuliah}/edit', [TimMataKuliahController::class, 'edit'])->name('matakuliah.edit');
         Route::put('/matakuliah/{matakuliah}', [TimMataKuliahController::class, 'update'])->name('matakuliah.update');
+        Route::get('/pemetaancplmkbk', [TimPemetaanCplMkBkController::class, 'index'])->name('pemetaancplmkbk.index');
         Route::get('/export/excel', [TimExportController::class, 'export'])->name('export.excel');
     });
 });
