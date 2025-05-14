@@ -1,21 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.tim.app')
 
 @section('content')
 <div class="mr-20 ml-20">
     <h2 class="text-4xl font-extrabold text-center mb-4">Organisasi MK</h2>
     <hr class="border border-black mb-4">
-    <form method="GET" action="{{ route('admin.matakuliah.organisasimk') }}" class="flex items-center mb-4">
-        <select id="prodi" name="kode_prodi" class="border border-gray-300 px-3 py-2 rounded-md mr-2" onchange="this.form.submit()">
-            <option value="all" {{ $kode_prodi == 'all' ? 'selected' : '' }}>Semua Program Studi</option>
-            @foreach($prodis as $prodi)
-                <option value="{{ $prodi->kode_prodi }}" {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
-                    {{ $prodi->nama_prodi }}
-                </option>
-            @endforeach
-        </select>
-    </form>
     <table class="w-full border border-gray-300 shadow-md rounded-lg">
-        <thead class="bg-green-800">
+        <thead class="bg-green-800 text-white">
             <tr>
                 <th class="py-2 px-3 text-center font-bold uppercase">Semester</th>
                 <th class="py-2 px-3 text-center font-bold uppercase">SKS</th>
@@ -55,10 +45,9 @@
                                 @endforeach
                             </div>
                         @else
-                            -
+                        {{null}}
                         @endif
                     </td>
-                    
                 </tr>
             @endfor
 

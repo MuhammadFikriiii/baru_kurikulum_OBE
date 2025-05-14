@@ -172,4 +172,36 @@ class TimMataKuliahController extends Controller
 
         return redirect()->route('tim.matakuliah.index')->with('success', 'Mata kuliah berhasil diperbarui!');
     }
+
+    public function organisasi_mk(Request $request)
+    {
+        $kodeProdi = Auth::user()->kode_prodi;
+
+        $query = DB::table('mata_kuliahs as mk')
+            ->select(
+                'mk.kode_mk', 'mk.nama_mk', 'mk.jenis_mk', 'mk.sks_mk', 
+                'mk.semester_mk', 'mk.kompetensi_mk', 'prodis.nama_prodi', 'prodis.kode_prodi'
+            )
+            ->leftJoin('cpl_mk', 'mk.kode_mk', '=', 'cpl_mk.kode_mk')
+            ->leftJoin('capaian_profil_lulusans as cpl', 'cpl_mk.id_cpl', '=', 'cpl.id_cpl')
+            ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
+            ->where('prodis.kode_prodi', '=', $kodeProdi)
+            ->groupBy('mk.kode_mk', 'mk.nama_mk', 'mk.jenis_mk', 'mk.sks_mk', 
+                    'mk.semester_mk', 'mk.kompetensi_mk', 'prodis.nama_prodi', 'prodis.kode_prodi');
+
+        $matakuliah = $query->get();
+        
+        $organisasiMK = $matakuliah->groupBy('semester_mk')->map(function ($items, $semester_mk) {
+            return [
+                'semester_mk' => $semester_mk,
+                'sks_mk' => $items->sum('sks_mk'),
+                'jumlah_mk' => $items->count(),
+                'nama_mk' => $items->pluck('nama_mk')->toArray(),
+                'mata_kuliah' => $items,
+            ];
+        });
+        return view('tim.matakuliah.organisasimk', compact('organisasiMK', 'kodeProdi'));
+    }
 }

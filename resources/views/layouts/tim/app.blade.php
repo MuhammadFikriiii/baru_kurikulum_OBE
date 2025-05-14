@@ -82,9 +82,13 @@
                         <i class="fas fa-cog mr-2"></i> Settings
                     </a>
                     <div class="border-t my-1"></div>
-                    <a href="/" class="flex items-center px-4 py-2 hover:bg-gray-100 text-red-600">
-                        <i class="fas fa-sign-out-alt mr-2"></i> Log Out
-                    </a>
+                    <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="flex items-center px-4 py-2 hover:bg-gray-100 text-red-600">
+                        <i class="fas fa-sign-out-alt mr-2"></i>
+                        <span class="ml-2">Logout</span>
+                    </button>
+                </form>
                 </div>
             </div>
 
@@ -164,6 +168,12 @@
                 <a href="{{ route('tim.pemetaancplmkbk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="fas fa-link"></i>
                     <span class="ml-2">Pemetaan CPL - MK - BK</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('tim.matakuliah.organisasimk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span class="ml-2">Organisasi matakuliah</span>
                 </a>
             </li>
             <li>
