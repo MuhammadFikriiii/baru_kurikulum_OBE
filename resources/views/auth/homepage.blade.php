@@ -135,62 +135,77 @@
 </header>
 
  <!-- Page Home -->
- <section class="w-full h-[500px] bg-cover bg-center flex items-center justify-center text-white" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/image/poliban.jpeg'); background-position: center;" id="top">
+ <section class="w-full h-[650px] bg-cover bg-center flex items-center justify-center text-white" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/image/poliban.jpeg'); background-position: center;" id="top">
   <div class="container">
     <div class="row">
       <div class="col-lg-1mn2">
         <div class="row">
           <div class="col-lg-6 align-self-center">
-                 <div class="owl-carousel owl-banner ">
-                    <!-- Slide 1 -->
-                    <div class="item header-text">
-                      <h6 class="text-2xl font-semibold text-white">KURIKULUM OBE</h6>
-                      <h2 class="text-5xl font-bold">
-                        <span class="text-[#f3f3f3]">Politeknik</span>
-                        <em class="text-[#3094c6]">Negeri</em>
-                        <span class="text-[#f3f3f3]">Banjarmasin</span>
-                      </h2>
-                      <p class="text-lg text-blue-100 mb-6 mt-3">
-                        Selamat Datang di Website Kurikulum berbasis OBE
-                      </p>
-                      <div class="down-buttons">
-                        <div class="ml-1 main-blue-button-hover bg-blue-600 text-white shadow-lg hover:bg-blue-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
-                          <a href="#services" class="text-lg font-semibold py-2 px-10 inline-block">Start</a>
-                        </div>
-                        <div class="ml-5 call-button bg-green-600 text-white shadow-lg hover:bg-green-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
-                          <a href="#" class="text-lg font-semibold py-2 px-8 inline-block"><i class="fa fa-envelope mr-3"></i>Email</a>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Slide 2 -->
-                    <div class="item header-text">
-                      <h6>loremloremlorem</h6>
-                      <h2>loremlorem<em>loremlorem</em> loremlorem<span>loremlorem</span></h2>
-                      <p>Some text here for slide 2.</p>
-                      <div class="down-buttons">
-                        <div class="main-blue-button-hover">
-                          <a href="#video">loremloremlorem</a>
-                        </div>
-                        <div class="call-button">
-                          <a href="#"><i class="fa fa-phone"></i> loremloremlorem</a>
-                        </div>
-                      </div>
-                    </div>
-                     <!-- Slide 3 -->
-                    <div class="item header-text">
-                      <h6>Welcome to Onix Digital</h6>
-                      <h2>asdfadada <em>loremlorem</em> lorem <span>lorem</span>lorem</h2>
-                      <p>loremloremloremloremlorem</p>
-                      <div class="down-buttons">
-                        <div class="main-blue-button-hover">
-                          <a href="#contact">Message Us Now</a>
-                        </div>
-                        <div class="call-button">
-                          <a href="#"><i class="fa fa-phone"></i> 010-020-0340</a>
-                        </div>
-                      </div>
-                    </div>
+            <div class="owl-carousel owl-banner">
+              <!-- Slide 1: Selamat Datang -->
+              <div class="item header-text">
+                <h6 class="text-2xl font-semibold text-white">KURIKULUM OBE</h6>
+                <h2 class="text-5xl font-bold">
+                  <span class="text-[#f3f3f3]">Politeknik</span>
+                  <em class="text-sky-500">Negeri</em>
+                  <span class="text-[#f3f3f3]">Banjarmasin</span>
+                </h2>
+                <p class="text-lg text-blue-100 mb-6 mt-3">
+                  Selamat Datang di Website Kurikulum Berbasis Outcome-Based Education (OBE)
+                </p>
+                <div class="down-buttons">
+                  <div class="ml-1 main-blue-button-hover bg-blue-600 text-white shadow-lg hover:bg-blue-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
+                    <a href="#services" class="text-lg font-semibold py-2 px-10 inline-block">Mulai</a>
+                  </div>
+                  <div class="ml-5 call-button bg-green-600 text-white shadow-lg hover:bg-green-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@poliban.ac.id" target="_blank" class="text-lg font-semibold py-2 px-8 inline-block">
+                      <i class="fa fa-envelope mr-3"></i>Email
+                    </a>
+                  </div>
                 </div>
+              </div>
+            
+              <!-- Slide 2: Visi dan Misi -->
+              <div class="item header-text">
+                <h6 class="text-2xl font-semibold text-white">VISI & MISI</h6>
+                <h2 class="text-4xl font-bold text-white">
+                  Mewujudkan Lulusan Unggul <em class="text-sky-500">Berbasis</em> Outcome-Based Education
+                </h2>
+                <p class="text-lg text-blue-100 mb-6 mt-3">
+                  Visi kami adalah mencetak lulusan yang siap kerja, kompeten, dan adaptif terhadap perkembangan industri.
+                </p>
+                <div class="down-buttons">
+                  <div class="ml-1 main-blue-button-hover bg-blue-600 text-white shadow-lg hover:bg-blue-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
+                    <a href="#visi" class="text-lg font-semibold py-2 px-10 inline-block">Lihat Visi</a>
+                  </div>
+                  <div class="ml-5 call-button bg-green-600 text-white shadow-lg hover:bg-green-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
+                    <a href="kontak-poliban.vcf" download class="text-lg font-semibold py-2 px-8 inline-block bg-green-600 text-white rounded-full hover:bg-green-700">
+                      <i class="fa fa-phone mr-2"></i>Kontak Kami
+                    </a>
+                  </div>
+                </div>
+              </div>
+            
+              <!-- Slide 3: Profil Jurusan -->
+              <div class="item header-text">
+                <h6 class="text-2xl font-semibold text-white">PROFIL JURUSAN</h6>
+                <h2 class="text-4xl font-bold text-white">
+                  Program Studi Unggulan <em class="text-sky-500">Siap</em> Meningkatkan Mutu Pendidikan
+                </h2>
+                <p class="text-lg text-blue-100 mb-6 mt-3">
+                  Kenali lebih jauh jurusan dan program studi di Poliban yang mendukung sistem pembelajaran OBE.
+                </p>
+                <div class="down-buttons">
+                  <div class="ml-1 main-blue-button-hover bg-blue-600 text-white shadow-lg hover:bg-blue-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
+                    <a href="#jurusan" class="text-lg font-semibold py-2 px-10 inline-block">Lihat Jurusan</a>
+                  </div>
+                  <div class="ml-5 call-button bg-green-600 text-white shadow-lg hover:bg-green-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
+                    <a href="https://wa.me/62511326179" class="text-lg font-semibold py-2 px-8 inline-block"><i class="fa fa-comment mr-2"></i>Hubungi Kami</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
               </div>
               <!-- tombol slide -->
               <div class="flex justify-left gap-2 mt-2">
@@ -239,123 +254,108 @@
 
   
 <!-- Section: Profil Pengajar -->
-  <section id="pengajar" class="bg-white py-16">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-semibold text-center text-gray-800">Profil Pengajar</h2>
-      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Pengajar 1 -->
-        <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
-          <img src="https://via.placeholder.com/150" alt="Pengajar 1" class="w-32 h-32 mx-auto rounded-full">
-          <h3 class="mt-4 text-xl font-semibold text-gray-800">Dr. Andi Susanto</h3>
-          <p class="text-gray-600 mt-2">Dosen Matematika dan Teknologi Pendidikan</p>
-          <p class="text-gray-600 mt-2">Pengalaman lebih dari 10 tahun di bidang pendidikan dan penelitian.</p>
-        </div>
+<section id="pengajar" class="bg-gray-100 py-16">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center text-blue-700 mb-10">Profil Pengajar</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      
+      <!-- Pengajar 1 -->
+      <div class="bg-white rounded-xl shadow-lg p-6 text-center transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl">
+        <img src="https://duniadosen.com/wp-content/uploads/2016/04/Jadi-Dosen.jpg" alt="Dr. Andi Susanto" class="w-28 h-28 mx-auto rounded-full border-4 border-blue-200 shadow-sm">
+        <h3 class="mt-4 text-xl font-semibold text-gray-800">Dr. Andi Susanto</h3>
+        <p class="text-blue-600 mt-1 font-medium">Dosen Matematika & Teknologi Pendidikan</p>
+        <p class="text-gray-600 mt-2 text-sm">10+ tahun pengalaman di bidang pendidikan & penelitian.</p>
+      </div>
 
         <!-- Pengajar 2 -->
-        <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
-          <img src="https://via.placeholder.com/150" alt="Pengajar 2" class="w-32 h-32 mx-auto rounded-full">
-          <h3 class="mt-4 text-xl font-semibold text-gray-800">Prof. Siti Nurhasanah</h3>
-          <p class="text-gray-600 mt-2">Dosen Ilmu Komputer</p>
-          <p class="text-gray-600 mt-2">Berfokus pada pengembangan kurikulum berbasis teknologi informasi.</p>
+        <div class="bg-white rounded-xl shadow-lg p-6 text-center transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl">
+          <img src="https://duniadosen.com/wp-content/uploads/2016/04/Jadi-Dosen.jpg" alt="Dr. Andi Susanto" class="w-28 h-28 mx-auto rounded-full border-4 border-blue-200 shadow-sm">
+          <h3 class="mt-4 text-xl font-semibold text-gray-800">Dr. Andi Susanto</h3>
+          <p class="text-blue-600 mt-1 font-medium">Dosen Matematika & Teknologi Pendidikan</p>
+          <p class="text-gray-600 mt-2 text-sm">10+ tahun pengalaman di bidang pendidikan & penelitian.</p>
         </div>
 
-        <!-- Pengajar 3 -->
-        <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
-          <img src="https://via.placeholder.com/150" alt="Pengajar 3" class="w-32 h-32 mx-auto rounded-full">
-          <h3 class="mt-4 text-xl font-semibold text-gray-800">Budi Setiawan</h3>
-          <p class="text-gray-600 mt-2">Instruktur Bahasa Inggris</p>
-          <p class="text-gray-600 mt-2">Mengajarkan Bahasa Inggris untuk komunikasi profesional dan akademik.</p>
-        </div>
-
-        <!-- Pengajar 4 -->
-        <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
-          <img src="https://via.placeholder.com/150" alt="Pengajar 4" class="w-32 h-32 mx-auto rounded-full">
-          <h3 class="mt-4 text-xl font-semibold text-gray-800">Dr. Sarah Lestari</h3>
-          <p class="text-gray-600 mt-2">Dosen Kimia</p>
-          <p class="text-gray-600 mt-2">Mempunyai keahlian di bidang kimia organik dan sintesis bahan baru.</p>
-        </div>
-
-        <!-- Pengajar 5 -->
-        <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
-          <img src="https://via.placeholder.com/150" alt="Pengajar 5" class="w-32 h-32 mx-auto rounded-full">
-          <h3 class="mt-4 text-xl font-semibold text-gray-800">Ir. Joko Santoso</h3>
-          <p class="text-gray-600 mt-2">Dosen Teknik Elektro</p>
-          <p class="text-gray-600 mt-2">Berfokus pada penelitian dan pengembangan teknologi elektronika.</p>
-        </div>
-
-        <!-- Pengajar 6 -->
-        <div class="bg-gray-50 p-6 rounded-lg shadow-lg text-center">
-          <img src="https://via.placeholder.com/150" alt="Pengajar 6" class="w-32 h-32 mx-auto rounded-full">
-          <h3 class="mt-4 text-xl font-semibold text-gray-800">Maya Kusuma</h3>
-          <p class="text-gray-600 mt-2">Instruktur Desain Grafis</p>
-          <p class="text-gray-600 mt-2">Mengajarkan desain grafis dan multimedia untuk seni dan komunikasi visual.</p>
-        </div>
+          <!-- Pengajar 3 -->
+      <div class="bg-white rounded-xl shadow-lg p-6 text-center transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl">
+        <img src="https://duniadosen.com/wp-content/uploads/2016/04/Jadi-Dosen.jpg" alt="Dr. Andi Susanto" class="w-28 h-28 mx-auto rounded-full border-4 border-blue-200 shadow-sm">
+        <h3 class="mt-4 text-xl font-semibold text-gray-800">Dr. Andi Susanto</h3>
+        <p class="text-blue-600 mt-1 font-medium">Dosen Matematika & Teknologi Pendidikan</p>
+        <p class="text-gray-600 mt-2 text-sm">10+ tahun pengalaman di bidang pendidikan & penelitian.</p>
       </div>
+      
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- Daftar Kurikulum dan Program Studi -->
-  <section class="bg-gray-100 py-12">
+  <section class="bg-gray-100 py-16">
     <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center text-blue-700 mb-10">Jurusan & Program Studi di Poliban</h2>
+      <h2 class="text-3xl font-bold text-center text-blue-700 mb-12">Jurusan & Program Studi di Poliban</h2>
   
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Card: Teknik Sipil -->
-        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-blue-600 mb-3">🏗️ Teknik Sipil</h3>
-          <ul class="list-disc pl-5 text-gray-700 space-y-1">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Teknik Sipil -->
+        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition">
+          <h3 class="text-2xl font-semibold text-blue-600 mb-4">🏗️ Teknik Sipil</h3>
+          <ul class="list-disc pl-5 text-gray-700 mb-4 space-y-1">
             <li>D3 Teknik Sipil</li>
             <li>D4 Teknik Bangunan Rawa</li>
             <li>D3 Teknik Geodesi</li>
             <li>D3 Teknik Pertambangan</li>
             <li>D4 Rekayasa Konstruksi Jalan & Jembatan</li>
           </ul>
+          <a href="https://sipil.poliban.ac.id" target="_blank" class="inline-block mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Kunjungi Website</a>
         </div>
   
-        <!-- Card: Teknik Mesin -->
-        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-red-600 mb-3">⚙️ Teknik Mesin</h3>
-          <ul class="list-disc pl-5 text-gray-700 space-y-1">
+        <!-- Teknik Mesin -->
+        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition">
+          <h3 class="text-2xl font-semibold text-red-600 mb-4">⚙️ Teknik Mesin</h3>
+          <ul class="list-disc pl-5 text-gray-700 mb-4 space-y-1">
             <li>D3 Teknik Mesin</li>
             <li>D3 Teknik Mesin Otomotif</li>
             <li>D3 Alat Berat</li>
           </ul>
+          <a href="https://mesin.poliban.ac.id" target="_blank" class="inline-block mt-2 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">Kunjungi Website</a>
         </div>
   
-        <!-- Card: Teknik Elektro -->
-        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-yellow-600 mb-3">💡 Teknik Elektro</h3>
-          <ul class="list-disc pl-5 text-gray-700 space-y-1">
+        <!-- Teknik Elektro -->
+        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition">
+          <h3 class="text-2xl font-semibold text-yellow-600 mb-4">💡 Teknik Elektro</h3>
+          <ul class="list-disc pl-5 text-gray-700 mb-4 space-y-1">
             <li>D3 Teknik Listrik</li>
             <li>D3 Elektronika</li>
             <li>D3 Teknik Informatika</li>
             <li>D4 Sistem Informasi Kota Cerdas</li>
             <li>D4 Rekayasa Pembangkit Energi</li>
           </ul>
+          <a href="https://elektro.poliban.ac.id" target="_blank" class="inline-block mt-2 bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition">Kunjungi Website</a>
         </div>
   
-        <!-- Card: Akuntansi -->
-        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-green-600 mb-3">📊 Akuntansi</h3>
-          <ul class="list-disc pl-5 text-gray-700 space-y-1">
+        <!-- Akuntansi -->
+        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition">
+          <h3 class="text-2xl font-semibold text-green-600 mb-4">📊 Akuntansi</h3>
+          <ul class="list-disc pl-5 text-gray-700 mb-4 space-y-1">
             <li>D3 Akuntansi</li>
             <li>D3 Komputerisasi Akuntansi</li>
             <li>D4 Akuntansi Lembaga Keuangan Syariah</li>
           </ul>
+          <a href="https://akuntansi.poliban.ac.id" target="_blank" class="inline-block mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">Kunjungi Website</a>
         </div>
   
-        <!-- Card: Administrasi Bisnis -->
-        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-          <h3 class="text-xl font-semibold text-purple-600 mb-3">💼 Administrasi Bisnis</h3>
-          <ul class="list-disc pl-5 text-gray-700 space-y-1">
+        <!-- Administrasi Bisnis -->
+        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition">
+          <h3 class="text-2xl font-semibold text-purple-600 mb-4">💼 Administrasi Bisnis</h3>
+          <ul class="list-disc pl-5 text-gray-700 mb-4 space-y-1">
             <li>D3 Administrasi Bisnis</li>
             <li>D3 Manajemen Informatika</li>
             <li>D4 Bisnis Digital</li>
           </ul>
+          <a href="https://bisnis.poliban.ac.id" target="_blank" class="inline-block mt-2 bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition">Kunjungi Website</a>
         </div>
       </div>
     </div>
   </section>
+  
   
   <!-- Footer -->
   <footer class="bg-gray-800 text-white py-14">
@@ -380,30 +380,30 @@
         
         <!-- Services Section -->
         <div class="footer-item">
-          <h4 class="font-semibold text-lg mb-6">Services</h4>
+          <h4 class="font-semibold text-lg mb-6">Layanan</h4>
           <ul class="space-y-2">
-            <li><a href="#" class="text-gray-400 hover:text-white">SEO Development</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white">Business Growth</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white">Social Media Management</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white">Website Optimization</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Perpustakaan Digital</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Portal Mahasiswa</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Bimbingan Akademik</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Pusat Karier</a></li>
           </ul>
         </div>
         
         <!-- Community Section -->
         <div class="footer-item">
-          <h4 class="font-semibold text-lg mb-6">Community</h4>
+          <h4 class="font-semibold text-lg mb-6">Komunitas</h4>
           <ul class="space-y-2">
-            <li><a href="#" class="text-gray-400 hover:text-white">Digital Marketing</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white">Business Ideas</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white">Website Checkup</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white">Page Speed Test</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Organisasi Mahasiswa</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Alumni & Jejaring</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Forum Diskusi Akademik</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Kegiatan Kampus</a></li>
           </ul>
         </div>
         
         <!-- Subscribe -->
         <div class="footer-item">
-          <h4 class="font-semibold text-lg mb-6">Subscribe Newsletters</h4>
-          <p class="text-gray-400 mb-4">Get our latest news and ideas delivered to your inbox.</p>
+          <h4 class="font-semibold text-lg mb-6">Langganan Berita</h4>
+          <p class="text-gray-400 mb-4">Dapatkan informasi terbaru seputar berita kampus langsung di email Anda.</p>
           <form action="#" method="get" class="flex items-center space-x-2">
             <input type="email" name="email" id="email" placeholder="Your Email"
                    class="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#5460B5] w-full" required>
