@@ -91,13 +91,15 @@ class PemetaanCplBkExport implements FromArray, WithHeadings, WithTitle, WithEve
     {
         return [
             BeforeSheet::class => function (BeforeSheet $event) {
-                $totalCols = count($this->bks) + 2;
-                $lastCol = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($totalCols);
+                // Set title in A1
+                $event->sheet->setCellValue('A1', '5. Pemetaan CPL - BK');
 
-                $event->sheet->setCellValue('A1', 'Pemetaan CPL - BK');
-                $event->sheet->mergeCells("A1:{$lastCol}1");
-                $event->sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
-                $event->sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+                // Merge the cells for the title
+                $lastColumn = $event->sheet->getHighestColumn();
+                $event->sheet->mergeCells("A1:{$lastColumn}1");
+
+                // Set the title style
+                $event->sheet->getStyle("A1")->getFont()->setBold(true)->setSize(10);
             },
 
             AfterSheet::class => function (AfterSheet $event) {

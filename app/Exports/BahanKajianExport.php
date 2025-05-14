@@ -102,7 +102,7 @@ class BahanKajianExport implements
             'A' => 6,
             'B' => 20,
             'C' => 20,
-            'D' => 25,
+            'D' => 40,
             'E' => 40,
             'F' => 30,
             'G' => 15,
@@ -129,7 +129,8 @@ class BahanKajianExport implements
         $sheet->getStyle('A2:H2')->applyFromArray($headerStyle); // Header row
         $sheet->getStyle('A3:H' . $lastRow)->applyFromArray($dataStyle); // Data rows
 
-        $sheet->getDefaultRowDimension()->setRowHeight(40);
+        $sheet->getRowDimension(1)->setRowHeight(15); // Judul
+        $sheet->getRowDimension(2)->setRowHeight(30);
         for ($i = 3; $i <= $lastRow; $i++) {
             $descLength = strlen($sheet->getCell('E' . $i)->getValue());
             if ($descLength > 200) {
@@ -137,7 +138,7 @@ class BahanKajianExport implements
             } elseif ($descLength > 100) {
                 $sheet->getRowDimension($i)->setRowHeight(60);
             }
-
+            
             // Alternating background
             if ($i % 2 == 0) {
                 $sheet->getStyle("A{$i}:H{$i}")->getFill()
@@ -147,6 +148,7 @@ class BahanKajianExport implements
         }
 
         $sheet->getStyle('A3:A' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('B3:B' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('C3:C' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('G3:G' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('D3:D' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
@@ -167,10 +169,8 @@ class BahanKajianExport implements
             BeforeSheet::class => function (BeforeSheet $event) {
                 $sheet = $event->sheet;
 
-                $sheet->setCellValue('A1', 'Daftar Bahan Kajian');
-                $sheet->mergeCells('A1:H1');
-                $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
-                $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+                $sheet->setCellValue('A1', '4. Daftar Bahan Kajian');
+                $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(10);
             },
         ];
     }
