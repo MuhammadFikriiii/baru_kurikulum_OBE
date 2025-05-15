@@ -138,4 +138,35 @@ class TimCapaianPembelajaranLulusanController extends Controller
         $id_cpl->delete();
         return redirect()->route('tim.capaianpembelajaranlulusan.index')->with('success', 'Capaian Pembelajaran lulusan berhasil dihapus.');
     }
+
+    public function pemenuhan_cpl()
+    {
+        $kodeProdi = Auth::user()->kode_prodi;
+
+        $cpls = DB::table('capaian_profil_lulusans as cpl')
+        ->join('cpl_pl as cplpl', 'cpl.id_cpl', '=', 'cplpl.id_cpl')
+        ->join('profil_lulusans as pl', 'cplpl.id_pl', '=', 'pl.id_pl')
+        ->join('prodis as ps', 'pl.kode_prodi', '=', 'ps.kode_prodi')
+        ->leftJoin('cpl_mk as cmk', 'cpl.id_cpl', '=', 'cmk.id_cpl')
+        ->leftJoin('mata_kuliahs as mk', 'cmk.kode_mk', '=', 'mk.kode_mk')
+        ->where('ps.kode_prodi', $kodeProdi)
+        ->select('cpl.id_cpl','cpl.kode_cpl', 'mk.semester_mk', 'mk.kode_mk','mk.nama_mk', 'ps.kode_prodi')
+        ->distinct();
+
+        $data = $cpls
+            ->orderBy('cpl.kode_cpl', 'asc')
+            ->orderBy('mk.semester_mk', 'asc')
+            ->get();
+
+            $petaCPL = [];
+
+            foreach ($data as $row) {
+                $semester = 'Semester ' . $row->semester_mk;
+                $namamk = $row->nama_mk;
+            
+                $petaCPL[$row->id_cpl]['label'] = $row->kode_cpl; // yang ditampilkan
+                $petaCPL[$row->id_cpl]['semester'][$semester][] = $namamk; // pengelompokan tetap pakai id
+            }        
+            return view('tim.pemenuhancpl.index', compact('petaCPL'));
+    }
 }

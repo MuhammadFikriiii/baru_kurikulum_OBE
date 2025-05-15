@@ -127,41 +127,40 @@ class AdminCapaianProfilLulusanController extends Controller
     }
 
     public function peta_pemenuhan_cpl(Request $request)
-{
-    $kode_prodi = $request->get('kode_prodi', 'all');
+    {
+        $kode_prodi = $request->get('kode_prodi', 'all');
 
-    $query = DB::table('capaian_profil_lulusans as cpl')
-    ->join('cpl_pl as cplpl', 'cpl.id_cpl', '=', 'cplpl.id_cpl')
-    ->join('profil_lulusans as pl', 'cplpl.id_pl', '=', 'pl.id_pl')
-    ->join('prodis as ps', 'pl.kode_prodi', '=', 'ps.kode_prodi')
-    ->leftJoin('cpl_mk as cmk', 'cpl.id_cpl', '=', 'cmk.id_cpl')
-    ->leftJoin('mata_kuliahs as mk', 'cmk.kode_mk', '=', 'mk.kode_mk')
-    ->select('cpl.id_cpl','cpl.kode_cpl', 'mk.semester_mk', 'mk.kode_mk','mk.nama_mk', 'ps.kode_prodi')
-    ->distinct();
+        $query = DB::table('capaian_profil_lulusans as cpl')
+        ->join('cpl_pl as cplpl', 'cpl.id_cpl', '=', 'cplpl.id_cpl')
+        ->join('profil_lulusans as pl', 'cplpl.id_pl', '=', 'pl.id_pl')
+        ->join('prodis as ps', 'pl.kode_prodi', '=', 'ps.kode_prodi')
+        ->leftJoin('cpl_mk as cmk', 'cpl.id_cpl', '=', 'cmk.id_cpl')
+        ->leftJoin('mata_kuliahs as mk', 'cmk.kode_mk', '=', 'mk.kode_mk')
+        ->select('cpl.id_cpl','cpl.kode_cpl', 'mk.semester_mk', 'mk.kode_mk','mk.nama_mk', 'ps.kode_prodi')
+        ->distinct();
 
 
-    if ($kode_prodi !== 'all') {
-        $query->where('ps.kode_prodi', $kode_prodi);
+        if ($kode_prodi !== 'all') {
+            $query->where('ps.kode_prodi', $kode_prodi);
+        }
+
+        $data = $query
+            ->orderBy('cpl.kode_cpl', 'asc')
+            ->orderBy('mk.semester_mk', 'asc')
+            ->get();
+
+            $petaCPL = [];
+
+            foreach ($data as $row) {
+                $semester = 'Semester ' . $row->semester_mk;
+                $namamk = $row->nama_mk;
+            
+                $petaCPL[$row->id_cpl]['label'] = $row->kode_cpl; // yang ditampilkan
+                $petaCPL[$row->id_cpl]['semester'][$semester][] = $namamk; // pengelompokan tetap pakai id
+            }        
+
+        $prodis = DB::table('prodis')->get();
+
+        return view('admin.pemenuhancpl.index', compact('petaCPL', 'prodis', 'kode_prodi'));
     }
-
-    $data = $query
-        ->orderBy('cpl.kode_cpl', 'asc')
-        ->orderBy('mk.semester_mk', 'asc')
-        ->get();
-
-        $petaCPL = [];
-
-        foreach ($data as $row) {
-            $semester = 'Semester ' . $row->semester_mk;
-            $namamk = $row->nama_mk;
-        
-            $petaCPL[$row->id_cpl]['label'] = $row->kode_cpl; // yang ditampilkan
-            $petaCPL[$row->id_cpl]['semester'][$semester][] = $namamk; // pengelompokan tetap pakai id
-        }        
-
-    $prodis = DB::table('prodis')->get();
-
-    return view('admin.pemenuhancpl.index', compact('petaCPL', 'prodis', 'kode_prodi'));
-}
-
 }
