@@ -15,7 +15,7 @@
         <div class="flex space-x-2 mb-3 md:mb-0">
             <a href="{{ route('tim.export.excel') }}" 
                 class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 inline-block mt-4">
-        📄  Export skrng baru pl sama cpl
+        📄  Export Excel
         </a>
         </div>
         <div class="relative">

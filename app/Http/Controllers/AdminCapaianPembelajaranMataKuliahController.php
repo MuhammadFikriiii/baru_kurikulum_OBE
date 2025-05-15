@@ -112,7 +112,7 @@ class AdminCapaianPembelajaranMataKuliahController extends Controller
         $cpls = DB::table('cpl_cpmk')
             ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
             ->where('cpl_cpmk.id_cpmk', $id_cpmk)
-            ->select('cpl.id_cpl', 'cpl.deskripsi_cpl')
+            ->select('cpl.id_cpl','cpl.kode_cpl', 'cpl.deskripsi_cpl')
             ->get();
 
         $mks = DB::table('cpmk_mk')
@@ -122,5 +122,16 @@ class AdminCapaianPembelajaranMataKuliahController extends Controller
             ->get();
 
         return view('admin.capaianpembelajaranmatakuliah.detail', compact( 'cpls', 'mks', 'cpmk'));
+    }
+
+    public function destroy($id_cpmk)
+    {
+        $cpmk = CapaianPembelajaranMataKuliah::findOrFail($id_cpmk);
+        $cpmk->delete();
+
+        DB::table('cpl_cpmk')->where('id_cpmk', $id_cpmk)->delete();
+        DB::table('cpmk_mk')->where('id_cpmk', $id_cpmk)->delete();
+
+        return redirect()->route('admin.capaianpembelajaranmatakuliah.index')->with('success', 'Capaian Pembelajaran Mata Kuliah berhasil dihapus.');
     }
 }

@@ -44,14 +44,14 @@
     </div>
     
     <!-- Tabel data Capaian Pembelajaran Mata Kuliah -->
-    <table class="w-full table-fixed shadow-md rounded-lg overflow-hidden">
+    <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
         <thead class="bg-green-800 text-white border-b uppercase">
             <tr>
-                <th class="py-3 px-6 text-center">No</th>
-                <th class="py-3 px-6 text-center">prodi</th>
-                <th class="py-3 px-6 text-center">Kode CPMK</th>
-                <th class="py-3 px-6 text-center">Deskripsi CPMK</th>
-                <th class="py-3 px-6 text-center">Aksi</th>
+                <th class="py-3 px-6 min-w-[10px] text-center">No</th>
+                <th class="py-3 px-6 min-w-[10px] text-center">prodi</th>
+                <th class="py-3 px-6 min-w-[10px] text-center">Kode CPMK</th>
+                <th class="py-3 px-6 min-w-[10px] text-center">Deskripsi CPMK</th>
+                <th class="py-3 px-6 min-w-[10px] text-center">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -60,18 +60,18 @@
                     <td class="py-3 px-6 text-center">{{ $index + 1 }}</td>
                     <td class="py-3 px-6 text-center">{{ $cpmk->nama_prodi ?? 'Tidak ada prodi' }}</td>
                     <td class="py-3 px-6 text-center">{{ $cpmk->kode_cpmk }}</td>
-                    <td class="py-3 px-6 text-center">{{ $cpmk->deskripsi_cpmk }}</td>
+                    <td class="py-3 px-6">{{ $cpmk->deskripsi_cpmk }}</td>
                         <td class="py-2 px-3 flex justify-center items-center space-x-2">
                             <a href="{{ route('admin.capaianpembelajaranmatakuliah.detail', $cpmk->id_cpmk) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈</a>
                             <a href="{{ route('admin.capaianpembelajaranmatakuliah.edit', $cpmk->id_cpmk) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️</a>
-                            <form action="#" method="POST">
+                            <form action="{{ route('admin.capaianpembelajaranmatakuliah.destroy', $cpmk->id_cpmk) }}" method="POST">
                                 @csrf @method('DELETE')
                             <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus jurusan ini?')">
                                 🗑️
                             </button>
                             </form>
                         </td>
-                </tr>
+                    </tr>
             @endforeach
         </tbody>
     </table>

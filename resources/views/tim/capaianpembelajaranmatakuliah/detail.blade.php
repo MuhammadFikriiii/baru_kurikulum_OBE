@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.tim.app')
 
 @section('content')
 <div class="mr-20 ml-20">
@@ -35,7 +35,7 @@
             @endforelse
         </ul>
     </div>
-        <a href="{{ route('admin.capaianpembelajaranmatakuliah.index') }}"
+        <a href="{{ route('tim.capaianpembelajaranmatakuliah.index') }}"
            class="px-5 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700">
            kembali
         </a>

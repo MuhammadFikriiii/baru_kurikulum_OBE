@@ -8,7 +8,6 @@ use App\Http\Controllers\AdminProdiController;
 use App\Http\Controllers\AdminProfilLulusanController;
 use App\Http\Controllers\AdminCapaianProfilLulusanController;
 use App\Http\Controllers\Wadir1ProdiController;
-use App\Models\AdminCapaianPembelajaranMataKuliah;
 use App\Http\Controllers\AdminPenilaianController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPemetaanCplPlController;
@@ -44,6 +43,7 @@ use App\Http\Controllers\TimExportController;
 use App\Http\Controllers\TimPemetaanBkMkController;
 use App\Http\Controllers\TimPemetaanCplMkController;
 use App\Http\Controllers\TimPemetaanCplMkBkController;
+use App\Http\Controllers\TimCapaianPembelajaranMatakuliahController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -159,6 +159,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/capaianpembelajaranmatakuliah/{id_cpmk}/edit', [AdminCapaianPembelajaranMataKuliahController::class, 'edit'])->name('capaianpembelajaranmatakuliah.edit');
         Route::put('/capaianpembelajaranmatakuliah/{id_cpmk}', [AdminCapaianPembelajaranMataKuliahController::class, 'update'])->name('capaianpembelajaranmatakuliah.update');
         Route::get('/capaianpembelejaranmatakuliah/{id_cpmk}/detail', [AdminCapaianPembelajaranMataKuliahController::class, 'detail'])->name('capaianpembelajaranmatakuliah.detail');
+        Route::delete('/capaianpembelajaranmatakuliah/{id_cpmk}', [AdminCapaianPembelajaranMataKuliahController::class, 'destroy'])->name('capaianpembelajaranmatakuliah.destroy');
 
         Route::get('/subcpmk', [AdminSubCpmkController::class, 'index'])->name('subcpmk.index');
         Route::get('/subcpmk/create', [AdminSubCpmkController::class, 'create'])->name('subcpmk.create');
@@ -239,5 +240,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/organisasimk', [TimMataKuliahController::class, 'organisasi_mk'])->name('matakuliah.organisasimk');
         Route::get('/pemetaancplmkbk', [TimPemetaanCplMkBkController::class, 'index'])->name('pemetaancplmkbk.index');
         Route::get('/export/excel', [TimExportController::class, 'export'])->name('export.excel');
+        Route::get('/capaianpembelajaranmatakuliah', [TimCapaianPembelajaranMatakuliahController::class, 'index'])->name('capaianpembelajaranmatakuliah.index');
+        Route::get('/capaianpembelajaranmatakuliah/create', [TimCapaianPembelajaranMataKuliahController::class, 'create'])->name('capaianpembelajaranmatakuliah.create');
+        Route::post('/capaianpembelajaranmatakuliah', [TimCapaianPembelajaranMataKuliahController::class, 'store'])->name('capaianpembelajaranmatakuliah.store');
+        Route::get('/capaianpembelajaranmatakuliah/{id_cpmk}/edit', [TimCapaianPembelajaranMataKuliahController::class, 'edit'])->name('capaianpembelajaranmatakuliah.edit');
+        Route::put('/capaianpembelajaranmatakuliah/{id_cpmk}', [TimCapaianPembelajaranMataKuliahController::class, 'update'])->name('capaianpembelajaranmatakuliah.update');
+        Route::get('/capaianpembelejaranmatakuliah/{id_cpmk}/detail', [TimCapaianPembelajaranMataKuliahController::class, 'detail'])->name('capaianpembelajaranmatakuliah.detail');
+        Route::delete('/capaianpembelajaranmatakuliah/{id_cpmk}', [TimCapaianPembelajaranMataKuliahController::class, 'destroy'])->name('capaianpembelajaranmatakuliah.destroy');
     });
 });

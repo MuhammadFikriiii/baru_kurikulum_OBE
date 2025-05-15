@@ -43,6 +43,7 @@ class TimMataKuliahController extends Controller
             ->select('cpl.id_cpl', 'cpl.kode_cpl', 'cpl.deskripsi_cpl')
             ->distinct()
             ->get();
+            
         $bahanKajians = DB::table('bahan_kajians as bk')
             ->select(
                 'bk.id_bk', 'bk.nama_bk', 'bk.kode_bk', 'bk.deskripsi_bk',
