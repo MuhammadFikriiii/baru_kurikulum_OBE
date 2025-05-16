@@ -183,6 +183,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('tim.pemetaancplcpmkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="fas fa-sliders-h"></i>
+                    <span class="ml-2">pemetaann cpl-cpmk-mk</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('tim.pemenuhancpl.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="fas fa-share-alt"></i>
                     <span class="ml-2">Pemenuhan CPL</span>

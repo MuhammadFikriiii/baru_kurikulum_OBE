@@ -45,6 +45,7 @@ use App\Http\Controllers\TimPemetaanCplMkController;
 use App\Http\Controllers\TimPemetaanCplMkBkController;
 use App\Http\Controllers\TimCapaianPembelajaranMatakuliahController;
 use App\Http\Controllers\TimPemetaanCplCpmkMkController;
+use App\Http\Controllers\TimSubCpmkController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -250,5 +251,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/capaianpembelajaranmatakuliah/{id_cpmk}', [TimCapaianPembelajaranMataKuliahController::class, 'destroy'])->name('capaianpembelajaranmatakuliah.destroy');
         Route::get('/pemetaancplcpmkmk', [TimPemetaanCplCpmkMkController::class, 'index'])->name('pemetaancplcpmkmk.index');
         Route::get('/pemenuhancpl', [TimCapaianPembelajaranLulusanController::class, 'pemenuhan_cpl'])->name('pemenuhancpl.index');
+        Route::get('/subcpmk/create', [TimSubCpmkController::class, 'create'])->name('subcpmk.create');
+        Route::post('/subcpmk', [TimSubCpmkController::class, 'store'])->name('subcpmk.store');
     });
 });
