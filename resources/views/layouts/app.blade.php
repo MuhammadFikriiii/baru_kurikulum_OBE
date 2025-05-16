@@ -89,7 +89,7 @@
     <!-- Sidebar -->
     <aside id="sidebar" class="w-64 bg-[#201F31] text-white p-5  space-y-6 fixed top-0 left-0 h-full overflow-y-auto transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40">
         <!-- Header -->
-        <div class="flex items-center justify-between mb-4 pt-2 mt-16 ">
+        <div class="flex items-center justify-between mb-4 pt-2 mt-16">
             <h2 class="text-xl font-bold">Dashboard Admin</h2>
             <button class="md:hidden" onclick="toggleSidebar()">✖</button>
         </div>

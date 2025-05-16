@@ -402,7 +402,7 @@
         
         <!-- Subscribe -->
         <div class="footer-item">
-          <h4 class="font-semibold text-lg mb-6">Langganan Berita</h4>
+          <h4 class="font-semibold text-lg mb-6">Informasi Berita</h4>
           <p class="text-gray-400 mb-4">Dapatkan informasi terbaru seputar berita kampus langsung di email Anda.</p>
           <form action="#" method="get" class="flex items-center space-x-2">
             <input type="email" name="email" id="email" placeholder="Your Email"

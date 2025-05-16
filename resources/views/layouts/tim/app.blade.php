@@ -58,7 +58,7 @@
                 <span class="absolute left-0 bottom-0 block w-0 h-[2px] bg-white"></span>
             </span>
             
-           <div class="relative">
+           <div class="relative ">
                 <div id="dropdownMenu" class="absolute hidden bg-white text-gray-900 rounded-lg shadow-md mt-2 w-32 z-50 border border-gray-300">
                     <a href="#" class="block px-4 py-2 hover:bg-gray-300 rounded-lg">PDF</a>
                     <a href="#" class="block px-4 py-2 hover:bg-gray-300 rounded-lg">DOCX</a>
@@ -98,7 +98,7 @@
     <!-- Sidebar -->
     <aside id="sidebar" class="w-64 bg-gray-800 text-white p-5 space-y-6 fixed top-0 left-0 h-full transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40">
         <!-- Header -->
-        <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center justify-between mb-4 pt-2 mt-16 ">
             <h2 class="text-xl font-bold">Dashboard Tim</h2>
             <button class="md:hidden" onclick="toggleSidebar()">✖</button>
         </div>
