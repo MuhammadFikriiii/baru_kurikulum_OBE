@@ -11,7 +11,20 @@ class TimSubCpmkController extends Controller
 {
     public function index()
     {
-        
+        $kodeProdi = Auth::user()->kode_prodi;
+
+        $subcpmks = DB::table('sub_cpmks as sc')
+            ->join('capaian_pembelajaran_mata_kuliahs as cpmk', 'sc.id_cpmk', '=', 'cpmk.id_cpmk')
+            ->join('cpl_cpmk as cplcpmk', 'cpmk.id_cpmk', '=', 'cplcpmk.id_cpmk')
+            ->join('capaian_profil_lulusans as cpl', 'cplcpmk.id_cpl', '=', 'cpl.id_cpl')
+            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->select('sc.*', 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk', 'cpmk.kode_cpmk')
+            ->where('pl.kode_prodi', $kodeProdi)
+            ->orderBy('sc.sub_cpmk')
+            ->get();
+
+        return view('tim.subcpmk.index', compact('subcpmks'));
     }
     public function create()
     {

@@ -251,6 +251,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/capaianpembelajaranmatakuliah/{id_cpmk}', [TimCapaianPembelajaranMataKuliahController::class, 'destroy'])->name('capaianpembelajaranmatakuliah.destroy');
         Route::get('/pemetaancplcpmkmk', [TimPemetaanCplCpmkMkController::class, 'index'])->name('pemetaancplcpmkmk.index');
         Route::get('/pemenuhancpl', [TimCapaianPembelajaranLulusanController::class, 'pemenuhan_cpl'])->name('pemenuhancpl.index');
+        Route::get('/subcpmk', [TimSubCpmkController::class, 'index'])->name('subcpmk.index');
         Route::get('/subcpmk/create', [TimSubCpmkController::class, 'create'])->name('subcpmk.create');
         Route::post('/subcpmk', [TimSubCpmkController::class, 'store'])->name('subcpmk.store');
     });

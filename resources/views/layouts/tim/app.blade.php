@@ -185,13 +185,19 @@
             <li>
                 <a href="{{ route('tim.pemetaancplcpmkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="fas fa-sliders-h"></i>
-                    <span class="ml-2">pemetaann cpl-cpmk-mk</span>
+                    <span class="ml-2">PEMETAAN CPL - CPMK - MK</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('tim.pemenuhancpl.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="fas fa-share-alt"></i>
                     <span class="ml-2">Pemenuhan CPL</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('tim.subcpmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="fas fa-share-alt"></i>
+                    <span class="ml-2">SUB CPMK</span>
                 </a>
             </li>
             <li>
