@@ -239,6 +239,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/matakuliah', [TimMataKuliahController::class, 'store'])->name('matakuliah.store');
         Route::get('/matakuliah/{matakuliah}/edit', [TimMataKuliahController::class, 'edit'])->name('matakuliah.edit');
         Route::put('/matakuliah/{matakuliah}', [TimMataKuliahController::class, 'update'])->name('matakuliah.update');
+        Route::get('/matakuliah/{matakuliah}/detail', [TimMataKuliahController::class, 'detail'])->name('matakuliah.detail');
+        Route::delete('/matakuliah/{matakuliah}', [TimMataKuliahController::class, 'destroy'])->name('matakuliah.destroy');
         Route::get('/organisasimk', [TimMataKuliahController::class, 'organisasi_mk'])->name('matakuliah.organisasimk');
         Route::get('/pemetaancplmkbk', [TimPemetaanCplMkBkController::class, 'index'])->name('pemetaancplmkbk.index');
         Route::get('/export/excel', [TimExportController::class, 'export'])->name('export.excel');

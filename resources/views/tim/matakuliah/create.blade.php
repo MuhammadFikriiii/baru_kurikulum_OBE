@@ -18,25 +18,25 @@
     <form action="{{ route ('tim.matakuliah.store') }}" method="POST">
         @csrf
 
-        <label for="id_cpls" class="text-2xl font-semibold mb-2">CPL Lulusan Terkait:</label>
-    <select id="id_cpls" name="id_cpls[]" class="border border-gray-300 p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]" multiple required>
+    <label for="id_cpls" class="text-2xl font-semibold mb-2">CPL Terkait</label>
+    <select id="id_cpls" name="id_cpls[]" size="2" class="border border-black p-3 w-full rounded-lg mt-1 mb-1" multiple required>
     @foreach($capaianProfilLulusans as $cpl)
         <option value="{{ $cpl->id_cpl }}" title="{{ $cpl->kode_cpl }} - {{ $cpl->deskripsi_cpl }}">
     {{ $cpl->kode_cpl }} - {{ $cpl->deskripsi_cpl }}
     </option>
     @endforeach
     </select>
-    <p class="text-sm text-gray-500 mb-2">Tekan shift/Tahan Klik mouseuntuk memilih lebih dari satu.</p>
+    <p class="italic text-red-700 mb-2">*Tekan tombol Ctrl dan klik untuk memilih lebih dari satu item.</p>
 
     <label for="id_bks" class="text-2xl font-semibold mb-2">BK Terkait:</label>
-    <select id="id_bks" name="id_bks[]" class="border border-gray-300 p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]" multiple required>
+    <select id="id_bks" name="id_bks[]" size="2" class="border border-black p-3 mb-1 w-full rounded-lg mt-1" multiple required>
     @foreach($bahanKajians as $bk)
         <option value="{{ $bk->id_bk }}" title="{{ $bk->kode_bk }} - {{ $bk->nama_bk }}">
     {{ $bk->kode_bk }} - {{ $bk->nama_bk }}
     </option>
     @endforeach
     </select>
-    <p class="text-sm text-gray-500 mb-2">Tekan shift/Tahan Klik mouseuntuk memilih lebih dari satu.</p>
+    <p class="italic text-red-700 mb-2">*Tekan tombol Ctrl dan klik untuk memilih lebih dari satu item.</p>
 
         <div class="mt-3">
             <label for="kode_mk" class="text-2xl">Kode Mata Kuliah</label>
@@ -77,9 +77,8 @@
             </select>
         </div>
         <div>
-            <button type="submit" class="bg-green-400 hover:bg-green-800 mt-3 px-5 py-2 rounded-lg">Simpan</button>
-            <a href="{{ route('tim.matakuliah.index') }}" class="bg-blue-400 hover:bg-blue-800 px-5 py-2 rounded-lg">Kembali</a>
+            <button type="submit" class="bg-blue-600 hover:bg-blue-800 text-white font-bold mt-3 px-5 py-2 rounded-lg">Simpan</button>
+            <a href="{{ route('tim.matakuliah.index') }}" class="bg-gray-600 hover:bg-gray-700 px-5 py-2 rounded-lg text-white font-bold ml-2">Kembali</a>
         </div>
     </form>
-
 @endsection

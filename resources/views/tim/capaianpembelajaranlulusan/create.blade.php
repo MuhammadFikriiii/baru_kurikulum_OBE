@@ -20,34 +20,33 @@
 <form action="{{ route('tim.capaianpembelajaranlulusan.store') }}" method="POST">
 @csrf
 
-<label for="id_pls" class="text-2xl font-semibold mb-2">Profil Lulusan Terkait ({{ auth()->user()->prodi->nama_prodi ?? '' }}):</label>
-<select id="id_pls" name="id_pls[]" class="border border-gray-300 p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]" multiple required>
+<label for="id_pls" class="text-xl font-semibold mb-2">Profil Lulusan Terkait:</label>
+<select id="id_pls" name="id_pls[]" class="border border-black p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]" required>
     @foreach($profilLulusans as $pl)
         <option value="{{ $pl->id_pl }}" title="{{ $pl->kode_pl }} - {{ $pl->deskripsi_pl }}">
             {{ $pl->kode_pl }} - {{ $pl->deskripsi_pl }}
         </option>
     @endforeach
 </select>
-<p class="text-sm text-gray-500 mb-2">Tekan shift/Tahan Klik mouse untuk memilih lebih dari satu.</p>
 
-<label for="kode_cpl" class="text-2xl">Kode CPL:</label>
+<label for="kode_cpl" class="text-xl font-semibold">Kode CPL:</label>
 <input type="text" id="kode_cpl" name="kode_cpl" class="border border-black p-3 w-full rounded-lg mt-1 mb-3" required></input>
 <br>
 
-<label for="deskripsi_cpl" class="text-2xl">Deskripsi CPL:</label>
+<label for="deskripsi_cpl" class="text-xl font-semibold">Deskripsi CPL:</label>
 <textarea id="deskripsi_cpl" type="text" name="deskripsi_cpl" class="border border-black p-3 w-full rounded-lg mt-1 mb-3" required></textarea>
 <br>
 
-<label for="status_cpl" class="text-2xl">Status CPL:</label>
-<select id="status_cpl" name="status_cpl" class="border border-black p-3 w-full rounded-lg mt-1 mb-3" required>
+<label for="status_cpl" class="text-xl font-semibold">Status CPL:</label>
+<select id="status_cpl" name="status_cpl" class="border border-black p-3 w-full rounded-lg mt-1 mb-5" required>
     <option value="" selected disabled>Pilih Status CPL</option>
     <option value="Kompetensi Utama Bidang">Kompetensi Utama</option>
     <option value="Kompetensi Tambahan">Kompetensi Tambahan</option>
 </select>
 <br>
 
-<button type="submit" class="bg-green-400 hover:bg-green-800 mt-2 rounded-lg px-5 py-2">Simpan</button>
-<a href="{{ route('tim.capaianpembelajaranlulusan.index') }}" class="bg-blue-400 hover:bg-blue-800 px-5 py-2 rounded-lg">Kembali</a>
+<button type="submit" class="bg-blue-600 hover:bg-blue-800 mt-2 rounded-lg px-5 py-2 text-white font-bold">Simpan</button>
+<a href="{{ route('tim.capaianpembelajaranlulusan.index') }}" class="ml-2 bg-gray-600 hover:bg-gray-700 px-5 py-2 rounded-lg text-white font-bold">Kembali</a>
 </form>
 </div>
 @endsection

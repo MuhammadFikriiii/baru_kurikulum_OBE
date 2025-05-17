@@ -27,29 +27,16 @@
 
     <div class="flex justify-between mb-4">
         <div class="space-x-2">
-            <a href="{{ route('tim.bahankajian.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-                👤 Tambah Bahan Kajian
-            </a>
-            <a href="" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
-                📄 Ekspor ke Excel
+            <a href="{{ route('tim.bahankajian.create') }}" class="bg-green-600 h-10 font-bold text-white px-5 inline-flex items-center py-2 rounded-md hover:bg-green-800">
+                Tambah
             </a>
         </div>
-    </div>
-    
-    <div class="flex items-center justify-between mb-3">
-        <label for="entries" class="text-gray-600 mr-2">Show</label>
-        <select id="entries" class="border border-gray-300 px-3 py-2 rounded-md mr-2">
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-        </select> 
-        <span class="text-gray-600">entries</span>
         <div class="ml-auto justify-between">
             <input type="text" id="search" placeholder="Search..." 
-                class="border border-gray-300 px-3 py-2 rounded-md">
+                class="border border-black px-3 py-2 rounded-md">
         </div>
     </div>
+
     <div class="bg-white shadow-lg overflow-hidden">
         <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
             <thead class="bg-green-800 text-white border-b">
@@ -77,11 +64,11 @@
                     <td class="py-3 px-6 text-center min-w-[10px]">{{ $bahankajian->status_bk }}</td>
                     <td class="py-3 px-6 text-center min-w-[10px]">{{ $bahankajian->knowledge_area }}</td>
                     <td class="py-3 px-6 flex justify-center min-w-[10px] items-center space-x-2">
-                        <a href="{{ route('tim.bahankajian.detail', $bahankajian->id_bk) }}"class="bg-green-500 font-bold text-white px-5 py-2 rounded-md hover:bg-green-600">🛈</a>
-                        <a href="{{ route('tim.bahankajian.edit', $bahankajian->id_bk) }}"  class="bg-yellow-500 text-white font-bold px-5 py-2 rounded-md hover:bg-yellow-600">✏️</a>
+                        <a href="{{ route('tim.bahankajian.detail', $bahankajian->id_bk) }}"class="bg-gray-600 font-bold text-white px-5 py-2 rounded-md hover:bg-gray-700">🛈</a>
+                        <a href="{{ route('tim.bahankajian.edit', $bahankajian->id_bk) }}"  class="bg-blue-600 text-white font-bold px-5 py-2 rounded-md hover:bg-blue-800">✏️</a>
                         <form action="{{ route('tim.bahankajian.destroy', $bahankajian->id_bk) }}" method="POST">
                             @csrf @method('DELETE')
-                            <button class="bg-red-500 text-white px-5 py-2 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">
+                            <button class="bg-red-500 text-white px-5 py-2 rounded-md hover:bg-red-600" onclick="return confirm('Hapus BK ini?')">
                                 🗑️
                             </button>
                         </form>

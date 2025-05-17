@@ -28,6 +28,18 @@ class TimPemetaanCplMkController extends Controller
         ->orderBy('kode_cpl', 'asc')
         ->get();
         
+        $prodiByCpl = DB::table('cpl_mk')
+            ->join('capaian_profil_lulusans', 'cpl_mk.id_cpl', '=', 'capaian_profil_lulusans.id_cpl')
+            ->join('cpl_pl', 'capaian_profil_lulusans.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
+            ->join('prodis', 'profil_lulusans.kode_prodi', '=', 'prodis.kode_prodi')
+            ->select('cpl_mk.id_cpl', 'prodis.nama_prodi')
+            ->get()
+            ->groupBy('id_cpl')
+            ->map(function ($items) {
+                return $items->first()->nama_prodi ?? '-';
+            });
+
         $mks = MataKuliah::whereIn('kode_mk', function ($query) use ($kodeProdi) {
             $query->select('kode_mk')
                 ->from('cpl_mk')
@@ -41,6 +53,6 @@ class TimPemetaanCplMkController extends Controller
         
         $relasi = DB::table('cpl_mk')->get()->groupBy('kode_mk');
 
-        return view('tim.pemetaancplmk.index', compact('cpls', 'mks', 'relasi', 'prodi'));
+        return view('tim.pemetaancplmk.index', compact('cpls', 'mks', 'relasi', 'prodi','prodiByCpl'));
     }
 }

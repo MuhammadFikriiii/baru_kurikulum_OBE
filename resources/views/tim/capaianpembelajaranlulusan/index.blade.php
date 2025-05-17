@@ -26,31 +26,18 @@
     
         <div class="flex justify-between mb-4">
             <div class="space-x-2">
-                <a href="{{ route('tim.capaianpembelajaranlulusan.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-                    👤 Tambah Capaian Profil Lulusan
-                </a>
-                <a href="" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
-                    📄 Ekspor ke Excel
+                <a href="{{ route('tim.capaianpembelajaranlulusan.create') }}" class= "bg-green-600 text-white font-bold h-10 px-5 rounded-md hover:bg-green-800 inline-flex items-center">
+                    Tambah
                 </a>
             </div>
-        </div>
-    
-        <div class="flex items-center justify-between mb-3">
-            <label for="entries" class="text-gray-600 mr-2">Show</label>
-            <select id="entries" class="border border-gray-300 px-3 py-2 rounded-md mr-2">
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
-            <span class="text-gray-600">entries</span>
             <div class="ml-auto justify-between">
                 <input type="text" id="search" placeholder="Search..." 
-                    class="border border-gray-300 px-3 py-2 rounded-md">
+                    class="border border-black px-3 py-2 rounded-md">
             </div>
         </div>
+
         <div class="bg-white shadow-lg overflow-hidden">
-            <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
+            <table class="w-full border border-black shadow-md rounded-lg overflow-hidden">
                 <thead class="bg-green-800 text-white border-b">
                     <tr>
                         <th class="py-3 px-4 min-w-[10px] text-center font-bold uppercase ">No.</th>
@@ -65,17 +52,17 @@
                     @foreach ($capaianpembelajaranlulusans as $index => $capaianpembelajaranlulusan)
                     <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $index + 1 }}</td>
-                        <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianpembelajaranlulusan->nama_prodi ?? 'Tidak ada prodi' }}</td>                        </td>
+                        <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianpembelajaranlulusan->nama_prodi ?? 'Tidak ada prodi' }}</td>
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianpembelajaranlulusan->kode_cpl }}</td>
                         <td class="py-3 px-6 min-w-[10px] text-justify">{{ $capaianpembelajaranlulusan->deskripsi_cpl }}</td>
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianpembelajaranlulusan->status_cpl }}</td>
                         <td class="py-3 px-6 min-w-[10px] flex justify-center items-center space-x-2">
-                            <a href="{{ route('tim.capaianpembelajaranlulusan.detail', $capaianpembelajaranlulusan->id_cpl) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
-                            <a href="{{ route('tim.capaianpembelajaranlulusan.edit', $capaianpembelajaranlulusan->id_cpl) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
+                            <a href="{{ route('tim.capaianpembelajaranlulusan.detail', $capaianpembelajaranlulusan->id_cpl) }}" class="bg-gray-600 font-bold text-white px-5 py-3 rounded-md hover:bg-gray-800">🛈</a>
+                            <a href="{{ route('tim.capaianpembelajaranlulusan.edit', $capaianpembelajaranlulusan->id_cpl) }}" class="bg-blue-600 text-white font-bold px-5 py-3 rounded-md hover:bg-blue-800">✏️</a>
                             <form action="{{ route('tim.capaianpembelajaranlulusan.destroy', $capaianpembelajaranlulusan->id_cpl) }}" method="POST">
                                 @csrf @method('DELETE')
-                                <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">
-                                    🗑️ Hapus
+                                <button class="bg-red-600 text-white px-5 py-3 rounded-md hover:bg-red-800" onclick="return confirm('Hapus CPL ini?')">
+                                    🗑️
                                 </button>
                             </form>
                         </td>

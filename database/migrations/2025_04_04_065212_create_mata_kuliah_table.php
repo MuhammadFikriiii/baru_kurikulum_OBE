@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum("semester_mk",['1','2','3','4','5','6','7','8']);
             $table->enum("kompetensi_mk", ['pendukung','utama']);
             $table->timestamps();
+            
         }); 
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists("mata_kuliahs");
     }
 };

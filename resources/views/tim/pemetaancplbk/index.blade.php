@@ -29,7 +29,7 @@
     
 <form>
     <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-visible">
-        <thead class="bg-green-500">
+        <thead class="bg-green-800 text-white">
             <tr>
                 <th class="px-4 py-2 text-left"></th> 
                 @foreach ($bks as $bk)
@@ -51,13 +51,12 @@
                     <td class="px-4 py-2 relative group">
                         <span class="cursor-help">{{ $cpl->kode_cpl }}</span>
                         <div class="mt-9 absolute left-1/2 -translate-x-[60%] top-full hidden group-hover:block w-64 bg-gray-700 text-white text-sm rounded p-2 z-50 text-center">
-                    {{ $cpl->deskripsi_cpl }}
-                </div>
-                     @if (isset($prodiByCpl[$cpl->id_cpl]))
-                    <div class="absolute left-1/2 -translate-x-[60%] top-full hidden group-hover:block w-64 bg-gray-700 text-white text-sm rounded p-2 z-50 text-center">
-                        {{ $prodiByCpl[$cpl->id_cpl] }}
-                    </div>
-                    
+                            {{ $cpl->deskripsi_cpl }}
+                        </div>
+                        @if (isset($prodiByCpl[$cpl->id_cpl]))
+                        <div class="absolute left-1/2 -translate-x-[60%] top-full hidden group-hover:block w-64 bg-gray-700 text-white text-sm rounded p-2 z-50 text-center">
+                            {{ $prodiByCpl[$cpl->id_cpl] }}
+                        </div>
                 @endif
                 @if (isset($prodiByCpl[$cpl->id_cpl]))
                             <div class="absolute left-1/2 -translate-x-[60%] top-full hidden group-hover:block w-64 bg-gray-700 text-white text-sm rounded p-2 z-50 text-center">
@@ -78,6 +77,6 @@
         </tbody>
     </table>
 </form>
-
+<p class="mt-3 italic text-red-500">*arahkan cursor pada cpl atau bk untuk melihat deskripsi*</p>
 </div>
 @endsection

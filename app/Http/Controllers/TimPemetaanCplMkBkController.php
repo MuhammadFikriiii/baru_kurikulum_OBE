@@ -14,6 +14,8 @@ class TimPemetaanCplMkBkController extends Controller
     {
         $kodeProdi = Auth::user()->kode_prodi;
 
+        $prodi = DB::table('prodis')->where('kode_prodi', $kodeProdi)->first();
+
         $cpls = CapaianProfilLulusan::whereIn('id_cpl', function ($query) use ($kodeProdi) {
                 $query->select('id_cpl')
                     ->from('cpl_pl')
@@ -45,6 +47,19 @@ class TimPemetaanCplMkBkController extends Controller
             ->select('cpl_mk.id_cpl', 'bk_mk.id_bk', 'mk.nama_mk')
             ->get();
 
+        $prodiByCpl = DB::table('capaian_profil_lulusans as cpl')
+            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->join('prodis as p', 'pl.kode_prodi', '=', 'p.kode_prodi')
+            ->where('p.kode_prodi', $kodeProdi)
+            ->select('cpl.id_cpl', 'p.kode_prodi', 'p.nama_prodi')
+            ->distinct()
+            ->get()
+            ->groupBy('id_cpl');
+        $prodiByCpl = $prodiByCpl->map(function ($item) {
+            return $item->pluck('nama_prodi')->unique()->first();
+        });
+
         $matrix = [];
         foreach ($mkCplBk as $row) {
             if ($row->id_cpl && $row->id_bk) {
@@ -52,6 +67,6 @@ class TimPemetaanCplMkBkController extends Controller
             }
         }
 
-        return view('tim.pemetaancplmkbk.index', compact('cpls', 'bks', 'matrix'));
+        return view('tim.pemetaancplmkbk.index', compact('cpls', 'bks', 'matrix', 'prodi', 'prodiByCpl'));
     }
 }

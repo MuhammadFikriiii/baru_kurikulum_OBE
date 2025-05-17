@@ -26,42 +26,28 @@
     
         <div class="flex justify-between mb-4">
             <div class="space-x-2">
-                <a href="{{ route('tim.profillulusan.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-                    👤 Tambah Profil Lulusan
-                </a>
-                <a href="" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
-                    📄 Ekspor ke Excel
+                <a href="{{ route('tim.profillulusan.create') }}" class="bg-green-600 text-white font-bold h-10 px-5 rounded-md hover:bg-green-800 inline-flex items-center">
+                    Tambah
                 </a>
             </div>
-        </div>
-    
-        <div class="flex items-center justify-between mb-3">
-            <label for="entries" class="text-gray-600 mr-2">Show</label>
-            <select id="entries" class="border border-gray-300 px-3 py-2 rounded-md mr-2">
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
-            <span class="text-gray-600">entries</span>
-            <div class="ml-auto justify-between">
+             <div class="ml-auto justify-between">
                 <input type="text" id="search" placeholder="Search..." 
-                    class="border border-gray-300 px-3 py-2 rounded-md">
+                    class="border border-black px-3 py-2 rounded-md">
             </div>
         </div>
     
-        <div class="bg-white shadow-lg overflow-hidden">
-            <table class="w-full table-fixed shadow-md rounded-lg overflow-hidden">
+        <div class="bg-white">
+            <table class="w-full table-fixed shadow-lg rounded-lg overflow-hidden">
                 <thead class="bg-green-800 text-white">
                     <tr class="text-center">
-                        <th class="px-4 py-2 text-center w-16">Kode Profil Lulusan</th>
+                        <th class="px-4 py-2 text-center w-16">Kode PL</th>
                         <th class="px-4 py-2 text-center w-24">Prodi</th>
-                        <th class="px-4 py-2 text-center w-70">Deskripsi Profil Lulusan</th>
+                        <th class="px-4 py-2 text-center w-64">Deskripsi</th>
                         <th class="px-4 py-2 text-center max-w-96">Profesi</th>
-                        <th class="px-4 py-2 text-center w-36">Unsur</th>
+                        <th class="px-4 py-2 text-center w-32">Unsur</th>
                         <th class="px-4 py-2 text-center w-28">Keterangan</th>
                         <th class="px-4 py-2 text-center w-40">Sumber</th>
-                        <th class="px-4 py-2 text-center w-40">Aksi</th>
+                        <th class="px-4 py-2 text-center w-64">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,11 +61,11 @@
                             <td class="px-4 py-2 w-28 text-center">{{ $profillulusan->keterangan_pl }}</td>
                             <td class="px-4 py-2 w-40 text-justify">{{ $profillulusan->sumber_pl }}</td>
                             <td class="py-2 px-4 flex justify-center items-center">
-                                <a href="{{ route('tim.profillulusan.detail', $profillulusan->id_pl) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
-                                <a href="{{ route('tim.profillulusan.edit', $profillulusan->id_pl) }}" class="bg-yellow-500 text-white px-3 py-1 rounded-md text-sm font-semibold hover:bg-yellow-600 text-center">✏️ Ubah</a>
+                                <a href="{{ route('tim.profillulusan.detail', $profillulusan->id_pl) }}" class="bg-gray-600 font-bold text-white px-5 py-2 rounded-md hover:bg-gray-800 mr-2">🛈</a>
+                                <a href="{{ route('tim.profillulusan.edit', $profillulusan->id_pl) }}" class="bg-blue-600 text-white px-5 py-2 rounded-md  hover:bg-blue-800 text-center mr-2">✏️</a>
                                 <form action="{{ route('tim.profillulusan.destroy',$profillulusan->id_pl) }}" method="POST">
                                     @csrf @method('DELETE')
-                                    <button class="bg-red-500 text-white px-5 py-2 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">
+                                    <button class="bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-800" onclick="return confirm('Hapus PL ini?')">
                                         🗑️
                                     </button>
                                 </form>

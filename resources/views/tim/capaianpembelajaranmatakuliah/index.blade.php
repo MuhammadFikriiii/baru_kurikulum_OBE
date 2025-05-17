@@ -24,16 +24,14 @@
     @endif
     <div class="flex justify-between mb-4">
         <div class="space-x-2">
-            <a href="{{ route('tim.capaianpembelajaranmatakuliah.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-                👤 Tambah CPMK
+            <a href="{{ route('tim.capaianpembelajaranmatakuliah.create') }}" class="bg-green-600 inline-flex text-white px-4 py-2 rounded-md hover:bg-green-800">
+                Tambah
             </a>
         </div>
-        <div class="flex items-center justify-between mb-3">
         <div class="ml-auto justify-between">
             <input type="text" id="search" placeholder="Search..." 
-                class="border border-gray-300 px-3 py-2 rounded-md">
+                class="border border-black px-3 py-2 rounded-md">
         </div>
-    </div>
     </div>  
     <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
         <thead class="bg-green-800 text-white border-b">
@@ -53,11 +51,11 @@
                     <td class="py-2 px-3 text-center">{{ $cpmk->kode_cpmk }}</td>
                     <td class="py-2 px-3">{{ $cpmk->deskripsi_cpmk }}</td>
                     <td class="py-2 px-3 flex justify-center items-center space-x-2">
-                        <a href="{{ route('tim.capaianpembelajaranmatakuliah.detail', $cpmk->id_cpmk) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈</a>
-                        <a href="{{ route('tim.capaianpembelajaranmatakuliah.edit',$cpmk->id_cpmk) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️</a>
+                        <a href="{{ route('tim.capaianpembelajaranmatakuliah.detail', $cpmk->id_cpmk) }}" class="bg-gray-600 font-bold text-white px-5 py-2 rounded-md hover:bg-gray-700">🛈</a>
+                        <a href="{{ route('tim.capaianpembelajaranmatakuliah.edit',$cpmk->id_cpmk) }}" class="bg-blue-600 text-white font-bold px-5 py-2 rounded-md hover:bg-blue-800">✏️</a>
                         <form action="{{ route('tim.capaianpembelajaranmatakuliah.destroy', $cpmk->id_cpmk) }}" method="POST">
                             @csrf @method('DELETE')
-                        <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus CPMK ini?')">
+                        <button type="submit" class="bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-800" onclick="return confirm('Hapus CPMK ini?')">
                             🗑️
                         </button>
                         </form>

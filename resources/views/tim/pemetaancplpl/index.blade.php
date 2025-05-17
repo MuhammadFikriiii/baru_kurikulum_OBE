@@ -29,7 +29,7 @@
     
 <form>
     <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-visible">
-        <thead class="bg-green-500">
+        <thead class="bg-green-800 text-white">
             <tr>
                 <th class="px-4 py-2 text-left"></th> 
                 @foreach ($pls as $pl)
@@ -74,6 +74,6 @@
 </tbody>
     </table>
 </form>
-
+<p class="mt-3 italic text-red-500">*arahkan cursor pada cpl atau pl untuk melihat deskripsi*</p>
 </div>
 @endsection

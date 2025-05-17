@@ -96,7 +96,7 @@
     </nav>
 
     <!-- Sidebar -->
-    <aside id="sidebar" class="w-64 bg-gray-800 text-white p-5 space-y-6 fixed top-0 left-0 h-full transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40">
+    <aside id="sidebar" class="w-64 bg-gray-800 text-white p-5 space-y-6 fixed top-0 left-0 h-full transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40 overflow-auto">
         <!-- Header -->
         <div class="flex items-center justify-between mb-4 pt-2 mt-16 ">
             <h2 class="text-xl font-bold">Dashboard Tim</h2>
@@ -105,7 +105,7 @@
 
         <!-- Search bar -->
         <div>
-            <input type="text" placeholder="Search..." class="w-full p-2 rounded bg-gray-700 placeholder-gray-400 text-white focus:outline-none">
+            <input type="text" id="search-sidebar" placeholder="Search..." class="w-full p-2 rounded bg-gray-700 placeholder-gray-400 text-white focus:outline-none">
         </div>
 
         <!-- Navigation -->
@@ -167,7 +167,7 @@
             <li>
                 <a href="{{ route('tim.pemetaancplmkbk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="fas fa-link"></i>
-                    <span class="ml-2">Pemetaan CPL - MK - BK</span>
+                    <span class="ml-2">Pemetaan CPL - BK - MK</span>
                 </a>
             </li>
             <li>

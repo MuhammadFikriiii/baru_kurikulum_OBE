@@ -7,21 +7,17 @@
     <hr class="w-full border border-black mb-4">
 
     @if($selectedCapaianProfilLulusans)
-    <div class="mt-4 mb-4">
-        <h3 class="text-xl font-semibold mb-2">Profil Lulusan yang sebelumnya terkait Terkait:</h3>
-        <ul class="list-disc pl-5 text-gray-700" disabled>
+        <h3 class="text-xl font-semibold mt-6">CPL Terkait</h3>
             @foreach($selectedCapaianProfilLulusans as $id_cpl)
                 @php
                     $cplDetail = $capaianprofillulusans->firstWhere('id_cpl', $id_cpl);
                 @endphp
                 @if($cplDetail)
-                    <li>
-                        <strong>{{ $cplDetail->kode_cpl }}</strong>: {{ $cplDetail->deskripsi_cpl }}
-                    </li>
+                        <textarea type="text" name="kode_bk" id="kode_bk" readonly
+                        class="w-full p-3 border border-black rounded-lg bg-gray-100">{{ $cplDetail->kode_cpl }} {{ $cplDetail->deskripsi_cpl }}</textarea>
+                        <br>
                 @endif
             @endforeach
-        </ul>
-    </div>
     @endif
     <br>
 
@@ -55,6 +51,6 @@
         class="w-full p-3 border border-black rounded-lg mb-10 bg-gray-100">
         <br>
 
-        <a href="{{ route('tim.bahankajian.index') }}" class="px-4 py-2 bg-blue-600 hover:bg-blue-800 rounded-lg text-white font-bold mt-4">Kembali</a>
+        <a href="{{ route('tim.bahankajian.index') }}" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg text-white font-bold mt-2">Kembali</a>
 </div>
 @endsection

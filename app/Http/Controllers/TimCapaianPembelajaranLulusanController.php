@@ -136,7 +136,7 @@ class TimCapaianPembelajaranLulusanController extends Controller
     public function destroy(CapaianProfilLulusan $id_cpl)
     {
         $id_cpl->delete();
-        return redirect()->route('tim.capaianpembelajaranlulusan.index')->with('success', 'Capaian Pembelajaran lulusan berhasil dihapus.');
+        return redirect()->route('tim.capaianpembelajaranlulusan.index')->with('sukses', 'Capaian Pembelajaran lulusan berhasil dihapus.');
     }
 
     public function pemenuhan_cpl()

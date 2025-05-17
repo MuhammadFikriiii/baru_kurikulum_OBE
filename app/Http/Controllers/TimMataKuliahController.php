@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BahanKajian;
+use App\Models\CapaianProfilLulusan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -172,6 +174,47 @@ class TimMataKuliahController extends Controller
         }
 
         return redirect()->route('tim.matakuliah.index')->with('success', 'Mata kuliah berhasil diperbarui!');
+    }
+
+    public function detail(MataKuliah $matakuliah)
+    {
+    
+        $kodeProdi = Auth::user()->kode_prodi;
+
+        $selectedCPL = DB::table('cpl_mk as cplmk')
+            ->join('capaian_profil_lulusans as cpl', 'cplmk.id_cpl', '=', 'cpl.id_cpl')
+            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
+            ->where('cplmk.kode_mk', $matakuliah->kode_mk)
+            ->where('prodis.kode_prodi', $kodeProdi)
+            ->pluck('cplmk.id_cpl')
+            ->unique()
+            ->toArray();
+
+        $cplList = CapaianProfilLulusan::whereIn('id_cpl', $selectedCPL)->get();
+
+        $selectedBK = DB::table('bk_mk as bkmk')
+            ->join('bahan_kajians as bk', 'bkmk.id_bk', '=', 'bk.id_bk')
+            ->join('cpl_bk', 'bk.id_bk', '=', 'cpl_bk.id_bk')
+            ->join('capaian_profil_lulusans as cpl', 'cpl_bk.id_cpl', '=', 'cpl.id_cpl')
+            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
+            ->where('bkmk.kode_mk', $matakuliah->kode_mk)
+            ->where('prodis.kode_prodi', $kodeProdi)
+            ->pluck('bkmk.id_bk')
+            ->unique()
+            ->toArray();
+
+            $bkList = BahanKajian::whereIn('id_bk', $selectedBK)->get();
+
+        return view("tim.matakuliah.detail", compact('matakuliah', 'cplList', 'selectedCPL', 'bkList', 'selectedBK'));
+    }
+    public function destroy(MataKuliah $matakuliah)
+    {
+        $matakuliah->delete();
+        return redirect()->route('tim.matakuliah.index')->with('sukses', 'matakuliah berhasil dihapus');
     }
 
     public function organisasi_mk(Request $request)
