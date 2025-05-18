@@ -15,6 +15,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
   
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+ 
   <script>
     $(document).ready(function(){
       const owl = $(".owl-banner");
@@ -48,7 +52,16 @@
     });
   </script>
 
-
+  <script>
+ $('.weekly2-news-active').slick({
+  slidesToShow: 4,
+  responsive: [
+    { breakpoint: 1024, settings: { slidesToShow: 3 }},
+    { breakpoint: 600, settings: { slidesToShow: 2 }},
+    { breakpoint: 480, settings: { slidesToShow: 1 }}
+  ]
+});
+    </script>
   
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -235,9 +248,9 @@
       AOS.init();
       mirror: true
   </script> 
-  <div id="beranda" class="homepage pb-16">
+  <div id="beranda" class="homepage pb-10">
     <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-10 pt-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-10 pt-12">
         <div data-aos="fade-right" data-aos-once="false" data-aos-duration="1000">
           <h1 class="text-4xl md:text-5xl font-semibold leading-tight mb-10">
             Profil Kurikulum OBE <span class="text-sky-500">Poliban</span>
@@ -262,7 +275,7 @@
 
   
 <!-- Section: Profil Pengajar -->
-<section id="pengajar" class="bg-gray-100 py-16">
+<section id="pengajar" class="bg-gray-100 py-12">
   <div class="container mx-auto px-4">
     <h2 class="text-3xl font-bold text-center text-blue-700 mb-10">Profil Pengajar</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -364,6 +377,155 @@
     </div>
   </section>
   
+  
+  <div class="weekly2-news-area  weekly2-pading gray-bg">
+    <div class="container">
+        <div class="weekly2-wrapper">
+            <!-- section Tittle -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-tittle mb-30">
+                        <h3>Weekly Top News</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="weekly2-news-active dot-style d-flex dot-style slick-initialized slick-slider slick-dotted">
+                        <div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 3360px; transform: translate3d(-960px, 0px, 0px);"><div class="weekly2-single slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" style="width: 210px;" tabindex="-1">
+                            <div class="weekly2-img">
+                                <img src="https://picsum.photos/210/140" alt="">
+                            </div>
+                            <div class="weekly2-caption">
+                                <span class="color1">Event night</span>
+                                <p>25 Jan 2020</p>
+                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
+                            </div>
+                        </div><div class="weekly2-single slick-slide slick-cloned" data-slick-index="-3" aria-hidden="true" style="width: 210px;" tabindex="-1">
+                            <div class="weekly2-img">
+                                <img src="https://picsum.photos/210/140" alt="">
+                            </div>
+                            <div class="weekly2-caption">
+                                <span class="color1">Corporate</span>
+                                <p>25 Jan 2020</p>
+                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
+                            </div>
+                        </div><div class="weekly2-single slick-slide slick-cloned" data-slick-index="-2" aria-hidden="true" style="width: 210px;" tabindex="-1">
+                            <div class="weekly2-img">
+                                <img src="https://picsum.photos/210/140" alt="">
+                            </div>
+                            <div class="weekly2-caption">
+                                <span class="color1">Event time</span>
+                                <p>25 Jan 2020</p>
+                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
+                            </div>
+                        </div><div class="weekly2-single slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" style="width: 210px;" tabindex="-1">
+                            <div class="weekly2-img">
+                                <img src="https://picsum.photos/210/140" alt="">
+                            </div>
+                            <div class="weekly2-caption">
+                                <span class="color1">Corporate</span>
+                                <p>25 Jan 2020</p>
+                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
+                            </div>
+                        </div><div class="weekly2-single slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" style="width: 210px;" tabindex="0" role="tabpanel" id="slick-slide10" aria-describedby="slick-slide-control10">
+                            <div class="weekly2-img">
+                                <img src="https://picsum.photos/210/140" alt="">
+                            </div>
+                            <div class="weekly2-caption">
+                                <span class="color1">Corporate</span>
+                                <p>25 Jan 2020</p>
+                                <h4><a href="#" tabindex="0">Welcome To The Best Model  Winner Contest</a></h4>
+                            </div>
+                        </div><div class="weekly2-single slick-slide slick-active" data-slick-index="1" aria-hidden="false" style="width: 210px;" tabindex="0" role="tabpanel" id="slick-slide11" aria-describedby="slick-slide-control11">
+                            <div class="weekly2-img">
+                                <img src="https://picsum.photos/210/140" alt="">
+                            </div>
+                            <div class="weekly2-caption">
+                                <span class="color1">Event night</span>
+                                <p>25 Jan 2020</p>
+                                <h4><a href="#" tabindex="0">Welcome To The Best Model  Winner Contest</a></h4>
+                            </div>
+                        </div><div class="weekly2-single slick-slide slick-active" data-slick-index="2" aria-hidden="false" style="width: 210px;" tabindex="0" role="tabpanel" id="slick-slide12" aria-describedby="slick-slide-control12">
+                            <div class="weekly2-img">
+                                <img src="https://picsum.photos/210/140" alt="">
+                            </div>
+                            <div class="weekly2-caption">
+                                <span class="color1">Corporate</span>
+                                <p>25 Jan 2020</p>
+                                <h4><a href="#" tabindex="0">Welcome To The Best Model  Winner Contest</a></h4>
+                            </div>
+                        </div><div class="weekly2-single slick-slide slick-active" data-slick-index="3" aria-hidden="false" style="width: 210px;" tabindex="0" role="tabpanel" id="slick-slide13" aria-describedby="slick-slide-control13">
+                            <div class="weekly2-img">
+                                <img src="https://picsum.photos/210/140" alt="">
+                            </div>
+                            <div class="weekly2-caption">
+                                <span class="color1">Event time</span>
+                                <p>25 Jan 2020</p>
+                                <h4><a href="#" tabindex="0">Welcome To The Best Model  Winner Contest</a></h4>
+                            </div>
+                        </div><div class="weekly2-single slick-slide" data-slick-index="4" aria-hidden="true" style="width: 210px;" tabindex="-1" role="tabpanel" id="slick-slide14" aria-describedby="slick-slide-control14">
+                            <div class="weekly2-img">
+                                <img src="https://picsum.photos/210/140" alt="">
+                            </div>
+                            <div class="weekly2-caption">
+                                <span class="color1">Corporate</span>
+                                <p>25 Jan 2020</p>
+                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
+                            </div>
+                        </div><div class="weekly2-single slick-slide slick-cloned" data-slick-index="5" aria-hidden="true" style="width: 210px;" tabindex="-1">
+                            <div class="weekly2-img">
+                                <img src="https://picsum.photos/210/140" alt="">
+                            </div>
+                            <div class="weekly2-caption">
+                                <span class="color1">Corporate</span>
+                                <p>25 Jan 2020</p>
+                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
+                            </div>
+                        </div><div class="weekly2-single slick-slide slick-cloned" data-slick-index="6" aria-hidden="true" style="width: 210px;" tabindex="-1">
+                            <div class="weekly2-img">
+                                <img src="https://picsum.photos/210/140" alt="">
+                            </div>
+                            <div class="weekly2-caption">
+                                <span class="color1">Event night</span>
+                                <p>25 Jan 2020</p>
+                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
+                            </div>
+                        </div><div class="weekly2-single slick-slide slick-cloned" data-slick-index="7" aria-hidden="true" style="width: 210px;" tabindex="-1">
+                            <div class="weekly2-img">
+                                <img src="https://picsum.photos/210/140" alt="">
+                            </div>
+                            <div class="weekly2-caption">
+                                <span class="color1">Corporate</span>
+                                <p>25 Jan 2020</p>
+                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
+                            </div>
+                        </div><div class="weekly2-single slick-slide slick-cloned" data-slick-index="8" aria-hidden="true" style="width: 210px;" tabindex="-1">
+                            <div class="weekly2-img">
+                                <img src="https://picsum.photos/210/140" alt="">
+                            </div>
+                            <div class="weekly2-caption">
+                                <span class="color1">Event time</span>
+                                <p>25 Jan 2020</p>
+                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
+                            </div>
+                        </div><div class="weekly2-single slick-slide slick-cloned" data-slick-index="9" aria-hidden="true" style="width: 210px;" tabindex="-1">
+                            <div class="weekly2-img">
+                                <img src="https://picsum.photos/210/140" alt="">
+                            </div>
+                            <div class="weekly2-caption">
+                                <span class="color1">Corporate</span>
+                                <p>25 Jan 2020</p>
+                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
+                            </div>
+                        </div></div></div> 
+                        
+                    <ul class="slick-dots" style="display: block;" role="tablist"><li class="slick-active" role="presentation"><button type="button" role="tab" id="slick-slide-control10" aria-controls="slick-slide10" aria-label="1 of 2" tabindex="0" aria-selected="true">1</button></li><li role="presentation" class=""><button type="button" role="tab" id="slick-slide-control11" aria-controls="slick-slide11" aria-label="2 of 2" tabindex="-1">2</button></li><li role="presentation" class=""><button type="button" role="tab" id="slick-slide-control12" aria-controls="slick-slide12" aria-label="3 of 2" tabindex="-1">3</button></li><li class="" role="presentation"><button type="button" role="tab" id="slick-slide-control13" aria-controls="slick-slide13" aria-label="4 of 2" tabindex="-1">4</button></li><li role="presentation" class=""><button type="button" role="tab" id="slick-slide-control14" aria-controls="slick-slide14" aria-label="5 of 2" tabindex="-1">5</button></li></ul></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
   
   <!-- Footer -->
   <footer class="bg-gray-800 text-white py-14">
