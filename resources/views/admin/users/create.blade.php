@@ -16,17 +16,17 @@
     @endif
     <form action="{{ route('admin.users.store') }}" method="POST">
         @csrf
-            <label for="name" class="text-2xl">Nama</label>
+            <label for="name" class="text-xl font-semibold">Nama</label>
             <input type="text" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500 mb-3" id="name" name="name" required value="{{ old('name') }}">
 
-            <label for="email" class="text-2xl">Email</label>
+            <label for="email" class="text-xl font-semibold">Email</label>
             <input type="email" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500 mb-3" id="email" name="email" required value="{{ old('email') }}">
 
 
-            <label for="password" class="text-2xl">Password</label>
+            <label for="password" class="text-xl font-semibold">Password</label>
             <input type="password" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500 mb-3" id="password" name="password" required value="{{ old('password') }}">
 
-            <label for="role" class="text-2xl">Role</label>
+            <label for="role" class="text-xl font-semibold">Role</label>
             <select name="role" id="role" class="w-full p-3 border border-black rounded-lg mb-3" required>
                 <option value="" disabled selected {{ old('role') ? '' : 'selected' }}>Pilih Role</option>
                 <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
@@ -35,14 +35,14 @@
                 <option value="tim" {{ old('role') == 'tim' ? 'selected' : '' }}>Tim</option>
             </select>     
 
-            <label for="role" class="text-2xl">Status User</label>
+            <label for="role" class="text-xl font-semibold">Status User</label>
             <select name="status" id="status" class="w-full p-3 border border-black rounded-lg mb-3" required>
                 <option value="" disabled selected {{ old('status') ? '' : 'selected' }}>Pilih Status</option>
                 <option value="approved" {{ old('status') == 'approved' ? 'selected' : '' }}>Approved</option>
                 <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
             </select>     
 
-            <label for="kode_prodi" class="text-2xl">Prodi</label>
+            <label for="kode_prodi" class="text-xl font-semibold">Prodi</label>
             <select name="kode_prodi" id="kode_prodi"
                 class="w-full p-3 border border-black rounded-lg mb">
                 <option value="">Pilih Prodi</option>
@@ -52,8 +52,8 @@
             </select>
             <p class="italic text-red-500">*kosongkan bila user admin/wadir1, jika tetap dipilih prodi tetap dinull kan</p>
 
-        <button type="submit" class="bg-green-400 hover:bg-green-800 mt-3 px-5 py-2 rounded-lg">Simpan</button>
-        <a href="{{ route('admin.users.index') }}" class="bg-blue-400 hover:bg-blue-800 mt-3 px-5 py-2 rounded-lg">Kembali</a>
+        <button type="submit" class="bg-blue-600 hover:bg-blue-800 text-white font-bold mt-3 px-5 py-2 rounded-lg">Simpan</button>
+        <a href="{{ route('admin.users.index') }}" class="ml-2 bg-gray-600 hover:bg-gray-800 text-white inline-flex font-semibold mt-3 px-5 py-2 rounded-lg">Kembali</a>
     </form>
 </div>
 </div>

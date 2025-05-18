@@ -27,29 +27,16 @@
 
     <div class="flex justify-between mb-4">
         <div class="space-x-2">
-            <a href="{{ route('admin.users.create') }}" class="bg-[#4e70bb] text-white px-4 py-2 rounded-md  hover:bg-blue-900">
-                <i class="bi bi-person-plus"></i> Tambah User
+            <a href="{{ route('admin.users.create') }}" class="bg-green-600 text-white px-4 py-2 rounded-md font-bold inline-flex  hover:bg-green-800">
+                Tambah
             </a>
-            <a href="" class="bg-[#44a35c] text-white px-4 py-2 rounded-md hover:bg-green-800">
-                <i class="bi bi-file-earmark-spreadsheet"></i> Ekspor ke Excel
-            </a>
+        </div>
+        <div class="ml-auto justify-between">
+            <input type="text" id="search" placeholder="Search..." 
+                class="border border-black px-3 py-2 rounded-md">
         </div>
     </div>
 
-    <div class="flex items-center justify-between mb-3">
-        <label for="entries" class="text-gray-600 mr-2">Show</label>
-        <select id="entries" class="border border-gray-300 px-3 py-2 rounded-md mr-2">
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-        </select>
-        <span class="text-gray-600">entries</span>
-        <div class="ml-auto justify-between">
-            <input type="text" id="search" placeholder="Search..." 
-                class="border border-gray-300 px-3 py-2 rounded-md">
-        </div>
-    </div>
     <div class="bg-white shadow-lg overflow-hidden">
         <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
             <thead class="bg-green-800 text-white border-b">
@@ -73,16 +60,16 @@
                     <td class="py-3 px-6 min-w-[10px] text-center">{{ $user->status }}</td>
                     <td class="py-3 px-6 min-w-[10px] text-center">{{ ucfirst($user->role) }}</td>
                     <td class="py-3 px-6 flex justify-center items-center space-x-2">
-                        <a href="{{ route('admin.users.detail',$user->id) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">
-                            <i class="bi bi-info-circle"></i> Detail 
+                        <a href="{{ route('admin.users.detail',$user->id) }}" class="bg-gray-600 font-bold text-white px-5 py-2 rounded-md hover:bg-gray-700">
+                         🛈 
                         </a>
-                        <a href="{{ route('admin.users.edit', $user->id) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">
-                            <i class="bi bi-pencil"></i>  Ubah 
+                        <a href="{{ route('admin.users.edit', $user->id) }}" class="bg-blue-600 text-white font-bold px-5 py-2 rounded-md hover:bg-blue-800">
+                        ✏️ 
                         </a>
                         <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
                             @csrf @method('DELETE')
-                            <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">
-                                <i class="bi bi-trash"></i> Hapus
+                            <button class="bg-red-500 text-white px-5 py-2 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">
+                            🗑️
                             </button>
                         </form>
                     </td>

@@ -27,27 +27,13 @@
 
         <div class="flex justify-between mb-4">
             <div class="space-x-2">
-                <a href="{{ route('admin.prodi.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-                    👤 Tambah Prodi
-                </a>
-                <a href="" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
-                    📄 Ekspor ke Excel
+                <a href="{{ route('admin.prodi.create') }}" class="bg-green-600 font-bold text-white px-5 inline-flex py-2 rounded-md hover:bg-green-800">
+                    Tambah
                 </a>
             </div>
-        </div>
-
-        <div class="flex items-center justify-between mb-3">
-            <label for="entries" class="text-gray-600 mr-2">Show</label>
-            <select id="entries" class="border border-gray-300 px-3 py-2 rounded-md mr-2">
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
-            <span class="text-gray-600">entries</span>
             <div class="ml-auto justify-between">
                 <input type="text" id="search" placeholder="Search..." 
-                    class="border border-gray-300 px-3 py-2 rounded-md">
+                    class="border border-black px-3 py-2 rounded-md">
             </div>
         </div>
     
@@ -73,12 +59,12 @@
                         <td class="py-3 px-4 text-center">{{ $prodi->jenjang_pendidikan ?? '-' }}</td>
                         <td class="py-3 px-4 text-center">{{ $prodi->peringkat_akreditasi ?? '-' }}</td>
                         <td class="py-3 px-6 flex justify-center items-center space-x-2">
-                            <a href="{{ route('admin.prodi.detail', $prodi->kode_prodi) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
-                            <a href="{{ route('admin.prodi.edit', $prodi->kode_prodi) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
+                            <a href="{{ route('admin.prodi.detail', $prodi->kode_prodi) }}" class="bg-gray-600 font-bold text-white px-5 py-2 rounded-md hover:bg-gray-700">🛈</a>
+                            <a href="{{ route('admin.prodi.edit', $prodi->kode_prodi) }}" class="bg-blue-600 text-white font-bold px-5 py-2 rounded-md hover:bg-blue-800">✏️</a>
                             <form action="{{ route('admin.prodi.destroy', $prodi->kode_prodi) }}" method="POST">
                                 @csrf @method('DELETE')
-                                <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus prodi ini?')">
-                                    🗑️ Hapus
+                                <button class="bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-800" onclick="return confirm('Hapus prodi ini?')">
+                                    🗑️
                                 </button>
                             </form>
                         </td> 

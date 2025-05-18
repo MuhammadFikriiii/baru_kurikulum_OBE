@@ -115,6 +115,6 @@ class AdminUserController extends Controller {
     public function rejectUser($id) {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('admin.pendingusers.index')->with('success', 'Pengguna berhasil ditolak');
+        return redirect()->route('admin.pendingusers.index')->with('sukses', 'Pengguna berhasil ditolak');
     }
 }
