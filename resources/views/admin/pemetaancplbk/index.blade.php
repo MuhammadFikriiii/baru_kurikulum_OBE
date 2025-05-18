@@ -30,7 +30,7 @@
 <form>
     <form method="GET" action="{{ route('admin.pemenuhancpl.index') }}">
         <select name="kode_prodi" onchange="this.form.submit()" class="border border-gray-300 px-3 py-2 rounded-md mr-2">
-            <option value="all" {{ $kode_prodi == 'all' ? 'selected' : '' }}>All</option>
+            <option value="all" disabled selected>All</option>
             @foreach($prodis as $prodi)
                 <option value="{{ $prodi->kode_prodi }}" {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
                     {{ $prodi->nama_prodi }}
@@ -53,6 +53,17 @@
             </tr>
         </thead>
         <tbody>
+            @if(empty($kode_prodi))
+            <tr>
+                <td colspan="9" class="text-center text-black py-4">Silakan pilih prodi terlebih dahulu.</td>
+            </tr>
+            @elseif($cpls->isEmpty())
+            <tr>
+                <td colspan="9" class="text-center text-black py-4">
+                    Data belum dibuat untuk prodi ini.
+                </td>
+            </tr>
+            @else
             @foreach ($cpls as $cpl)
                 <tr class="border-b">
                     <td class="px-4 py-2 relative group">
@@ -70,6 +81,7 @@
                     @endforeach
                 </tr>
             @endforeach
+            @endif
         </tbody>
     </table>
 </form>

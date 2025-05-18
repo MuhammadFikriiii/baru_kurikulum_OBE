@@ -6,6 +6,7 @@
     <title>@yield('title', 'Kurikulum OBE')</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     @vite(['resources/js/app.js'])
     <script>
         function toggleSidebar() {

@@ -21,10 +21,16 @@ class AdminPemetaanCplBkController extends Controller
             ->distinct()
             ->orderBy('id_cpl', 'asc');
         
-        if ($kode_prodi && $kode_prodi !== 'all') {
-            $query->where('pl.kode_prodi', $kode_prodi);
-        }
-
+        if (empty($kode_prodi)) {
+        return view('admin.pemetaancplbk.index', [
+            'cpls' => collect(),
+            'bks' => collect(),
+            'relasi' => [],
+            'kode_prodi' => '',
+            'prodis' => $prodis,
+        ]);
+    }
+    
         $cpls = $query->get();
         $cplIds = $cpls->pluck('id_cpl');
 
