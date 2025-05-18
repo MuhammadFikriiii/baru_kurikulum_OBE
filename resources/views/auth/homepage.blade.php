@@ -13,7 +13,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
+  
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <script>
     $(document).ready(function(){
       const owl = $(".owl-banner");
@@ -46,10 +47,12 @@
       });
     });
   </script>
+
+
   
 </head>
 <body class="bg-gray-100 text-gray-800">
-  
+
 <header class="bg-white shadow-md w-full fixed top-0 z-50" x-data="{ open: false }">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
@@ -219,7 +222,7 @@
                   <span class="group-hover:text-blue-500">3</span>
                 </button>
               </div>
-              
+        
         </div>
       </div>
     </div>
@@ -227,10 +230,15 @@
 </section>
 
   <!-- Beranda -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+      AOS.init();
+      mirror: true
+  </script> 
   <div id="beranda" class="homepage pb-16">
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-10 pt-20">
-        <div>
+        <div data-aos="fade-right" data-aos-once="false" data-aos-duration="1000">
           <h1 class="text-4xl md:text-5xl font-semibold leading-tight mb-10">
             Profil Kurikulum OBE <span class="text-sky-500">Poliban</span>
           </h1>
@@ -245,7 +253,7 @@
             Tentang Website <i class="ri-eye-line ms-2"></i>
           </a>
         </div>
-        <div className="flex justify-end">
+        <div className="flex justify-end" data-aos="fade-left" data-aos-once="false" data-aos-duration="1000">
           <img src="/image/profil.png" alt="Hero Image" className="w-full max-w-md h-auto ml-auto" />
         </div>
       </div>
@@ -425,5 +433,9 @@
     </div>
   </footer>
   
+
+
+
+
 </body>
 </html>

@@ -96,120 +96,120 @@
 
         <!-- Search bar -->
         <div>
-            <input type="text" placeholder="Search..." class="w-full p-2 rounded bg-[#2c2b43] placeholder-gray-400 text-white focus:outline-none">
+            <input id="searchInput"  type="text" placeholder="Search..." class="w-full p-2 rounded bg-[#2c2b43] placeholder-gray-400 text-white focus:outline-none">
         </div>
 
         <!-- Navigation -->
         <ul class="space-y-1">
-            <li>
+            <li data-title="Dashboard"> 
                 <a href="{{ route('admin.dashboard') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-house-door"></i>
                     <span class="ml-2">Dashboard</span>
                 </a>
             </li>
-            <li>
+            <li data-title="Users">
                 <a href="{{ route('admin.users.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-person"></i>
                     <span class="ml-2">Users</span>
                 </a>
             </li>
-            <li>
+            <li data-title="Register User">
                 <a href="{{ route('admin.pendingusers.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-person-plus"></i>
                     <span class="ml-2">Register User</span>
                 </a>
             </li>
-            <li>
+            <li data-title="Jurusan"> 
                 <a href="{{ route('admin.jurusan.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-building"></i>
                     <span class="ml-2">Jurusan</span>
                 </a>
             </li>
-            <li>
+            <li data-title="Prodi">
                 <a href="{{ route('admin.prodi.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-mortarboard"></i>
                     <span class="ml-2">Prodi</span>
                 </a>
             </li>
-            <li>
+            <li data-title="Profil Lulusan">
                 <a href="{{ route('admin.profillulusan.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-file-earmark-person"></i>
                     <span class="ml-2">Profil Lulusan</span>
                 </a>
             </li>
-            <li>
+            <li data-title="Capaian Profil Lulusan">
                 <a href="{{ route('admin.capaianprofillulusan.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-check2-square"></i>
                     <span class="ml-2">Capaian Profil Lulusan</span>
                 </a>
             </li>
-            <li>
+            <li data-title="Pemetaan CPL-PL">
                 <a href="{{ route('admin.pemetaancplpl.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-diagram-3"></i>
                     <span class="ml-2">Pemetaan CPL-PL</span>
                 </a>
             </li>
-            <li>
+            <li data-title="Bahan Kajian">
                 <a href="{{ route('admin.bahankajian.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-journal-bookmark"></i>
                     <span class="ml-2">Bahan Kajian</span>
                 </a>
             </li>
-            <li>
+            <li data-title="Pemetaan CPL - BK">
                 <a href="{{ route('admin.pemetaancplbk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-pin-map"></i>
                     <span class="ml-2">Pemetaan CPL - BK</span>
                 </a>
             </li>
-            <li>
+            <li data-title="Mata Kuliah">
                 <a href="{{ route('admin.matakuliah.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-book"></i>
                     <span class="ml-2">Mata Kuliah</span>
                 </a>
             </li>
-            <li>
+            <li data-title="Pemetaan CPL - MK">
                 <a href="{{ route('admin.pemetaancplmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-bar-chart"></i>
                     <span class="ml-2">Pemetaan CPL - MK</span>
                 </a>
             </li>
-            <li>
+            <li data-title="Pemetaan BK - MK">
                 <a href="{{ route('admin.pemetaanbkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-folder2-open"></i>
                     <span class="ml-2">Pemetaan BK - MK</span>
                 </a>
             </li>
-            <li>
+            <li data-title="Pemetaan CPL - BK - MK">
                 <a href="{{ route('admin.pemetaancplmkbk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-folder2-open"></i>
                     <span class="ml-2">Pemetaan CPL - BK - MK</span>
                 </a>
             </li>
-            <li>
+            <li data-title="Organisasi MK">
                 <a href="{{ route('admin.matakuliah.organisasimk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-folder2-open"></i>
                     <span class="ml-2">Organisasi MK</span>
                 </a>
             </li>
-            <li>
+            <li data-title="CPMK">
                 <a href="{{ route('admin.capaianpembelajaranmatakuliah.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-folder2-open"></i>
                     <span class="ml-2">CPMK</span>
                 </a>
             </li>
-            <li>
+            <li data-title="PEMETAAN CPL-CPMK-MK">
                 <a href="{{ route('admin.pemetaancplcpmkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-folder2-open"></i>
                     <span class="ml-2">PEMETAAN CPL-CPMK-MK</span>
                 </a>
             </li>
-            <li>
+            <li data-title="PEMENUHAN CP">
                 <a href="{{ route('admin.pemenuhancpl.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-folder2-open"></i>
                     <span class="ml-2">PEMENUHAN CPL</span>
                 </a>
             </li>
-            <li>
+            <li data-title="Sub Cpmk">
                 <a href="{{ route('admin.subcpmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-folder2-open"></i>
                     <span class="ml-2">Sub Cpmk</span>
@@ -225,8 +225,22 @@
                 </form>
             </li>  
         </ul>
-        
     </aside>
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function () {
+            const keyword = this.value.toLowerCase();
+            const items = document.querySelectorAll('#sidebar ul li[data-title]');
+    
+            items.forEach(item => {
+                const title = item.getAttribute('data-title').toLowerCase();
+                if (title.includes(keyword)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
 
     <!-- Konetn utama -->
     <div class="flex-1 md:ml-64 p-6 pt-28">
