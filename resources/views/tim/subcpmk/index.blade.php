@@ -27,30 +27,16 @@
 
         <div class="flex justify-between mb-4">
             <div class="space-x-2">
-                <a href="{{ route('tim.subcpmk.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-                    👤 Tambah Sub CPMK
+                <a href="{{ route('tim.subcpmk.create') }}" class="bg-green-600 text-white inline-flex font-bold px-4 py-2 rounded-md hover:bg-green-800">
+                    Tambah
                 </a>
-                <a href="" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
-                    📄 Ekspor ke Excel
-                </a>
+            </div>
+            <div class="ml-auto justify-between">
+                <input type="text" id="search" placeholder="Search..." 
+                class="border border-black px-3 py-2 rounded-md">
             </div>
         </div>
 
-        <div class="flex items-center justify-between mb-3">
-            <label for="entries" class="text-gray-600 mr-2">Show</label>
-            <select id="entries" class="border border-gray-300 px-3 py-2 rounded-md mr-2">
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
-            <span class="text-gray-600">entries</span>
-            <div class="ml-auto justify-between">
-                <input type="text" id="search" placeholder="Search..." 
-                    class="border border-gray-300 px-3 py-2 rounded-md">
-            </div>
-        </div>
-    
         <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
             <thead class="bg-green-800 text-white border-b">
                 <tr>
@@ -69,12 +55,12 @@
                         <td class="bpy-3 px-6 w-16 text-center">{{ $subcpmk->sub_cpmk }}</td>
                         <td class="bpy-3 px-6 w-16 text-center">{{ $subcpmk->uraian_cpmk }}</td>
                         <td class="py-3 px-6 flex justify-center items-center space-x-2">
-                            <a href="#" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
-                            <a href="#" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
+                            <a href="#" class="bg-gray-600 font-bold text-white px-5 py-2 rounded-md hover:bg-gray-700">🛈</a>
+                            <a href="#" class="bg-blue-600 text-white font-bold px-5 py-2 rounded-md hover:bg-blue-800">✏️</a>
                             <form action="#" method="POST">
                                 @csrf @method('DELETE')
-                                <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus Sub Cpmk ini?')">
-                                    🗑️ Hapus
+                                <button class="bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-800" onclick="return confirm('Hapus Sub Cpmk ini?')">
+                                    🗑️
                                 </button>
                             </form>
                         </td> 

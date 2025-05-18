@@ -7,7 +7,7 @@
 
     <div class="overflow-auto border">
         <table class="min-w-full divide-y divide-gray-200 text-sm">
-            <thead class="bg-green-500 text-white">
+            <thead class="bg-green-800 text-white uppercase">
                 <tr>
                     <th class="border px-4 py-2">Kode CPL</th>
                     <th class="border px-4 py-2">Deskripsi CPL</th>

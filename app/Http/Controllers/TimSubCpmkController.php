@@ -54,8 +54,6 @@ class TimSubCpmkController extends Controller
 
         SubCpmk::create($request->all());
 
-        dd($request->all());
-
         return redirect()->route('tim.subcpmk.index')->with('success', 'Sub CPMK berhasil dibuat');
     }
 }

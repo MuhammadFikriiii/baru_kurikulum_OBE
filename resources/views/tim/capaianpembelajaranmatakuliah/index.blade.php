@@ -24,7 +24,7 @@
     @endif
     <div class="flex justify-between mb-4">
         <div class="space-x-2">
-            <a href="{{ route('tim.capaianpembelajaranmatakuliah.create') }}" class="bg-green-600 inline-flex text-white px-4 py-2 rounded-md hover:bg-green-800">
+            <a href="{{ route('tim.capaianpembelajaranmatakuliah.create') }}" class="bg-green-600 inline-flex text-white font-bold px-4 py-2 rounded-md hover:bg-green-800">
                 Tambah
             </a>
         </div>

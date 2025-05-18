@@ -150,7 +150,7 @@ class TimCapaianPembelajaranLulusanController extends Controller
         ->leftJoin('cpl_mk as cmk', 'cpl.id_cpl', '=', 'cmk.id_cpl')
         ->leftJoin('mata_kuliahs as mk', 'cmk.kode_mk', '=', 'mk.kode_mk')
         ->where('ps.kode_prodi', $kodeProdi)
-        ->select('cpl.id_cpl','cpl.kode_cpl', 'mk.semester_mk', 'mk.kode_mk','mk.nama_mk', 'ps.kode_prodi')
+        ->select('cpl.id_cpl','cpl.kode_cpl', 'deskripsi_cpl', 'ps.nama_prodi', 'mk.semester_mk', 'mk.kode_mk','mk.nama_mk', 'ps.kode_prodi')
         ->distinct();
 
         $data = $cpls
@@ -165,6 +165,8 @@ class TimCapaianPembelajaranLulusanController extends Controller
                 $namamk = $row->nama_mk;
             
                 $petaCPL[$row->id_cpl]['label'] = $row->kode_cpl; // yang ditampilkan
+                $petaCPL[$row->id_cpl]['deskripsi_cpl'] = $row->deskripsi_cpl; // yang ditampilkan
+                $petaCPL[$row->id_cpl]['prodi'] = $row->nama_prodi; // yang ditampilkan
                 $petaCPL[$row->id_cpl]['semester'][$semester][] = $namamk; // pengelompokan tetap pakai id
             }        
             return view('tim.pemenuhancpl.index', compact('petaCPL'));
