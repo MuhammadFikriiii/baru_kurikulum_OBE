@@ -23,6 +23,36 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
+    // public function login(Request $request) {
+    //     $request->validate([
+    //         'email' => 'required|email',
+    //         'password' => 'required'
+    //     ], [
+    //         'email.required' => 'Email wajib diisi',
+    //         'password.required' => 'Password wajib diisi'
+    //     ]);
+
+    //     if (Auth::attempt($request->only('email', 'password'))) {
+    //         $user = Auth::user();
+
+    //         if ($user->role === 'admin') {
+    //             return redirect()->route('admin.dashboard')->with('success', 'Login berhasil');
+    //         } elseif ($user->role === 'wadir1') {
+    //             return redirect()->route('wadir1.dashboard')->with('success', 'Login berhasil');
+    //         } elseif ($user->role === 'tim') {
+    //             return redirect()->route('tim.dashboard')->with('success', 'Login berhasil');
+    //         } elseif ($user->role === 'kaprodi') {
+    //             return redirect()->route('kaprodi.dashboard')->with('success', 'Login berhasil');
+    //         }else {
+    //             Auth::logout(); // pastikan user tidak tetap login
+    //             return redirect()->route('login')->withErrors(['role' => 'Role tidak dikenali. Hubungi admin.']);
+    //         }
+    //     }
+    
+    //     return back()->withErrors(['email' => 'Email atau password salah'])->withInput();
+    // }
+
+    
     public function login(Request $request) {
         $request->validate([
             'email' => 'required|email',
@@ -31,25 +61,34 @@ class LoginController extends Controller
             'email.required' => 'Email wajib diisi',
             'password.required' => 'Password wajib diisi'
         ]);
-
+    
         if (Auth::attempt($request->only('email', 'password'))) {
+            $request->session()->regenerate(); // Regenerasi session untuk keamanan
             $user = Auth::user();
-
-            if ($user->role === 'admin') {
-                return redirect()->route('admin.dashboard')->with('success', 'Login berhasil');
-            } elseif ($user->role === 'wadir1') {
-                return redirect()->route('wadir1.dashboard')->with('success', 'Login berhasil');
-            } elseif ($user->role === 'tim') {
-                return redirect()->route('tim.dashboard')->with('success', 'Login berhasil');
-            } elseif ($user->role === 'kaprodi') {
-                return redirect()->route('kaprodi.dashboard')->with('success', 'Login berhasil');
-            }else {
-                Auth::logout(); // pastikan user tidak tetap login
-                return redirect()->route('login')->withErrors(['role' => 'Role tidak dikenali. Hubungi admin.']);
+            
+            // Buat pesan sukses
+            $message = 'Login berhasil! Selamat datang, ' . $user->name . '!';
+            
+            // Redirect berdasarkan role dengan membawa flash message
+            switch ($user->role) {
+                case 'admin':
+                    return redirect()->route('admin.dashboard')->with('login_success', $message);
+                case 'wadir1':
+                    return redirect()->route('wadir1.dashboard')->with('login_success', $message);
+                case 'tim':
+                    return redirect()->route('tim.dashboard')->with('login_success', $message);
+                case 'kaprodi':
+                    return redirect()->route('kaprodi.dashboard')->with('login_success', $message);
+                default:
+                    Auth::logout();
+                    return redirect()->route('login')->with('error', 'Role tidak dikenali. Hubungi admin.');
             }
         }
     
-        return back()->withErrors(['email' => 'Email atau password salah'])->withInput();
+        // Jika login gagal
+        return back()->withErrors([
+            'email' => 'Email atau password salah',
+        ])->onlyInput('email');
     }
 
     public function showForgotPasswordForm() {

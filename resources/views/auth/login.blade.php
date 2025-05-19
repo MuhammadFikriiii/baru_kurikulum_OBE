@@ -33,25 +33,13 @@
             <hr class="bg-[#3094c6] mx-auto border-none h-1 w-1/3 mb-4">
             <p class="text-center text-[#3094c6] font-semibold ">Sistem Informasi Penyusun Kurikulum Berbasis OBE</p>
             
-            @if(session('sukses'))
-            <div id="alert" class="bg-red-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
-                <span class="font-bold">{{ session('sukses') }}</span>
-                <button onclick="document.getElementById('alert').style.display='none'" 
-                    class="absolute top-1 right-3 text-white font-bold text-lg">
-                    &times;
-                </button>
-            </div>
+            @if($errors->any())
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    showToast("{{ $errors->first() }}", 'error');
+                });
+            </script>
             @endif
-
-            @if(session('register'))
-            <div id="alert" class="bg-green-500 text-white px-6 py-2 rounded-md mb-4 text-center relative">
-                <span class="font-bold">{{ session('register') }}</span>
-                <button onclick="document.getElementById('alert').style.display='none'"
-                    class="absolute top-1 right-3 text-white font-bold text-lg">
-                    &times;
-                </button>
-            </div>
-        @endif
             
             <form action="{{ route('login.post') }}" method="POST" class="space-y-4">
                 @csrf
@@ -77,5 +65,53 @@
     </div>
     </div>
     
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Function untuk show toast notification
+        function showToast(message, type = 'success') {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+            
+            Toast.fire({
+                icon: type,
+                title: message
+            });
+        }
+
+        // Check for session messages
+        document.addEventListener('DOMContentLoaded', function() {
+        @if($errors->any())
+            Swal.fire({
+                icon: 'error',
+                title: '{{ $errors->first() }}',
+                showConfirmButton: false,
+                timer: 2000,
+                toast: true,
+                position: 'top'
+            });
+        @endif
+        
+        @if(session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: '{{ session('error') }}',
+                showConfirmButton: false,
+                timer: 2000,
+                toast: true,
+                position: 'top'
+            });
+        @endif
+    });
+    </script>
 </body>
 </html>

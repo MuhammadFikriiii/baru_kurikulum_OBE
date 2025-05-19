@@ -18,7 +18,12 @@
 
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
- 
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  
+  
+
   <script>
     $(document).ready(function(){
       const owl = $(".owl-banner");
@@ -52,16 +57,42 @@
     });
   </script>
 
+  <!-- Swiper -->
   <script>
- $('.weekly2-news-active').slick({
-  slidesToShow: 4,
-  responsive: [
-    { breakpoint: 1024, settings: { slidesToShow: 3 }},
-    { breakpoint: 600, settings: { slidesToShow: 2 }},
-    { breakpoint: 480, settings: { slidesToShow: 1 }}
-  ]
-});
-    </script>
+    const carousel = document.getElementById('carousel');
+    const indicators = document.querySelectorAll('#indicators button');
+    let currentSlide = 0;
+    const totalSlides = indicators.length;
+
+    function goToSlide(index) {
+      currentSlide = index;
+      carousel.style.transform = `translateX(-${index * 100}%)`;
+      updateIndicators();
+    }
+
+    function updateIndicators() {
+      indicators.forEach((btn, idx) => {
+        btn.classList.remove('bg-orange-500', 'w-6');
+        btn.classList.add('bg-gray-300', 'w-2');
+        if (idx === currentSlide) {
+          btn.classList.add('bg-orange-500', 'w-6');
+          btn.classList.remove('bg-gray-300', 'w-2');
+        }
+      });
+    }
+
+    indicators.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+        goToSlide(index);
+      });
+    });
+
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      goToSlide(currentSlide);
+    }, 5000); // Auto slide setiap 5 detik
+  </script>
+
   
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -83,18 +114,14 @@
         before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
         before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
         Profil</a>
-        <a href="#about" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
-        before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
-        before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
-        Program Studi</a>
-        <a href="#portfolio" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
-        before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
-        before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
-        Mata Kuliah</a>
         <a href="#video" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
         before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
         before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
         Akademik</a>
+        <a href="#about" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
+        before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
+        before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
+        Team</a>
         <a href="#contact" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
         before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
         before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
@@ -129,13 +156,10 @@
           </i><span>Profil</span>
         </a>
         <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
-        </i><span>Program Studi</span>
-        </a>
-        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
-        </i><span>Mata Kuliah</span>
-        </a>
-        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
         </i><span>Akademik</span>
+        </a>
+        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
+        </i><span>Team</span>
         </a>
         <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
         </i><span>Contact Us</span>
@@ -274,261 +298,288 @@
   </div>
 
   
-<!-- Section: Profil Pengajar -->
-<section id="pengajar" class="bg-gray-100 py-12">
-  <div class="container mx-auto px-4">
-    <h2 class="text-3xl font-bold text-center text-blue-700 mb-10">Profil Pengajar</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-      
-      <!-- Pengajar 1 -->
-      <div class="bg-white rounded-xl shadow-lg p-6 text-center transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl">
-        <img src="https://duniadosen.com/wp-content/uploads/2016/04/Jadi-Dosen.jpg" alt="Dr. Andi Susanto" class="w-28 h-28 mx-auto rounded-full border-4 border-blue-200 shadow-sm">
-        <h3 class="mt-4 text-xl font-semibold text-gray-800">Dr. Andi Susanto</h3>
-        <p class="text-blue-600 mt-1 font-medium">Dosen Matematika & Teknologi Pendidikan</p>
-        <p class="text-gray-600 mt-2 text-sm">10+ tahun pengalaman di bidang pendidikan & penelitian.</p>
-      </div>
 
-        <!-- Pengajar 2 -->
-        <div class="bg-white rounded-xl shadow-lg p-6 text-center transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl">
-          <img src="https://duniadosen.com/wp-content/uploads/2016/04/Jadi-Dosen.jpg" alt="Dr. Andi Susanto" class="w-28 h-28 mx-auto rounded-full border-4 border-blue-200 shadow-sm">
-          <h3 class="mt-4 text-xl font-semibold text-gray-800">Dr. Andi Susanto</h3>
-          <p class="text-blue-600 mt-1 font-medium">Dosen Matematika & Teknologi Pendidikan</p>
-          <p class="text-gray-600 mt-2 text-sm">10+ tahun pengalaman di bidang pendidikan & penelitian.</p>
-        </div>
+<!-- Daftar Kurikulum dan Program Studi -->
 
-          <!-- Pengajar 3 -->
-      <div class="bg-white rounded-xl shadow-lg p-6 text-center transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl">
-        <img src="https://duniadosen.com/wp-content/uploads/2016/04/Jadi-Dosen.jpg" alt="Dr. Andi Susanto" class="w-28 h-28 mx-auto rounded-full border-4 border-blue-200 shadow-sm">
-        <h3 class="mt-4 text-xl font-semibold text-gray-800">Dr. Andi Susanto</h3>
-        <p class="text-blue-600 mt-1 font-medium">Dosen Matematika & Teknologi Pendidikan</p>
-        <p class="text-gray-600 mt-2 text-sm">10+ tahun pengalaman di bidang pendidikan & penelitian.</p>
-      </div>
-      
+<!-- Team -->
+<div class="p-6 max-w-7xl mx-auto">
+  <!-- Header: Judul dan Indikator -->
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold text-indigo-800">Team Kurikulum</h2>
+    <!-- Indicators (3 tombol untuk 7 card dengan geser 1 card) -->
+    <div class="flex items-center space-x-2" id="indicators">
+      <button class="h-2 w-6 rounded-full bg-indigo-600 focus:outline-none transition-all duration-300" data-slide="0"></button>
+      <button class="h-2 w-2 rounded-full bg-gray-300 focus:outline-none transition-all duration-300" data-slide="1"></button>
+      <button class="h-2 w-2 rounded-full bg-gray-300 focus:outline-none transition-all duration-300" data-slide="2"></button>
     </div>
   </div>
-</section>
 
-
-  <!-- Daftar Kurikulum dan Program Studi -->
-  <section class="bg-gray-100 py-16">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center text-blue-700 mb-12">Jurusan & Program Studi di Poliban</h2>
-  
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Teknik Sipil -->
-        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition">
-          <h3 class="text-2xl font-semibold text-blue-600 mb-4">🏗️ Teknik Sipil</h3>
-          <ul class="list-disc pl-5 text-gray-700 mb-4 space-y-1">
-            <li>D3 Teknik Sipil</li>
-            <li>D4 Teknik Bangunan Rawa</li>
-            <li>D3 Teknik Geodesi</li>
-            <li>D3 Teknik Pertambangan</li>
-            <li>D4 Rekayasa Konstruksi Jalan & Jembatan</li>
-          </ul>
-          <a href="https://sipil.poliban.ac.id" target="_blank" class="inline-block mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Kunjungi Website</a>
+  <!-- Carousel wrapper -->
+  <div class="relative overflow-hidden">
+    <div id="carousel" class="flex transition-transform duration-700 ease-in-out" style="gap: 1.75rem;">
+      <!-- 7 Card Dosen & Kurikulum -->
+     <!-- Card 1 - Original Kurikulum Card -->
+    <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300 relative group">
+      <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 z-10 rounded-xl"></div>
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-pink-500"></div>
+      
+      <div class="relative">
+        <div class="w-32 h-32 mx-auto mt-6 rounded-full overflow-hidden border-4 border-white shadow-md bg-gray-100 flex items-center justify-center group-hover:bg-gray-50 transition-all duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-purple-500 group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+          </svg>
         </div>
-  
-        <!-- Teknik Mesin -->
-        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition">
-          <h3 class="text-2xl font-semibold text-red-600 mb-4">⚙️ Teknik Mesin</h3>
-          <ul class="list-disc pl-5 text-gray-700 mb-4 space-y-1">
-            <li>D3 Teknik Mesin</li>
-            <li>D3 Teknik Mesin Otomotif</li>
-            <li>D3 Alat Berat</li>
-          </ul>
-          <a href="https://mesin.poliban.ac.id" target="_blank" class="inline-block mt-2 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">Kunjungi Website</a>
-        </div>
-  
-        <!-- Teknik Elektro -->
-        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition">
-          <h3 class="text-2xl font-semibold text-yellow-600 mb-4">💡 Teknik Elektro</h3>
-          <ul class="list-disc pl-5 text-gray-700 mb-4 space-y-1">
-            <li>D3 Teknik Listrik</li>
-            <li>D3 Elektronika</li>
-            <li>D3 Teknik Informatika</li>
-            <li>D4 Sistem Informasi Kota Cerdas</li>
-            <li>D4 Rekayasa Pembangkit Energi</li>
-          </ul>
-          <a href="https://elektro.poliban.ac.id" target="_blank" class="inline-block mt-2 bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition">Kunjungi Website</a>
-        </div>
-  
-        <!-- Akuntansi -->
-        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition">
-          <h3 class="text-2xl font-semibold text-green-600 mb-4">📊 Akuntansi</h3>
-          <ul class="list-disc pl-5 text-gray-700 mb-4 space-y-1">
-            <li>D3 Akuntansi</li>
-            <li>D3 Komputerisasi Akuntansi</li>
-            <li>D4 Akuntansi Lembaga Keuangan Syariah</li>
-          </ul>
-          <a href="https://akuntansi.poliban.ac.id" target="_blank" class="inline-block mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">Kunjungi Website</a>
-        </div>
-  
-        <!-- Administrasi Bisnis -->
-        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition">
-          <h3 class="text-2xl font-semibold text-purple-600 mb-4">💼 Administrasi Bisnis</h3>
-          <ul class="list-disc pl-5 text-gray-700 mb-4 space-y-1">
-            <li>D3 Administrasi Bisnis</li>
-            <li>D3 Manajemen Informatika</li>
-            <li>D4 Bisnis Digital</li>
-          </ul>
-          <a href="https://bisnis.poliban.ac.id" target="_blank" class="inline-block mt-2 bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition">Kunjungi Website</a>
+        <span class="absolute top-28 left-1/2 transform -translate-x-1/2 text-xs bg-green-600 text-white px-3 py-1 rounded-full shadow-sm group-hover:scale-105 transition-transform duration-300">KURIKULUM</span>
+      </div>
+      
+      <div class="p-4 pt-6 text-center">
+        <h3 class="font-bold text-lg text-gray-800 group-hover:text-green-700 transition-colors duration-300">Kurikulum MBKM 2024</h3>
+        <p class="text-gray-600 text-sm mt-1">Program Studi Teknik Informatika</p>
+        
+        <div class="mt-4 pt-4 border-t border-gray-100 group-hover:border-gray-200 transition-colors duration-300">
+          <div class="flex justify-center space-x-2">
+            <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded group-hover:scale-105 transition-transform duration-300">#MerdekaBelajar</span>
+            <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded group-hover:scale-105 transition-transform duration-300">#KampusMerdeka</span>
+          </div>
+          <p class="text-gray-500 text-sm mt-3">Update terbaru: Jan 2024</p>
         </div>
       </div>
     </div>
-  </section>
-  
-  
-  <div class="weekly2-news-area  weekly2-pading gray-bg">
-    <div class="container">
-        <div class="weekly2-wrapper">
-            <!-- section Tittle -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-tittle mb-30">
-                        <h3>Weekly Top News</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="weekly2-news-active dot-style d-flex dot-style slick-initialized slick-slider slick-dotted">
-                        <div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 3360px; transform: translate3d(-960px, 0px, 0px);"><div class="weekly2-single slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" style="width: 210px;" tabindex="-1">
-                            <div class="weekly2-img">
-                                <img src="https://picsum.photos/210/140" alt="">
-                            </div>
-                            <div class="weekly2-caption">
-                                <span class="color1">Event night</span>
-                                <p>25 Jan 2020</p>
-                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
-                            </div>
-                        </div><div class="weekly2-single slick-slide slick-cloned" data-slick-index="-3" aria-hidden="true" style="width: 210px;" tabindex="-1">
-                            <div class="weekly2-img">
-                                <img src="https://picsum.photos/210/140" alt="">
-                            </div>
-                            <div class="weekly2-caption">
-                                <span class="color1">Corporate</span>
-                                <p>25 Jan 2020</p>
-                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
-                            </div>
-                        </div><div class="weekly2-single slick-slide slick-cloned" data-slick-index="-2" aria-hidden="true" style="width: 210px;" tabindex="-1">
-                            <div class="weekly2-img">
-                                <img src="https://picsum.photos/210/140" alt="">
-                            </div>
-                            <div class="weekly2-caption">
-                                <span class="color1">Event time</span>
-                                <p>25 Jan 2020</p>
-                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
-                            </div>
-                        </div><div class="weekly2-single slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" style="width: 210px;" tabindex="-1">
-                            <div class="weekly2-img">
-                                <img src="https://picsum.photos/210/140" alt="">
-                            </div>
-                            <div class="weekly2-caption">
-                                <span class="color1">Corporate</span>
-                                <p>25 Jan 2020</p>
-                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
-                            </div>
-                        </div><div class="weekly2-single slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" style="width: 210px;" tabindex="0" role="tabpanel" id="slick-slide10" aria-describedby="slick-slide-control10">
-                            <div class="weekly2-img">
-                                <img src="https://picsum.photos/210/140" alt="">
-                            </div>
-                            <div class="weekly2-caption">
-                                <span class="color1">Corporate</span>
-                                <p>25 Jan 2020</p>
-                                <h4><a href="#" tabindex="0">Welcome To The Best Model  Winner Contest</a></h4>
-                            </div>
-                        </div><div class="weekly2-single slick-slide slick-active" data-slick-index="1" aria-hidden="false" style="width: 210px;" tabindex="0" role="tabpanel" id="slick-slide11" aria-describedby="slick-slide-control11">
-                            <div class="weekly2-img">
-                                <img src="https://picsum.photos/210/140" alt="">
-                            </div>
-                            <div class="weekly2-caption">
-                                <span class="color1">Event night</span>
-                                <p>25 Jan 2020</p>
-                                <h4><a href="#" tabindex="0">Welcome To The Best Model  Winner Contest</a></h4>
-                            </div>
-                        </div><div class="weekly2-single slick-slide slick-active" data-slick-index="2" aria-hidden="false" style="width: 210px;" tabindex="0" role="tabpanel" id="slick-slide12" aria-describedby="slick-slide-control12">
-                            <div class="weekly2-img">
-                                <img src="https://picsum.photos/210/140" alt="">
-                            </div>
-                            <div class="weekly2-caption">
-                                <span class="color1">Corporate</span>
-                                <p>25 Jan 2020</p>
-                                <h4><a href="#" tabindex="0">Welcome To The Best Model  Winner Contest</a></h4>
-                            </div>
-                        </div><div class="weekly2-single slick-slide slick-active" data-slick-index="3" aria-hidden="false" style="width: 210px;" tabindex="0" role="tabpanel" id="slick-slide13" aria-describedby="slick-slide-control13">
-                            <div class="weekly2-img">
-                                <img src="https://picsum.photos/210/140" alt="">
-                            </div>
-                            <div class="weekly2-caption">
-                                <span class="color1">Event time</span>
-                                <p>25 Jan 2020</p>
-                                <h4><a href="#" tabindex="0">Welcome To The Best Model  Winner Contest</a></h4>
-                            </div>
-                        </div><div class="weekly2-single slick-slide" data-slick-index="4" aria-hidden="true" style="width: 210px;" tabindex="-1" role="tabpanel" id="slick-slide14" aria-describedby="slick-slide-control14">
-                            <div class="weekly2-img">
-                                <img src="https://picsum.photos/210/140" alt="">
-                            </div>
-                            <div class="weekly2-caption">
-                                <span class="color1">Corporate</span>
-                                <p>25 Jan 2020</p>
-                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
-                            </div>
-                        </div><div class="weekly2-single slick-slide slick-cloned" data-slick-index="5" aria-hidden="true" style="width: 210px;" tabindex="-1">
-                            <div class="weekly2-img">
-                                <img src="https://picsum.photos/210/140" alt="">
-                            </div>
-                            <div class="weekly2-caption">
-                                <span class="color1">Corporate</span>
-                                <p>25 Jan 2020</p>
-                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
-                            </div>
-                        </div><div class="weekly2-single slick-slide slick-cloned" data-slick-index="6" aria-hidden="true" style="width: 210px;" tabindex="-1">
-                            <div class="weekly2-img">
-                                <img src="https://picsum.photos/210/140" alt="">
-                            </div>
-                            <div class="weekly2-caption">
-                                <span class="color1">Event night</span>
-                                <p>25 Jan 2020</p>
-                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
-                            </div>
-                        </div><div class="weekly2-single slick-slide slick-cloned" data-slick-index="7" aria-hidden="true" style="width: 210px;" tabindex="-1">
-                            <div class="weekly2-img">
-                                <img src="https://picsum.photos/210/140" alt="">
-                            </div>
-                            <div class="weekly2-caption">
-                                <span class="color1">Corporate</span>
-                                <p>25 Jan 2020</p>
-                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
-                            </div>
-                        </div><div class="weekly2-single slick-slide slick-cloned" data-slick-index="8" aria-hidden="true" style="width: 210px;" tabindex="-1">
-                            <div class="weekly2-img">
-                                <img src="https://picsum.photos/210/140" alt="">
-                            </div>
-                            <div class="weekly2-caption">
-                                <span class="color1">Event time</span>
-                                <p>25 Jan 2020</p>
-                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
-                            </div>
-                        </div><div class="weekly2-single slick-slide slick-cloned" data-slick-index="9" aria-hidden="true" style="width: 210px;" tabindex="-1">
-                            <div class="weekly2-img">
-                                <img src="https://picsum.photos/210/140" alt="">
-                            </div>
-                            <div class="weekly2-caption">
-                                <span class="color1">Corporate</span>
-                                <p>25 Jan 2020</p>
-                                <h4><a href="#" tabindex="-1">Welcome To The Best Model  Winner Contest</a></h4>
-                            </div>
-                        </div></div></div> 
-                        
-                    <ul class="slick-dots" style="display: block;" role="tablist"><li class="slick-active" role="presentation"><button type="button" role="tab" id="slick-slide-control10" aria-controls="slick-slide10" aria-label="1 of 2" tabindex="0" aria-selected="true">1</button></li><li role="presentation" class=""><button type="button" role="tab" id="slick-slide-control11" aria-controls="slick-slide11" aria-label="2 of 2" tabindex="-1">2</button></li><li role="presentation" class=""><button type="button" role="tab" id="slick-slide-control12" aria-controls="slick-slide12" aria-label="3 of 2" tabindex="-1">3</button></li><li class="" role="presentation"><button type="button" role="tab" id="slick-slide-control13" aria-controls="slick-slide13" aria-label="4 of 2" tabindex="-1">4</button></li><li role="presentation" class=""><button type="button" role="tab" id="slick-slide-control14" aria-controls="slick-slide14" aria-label="5 of 2" tabindex="-1">5</button></li></ul></div>
-                </div>
-            </div>
+
+    <!-- Card 2 - Dosen Profesor -->
+    <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300 relative group">
+      <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 z-10 rounded-xl"></div>
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-500"></div>
+      
+      <div class="relative">
+        <div class="w-32 h-32 mx-auto mt-6 rounded-full overflow-hidden border-4 border-white shadow-md group-hover:border-blue-100 transition-all duration-300">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" alt="Dosen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
         </div>
+        <span class="absolute top-28 left-1/2 transform -translate-x-1/2 text-xs bg-indigo-600 text-white px-3 py-1 rounded-full shadow-sm group-hover:scale-105 transition-transform duration-300">PROFESOR</span>
+      </div>
+      
+      <div class="p-4 pt-6 text-center">
+        <h3 class="font-bold text-lg text-gray-800 group-hover:text-indigo-700 transition-colors duration-300">Prof. Dr. Putri Sari, M.Sc.</h3>
+        <p class="text-gray-600 text-sm mt-1">Fakultas Teknologi Informasi</p>
+        
+        <div class="mt-4 pt-4 border-t border-gray-100 group-hover:border-gray-200 transition-colors duration-300">
+          <p class="text-gray-700 text-sm font-medium">Spesialisasi:</p>
+          <p class="text-gray-500 text-sm mt-1">Kecerdasan Buatan</p>
+        </div>
+      </div>
     </div>
-</div> 
+
+    <!-- Card 3 - Dosen Doktor -->
+    <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300 relative group">
+      <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 z-10 rounded-xl"></div>
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-teal-500"></div>
+      
+      <div class="relative">
+        <div class="w-32 h-32 mx-auto mt-6 rounded-full overflow-hidden border-4 border-white shadow-md group-hover:border-green-100 transition-all duration-300">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="Dosen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+        </div>
+        <span class="absolute top-28 left-1/2 transform -translate-x-1/2 text-xs bg-teal-600 text-white px-3 py-1 rounded-full shadow-sm group-hover:scale-105 transition-transform duration-300">DOKTOR</span>
+      </div>
+      
+      <div class="p-4 pt-6 text-center">
+        <h3 class="font-bold text-lg text-gray-800 group-hover:text-teal-700 transition-colors duration-300">Dr. Ahmad Fauzi, M.Kom.</h3>
+        <p class="text-gray-600 text-sm mt-1">Fakultas Ilmu Komputer</p>
+        
+        <div class="mt-4 pt-4 border-t border-gray-100 group-hover:border-gray-200 transition-colors duration-300">
+          <p class="text-gray-700 text-sm font-medium">Spesialisasi:</p>
+          <p class="text-gray-500 text-sm mt-1">Data Science</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 - Guru Besar -->
+    <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300 relative group">
+      <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 z-10 rounded-xl"></div>
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-indigo-500"></div>
+      
+      <div class="relative">
+        <div class="w-32 h-32 mx-auto mt-6 rounded-full overflow-hidden border-4 border-white shadow-md group-hover:border-purple-100 transition-all duration-300">
+          <img src="https://images.unsplash.com/photo-1542190891-2093d38760f2?auto=format&fit=crop&w=400&q=80" alt="Dosen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+        </div>
+        <span class="absolute top-28 left-1/2 transform -translate-x-1/2 text-xs bg-purple-600 text-white px-3 py-1 rounded-full shadow-sm group-hover:scale-105 transition-transform duration-300">GURU BESAR</span>
+      </div>
+      
+      <div class="p-4 pt-6 text-center">
+        <h3 class="font-bold text-lg text-gray-800 group-hover:text-purple-700 transition-colors duration-300">Prof. Dr. Siti Rahayu, Ph.D</h3>
+        <p class="text-gray-600 text-sm mt-1">Fakultas Kedokteran</p>
+        
+        <div class="mt-4 pt-4 border-t border-gray-100 group-hover:border-gray-200 transition-colors duration-300">
+          <p class="text-gray-700 text-sm font-medium">Spesialisasi:</p>
+          <p class="text-gray-500 text-sm mt-1">Neurologi</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 - NEW: Kurikulum Internasional -->
+    <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300 relative group">
+      <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 z-10 rounded-xl"></div>
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-400 to-orange-500"></div>
+      
+      <div class="relative">
+        <div class="w-32 h-32 mx-auto mt-6 rounded-full overflow-hidden border-4 border-white shadow-md bg-gray-100 flex items-center justify-center group-hover:bg-gray-50 transition-all duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-500 group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <span class="absolute top-28 left-1/2 transform -translate-x-1/2 text-xs bg-orange-600 text-white px-3 py-1 rounded-full shadow-sm group-hover:scale-105 transition-transform duration-300">INTERNASIONAL</span>
+      </div>
+      
+      <div class="p-4 pt-6 text-center">
+        <h3 class="font-bold text-lg text-gray-800 group-hover:text-orange-700 transition-colors duration-300">Kurikulum Internasional</h3>
+        <p class="text-gray-600 text-sm mt-1">Program Studi Kedokteran</p>
+        
+        <div class="mt-4 pt-4 border-t border-gray-100 group-hover:border-gray-200 transition-colors duration-300">
+          <div class="flex justify-center space-x-2">
+            <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded group-hover:scale-105 transition-transform duration-300">#AkreditasiA</span>
+            <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded group-hover:scale-105 transition-transform duration-300">#Global</span>
+          </div>
+          <p class="text-gray-500 text-sm mt-3">Mulai berlaku: Agustus 2024</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 - NEW: Dosen Ahli -->
+    <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300 relative group">
+      <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 z-10 rounded-xl"></div>
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-amber-500"></div>
+      
+      <div class="relative">
+        <div class="w-32 h-32 mx-auto mt-6 rounded-full overflow-hidden border-4 border-white shadow-md group-hover:border-yellow-100 transition-all duration-300">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=400&q=80" alt="Dosen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+        </div>
+        <span class="absolute top-28 left-1/2 transform -translate-x-1/2 text-xs bg-amber-600 text-white px-3 py-1 rounded-full shadow-sm group-hover:scale-105 transition-transform duration-300">AHLI</span>
+      </div>
+      
+      <div class="p-4 pt-6 text-center">
+        <h3 class="font-bold text-lg text-gray-800 group-hover:text-amber-700 transition-colors duration-300">Dr. Rina Wijayanti, M.Eng</h3>
+        <p class="text-gray-600 text-sm mt-1">Fakultas Teknik Elektro</p>
+        
+        <div class="mt-4 pt-4 border-t border-gray-100 group-hover:border-gray-200 transition-colors duration-300">
+          <p class="text-gray-700 text-sm font-medium">Spesialisasi:</p>
+          <p class="text-gray-500 text-sm mt-1">Robotika</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 7 - NEW: Tim Pengajar -->
+    <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300 relative group">
+      <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 z-10 rounded-xl"></div>
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-400 to-rose-500"></div>
+      
+      <div class="relative">
+        <div class="w-32 h-32 mx-auto mt-6 rounded-full overflow-hidden border-4 border-white shadow-md bg-gray-100 flex items-center justify-center group-hover:bg-gray-50 transition-all duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-pink-500 group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+        </div>
+        <span class="absolute top-28 left-1/2 transform -translate-x-1/2 text-xs bg-rose-600 text-white px-3 py-1 rounded-full shadow-sm group-hover:scale-105 transition-transform duration-300">TIM PENGAJAR</span>
+      </div>
+      
+      <div class="p-4 pt-6 text-center">
+        <h3 class="font-bold text-lg text-gray-800 group-hover:text-rose-700 transition-colors duration-300">Tim Pengajar Berprestasi</h3>
+        <p class="text-gray-600 text-sm mt-1">Fakultas Ekonomi & Bisnis</p>
+        
+        <div class="mt-4 pt-4 border-t border-gray-100 group-hover:border-gray-200 transition-colors duration-300">
+          <div class="flex justify-center space-x-2">
+            <span class="inline-block bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded group-hover:scale-105 transition-transform duration-300">#JuaraNasional</span>
+            <span class="inline-block bg-rose-100 text-rose-800 text-xs px-2 py-1 rounded group-hover:scale-105 transition-transform duration-300">#Inovasi</span>
+          </div>
+          <p class="text-gray-500 text-sm mt-3">Penghargaan: Mei 2024</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 8 - NEW: Kurikulum Industri -->
+    <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300 relative group">
+      <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 z-10 rounded-xl"></div>
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
+      
+      <div class="relative">
+        <div class="w-32 h-32 mx-auto mt-6 rounded-full overflow-hidden border-4 border-white shadow-md bg-gray-100 flex items-center justify-center group-hover:bg-gray-50 transition-all duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-cyan-500 group-hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+          </svg>
+        </div>
+        <span class="absolute top-28 left-1/2 transform -translate-x-1/2 text-xs bg-blue-600 text-white px-3 py-1 rounded-full shadow-sm group-hover:scale-105 transition-transform duration-300">INDUSTRI</span>
+      </div>
+      
+      <div class="p-4 pt-6 text-center">
+        <h3 class="font-bold text-lg text-gray-800 group-hover:text-blue-700 transition-colors duration-300">Kurikulum Link & Match</h3>
+        <p class="text-gray-600 text-sm mt-1">Program Studi Teknik Industri</p>
+        
+        <div class="mt-4 pt-4 border-t border-gray-100 group-hover:border-gray-200 transition-colors duration-300">
+          <div class="flex justify-center space-x-2">
+            <span class="inline-block bg-cyan-100 text-cyan-800 text-xs px-2 py-1 rounded group-hover:scale-105 transition-transform duration-300">#Kerjasama</span>
+            <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded group-hover:scale-105 transition-transform duration-300">#Industri</span>
+          </div>
+          <p class="text-gray-500 text-sm mt-3">Mulai berlaku: September 2024</p>
+        </div>
+      </div>
+    </div>
+     
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  const carousel = document.querySelector('#carousel');
+  const cards = carousel.children;
+  const cardsPerView = 4; // Tampilkan 4 card sekaligus
+  const totalCards = cards.length;
+  const gap = 28; // px, sesuai gap-7
+  const cardWidth = cards[0].offsetWidth;
+  const slideDistance = cardWidth + gap; // Geser per 1 card
   
+  let currentSlide = 0;
+  const indicators = document.querySelectorAll('#indicators button');
+  let slideInterval;
+
+  function updateCarousel() {
+    const moveX = currentSlide * slideDistance;
+    carousel.style.transform = `translateX(-${moveX}px)`;
+
+    // Update indikator
+    indicators.forEach((btn, index) => {
+      const isActive = index === Math.floor(currentSlide / cardsPerView);
+      btn.classList.toggle('bg-blue-600', isActive);
+      btn.classList.toggle('bg-gray-300', !isActive);
+      btn.classList.toggle('w-6', isActive);
+      btn.classList.toggle('w-2', !isActive);
+    });
+  }
+
+  function startAutoSlide() {
+    slideInterval = setInterval(() => {
+      currentSlide = (currentSlide + 1) % totalCards;
+      if (currentSlide >= totalCards) currentSlide = 0;
+      updateCarousel();
+    }, 3000);
+  }
+
+  // Event klik indikator
+  indicators.forEach((btn, index) => {
+    btn.addEventListener('click', function() {
+      clearInterval(slideInterval);
+      currentSlide = index * cardsPerView;
+      updateCarousel();
+      startAutoSlide();
+    });
+  });
+
+  // Inisialisasi
+  updateCarousel();
+  startAutoSlide();
+});
+</script>
+
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-14">
+  <footer class="bg-gray-800 text-white py-14 mt-20">
     <div class="container mx-auto px-6">
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
         <!-- About Section -->
@@ -595,9 +646,7 @@
     </div>
   </footer>
   
-
-
-
-
+  
+  
 </body>
 </html>
