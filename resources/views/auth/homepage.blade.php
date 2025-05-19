@@ -317,8 +317,7 @@
   <!-- Carousel wrapper -->
   <div class="relative overflow-hidden">
     <div id="carousel" class="flex transition-transform duration-700 ease-in-out" style="gap: 1.75rem;">
-      <!-- 7 Card Dosen & Kurikulum -->
-     <!-- Card 1 - Original Kurikulum Card -->
+
     <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300 relative group">
       <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 z-10 rounded-xl"></div>
       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-pink-500"></div>

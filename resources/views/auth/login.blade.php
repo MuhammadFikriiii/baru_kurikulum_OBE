@@ -68,7 +68,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        // Function untuk show toast notification
         function showToast(message, type = 'success') {
             const Toast = Swal.mixin({
                 toast: true,

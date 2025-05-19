@@ -63,13 +63,11 @@ class LoginController extends Controller
         ]);
     
         if (Auth::attempt($request->only('email', 'password'))) {
-            $request->session()->regenerate(); // Regenerasi session untuk keamanan
+            $request->session()->regenerate(); 
             $user = Auth::user();
             
-            // Buat pesan sukses
             $message = 'Login berhasil! Selamat datang, ' . $user->name . '!';
             
-            // Redirect berdasarkan role dengan membawa flash message
             switch ($user->role) {
                 case 'admin':
                     return redirect()->route('admin.dashboard')->with('login_success', $message);
