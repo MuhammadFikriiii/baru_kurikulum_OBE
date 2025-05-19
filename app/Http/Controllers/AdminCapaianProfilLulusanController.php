@@ -41,7 +41,11 @@ class AdminCapaianProfilLulusanController extends Controller
 
     public function create()
     {
-        $profilLulusans = DB::table('profil_lulusans')->orderBy('kode_pl','asc')->get();
+        $profilLulusans = DB::table('profil_lulusans')
+        ->join('prodis', 'profil_lulusans.kode_prodi', '=', 'prodis.kode_prodi')
+        ->select('profil_lulusans.id_pl', 'profil_lulusans.kode_pl', 'profil_lulusans.deskripsi_pl', 'prodis.nama_prodi')
+        ->orderBy('prodis.nama_prodi')
+        ->get();
         return view("admin.capaianprofillulusan.create", compact("profilLulusans"));
     }
 

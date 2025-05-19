@@ -26,15 +26,12 @@
     
         <div class="flex justify-between mb-4">
             <div class="space-x-2">
-                <a href="{{ route('admin.capaianprofillulusan.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-                    👤 Tambah Capaian Profil Lulusan
-                </a>
-                <a href="" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
-                    📄 Ekspor ke Excel
+                <a href="{{ route('admin.capaianprofillulusan.create') }}" class="bg-green-600 inline-flex text-white px-4 py-2 rounded-md hover:bg-green-800 mr-6 font-bold">
+                    Tambah
                 </a>
             </div>
             <form method="GET" action="{{ route('admin.capaianprofillulusan.index') }}" class="flex items-center">
-                <select id="prodi" name="kode_prodi" class="border border-gray-300 px-3 py-2 rounded-md mr-2" onchange="this.form.submit()">
+                <select id="prodi" name="kode_prodi" class="border border-black px-3 py-2 rounded-md mr-2 w-60 text-center" onchange="this.form.submit()">
                     <option value="" {{ empty($kode_prodi) ? 'selected' : '' }} disabled selected>Pilih Prodi</option>
                     @foreach($prodis as $prodi)
                         <option value="{{ $prodi->kode_prodi }}" {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
@@ -42,23 +39,13 @@
                         </option>
                     @endforeach
                 </select>
-            </form>                        
-        </div>
-    
-        <div class="flex items-center justify-between mb-3">
-            <label for="entries" class="text-gray-600 mr-2">Show</label>
-            <select id="entries" class="border border-gray-300 px-3 py-2 rounded-md mr-2">
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
-            <span class="text-gray-600">entries</span>
+            </form>
             <div class="ml-auto justify-between">
                 <input type="text" id="search" placeholder="Search..." 
-                    class="border border-gray-300 px-3 py-2 rounded-md">
-            </div>
-        </div>  
+                    class="border border-black px-3 py-2 rounded-md">
+            </div>                        
+        </div>
+ 
         <div class="bg-white shadow-lg overflow-hidden">
             <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
                 <thead class="bg-green-800 text-white border-b">
@@ -88,15 +75,15 @@
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $index + 1 }}</td>
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->nama_prodi ?? 'Tidak ada prodi' }}</td>
                         <td class="px-5 py-2 text-sm">{{ $capaianprofillulusan->kode_cpl }}</td>
-                        <td class="px-4 py-2 text-sm w-96 break-words whitespace-pre-line">{{ $capaianprofillulusan->deskripsi_cpl }}</td>
+                        <td class="px-4 py-2 text-sm min-w-[10px] break-words whitespace-pre-line text-justify">{{ $capaianprofillulusan->deskripsi_cpl }}</td>
                         <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->status_cpl }}</td>
                         <td class="py-3 px-6 min-w-[10px] flex justify-center items-center space-x-2">
-                            <a href="{{ route('admin.capaianprofillulusan.detail',$capaianprofillulusan->id_cpl) }}" class="bg-green-500 font-bold text-white px-3 py-1 rounded-md hover:bg-green-600">🛈 Detail</a>
-                            <a href="{{ route('admin.capaianprofillulusan.edit', $capaianprofillulusan->id_cpl) }}" class="bg-yellow-500 text-white font-bold px-3 py-1 rounded-md hover:bg-yellow-600">✏️ Ubah</a>
+                            <a href="{{ route('admin.capaianprofillulusan.detail',$capaianprofillulusan->id_cpl) }}" class="bg-gray-600 font-bold text-white px-5 py-2 rounded-md hover:bg-gray-700">🛈</a>
+                            <a href="{{ route('admin.capaianprofillulusan.edit', $capaianprofillulusan->id_cpl) }}" class="bg-blue-600 text-white font-bold px-5 py-2 rounded-md hover:bg-blue-800">✏️</a>
                             <form action="{{ route('admin.capaianprofillulusan.destroy',$capaianprofillulusan->id_cpl ) }}" method="POST">
                                 @csrf @method('DELETE')
-                                <button class="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600" onclick="return confirm('Hapus user ini?')">
-                                    🗑️ Hapus
+                                <button class="bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-800" onclick="return confirm('Hapus CPL ini?')">
+                                    🗑️
                                 </button>
                             </form>
                         </td>
