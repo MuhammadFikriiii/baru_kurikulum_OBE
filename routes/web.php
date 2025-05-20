@@ -178,6 +178,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/penilaian/create', [AdminPenilaianController::class, 'create'])->name('penilaian.create');
         Route::post('/penilaian', [AdminPenilaianController::class, 'store'])->name('penilaian.store');
         Route::get('/pemenuhancplcpmkmk', [AdminPemetaanCplCpmkMkController::class, 'pemenuhancplcpmkmk'])->name('pemetaancplcpmkmk.pemenuhancplcpmkmk');
+        Route::get('/pemetaanmkcpmkcpl', [AdminPemetaanCplCpmkMkController::class, 'pemetaanmkcpmkcpl'])->name('pemetaancplcpmkmk.pemetaanmkcpmkcpl');
                 Route::get('/export/excel', [TimExportController::class, 'export'])->name('export.excel');
     });
 
