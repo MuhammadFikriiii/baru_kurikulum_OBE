@@ -215,6 +215,12 @@
                     <span class="ml-2">Sub Cpmk</span>
                 </a>
             </li>
+            <li data-title="Pemenuhan CPL - CPMK - MK">
+                <a href="{{ route('admin.pemetaancplcpmkmk.pemenuhancplcpmkmk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="bi bi-folder2-open"></i>
+                    <span class="ml-2">Pemenuhan CPL - CPMK - MK</span>
+                </a>
+            </li>
             <li>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
