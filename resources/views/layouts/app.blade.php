@@ -251,6 +251,20 @@
                     <span class="ml-2">Pemenuhan MK - CPMK - CPL</span>
                 </a>
             </li>
+            <li data-title="Pemenuhan CPL - CPMK - MK">
+                <a href="{{ route('admin.pemetaanmkcpmksubcpmk.index') }}"
+                    class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="bi bi-folder2-open"></i>
+                    <span class="ml-2">Pemenuhan MK - CPMK - SubCPMK</span>
+                </a>
+            </li>
+            <li data-title="Pemenuhan CPL - CPMK - MK">
+                <a href="{{ route('admin.penilaian.create') }}"
+                    class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="bi bi-folder2-open"></i>
+                    <span class="ml-2">Penilaian</span>
+                </a>
+            </li>
             <li>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
