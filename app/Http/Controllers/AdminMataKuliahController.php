@@ -75,8 +75,13 @@ class AdminMataKuliahController extends Controller
     }
 
     public function edit(MataKuliah $matakuliah)
-    {
-        return view("admin.matakuliah.edit", compact('matakuliah'));
+    { 
+    // return view("admin.matakuliah.edit", compact('matakuliah'));
+    $capaianProfilLulusans = CapaianProfilLulusan::orderBy('kode_cpl', 'asc')->get();
+    $bahanKajians = DB::table('bahan_kajians')->get();
+    
+    return view("admin.matakuliah.edit", compact('matakuliah', 'capaianProfilLulusans', 'bahanKajians'));
+
     }
 
     public function update(Request $request, MataKuliah  $matakuliah)
