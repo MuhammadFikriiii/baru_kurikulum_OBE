@@ -30,13 +30,14 @@ class TimPemetaanCplCpmkMkController extends Controller
                 'mk.nama_mk'
             )
             ->where('prodis.kode_prodi', $kodeProdi)
-            ->orderBy('cpl.kode_cpl')
+            ->orderBy('cpl.kode_cpl', 'asc')
+            ->orderBy('cpmk.id_cpmk', 'asc')
             ->get();
 
         $matrix = [];
         foreach ($data as $row) {
             $matrix[$row->kode_cpl]['deskripsi'] = $row->deskripsi_cpl;
-            $matrix[$row->kode_cpl]['cpmk'][$row->kode_cpmk]['deskripsi'][] = $row->deskripsi_cpmk;
+            $matrix[$row->kode_cpl]['cpmk'][$row->kode_cpmk]['deskripsi'] = $row->deskripsi_cpmk;
             $matrix[$row->kode_cpl]['cpmk'][$row->kode_cpmk]['mk'][] = $row->nama_mk;
         }
         return view('tim.pemetaancplcpmkmk.index', compact('matrix'));
@@ -65,6 +66,7 @@ class TimPemetaanCplCpmkMkController extends Controller
                 'mk.semester_mk'
             )
             ->orderBy('cpl.kode_cpl')
+            ->orderBy('cpmk.kode_cpmk')
             ->get();
 
         $matrix = [];

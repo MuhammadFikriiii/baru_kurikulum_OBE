@@ -43,11 +43,14 @@ class AdminPemetaanCplCpmkMkController extends Controller
 
     public function pemenuhancplcpmkmk()
     {
-        $data = DB::table('cpl_cpmk')
-            ->join('capaian_pembelajaran_mata_kuliahs as cpmk', 'cpl_cpmk.id_cpmk', '=', 'cpmk.id_cpmk')
-            ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
-            ->join('cpmk_mk', 'cpl_cpmk.id_cpmk', '=', 'cpmk_mk.id_cpmk')
-            ->join('mata_kuliahs as mk', 'cpmk_mk.kode_mk', '=', 'mk.kode_mk')
+        $data = DB::table('capaian_profil_lulusans as cpl')
+            ->Join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
+            ->leftJoin('cpl_cpmk as cpl_cpmk', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
+            ->leftJoin('capaian_pembelajaran_mata_kuliahs as cpmk', 'cpl_cpmk.id_cpmk', '=', 'cpmk.id_cpmk')
+            ->leftJoin('cpmk_mk', 'cpl_cpmk.id_cpmk', '=', 'cpmk_mk.id_cpmk')
+            ->leftJoin('mata_kuliahs as mk', 'cpmk_mk.kode_mk', '=', 'mk.kode_mk')
             ->select(
                 'cpl.kode_cpl',
                 'cpl.deskripsi_cpl',
@@ -67,6 +70,9 @@ class AdminPemetaanCplCpmkMkController extends Controller
             $kode_cpmk = $row->kode_cpmk;
             $semester = $row->semester_mk;
 
+            if (!$kode_cpmk) {
+                continue;
+            }
             $matrix[$kode_cpl]['deskripsi'] = $row->deskripsi_cpl;
             $matrix[$kode_cpl]['cpmk'][$kode_cpmk]['deskripsi'] = $row->deskripsi_cpmk;
 
