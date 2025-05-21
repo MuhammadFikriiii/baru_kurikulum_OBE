@@ -10,8 +10,8 @@
                     <tr>
                         <th class="border px-4 py-2">Kode MK</th>
                         <th class="border px-4 py-2">Nama Mata Kuliah</th>
-                        @foreach ($semuaCpl as $kodeCpl)
-                            <th class="border px-4 py-2">{{ $kodeCpl }}</th>
+                        @foreach ($semuaCpl as $cpl)
+                            <th class="border px-4 py-2">{{ $cpl->kode_cpl }}</th>
                         @endforeach
                     </tr>
                 </thead>
@@ -20,10 +20,10 @@
                         <tr>
                             <td class="border px-4 py-2 align-top">{{ $kodeMk }}</td>
                             <td class="border px-4 py-2 align-top">{{ $mk['nama'] }}</td>
-                            @foreach ($semuaCpl as $kodeCpl)
+                            @foreach ($semuaCpl as $cpl)
                                 <td class="border px-4 py-2 whitespace-pre-line text-center">
-                                    @if (isset($mk['cpl'][$kodeCpl]))
-                                        {!! implode('<br>', $mk['cpl'][$kodeCpl]['cpmks']) !!}
+                                    @if (isset($mk['cpl'][$cpl->kode_cpl]))
+                                        {!! implode('<br>', $mk['cpl'][$cpl->kode_cpl]['cpmks']) !!}
                                     @endif
                                 </td>
                             @endforeach

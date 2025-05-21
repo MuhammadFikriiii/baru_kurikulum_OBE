@@ -259,5 +259,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/subcpmk', [TimSubCpmkController::class, 'index'])->name('subcpmk.index');
         Route::get('/subcpmk/create', [TimSubCpmkController::class, 'create'])->name('subcpmk.create');
         Route::post('/subcpmk', [TimSubCpmkController::class, 'store'])->name('subcpmk.store');
+        Route::get('/pemenuhancplcpmkmk', [TimPemetaanCplCpmkMkController::class, 'pemenuhancplcpmkmk'])->name('pemetaancplcpmkmk.pemenuhancplcpmkmk');
     });
 });
