@@ -85,4 +85,68 @@ class TimPemetaanCplCpmkMkController extends Controller
 
         return view('tim.pemetaancplcpmkmk.pemenuhancplcpmkmk', compact('data', 'matrix'));
     }
+
+    public function pemetaanmkcplcpmk()
+    {
+        $kodeProdi = Auth::user()->kode_prodi;
+
+        $semuaCpl = DB::table('capaian_profil_lulusans as cpl')
+            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
+            ->where('prodis.kode_prodi', $kodeProdi)
+            ->select('cpl.id_cpl', 'cpl.kode_cpl')
+            ->orderBy('cpl.kode_cpl')
+            ->get();
+
+
+        $semuaMk = DB::table('capaian_profil_lulusans as cpl')
+            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
+            ->join('cpl_mk', 'cpl.id_cpl', '=', 'cpl_mk.id_cpl')
+            ->join('mata_kuliahs as mk', 'cpl_mk.kode_mk', '=', 'mk.kode_mk')
+            ->where('prodis.kode_prodi', $kodeProdi)
+            ->select('mk.kode_mk', 'mk.nama_mk', 'mk.semester_mk')
+            ->orderBy('mk.kode_mk')
+            ->get();
+
+        $relasi = DB::table('cpl_cpmk')
+            ->join('capaian_pembelajaran_mata_kuliahs as cpmk', 'cpl_cpmk.id_cpmk', '=', 'cpmk.id_cpmk')
+            ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
+            ->join('cpmk_mk', 'cpl_cpmk.id_cpmk', '=', 'cpmk_mk.id_cpmk')
+            ->join('mata_kuliahs as mk', 'cpmk_mk.kode_mk', '=', 'mk.kode_mk')
+            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
+            ->where('prodis.kode_prodi', $kodeProdi)
+            ->select(
+                'mk.kode_mk',
+                'mk.nama_mk',
+                'mk.semester_mk',
+                'cpl.kode_cpl',
+                'cpl.deskripsi_cpl',
+                'cpmk.kode_cpmk',
+                'cpmk.deskripsi_cpmk'
+            )
+            ->orderBy('mk.kode_mk')
+            ->orderBy('cpl.kode_cpl')
+            ->get();
+
+        $matrix = [];
+
+        foreach ($semuaMk as $mk) {
+            $matrix[$mk->kode_mk]['nama'] = $mk->nama_mk;
+            foreach ($semuaCpl as $cpl) {
+                $matrix[$mk->kode_mk]['cpl'][$cpl->kode_cpl]['cpmks'] = [];
+            }
+        }
+
+        // Masukkan relasi CPMK ke dalam matrix
+        foreach ($relasi as $row) {
+            $matrix[$row->kode_mk]['cpl'][$row->kode_cpl]['cpmks'][] = $row->kode_cpmk;
+        }
+
+        return view('tim.pemetaancplcpmkmk.pemetaanmkcplcpmk', compact('matrix', 'semuaMk', 'semuaCpl'));
+    }
 }
