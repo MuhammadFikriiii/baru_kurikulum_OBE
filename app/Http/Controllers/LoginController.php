@@ -66,6 +66,11 @@ class LoginController extends Controller
             $request->session()->regenerate(); 
             $user = Auth::user();
             
+            if ($user->status === 'pending') {
+                Auth::logout();
+                return redirect()->route('login')->withErrors(['email' => 'Akun Anda masih dalam status pending.']);
+            }
+
             $message = 'Login berhasil! Selamat datang, ' . $user->name . '!';
             
             switch ($user->role) {

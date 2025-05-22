@@ -126,13 +126,13 @@
             <li>
                 <a href="{{ route('tim.capaianpembelajaranlulusan.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="fas fa-book-open"></i>
-                    <span class="ml-2">Capaian Pembelajaran Lulusan</span>
+                    <span class="ml-2">CPL Prodi</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('tim.pemetaancplpl.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="fas fa-project-diagram"></i>
-                    <span class="ml-2">Pemetaan CPL PL</span>
+                    <span class="ml-2">CPL - PL</span>
                 </a>
             </li>
             <li>
@@ -144,7 +144,7 @@
             <li>
                 <a href="{{ route('tim.pemetaancplbk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="fas fa-link"></i>
-                    <span class="ml-2">Pemetaan CPL BK</span>
+                    <span class="ml-2">CPL - BK</span>
                 </a>
             </li>
             <li>
@@ -154,27 +154,27 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('tim.pemetaancplmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-stream"></i>
-                    <span class="ml-2">Pemetaan CPL - MK</span>
+                <a href="{{ route('tim.pemetaanbkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="fas fa-share-alt"></i>
+                    <span class="ml-2">BK - MK</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('tim.pemetaanbkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-share-alt"></i>
-                    <span class="ml-2">Pemetaan BK - MK</span>
+                <a href="{{ route('tim.pemetaancplmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="fas fa-stream"></i>
+                    <span class="ml-2">CPL - MK</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('tim.pemetaancplmkbk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="fas fa-link"></i>
-                    <span class="ml-2">Pemetaan CPL - BK - MK</span>
+                    <span class="ml-2">CPL - MK - BK</span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('tim.matakuliah.organisasimk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="fas fa-chalkboard-teacher"></i>
-                    <span class="ml-2">Organisasi matakuliah</span>
+                    <span class="ml-2">Organisasi MK</span>
                 </a>
             </li>
             <li>
@@ -184,15 +184,27 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('tim.pemetaancplcpmkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-sliders-h"></i>
-                    <span class="ml-2">PEMETAAN CPL - CPMK - MK</span>
-                </a>
-            </li>
-            <li>
                 <a href="{{ route('tim.pemenuhancpl.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="fas fa-share-alt"></i>
                     <span class="ml-2">Pemenuhan CPL</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('tim.pemetaancplcpmkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="fas fa-sliders-h"></i>
+                    <span class="ml-2">Pemetaan CPL - CPMK - MK</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('tim.pemetaancplcpmkmk.pemenuhancplcpmkmk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="fas fa-share-alt"></i>
+                    <span class="ml-2">Pemenuhan CPL - CPMK - MK</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('tim.pemetaancplcpmkmk.pemetaanmkcplcpmk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="fas fa-share-alt"></i>
+                    <span class="ml-2">Pemetaan CPL - MK - CPMK</span>
                 </a>
             </li>
             <li>
@@ -202,9 +214,9 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('tim.pemetaancplcpmkmk.pemenuhancplcpmkmk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                <a href="{{ route('tim.pemetaanmkcpmksubcpmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="fas fa-share-alt"></i>
-                    <span class="ml-2">Pemenuhan CPL - CPMK - MK</span>
+                    <span class="ml-2">Pemetaan MK - CPMK - SubCPMK</span>
                 </a>
             </li>
             <li>

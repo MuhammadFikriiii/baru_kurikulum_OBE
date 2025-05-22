@@ -5,9 +5,9 @@
         <h2 class="text-4xl font-extrabold text-center mb-4">Pemetaan CPL - CPMK - MK Per Semester</h2>
         <hr class="border border-black mb-4">
 
-        <div class="overflow-auto border">
-            <table class="min-w-full divide-y divide-gray-200 text-sm">
-                <thead class="bg-green-500 text-white">
+        <div class="border overflow-visible">
+            <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-visible">
+                <thead class="bg-green-800 text-white uppercase">
                     <tr>
                         <th class="border px-4 py-2">CPL</th>
                         <th class="border px-4 py-2">CPMK</th>
@@ -25,12 +25,32 @@
                         @foreach ($cpl['cpmk'] as $kode_cpmk => $cpmk)
                             <tr>
                                 @if ($first)
-                                    <td class="border px-4 py-2" rowspan="{{ $rowspan }}">{{ $kode_cpl }}</td>
+                                    <td class="border px-4 py-2 relative group" rowspan="{{ $rowspan }}">
+                                        <span class="hover:cursor-help">{{ $kode_cpl }}</span>
+
+                                        <!-- Tooltip cpl -->
+                                        <div
+                                            class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+                                            <div class="bg-gray-600"><strong>{{ $cpl['prodi'] ?? '-' }}</strong></div>
+                                            <div class="mt-3 text-justify">{{ $cpl['deskripsi'] ?? '-' }}</div>
+                                        </div>
+                                    </td>
                                     @php $first = false; @endphp
                                 @endif
-                                <td class="border px-4 py-2">{{ $kode_cpmk }}</td>
+
+                                <td class="border px-4 py-2 relative group">
+                                    <span class="hover:cursor-help">{{ $kode_cpmk }}</span>
+
+                                    <!-- Tooltip CPMK -->
+                                    <div
+                                        class="absolute left-1/2 -translate-x-1/2 top-full mt-2 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+                                        <div class="bg-gray-600"><strong>{{ $cpmk['prodi'] ?? '-' }}</strong></div>
+                                        <div class="mt-1 text-justify">{{ $cpmk['deskripsi'] ?? '-' }}</div>
+                                    </div>
+                                </td>
+
                                 @for ($i = 1; $i <= 8; $i++)
-                                    <td class="border px-4 py-2 whitespace-pre-line">
+                                    <td class="border px-4 py-2 text-center">
                                         @if (!empty($cpmk['semester'][$i]))
                                             {!! implode('<br>', $cpmk['semester'][$i]) !!}
                                         @endif
