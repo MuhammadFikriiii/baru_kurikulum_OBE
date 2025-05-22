@@ -45,6 +45,7 @@ use App\Http\Controllers\TimPemetaanCplMkController;
 use App\Http\Controllers\TimPemetaanCplMkBkController;
 use App\Http\Controllers\TimCapaianPembelajaranMatakuliahController;
 use App\Http\Controllers\TimPemetaanCplCpmkMkController;
+use App\Http\Controllers\TimPenilaianController;
 use App\Http\Controllers\TimSubCpmkController;
 
 // Rute untuk tamu (guest)
@@ -262,5 +263,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pemenuhancplcpmkmk', [TimPemetaanCplCpmkMkController::class, 'pemenuhancplcpmkmk'])->name('pemetaancplcpmkmk.pemenuhancplcpmkmk');
         Route::get('/pemetaanmkcpmkcpl', [TimPemetaanCplCpmkMkController::class, 'pemetaanmkcplcpmk'])->name('pemetaancplcpmkmk.pemetaanmkcplcpmk');
         Route::get('/pemetaanmkcpmksubcpmk', [TimSubCpmkController::class, 'pemetaanmkcpmksubcpmk'])->name('pemetaanmkcpmksubcpmk.index');
+        Route::get('/penilaian', [TimPenilaianController::class, 'index'])->name('penilaian.index');
+        Route::get('/penilaian/create', [TimPenilaianController::class, 'create'])->name('penilaian.create');
+        Route::post('/penilaian', [TimPenilaianController::class, 'store'])->name('penilaian.store');
+        Route::get('/penilaian/{penilaian}/edit', [TimPenilaianController::class, 'edit'])->name('penilaian.edit');
+        Route::put('/penilaian/{penilaian}', [TimPenilaianController::class, 'update'])->name('penilaian.update');
+        Route::get('/penilaian/{penilaian}/detail', [TimPenilaianController::class, 'detail'])->name('penilaian.detail');
     });
 });
