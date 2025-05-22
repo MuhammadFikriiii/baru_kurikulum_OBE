@@ -1,38 +1,52 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="mr-20 ml-20">
-    <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Daftar Capaian Pembelajaran Lulusan</h2>
-    <hr class="border-t-4 border-black my-8">
-        @if(session('success'))
-        <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
-            <span class="font-bold">{{ session('success') }}</span>
-            <button onclick="document.getElementById('alert').style.display='none'"
-                class="absolute top-1 right-3 text-white font-bold text-lg">
-                &times;
-            </button>
-        </div>
-        @endif
-
-        @if(session('sukses'))
-        <div id="alert" class="bg-red-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
-            <span class="font-bold">{{ session('sukses') }}</span>
-            <button onclick="document.getElementById('alert').style.display='none'"
-                class="absolute top-1 right-3 text-white font-bold text-lg">
-                &times;
-            </button>
-        </div>
-        @endif
+<div class="container mx-auto px-4">
     
-        <div class="flex justify-between mb-4">
-            <div class="space-x-2">
-                <a href="{{ route('admin.capaianprofillulusan.create') }}" class="bg-green-600 inline-flex text-white px-4 py-2 rounded-md hover:bg-green-800 mr-6 font-bold">
-                    Tambah
-                </a>
-            </div>
-            <form method="GET" action="{{ route('admin.capaianprofillulusan.index') }}" class="flex items-center">
-                <select id="prodi" name="kode_prodi" class="border border-black px-3 py-2 rounded-md mr-2 w-60 text-center" onchange="this.form.submit()">
-                    <option value="" {{ empty($kode_prodi) ? 'selected' : '' }} disabled selected>Pilih Prodi</option>
+    <div class="text-center mb-8">
+        <h1 class="text-2xl font-bold text-gray-800">Daftar Capaian Pembelajaran Lulusan</h1>
+        <hr class="border-t-4 border-black my-4 mx-auto mb-4">
+    </div>
+
+    
+    @if(session('success'))
+    <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-6 text-center relative max-w-4xl mx-auto">
+        <span class="font-bold">{{ session('success') }}</span>
+        <button onclick="document.getElementById('alert').style.display='none'"
+            class="absolute top-1 right-3 text-white font-bold text-lg">
+            &times;
+        </button>
+    </div>
+    @endif
+
+    @if(session('sukses'))
+    <div id="alert" class="bg-red-500 text-white px-4 py-2 rounded-md mb-6 text-center relative max-w-4xl mx-auto">
+        <span class="font-bold">{{ session('sukses') }}</span>
+        <button onclick="document.getElementById('alert').style.display='none'"
+            class="absolute top-1 right-3 text-white font-bold text-lg">
+            &times;
+        </button>
+    </div>
+    @endif
+
+    
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+        <div class="flex space-x-2">
+            <a href="{{ route('admin.capaianprofillulusan.create') }}" 
+               class="bg-green-600 hover:bg-green-800 text-white font-bold px-4 py-2 rounded-md inline-flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                </svg>
+                Tambah
+            </a>
+        </div>
+        
+        <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+            <form method="GET" action="{{ route('admin.capaianprofillulusan.index') }}" class="w-full md:w-64">
+                <select id="prodi" name="kode_prodi" 
+                    class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    onchange="this.form.submit()">
+                    <option value="" {{ empty($kode_prodi) ? 'selected' : '' }} disabled>Pilih Prodi</option>
                     @foreach($prodis as $prodi)
                         <option value="{{ $prodi->kode_prodi }}" {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
                             {{ $prodi->nama_prodi }}
@@ -40,57 +54,86 @@
                     @endforeach
                 </select>
             </form>
-            <div class="ml-auto justify-between">
+            
+            <div class="relative w-full md:w-64">
                 <input type="text" id="search" placeholder="Search..." 
-                    class="border border-black px-3 py-2 rounded-md">
-            </div>                        
+                    class="w-full border border-gray-300 px-4 py-2 rounded-md pl-10 focus:outline-none focus:ring-2 focus:ring-green-500">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+            </div>
         </div>
- 
-        <div class="bg-white shadow-lg overflow-hidden">
-            <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
-                <thead class="bg-green-800 text-white border-b">
+    </div>
+
+    <!-- Table -->
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+        @if(empty($kode_prodi))
+        <div class="p-8 text-center text-gray-600">
+            Silakan pilih prodi terlebih dahulu.
+        </div>
+        @elseif($dataKosong)
+        <div class="p-8 text-center text-gray-600">
+            <strong>Data belum dibuat untuk prodi ini.</strong>
+        </div>
+        @else
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-green-800 text-white">
                     <tr>
-                        <th class="py-3 px-4 min-w-[10px] text-center font-bold uppercase ">No.</th>
-                        <th class="py-3 px-6 min-w-[10px] text-center font-bold uppercase">Prodi</th>
-                        <th class="py-3 px-6 min-w-[10px] text-center font-bold uppercase">Kode CPL</th>
-                        <th class="py-3 px-6 min-w-[10px] text-center font-bold uppercase">Deskripsi CPL</th>
-                        <th class="py-3 px-6 min-w-[10px] text-center font-bold uppercase">Status CPL</th>
-                        <th class="py-3 px-6 font-bold uppercase min-w-[10px] text-center">Aksi</th>
+                        <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">No</th>
+                        <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Prodi</th>
+                        <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Kode CPL</th>
+                        <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Deskripsi CPL</th>
+                        <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Status CPL</th>
+                        <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @if(empty($kode_prodi))
-                    <tr>
-                        <td colspan="9" class="text-center text-black py-4">Silakan pilih prodi terlebih dahulu.</td>
-                    </tr>
-                    @elseif($dataKosong)
-                    <tr>
-                        <td colspan="9" class="text-center text-black py-4">
-                            <strong>Data belum dibuat untuk prodi ini.</strong>
-                        </td>
-                    </tr>
-                    @else
+                <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($capaianprofillulusans as $index => $capaianprofillulusan)
-                    <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
-                        <td class="py-3 px-6 min-w-[10px] text-center">{{ $index + 1 }}</td>
-                        <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->nama_prodi ?? 'Tidak ada prodi' }}</td>
-                        <td class="px-5 py-2 text-sm">{{ $capaianprofillulusan->kode_cpl }}</td>
-                        <td class="px-4 py-2 text-sm min-w-[10px] break-words whitespace-pre-line text-justify">{{ $capaianprofillulusan->deskripsi_cpl }}</td>
-                        <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianprofillulusan->status_cpl }}</td>
-                        <td class="py-3 px-6 min-w-[10px] flex justify-center items-center space-x-2">
-                            <a href="{{ route('admin.capaianprofillulusan.detail',$capaianprofillulusan->id_cpl) }}" class="bg-gray-600 font-bold text-white px-5 py-2 rounded-md hover:bg-gray-700">🛈</a>
-                            <a href="{{ route('admin.capaianprofillulusan.edit', $capaianprofillulusan->id_cpl) }}" class="bg-blue-600 text-white font-bold px-5 py-2 rounded-md hover:bg-blue-800">✏️</a>
-                            <form action="{{ route('admin.capaianprofillulusan.destroy',$capaianprofillulusan->id_cpl ) }}" method="POST">
-                                @csrf @method('DELETE')
-                                <button class="bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-800" onclick="return confirm('Hapus CPL ini?')">
-                                    🗑️
-                                </button>
-                            </form>
+                    <tr class="{{ $index % 2 == 0 ? 'bg-gray-50' : 'bg-white' }} hover:bg-gray-100">
+                        <td class="px-4 py-4 text-center text-sm">{{ $index + 1 }}</td>
+                        <td class="px-4 py-4 text-center text-sm">{{ $capaianprofillulusan->nama_prodi ?? 'Tidak ada prodi' }}</td>
+                        <td class="px-4 py-4 text-center text-sm">{{ $capaianprofillulusan->kode_cpl }}</td>
+                        <td class="px-4 py-4 text-sm whitespace-pre-line">{{ $capaianprofillulusan->deskripsi_cpl }}</td>
+                        <td class="px-4 py-4 text-center text-sm">{{ $capaianprofillulusan->status_cpl }}</td>
+                        <td class="px-4 py-4">
+                            <div class="flex justify-center space-x-2">
+                                <a href="{{ route('admin.capaianprofillulusan.detail', $capaianprofillulusan->id_cpl) }}" 
+                                   class="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md"
+                                   title="Detail">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                                <a href="{{ route('admin.capaianprofillulusan.edit', $capaianprofillulusan->id_cpl) }}" 
+                                   class="bg-blue-600 hover:bg-blue-800 text-white p-2 rounded-md"
+                                   title="Edit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                    </svg>
+                                </a>
+                                <form action="{{ route('admin.capaianprofillulusan.destroy', $capaianprofillulusan->id_cpl) }}" method="POST">
+                                    @csrf @method('DELETE')
+                                    <button type="submit"
+                                            class="bg-red-600 hover:bg-red-800 text-white p-2 rounded-md"
+                                            title="Hapus"
+                                            onclick="return confirm('Hapus CPL ini?')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     @endforeach
-                    @endif
-                </tbody>                  
+                </tbody>
             </table>
         </div>
+        @endif
+    </div>
+</div>
 @endsection
