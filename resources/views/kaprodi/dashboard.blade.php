@@ -13,22 +13,18 @@
     <!-- Filter dan Pencarian -->
     <div class="flex flex-col md:flex-row justify-between mb-6">
         <div class="flex space-x-2 mb-3 md:mb-0">
-            <select class="bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option value="">Semua Fakultas</option>
-                <option value="fmipa">FMIPA</option>
-                <option value="ft">Fakultas Teknik</option>
-                <option value="feb">FEB</option>
-                <option value="fk">Fakultas Kedokteran</option>
-            </select>
-            <select class="bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option value="">Semua Semester</option>
-                <option value="ganjil">Ganjil 2024/2025</option>
-                <option value="genap">Genap 2024/2025</option>
-            </select>
+            <a href="{{ route('tim.export.excel') }}" 
+                class="bg-green-600 text-white px-5 font-bold py-2 rounded-md hover:bg-green-800 inline-block mt-4">
+        <i class="fas fa-file-excel mr-2"></i>Excel
+        </a>
+            <a href="#" 
+                class="bg-blue-600 text-white px-5 font-bold py-2 rounded-md hover:bg-blue-800 inline-block mt-4">
+                <i class="fas fa-file-word mr-2"></i>Word
+            </a>
         </div>
         <div class="relative">
             <input type="text" id="search-prodi-dashboard" placeholder="Search..." 
-                    class="border border-gray-300 px-3 py-2 rounded-md">
+                class="border border-black px-3 py-2 pl-10 rounded-md">
             <span class="absolute left-3 top-2.5 text-gray-400">
                 <i class="fas fa-search"></i>
             </span>

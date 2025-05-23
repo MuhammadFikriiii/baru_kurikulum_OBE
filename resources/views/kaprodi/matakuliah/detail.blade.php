@@ -1,4 +1,4 @@
-@extends('layouts.tim.app')
+@extends('layouts.kaprodi.app')
 
 @section('content')
     <div class="mr-20 ml-20">
@@ -52,7 +52,7 @@
         <input type="text" name="kompetensi_mk" id="kompetensi_mk" value="{{ $matakuliah->kompetensi_mk }}" readonly
             class="w-full p-3 border border-black rounded-lg mb-8 bg-gray-100">
 
-        <a href="{{ route('tim.matakuliah.index') }}"
+        <a href="{{ route('kaprodi.matakuliah.index') }}"
             class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg text-white font-semibold">Kembali</a>
     </div>
 @endsection

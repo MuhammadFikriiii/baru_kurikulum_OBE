@@ -55,7 +55,7 @@
                         <td class="bpy-3 px-6 w-16 text-center">{{ $subcpmk->sub_cpmk }}</td>
                         <td class="bpy-3 px-6 w-16 text-center">{{ $subcpmk->uraian_cpmk }}</td>
                         <td class="py-3 px-6 flex justify-center items-center space-x-2">
-                            <a href="#" class="bg-gray-600 font-bold text-white px-5 py-2 rounded-md hover:bg-gray-700">🛈</a>
+                            <a href="{{ route('tim.subcpmk.detail', $subcpmk->id_sub_cpmk) }}" class="bg-gray-600 font-bold text-white px-5 py-2 rounded-md hover:bg-gray-700">🛈</a>
                             <a href="{{ route('tim.subcpmk.edit', $subcpmk->id_sub_cpmk) }}" class="bg-blue-600 text-white font-bold px-5 py-2 rounded-md hover:bg-blue-800">✏️</a>
                             <form action="#" method="POST">
                                 @csrf @method('DELETE')

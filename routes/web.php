@@ -47,6 +47,18 @@ use App\Http\Controllers\TimCapaianPembelajaranMatakuliahController;
 use App\Http\Controllers\TimPemetaanCplCpmkMkController;
 use App\Http\Controllers\TimPenilaianController;
 use App\Http\Controllers\TimSubCpmkController;
+use App\Http\Controllers\KaprodiCapaianPembelajaranLulusanController;
+use App\Http\Controllers\KaprodiPemetaanCplPlController;
+use App\Http\Controllers\KaprodiBahanKajianController;
+use App\Http\Controllers\KaprodiPemetaanCplBkController;
+use App\Http\Controllers\KaprodiPemetaanBkMkController;
+use App\Http\Controllers\KaprodiPemetaanCplMkController;
+use App\Http\Controllers\KaprodiPemetaanCplMkBkController;
+use App\Http\Controllers\KaprodiMataKuliahController;
+use App\Http\Controllers\KaprodiPemetaanCplCpmkMkController;
+use App\Http\Controllers\KaprodiCapaianPembelajaranMataKuliahController;
+use App\Http\Controllers\KaprodiSubCpmkController;
+use App\Http\Controllers\KaprodiPenilaianController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -76,7 +88,7 @@ Route::middleware(['guest'])->group(function () {
 // Rute yang memerlukan autentikasi
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-    
+
     // Grup Route Admin
     Route::prefix('admin')->name('admin.')->middleware(['auth.admin'])->group(function () {
         Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
@@ -84,9 +96,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/users', [AdminUserController::class, 'store'])->name('users.store');
         Route::get('/users/{id}/edit', [AdminUserController::class, 'edit'])->name('users.edit');
         Route::put('/users/{id}', [AdminUserController::class, 'update'])->name('users.update');
-        Route::get('/users/{id}/detail', [AdminUserController::class,'details'])->name('users.detail');
+        Route::get('/users/{id}/detail', [AdminUserController::class, 'details'])->name('users.detail');
         Route::delete('/users/{id}', [AdminUserController::class, 'destroy'])->name('users.destroy');
-        
+
         Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
 
         Route::get('/jurusan', [JurusanController::class, 'index'])->name('jurusan.index');
@@ -96,7 +108,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/jurusan/{jurusan}', [JurusanController::class, 'update'])->name('jurusan.update');
         Route::get('/jurusan/{jurusan}/detail', [JurusanController::class, 'detail'])->name('jurusan.detail');
         Route::delete('/jurusan/{jurusan}', [JurusanController::class, 'destroy'])->name('jurusan.destroy');
-        
+
         Route::get('/prodi', [AdminProdiController::class, 'index'])->name('prodi.index');
         Route::get('/prodi/create', [AdminProdiController::class, 'create'])->name('prodi.create');
         Route::post('/prodi', [AdminProdiController::class, 'store'])->name('prodi.store');
@@ -120,7 +132,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/capaianprofillulusan/{id_cpl}', [AdminCapaianProfilLulusanController::class, 'update'])->name('capaianprofillulusan.update');
         Route::get('/capaianprofillulusan/{id_cpl}/detail', [AdminCapaianProfilLulusanController::class, 'detail'])->name('capaianprofillulusan.detail');
         Route::delete('/capaianprofillulusan/{id_cpl}', [AdminCapaianProfilLulusanController::class, 'destroy'])->name('capaianprofillulusan.destroy');
-        
+
         Route::get('/pemetaancplpl', [AdminPemetaanCplPlController::class, 'index'])->name('pemetaancplpl.index');
 
         Route::get('/bahankajian', [AdminBahankajianController::class, 'index'])->name('bahankajian.index');
@@ -129,11 +141,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/bahankajian/{id_bk}/edit', [AdminBahankajianController::class, 'edit'])->name('bahankajian.edit');
         Route::put('/bahankajian/{id_bk}', [AdminBahankajianController::class, 'update'])->name('bahankajian.update');
         Route::get('/bahankajian/{id_bk}/detail', [AdminBahankajianController::class, 'detail'])->name('bahankajian.detail');
-        Route::delete('/bahankajian/{id_bk}', [AdminBahankajianController::class,'destroy'])->name('bahankajian.destroy');
+        Route::delete('/bahankajian/{id_bk}', [AdminBahankajianController::class, 'destroy'])->name('bahankajian.destroy');
 
         Route::get('/pemetaancplbk', [AdminPemetaanCplBkController::class, 'index'])->name('pemetaancplbk.index');
         Route::post('/pemetaancplbk', [AdminPemetaanCplBkController::class, 'store'])->name('pemetaancplbk.store');
-        
+
         Route::get('/matakuliah', [AdminMataKuliahController::class, 'index'])->name('matakuliah.index');
         Route::get('/matakuliah/create', [AdminMataKuliahController::class, 'create'])->name('matakuliah.create');
         Route::post('/matakuliah', [AdminMataKuliahController::class, 'store'])->name('matakuliah.store');
@@ -168,31 +180,31 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/subcpmk/create', [AdminSubCpmkController::class, 'create'])->name('subcpmk.create');
         Route::post('/subcpmk', [AdminSubCpmkController::class, 'store'])->name('subcpmk.store');
         Route::get('/subcpmk/{subcpmk}/edit', [AdminSubCpmkController::class, 'edit'])->name('subcpmk.edit');
-        Route::put('/subcpmk/{subcpmk}',[AdminSubCpmkController::class, 'update'])->name('subcpmk.update');
+        Route::put('/subcpmk/{subcpmk}', [AdminSubCpmkController::class, 'update'])->name('subcpmk.update');
         Route::delete('/subcpmk/{subcpmk}', [AdminSubCpmkController::class, 'destroy'])->name('subcpmk.destroy');
         Route::get('/subcpmk/{subcpmk}/detail', [AdminSubCpmkController::class, 'detail'])->name('subcpmk.detail');
 
-        Route::get('/pemetaancplcpmk',[AdminPemetaanCplCpmkController::class, 'index'])->name('pemetaancplcpmk.index');
-        Route::get('/pemetaancplcpmkmk',[AdminPemetaanCplCpmkMkController::class, 'index'])->name('pemetaancplcpmkmk.index');
+        Route::get('/pemetaancplcpmk', [AdminPemetaanCplCpmkController::class, 'index'])->name('pemetaancplcpmk.index');
+        Route::get('/pemetaancplcpmkmk', [AdminPemetaanCplCpmkMkController::class, 'index'])->name('pemetaancplcpmkmk.index');
 
-        Route::get('/pemenuhancpl',[AdminCapaianProfilLulusanController::class, 'peta_pemenuhan_cpl'])->name('pemenuhancpl.index');
+        Route::get('/pemenuhancpl', [AdminCapaianProfilLulusanController::class, 'peta_pemenuhan_cpl'])->name('pemenuhancpl.index');
         Route::get('/penilaian/create', [AdminPenilaianController::class, 'create'])->name('penilaian.create');
         Route::post('/penilaian', [AdminPenilaianController::class, 'store'])->name('penilaian.store');
         Route::get('/pemenuhancplcpmkmk', [AdminPemetaanCplCpmkMkController::class, 'pemenuhancplcpmkmk'])->name('pemetaancplcpmkmk.pemenuhancplcpmkmk');
         Route::get('/pemetaanmkcpmkcpl', [AdminPemetaanCplCpmkMkController::class, 'pemetaanmkcpmkcpl'])->name('pemetaancplcpmkmk.pemetaanmkcpmkcpl');
         Route::get('/pemetaanmkcpmksubcpmk', [AdminSubCpmkController::class, 'pemetaanmkcpmksubcpmk'])->name('pemetaanmkcpmksubcpmk.index');
-                Route::get('/export/excel', [TimExportController::class, 'export'])->name('export.excel');
+        Route::get('/export/excel', [TimExportController::class, 'export'])->name('export.excel');
     });
 
     // Grup Route Wadir1
-    Route::prefix('wadir1')->name('wadir1.')->middleware(['auth.wadir1'])->group(function(){
+    Route::prefix('wadir1')->name('wadir1.')->middleware(['auth.wadir1'])->group(function () {
         Route::get('/users', [Wadir1UserController::class, 'index'])->name('users.index');
         Route::get('/users/{id}/detail', [Wadir1UserController::class, 'detail'])->name('users.detail');
         Route::get('/dashboard', [Wadir1DashboardController::class, 'dashboard'])->name('dashboard');
         Route::get('/jurusan', [Wadir1JurusanController::class, 'index'])->name('jurusan.index');
         Route::get('/jurusan/{jurusan}/detail', [Wadir1JurusanController::class, 'detail'])->name('jurusan.detail');
         Route::get('/prodi', [Wadir1ProdiController::class, 'index'])->name('prodi.index');
-        Route::get('/prodi/{prodi}/detail', [Wadir1ProdiController::class,'detail'])->name('prodi.detail');
+        Route::get('/prodi/{prodi}/detail', [Wadir1ProdiController::class, 'detail'])->name('prodi.detail');
         Route::get('/profillulusan', [Wadir1ProfilLulusanController::class, 'index'])->name('profillulusan.index');
         Route::get('/profillulusan/{id_pl}/detail', [Wadir1ProfilLulusanController::class, 'detail'])->name('profillulusan.detail');
         Route::get('/capaianpembelajaranlulusan', [Wadir1CapaianPembelajaranLulusanController::class, 'index'])->name('capaianpembelajaranlulusan.index');
@@ -204,21 +216,45 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Grup Route Kaprodi
-    Route::prefix('kaprodi')->name('kaprodi.')->middleware(['auth.kaprodi'])->group(function(){
+    Route::prefix('kaprodi')->name('kaprodi.')->middleware(['auth.kaprodi'])->group(function () {
         Route::get('/dashboard', [KaprodiDashboardController::class, 'dashboard'])->name('dashboard');
         Route::get('/profillulusan', [KaprodiProfilLulusanController::class, 'index'])->name('profillulusan.index');
+        Route::get('/profillulusan/{id_pl}/detail', [KaprodiProfilLulusanController::class, 'detail'])->name('profillulusan.detail');
+        Route::get('/capaianpembelajaranlulusan', [KaprodiCapaianPembelajaranLulusanController::class, 'index'])->name('capaianpembelajaranlulusan.index');
+        Route::get('/capaianpembelajaranlulusan/{id_cpl}/detail', [KaprodiCapaianPembelajaranLulusanController::class, 'detail'])->name('capaianpembelajaranlulusan.detail');
+        Route::get('/pemetaancplpl', [KaprodiPemetaanCplPlController::class, 'index'])->name('pemetaancplpl.index');
+        Route::get('/bahankajian', [KaprodiBahanKajianController::class, 'index'])->name('bahankajian.index');
+        Route::get('/bahankajian/{id_bk}/detail', [KaprodiBahanKajianController::class, 'detail'])->name('bahankajian.detail');
+        Route::get('/pemetaancplbk', [KaprodiPemetaanCplBkController::class, 'index'])->name('pemetaancplbk.index');
+        Route::get('/pemetaanbkmk', [KaprodiPemetaanBkMkController::class, 'index'])->name('pemetaanbkmk.index');
+        Route::get('/pemetaancplmk', [KaprodiPemetaanCplMkController::class, 'index'])->name('pemetaancplmk.index');
+        Route::get('/pemetaancplmkbk', [KaprodiPemetaanCplMkBkController::class, 'index'])->name('pemetaancplmkbk.index');
+        Route::get('/matakuliah', [KaprodiMataKuliahController::class, 'index'])->name('matakuliah.index');
+        Route::get('/matakuliah/{matakuliah}/detail', [KaprodiMataKuliahController::class, 'detail'])->name('matakuliah.detail');
+        Route::get('/organisasimk', [KaprodiMataKuliahController::class, 'organisasi_mk'])->name('matakuliah.organisasimk');
+        Route::get('/capaianpembelajaranmatakuliah', [KaprodiCapaianPembelajaranMatakuliahController::class, 'index'])->name('capaianpembelajaranmatakuliah.index');
+        Route::get('/capaianpembelajaranmatakuliah/{id_cpmk}/detail', [KaprodiCapaianPembelajaranMatakuliahController::class, 'detail'])->name('capaianpembelajaranmatakuliah.detail');
+        Route::get('/pemenuhancpl', [KaprodiCapaianPembelajaranLulusanController::class, 'pemenuhan_cpl'])->name('pemenuhancpl.index');
+        Route::get('/pemetaancplcpmkmk', [KaprodiPemetaanCplCpmkMkController::class, 'index'])->name('pemetaancplcpmkmk.index');
+        Route::get('/pemenuhancplcpmkmk', [KaprodiPemetaanCplCpmkMkController::class, 'pemenuhancplcpmkmk'])->name('pemetaancplcpmkmk.pemenuhancplcpmkmk');
+        Route::get('/pemetaanmkcpmkcpl', [KaprodiPemetaanCplCpmkMkController::class, 'pemetaanmkcplcpmk'])->name('pemetaancplcpmkmk.pemetaanmkcplcpmk');
+        Route::get('/subcpmk', [KaprodiSubCpmkController::class, 'index'])->name('subcpmk.index');
+        Route::get('/subcpmk/{id_sub_cpmk}/detail', [KaprodiSubCpmkController::class, 'detail'])->name('subcpmk.detail');
+        Route::get('/pemetaanmkcpmksubcpmk', [KaprodiSubCpmkController::class, 'pemetaanmkcpmksubcpmk'])->name('pemetaanmkcpmksubcpmk.index');
+        Route::get('/penilaian', [KaprodiPenilaianController::class, 'index'])->name('penilaian.index');
+        Route::get('/penilaian/{penilaian}/detail', [KaprodiPenilaianController::class, 'detail'])->name('penilaian.detail');
     });
 
     // Grup Route Tim
-    Route::prefix('tim')->name('tim.')->middleware(['auth.tim'])->group(function(){
+    Route::prefix('tim')->name('tim.')->middleware(['auth.tim'])->group(function () {
         Route::get('/dashboard', [TimDashboardController::class, 'dashboard'])->name('dashboard');
         Route::get('/profillulusan', [TimProfilLulusanController::class, 'index'])->name('profillulusan.index');
         Route::get('/profillulusan/create', [TimProfilLulusanController::class, 'create'])->name('profillulusan.create');
         Route::post('/profillulusan', [TimProfilLulusanController::class, 'store'])->name('profillulusan.store');
-        Route::get('/profillulusan/{id_pl}/edit',[TimProfilLulusanController::class,'edit'])->name('profillulusan.edit');
-        Route::put('/profillulusan/{id_pl}',[TimProfilLulusanController::class, 'update'])->name('profillulusan.update');
-        Route::get('/profillulusan/{id_pl}/detail',[TimProfilLulusanController::class, 'detail'])->name('profillulusan.detail');
-        Route::delete('/profillulusan/{id_pl}',[TimProfilLulusanController::class,'destroy'])->name('profillulusan.destroy');
+        Route::get('/profillulusan/{id_pl}/edit', [TimProfilLulusanController::class, 'edit'])->name('profillulusan.edit');
+        Route::put('/profillulusan/{id_pl}', [TimProfilLulusanController::class, 'update'])->name('profillulusan.update');
+        Route::get('/profillulusan/{id_pl}/detail', [TimProfilLulusanController::class, 'detail'])->name('profillulusan.detail');
+        Route::delete('/profillulusan/{id_pl}', [TimProfilLulusanController::class, 'destroy'])->name('profillulusan.destroy');
         Route::get('/capaianpembelajaranlulusan', [TimCapaianPembelajaranLulusanController::class, 'index'])->name('capaianpembelajaranlulusan.index');
         Route::get('/capaianpembelajaranlulusan/create', [TimCapaianPembelajaranLulusanController::class, 'create'])->name('capaianpembelajaranlulusan.create');
         Route::post('/capaianpembelajaranlulusan', [TimCapaianPembelajaranLulusanController::class, 'store'])->name('capaianpembelajaranlulusan.store');
