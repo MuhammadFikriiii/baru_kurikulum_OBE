@@ -57,33 +57,110 @@ class TimSubCpmkController extends Controller
         return redirect()->route('tim.subcpmk.index')->with('success', 'Sub CPMK berhasil dibuat');
     }
 
+    public function edit(SubCpmk $id_sub_cpmk)
+    {
+        $kodeProdi = Auth::user()->kode_prodi;
+
+        // Cek akses: pastikan sub_cpmk ini milik prodi user
+        $akses = DB::table('sub_cpmks as sc')
+            ->join('capaian_pembelajaran_mata_kuliahs as cpmk', 'sc.id_cpmk', '=', 'cpmk.id_cpmk')
+            ->join('cpl_cpmk as cplcpmk', 'cpmk.id_cpmk', '=', 'cplcpmk.id_cpmk')
+            ->join('capaian_profil_lulusans as cpl', 'cplcpmk.id_cpl', '=', 'cpl.id_cpl')
+            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->where('sc.id_sub_cpmk', $id_sub_cpmk->id_sub_cpmk)
+            ->where('pl.kode_prodi', $kodeProdi)
+            ->exists();
+
+        if (!$akses) {
+            abort(403, 'Akses ditolak');
+        }
+
+        $cpmks = DB::table('capaian_pembelajaran_mata_kuliahs as cpmk')
+            ->join('cpl_cpmk', 'cpmk.id_cpmk', '=', 'cpl_cpmk.id_cpmk')
+            ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
+            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->where('pl.kode_prodi', $kodeProdi)
+            ->select('cpmk.id_cpmk', 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk')
+            ->distinct()
+            ->get();
+
+        return view('tim.subcpmk.edit', [
+            'subcpmk' => $id_sub_cpmk,
+            'cpmks' => $cpmks
+        ]);
+    }
+
+    public function update(Request $request, SubCpmk $id_sub_cpmk)
+    {
+        $request->validate([
+            'id_cpmk' => 'required|exists:capaian_pembelajaran_mata_kuliahs,id_cpmk',
+            'sub_cpmk' => 'required|string|max:10',
+            'uraian_cpmk' => 'required|string|max:255'
+        ]);
+
+        $id_sub_cpmk->update($request->only(['id_cpmk', 'sub_cpmk', 'uraian_cpmk']));
+
+        return redirect()->route('tim.subcpmk.index')->with('success', 'Sub CPMK berhasil diperbarui');
+    }
+
     public function pemetaanmkcpmksubcpmk()
     {
         $kodeProdi = Auth::user()->kode_prodi;
 
         $data = DB::table('sub_cpmks as sub')
-        ->join('capaian_pembelajaran_mata_kuliahs as cpmk', 'sub.id_cpmk', '=', 'cpmk.id_cpmk')
-        ->join('cpl_cpmk', 'cpmk.id_cpmk', '=', 'cpl_cpmk.id_cpmk')
-        ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
-        ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
-        ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
-        ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
-        ->join('cpmk_mk', 'cpmk.id_cpmk', '=', 'cpmk_mk.id_cpmk')
-        ->join('mata_kuliahs as mk', 'cpmk_mk.kode_mk', '=', 'mk.kode_mk')
-        ->where('prodis.kode_prodi', $kodeProdi)
-        ->select(
-            'mk.kode_mk',
-            'mk.nama_mk',
-            'cpmk.kode_cpmk',
-            'cpmk.deskripsi_cpmk',
-            'sub.id_sub_cpmk',
-            'sub.sub_cpmk',
-            'sub.uraian_cpmk',
-        )
-        ->orderBy('mk.kode_mk')
-        ->orderBy('cpmk.kode_cpmk')
-        ->get();
+            ->join('capaian_pembelajaran_mata_kuliahs as cpmk', 'sub.id_cpmk', '=', 'cpmk.id_cpmk')
+            ->join('cpl_cpmk', 'cpmk.id_cpmk', '=', 'cpl_cpmk.id_cpmk')
+            ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
+            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
+            ->join('cpmk_mk', 'cpmk.id_cpmk', '=', 'cpmk_mk.id_cpmk')
+            ->join('mata_kuliahs as mk', 'cpmk_mk.kode_mk', '=', 'mk.kode_mk')
+            ->where('prodis.kode_prodi', $kodeProdi)
+            ->select(
+                'mk.kode_mk',
+                'mk.nama_mk',
+                'cpmk.kode_cpmk',
+                'cpmk.deskripsi_cpmk',
+                'sub.id_sub_cpmk',
+                'sub.sub_cpmk',
+                'sub.uraian_cpmk',
+            )
+            ->orderBy('mk.kode_mk')
+            ->orderBy('cpmk.kode_cpmk')
+            ->distinct()
+            ->get();
 
         return view('tim.pemetaanmkcpmksubcpmk.index', compact('data'));
+    }
+
+    public function detail($id)
+    {
+        $kodeProdi = Auth::user()->kode_prodi;
+
+        $subcpmk = DB::table('sub_cpmks as sc')
+            ->join('capaian_pembelajaran_mata_kuliahs as cpmk', 'sc.id_cpmk', '=', 'cpmk.id_cpmk')
+            ->join('cpl_cpmk as cplcpmk', 'cpmk.id_cpmk', '=', 'cplcpmk.id_cpmk')
+            ->join('capaian_profil_lulusans as cpl', 'cplcpmk.id_cpl', '=', 'cpl.id_cpl')
+            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->where('pl.kode_prodi', $kodeProdi)
+            ->where('sc.id_sub_cpmk', $id)
+            ->select(
+                'sc.id_sub_cpmk',
+                'sc.sub_cpmk',
+                'sc.uraian_cpmk',
+                'cpmk.kode_cpmk',
+                'cpmk.deskripsi_cpmk'
+            )
+            ->first();
+
+        if (!$subcpmk) {
+            abort(403, 'Akses ditolak atau data tidak ditemukan');
+        }
+
+        return view('tim.subcpmk.detail', compact('subcpmk'));
     }
 }

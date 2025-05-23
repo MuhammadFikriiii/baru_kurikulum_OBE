@@ -21,34 +21,16 @@
     @csrf
     @method('PUT')
 
-    @if($selectedProfilLulusans)
-    <div class="mt-4 mb-4">
-        <h3 class="text-xl font-semibold mb-2">Profil Lulusan yang sebelumnya terkait Terkait:</h3>
-            @foreach($selectedProfilLulusans as $id_pl)
-                @php
-                    $plDetail = $profilLulusans->firstWhere('id_pl', $id_pl);
-                @endphp
-                @if($plDetail)
-                        <input 
-                        type="text" 
-                        readonly 
-                        class="w-full p-3 border border-black rounded-lg bg-gray-100"
-                        value="{{ $plDetail->kode_pl }}: {{ $plDetail->deskripsi_pl }}"
-                    >
-                @endif
-            @endforeach
-    </div>
-    @endif
-
-    <label for="id_pls" class="text-xl font-semibold mb-2">Profil Lulusan Terkait:</label>
-    <select id="id_pls" name="id_pls[]" class="border border-black p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]" required>
+    <label for="id_pl" class="text-xl font-semibold mb-2">Profil Lulusan Terkait:</label>
+    <select id="id_pl" name="id_pl" class="border border-black p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]" required>
         @foreach($profilLulusans as $pl)
-            <option value="{{ $pl->id_pl }}"
-                @if(in_array($pl->id_pl, old('id_pls', $selectedPlIds ?? []))) selected @endif
-                title="{{ $pl->kode_pl }} - {{ $pl->deskripsi_pl }}">
-                {{ $pl->kode_pl }} - {{ $pl->deskripsi_pl }}
-            </option>
-        @endforeach
+    <option value="{{ $pl->id_pl }}"
+        @if(old('id_pl', $selectedProfilLulusans[0] ?? '') == $pl->id_pl) selected @endif
+        title="{{ $pl->kode_pl }} - {{ $pl->deskripsi_pl }}">
+        {{ $pl->kode_pl }} - {{ $pl->deskripsi_pl }}
+    </option>
+@endforeach
+
     </select>   
 
     <label class="text-xl font-semibold" for="kode_cpl">Kode Capaian Profil Lulusan:</label>

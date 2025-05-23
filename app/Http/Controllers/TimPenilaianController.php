@@ -20,7 +20,9 @@ class TimPenilaianController extends Controller
             ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->where('pl.kode_prodi', $kodeProdi)
-            ->select('id_penilaian',
+            ->distinct()
+            ->select(
+                'id_penilaian',
                 'p.id_cpl',
                 'p.kode_mk',
                 'p.id_cpmk',
@@ -35,7 +37,17 @@ class TimPenilaianController extends Controller
                 'cpl.kode_cpl'
             )
             ->get();
-
+                
+            foreach ($penilaians as $penilaian) {
+        $penilaian->count =
+            ($penilaian->kuis ?? 0) +
+            ($penilaian->observasi ?? 0) +
+            ($penilaian->presentasi ?? 0) +
+            ($penilaian->uts ?? 0) +
+            ($penilaian->uas ?? 0) +
+            ($penilaian->project ?? 0);
+    }
+    
         return view('tim.penilaian.index', compact('penilaians'));
     }
 
@@ -92,10 +104,32 @@ class TimPenilaianController extends Controller
         return redirect()->route('tim.penilaian.index')->with('success', 'Penilaian berhasil ditambahkan.');
     }
 
-    public function edit(Penilaian $penilaian)
+    public function edit($id_penilaian)
     {
         $kodeProdi = Auth::user()->kode_prodi;
 
+        $penilaian = DB::table('penilaian as p')
+            ->join('capaian_profil_lulusans as cpl', 'p.id_cpl', '=', 'cpl.id_cpl')
+            ->join('mata_kuliahs as mk', 'p.kode_mk', '=', 'mk.kode_mk')
+            ->join('capaian_pembelajaran_mata_kuliahs as cpmk', 'p.id_cpmk', '=', 'cpmk.id_cpmk')
+            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->where('pl.kode_prodi', $kodeProdi)
+            ->where('p.id_penilaian', $id_penilaian)
+            ->select(
+                'p.*',
+                'cpl.deskripsi_cpl',
+                'cpl.kode_cpl',
+                'mk.nama_mk',
+                'cpmk.deskripsi_cpmk',
+                'cpmk.kode_cpmk'
+            )
+            ->first();
+
+        if (!$penilaian) {
+            abort(403, 'Akses ditolak');
+        }
+        
         $cpls = DB::table('capaian_profil_lulusans as cpl')
             ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
@@ -143,5 +177,34 @@ class TimPenilaianController extends Controller
 
         $penilaian->update($request->all());
         return redirect()->route('tim.penilaian.index')->with('success', 'Penilaian berhasil diperbarui.');
+    }
+
+    public function detail($id_penilaian)
+    {
+        $kodeProdi = Auth::user()->kode_prodi;
+
+        $penilaian = DB::table('penilaian as p')
+            ->join('capaian_profil_lulusans as cpl', 'p.id_cpl', '=', 'cpl.id_cpl')
+            ->join('mata_kuliahs as mk', 'p.kode_mk', '=', 'mk.kode_mk')
+            ->join('capaian_pembelajaran_mata_kuliahs as cpmk', 'p.id_cpmk', '=', 'cpmk.id_cpmk')
+            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->where('pl.kode_prodi', $kodeProdi)
+            ->where('p.id_penilaian', $id_penilaian)
+            ->select(
+                'p.*',
+                'cpl.deskripsi_cpl',
+                'cpl.kode_cpl',
+                'mk.nama_mk',
+                'cpmk.deskripsi_cpmk',
+                'cpmk.kode_cpmk'
+            )
+            ->first();
+
+        if (!$penilaian) {
+            abort(403, 'Akses ditolak');
+        }
+
+        return view('tim.penilaian.detail', compact('penilaian'));
     }
 }

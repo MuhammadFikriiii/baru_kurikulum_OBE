@@ -253,13 +253,16 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/capaianpembelajaranmatakuliah', [TimCapaianPembelajaranMataKuliahController::class, 'store'])->name('capaianpembelajaranmatakuliah.store');
         Route::get('/capaianpembelajaranmatakuliah/{id_cpmk}/edit', [TimCapaianPembelajaranMataKuliahController::class, 'edit'])->name('capaianpembelajaranmatakuliah.edit');
         Route::put('/capaianpembelajaranmatakuliah/{id_cpmk}', [TimCapaianPembelajaranMataKuliahController::class, 'update'])->name('capaianpembelajaranmatakuliah.update');
-        Route::get('/capaianpembelejaranmatakuliah/{id_cpmk}/detail', [TimCapaianPembelajaranMataKuliahController::class, 'detail'])->name('capaianpembelajaranmatakuliah.detail');
+        Route::get('/capaianpembelajaranmatakuliah/{id_cpmk}/detail', [TimCapaianPembelajaranMataKuliahController::class, 'detail'])->name('capaianpembelajaranmatakuliah.detail');
         Route::delete('/capaianpembelajaranmatakuliah/{id_cpmk}', [TimCapaianPembelajaranMataKuliahController::class, 'destroy'])->name('capaianpembelajaranmatakuliah.destroy');
         Route::get('/pemetaancplcpmkmk', [TimPemetaanCplCpmkMkController::class, 'index'])->name('pemetaancplcpmkmk.index');
         Route::get('/pemenuhancpl', [TimCapaianPembelajaranLulusanController::class, 'pemenuhan_cpl'])->name('pemenuhancpl.index');
         Route::get('/subcpmk', [TimSubCpmkController::class, 'index'])->name('subcpmk.index');
         Route::get('/subcpmk/create', [TimSubCpmkController::class, 'create'])->name('subcpmk.create');
         Route::post('/subcpmk', [TimSubCpmkController::class, 'store'])->name('subcpmk.store');
+        Route::get('/subcpmk/{id_sub_cpmk}/edit', [TimSubCpmkController::class, 'edit'])->name('subcpmk.edit');
+        Route::put('/subcpmk/{id_sub_cpmk}', [TimSubCpmkController::class, 'update'])->name('subcpmk.update');
+        Route::get('/subcpmk/{id_sub_cpmk}/detail', [TimSubCpmkController::class, 'detail'])->name('subcpmk.detail');
         Route::get('/pemenuhancplcpmkmk', [TimPemetaanCplCpmkMkController::class, 'pemenuhancplcpmkmk'])->name('pemetaancplcpmkmk.pemenuhancplcpmkmk');
         Route::get('/pemetaanmkcpmkcpl', [TimPemetaanCplCpmkMkController::class, 'pemetaanmkcplcpmk'])->name('pemetaancplcpmkmk.pemetaanmkcplcpmk');
         Route::get('/pemetaanmkcpmksubcpmk', [TimSubCpmkController::class, 'pemetaanmkcpmksubcpmk'])->name('pemetaanmkcpmksubcpmk.index');

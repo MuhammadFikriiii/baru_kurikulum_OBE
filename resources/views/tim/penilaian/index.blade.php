@@ -37,6 +37,7 @@
                     <th class="py-3 px-4 text-center font-bold uppercase">UTS</th>
                     <th class="py-3 px-4 text-center font-bold uppercase">UAS</th>
                     <th class="py-3 px-4 text-center font-bold uppercase">Project</th>
+                    <th class="py-3 px-4 text-center font-bold uppercase">Total</th>
                     <th class="py-3 px-4 text-center font-bold uppercase">Aksi</th>
                 </tr>
             </thead>
@@ -53,7 +54,9 @@
                     <td class="py-3 px-4 text-center">{{ $penilaian->uts }}</td>
                     <td class="py-3 px-4 text-center">{{ $penilaian->uas }}</td>
                     <td class="py-3 px-4 text-center">{{ $penilaian->project }}</td>
+                    <td class="py-3 px-4 text-center">{{ $penilaian->count }}</td>
                     <td class="py-3 px-4 flex justify-center items-center space-x-2">
+                        <a href="{{ route('tim.penilaian.detail', $penilaian->id_penilaian) }}" class="bg-gray-600 font-bold text-white px-5 py-2 rounded-md hover:bg-gray-700">🛈</a>
                         <a href="{{ route('tim.penilaian.edit', $penilaian->id_penilaian) }}" class="bg-blue-600 text-white font-bold px-4 py-2 rounded-md hover:bg-blue-800">✏️</a>
                         <form action="#" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                             @csrf

@@ -207,6 +207,9 @@ class TimMataKuliahController extends Controller
             ->unique()
             ->toArray();
 
+            if (empty($selectedCPL)) {
+            abort(403, 'Akses ditolak');
+        }
             $bkList = BahanKajian::whereIn('id_bk', $selectedBK)->get();
 
         return view("tim.matakuliah.detail", compact('matakuliah', 'cplList', 'selectedCPL', 'bkList', 'selectedBK'));

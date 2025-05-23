@@ -11,9 +11,9 @@
                     <th class="p-2 py-3 px-4 min-w-[10px] text-center font-bold uppercase">kode MK</th>
                     <th class="p-2 py-3 px-4 min-w-[10px] text-center font-bold uppercase">nama MK</th>
                     <th class="p-2 py-3 px-4 min-w-[10px] text-center font-bold uppercase">kode CPMK</th>
-                    <th class="p-2 py-3 px-4 min-w-[10px] text-center font-bold uppercase">nama CPMK</th>
+                    <th class="p-2 py-3 px-4 min-w-[10px] text-center font-bold uppercase">deskripsi CPMK</th>
                     <th class="p-2 py-3 px-4 min-w-[10px] text-center font-bold uppercase">kode Sub CPMK</th>
-                    <th class="p-2 py-3 px-4 min-w-[10px] text-center font-bold uppercase">nama Sub CPMK</th>
+                    <th class="p-2 py-3 px-4 min-w-[10px] text-center font-bold uppercase">uraian Sub CPMK</th>
                 </tr>
             </thead>
             <tbody>
