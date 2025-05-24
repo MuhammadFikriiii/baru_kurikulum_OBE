@@ -44,9 +44,13 @@
         </div>
         @else
         <style>
+            input[type="checkbox"]:checked {
+                background-color: #2563eb;
+                border-color: #2563eb;   
+            }
             input[type="checkbox"]:checked::before {
-                content: "✔";
-                color: white;
+                content: "✓";
+                color: white;            
                 font-size: 1rem;
                 position: absolute;
                 top: 50%;
