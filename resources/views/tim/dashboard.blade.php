@@ -24,7 +24,7 @@
         </div>
         <div class="relative">
             <input type="text" id="search-prodi-dashboard" placeholder="Search..." 
-                class="border border-black px-3 py-2 pl-10 rounded-md">
+                class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md pl-10 focus:outline-none focus:ring-2 focus:ring-green-500">
             <span class="absolute left-3 top-2.5 text-gray-400">
                 <i class="fas fa-search"></i>
             </span>

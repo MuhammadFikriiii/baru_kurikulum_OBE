@@ -12,8 +12,44 @@
         <hr class="border-t-4 border-black my-5">
     </div>
 
+    
     <!-- Filter dan Pencarian -->
-    <div class="mb-6">
+    <div class="flex flex-col md:flex-row justify-between mb-6">
+        <div class="flex space-x-2 mb-3 md:mb-0">
+            @if(Auth::user()->role === 'admin' && isset($prodis))
+                <form id="exportForm" action="{{ route('admin.export.excel') }}" method="GET" class="flex items-center gap-4">
+                    <select name="kode_prodi" id="prodiSelect" required class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <option value="" selected disabled>Pilih Prodi</option>
+                        @foreach($prodis as $prodi)
+                            <option value="{{ $prodi->kode_prodi }}">{{ $prodi->nama_prodi }}</option>
+                        @endforeach
+                    </select>
+                    <button type="submit" class="bg-green-600 text-white px-5 font-bold py-2 rounded-md hover:bg-green-800">
+                        <i class="fas fa-file-excel mr-2"></i>Excel
+                    </button>
+                </form>
+            @else
+                <a href="{{ route('tim.export.excel') }}" 
+                    class="bg-green-600 text-white px-5 font-bold py-2 rounded-md hover:bg-green-800">
+                    <i class="fas fa-file-excel mr-2"></i>Excel
+                </a>
+            @endif
+            <a href="#" 
+                class="bg-blue-600 text-white px-5 font-bold py-2 rounded-md hover:bg-blue-800">
+                <i class="fas fa-file-word mr-2"></i>Word
+            </a>
+        </div>
+        <div class="relative">
+            <input type="text" id="search-prodi-dashboard" placeholder="Search..." 
+                class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md pl-10 focus:outline-none focus:ring-2 focus:ring-green-500">
+            <span class="absolute left-3 top-2.5 text-gray-400">
+                <i class="fas fa-search"></i>
+            </span>
+        </div>
+    </div>
+
+    <!-- Filter dan Pencarian CPL + PL--> 
+    {{-- <div class="mb-6">
         <div class="flex flex-col md:flex-row justify-between items-center w-full space-y-2 md:space-y-0 md:space-x-4">
             
             <!-- Search Input -->
@@ -42,7 +78,7 @@
             @endif
 
         </div>
-    </div>
+    </div> --}}
 
 
     <!-- Summary Cards -->
@@ -97,7 +133,7 @@
     </div>
 
     <!-- Progress Bar Per Prodi -->
-    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+    <div class="bg-white rounded-lg shadow-lg p-2 mb-8">
         <h2 class="text-xl font-bold text-gray-800 mb-4">Progress Penyusunan Kurikulum OBE</h2>
 
         <!-- Prodi item -->

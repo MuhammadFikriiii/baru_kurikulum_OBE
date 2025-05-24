@@ -188,8 +188,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pemetaancplcpmkmk', [AdminPemetaanCplCpmkMkController::class, 'index'])->name('pemetaancplcpmkmk.index');
 
         Route::get('/pemenuhancpl', [AdminCapaianProfilLulusanController::class, 'peta_pemenuhan_cpl'])->name('pemenuhancpl.index');
-        Route::get('/penilaian/create', [AdminPenilaianController::class, 'create'])->name('penilaian.create');
+        
+        Route::get('/penilaian', [AdminPenilaianController::class, 'create'])->name('penilaian.create');
         Route::post('/penilaian', [AdminPenilaianController::class, 'store'])->name('penilaian.store');
+        // Route::get('/penilaian', [AdminPenilaianController::class, 'index'])->name('penilaian.index');
+        // Route::get('/penilaian', [AdminPenilaianController::class, 'edit'])->name('penilaian.edit');
+        // Route::put('/penilaian', [AdminPenilaianController::class, 'update'])->name('penilaian.update');
+
+
         Route::get('/pemenuhancplcpmkmk', [AdminPemetaanCplCpmkMkController::class, 'pemenuhancplcpmkmk'])->name('pemetaancplcpmkmk.pemenuhancplcpmkmk');
         Route::get('/pemetaanmkcpmkcpl', [AdminPemetaanCplCpmkMkController::class, 'pemetaanmkcpmkcpl'])->name('pemetaancplcpmkmk.pemetaanmkcpmkcpl');
         Route::get('/pemetaanmkcpmksubcpmk', [AdminSubCpmkController::class, 'pemetaanmkcpmksubcpmk'])->name('pemetaanmkcpmksubcpmk.index');

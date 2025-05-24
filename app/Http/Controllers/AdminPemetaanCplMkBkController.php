@@ -10,8 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class AdminPemetaanCplMkBkController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+    
+
         $cpls = CapaianProfilLulusan::orderBy('id_cpl')->get();
         $bks = BahanKajian::orderBy('id_bk')->get();
 
