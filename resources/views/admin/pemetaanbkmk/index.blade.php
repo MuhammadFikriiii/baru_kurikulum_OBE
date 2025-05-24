@@ -58,17 +58,22 @@
             }
             </style>
 
-            <div class="overflow-x-auto">
-                <table class="w-full border border-gray-200 shadow-sm rounded-lg overflow-hidden">
+            <div class="">
+                <table class="w-full border border-gray-200 shadow-sm rounded-lg overflow-visible">
                     <thead class="bg-green-800 text-white">
                         <tr>
                             <th class="px-6 py-3 text-left font-semibold">BK</th> 
                             @foreach ($mks as $mk)
                             <th class="px-4 py-3 relative group text-center">
                                 <span class="cursor-help">{{ $mk->kode_mk }}</span>
-                                <div class="absolute z-50 hidden group-hover:block w-64 bg-gray-800 text-white text-sm rounded p-2 -ml-32 mt-2">
-                                    <p class="font-semibold">{{ $mk->kode_mk }}</p>
-                                    <p class="text-gray-300">{{ $mk->nama_mk }}</p>
+                                <div
+                                    class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+                                    <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
+                                        {{ $mk->nama_prodi }}
+                                    </div>
+                                    <div class="mt-3 px-2 text-center">
+                                        {{ $mk->nama_mk }}
+                                    </div>
                                 </div>
                             </th>
                             @endforeach
@@ -79,10 +84,16 @@
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 whitespace-nowrap relative group">
                                     <span class="cursor-help font-medium">{{ $bk->kode_bk }}</span>
-                                    <div class="absolute z-50 hidden group-hover:block w-80 bg-gray-800 text-white text-sm rounded p-3 left-full mt-2">
-                                        <p class="font-semibold">{{ $bk->kode_bk }}</p>
-                                        <p class="text-gray-300">{{ $bk->nama_bk }}</p>
+                                    <div
+                                    class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+
+                                    <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
+                                        {{ $bk->nama_prodi }}
                                     </div>
+                                    <div class="mt-3 px-2 text-center">
+                                        {{ $bk->nama_bk }}
+                                    </div>
+                                </div>
                                 </td> 
                                 @foreach ($mks as $mk)
                                     <td class="px-4 py-4 text-center">

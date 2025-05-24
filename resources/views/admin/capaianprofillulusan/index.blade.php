@@ -92,7 +92,7 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($capaianprofillulusans as $index => $capaianprofillulusan)
-                    <tr class="{{ $index % 2 == 0 ? 'bg-gray-50' : 'bg-white' }} hover:bg-gray-100">
+                    <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-100">
                         <td class="px-4 py-4 text-center text-sm">{{ $index + 1 }}</td>
                         <td class="px-4 py-4 text-center text-sm">{{ $capaianprofillulusan->nama_prodi ?? 'Tidak ada prodi' }}</td>
                         <td class="px-4 py-4 text-center text-sm">{{ $capaianprofillulusan->kode_cpl }}</td>
