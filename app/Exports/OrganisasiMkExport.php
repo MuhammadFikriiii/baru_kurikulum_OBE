@@ -2,13 +2,18 @@
 
 namespace App\Exports;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromArray;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithTitle;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
-class OrganisasiMkExport implements FromArray, WithHeadings, WithTitle
+class OrganisasiMkExport implements FromArray, WithTitle, ShouldAutoSize, WithEvents
 {
     protected $kodeProdi;
 
@@ -42,11 +47,15 @@ class OrganisasiMkExport implements FromArray, WithHeadings, WithTitle
                 'semester_mk' => $semester_mk,
                 'sks_mk' => $items->sum('sks_mk'),
                 'jumlah_mk' => $items->count(),
-                'nama_mk' => implode(', ', $items->pluck('nama_mk')->toArray()),
+                'nama_mk' => $items->pluck('nama_mk')->toArray(),
             ];
         });
 
         $rows = [];
+
+        // Tambah judul di atas heading
+        $rows[] = ['12. Organisasi Matakuliah']; // A1, merged nanti
+        $rows[] = ['Semester', 'Total SKS', 'Jumlah MK', 'Daftar MK']; // Heading di A2:D2
 
         $totalSks = 0;
         $totalMk = 0;
@@ -56,7 +65,7 @@ class OrganisasiMkExport implements FromArray, WithHeadings, WithTitle
                 'semester_mk' => $i,
                 'sks_mk' => 0,
                 'jumlah_mk' => 0,
-                'nama_mk' => '',
+                'nama_mk' => [],
             ]);
 
             $totalSks += $data['sks_mk'];
@@ -66,28 +75,61 @@ class OrganisasiMkExport implements FromArray, WithHeadings, WithTitle
                 'Semester ' . $data['semester_mk'],
                 $data['sks_mk'],
                 $data['jumlah_mk'],
-                $data['nama_mk'],
+                implode(', ', $data['nama_mk']),
             ];
         }
 
-        // Baris total di akhir
-        $rows[] = [
-            'Total',
-            $totalSks,
-            $totalMk,
-            '',
-        ];
+        // Baris total
+        $rows[] = ['Total', $totalSks, $totalMk, ''];
 
         return $rows;
-    }
-
-    public function headings(): array
-    {
-        return ['Semester', 'Total SKS', 'Jumlah MK', 'Daftar MK'];
     }
 
     public function title(): string
     {
         return 'Organisasi MK';
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function (AfterSheet $event) {
+                $sheet = $event->sheet->getDelegate();
+
+                // Merge untuk judul
+                $sheet->getStyle('A1')->applyFromArray([
+                    'font' => ['bold' => true, 'size' => 14],
+                    'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+                ]);
+
+                // Style header (baris ke-2)
+                $sheet->getStyle('A2:D2')->applyFromArray([
+                    'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF']],
+                    'fill' => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '166534']],
+                    'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
+                ]);
+
+                // Style seluruh tabel (mulai dari A2)
+                $lastRow = $sheet->getHighestRow();
+                $sheet->getStyle("A2:D{$lastRow}")->applyFromArray([
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                            'color' => ['argb' => '000000'],
+                        ],
+                    ],
+                    'alignment' => [
+                        'vertical' => Alignment::VERTICAL_CENTER,
+                        'wrapText' => true,
+                    ],
+                ]);
+
+                // Baris total di akhir
+                $sheet->getStyle("A{$lastRow}:D{$lastRow}")->applyFromArray([
+                    'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF']],
+                    'fill' => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '000000']],
+                ]);
+            },
+        ];
     }
 }
