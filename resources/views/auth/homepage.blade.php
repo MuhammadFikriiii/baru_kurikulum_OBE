@@ -22,8 +22,6 @@
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   
-  
-
   <script>
     $(document).ready(function(){
       const owl = $(".owl-banner");
@@ -93,6 +91,28 @@
     }, 5000); // Auto slide setiap 5 detik
   </script>
 
+  <!-- Jurusan -->
+  <style>
+    .program-slider {
+        scroll-behavior: smooth;
+        transition: transform 0.5s ease-in-out;
+    }
+    .program-card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    .program-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+    .program-tab.active {
+        background-color: #2563eb;
+        color: white;
+    }
+    .indicator-dot.active {
+        background-color: #2563eb;
+    }
+  </style>
   
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -298,8 +318,278 @@
   </div>
 
   
-
 <!-- Daftar Kurikulum dan Program Studi -->
+<div class="container mx-auto px-4 py-12">
+  <h1 class="text-2xl text-center font-bold text-indigo-800 mb-2">Program Studi</h1>
+  <p class=" font-bold text-center text-gray-600 mb-8 ">Macam-macam program studi</p>
+  
+  <!-- Navigation -->
+  <div class="flex flex-wrap justify-center mb-8 gap-2">
+      <button onclick="showSlide(0)" class="program-tab px-4 py-2 rounded-lg bg-blue-600 text-white font-medium transition active">Teknik Sipil</button>
+      <button onclick="showSlide(1)" class="program-tab px-4 py-2 rounded-lg bg-gray-200 font-medium transition">Teknik Mesin</button>
+      <button onclick="showSlide(2)" class="program-tab px-4 py-2 rounded-lg bg-gray-200 font-medium transition">Teknik Elektro</button>
+      <button onclick="showSlide(3)" class="program-tab px-4 py-2 rounded-lg bg-gray-200 font-medium transition">Akutansi</button>
+      <button onclick="showSlide(4)" class="program-tab px-4 py-2 rounded-lg bg-gray-200 font-medium transition">Administrasi Bisnis</button>
+  </div>
+  
+  <!-- Slider -->
+  <div class="relative">
+      <!-- Previous -->
+      <button onclick="prevSlide()" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white p-3 rounded-full shadow-md hover:bg-gray-100 transition">
+          <i class="fas fa-chevron-left text-blue-600"></i>
+      </button>
+      
+      <!-- Slides -->
+      <div class="overflow-hidden">
+          <div id="program-slider" class="program-slider flex" style="width: 500%;">
+              <!-- Teknik Elektro -->
+              <div class="w-full px-4">
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" onclick="window.location.href='#'">
+                          <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Teknik Listrik" class="w-full h-48 object-cover">
+                          <div class="p-6">
+                              <h3 class="text-xl font-bold text-gray-800 mb-2">D3 Teknik Listrik</h3>
+                              <p class="text-gray-600 mb-4">Program studi yang mempelajari sistem tenaga listrik, instalasi, dan distribusi daya.</p>
+                              <div class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg">Kunjungi Website</div>
+                          </div>
+                      </div>
+                      
+                      <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" onclick="window.location.href='#'">
+                          <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Elektronika" class="w-full h-48 object-cover">
+                          <div class="p-6">
+                              <h3 class="text-xl font-bold text-gray-800 mb-2">D3 Elektronika</h3>
+                              <p class="text-gray-600 mb-4">Mempelajari komponen elektronika, rangkaian digital, dan sistem kendali elektronik.</p>
+                              <div class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg">Kunjungi Website</div>
+                          </div>
+                      </div>
+                      
+                      <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" onclick="window.location.href='#'">
+                          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Teknik Informatika" class="w-full h-48 object-cover">
+                          <div class="p-6">
+                              <h3 class="text-xl font-bold text-gray-800 mb-2">D3 Teknik Informatika</h3>
+                              <p class="text-gray-600 mb-4">Berfokus pada pengembangan perangkat lunak, jaringan komputer, dan basis data.</p>
+                              <div class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg">Kunjungi Website</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Teknik Sipil -->
+              <div class="w-full px-4">
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" onclick="window.location.href='#'">
+                          <img src="https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Teknik Sipil" class="w-full h-48 object-cover">
+                          <div class="p-6">
+                              <h3 class="text-xl font-bold text-gray-800 mb-2">D3 Teknik Sipil</h3>
+                              <p class="text-gray-600 mb-4">Program studi yang mempelajari perencanaan, perancangan, konstruksi, dan pemeliharaan infrastruktur.</p>
+                              <div class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg">Kunjungi Website</div>
+                          </div>
+                      </div>
+                      
+                      <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" onclick="window.location.href='#'">
+                          <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a7e6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Teknik Bangunan Rawa" class="w-full h-48 object-cover">
+                          <div class="p-6">
+                              <h3 class="text-xl font-bold text-gray-800 mb-2">D4 Teknik Bangunan Rawa</h3>
+                              <p class="text-gray-600 mb-4">Spesialisasi dalam konstruksi bangunan di daerah rawa dengan pendekatan berkelanjutan.</p>
+                              <div class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg">Kunjungi Website</div>
+                          </div>
+                      </div>
+                      
+                      <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" onclick="window.location.href='#'">
+                          <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Teknik Geodesi" class="w-full h-48 object-cover">
+                          <div class="p-6">
+                              <h3 class="text-xl font-bold text-gray-800 mb-2">D3 Teknik Geodesi</h3>
+                              <p class="text-gray-600 mb-4">Mempelajari pengukuran dan pemetaan permukaan bumi untuk berbagai keperluan konstruksi.</p>
+                              <div class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg">Kunjungi Website</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+              <!-- Teknik Mesin -->
+              <div class="w-full px-4">
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" onclick="window.location.href='#'">
+                          <img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Teknik Mesin" class="w-full h-48 object-cover">
+                          <div class="p-6">
+                              <h3 class="text-xl font-bold text-gray-800 mb-2">D3 Teknik Mesin</h3>
+                              <p class="text-gray-600 mb-4">Program studi yang berfokus pada perancangan, analisis, dan pemeliharaan sistem mekanik.</p>
+                              <div class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg">Kunjungi Website</div>
+                          </div>
+                      </div>
+                      
+                      <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" onclick="window.location.href='#'">
+                          <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1583&q=80" alt="Teknik Mesin Otomotif" class="w-full h-48 object-cover">
+                          <div class="p-6">
+                              <h3 class="text-xl font-bold text-gray-800 mb-2">D3 Teknik Mesin Otomotif</h3>
+                              <p class="text-gray-600 mb-4">Spesialisasi dalam teknologi otomotif, perawatan, dan perbaikan kendaraan bermotor.</p>
+                              <div class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg">Kunjungi Website</div>
+                          </div>
+                      </div>
+                      
+                      <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" onclick="window.location.href='#'">
+                          <img src="https://images.unsplash.com/photo-1592155931584-901ac15763e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Alat Berat" class="w-full h-48 object-cover">
+                          <div class="p-6">
+                              <h3 class="text-xl font-bold text-gray-800 mb-2">D3 Alat Berat</h3>
+                              <p class="text-gray-600 mb-4">Mempelajari operasi, perawatan, dan manajemen alat berat untuk konstruksi dan pertambangan.</p>
+                              <div class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg">Kunjungi Website</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+              
+              
+              <!-- Akutansi -->
+              <div class="w-full px-4">
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" onclick="window.location.href='#'">
+                          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1511&q=80" alt="Akuntansi" class="w-full h-48 object-cover">
+                          <div class="p-6">
+                              <h3 class="text-xl font-bold text-gray-800 mb-2">D3 Akuntansi</h3>
+                              <p class="text-gray-600 mb-4">Program studi yang mempelajari pencatatan, pengklasifikasian, dan pelaporan transaksi keuangan.</p>
+                              <div class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg">Kunjungi Website</div>
+                          </div>
+                      </div>
+                      
+                      <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" onclick="window.location.href='#'">
+                          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Komputerisasi Akuntansi" class="w-full h-48 object-cover">
+                          <div class="p-6">
+                              <h3 class="text-xl font-bold text-gray-800 mb-2">D3 Komputerisasi Akuntansi</h3>
+                              <p class="text-gray-600 mb-4">Mengintegrasikan ilmu akuntansi dengan teknologi informasi untuk sistem akuntansi digital.</p>
+                              <div class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg">Kunjungi Website</div>
+                          </div>
+                      </div>
+                      
+                      <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" onclick="window.location.href='#'">
+                          <img src="https://images.unsplash.com/photo-1601597111158-2fceff292cdc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Akuntansi Syariah" class="w-full h-48 object-cover">
+                          <div class="p-6">
+                              <h3 class="text-xl font-bold text-gray-800 mb-2">D4 Akuntansi Lembaga Keuangan Syariah</h3>
+                              <p class="text-gray-600 mb-4">Spesialisasi akuntansi untuk lembaga keuangan yang beroperasi berdasarkan prinsip syariah.</p>
+                              <div class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg">Kunjungi Website</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+              <!-- Administrasi Bisnis -->
+              <div class="w-full px-4">
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" onclick="window.location.href='#'">
+                          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Administrasi Bisnis" class="w-full h-48 object-cover">
+                          <div class="p-6">
+                              <h3 class="text-xl font-bold text-gray-800 mb-2">D3 Administrasi Bisnis</h3>
+                              <p class="text-gray-600 mb-4">Program studi yang mempelajari manajemen perkantoran, korespondensi bisnis, dan administrasi.</p>
+                              <div class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg">Kunjungi Website</div>
+                          </div>
+                      </div>
+                      
+                      <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" onclick="window.location.href='#'">
+                          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Manajemen Informatika" class="w-full h-48 object-cover">
+                          <div class="p-6">
+                              <h3 class="text-xl font-bold text-gray-800 mb-2">D3 Manajemen Informatika</h3>
+                              <p class="text-gray-600 mb-4">Mengintegrasikan ilmu manajemen dengan teknologi informasi untuk kebutuhan bisnis.</p>
+                              <div class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg">Kunjungi Website</div>
+                          </div>
+                      </div>
+                      
+                      <div class="program-card bg-white rounded-xl shadow-md overflow-hidden" onclick="window.location.href='#'">
+                          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1415&q=80" alt="Bisnis Digital" class="w-full h-48 object-cover">
+                          <div class="p-6">
+                              <h3 class="text-xl font-bold text-gray-800 mb-2">D4 Bisnis Digital</h3>
+                              <p class="text-gray-600 mb-4">Mempelajari transformasi digital bisnis, e-commerce, dan strategi pemasaran digital.</p>
+                              <div class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg">Kunjungi Website</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <!-- Next Button -->
+      <button onclick="nextSlide()" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white p-3 rounded-full shadow-md hover:bg-gray-100 transition">
+          <i class="fas fa-chevron-right text-blue-600"></i>
+      </button>
+  </div>
+  
+  <!-- Slide Indicators -->
+  <div class="flex justify-center mt-8 gap-2">
+      <button onclick="showSlide(0)" class="w-3 h-3 rounded-full bg-blue-600 indicator-dot active"></button>
+      <button onclick="showSlide(1)" class="w-3 h-3 rounded-full bg-gray-300 indicator-dot"></button>
+      <button onclick="showSlide(2)" class="w-3 h-3 rounded-full bg-gray-300 indicator-dot"></button>
+      <button onclick="showSlide(3)" class="w-3 h-3 rounded-full bg-gray-300 indicator-dot"></button>
+      <button onclick="showSlide(4)" class="w-3 h-3 rounded-full bg-gray-300 indicator-dot"></button>
+  </div>
+</div>
+
+<script>
+  let currentSlide = 0;
+  const totalSlides = 5;
+  let autoSlideInterval;
+  
+  function updateSlider() {
+      const slider = document.getElementById('program-slider');
+      slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+      
+      // Update tab buttons
+      document.querySelectorAll('.program-tab').forEach((tab, index) => {
+          if (index === currentSlide) {
+              tab.classList.add('active');
+          } else {
+              tab.classList.remove('active');
+          }
+      });
+      
+      // Update indicator dots
+      document.querySelectorAll('.indicator-dot').forEach((dot, index) => {
+          if (index === currentSlide) {
+              dot.classList.add('active');
+              dot.classList.remove('bg-gray-300');
+          } else {
+              dot.classList.remove('active');
+              dot.classList.add('bg-gray-300');
+          }
+      });
+  }
+  
+  function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateSlider();
+      resetAutoSlide();
+  }
+  
+  function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateSlider();
+      resetAutoSlide();
+  }
+  
+  function showSlide(index) {
+      currentSlide = index;
+      updateSlider();
+      resetAutoSlide();
+  }
+  
+  function startAutoSlide() {
+      autoSlideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+  }
+  
+  function resetAutoSlide() {
+      clearInterval(autoSlideInterval);
+      startAutoSlide();
+  }
+  
+  // Initialize
+  document.addEventListener('DOMContentLoaded', () => {
+      updateSlider();
+      startAutoSlide();
+      
+      // Make entire cards clickable
+      document.querySelectorAll('.program-card').forEach(card => {
+          card.style.cursor = 'pointer';
+      });
+  });
+</script>
 
 <!-- Team -->
 <div class="p-6 max-w-7xl mx-auto">

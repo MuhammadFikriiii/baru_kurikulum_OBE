@@ -4,14 +4,12 @@
 
 @section('content')
 
-
 <div class="container mx-auto px-4">
     <div class="mb-8">
         <h1 class="text-3xl font-bold text-gray-800">Dashboard Penyusunan Kurikulum OBE</h1>
         <p class="text-gray-600 mt-2">Progress implementasi kurikulum berbasis Outcome-Based Education per Program Studi</p>
         <hr class="border-t-4 border-black my-5">
     </div>
-
     
     <!-- Filter dan Pencarian -->
     <div class="flex flex-col md:flex-row justify-between mb-6">

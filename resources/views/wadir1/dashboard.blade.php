@@ -3,37 +3,81 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
+
+<div class="container mx-auto px-4">
     <div class="mb-8">
         <h1 class="text-3xl font-bold text-gray-800">Dashboard Penyusunan Kurikulum OBE</h1>
         <p class="text-gray-600 mt-2">Progress implementasi kurikulum berbasis Outcome-Based Education per Program Studi</p>
-        <hr class="border-t-4 border-black my-8">
+        <hr class="border-t-4 border-black my-5">
     </div>
 
     <!-- Filter dan Pencarian -->
     <div class="flex flex-col md:flex-row justify-between mb-6">
         <div class="flex space-x-2 mb-3 md:mb-0">
-            <select class="bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option value="">Semua Fakultas</option>
-                <option value="fmipa">FMIPA</option>
-                <option value="ft">Fakultas Teknik</option>
-                <option value="feb">FEB</option>
-                <option value="fk">Fakultas Kedokteran</option>
-            </select>
-            <select class="bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option value="">Semua Semester</option>
-                <option value="ganjil">Ganjil 2024/2025</option>
-                <option value="genap">Genap 2024/2025</option>
-            </select>
+            @if(Auth::user()->role === 'wadir1' && isset($prodis))
+                {{-- action="{{ route('') }}" --}}
+                <form id="exportForm" method="GET" class="flex items-center gap-4">
+                    <select name="kode_prodi" id="prodiSelect" required class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <option value="" selected disabled>Pilih Prodi</option>
+                        @foreach($prodis as $prodi)
+                            <option value="{{ $prodi->kode_prodi }}">{{ $prodi->nama_prodi }}</option>
+                        @endforeach
+                    </select>
+                    <button type="submit" class="bg-green-600 text-white px-5 font-bold py-2 rounded-md hover:bg-green-800">
+                        <i class="fas fa-file-excel mr-2"></i>Excel
+                    </button>
+                </form>
+            @else
+                <a href="{{ route('tim.export.excel') }}" 
+                    class="bg-green-600 text-white px-5 font-bold py-2 rounded-md hover:bg-green-800">
+                    <i class="fas fa-file-excel mr-2"></i>Excel
+                </a>
+            @endif
+            <a href="#" 
+                class="bg-blue-600 text-white px-5 font-bold py-2 rounded-md hover:bg-blue-800">
+                <i class="fas fa-file-word mr-2"></i>Word
+            </a>
         </div>
         <div class="relative">
             <input type="text" id="search-prodi-dashboard" placeholder="Search..." 
-                    class="border border-gray-300 px-3 py-2 rounded-md">
+                class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md pl-10 focus:outline-none focus:ring-2 focus:ring-green-500">
             <span class="absolute left-3 top-2.5 text-gray-400">
                 <i class="fas fa-search"></i>
             </span>
         </div>
     </div>
+
+    <!-- Filter dan Pencarian CPL + PL--> 
+    {{-- <div class="mb-6">
+        <div class="flex flex-col md:flex-row justify-between items-center w-full space-y-2 md:space-y-0 md:space-x-4">
+            
+            <!-- Search Input -->
+            <div class="relative w-full md:w-auto">
+                <input type="text" id="search-prodi-dashboard" placeholder="Search..." 
+                    class="border border-gray-300 pl-10 pr-3 py-2 rounded-md w-full md:w-64">
+                <span class="absolute left-3 top-2.5 text-gray-400">
+                    <i class="fas fa-search"></i>
+                </span>
+            </div>
+
+            <!-- Export Form (Hanya Admin) -->
+            @if(Auth::user()->role === 'admin' && isset($prodis))
+                <form action="{{ route(Auth::user()->role === 'admin' ? 'admin.export.excel' : 'tim.export.excel') }}" method="GET" class="flex items-center gap-4">
+
+                    <select name="kode_prodi" required class="border border-gray-300 rounded-md py-2">
+                        <option value="" class="text-center">Pilih Prodi</option>
+                        @foreach($prodis as $prodi)
+                            <option value="{{ $prodi->kode_prodi }}">{{ $prodi->nama_prodi }}</option>
+                        @endforeach
+                    </select>
+                    <button type="submit" class="bg-green-600 text-white px-5 py-2 rounded-md hover:bg-green-700">
+                        📄 Export PL + CPL
+                    </button>
+                </form>
+            @endif
+
+        </div>
+    </div> --}}
 
     <!-- Summary Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
@@ -87,7 +131,7 @@
     </div>
 
     <!-- Progress Bar Per Prodi -->
-    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+    <div class="bg-white rounded-lg shadow-lg p-2 mb-8">
         <h2 class="text-xl font-bold text-gray-800 mb-4">Progress Penyusunan Kurikulum OBE</h2>
 
         <!-- Prodi item -->

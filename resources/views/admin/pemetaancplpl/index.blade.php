@@ -62,7 +62,7 @@
                 </style>
 
                 <div class="">
-                    <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-visible">
+                <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-visible">
                 <thead class="bg-green-800 text-white">
                     <tr>
                         <th class="px-4 py-2 text-left"></th>
