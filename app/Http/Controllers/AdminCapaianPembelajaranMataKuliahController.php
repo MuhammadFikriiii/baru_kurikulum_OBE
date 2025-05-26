@@ -8,8 +8,22 @@ use Illuminate\Support\Facades\DB;
 
 class AdminCapaianPembelajaranMataKuliahController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $prodis = DB::table('prodis')->get();
+        $kode_prodi = $request->get('kode_prodi');
+
+        if (empty($kode_prodi)) {
+            return view('admin.capaianpembelajaranmatakuliah.index', [
+                'kode_prodi' => '',
+                'prodis' => $prodis,
+                'prodi' => null,
+                'cpmks' => [],
+            ]);
+        }
+
+        $prodi = $prodis->where('kode_prodi', $kode_prodi)->first();
+
         $cpmks = DB::table('capaian_pembelajaran_mata_kuliahs as cpmk')
             ->select(
                 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk'
@@ -21,8 +35,10 @@ class AdminCapaianPembelajaranMataKuliahController extends Controller
             ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
             ->select('cpmk.id_cpmk', 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk', 'prodis.nama_prodi')
             ->groupBy('cpmk.id_cpmk', 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk', 'prodis.nama_prodi')
+            ->where('prodis.kode_prodi', $kode_prodi)
+            ->orderBy('cpmk.kode_cpmk', 'asc')
             ->get();
-        return view('admin.capaianpembelajaranmatakuliah.index', compact('cpmks'));
+        return view('admin.capaianpembelajaranmatakuliah.index', compact('cpmks', 'prodis', 'kode_prodi', 'prodi'));
     }
     public function create()
     {

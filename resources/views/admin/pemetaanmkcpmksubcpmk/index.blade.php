@@ -3,7 +3,20 @@
     <div class="mr-20 ml-20">
         <h2 class="text-4xl font-extrabold text-center mb-4">Pemetaan MK - CPMK - SUBCPMK</h2>
         <hr class="w-full border border-black mb-4">
-
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+            <form method="GET" action="{{ route('admin.pemetaanmkcpmksubcpmk.index') }}" class="w-full md:w-64">
+                <select name="kode_prodi" id="kode_prodi"
+                    class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    onchange="this.form.submit()">
+                    <option value="">Pilih Prodi</option>
+                    @foreach ($prodis as $prodi)
+                        <option value="{{ $prodi->kode_prodi }}" {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
+                            {{ $prodi->nama_prodi }}
+                        </option>
+                    @endforeach
+                </select>
+            </form>
+        </div>
         <table class="w-full border border-gray-300 rounded-lg overflow-hidden shadow-md">
             <thead class="bg-green-800">
                 <tr class="text-white uppercase text-center">

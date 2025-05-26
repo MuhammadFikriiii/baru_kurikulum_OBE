@@ -5,6 +5,21 @@
     <h1 class="text-2xl font-bold text-gray-700 mb-4 text-center">Daftar Sub Cpmk</h1>
     <hr class="border-t-4 border-black my-8">
     
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+        <form method="GET" action="{{ route('admin.subcpmk.index') }}" class="w-full md:w-64">
+            <select name="kode_prodi" id="kode_prodi"
+                class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                onchange="this.form.submit()">
+                <option value="">Pilih Prodi</option>
+                @foreach ($prodis as $prodi)
+                    <option value="{{ $prodi->kode_prodi }}" {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
+                        {{ $prodi->nama_prodi }}
+                    </option>
+                @endforeach
+            </select>
+        </form>
+    </div>
+
     @if(session('success'))
         <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
             <span class="font-bold">{{ session('success') }}</span>
