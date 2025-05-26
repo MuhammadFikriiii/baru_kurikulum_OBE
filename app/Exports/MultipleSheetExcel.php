@@ -29,7 +29,9 @@ class MultipleSheetExcel implements WithMultipleSheets
             'Mata Kuliah' => new MataKuliahExport($this->kodeProdi),
             'Organisasi MK' => new OrganisasiMkExport($this->kodeProdi),
             'Pemenuhan CPL' => new PemenuhanCplExport($this->kodeProdi),
-            'Pemetaan CPL - CPMK - MK' => new PemetaanCplCpmkMkExport($this->kodeProdi)
+            'Pemetaan CPL - CPMK - MK' => new PemetaanCplCpmkMkExport($this->kodeProdi),
+            'pemenuhan CPL - CPMK - MK' => new PemenuhanCplCpmkMkExport($this->kodeProdi),
+            'pemetaan MK - CPL - CPMK' => new PemetaanMkCplCpmkExport($this->kodeProdi),
         ];
     }
 }

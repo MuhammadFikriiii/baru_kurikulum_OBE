@@ -30,7 +30,7 @@ class PemetaanCplCpmkMkExport implements FromArray, WithHeadings, WithStyles, Wi
     private function buildMatrix()
     {
         $matrix = [];
-        
+
         try {
             // Query yang sama persis kayak di controller index
             $data = DB::table('capaian_profil_lulusans as cpl')
@@ -57,25 +57,34 @@ class PemetaanCplCpmkMkExport implements FromArray, WithHeadings, WithStyles, Wi
 
             // Build matrix persis kayak di controller
             foreach ($data as $row) {
-                // Skip row jika CPMK null (karena leftJoin)
-                if (!$row->kode_cpmk) {
-                    continue;
+                // Pastikan CPL selalu masuk ke matrix meskipun tidak ada CPMK
+                if (!isset($matrix[$row->kode_cpl])) {
+                    $matrix[$row->kode_cpl]['deskripsi'] = $row->deskripsi_cpl;
                 }
-                
+
+                // Jika ada CPMK, tambahkan ke dalam CPL
+                if ($row->kode_cpmk) {
+                    $matrix[$row->kode_cpl]['cpmk'][$row->kode_cpmk]['deskripsi'] = $row->deskripsi_cpmk;
+
+                    if ($row->nama_mk) {
+                        $matrix[$row->kode_cpl]['cpmk'][$row->kode_cpmk]['mk'][] = $row->nama_mk;
+                    }
+                }
+
+
                 $matrix[$row->kode_cpl]['deskripsi'] = $row->deskripsi_cpl;
                 $matrix[$row->kode_cpl]['cpmk'][$row->kode_cpmk]['deskripsi'] = $row->deskripsi_cpmk;
-                
+
                 // Hanya tambahkan mata kuliah jika tidak null
                 if ($row->nama_mk) {
                     $matrix[$row->kode_cpl]['cpmk'][$row->kode_cpmk]['mk'][] = $row->nama_mk;
                 }
             }
-            
         } catch (\Exception $e) {
             // Jika terjadi error, return array kosong
             $matrix = [];
         }
-        
+
         return $matrix;
     }
 
@@ -87,25 +96,25 @@ class PemetaanCplCpmkMkExport implements FromArray, WithHeadings, WithStyles, Wi
     public function array(): array
     {
         $data = [];
-        
+
         // Pastikan matrix adalah array dan tidak kosong
         if (!is_array($this->matrix) || empty($this->matrix)) {
             return $data;
         }
-        
+
         foreach ($this->matrix as $kode_cpl => $cpl) {
             // Pastikan struktur cpl valid
             if (!isset($cpl['cpmk']) || !is_array($cpl['cpmk'])) {
                 continue;
             }
-            
+
             $first = true;
-            
+
             foreach ($cpl['cpmk'] as $kode_cpmk => $cpmk) {
                 // Pastikan mk adalah array
                 $mata_kuliah_array = isset($cpmk['mk']) && is_array($cpmk['mk']) ? $cpmk['mk'] : [];
                 $mata_kuliah = implode("\n", array_unique($mata_kuliah_array));
-                
+
                 if ($first) {
                     // Baris pertama untuk CPL ini - tampilkan data CPL
                     $data[] = [
@@ -128,7 +137,7 @@ class PemetaanCplCpmkMkExport implements FromArray, WithHeadings, WithStyles, Wi
                 }
             }
         }
-        
+
         return $data;
     }
 
@@ -168,7 +177,7 @@ class PemetaanCplCpmkMkExport implements FromArray, WithHeadings, WithStyles, Wi
     {
         $lastRow = $sheet->getHighestRow();
         $lastColumn = $sheet->getHighestColumn();
-        
+
         // Style untuk header
         $sheet->getStyle('A1:E1')->applyFromArray([
             'font' => [
@@ -220,17 +229,17 @@ class PemetaanCplCpmkMkExport implements FromArray, WithHeadings, WithStyles, Wi
     private function mergeCells(Worksheet $sheet)
     {
         $currentRow = 2; // Mulai dari baris data pertama
-        
+
         foreach ($this->matrix as $kode_cpl => $cpl) {
             $cpmkCount = count($cpl['cpmk']);
-            
+
             if ($cpmkCount > 1) {
                 $endRow = $currentRow + $cpmkCount - 1;
-                
+
                 // Merge kolom Kode CPL (A) dan Deskripsi CPL (B)
                 $sheet->mergeCells("A{$currentRow}:A{$endRow}");
                 $sheet->mergeCells("B{$currentRow}:B{$endRow}");
-                
+
                 // Set alignment untuk merged cells
                 $sheet->getStyle("A{$currentRow}:B{$endRow}")->applyFromArray([
                     'alignment' => [
@@ -240,7 +249,7 @@ class PemetaanCplCpmkMkExport implements FromArray, WithHeadings, WithStyles, Wi
                     ],
                 ]);
             }
-            
+
             $currentRow += $cpmkCount;
         }
     }

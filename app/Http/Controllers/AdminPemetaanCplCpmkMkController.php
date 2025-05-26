@@ -135,57 +135,105 @@ class AdminPemetaanCplCpmkMkController extends Controller
 
 
     public function pemetaanmkcpmkcpl(Request $request)
-    {
-        $prodis = DB::table('prodis')->get();
-        $kode_prodi = $request->get('kode_prodi');
-
-        if (empty($kode_prodi)) {
-            return view('admin.pemetaancplcpmkmk.pemenuhancplcpmkmk', [
-                'kode_prodi' => '',
-                'prodis' => $prodis,
-                'prodi' => null,
-                'matrix' => [],
-            ]);
-        }
-
-        $prodi = $prodis->where('kode_prodi', $kode_prodi)->first();
-
-        $semuaCpl = DB::table('capaian_profil_lulusans as cpl')
-            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
-            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
-            ->where('pl.kode_prodi', $kode_prodi)
-            ->select('cpl.kode_cpl', 'cpl.deskripsi_cpl')
-            ->orderBy('cpl.kode_cpl', 'asc')
-            ->get();
-
-        $semuaMk = DB::table('mata_kuliahs')
-            ->select('kode_mk', 'nama_mk')
-            ->orderBy('kode_mk', 'desc')
-            ->get();
-
-        $relasi = DB::table('cpl_cpmk')
-            ->join('capaian_pembelajaran_mata_kuliahs as cpmk', 'cpl_cpmk.id_cpmk', '=', 'cpmk.id_cpmk')
-            ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
-            ->join('cpmk_mk', 'cpl_cpmk.id_cpmk', '=', 'cpmk_mk.id_cpmk')
-            ->join('mata_kuliahs as mk', 'cpmk_mk.kode_mk', '=', 'mk.kode_mk')
-            ->select('mk.kode_mk', 'mk.nama_mk', 'cpl.id_cpl', 'cpl.kode_cpl', 'cpmk.kode_cpmk')
-            ->get();
-
-        // Siapkan struktur matrix
-        $matrix = [];
-
-        foreach ($semuaMk as $mk) {
-            $matrix[$mk->kode_mk]['nama'] = $mk->nama_mk;
-            foreach ($semuaCpl as $cpl) {
-                $matrix[$mk->kode_mk]['cpl'][$cpl->kode_cpl]['cpmks'] = [];
-            }
-        }
-
-        // Masukkan relasi CPMK ke dalam matrix
-        foreach ($relasi as $row) {
-            $matrix[$row->kode_mk]['cpl'][$row->kode_cpl]['cpmks'][] = $row->kode_cpmk;
-        }
-
-        return view('admin.pemetaancplcpmkmk.pemetaanmkcplcpmk', compact('matrix', 'prodis', 'kode_prodi'));
+{
+    $prodis = DB::table('prodis')->get();
+    $kode_prodi = $request->get('kode_prodi');
+    
+    if (empty($kode_prodi)) {
+        return view('admin.pemetaancplcpmkmk.pemetaanmkcplcpmk', [
+            'kode_prodi' => '',
+            'prodis' => $prodis,
+            'prodi' => null,
+            'matrix' => [],
+            'semuaCpl' => collect(),
+            'semuaMk' => collect(),
+        ]);
     }
+    
+    $prodi = $prodis->where('kode_prodi', $kode_prodi)->first();
+    
+    // Get all CPL for the selected prodi
+    $semuaCpl = DB::table('capaian_profil_lulusans as cpl')
+        ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+        ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+        ->where('pl.kode_prodi', $kode_prodi)
+        ->select('cpl.kode_cpl', 'cpl.deskripsi_cpl')
+        ->orderBy('cpl.kode_cpl', 'asc')
+        ->get();
+    
+    // Get ALL mata kuliah for the prodi through CPL relationships
+    $semuaMk = DB::table('capaian_profil_lulusans as cpl')
+        ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+        ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+        ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
+        ->join('cpl_mk', 'cpl.id_cpl', '=', 'cpl_mk.id_cpl')
+        ->join('mata_kuliahs as mk', 'cpl_mk.kode_mk', '=', 'mk.kode_mk')
+        ->where('prodis.kode_prodi', $kode_prodi)
+        ->select('mk.kode_mk', 'mk.nama_mk', 'mk.semester_mk')
+        ->distinct()
+        ->orderBy('mk.kode_mk')
+        ->get();
+    
+    // Get relationships between CPL, CPMK, and MK
+    $relasi = DB::table('cpl_cpmk')
+        ->join('capaian_pembelajaran_mata_kuliahs as cpmk', 'cpl_cpmk.id_cpmk', '=', 'cpmk.id_cpmk')
+        ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
+        ->join('cpmk_mk', 'cpl_cpmk.id_cpmk', '=', 'cpmk_mk.id_cpmk')
+        ->join('mata_kuliahs as mk', 'cpmk_mk.kode_mk', '=', 'mk.kode_mk')
+        ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+        ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+        ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
+        ->where('pl.kode_prodi', $kode_prodi)
+        ->select(
+            'mk.kode_mk', 
+            'mk.nama_mk', 
+            'cpl.id_cpl', 
+            'cpl.kode_cpl', 
+            'cpmk.kode_cpmk', 
+            'prodis.nama_prodi', 
+            'cpmk.deskripsi_cpmk'
+        )
+        ->get();
+    
+    // Initialize the matrix structure for ALL mata kuliah
+    $matrix = [];
+    
+    foreach ($semuaMk as $mk) {
+        $matrix[$mk->kode_mk]['nama'] = $mk->nama_mk;
+        
+        // Initialize CPL structure for each mata kuliah
+        foreach ($semuaCpl as $cpl) {
+            $matrix[$mk->kode_mk]['cpl'][$cpl->kode_cpl] = [
+                'cpmks' => [],
+                'cpmk_details' => []
+            ];
+        }
+    }
+    
+    // Populate the matrix with relationship data (only for MK that have relationships)
+    foreach ($relasi as $row) {
+        // Safety check - ensure the course exists in matrix
+        if (isset($matrix[$row->kode_mk])) {
+            // Add CPMK to the appropriate CPL if not already exists
+            if (!in_array($row->kode_cpmk, $matrix[$row->kode_mk]['cpl'][$row->kode_cpl]['cpmks'])) {
+                $matrix[$row->kode_mk]['cpl'][$row->kode_cpl]['cpmks'][] = $row->kode_cpmk;
+            }
+            
+            // Add CPMK details
+            $matrix[$row->kode_mk]['cpl'][$row->kode_cpl]['cpmk_details'][$row->kode_cpmk] = [
+                'nama_prodi' => $row->nama_prodi,
+                'deskripsi_cpmk' => $row->deskripsi_cpmk,
+            ];
+        }
+    }
+    
+    return view('admin.pemetaancplcpmkmk.pemetaanmkcplcpmk', compact(
+        'matrix', 
+        'prodis', 
+        'kode_prodi', 
+        'semuaCpl', 
+        'semuaMk',
+        'prodi'
+    ));
+}
 }
