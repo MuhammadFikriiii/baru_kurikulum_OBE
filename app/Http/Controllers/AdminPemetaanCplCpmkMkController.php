@@ -156,8 +156,9 @@ class AdminPemetaanCplCpmkMkController extends Controller
     $semuaCpl = DB::table('capaian_profil_lulusans as cpl')
         ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
         ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+        ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
         ->where('pl.kode_prodi', $kode_prodi)
-        ->select('cpl.kode_cpl', 'cpl.deskripsi_cpl')
+        ->select('cpl.kode_cpl', 'cpl.deskripsi_cpl', 'prodis.nama_prodi')
         ->orderBy('cpl.kode_cpl', 'asc')
         ->get();
     

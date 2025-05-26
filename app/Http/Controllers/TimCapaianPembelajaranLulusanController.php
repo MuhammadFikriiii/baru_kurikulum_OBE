@@ -105,7 +105,6 @@ class TimCapaianPembelajaranLulusanController extends Controller
                 'id_pl' => $request->id_pl
             ]);
         }
-        dd($request->all());
         return redirect()->route('tim.capaianpembelajaranlulusan.index')->with('success', 'Capaian Profil lulusan berhasil diperbarui.');
     }
 
