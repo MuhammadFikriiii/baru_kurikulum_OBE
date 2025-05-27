@@ -17,10 +17,10 @@
                 class="bg-green-600 text-white px-5 font-bold py-2 rounded-md hover:bg-green-800 inline-block mt-4">
         <i class="fas fa-file-excel mr-2"></i>Excel
         </a>
-            <a href="#" 
+            {{-- <a href="#" 
                 class="bg-blue-600 text-white px-5 font-bold py-2 rounded-md hover:bg-blue-800 inline-block mt-4">
                 <i class="fas fa-file-word mr-2"></i>Word
-            </a>
+            </a> --}}
         </div>
         <div class="relative">
             <input type="text" id="search-prodi-dashboard" placeholder="Search..." 

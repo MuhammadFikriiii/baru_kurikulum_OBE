@@ -84,7 +84,7 @@ class TimCapaianPembelajaranLulusanExport implements
             'A' => 8,
             'B' => 20,
             'C' => 12,
-            'D' => 40,
+            'D' => 60,
             'E' => 20,
         ];
     }
@@ -172,10 +172,10 @@ class TimCapaianPembelajaranLulusanExport implements
                 $sheet = $event->sheet;
                 
                 // Title in the first row
-                $sheet->setCellValue('A1', 'Daftar Capaian Pembelajaran Lulusan');
+                $sheet->setCellValue('A1', '2. CPL Kompetensi Utama Program Studi Vokasi Teknik Informatika');
                 $sheet->mergeCells('A1:E1');
-                $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
-                $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+                $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(12);
+                $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
             },
         ];
     }

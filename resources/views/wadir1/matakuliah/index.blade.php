@@ -4,7 +4,7 @@
 <div class="container mx-auto px-4">
     
     <div class="text-center mb-8">
-        <h1 class="text-2xl font-bold text-gray-800">Daftar Bahan Kajian</h1>
+        <h1 class="text-2xl font-bold text-gray-800">Daftar Mata Kuliah</h1>
         <hr class="border-t-4 border-black my-4 mx-auto mb-4">
     </div>
 
@@ -28,10 +28,9 @@
     </div>
     @endif
 
-    
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">     
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
         <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-            <form method="GET" action="{{ route('wadir1.bahankajian.index') }}" class="w-full md:w-64">
+            <form method="GET" action="{{ route('wadir1.matakuliah.index') }}" class="w-full md:w-64">
                 <select id="prodi" name="kode_prodi" 
                     class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     onchange="this.form.submit()">
@@ -62,9 +61,9 @@
         <div class="p-8 text-center text-gray-600">
             Silakan pilih prodi terlebih dahulu.
         </div>
-        @elseif($dataKosong)
+        @elseif($mata_kuliahs->isEmpty())
         <div class="p-8 text-center text-gray-600">
-            <strong>Data belum dibuat untuk prodi ini.</strong>
+            Data belum dibuat untuk prodi ini.
         </div>
         @else
         <div class="overflow-x-auto">
@@ -73,36 +72,44 @@
                     <tr>
                         <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">No</th>
                         <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Prodi</th>
-                        <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Kode BK</th>
-                        <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Nama BK</th>
-                        <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Deskripsi BK</th>
-                        <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Referensi BK</th>
-                        <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Status BK</th>
-                        <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Knowledge Area</th>
+                        <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Kode MK</th>
+                        <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Nama MK</th>
+                        <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Jenis MK</th>
+                        <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">SKS</th>
+                        @for ($i = 1; $i <= 8; $i++)
+                        <th class="px-2 py-3 text-center text-xs font-medium uppercase tracking-wider">S{{ $i }}</th>
+                        @endfor
+                        <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Kompetensi</th>
                         <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    @foreach ($bahankajians as $index => $bahankajian)
-                    <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-100">
+                    @foreach($mata_kuliahs as $index => $mata_kuliah)
+                    <tr class="{{ $index % 2 == 0 ? 'bg-gray-50' : 'bg-white' }} hover:bg-gray-100">
                         <td class="px-4 py-4 text-center text-sm">{{ $index + 1 }}</td>
-                        <td class="px-4 py-4 text-center text-sm">{{ $bahankajian->nama_prodi }}</td>
-                        <td class="px-4 py-4 text-center text-sm">{{ $bahankajian->kode_bk }}</td>
-                        <td class="px-4 py-4 text-center text-sm">{{ $bahankajian->nama_bk }}</td>
-                        <td class="px-4 py-4 text-sm">{{ $bahankajian->deskripsi_bk }}</td>
-                        <td class="px-4 py-4 text-center text-sm">{{ $bahankajian->referensi_bk }}</td>
-                        <td class="px-4 py-4 text-center text-sm">{{ $bahankajian->status_bk }}</td>
-                        <td class="px-4 py-4 text-center text-sm">{{ $bahankajian->knowledge_area }}</td>
+                        <td class="px-4 py-4 text-center text-sm">{{ $mata_kuliah->nama_prodi }}</td>
+                        <td class="px-4 py-4 text-center text-sm">{{ $mata_kuliah->kode_mk }}</td>
+                        <td class="px-4 py-4 text-center text-sm">{{ $mata_kuliah->nama_mk }}</td>
+                        <td class="px-4 py-4 text-center text-sm">{{ $mata_kuliah->jenis_mk }}</td>
+                        <td class="px-4 py-4 text-center text-sm">{{ $mata_kuliah->sks_mk }}</td>
+                        @for ($i = 1; $i <= 8; $i++)
+                            <td class="px-2 py-4 text-center">
+                                @if ($mata_kuliah->semester_mk == $i)
+                                <span class="inline-flex items-center justify-center w-6 h-6 bg-green-500 text-white rounded-full mx-auto">✓</span>
+                                @endif
+                            </td>
+                        @endfor
+                        <td class="px-4 py-4 text-center text-sm">{{ $mata_kuliah->kompetensi_mk }}</td>
                         <td class="px-4 py-4">
                             <div class="flex justify-center space-x-2">
-                                <a href="{{ route('wadir1.bahankajian.detail', $bahankajian->id_bk) }}" 
-                                   class="bg-green-500 hover:bg-green-600 text-white p-2 rounded-md"
+                                <a href="{{ route('wadir1.matakuliah.detail', $mata_kuliah->kode_mk) }}" 
+                                   class="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md"
                                    title="Detail">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                                         <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
                                     </svg>
-                                </a>
+                                </a>                          
                             </div>
                         </td>
                     </tr>

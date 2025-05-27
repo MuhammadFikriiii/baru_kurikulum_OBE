@@ -9,9 +9,15 @@ use App\Models\CapaianProfilLulusan;
 
 class Wadir1BahanKajianController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $bahankajians = DB::table('bahan_kajians as bk')
+        $kode_prodi = $request->get('kode_prodi');
+        $prodis = DB::table('prodis')->get();
+        if (!$kode_prodi) {
+            return view("wadir1.bahankajian.index", compact("prodis", "kode_prodi"));
+        }
+
+        $query = DB::table('bahan_kajians as bk')
             ->select(
                 'bk.id_bk', 'bk.nama_bk', 'bk.kode_bk', 'bk.deskripsi_bk', 
                 'bk.referensi_bk', 'bk.status_bk', 'bk.knowledge_area',
@@ -22,11 +28,20 @@ class Wadir1BahanKajianController extends Controller
             ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
-            ->groupBy('bk.id_bk', 'bk.nama_bk', 'bk.kode_bk', 'bk.deskripsi_bk', 
-                    'bk.referensi_bk', 'bk.status_bk', 'bk.knowledge_area', 'prodis.nama_prodi')
-            ->get();
+            ->groupBy(
+                'bk.id_bk', 'bk.nama_bk', 'bk.kode_bk', 'bk.deskripsi_bk', 
+                'bk.referensi_bk', 'bk.status_bk', 'bk.knowledge_area', 'prodis.nama_prodi'
+            );
 
-        return view('wadir1.bahankajian.index', compact('bahankajians'));
+            if ($kode_prodi) {
+                $query->where('prodis.kode_prodi', $kode_prodi);
+            }
+
+        $bahankajians = $query->get();
+
+        $dataKosong = $bahankajians->isEmpty() && $kode_prodi;
+
+        return view('wadir1.bahankajian.index', compact('bahankajians', 'prodis', 'kode_prodi', 'dataKosong'));
     }
 
     public function detail(BahanKajian $id_bk)

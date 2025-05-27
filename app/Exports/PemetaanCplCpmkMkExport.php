@@ -12,8 +12,9 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Concerns\WithTitle;
 
-class PemetaanCplCpmkMkExport implements FromArray, WithHeadings, WithStyles, WithColumnWidths, ShouldAutoSize
+class PemetaanCplCpmkMkExport implements FromArray, WithHeadings, WithStyles, WithColumnWidths, ShouldAutoSize, WithTitle
 {
     protected $matrix;
     protected $kodeProdi;
@@ -88,7 +89,10 @@ class PemetaanCplCpmkMkExport implements FromArray, WithHeadings, WithStyles, Wi
         return $matrix;
     }
 
-
+    public function title(): string
+    {
+        return 'Pemetaan CPL CPMK MK';
+    }
 
     /**
      * @return array

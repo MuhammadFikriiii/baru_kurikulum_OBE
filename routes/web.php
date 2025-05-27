@@ -59,6 +59,11 @@ use App\Http\Controllers\KaprodiPemetaanCplCpmkMkController;
 use App\Http\Controllers\KaprodiCapaianPembelajaranMataKuliahController;
 use App\Http\Controllers\KaprodiSubCpmkController;
 use App\Http\Controllers\KaprodiPenilaianController;
+use App\Http\Controllers\Wadir1MataKuliahController;
+use App\Http\Controllers\Wadir1PemetaanCplMkController;
+use App\Http\Controllers\Wadir1PemetaanBkMkController;
+use App\Http\Controllers\Wadir1PemetaanCplBkMkController;
+use App\Http\Controllers\Wadir1CapaianPembelajaranMatakuliahController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -217,6 +222,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/bahankajian', [Wadir1BahanKajianController::class, 'index'])->name('bahankajian.index');
         Route::get('/bahankajian/{id_bk}/detail', [Wadir1BahanKajianController::class, 'detail'])->name('bahankajian.detail');
         Route::get('/pemetaancplbk', [Wadir1PemetaanCplBkController::class, 'index'])->name('pemetaancplbk.index');
+        Route::get('/matakuliah', [Wadir1MataKuliahController::class, 'index'])->name('matakuliah.index');
+        Route::get('/matakuliah/{matakuliah}/detail', [Wadir1MataKuliahController::class, 'detail'])->name('matakuliah.detail');
+        Route::get('/pemetaancplmk', [Wadir1PemetaanCplMkController::class, 'index'])->name('pemetaancplmk.index');
+        Route::get('/pemetaanbkmk', [Wadir1PemetaanBkMkController::class, 'index'])->name('pemetaanbkmk.index');
+        Route::get('/pemetaancplmkbk', [Wadir1PemetaanCplBkMkController::class, 'index'])->name('pemetaancplmkbk.index');
+        Route::get('/organisasimk', [Wadir1MataKuliahController::class, 'organisasi_mk'])->name('matakuliah.organisasimk');
+        Route::get('/capaianpembelajaranmatakuliah', [Wadir1CapaianPembelajaranMatakuliahController::class, 'index'])->name('capaianpembelajaranmatakuliah.index');
+        Route::get('/capaianpembelajaranmatakuliah/{id_cpmk}/detail', [Wadir1CapaianPembelajaranMatakuliahController::class, 'detail'])->name('capaianpembelajaranmatakuliah.detail');
     });
 
     // Grup Route Kaprodi

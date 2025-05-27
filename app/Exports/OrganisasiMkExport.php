@@ -54,7 +54,7 @@ class OrganisasiMkExport implements FromArray, WithTitle, ShouldAutoSize, WithEv
         $rows = [];
 
         // Tambah judul di atas heading
-        $rows[] = ['12. Organisasi Matakuliah']; // A1, merged nanti
+        $rows[] = ['10. Organisasi Matakuliah']; // A1, merged nanti
         $rows[] = ['Semester', 'Total SKS', 'Jumlah MK', 'Daftar MK']; // Heading di A2:D2
 
         $totalSks = 0;

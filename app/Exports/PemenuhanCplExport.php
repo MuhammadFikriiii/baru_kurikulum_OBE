@@ -80,12 +80,19 @@ class PemenuhanCplExport implements FromArray, WithHeadings, WithTitle, WithStyl
     public function styles(Worksheet $sheet)
     {
         $sheet->getColumnDimension('B')->setWidth(30);
+        $sheet->getColumnDimension('C')->setWidth(30);
+        $sheet->getColumnDimension('D')->setWidth(30);
+        $sheet->getColumnDimension('E')->setWidth(30);
+        $sheet->getColumnDimension('F')->setWidth(30);
+        $sheet->getColumnDimension('G')->setWidth(30);
+        $sheet->getColumnDimension('H')->setWidth(30);
+        $sheet->getColumnDimension('I')->setWidth(30);
         // Judul di baris 1
         $sheet->insertNewRowBefore(1, 1);
-        $sheet->setCellValue('A1', '12. Pemenuhan CPL');
+        $sheet->setCellValue('A1', '11. Pemenuhan CPL');
         $sheet->mergeCells('A1:I1');
         $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
-        $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         // Style header baris 2 (warna background hijau tua, font putih, bold)
         $headerRange = 'A2:I2';

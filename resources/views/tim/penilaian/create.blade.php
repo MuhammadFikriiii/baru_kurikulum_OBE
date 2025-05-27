@@ -19,7 +19,7 @@
          class="w-full mt-1 p-3 border border-black rounded-lg mb-4 focus:ring-blue-500 focus:border-blue-500">
             <option value="" selected disabled>Pilih CPL</option>
             @foreach ($cpls as $cpl)
-                <option value="{{ $cpl->id_cpl }}">{{ $cpl->deskripsi_cpl }}</option>
+                <option value="{{ $cpl->id_cpl }}">{{ $cpl->kode_cpl }}: {{ $cpl->deskripsi_cpl }}</option>
             @endforeach
         </select>
 
@@ -28,7 +28,7 @@
         class="w-full mt-1 p-3 border border-black rounded-lg mb-4">
         <option value="" selected disabled>Pilih MK</option>
         @foreach ($mks as $mk)
-            <option value="{{ $mk->kode_mk }}">{{ $mk->nama_mk }}</option>
+            <option value="{{ $mk->kode_mk }}">{{ $mk->kode_mk }}: {{ $mk->nama_mk }}</option>
         @endforeach
     </select>
 
@@ -37,7 +37,7 @@
         class="w-full mt-1 p-3 border border-black rounded-lg mb-4">
         <option value="" selected disabled>Pilih CPMK</option>
         @foreach ($cpmks as $cpmk)
-            <option value="{{ $cpmk->id_cpmk }}">{{ $cpmk->deskripsi_cpmk }}</option>
+            <option value="{{ $cpmk->id_cpmk }}">{{ $cpmk->kode_cpmk }}: {{ $cpmk->deskripsi_cpmk }}</option>
         @endforeach
     </select>
 

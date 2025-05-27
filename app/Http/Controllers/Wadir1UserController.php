@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class Wadir1UserController extends Controller
 {
-    public function index()
-    {
-        $users = User::all();
+    public function index() {
+
+        $users = User::with('prodi')->get();
         return view('wadir1.users.index', compact('users'));
     }
 

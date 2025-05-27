@@ -89,6 +89,9 @@ class TimPemetaanCplPlExport implements FromArray, WithTitle, WithStyles, WithCo
     {
         // Style for title cell (A1)
         $sheet->getStyle('A1')->getFont()->setBold(true);
+        $sheet->mergeCells('A1:F1');
+        $sheet->getStyle('A1')->getFont()->setSize(12);
+        $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
         
         // Style for the header row (row 2)
         $lastCol = $sheet->getHighestColumn();

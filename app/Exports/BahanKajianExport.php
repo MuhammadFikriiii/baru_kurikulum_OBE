@@ -170,7 +170,8 @@ class BahanKajianExport implements
                 $sheet = $event->sheet;
 
                 $sheet->setCellValue('A1', '4. Daftar Bahan Kajian');
-                $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(10);
+                $sheet->mergeCells('A1:H1');
+                $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(12);
             },
         ];
     }

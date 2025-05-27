@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class AdminPenilaianController extends Controller
 {
+    public function index()
+    {
+        
+    }
     public function create()
     {
         $cpls = CapaianProfilLulusan::all();

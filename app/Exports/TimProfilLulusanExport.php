@@ -184,10 +184,10 @@ class TimProfilLulusanExport implements
                 $sheet = $event->sheet;
                 
                 // Title in the first row
-                $sheet->setCellValue('A1', 'Profil Lulusan');
+                $sheet->setCellValue('A1', '1. Profil Lulusan');
                 $sheet->mergeCells('A1:G1');
-                $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
-                $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+                $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(12);
+                $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
             },
         ];
     }
