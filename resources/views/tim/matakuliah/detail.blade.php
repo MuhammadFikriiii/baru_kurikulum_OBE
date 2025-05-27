@@ -7,29 +7,33 @@
         @if ($selectedCPL)
             <div class="mt-4">
                 <h3 class="text-xl font-semibold mb-2">CPL Terkait:</h3>
-                @foreach ($selectedCPL as $id_cpl)
-                    @php
+                @php
+                    $allCplText = '';
+                    foreach ($selectedCPL as $id_cpl) {
                         $cplDetail = $cplList->firstWhere('id_cpl', $id_cpl);
-                    @endphp
-                    @if ($cplDetail)
-                        <textarea type="text" readonly class="w-full p-3 border border-black rounded-lg bg-gray-100 mb-2">{{ $cplDetail->kode_cpl }}: {{ $cplDetail->deskripsi_cpl }}</textarea>
-                    @endif
-                @endforeach
+                        if ($cplDetail) {
+                            $allCplText .= $cplDetail->kode_cpl . ': ' . $cplDetail->deskripsi_cpl . "\n";
+                        }
+                    }
+                @endphp
+                <textarea readonly class="w-full p-3 border border-black rounded-lg bg-gray-100" rows="6">{{ trim($allCplText) }}</textarea>
             </div>
         @endif
 
         @if ($selectedBK)
             <div class="mt-4">
                 <h3 class="text-xl font-semibold mb-1">BK Terkait</h3>
-                @foreach ($selectedBK as $id_bk)
-                    @php
+
+                @php
+                    $allBkText = '';
+                    foreach ($selectedBK as $id_bk) {
                         $bkDetail = $bkList->firstWhere('id_bk', $id_bk);
-                    @endphp
-                    @if ($bkDetail)
-                        <input type="text" readonly class="w-full p-3 border border-black rounded-lg bg-gray-100 mb-2"
-                            value="{{ $bkDetail->kode_bk }}: {{ $bkDetail->nama_bk }}"></input>
-                    @endif
-                @endforeach
+                        if ($bkDetail) {
+                            $allBkText .= $bkDetail->kode_bk . ': ' . $bkDetail->nama_bk . "\n";
+                        }
+                    }
+                @endphp
+                <textarea readonly class="w-full p-3 border border-black rounded-lg bg-gray-100" rows="5">{{ trim($allBkText) }}</textarea>
             </div>
         @endif
 

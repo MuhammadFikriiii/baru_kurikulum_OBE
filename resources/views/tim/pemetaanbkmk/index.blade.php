@@ -33,8 +33,26 @@
                 <thead class="bg-green-800 text-white">
                     <tr>
                         <th class="px-4 py-2 text-left"></th>
-                        @foreach ($mks as $mk)
-                            <th class="px-2 py-2 relative group">
+                        @foreach ($bks as $bk)
+                            <th class="px-2 py-2 relative group text-center">
+                                <span class="cursor-help">{{ $bk->kode_bk }}</span>
+                                <div
+                                    class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+                                    <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
+                                        {{ $prodi->nama_prodi }}
+                                    </div>
+                                    <div class="mt-3 px-2 text-center">
+                                        {{ $bk->nama_bk }}
+                                    </div>
+                                </div>
+                            </th>
+                        @endforeach
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($mks as $index => $mk)
+                        <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border">
+                            <td class="px-4 py-2 relative group">
                                 <span class="cursor-help">{{ $mk->kode_mk }}</span>
                                 <div
                                     class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
@@ -45,27 +63,8 @@
                                         {{ $mk->nama_mk }}
                                     </div>
                                 </div>
-                            </th>
-                        @endforeach
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($bks as $index => $bk)
-                        <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border">
-                            <td class="px-4 py-2 relative group">
-                                <span class="cursor-help">{{ $bk->kode_bk }}</span>
-                                <div
-                                    class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
-
-                                    <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
-                                        {{ $prodi->nama_prodi }}
-                                    </div>
-                                    <div class="mt-3 px-2 text-center">
-                                        {{ $bk->nama_bk }}
-                                    </div>
-                                </div>
                             </td>
-                            @foreach ($mks as $mk)
+                            @foreach ($bks as $bk)
                                 <td class="px-4 py-2 text-center">
                                     <input type="checkbox" disabled
                                         {{ isset($relasi[$bk->id_bk]) && in_array($mk->kode_mk, $relasi[$bk->id_bk]->pluck('kode_mk')->toArray()) ? 'checked' : '' }}

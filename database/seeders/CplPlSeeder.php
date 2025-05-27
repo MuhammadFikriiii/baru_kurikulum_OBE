@@ -23,16 +23,6 @@ class CplPlSeeder extends Seeder
             ['id_cpl' => '7', 'id_pl' => 3],
             ['id_cpl' => '8', 'id_pl' => 4],
             ['id_cpl' => '9', 'id_pl' => 4],
-            //prodilain
-            ['id_cpl' => '10', 'id_pl' => 5],
-            ['id_cpl' => '11', 'id_pl' => 6],
-            ['id_cpl' => '12', 'id_pl' => 5],
-            ['id_cpl' => '13', 'id_pl' => 6],
-            ['id_cpl' => '14', 'id_pl' => 7],
-            ['id_cpl' => '15', 'id_pl' => 8],
-            ['id_cpl' => '16', 'id_pl' => 5],
-            ['id_cpl' => '17', 'id_pl' => 7],
-            ['id_cpl' => '18', 'id_pl' => 8],
         ];
         DB::table('cpl_pl')->insert($data);
     }

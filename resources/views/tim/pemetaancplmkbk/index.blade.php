@@ -6,9 +6,9 @@
 
         <hr class="border border-black mb-4">
 
-        <div class="w-full  overflow-visible border">
+        <div class="w-full  overflow-x-auto border">
 
-            <table class="w-full table-auto">
+            <table class="min-w-max table-auto">
                 <thead class="bg-green-800 sticky top-0  text-white text-sm text-center">
                     <tr>
                         <th class="text-center  bg-green-800">CPL / BK</th>

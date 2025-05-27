@@ -325,5 +325,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/penilaian/{penilaian}/edit', [TimPenilaianController::class, 'edit'])->name('penilaian.edit');
         Route::put('/penilaian/{penilaian}', [TimPenilaianController::class, 'update'])->name('penilaian.update');
         Route::get('/penilaian/{penilaian}/detail', [TimPenilaianController::class, 'detail'])->name('penilaian.detail');
+        Route::post('/ajax/get-cpl-by-bk', [TimMataKuliahController::class, 'getCplByBk'])->name('matakuliah.getCPLByBK');
     });
 });
