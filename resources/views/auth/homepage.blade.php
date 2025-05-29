@@ -22,6 +22,7 @@
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   
+  <!-- Swiper homepage  -->
   <script>
     $(document).ready(function(){
       const owl = $(".owl-banner");
@@ -90,7 +91,10 @@
       goToSlide(currentSlide);
     }, 5000); // Auto slide setiap 5 detik
   </script>
+
+
 </head>
+
 <body class="bg-gray-100 text-gray-800">
 
 <header class="bg-white shadow-md w-full fixed top-0 z-50" x-data="{ open: false }">
@@ -295,6 +299,7 @@
 
   
 <!-- Daftar Kurikulum dan Program Studi -->
+<!-- Jurusan -->
  <style>
   .program-slider {
       scroll-behavior: smooth;
@@ -705,10 +710,10 @@
 <div class="p-6 max-w-7xl mx-auto">
   <!-- Header: Judul dan Indikator -->
   <div class="flex justify-between items-center mb-4">
-    <h2 class="text-2xl font-bold text-indigo-800">Team Kurikulum</h2>
-    <!-- Indicators -->
-    <div class="flex items-center space-x-2" id="indicators">
-      <button class="h-2 w-6 rounded-full bg-indigo-600 focus:outline-none transition-all duration-300" data-slide="0"></button>
+      <h2 class="text-2xl font-bold text-indigo-800">Team Kurikulum</h2>
+     <!-- Indicators -->
+     <div class="flex items-center space-x-2" id="indicators">
+      <button class="h-2 w-6 rounded-full bg-gray-300 focus:outline-none transition-all duration-300" data-slide="0"></button>
       <button class="h-2 w-2 rounded-full bg-gray-300 focus:outline-none transition-all duration-300" data-slide="1"></button>
       <button class="h-2 w-2 rounded-full bg-gray-300 focus:outline-none transition-all duration-300" data-slide="2"></button>
     </div>
@@ -716,17 +721,14 @@
 
   <!-- Carousel wrapper -->
   <div class="relative overflow-hidden">
-    <div id="carousel" class="flex transition-transform duration-700 ease-in-out" style="gap: 1.75rem;">
-
+    <div id="carousel" class="flex transition-transform duration-500 ease-in-out" style="gap: 1.75rem;">
       <!-- Card 1 - Kurikulum MBKM -->
       <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300">
         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-pink-500"></div>
-        
         <div class="p-4">
           <span class="text-xs bg-green-600 text-white px-3 py-1 rounded-full shadow-sm">KURIKULUM</span>
           <h3 class="font-bold text-lg text-gray-800 mt-2">Kurikulum MBKM 2024</h3>
           <p class="text-gray-600 text-sm">Program Studi Teknik Informatika</p>
-          
           <div class="mt-4 pt-4 border-t border-gray-100">
             <div class="flex flex-wrap gap-2">
               <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">#MerdekaBelajar</span>
@@ -740,12 +742,10 @@
       <!-- Card 2 - Dosen Profesor -->
       <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300">
         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-500"></div>
-        
         <div class="p-4">
           <span class="text-xs bg-indigo-600 text-white px-3 py-1 rounded-full shadow-sm">PROFESOR</span>
           <h3 class="font-bold text-lg text-gray-800 mt-2">Prof. Dr. Putri Sari, M.Sc.</h3>
           <p class="text-gray-600 text-sm">Fakultas Teknologi Informasi</p>
-          
           <div class="mt-4 pt-4 border-t border-gray-100">
             <p class="text-gray-700 text-sm font-medium">Spesialisasi:</p>
             <p class="text-gray-500 text-sm mt-1">Kecerdasan Buatan</p>
@@ -756,12 +756,10 @@
       <!-- Card 3 - Dosen Doktor -->
       <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300">
         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-teal-500"></div>
-        
         <div class="p-4">
           <span class="text-xs bg-teal-600 text-white px-3 py-1 rounded-full shadow-sm">DOKTOR</span>
           <h3 class="font-bold text-lg text-gray-800 mt-2">Dr. Ahmad Fauzi, M.Kom.</h3>
           <p class="text-gray-600 text-sm">Fakultas Ilmu Komputer</p>
-          
           <div class="mt-4 pt-4 border-t border-gray-100">
             <p class="text-gray-700 text-sm font-medium">Spesialisasi:</p>
             <p class="text-gray-500 text-sm mt-1">Data Science</p>
@@ -772,161 +770,180 @@
       <!-- Card 4 - Guru Besar -->
       <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300">
         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-indigo-500"></div>
-        
         <div class="p-4">
           <span class="text-xs bg-purple-600 text-white px-3 py-1 rounded-full shadow-sm">GURU BESAR</span>
           <h3 class="font-bold text-lg text-gray-800 mt-2">Prof. Dr. Siti Rahayu, Ph.D</h3>
           <p class="text-gray-600 text-sm">Fakultas Kedokteran</p>
-          
           <div class="mt-4 pt-4 border-t border-gray-100">
             <p class="text-gray-700 text-sm font-medium">Spesialisasi:</p>
             <p class="text-gray-500 text-sm mt-1">Neurologi</p>
           </div>
         </div>
       </div>
-
-      <!-- Card 5 - Kurikulum Internasional -->
-      <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-400 to-orange-500"></div>
-        
-        <div class="p-4">
-          <span class="text-xs bg-orange-600 text-white px-3 py-1 rounded-full shadow-sm">INTERNASIONAL</span>
-          <h3 class="font-bold text-lg text-gray-800 mt-2">Kurikulum Internasional</h3>
-          <p class="text-gray-600 text-sm">Program Studi Kedokteran</p>
-          
-          <div class="mt-4 pt-4 border-t border-gray-100">
-            <div class="flex flex-wrap gap-2">
-              <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded">#AkreditasiA</span>
-              <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded">#Global</span>
-            </div>
-            <p class="text-gray-500 text-sm mt-3">Mulai berlaku: Agustus 2024</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 6 - Dosen Ahli -->
-      <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-amber-500"></div>
-        
-        <div class="p-4">
-          <span class="text-xs bg-amber-600 text-white px-3 py-1 rounded-full shadow-sm">AHLI</span>
-          <h3 class="font-bold text-lg text-gray-800 mt-2">Dr. Rina Wijayanti, M.Eng</h3>
-          <p class="text-gray-600 text-sm">Fakultas Teknik Elektro</p>
-          
-          <div class="mt-4 pt-4 border-t border-gray-100">
-            <p class="text-gray-700 text-sm font-medium">Spesialisasi:</p>
-            <p class="text-gray-500 text-sm mt-1">Robotika</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 7 - Tim Pengajar -->
-      <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-400 to-rose-500"></div>
-        
-        <div class="p-4">
-          <span class="text-xs bg-rose-600 text-white px-3 py-1 rounded-full shadow-sm">TIM PENGAJAR</span>
-          <h3 class="font-bold text-lg text-gray-800 mt-2">Tim Pengajar Berprestasi</h3>
-          <p class="text-gray-600 text-sm">Fakultas Ekonomi & Bisnis</p>
-          
-          <div class="mt-4 pt-4 border-t border-gray-100">
-            <div class="flex flex-wrap gap-2">
-              <span class="inline-block bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded">#JuaraNasional</span>
-              <span class="inline-block bg-rose-100 text-rose-800 text-xs px-2 py-1 rounded">#Inovasi</span>
-            </div>
-            <p class="text-gray-500 text-sm mt-3">Penghargaan: Mei 2024</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 8 - Kurikulum Industri -->
-      <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
-        
-        <div class="p-4">
-          <span class="text-xs bg-blue-600 text-white px-3 py-1 rounded-full shadow-sm">INDUSTRI</span>
-          <h3 class="font-bold text-lg text-gray-800 mt-2">Kurikulum Link & Match</h3>
-          <p class="text-gray-600 text-sm">Program Studi Teknik Industri</p>
-          
-          <div class="mt-4 pt-4 border-t border-gray-100">
-            <div class="flex flex-wrap gap-2">
-              <span class="inline-block bg-cyan-100 text-cyan-800 text-xs px-2 py-1 rounded">#Kerjasama</span>
-              <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">#Industri</span>
-            </div>
-            <p class="text-gray-500 text-sm mt-3">Mulai berlaku: September 2024</p>
-          </div>
-        </div>
-      </div>
+      
+  
     </div>
   </div>
 </div>
 
 <script>
-  // Carousel functionality
-  document.addEventListener('DOMContentLoaded', function() {
+ document.addEventListener('DOMContentLoaded', function() {
     const carousel = document.getElementById('carousel');
-    const cards = document.querySelectorAll('.w-[calc((100% - (3*1.75rem))/4)]');
+    const cards = document.querySelectorAll('#carousel > div');
     const indicators = document.querySelectorAll('#indicators button');
-    const cardWidth = cards[0].offsetWidth + 28; // width + gap
-    let currentPosition = 0;
-    let maxPosition = (cards.length - 4) * cardWidth;
-    let activeIndicator = 0;
     
+    const cardWidth = cards[0].offsetWidth + 28; // width + gap
+    let currentIndex = 0;
+    const maxVisibleCards = 4;
+    const totalSlides = Math.ceil(cards.length / maxVisibleCards);
+    let autoSlideInterval;
+    let isAnimating = false;
+    
+    // Initialize carousel
+    function initCarousel() {
+      updateCarousel();
+      startAutoSlide();
+    }
+    
+    // Update carousel position
     function updateCarousel() {
-      carousel.style.transform = `translateX(-${currentPosition}px)`;
+      if (isAnimating) return;
+      isAnimating = true;
       
-      // Update indicators
+      carousel.style.transition = 'transform 0.5s ease-in-out';
+      carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+      
+      setTimeout(() => {
+        isAnimating = false;
+      }, 500);
+      
+      updateIndicators();
+    }
+    
+    // Update indicators
+    function updateIndicators() {
+      const activeIndicator = Math.floor(currentIndex / maxVisibleCards);
       indicators.forEach((indicator, index) => {
         if (index === activeIndicator) {
-          indicator.classList.remove('w-2', 'bg-gray-300');
+          // Active indicator
+          indicator.classList.remove('w-2', 'bg-gray-300', 'hover:bg-indigo-600');
           indicator.classList.add('w-6', 'bg-indigo-600');
         } else {
+          // Inactive indicator
           indicator.classList.remove('w-6', 'bg-indigo-600');
-          indicator.classList.add('w-2', 'bg-gray-300');
+          indicator.classList.add('w-2', 'bg-gray-300', 'hover:bg-indigo-600');
         }
       });
     }
     
-    // Next slide
-    function nextSlide() {
-      if (currentPosition < maxPosition) {
-        currentPosition += cardWidth;
-        activeIndicator = Math.min(activeIndicator + 1, indicators.length - 1);
-      } else {
-        currentPosition = 0;
-        activeIndicator = 0;
+    // Go to specific slide (showing 4 cards at a time)
+    function goToSlide(slideIndex) {
+      currentIndex = slideIndex * maxVisibleCards;
+      if (currentIndex > cards.length - maxVisibleCards) {
+        currentIndex = cards.length - maxVisibleCards;
       }
       updateCarousel();
+      resetAutoSlide();
     }
     
-    // Previous slide
-    function prevSlide() {
-      if (currentPosition > 0) {
-        currentPosition -= cardWidth;
-        activeIndicator = Math.max(activeIndicator - 1, 0);
+    // Next card (single card movement)
+    function nextCard() {
+      if (currentIndex < cards.length - maxVisibleCards) {
+        currentIndex++;
       } else {
-        currentPosition = maxPosition;
-        activeIndicator = indicators.length - 1;
+        // If at end, loop back to start with animation
+        currentIndex = 0;
       }
       updateCarousel();
+      resetAutoSlide();
     }
     
-    // Indicator click
+    // Previous card (single card movement)
+    function prevCard() {
+      if (currentIndex > 0) {
+        currentIndex--;
+      } else {
+        // If at start, loop to end with animation
+        currentIndex = cards.length - maxVisibleCards;
+      }
+      updateCarousel();
+      resetAutoSlide();
+    }
+    
+    // Auto slide
+    function startAutoSlide() {
+      autoSlideInterval = setInterval(nextCard, 3000); // Slide every 3 seconds
+    }
+    
+    function resetAutoSlide() {
+      clearInterval(autoSlideInterval);
+      startAutoSlide();
+    }
+    
+    // Event listeners for indicators with animation
     indicators.forEach((indicator, index) => {
       indicator.addEventListener('click', () => {
-        currentPosition = index * 4 * cardWidth;
-        activeIndicator = index;
-        updateCarousel();
+        if (isAnimating) return;
+        
+        // Add click animation
+        indicator.classList.add('transform', 'scale-125');
+        setTimeout(() => {
+          indicator.classList.remove('transform', 'scale-125');
+        }, 300);
+        
+        goToSlide(index);
       });
     });
     
-    // Auto slide
-    setInterval(nextSlide, 5000);
+    // Initialize
+    initCarousel();
+    
+    // Pause on hover
+    carousel.addEventListener('mouseenter', () => {
+      clearInterval(autoSlideInterval);
+    });
+    
+    carousel.addEventListener('mouseleave', () => {
+      resetAutoSlide();
+    });
+    
+    // Touch events for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    carousel.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      clearInterval(autoSlideInterval);
+    });
+    
+    carousel.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+      resetAutoSlide();
+    });
+    
+    function handleSwipe() {
+      const threshold = 50;
+      if (touchEndX < touchStartX - threshold) {
+        nextCard();
+      } else if (touchEndX > touchStartX + threshold) {
+        prevCard();
+      }
+    }
+    
+    // Responsive adjustments
+    function handleResize() {
+      const newCardWidth = cards[0].offsetWidth + 28;
+      carousel.style.transform = `translateX(-${currentIndex * newCardWidth}px)`;
+    }
+    
+    window.addEventListener('resize', handleResize);
   });
 </script>
 
+
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-14 mt-20">
+ <footer class="bg-gray-800 text-white py-12 mt-20">
     <div class="container mx-auto px-6">
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
         <!-- About Section -->
@@ -991,7 +1008,7 @@
         <p>Copyright &copy; 2025 Fikri & Habibie., All Rights Reserved.</p>
       </div>
     </div>
-  </footer>
+ </footer>
   
   
 
