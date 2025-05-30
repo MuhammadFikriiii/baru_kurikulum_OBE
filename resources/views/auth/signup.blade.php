@@ -11,12 +11,12 @@
   <div class="min-h-screen flex items-center justify-center py-6 px-4">
     <div class="w-full max-w-4xl bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
       
-     <!-- Gambar Sign Up -->
+     
       <div class="md:w-1/2 w-full h-64 md:h-auto bg-cover bg-center relative" style="background-image: url('/image/poliban.jpeg');">
         <div class="absolute inset-0 bg-black bg-opacity-20"></div>
       </div>
       
-      <!-- Form -->
+      
       <div class="md:w-1/2 w-full py-8 px-6 sm:px-12">
         <h2 class="text-3xl font-bold text-gray-800 mb-4">Sign-Up</h2>
         <p class="mb-6 text-gray-600">Buat akunmu sekarang.</p>
