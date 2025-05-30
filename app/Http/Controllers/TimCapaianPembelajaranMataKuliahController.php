@@ -28,6 +28,19 @@ class TimCapaianPembelajaranMataKuliahController extends Controller
         return view("tim.capaianpembelajaranmatakuliah.index", compact("capaianpembelajaranmatakuliahs"));
     }
 
+    public function getCplByMk(Request $request)
+    {
+        $kode_mks = $request->kode_mks ?? [];
+
+        $cpls = DB::table('cpl_mk')
+            ->join('capaian_profil_lulusans as cpl', 'cpl_mk.id_cpl', '=', 'cpl.id_cpl')
+            ->whereIn('cpl_mk.kode_mk', $kode_mks)
+            ->select('cpl.id_cpl', 'cpl.kode_cpl', 'cpl.deskripsi_cpl')
+            ->distinct()
+            ->get();
+
+        return response()->json($cpls);
+    }
     public function create()
     {
         $kodeProdi = Auth::user()->kode_prodi;
@@ -66,28 +79,37 @@ class TimCapaianPembelajaranMataKuliahController extends Controller
 
     public function store(Request $request)
     {
-        request()->validate([
-            'kode_cpmk' => 'required|string|max:10',
-            'deskripsi_cpmk' => 'required',
-            'id_cpls' => 'required|array',
+        $request->validate([
+            'kode_cpmk' => 'required|string|max:10|unique:capaian_pembelajaran_mata_kuliahs,kode_cpmk',
+            'deskripsi_cpmk' => 'required|string',
+            'kode_mks' => 'required|array',
         ]);
 
         $cpmk = CapaianPembelajaranMataKuliah::create($request->only(['kode_cpmk', 'deskripsi_cpmk']));
-        $id_cpmk = $cpmk->id_cpmk;
-        foreach ($request->id_cpls as $id_cpl) {
+
+        $cpls = DB::table('cpl_mk')
+            ->whereIn('kode_mk', $request->kode_mks)
+            ->select('id_cpl')
+            ->distinct()
+            ->pluck('id_cpl');
+
+        foreach ($cpls as $id_cpl) {
             DB::table('cpl_cpmk')->insert([
-                'id_cpmk' => $id_cpmk,
+                'id_cpmk' => $cpmk->id_cpmk,
                 'id_cpl' => $id_cpl,
             ]);
         }
+
         foreach ($request->kode_mks as $kode_mk) {
             DB::table('cpmk_mk')->insert([
-                'id_cpmk' => $id_cpmk,
+                'id_cpmk' => $cpmk->id_cpmk,
                 'kode_mk' => $kode_mk,
             ]);
         }
-        return redirect()->route('tim.capaianpembelajaranmatakuliah.index')->with('success', 'Capaian Pembelajaran Mata Kuliah berhasil ditambahkan.');
+
+        return redirect()->route('tim.capaianpembelajaranmatakuliah.index')->with('success', 'CPMK berhasil ditambahkan.');
     }
+
 
     public function edit($id_cpmk)
     {
