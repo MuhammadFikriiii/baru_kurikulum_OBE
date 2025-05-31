@@ -943,7 +943,7 @@
 
 
   <!-- Footer -->
- <footer class="bg-gray-800 text-white py-12 mt-20">
+  <footer class="bg-gray-800 text-white py-12 mt-20">
     <div class="container mx-auto px-6">
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
         <!-- About Section -->
@@ -985,20 +985,163 @@
           </ul>
         </div>
         
-        <!-- Subscribe -->
+        <!-- Email -->
         <div class="footer-item">
-          <h4 class="font-semibold text-lg mb-6">Informasi Berita</h4>
-          <p class="text-gray-400 mb-4">Dapatkan informasi terbaru seputar berita kampus langsung di email Anda.</p>
+          <h4 class="font-semibold text-lg mb-6">Tentang Informasi</h4>
+          <p class="text-gray-400 mb-4">Dapatkan informasi, Tim kami siap menjawab pertanyaan Anda via email.</p>
           <form action="#" method="get" class="flex items-center space-x-2">
-            <input type="email" name="email" id="email" placeholder="Your Email"
-                   class="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#5460B5] w-full" required>
-            <button type="submit"
-                    class="bg-[#5460B5] text-white px-4 py-2 rounded-full hover:bg-blue-700 transition">
-              <i class="fas fa-paper-plane"></i>
-            </button>
-          </form>
+          <!-- Popup ) -->
+          <div id="popupOverlay"  class=" hidden">
+            <div class="fixed inset-0 bg-black bg-opacity-70 justify-center z-50 flex items-center backdrop-blur-sm">
+              <div class="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 w-full max-w-md shadow-2xl transform transition-all animate-fadeIn">
+                <div class="flex justify-between items-center mb-6">
+                  <div>
+                    <h3 class="text-2xl font-bold text-gray-800">Hubungi Kami</h3>
+                    <p class="text-sm text-gray-500 mt-1">Kami akan segera merespon pesan Anda</p>
+                  </div>
+                  <button id="closePopup" class="text-gray-400 hover:text-gray-600 transition-transform hover:rotate-90">
+                    <i class="fas fa-times text-xl"></i>
+                  </button>
+                </div>
+                
+                <form id="messageForm" class="space-y-5">
+                  <!-- Field Nama -->
+                  <div class="relative mb-3">
+                    <div class="relative">
+                      <input type="text" id="popupName" name="name" required
+                            class="w-full px-4 py-3 pl-11 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5460B5] 
+                            focus:border-transparent transition bg-white/80 text-gray-800 placeholder-gray-400 peer"
+                            placeholder="Nama Lengkap">
+                      <i class="fas fa-user absolute left-3 top-4 text-gray-400"></i>
+                      <label for="popupName" class="absolute left-11 top-3 text-sm text-gray-500 transition-all 
+                                      peer-focus:-top-3 peer-focus:text-xs peer-focus:text-[#5460B5]
+                                      peer-valid:-top-3 peer-valid:text-xs">
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <!-- Field Email -->
+                  <div class="relative mb-3">
+                    <div class="relative">
+                      <input type="email" id="popupEmail" name="email" required
+                            class="w-full px-4 py-3 pl-11 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5460B5] 
+                            focus:border-transparent transition bg-white/80 text-gray-800 placeholder-gray-400 peer"
+                            placeholder="Alamat Email">
+                      <i class="fas fa-envelope absolute left-3 top-4 text-gray-400"></i>
+                      <label for="popupEmail" class="absolute left-11 top-3 text-sm text-gray-500 transition-all 
+                                      peer-focus:-top-3 peer-focus:text-xs peer-focus:text-[#5460B5]
+                                      peer-valid:-top-3 peer-valid:text-xs">
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <!-- Field Pesan -->
+                  <div class="relative mb-3">
+                    <div class="relative">
+                      <textarea id="popupMessage" name="message" rows="5" required
+                                class="w-full px-4 py-3 pl-11 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#5460B5] 
+                                focus:border-transparent transition bg-white/80 text-gray-800 placeholder-gray-400 peer resize-none"
+                                placeholder="Tulis pesan Anda..."></textarea>
+                      <i class="fas fa-comment-dots absolute left-3 top-4 text-gray-400"></i>
+                      <label for="popupMessage" class="absolute left-11 top-3 text-sm text-gray-500 transition-all 
+                                      peer-focus:-top-3 peer-focus:text-xs peer-focus:text-[#5460B5]
+                                      peer-valid:-top-3 peer-valid:text-xs">
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <!-- Tombol Submit -->
+                  <button type="submit" 
+                          class="w-full bg-gradient-to-r from-[#5460B5] to-[#3a44a1] text-white py-3.5 px-6 rounded-xl hover:opacity-90 transition-all transform hover:scale-[1.02] shadow-lg font-medium flex items-center justify-center gap-2">
+                    <i class="fas fa-paper-plane"></i>
+                    <span class="relative">
+                      Kirim Pesan
+                      <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-white/50 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+                    </span>
+                  </button>
+                </form>
+                
+                <div class="mt-6 text-center text-xs text-gray-400">
+                  <p>Kami tidak akan membagikan data Anda kepada pihak lain</p>
+                </div>
+              </div>
+            </div>
+          </div>
+         
           
-        </div>
+          <style>
+            @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(10px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+            .animate-fadeIn {
+              animation: fadeIn 0.3s ease-out forwards;
+            }
+          </style>
+
+            <!-- Button to trigger popup -->
+            <button id="openPopup" 
+                    class=" bg-[#5460B5] text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition transform hover:scale-[1.03] shadow-md flex items-center">
+              <i class="fas fa-envelope mr-2"></i> Hubungi Kami
+            </button>
+
+            <!-- JavaScript to handle popup -->
+            <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                const popupOverlay = document.getElementById('popupOverlay');
+                const openPopup = document.getElementById('openPopup');
+                const closePopup = document.getElementById('closePopup');
+                const messageForm = document.getElementById('messageForm');
+                
+                // Open popup with animation
+                openPopup.addEventListener('click', function() {
+                  popupOverlay.classList.remove('hidden');
+                  document.body.style.overflow = 'hidden'; // Prevent scrolling
+                });
+                
+                // Close popup
+                closePopup.addEventListener('click', function() {
+                  popupOverlay.classList.add('hidden');
+                  document.body.style.overflow = ''; // Re-enable scrolling
+                });
+                
+                // Close when clicking outside
+                popupOverlay.addEventListener('click', function(e) {
+                  if (e.target === popupOverlay) {
+                    popupOverlay.classList.add('hidden');
+                    document.body.style.overflow = ''; // Re-enable scrolling
+                  }
+                });
+                
+                // Form submission
+                messageForm.addEventListener('submit', function(e) {
+                  e.preventDefault();
+                  
+                  // Get form values
+                  const name = document.getElementById('popupName').value;
+                  const email = document.getElementById('popupEmail').value;
+                  const message = document.getElementById('popupMessage').value;
+                  
+                  // Here you would typically send the data to a server
+                  console.log('Form submitted:', { name, email, message });
+                  
+                  // Show success message with SweetAlert or similar
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Pesan Terkirim!',
+                    text: 'Terima kasih telah menghubungi kami.',
+                    confirmButtonColor: '#5460B5'
+                  });
+                  
+                  // Reset form and close popup
+                  messageForm.reset();
+                  popupOverlay.classList.add('hidden');
+                  document.body.style.overflow = ''; // Re-enable scrolling
+                });
+              });
+            </script>
+              
+            </div>
   
       </div>
       
@@ -1009,6 +1152,7 @@
       </div>
     </div>
  </footer>
+  
   
   
 
