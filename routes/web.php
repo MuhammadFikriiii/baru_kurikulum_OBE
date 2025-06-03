@@ -63,6 +63,7 @@ use App\Http\Controllers\Wadir1PemetaanCplMkController;
 use App\Http\Controllers\Wadir1PemetaanBkMkController;
 use App\Http\Controllers\Wadir1PemetaanCplBkMkController;
 use App\Http\Controllers\Wadir1CapaianPembelajaranMatakuliahController;
+use App\Http\Controllers\HomepageController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -87,6 +88,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/', function () {
         return view('auth.homepage');
     });
+   Route::get('/', [HomepageController::class, 'homepage'])->name('homepage');
 });
 
 // Rute yang memerlukan autentikasi

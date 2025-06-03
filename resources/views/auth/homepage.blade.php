@@ -344,279 +344,82 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
           </svg>
       </button>
-      
+      <style>
+        /* Hide scrollbar tapi tetap bisa di-scroll */
+        .hide-scrollbar {
+          scrollbar-width: none; /* Firefox */
+          -ms-overflow-style: none;  /* IE and Edge */
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none; /* Chrome, Safari, Opera */
+        }
+      </style>
       <!-- Slides -->
-      <div class="overflow-hidden">
-          <div id="program-slider" class="program-slider flex" style="width: 500%;">
-              <!-- Teknik Sipil -->
-              <div class="w-full px-4">
-                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer" onclick="window.location.href='#'">
-                          <div class="flex items-center mb-4">
-                              <div class="bg-blue-100 p-3 rounded-lg mr-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                  </svg>
-                              </div>
-                              <h3 class="text-xl font-bold text-gray-800">D3 Teknik Sipil</h3>
-                          </div>
-                          <p class="text-gray-600 mb-4">Program studi yang mempelajari perencanaan, perancangan, konstruksi, dan pemeliharaan infrastruktur.</p>
-                          <div class="flex justify-between items-center">
-                              <span class="text-sm text-gray-500">Jenjang: D3</span>
-                              <button class="text-blue-600 font-medium hover:text-blue-800">Lihat Detail →</button>
-                          </div>
-                      </div>
-                      
-                      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer" onclick="window.location.href='#'">
-                          <div class="flex items-center mb-4">
-                              <div class="bg-blue-100 p-3 rounded-lg mr-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
-                                  </svg>
-                              </div>
-                              <h3 class="text-xl font-bold text-gray-800">D4 Teknik Bangunan Rawa</h3>
-                          </div>
-                          <p class="text-gray-600 mb-4">Spesialisasi dalam konstruksi bangunan di daerah rawa dengan pendekatan berkelanjutan.</p>
-                          <div class="flex justify-between items-center">
-                              <span class="text-sm text-gray-500">Jenjang: D4</span>
-                              <button class="text-blue-600 font-medium hover:text-blue-800">Lihat Detail →</button>
-                          </div>
-                      </div>
-                      
-                      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer" onclick="window.location.href='#'">
-                          <div class="flex items-center mb-4">
-                              <div class="bg-blue-100 p-3 rounded-lg mr-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                                  </svg>
-                              </div>
-                              <h3 class="text-xl font-bold text-gray-800">D3 Teknik Geodesi</h3>
-                          </div>
-                          <p class="text-gray-600 mb-4">Mempelajari pengukuran dan pemetaan permukaan bumi untuk berbagai keperluan konstruksi.</p>
-                          <div class="flex justify-between items-center">
-                              <span class="text-sm text-gray-500">Jenjang: D3</span>
-                              <button class="text-blue-600 font-medium hover:text-blue-800">Lihat Detail →</button>
-                          </div>
-                      </div>
-                  </div>
+      <div class="overflow-x-auto hide-scrollbar">
+        <div id="program-slider" class="flex space-x-6 w-max">
+          @foreach ($prodis as $prodi)
+          <div class="w-80 shrink-0 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer border border-gray-100" onclick="window.location.href='#'">
+            
+            <!-- Header dengan gradient -->
+            <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-6 text-white">
+              <div class="flex items-center justify-between mb-3">
+                <div class="bg-white bg-opacity-20 p-3 rounded-xl">
+                  <i class="fas fa-graduation-cap text-2xl"></i>
+                </div>
+                <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-medium">
+                  {{ $prodi->jenjang_pendidikan }}
+                </span>
               </div>
-              
-              <!-- Teknik Mesin -->
-              <div class="w-full px-4">
-                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer" onclick="window.location.href='#'">
-                          <div class="flex items-center mb-4">
-                              <div class="bg-blue-100 p-3 rounded-lg mr-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                  </svg>
-                              </div>
-                              <h3 class="text-xl font-bold text-gray-800">D3 Teknik Mesin</h3>
-                          </div>
-                          <p class="text-gray-600 mb-4">Program studi yang berfokus pada perancangan, analisis, dan pemeliharaan sistem mekanik.</p>
-                          <div class="flex justify-between items-center">
-                              <span class="text-sm text-gray-500">Jenjang: D3</span>
-                              <button class="text-blue-600 font-medium hover:text-blue-800">Lihat Detail →</button>
-                          </div>
-                      </div>
-                      
-                      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer" onclick="window.location.href='#'">
-                          <div class="flex items-center mb-4">
-                              <div class="bg-blue-100 p-3 rounded-lg mr-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
-                                  </svg>
-                              </div>
-                              <h3 class="text-xl font-bold text-gray-800">D3 Teknik Mesin Otomotif</h3>
-                          </div>
-                          <p class="text-gray-600 mb-4">Spesialisasi dalam teknologi otomotif, perawatan, dan perbaikan kendaraan bermotor.</p>
-                          <div class="flex justify-between items-center">
-                              <span class="text-sm text-gray-500">Jenjang: D3</span>
-                              <button class="text-blue-600 font-medium hover:text-blue-800">Lihat Detail →</button>
-                          </div>
-                      </div>
-                      
-                      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer" onclick="window.location.href='#'">
-                          <div class="flex items-center mb-4">
-                              <div class="bg-blue-100 p-3 rounded-lg mr-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
-                                  </svg>
-                              </div>
-                              <h3 class="text-xl font-bold text-gray-800">D3 Alat Berat</h3>
-                          </div>
-                          <p class="text-gray-600 mb-4">Mempelajari operasi, perawatan, dan manajemen alat berat untuk konstruksi dan pertambangan.</p>
-                          <div class="flex justify-between items-center">
-                              <span class="text-sm text-gray-500">Jenjang: D3</span>
-                              <button class="text-blue-600 font-medium hover:text-blue-800">Lihat Detail →</button>
-                          </div>
-                      </div>
-                  </div>
+              <h3 class="text-xl font-bold mb-2">{{ $prodi->nama_prodi }}</h3>
+              <p class="text-blue-100 text-sm">{{ $prodi->gelar_lulusan }}</p>
+            </div>
+
+            <!-- Content -->
+            <div class="p-6">
+              <div class="flex items-center mb-4">
+                <div class="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                  <i class="fas fa-award mr-2"></i>
+                  Akreditasi {{ $prodi->peringkat_akreditasi }}
+                </div>
               </div>
-              
-              <!-- Teknik Elektro -->
-              <div class="w-full px-4">
-                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer" onclick="window.location.href='#'">
-                          <div class="flex items-center mb-4">
-                              <div class="bg-blue-100 p-3 rounded-lg mr-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                  </svg>
-                              </div>
-                              <h3 class="text-xl font-bold text-gray-800">D3 Teknik Listrik</h3>
-                          </div>
-                          <p class="text-gray-600 mb-4">Program studi yang mempelajari sistem tenaga listrik, instalasi, dan distribusi daya.</p>
-                          <div class="flex justify-between items-center">
-                              <span class="text-sm text-gray-500">Jenjang: D3</span>
-                              <button class="text-blue-600 font-medium hover:text-blue-800">Lihat Detail →</button>
-                          </div>
-                      </div>
-                      
-                      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer" onclick="window.location.href='#'">
-                          <div class="flex items-center mb-4">
-                              <div class="bg-blue-100 p-3 rounded-lg mr-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-                                  </svg>
-                              </div>
-                              <h3 class="text-xl font-bold text-gray-800">D3 Elektronika</h3>
-                          </div>
-                          <p class="text-gray-600 mb-4">Mempelajari komponen elektronika, rangkaian digital, dan sistem kendali elektronik.</p>
-                          <div class="flex justify-between items-center">
-                              <span class="text-sm text-gray-500">Jenjang: D3</span>
-                              <button class="text-blue-600 font-medium hover:text-blue-800">Lihat Detail →</button>
-                          </div>
-                      </div>
-                      
-                      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer" onclick="window.location.href='#'">
-                          <div class="flex items-center mb-4">
-                              <div class="bg-blue-100 p-3 rounded-lg mr-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                  </svg>
-                              </div>
-                              <h3 class="text-xl font-bold text-gray-800">D3 Teknik Informatika</h3>
-                          </div>
-                          <p class="text-gray-600 mb-4">Berfokus pada pengembangan perangkat lunak, jaringan komputer, dan basis data.</p>
-                          <div class="flex justify-between items-center">
-                              <span class="text-sm text-gray-500">Jenjang: D3</span>
-                              <button class="text-blue-600 font-medium hover:text-blue-800">Lihat Detail →</button>
-                          </div>
-                      </div>
+
+              <div class="space-y-3 mb-6">
+                <div class="flex items-center text-gray-600">
+                  <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                    <i class="fas fa-calendar-alt text-blue-600"></i>
                   </div>
-              </div>
-              
-              <!-- Akutansi -->
-              <div class="w-full px-4">
-                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer" onclick="window.location.href='#'">
-                          <div class="flex items-center mb-4">
-                              <div class="bg-blue-100 p-3 rounded-lg mr-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                  </svg>
-                              </div>
-                              <h3 class="text-xl font-bold text-gray-800">D3 Akuntansi</h3>
-                          </div>
-                          <p class="text-gray-600 mb-4">Program studi yang mempelajari pencatatan, pengklasifikasian, dan pelaporan transaksi keuangan.</p>
-                          <div class="flex justify-between items-center">
-                              <span class="text-sm text-gray-500">Jenjang: D3</span>
-                              <button class="text-blue-600 font-medium hover:text-blue-800">Lihat Detail →</button>
-                          </div>
-                      </div>
-                      
-                      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer" onclick="window.location.href='#'">
-                          <div class="flex items-center mb-4">
-                              <div class="bg-blue-100 p-3 rounded-lg mr-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                                  </svg>
-                              </div>
-                              <h3 class="text-xl font-bold text-gray-800">D3 Komputerisasi Akuntansi</h3>
-                          </div>
-                          <p class="text-gray-600 mb-4">Mengintegrasikan ilmu akuntansi dengan teknologi informasi untuk sistem akuntansi digital.</p>
-                          <div class="flex justify-between items-center">
-                              <span class="text-sm text-gray-500">Jenjang: D3</span>
-                              <button class="text-blue-600 font-medium hover:text-blue-800">Lihat Detail →</button>
-                          </div>
-                      </div>
-                      
-                      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer" onclick="window.location.href='#'">
-                          <div class="flex items-center mb-4">
-                              <div class="bg-blue-100 p-3 rounded-lg mr-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                                  </svg>
-                              </div>
-                              <h3 class="text-xl font-bold text-gray-800">D4 Akuntansi Lembaga Keuangan Syariah</h3>
-                          </div>
-                          <p class="text-gray-600 mb-4">Spesialisasi akuntansi untuk lembaga keuangan yang beroperasi berdasarkan prinsip syariah.</p>
-                          <div class="flex justify-between items-center">
-                              <span class="text-sm text-gray-500">Jenjang: D4</span>
-                              <button class="text-blue-600 font-medium hover:text-blue-800">Lihat Detail →</button>
-                          </div>
-                      </div>
+                  <div>
+                    <span class="text-sm text-gray-500">Berdiri</span>
+                    <p class="font-medium">{{ date('d M Y', strtotime($prodi->tgl_berdiri_prodi)) }}</p>
                   </div>
-              </div>
-              
-              <!-- Administrasi Bisnis -->
-              <div class="w-full px-4">
-                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer" onclick="window.location.href='#'">
-                          <div class="flex items-center mb-4">
-                              <div class="bg-blue-100 p-3 rounded-lg mr-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                  </svg>
-                              </div>
-                              <h3 class="text-xl font-bold text-gray-800">D3 Administrasi Bisnis</h3>
-                          </div>
-                          <p class="text-gray-600 mb-4">Program studi yang mempelajari manajemen perkantoran, korespondensi bisnis, dan administrasi.</p>
-                          <div class="flex justify-between items-center">
-                              <span class="text-sm text-gray-500">Jenjang: D3</span>
-                              <button class="text-blue-600 font-medium hover:text-blue-800">Lihat Detail →</button>
-                          </div>
-                      </div>
-                      
-                      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer" onclick="window.location.href='#'">
-                          <div class="flex items-center mb-4">
-                              <div class="bg-blue-100 p-3 rounded-lg mr-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                  </svg>
-                              </div>
-                              <h3 class="text-xl font-bold text-gray-800">D3 Manajemen Informatika</h3>
-                          </div>
-                          <p class="text-gray-600 mb-4">Mengintegrasikan ilmu manajemen dengan teknologi informasi untuk kebutuhan bisnis.</p>
-                          <div class="flex justify-between items-center">
-                              <span class="text-sm text-gray-500">Jenjang: D3</span>
-                              <button class="text-blue-600 font-medium hover:text-blue-800">Lihat Detail →</button>
-                          </div>
-                      </div>
-                      
-                      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition cursor-pointer" onclick="window.location.href='#'">
-                          <div class="flex items-center mb-4">
-                              <div class="bg-blue-100 p-3 rounded-lg mr-4">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                                  </svg>
-                              </div>
-                              <h3 class="text-xl font-bold text-gray-800">D4 Bisnis Digital</h3>
-                          </div>
-                          <p class="text-gray-600 mb-4">Mempelajari transformasi digital bisnis, e-commerce, dan strategi pemasaran digital.</p>
-                          <div class="flex justify-between items-center">
-                              <span class="text-sm text-gray-500">Jenjang: D4</span>
-                              <button class="text-blue-600 font-medium hover:text-blue-800">Lihat Detail →</button>
-                          </div>
-                      </div>
+                </div>
+
+                <div class="flex items-center text-gray-600">
+                  <div class="bg-green-100 p-2 rounded-lg mr-3">
+                    <i class="fas fa-phone text-green-600"></i>
                   </div>
+                  <div>
+                    <span class="text-sm text-gray-500">Kontak</span>
+                    <p class="font-medium">{{ $prodi->telepon_prodi }}</p>
+                  </div>
+                </div>
               </div>
+
+              <!-- Footer Actions -->
+              <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+                <button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105" 
+                        onclick="event.stopPropagation(); window.open('{{ $prodi->website_prodi }}', '_blank')">
+                  <i class="fas fa-external-link-alt mr-2"></i>
+                  Lihat Detail
+                </button>
+              </div>
+            </div>
           </div>
+          @endforeach
+        </div>
       </div>
+
       
       <!-- Next Button -->
       <button onclick="nextSlide()" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white p-3 rounded-full shadow-md hover:bg-gray-100 transition">
@@ -724,65 +527,24 @@
   <div class="relative overflow-hidden">
     <div id="carousel" class="flex transition-transform duration-500 ease-in-out" style="gap: 1.75rem;">
       <!-- Card 1 - Kurikulum MBKM -->
-      <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-pink-500"></div>
-        <div class="p-4">
-          <span class="text-xs bg-green-600 text-white px-3 py-1 rounded-full shadow-sm">KURIKULUM</span>
-          <h3 class="font-bold text-lg text-gray-800 mt-2">Kurikulum MBKM 2024</h3>
-          <p class="text-gray-600 text-sm">Program Studi Teknik Informatika</p>
-          <div class="mt-4 pt-4 border-t border-gray-100">
-            <div class="flex flex-wrap gap-2">
-              <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">#MerdekaBelajar</span>
-              <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">#KampusMerdeka</span>
+      <div class="flex gap-7 overflow-x-auto hide-scrollbar px-4 py-4">
+        @foreach ($tim_users as $user)
+          <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-pink-500"></div>
+            <div class="p-4">
+              <span class="text-xs bg-green-600 text-white px-3 py-1 rounded-full shadow-sm"> TEAM KURIKULUM</span>
+              <h3 class="font-bold text-lg text-gray-800 mt-2">{{ $user->name }}</h3>
+              Program Studi: {{ $user->prodi?->nama_prodi ?? '-' }}
+              <div class="mt-4 pt-4 border-t border-gray-100">
+                <div class="flex flex-wrap gap-2">
+                  <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">#MerdekaBelajar</span>
+                  <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">#KampusMerdeka</span>
+                </div>
+              </div>
             </div>
-            <p class="text-gray-500 text-sm mt-3">Update terbaru: Jan 2024</p>
           </div>
-        </div>
+        @endforeach
       </div>
-
-      <!-- Card 2 - Dosen Profesor -->
-      <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-indigo-500"></div>
-        <div class="p-4">
-          <span class="text-xs bg-indigo-600 text-white px-3 py-1 rounded-full shadow-sm">PROFESOR</span>
-          <h3 class="font-bold text-lg text-gray-800 mt-2">Prof. Dr. Putri Sari, M.Sc.</h3>
-          <p class="text-gray-600 text-sm">Fakultas Teknologi Informasi</p>
-          <div class="mt-4 pt-4 border-t border-gray-100">
-            <p class="text-gray-700 text-sm font-medium">Spesialisasi:</p>
-            <p class="text-gray-500 text-sm mt-1">Kecerdasan Buatan</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3 - Dosen Doktor -->
-      <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-teal-500"></div>
-        <div class="p-4">
-          <span class="text-xs bg-teal-600 text-white px-3 py-1 rounded-full shadow-sm">DOKTOR</span>
-          <h3 class="font-bold text-lg text-gray-800 mt-2">Dr. Ahmad Fauzi, M.Kom.</h3>
-          <p class="text-gray-600 text-sm">Fakultas Ilmu Komputer</p>
-          <div class="mt-4 pt-4 border-t border-gray-100">
-            <p class="text-gray-700 text-sm font-medium">Spesialisasi:</p>
-            <p class="text-gray-500 text-sm mt-1">Data Science</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 4 - Guru Besar -->
-      <div class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc((100% - (3*1.75rem))/4)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-indigo-500"></div>
-        <div class="p-4">
-          <span class="text-xs bg-purple-600 text-white px-3 py-1 rounded-full shadow-sm">GURU BESAR</span>
-          <h3 class="font-bold text-lg text-gray-800 mt-2">Prof. Dr. Siti Rahayu, Ph.D</h3>
-          <p class="text-gray-600 text-sm">Fakultas Kedokteran</p>
-          <div class="mt-4 pt-4 border-t border-gray-100">
-            <p class="text-gray-700 text-sm font-medium">Spesialisasi:</p>
-            <p class="text-gray-500 text-sm mt-1">Neurologi</p>
-          </div>
-        </div>
-      </div>
-      
-  
     </div>
   </div>
 </div>
