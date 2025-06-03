@@ -845,8 +845,8 @@
 
             <!-- Button to trigger popup -->
             <button id="openPopup" type="button"
-                    class=" bg-[#5460B5] text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition transform hover:scale-[1.03] shadow-md flex items-center">
-              <i class="fas fa-envelope mr-2"></i> Hubungi Kami
+            class=" bg-[#5460B5] text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition transform hover:scale-[1.03] shadow-md flex items-center">
+              <i class="fas fa-envelope mr-2 flex items-center"></i> Hubungi Kami
             </button>
 
             <!-- JavaScript to handle popup -->
