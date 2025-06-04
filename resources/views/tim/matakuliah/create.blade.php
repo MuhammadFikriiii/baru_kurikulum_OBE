@@ -88,7 +88,7 @@
                 bkSelect.addEventListener('change', function() {
                     const selectedBKs = Array.from(this.selectedOptions).map(opt => opt.value);
 
-                    fetch("{{ route('tim.matakuliah.getCPLByBK') }}", {
+                    fetch("{{ route('tim.matakuliah.getCplByBk') }}", {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',

@@ -66,7 +66,7 @@ class TimCapaianPembelajaranLulusanController extends Controller
             ->join('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
             ->where('cpl_pl.id_cpl', $id_cpl)
             ->where('profil_lulusans.kode_prodi', Auth::user()->kode_prodi)
-            ->pluck('cpl_pl.id_pl', 'kode_pl')
+            ->pluck('cpl_pl.id_pl')
             ->toArray();
 
         $capaianpembelajaranlulusan = DB::table('capaian_profil_lulusans as cpl')

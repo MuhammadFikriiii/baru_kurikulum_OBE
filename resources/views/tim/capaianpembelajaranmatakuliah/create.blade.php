@@ -16,13 +16,13 @@
         <form action="{{ route('tim.capaianpembelajaranmatakuliah.store') }}" method="POST">
             @csrf
             <div id="cplContainer" class="mt-3">
-                <label class="text-xl font-semibold">CPL Terisi otomatis setelah memilih bk:</label>
+                <label class="text-xl font-semibold">CPL Terisi otomatis setelah memilih mk:</label>
                 <ul id="cplList" class="mt-1 w-full p-3 border border-black rounded-lg"></ul>
             </div>
             
             <label for="kode_mks" class="text-xl font-semibold mb-2">MK Terkait</label>
             <select id="kode_mks" name="kode_mks[]" size="2"
-                class="border border-gray-300 p-3 w-full rounded-lg mt-1 mb-1 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]"
+                class="border border-black p-3 w-full rounded-lg mt-1 mb-1 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]"
                 multiple required>
                 @foreach ($mataKuliahs as $mk)
                     <option value="{{ $mk->kode_mk }}" title="{{ $mk->nama_mk }}">

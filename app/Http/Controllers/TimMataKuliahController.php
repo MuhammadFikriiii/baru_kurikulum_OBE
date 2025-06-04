@@ -54,6 +54,7 @@ class TimMataKuliahController extends Controller
             ->whereIn('cpl_bk.id_bk', $id_bks)
             ->select('cpl.id_cpl', 'cpl.kode_cpl', 'cpl.deskripsi_cpl')
             ->distinct()
+            ->orderBy('cpl.kode_cpl')
             ->get();
 
         return response()->json($cpls);
@@ -105,7 +106,7 @@ class TimMataKuliahController extends Controller
     {
         $request->validate([
             'kode_mk' => 'required|string|max:10|unique:mata_kuliahs,kode_mk',
-            'nama_mk' => 'required|string|max:50',
+            'nama_mk' => 'required|string|max:100',
             'jenis_mk' => 'required|string|max:50',
             'sks_mk' => 'required|integer',
             'semester_mk' => 'required|integer|in:1,2,3,4,5,6,7,8',
@@ -206,7 +207,7 @@ class TimMataKuliahController extends Controller
     {
         $request->validate([
             'kode_mk' => 'required|string|max:10',
-            'nama_mk' => 'required|string|max:50',
+            'nama_mk' => 'required|string|max:100',
             'jenis_mk' => 'required|string|max:50',
             'sks_mk' => 'required|integer',
             'semester_mk' => 'required|integer|in:1,2,3,4,5,6,7,8',

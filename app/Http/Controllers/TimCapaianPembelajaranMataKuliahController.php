@@ -138,10 +138,11 @@ class TimCapaianPembelajaranMataKuliahController extends Controller
             ->distinct()
             ->get();
 
-        $selectedcpls = DB::table('cpl_cpmk')
-            ->where('id_cpmk', $id_cpmk)
-            ->pluck('id_cpl')
-            ->toArray();
+        $selectedCpls = DB::table('cpl_cpmk')
+            ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl' ,'=', 'cpl.id_cpl')
+            ->where('cpl_cpmk.id_cpmk', $cpmks->id_cpmk)
+            ->orderBy('cpl.kode_cpl')
+            ->get();
 
         $mataKuliahs = DB::table('mata_kuliahs as mk')
             ->join('cpl_mk as cplmk', 'mk.kode_mk', '=', 'cplmk.kode_mk')
@@ -159,7 +160,7 @@ class TimCapaianPembelajaranMataKuliahController extends Controller
             ->pluck('kode_mk')
             ->toArray();
 
-        return view('tim.capaianpembelajaranmatakuliah.edit', compact('cpmks', 'cpls', 'mataKuliahs', 'selectedcpls', 'selectedMKs'));
+        return view('tim.capaianpembelajaranmatakuliah.edit', compact('cpmks', 'cpls', 'mataKuliahs', 'selectedCpls', 'selectedMKs'));
     }
 
     public function update(Request $request, $id_cpmk)
@@ -167,25 +168,31 @@ class TimCapaianPembelajaranMataKuliahController extends Controller
         request()->validate([
             'kode_cpmk' => 'required|string|max:10',
             'deskripsi_cpmk' => 'required',
-            'id_cpls' => 'required|array',
         ]);
 
         $cpmk = CapaianPembelajaranMataKuliah::findOrFail($id_cpmk);
 
         $cpmk->update($request->only(['kode_cpmk', 'deskripsi_cpmk']));
 
-        DB::table('cpl_cpmk')->where('id_cpmk', $id_cpmk)->delete();
-        foreach ($request->id_cpls as $id_cpl) {
+        DB::table('cpl_cpmk')->where('id_cpmk', $cpmk->id_cpmk)->delete();
+        DB::table('cpmk_mk')->where('id_cpmk', $cpmk->id_cpmk)->delete();
+
+        $cpls = DB::table('cpl_mk')
+            ->whereIn('kode_mk', $request->kode_mks)
+            ->select('id_cpl')
+            ->distinct()
+            ->pluck('id_cpl');
+
+        foreach ($cpls as $id_cpl) {
             DB::table('cpl_cpmk')->insert([
-                'id_cpmk' => $id_cpmk,
+                'id_cpmk' => $cpmk->id_cpmk,
                 'id_cpl' => $id_cpl,
             ]);
         }
 
-        DB::table('cpmk_mk')->where('id_cpmk', $id_cpmk)->delete();
         foreach ($request->kode_mks as $kode_mk) {
             DB::table('cpmk_mk')->insert([
-                'id_cpmk' => $id_cpmk,
+                'id_cpmk' => $cpmk->id_cpmk,
                 'kode_mk' => $kode_mk,
             ]);
         }

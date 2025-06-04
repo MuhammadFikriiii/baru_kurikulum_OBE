@@ -18,11 +18,15 @@
             @csrf
             @method('PUT')
 
-            <ul id="cplList" class="mt-1 w-full p-3 border border-black rounded-lg">
-                @foreach ($selectedCpls as $cpl)
-                    <li>{{ $cpl->kode_cpl }} - {{ $cpl->deskripsi_cpl }}</li>
-                @endforeach
-            </ul>
+            <div id="cplContainer" class="mt-3">
+                <label class="text-xl font-semibold">CPL Terisi otomatis setelah memilih bk:</label>
+                <ul id="cplList" class="mt-1 w-full p-3 border border-black rounded-lg">
+                    {{-- Tampilkan CPL awal jika ada --}}
+                    @foreach ($selectedCpls as $cpl)
+                        <li>{{ $cpl->kode_cpl }} - {{ $cpl->deskripsi_cpl }}</li>
+                    @endforeach
+                </ul>
+            </div>
 
             <label for="id_bks" class="text-xl font-semibold">BK</label>
             <select name="id_bks[]" id="id_bks" size="2" multiple
@@ -74,4 +78,34 @@
                 class="ml-2 bg-gray-600 hover:bg-gray-800 px-5 py-2 rounded-lg text-white font-semibold">Kembali</a>
         </form>
     </div>
+    @push('scripts')
+        <script>
+            const cplList = document.getElementById('cplList');
+            const bkSelect = document.getElementById('id_bks');
+
+            bkSelect.addEventListener('change', function() {
+                const selectedBKs = Array.from(this.selectedOptions).map(opt => opt.value);
+
+                fetch("{{ route('tim.matakuliah.getCplByBk') }}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                        },
+                        body: JSON.stringify({
+                            id_bks: selectedBKs
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        cplList.innerHTML = "";
+                        data.forEach(cpl => {
+                            const li = document.createElement('li');
+                            li.textContent = `${cpl.kode_cpl} - ${cpl.deskripsi_cpl}`;
+                            cplList.appendChild(li);
+                        });
+                    });
+            });
+        </script>
+    @endpush
 @endsection
