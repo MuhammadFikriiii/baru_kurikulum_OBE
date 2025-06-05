@@ -1,40 +1,68 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="mr-20 ml-20">
+        <h2 class="text-4xl font-extrabold text-center mb-4">Tambah Capaian Pembelajaran Matakuliah</h2>
+        <hr class="w-full border border-black mb-4">
 
-<div class="mr-20 ml-20">
-    <h2 class="text-4xl font-extrabold text-center mb-4">Tambah Capaian Pembelajaran Matakuliah</h2>
-    <hr class="w-full border border-black mb-4">
+        <form action="{{ route('admin.capaianpembelajaranmatakuliah.store') }}" method="POST">
+            @csrf
+            <div id="cplContainer" class="mt-3">
+                <label class="text-xl font-semibold">CPL Terisi otomatis setelah memilih mk:</label>
+                <ul id="cplList" class="mt-1 w-full p-3 border border-black rounded-lg"></ul>
+            </div>
 
-    <form action="{{ route('admin.capaianpembelajaranmatakuliah.store') }}" method="POST">
-        @csrf
+            <label for="kode_mks" class="text-xl font-semibold mb-2">MK Terkait</label>
+            <select id="kode_mks" name="kode_mks[]" size="2"
+                class="border border-black p-3 w-full rounded-lg mt-1 mb-1 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]"
+                multiple required>
+                @foreach ($mataKuliahs as $mk)
+                    <option value="{{ $mk->kode_mk }}" title="{{ $mk->nama_mk }}">
+                        {{ $mk->kode_mk }} - {{ $mk->nama_mk }}
+                    </option>
+                @endforeach
+            </select>
+            <p class="italic text-red-700 mb-2">*Tekan tombol Ctrl dan klik untuk memilih lebih dari satu item.</p>
 
-        <label for="id_cpls" class="text-2xl font-semibold mb-2">Capaian Pembelajaran Lulusan Terkait:</label>
-        <select id="id_cpls" name="id_cpls[]" class="border border-gray-300 p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]" multiple required>
-        @foreach($capaianProfilLulusans as $cpl)
-            <option value="{{ $cpl->id_cpl }}" title="{{ $cpl->kode_cpl }} - {{ $cpl->deskripsi_cpl }}">
-        {{ $cpl->kode_cpl }} - {{ $cpl->deskripsi_cpl }}
-        </option>
-        @endforeach
-        </select>
-        <p class="text-sm text-gray-500 mb-2">Tekan shift/Tahan Klik mouseuntuk memilih lebih dari satu.</p>
+            <label for="kode_cpmk">Kode CPMK</label>
+            <input type="text" name="kode_cpmk" id="kode_cpmk"
+                class="border border-black p-3 w-full rounded-lg mt-1 mb-3" required>
 
-        <label for="kode_mks" class="text-2xl font-semibold mb-2">Mata Kuliah Terkait:</label>
-        <select id="kode_mks" name="kode_mks[]" class="border border-gray-300 p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]" multiple required>
-        @foreach($mataKuliahs as $mk)
-            <option value="{{ $mk->kode_mk }}" title="{{ $mk->nama_mk }}">
-        {{ $mk->kode_mk }} - {{ $mk->nama_mk }}
-        </option>
-        @endforeach
-        </select>
-        <p class="text-sm text-gray-500 mb-2">Tekan shift/Tahan Klik mouseuntuk memilih lebih dari satu.</p>
-        
-        <label for="kode_cpmk">Kode CPMK</label>
-        <input type="text" name="kode_cpmk" id="kode_cpmk" class="border border-black p-3 w-full rounded-lg mt-1 mb-3" required>
+            <label for="deskripsi_cpmk">Deskripsi CPMK</label>
+            <input type="text" name="deskripsi_cpmk" id="deskripsi_cpmk"
+                class="border border-black p-3 w-full rounded-lg mt-1 mb-3" required>
 
-        <label for="deskripsi_cpmk">Deskripsi CPMK</label>
-        <input type="text" name="deskripsi_cpmk" id="deskripsi_cpmk" class="border border-black p-3 w-full rounded-lg mt-1 mb-3" required>
+            <button type="submit" class="px-4 py-2 bg-green-400 rounded-lg hover:bg-green-600 mt-4">simpan</button>
+        </form>
 
-        <button type="submit" class="px-4 py-2 bg-green-400 rounded-lg hover:bg-green-600 mt-4">simpan</button>
-    </form>
-@endsection
+        @push('scripts')
+            <script>
+                const cplList = document.getElementById('cplList');
+                const mkSelect = document.getElementById('kode_mks');
+
+                mkSelect.addEventListener('change', function() {
+                    const selectedMKs = Array.from(this.selectedOptions).map(opt => opt.value);
+
+                    fetch("{{ route('admin.capaianpembelajaranmatakuliah.getCPLByMK') }}", {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                            },
+                            body: JSON.stringify({
+                                kode_mks: selectedMKs
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            cplList.innerHTML = "";
+                            data.forEach(cpl => {
+                                const li = document.createElement('li');
+                                li.textContent = `${cpl.kode_cpl} - ${cpl.deskripsi_cpl}`;
+                                cplList.appendChild(li);
+                            });
+                        });
+                });
+            </script>
+        @endpush
+    @endsection

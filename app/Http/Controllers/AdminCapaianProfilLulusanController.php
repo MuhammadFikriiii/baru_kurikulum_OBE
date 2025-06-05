@@ -14,7 +14,7 @@ class AdminCapaianProfilLulusanController extends Controller
     {
         $kode_prodi = $request->get('kode_prodi');
         $prodis = DB::table('prodis')->get();
-        
+
         if (!$kode_prodi) {
             return view("admin.capaianprofillulusan.index", compact("prodis", "kode_prodi"));
         }
@@ -42,30 +42,28 @@ class AdminCapaianProfilLulusanController extends Controller
     public function create()
     {
         $profilLulusans = DB::table('profil_lulusans')
-        ->join('prodis', 'profil_lulusans.kode_prodi', '=', 'prodis.kode_prodi')
-        ->select('profil_lulusans.id_pl', 'profil_lulusans.kode_pl', 'profil_lulusans.deskripsi_pl', 'prodis.nama_prodi')
-        ->orderBy('prodis.nama_prodi')
-        ->get();
+            ->join('prodis', 'profil_lulusans.kode_prodi', '=', 'prodis.kode_prodi')
+            ->select('profil_lulusans.id_pl', 'profil_lulusans.kode_pl', 'profil_lulusans.deskripsi_pl', 'prodis.nama_prodi')
+            ->orderBy('prodis.nama_prodi')
+            ->get();
         return view("admin.capaianprofillulusan.create", compact("profilLulusans"));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'kode_cpl'=> 'required|string|max:10',
-            'deskripsi_cpl'=> 'required',
-            'status_cpl'=> 'required|in:Kompetensi Utama Bidang,Kompetensi Tambahan',
-            'id_pls' => 'required|array'
+            'kode_cpl' => 'required|string|max:10',
+            'deskripsi_cpl' => 'required',
+            'status_cpl' => 'required|in:Kompetensi Utama Bidang,Kompetensi Tambahan',
+            'id_pls' => 'required|string'
         ]);
 
         $cpl = CapaianProfilLulusan::create($request->only(['kode_cpl', 'deskripsi_cpl', 'status_cpl']));
 
-        foreach ($request->id_pls as $id_pl) {
-            DB::table('cpl_pl')->insert([
-                'id_cpl' => $cpl->id_cpl,
-                'id_pl' => $id_pl
-            ]);
-        }
+        DB::table('cpl_pl')->insert([
+            'id_cpl' => $cpl->id_cpl,
+            'id_pl' => $request->id_pls
+        ]);
 
         return redirect()->route('admin.capaianprofillulusan.index')->with('success', 'Capaian Profil lulusan berhasil ditambahkan.');
     }
@@ -80,15 +78,15 @@ class AdminCapaianProfilLulusanController extends Controller
             ->where('id_cpl', $id_cpl)
             ->pluck('id_pl')
             ->toArray();
-        return view('admin.capaianprofillulusan.edit' , compact('capaianprofillulusan', 'profilLulusans', 'selectedProfilLulusans'));
+        return view('admin.capaianprofillulusan.edit', compact('capaianprofillulusan', 'profilLulusans', 'selectedProfilLulusans'));
     }
 
     public function update(Request $request, $id_cpl)
     {
         request()->validate([
-            'kode_cpl'=> 'required|string|max:10',
-            'deskripsi_cpl'=> 'required',
-            'status_cpl'=> 'required|in:Kompetensi Utama Bidang,Kompetensi Tambahan'
+            'kode_cpl' => 'required|string|max:10',
+            'deskripsi_cpl' => 'required',
+            'status_cpl' => 'required|in:Kompetensi Utama Bidang,Kompetensi Tambahan'
         ]);
 
         $capaianprofillulusan = CapaianProfilLulusan::findOrFail($id_cpl);
@@ -97,37 +95,34 @@ class AdminCapaianProfilLulusanController extends Controller
 
         DB::table('cpl_pl')->where('id_cpl', $id_cpl)->delete();
 
-        if ($request->has('id_pls')) {
-            foreach ($request->id_pls as $id_pl) {
-                DB::table('cpl_pl')->insert([
-                    'id_cpl' => $id_cpl,
-                    'id_pl' => $id_pl
-                ]);
-            }
-        }
+        DB::table('cpl_pl')->insert([
+            'id_cpl' => $capaianprofillulusan->id_cpl,
+            'id_pl' => $request->id_pls
+        ]);
+
         return redirect()->route('admin.capaianprofillulusan.index')->with('success', 'Capaian Profil lulusan berhasil diperbaharui.');
     }
 
     public function detail(CapaianProfilLulusan $id_cpl)
     {
         $selectedPlIds = DB::table('cpl_pl')
-        ->where('id_cpl', $id_cpl->id_cpl)
-        ->pluck('id_pl')
-        ->toArray();
+            ->where('id_cpl', $id_cpl->id_cpl)
+            ->pluck('id_pl')
+            ->toArray();
 
-    $profilLulusans = ProfilLulusan::whereIn('id_pl', $selectedPlIds)->get();
+        $profilLulusans = ProfilLulusan::whereIn('id_pl', $selectedPlIds)->get();
 
-    return view('admin.capaianprofillulusan.detail', [
-        'id_cpl' => $id_cpl,
-        'selectedProfilLulusans' => $selectedPlIds,
-        'profilLulusans' => $profilLulusans
-    ]);
+        return view('admin.capaianprofillulusan.detail', [
+            'id_cpl' => $id_cpl,
+            'selectedProfilLulusans' => $selectedPlIds,
+            'profilLulusans' => $profilLulusans
+        ]);
     }
 
     public function destroy(CapaianProfilLulusan $id_cpl)
     {
         $id_cpl->delete();
-        return redirect()->route('admin.capaianprofillulusan.index')->with('sukses','Capaian Profil Lulusan Ini Berhasil Di Hapus');
+        return redirect()->route('admin.capaianprofillulusan.index')->with('sukses', 'Capaian Profil Lulusan Ini Berhasil Di Hapus');
     }
 
     public function peta_pemenuhan_cpl(Request $request)
@@ -135,13 +130,13 @@ class AdminCapaianProfilLulusanController extends Controller
         $kode_prodi = $request->get('kode_prodi', 'all');
 
         $query = DB::table('capaian_profil_lulusans as cpl')
-        ->join('cpl_pl as cplpl', 'cpl.id_cpl', '=', 'cplpl.id_cpl')
-        ->join('profil_lulusans as pl', 'cplpl.id_pl', '=', 'pl.id_pl')
-        ->join('prodis as ps', 'pl.kode_prodi', '=', 'ps.kode_prodi')
-        ->leftJoin('cpl_mk as cmk', 'cpl.id_cpl', '=', 'cmk.id_cpl')
-        ->leftJoin('mata_kuliahs as mk', 'cmk.kode_mk', '=', 'mk.kode_mk')
-        ->select('cpl.id_cpl','cpl.kode_cpl', 'mk.semester_mk', 'mk.kode_mk','mk.nama_mk', 'ps.kode_prodi')
-        ->distinct();
+            ->join('cpl_pl as cplpl', 'cpl.id_cpl', '=', 'cplpl.id_cpl')
+            ->join('profil_lulusans as pl', 'cplpl.id_pl', '=', 'pl.id_pl')
+            ->join('prodis as ps', 'pl.kode_prodi', '=', 'ps.kode_prodi')
+            ->leftJoin('cpl_mk as cmk', 'cpl.id_cpl', '=', 'cmk.id_cpl')
+            ->leftJoin('mata_kuliahs as mk', 'cmk.kode_mk', '=', 'mk.kode_mk')
+            ->select('cpl.id_cpl', 'cpl.kode_cpl', 'mk.semester_mk', 'mk.kode_mk', 'mk.nama_mk', 'ps.kode_prodi')
+            ->distinct();
 
 
         if ($kode_prodi !== 'all') {
@@ -153,15 +148,15 @@ class AdminCapaianProfilLulusanController extends Controller
             ->orderBy('mk.semester_mk', 'asc')
             ->get();
 
-            $petaCPL = [];
+        $petaCPL = [];
 
-            foreach ($data as $row) {
-                $semester = 'Semester ' . $row->semester_mk;
-                $namamk = $row->nama_mk;
-            
-                $petaCPL[$row->id_cpl]['label'] = $row->kode_cpl; // yang ditampilkan
-                $petaCPL[$row->id_cpl]['semester'][$semester][] = $namamk; // pengelompokan tetap pakai id
-            }        
+        foreach ($data as $row) {
+            $semester = 'Semester ' . $row->semester_mk;
+            $namamk = $row->nama_mk;
+
+            $petaCPL[$row->id_cpl]['label'] = $row->kode_cpl; // yang ditampilkan
+            $petaCPL[$row->id_cpl]['semester'][$semester][] = $namamk; // pengelompokan tetap pakai id
+        }
 
         $prodis = DB::table('prodis')->get();
 

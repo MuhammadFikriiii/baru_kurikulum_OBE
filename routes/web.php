@@ -8,7 +8,6 @@ use App\Http\Controllers\AdminProdiController;
 use App\Http\Controllers\AdminProfilLulusanController;
 use App\Http\Controllers\AdminCapaianProfilLulusanController;
 use App\Http\Controllers\Wadir1ProdiController;
-use App\Http\Controllers\AdminPenilaianController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPemetaanCplPlController;
 use App\Http\Controllers\AdminBahanKajianController;
@@ -37,7 +36,6 @@ use App\Http\Controllers\TimBahanKajianController;
 use App\Http\Controllers\TimPemetaanCplBkController;
 use App\Http\Controllers\TimMataKuliahController;
 use App\Http\Controllers\AdminCapaianPembelajaranMataKuliahController;
-use App\Http\Controllers\AdminPemetaanCplCpmkController;
 use App\Http\Controllers\AdminPemetaanCplCpmkMkController;
 use App\Http\Controllers\TimExportController;
 use App\Http\Controllers\TimPemetaanBkMkController;
@@ -192,18 +190,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pemetaancplcpmkmk', [AdminPemetaanCplCpmkMkController::class, 'index'])->name('pemetaancplcpmkmk.index');
         Route::get('/pemetaanmkcplcpmk', [AdminPemetaanCplCpmkMkController::class, 'pemetaanmkcpmkcpl'])->name('pemetaancplcpmkmk.pemetaanmkcplcpmk');
         Route::get('/pemenuhancpl', [AdminCapaianProfilLulusanController::class, 'peta_pemenuhan_cpl'])->name('pemenuhancpl.index');
-        
-        Route::get('/penilaian', [AdminPenilaianController::class, 'create'])->name('penilaian.create');
-        Route::post('/penilaian', [AdminPenilaianController::class, 'store'])->name('penilaian.store'); 
-        // Route::get('/penilaian', [AdminPenilaianController::class, 'index'])->name('penilaian.index');
-        // Route::get('/penilaian', [AdminPenilaianController::class, 'edit'])->name('penilaian.edit');
-        // Route::put('/penilaian', [AdminPenilaianController::class, 'update'])->name('penilaian.update');
-
-
         Route::get('/pemenuhancplcpmkmk', [AdminPemetaanCplCpmkMkController::class, 'pemenuhancplcpmkmk'])->name('pemetaancplcpmkmk.pemenuhancplcpmkmk');
         Route::get('/pemetaanmkcpmkcpl', [AdminPemetaanCplCpmkMkController::class, 'pemetaanmkcpmkcpl'])->name('pemetaancplcpmkmk.pemetaanmkcpmkcpl');
         Route::get('/pemetaanmkcpmksubcpmk', [AdminSubCpmkController::class, 'pemetaanmkcpmksubcpmk'])->name('pemetaanmkcpmksubcpmk.index');
         Route::get('/export/excel', [TimExportController::class, 'export'])->name('export.excel');
+        Route::post('/ajax/get-cpl-by-bk', [AdminMataKuliahController::class, 'getCplByBk'])->name('matakuliah.getCplByBk');
+        Route::post('/ajax/get-cpl-by-mk', [AdminCapaianPembelajaranMataKuliahController::class, 'getCplByMk'])->name('capaianpembelajaranmatakuliah.getCPLByMK');
     });
 
     // Grup Route Wadir1
