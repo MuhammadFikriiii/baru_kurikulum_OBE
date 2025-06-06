@@ -27,7 +27,7 @@
             </div>
         @else
             @if($data->isEmpty())
-                <div class="text-center p-8 bg-white rounded-lg shadow">
+                <div class="text-center bg-white rounded-lg shadow">
                     <p class="p-8 text-center text-gray-600">Tidak ada data pemetaan untuk program studi yang dipilih.</p>
                 </div>
             @else

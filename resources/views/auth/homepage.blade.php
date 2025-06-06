@@ -198,8 +198,8 @@
                   <div class="ml-1 main-blue-button-hover bg-blue-600 text-white shadow-lg hover:bg-blue-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
                     <a href="#services" class="text-lg font-semibold py-2 px-10 inline-block">Mulai</a>
                   </div>
-                  <div class="ml-5 call-button bg-green-600 text-white shadow-lg hover:bg-green-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
-                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@poliban.ac.id" target="_blank" class="text-lg font-semibold py-2 px-8 inline-block">
+                  <div  class="ml-5 call-button bg-green-600 text-white shadow-lg hover:bg-green-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
+                    <a id="openPopup" target="_blank" class="text-lg font-semibold py-2 px-8 inline-block">
                       <i class="fa fa-envelope mr-3"></i>Email
                     </a>
                   </div>
@@ -301,7 +301,7 @@
   
 <!-- Daftar Kurikulum dan Program Studi -->
 <!-- Jurusan -->
- <style>
+<style>
   .program-slider {
       scroll-behavior: smooth;
       transition: transform 0.5s ease-in-out;
@@ -321,40 +321,39 @@
   .indicator-dot.active {
       background-color: #2563eb;
   }
+  /* Hide scrollbar tapi tetap bisa di-scroll */
+  .hide-scrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  /* Tambahan untuk responsivitas */
+  @media (max-width: 640px) {
+    .program-tab {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+    }
+  }
 </style>
 
 <div class="container mx-auto px-4 py-12">
   <h1 class="text-3xl text-center font-bold text-indigo-800 mb-2">Program Studi</h1>
   <p class="text-lg text-center text-gray-600 mb-8">Temukan program studi yang sesuai dengan minat Anda</p>
   
-  <!-- Navigation Tabs -->
-  <div class="flex flex-wrap justify-center mb-8 gap-2">
-      <button onclick="showSlide(0)" class="program-tab px-6 py-3 rounded-lg bg-blue-600 text-white font-medium shadow-md transition active hover:bg-blue-700">Teknik Sipil</button>
-      <button onclick="showSlide(1)" class="program-tab px-6 py-3 rounded-lg bg-gray-100 font-medium shadow-md transition hover:bg-gray-200">Teknik Mesin</button>
-      <button onclick="showSlide(2)" class="program-tab px-6 py-3 rounded-lg bg-gray-100 font-medium shadow-md transition hover:bg-gray-200">Teknik Elektro</button>
-      <button onclick="showSlide(3)" class="program-tab px-6 py-3 rounded-lg bg-gray-100 font-medium shadow-md transition hover:bg-gray-200">Akutansi</button>
-      <button onclick="showSlide(4)" class="program-tab px-6 py-3 rounded-lg bg-gray-100 font-medium shadow-md transition hover:bg-gray-200">Administrasi Bisnis</button>
+  <!-- Navigation Tabs - Diubah menjadi dinamis -->
+  <div class="flex flex-wrap justify-center mb-8 gap-2" id="program-tabs-container">
+      @foreach ($prodis as $index => $prodi)
+      <button onclick="showSlide({{ $index }})" class="program-tab px-6 py-3 rounded-lg font-medium shadow-md transition hover:bg-gray-200 {{ $index === 0 ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-gray-100' }}">
+          {{ $prodi->nama_jurusan }}
+      </button>
+      @endforeach
   </div>
   
   <!-- Slider Content -->
   <div class="relative">
-      <!-- Previous Button -->
-      <button onclick="prevSlide()" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white p-3 rounded-full shadow-md hover:bg-gray-100 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-      </button>
-      <style>
-        /* Hide scrollbar tapi tetap bisa di-scroll */
-        .hide-scrollbar {
-          scrollbar-width: none; /* Firefox */
-          -ms-overflow-style: none;  /* IE and Edge */
-        }
 
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none; /* Chrome, Safari, Opera */
-        }
-      </style>
       <!-- Slides -->
       <div class="overflow-x-auto hide-scrollbar">
         <div id="program-slider" class="flex space-x-6 w-max">
@@ -419,39 +418,31 @@
           @endforeach
         </div>
       </div>
-
       
-      <!-- Next Button -->
-      <button onclick="nextSlide()" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white p-3 rounded-full shadow-md hover:bg-gray-100 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-      </button>
   </div>
   
-  <!-- Slide Indicators -->
-  <div class="flex justify-center mt-8 gap-2">
-      <button onclick="showSlide(0)" class="w-3 h-3 rounded-full bg-blue-600 indicator-dot active"></button>
-      <button onclick="showSlide(1)" class="w-3 h-3 rounded-full bg-gray-300 indicator-dot"></button>
-      <button onclick="showSlide(2)" class="w-3 h-3 rounded-full bg-gray-300 indicator-dot"></button>
-      <button onclick="showSlide(3)" class="w-3 h-3 rounded-full bg-gray-300 indicator-dot"></button>
-      <button onclick="showSlide(4)" class="w-3 h-3 rounded-full bg-gray-300 indicator-dot"></button>
+  <!-- Slide Indicators - Diubah menjadi dinamis -->
+  <div class="flex justify-center mt-8 gap-2" id="indicator-dots-container">
+      @foreach ($prodis as $index => $prodi)
+      <button onclick="showSlide({{ $index }})" class="w-3 h-3 rounded-full indicator-dot {{ $index === 0 ? 'bg-blue-600 active' : 'bg-gray-300' }}"></button>
+      @endforeach
   </div>
 </div>
 
 <script>
   let currentSlide = 0;
-  const totalSlides = 5;
+  const totalSlides = {{ count($prodis) }};
   let autoSlideInterval;
   
   function updateSlider() {
       const slider = document.getElementById('program-slider');
-      slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+      const cardWidth = document.querySelector('.program-card').offsetWidth + 24; // width + gap
+      slider.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
       
       // Update tab buttons
       document.querySelectorAll('.program-tab').forEach((tab, index) => {
           if (index === currentSlide) {
-              tab.classList.remove('bg-gray-100');
+              tab.classList.remove('bg-gray-100', 'hover:bg-gray-200');
               tab.classList.add('bg-blue-600', 'text-white', 'hover:bg-blue-700');
           } else {
               tab.classList.remove('bg-blue-600', 'text-white', 'hover:bg-blue-700');
@@ -462,10 +453,10 @@
       // Update indicator dots
       document.querySelectorAll('.indicator-dot').forEach((dot, index) => {
           if (index === currentSlide) {
-              dot.classList.add('bg-blue-600');
+              dot.classList.add('bg-blue-600', 'active');
               dot.classList.remove('bg-gray-300');
           } else {
-              dot.classList.remove('bg-blue-600');
+              dot.classList.remove('bg-blue-600', 'active');
               dot.classList.add('bg-gray-300');
           }
       });
@@ -503,9 +494,9 @@
       updateSlider();
       startAutoSlide();
       
-      // Make entire cards clickable
-      document.querySelectorAll('.program-card').forEach(card => {
-          card.style.cursor = 'pointer';
+      // Handle window resize
+      window.addEventListener('resize', () => {
+          updateSlider();
       });
   });
 </script>
@@ -910,7 +901,6 @@
       </div>
     </div>
  </footer>
-  
   
   
 
