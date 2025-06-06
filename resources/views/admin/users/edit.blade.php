@@ -3,7 +3,7 @@
 @section('title', 'Edit Pengguna')
 
 @section('content')
-    <div class="mr-20 ml-20">
+    <div class="mx-20">
         <h2 class="mb-6 text-4xl font-extrabold text-center">Edit User</h2>
         <hr class="border border-black mb-4">
 

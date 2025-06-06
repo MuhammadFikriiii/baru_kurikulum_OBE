@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class=" ml-20  mr-20 container w-full">
+<div class="mx-20">
     <h2 class="font-extrabold text-4xl mb-6 text-center">Tambah User</h2>
     <hr class="w-full border border-black mb-4">
 <div class="">

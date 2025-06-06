@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="mr-20 ml-20">
+<div class="mx-20">
 <h2 class="font-extrabold text-4xl mb-6 text-center">Edit Jurusan</h2>
 <hr class="border border-black mb-4">
 @if ($errors->any())
