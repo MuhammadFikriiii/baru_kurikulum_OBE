@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto px-4">
+<div class="mx-5 md:mx-20 my-10">
     
     <div class="text-center mb-8">
         <h1 class="text-2xl font-bold text-gray-800">Daftar Jurusan</h1>

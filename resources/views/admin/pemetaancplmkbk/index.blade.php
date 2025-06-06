@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container mx-auto px-4">
+    <div class="mx-5 md:mx-20 my-10">
         <div class="text-center mb-8">
             <h1 class="text-2xl font-bold text-gray-800">Pemetaan CPL - BK - MK</h1>
             <hr class="border-t-4 border-black my-4 mx-auto mb-4">
