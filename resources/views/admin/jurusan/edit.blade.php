@@ -17,12 +17,19 @@
     @csrf
     @method('PUT')
 
-    <label for="nama_jurusan" class="text-xl font-semibold">Nama Jurusan:</label>
-    <input type="text" class="mt-1 w-full p-3 border border-black rounded-lg mb-3" name="nama_jurusan" id="nama_jurusan" value="{{ old('nama_jurusan', $jurusan->nama_jurusan) }}" required>
+    <label for="nama_jurusan" class="block text-lg font-semibold mb-2 text-gray-700">Nama Jurusan:</label>
+    <input type="text" 
+    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" name="nama_jurusan" id="nama_jurusan" value="{{ old('nama_jurusan', $jurusan->nama_jurusan) }}" required>
 
-    <div>
-        <button type="submit" class="bg-blue-600 hover:bg-blue-800 mt-3 text-white font-bold px-5 py-2 rounded-lg">Simpan</button>
-        <a href="{{ route('admin.jurusan.index') }}" class="ml-2 inline-flex text-white font-bold bg-gray-600 hover:bg-gray-700 mt-3 px-5 py-2 rounded-lg">Kembali</a>
+    <div class="flex justify-end space-x-5 mt-[50px]">
+        <a href="{{ route('admin.jurusan.index') }}" 
+        class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition duration-200">
+        Kembali
+    </a>
+    <button type="submit" 
+        class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-200">
+        Simpan
+    </button>
     </div>
 </form>
 </div>

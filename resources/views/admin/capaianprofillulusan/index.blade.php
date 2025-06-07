@@ -101,11 +101,10 @@
                         <td class="px-4 py-4">
                             <div class="flex justify-center space-x-2">
                                 <a href="{{ route('admin.capaianprofillulusan.detail', $capaianprofillulusan->id_cpl) }}" 
-                                   class="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md"
-                                   title="Detail">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                                        <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                                    class="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md inline-flex items-center justify-center"
+                                    title="Detail">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-9-3a1 1 0 112 0 1 1 0 01-2 0zm2 5a1 1 0 10-2 0v2a1 1 0 102 0v-2z" clip-rule="evenodd" />
                                     </svg>
                                 </a>
                                 <a href="{{ route('admin.capaianprofillulusan.edit', $capaianprofillulusan->id_cpl) }}" 

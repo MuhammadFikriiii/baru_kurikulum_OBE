@@ -14,46 +14,88 @@
         </ul>
     </div>
     @endif
-    <form action="{{ route('admin.users.store') }}" method="POST">
+    <form action="{{ route('admin.users.store') }}" method="POST" class="space-y-4">
         @csrf
-            <label for="name" class="text-xl font-semibold">Nama</label>
-            <input type="text" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500 mb-3" id="name" name="name" required value="{{ old('name') }}">
-
-            <label for="email" class="text-xl font-semibold">Email</label>
-            <input type="email" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500 mb-3" id="email" name="email" required value="{{ old('email') }}">
-
-
-            <label for="password" class="text-xl font-semibold">Password</label>
-            <input type="password" class="mt-1 w-full p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500 mb-3" id="password" name="password" required value="{{ old('password') }}">
-
-            <label for="role" class="text-xl font-semibold">Role</label>
-            <select name="role" id="role" class="w-full p-3 border border-black rounded-lg mb-3" required>
-                <option value="" disabled selected {{ old('role') ? '' : 'selected' }}>Pilih Role</option>
-                <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                <option value="wadir1" {{ old('role') == 'wadir1' ? 'selected' : '' }}>Wadir 1</option>
-                <option value="kaprodi" {{ old('role') == 'kaprodi' ? 'selected' : '' }}>Kaprodi</option>
-                <option value="tim" {{ old('role') == 'tim' ? 'selected' : '' }}>Tim</option>
-            </select>     
-
-            <label for="role" class="text-xl font-semibold">Status User</label>
-            <select name="status" id="status" class="w-full p-3 border border-black rounded-lg mb-3" required>
-                <option value="" disabled selected {{ old('status') ? '' : 'selected' }}>Pilih Status</option>
-                <option value="approved" {{ old('status') == 'approved' ? 'selected' : '' }}>Approved</option>
-                <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-            </select>     
-
-            <label for="kode_prodi" class="text-xl font-semibold">Prodi</label>
-            <select name="kode_prodi" id="kode_prodi"
-                class="w-full p-3 border border-black rounded-lg mb">
-                <option value="">Pilih Prodi</option>
-                @foreach ($prodis as $prodi)
-                    <option value="{{ $prodi->kode_prodi }}">{{ $prodi->nama_prodi }}</option>
-                @endforeach
-            </select>
-            <p class="italic text-red-500">*kosongkan bila user admin/wadir1, jika tetap dipilih prodi tetap dinull kan</p>
-
-        <button type="submit" class="bg-blue-600 hover:bg-blue-800 text-white font-bold mt-3 px-5 py-2 rounded-lg">Simpan</button>
-        <a href="{{ route('admin.users.index') }}" class="ml-2 bg-gray-600 hover:bg-gray-800 text-white inline-flex font-semibold mt-3 px-5 py-2 rounded-lg">Kembali</a>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Kolom Pertama -->
+            <div class="space-y-4">
+                <!-- Nama -->
+                <div>
+                    <label for="name" class="block text-lg font-semibold mb-2 text-gray-700">Nama</label>
+                    <input type="text" id="name" name="name" value="{{ old('name') }}" required
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+        
+                <!-- Email -->
+                <div>
+                    <label for="email" class="block text-lg font-semibold mb-2 text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" value="{{ old('email') }}" required
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+        
+                <!-- Password -->
+                <div class="pt-6">
+                    <label for="password" class="block text-lg font-semibold mb-2 text-gray-700">Password</label>
+                    <input type="password" id="password" name="password" required
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+            </div>
+        
+            <!-- Kolom Kedua -->
+            <div class="space-y-4">
+                <!-- Role -->
+                <div>
+                    <label for="role" class="block text-lg font-semibold mb-2 text-gray-700">Role</label>
+                    <select id="role" name="role" required
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <option value="" disabled selected>Pilih Role</option>
+                        <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                        <option value="wadir1" {{ old('role') == 'wadir1' ? 'selected' : '' }}>Wadir 1</option>
+                        <option value="tim" {{ old('role') == 'tim' ? 'selected' : '' }}>Tim</option>
+                        <option value="kaprodi" {{ old('role') == 'kaprodi' ? 'selected' : '' }}>Kaprodi</option>
+                    </select>
+                </div>
+        
+                <!-- Prodi -->
+                <div>
+                    <label for="kode_prodi" class="block text-lg font-semibold mb-2 text-gray-700">Prodi</label>
+                    <select name="kode_prodi" id="kode_prodi"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <option value="">Pilih Prodi</option>
+                        @foreach ($prodis as $prodi)
+                            <option value="{{ $prodi->kode_prodi }}" {{ old('kode_prodi') == $prodi->kode_prodi ? 'selected' : '' }}>
+                                {{ $prodi->nama_prodi }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <p class="mt-2 text-sm text-gray-500 italic">*Kosongkan bila user admin/wadir1*</p>
+                </div>
+        
+                <!-- Status -->
+                <div>
+                    <label for="status" class="block text-lg font-semibold mb-2 text-gray-700">Status User</label>
+                    <select name="status" id="status" required
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <option value="" disabled selected>Pilih Status</option>
+                        <option value="approved" {{ old('status') == 'approved' ? 'selected' : '' }}>Approved</option>
+                        <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Tombol Aksi -->
+        <div class="flex justify-end space-x-5 pt-6">
+            <a href="{{ route('admin.users.index') }}" 
+               class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition duration-200">
+                Kembali
+            </a>
+            <button type="submit" 
+                    class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-200">
+                Simpan
+            </button>
+        </div>
     </form>
 </div>
 </div>
