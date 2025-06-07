@@ -62,9 +62,13 @@
                             </td>
                             <td class="py-3 px-6 min-w-[10px] flex justify-center items-center space-x-2">
                                 <a href="{{ route('tim.capaianpembelajaranlulusan.detail', $capaianpembelajaranlulusan->id_cpl) }}"
-                                    class="bg-gray-600 font-bold text-white px-5 py-3 rounded-md hover:bg-gray-800">🛈</a>
+                                    class="bg-gray-600 font-bold text-white px-5 py-3 rounded-md hover:bg-gray-800">
+                                    🛈
+                                </a>
                                 <a href="{{ route('tim.capaianpembelajaranlulusan.edit', $capaianpembelajaranlulusan->id_cpl) }}"
-                                    class="bg-blue-600 text-white font-bold px-5 py-3 rounded-md hover:bg-blue-800">✏️</a>
+                                    class="bg-blue-600 text-white font-bold px-5 py-3 rounded-md hover:bg-blue-800">
+                                    ✏️
+                                </a>
                                 <form
                                     action="{{ route('tim.capaianpembelajaranlulusan.destroy', $capaianpembelajaranlulusan->id_cpl) }}"
                                     method="POST">

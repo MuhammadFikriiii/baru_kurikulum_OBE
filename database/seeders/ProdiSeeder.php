@@ -12,7 +12,7 @@ class ProdiSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
-    {
+    { 
         Prodi::insert([
             [
                 'kode_prodi' => 'C0303',

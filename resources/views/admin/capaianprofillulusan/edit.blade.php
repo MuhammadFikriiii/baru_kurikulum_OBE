@@ -53,9 +53,17 @@
                 </option>
             </select>
             <br>
-            <button type="submit" class="bg-green-400 hover:bg-green-800 px-5 py-2 rounded-lg">Simpan</button>
-            <a href="{{ route('admin.capaianprofillulusan.index') }}"
-                class="bg-blue-400 hover:bg-blue-800 rounded-lg py-2 px-5">Kembali</a>
+            
+                <div class="flex justify-end space-x-5 mt-[50px]">
+                    <a href="{{ route('admin.capaianprofillulusan.index') }}" 
+                       class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition duration-200">
+                        Kembali
+                    </a>
+                    <button type="submit" 
+                            class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-200">
+                        Simpan
+                    </button>
+                </div>
         </form>
     </div>
 @endsection
