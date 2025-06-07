@@ -35,25 +35,29 @@
                     <table class="w-full border border-gray-300 rounded-lg overflow-hidden shadow-md">
                         <thead class="bg-green-800">
                             <tr class="text-white uppercase text-center">
-                                <th class="p-2 py-3 px-4 min-w-[10px] text-center font-bold uppercase">No</th>
-                                <th class="p-2 py-3 px-4 min-w-[10px] text-center font-bold uppercase">kode MK</th>
-                                <th class="p-2 py-3 px-4 min-w-[10px] text-center font-bold uppercase">nama MK</th>
-                                <th class="p-2 py-3 px-4 min-w-[10px] text-center font-bold uppercase">kode CPMK</th>
-                                <th class="p-2 py-3 px-4 min-w-[10px] text-center font-bold uppercase">nama CPMK</th>
-                                <th class="p-2 py-3 px-4 min-w-[10px] text-center font-bold uppercase">kode Sub CPMK</th>
-                                <th class="p-2 py-3 px-4 min-w-[10px] text-center font-bold uppercase">nama Sub CPMK</th>
+                                <th class="p-3 border-r border-gray-200 font-bold">No</th>
+                                <th class="p-3 border-r border-gray-200 font-bold">Kode MK</th>
+                                <th class="p-3 border-r border-gray-200 font-bold">Nama MK</th>
+                                <th class="p-3 border-r border-gray-200 font-bold">Kode CPMK</th>
+                                <th class="p-3 border-r border-gray-200 font-bold">Nama CPMK</th>
+                                <th class="p-3 border-r border-gray-200 font-bold">Kode Sub CPMK</th>
+                                <th class="p-3 font-bold">Nama Sub CPMK</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($data as $index => $row)
-                                <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
-                                    <td class="p-2 py-3 px-4 min-w-[10px] text-justify uppercase">{{ $index + 1 }}</td>
-                                    <td class="p-2 py-3 px-4 min-w-[10px] text-justify uppercase">{{ $row->kode_mk }}</td>
-                                    <td class="p-2 py-3 px-4 min-w-[10px] text-justify uppercase">{{ $row->nama_mk }}</td>
-                                    <td class="p-2 py-3 px-4 min-w-[10px] text-justify uppercase">{{ $row->kode_cpmk }}</td>
-                                    <td class="p-2 py-3 px-4 min-w-[10px] text-justify uppercase">{{ $row->deskripsi_cpmk }}</td>
-                                    <td class="p-2 py-3 px-4 min-w-[10px] text-justify uppercase">{{ $row->sub_cpmk }}</td>
-                                    <td class="p-2 py-3 px-4 min-w-[10px] text-justify uppercase">{{ $row->uraian_cpmk }}</td>
+                                <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200">
+                                    <td class="p-3 border border-gray-200 text-center">{{ $index + 1 }}</td>
+                                    <td class="p-3 border border-gray-200 text-center">{{ $row->kode_mk }}</td>
+                                    <td class="p-3 border border-gray-200 whitespace-normal break-words">
+                                        <div class="flex items-center h-full">
+                                            {{ $row->nama_mk }}
+                                        </div>
+                                    </td>
+                                    <td class="p-3 border border-gray-200 text-center">{{ $row->kode_cpmk }}</td>
+                                    <td class="p-3 border border-gray-200">{{ $row->deskripsi_cpmk }}</td>
+                                    <td class="p-3 border border-gray-200 text-center">{{ $row->sub_cpmk }}</td>
+                                    <td class="p-3 border border-gray-200">{{ $row->uraian_cpmk }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

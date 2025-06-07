@@ -16,8 +16,10 @@
 
     <label for="uraian_cpmk" class="block text-xl font-semibold">Deskripsi SubCpmk</label>
     <textarea name="uraian_cpmk" id="uraian_cpmk" readonly
-        class="w-full p-3 border border-black rounded-lg mb-8 bg-gray-100">{{ $subcpmk->uraian_cpmk }}</textarea>
+        class="w-full p-3 border border-black rounded-lg mb-4 bg-gray-100">{{ $subcpmk->uraian_cpmk }}</textarea>
 
-    <a href="{{ route('admin.subcpmk.index') }}" class="bg-blue-400 hover:bg-blue-600 rounded-lg px-4 py-2">Kembali</a>
+    <a href="{{ route('admin.subcpmk.index') }}" 
+    class=" bg-gray-600 inline-flex px-5 py-2 rounded-lg hover:bg-gray-700 mt-4 text-white font-bold" >
+        Kembali</a>
 </div>
 @endsection

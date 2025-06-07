@@ -46,10 +46,10 @@
             </div>
 
         <div class="mt-6">
-            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white px-6 py-2 rounded-lg">
-                Update
+            <button type="submit" class="bg-blue-600 px-5 py-2 rounded-lg hover:bg-blue-800 mt-4 text-white font-bold">
+                Simpan
             </button>
-            <a href="{{ route('admin.subcpmk.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white px-6 py-2 rounded-lg ml-4">
+            <a href="{{ route('admin.subcpmk.index') }}" class="ml-2 bg-gray-600 inline-flex px-5 py-2 rounded-lg hover:bg-gray-700 mt-4 text-white font-bold">
                 Kembali
             </a>
         </div>
