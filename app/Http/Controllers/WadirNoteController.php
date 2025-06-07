@@ -42,14 +42,14 @@ class WadirNoteController extends Controller
             ->with('success', 'Catatan berhasil disimpan');
     }
 
-    // Edit - Form untuk mengedit catatan
+  
     public function edit(WadirNote $note)
     {
         $prodis = Prodi::all();
         return view('wadir.notes.edit', compact('note', 'prodis'));
     }
 
-    // Update - Memperbarui catatan
+   
     public function update(Request $request, WadirNote $note)
     {
         $request->validate([
@@ -66,7 +66,7 @@ class WadirNoteController extends Controller
             ->with('success', 'Catatan berhasil diperbarui');
     }
 
-    // Destroy - Menghapus catatan
+   
     public function destroy(WadirNote $note)
     {
         $note->delete();
