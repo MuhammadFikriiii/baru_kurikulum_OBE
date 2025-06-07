@@ -225,8 +225,16 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/capaianpembelajaranmatakuliah', [Wadir1CapaianPembelajaranMatakuliahController::class, 'index'])->name('capaianpembelajaranmatakuliah.index');
         Route::get('/capaianpembelajaranmatakuliah/{id_cpmk}/detail', [Wadir1CapaianPembelajaranMatakuliahController::class, 'detail'])->name('capaianpembelajaranmatakuliah.detail');
     
-        Route::get('/pemetaancplpl', [KaprodiPemetaanCplPlController::class, 'index'])->name('pemetaancplpl.index');
+        //catatan
         Route::get('/notes', [WadirNoteController::class, 'index'])->name('notes.index');
+        Route::get('/notes/create', [WadirNoteController::class, 'create'])->name('notes.create');
+        Route::post('/notes', [WadirNoteController::class, 'store'])->name('notes.store');
+        Route::get('/notes/{note}', [WadirNoteController::class, 'show'])->name('notes.show');
+        Route::get('/notes/{note}/edit', [WadirNoteController::class, 'edit'])->name('notes.edit');
+        Route::put('/notes/{note}', [WadirNoteController::class, 'update'])->name('notes.update');
+        Route::delete('/notes/{note}', [WadirNoteController::class, 'destroy'])->name('notes.destroy');
+
+
     });
 
     // Grup Route Kaprodi
