@@ -134,7 +134,7 @@ class AdminMataKuliahController extends Controller
             'id_bks' => 'required|array',
         ]);
 
-        // Simpan kode_mk lama sebelum update untuk hapus data relasi lama
+        // Simpan kode_mk lama sebelum update untuk referensi
         $old_kode_mk = $matakuliah->kode_mk;
 
         // Update data dasar mata kuliah
@@ -149,16 +149,14 @@ class AdminMataKuliahController extends Controller
 
         $new_kode_mk = $matakuliah->kode_mk;
 
-        // Hapus relasi cpl_mk lama berdasarkan kode lama
+        // Hapus dan isi ulang cpl_mk berdasarkan CPL dari BK yang dipilih
         DB::table('cpl_mk')->where('kode_mk', $old_kode_mk)->delete();
 
-        // Ambil id_cpl terkait id_bk dari input
         $cpls = DB::table('cpl_bk')
             ->whereIn('id_bk', $request->id_bks)
             ->pluck('id_cpl')
             ->unique();
 
-        // Insert ulang relasi cpl_mk dengan kode mk baru
         foreach ($cpls as $id_cpl) {
             DB::table('cpl_mk')->insert([
                 'kode_mk' => $new_kode_mk,
@@ -166,10 +164,9 @@ class AdminMataKuliahController extends Controller
             ]);
         }
 
-        // Hapus relasi bk_mk lama berdasarkan kode lama
+        // Hapus dan isi ulang bk_mk
         DB::table('bk_mk')->where('kode_mk', $old_kode_mk)->delete();
 
-        // Insert ulang relasi bk_mk dengan kode mk baru
         foreach ($request->id_bks as $id_bk) {
             DB::table('bk_mk')->insert([
                 'kode_mk' => $new_kode_mk,
@@ -177,75 +174,39 @@ class AdminMataKuliahController extends Controller
             ]);
         }
 
-        // PENDEKATAN BARU: Cari CPMK yang ada di cpl_cpmk dengan CPL yang berbeda dari CPL baru
-        // Ini untuk menangani kasus dimana kode MK di cpmk_mk tidak sinkron
-
-        // 1. Cari semua CPMK yang terkait dengan mata kuliah ini dari berbagai sumber
-        $relatedCpmks = collect();
-
-        // Dari cpmk_mk (dengan kode lama dan baru)
-        $cpmksFromMk = DB::table('cpmk_mk')
-            ->where(function ($query) use ($old_kode_mk, $new_kode_mk) {
-                $query->where('kode_mk', $old_kode_mk)
-                    ->orWhere('kode_mk', $new_kode_mk);
-            })
-            ->pluck('id_cpmk');
-
-        $relatedCpmks = $relatedCpmks->merge($cpmksFromMk);
-
-        // Jika tidak ada dari cpmk_mk, cari dari cpl_cpmk yang tidak sesuai dengan CPL baru
-        if ($cpmksFromMk->isEmpty()) {
-            // Cari CPMK yang ada di cpl_cpmk tapi CPL-nya bukan dari BK yang dipilih
-            $cpmksFromCplCpmk = DB::table('cpl_cpmk')
-                ->whereNotIn('id_cpl', $cpls)
-                ->pluck('id_cpmk')
-                ->unique();
-
-            Log::info('CPMK found from cpl_cpmk with different CPL:', $cpmksFromCplCpmk->toArray());
-            $relatedCpmks = $relatedCpmks->merge($cpmksFromCplCpmk);
+        // Update kode_mk di cpmk_mk jika kode MK berubah
+        if ($old_kode_mk !== $new_kode_mk) {
+            DB::table('cpmk_mk')->where('kode_mk', $old_kode_mk)->update([
+                'kode_mk' => $new_kode_mk
+            ]);
         }
 
-        $relatedCpmks = $relatedCpmks->unique()->toArray();
+        // Ambil semua CPMK yang terkait dengan MK ini
+        $relatedCpmks = DB::table('cpmk_mk')
+            ->where('kode_mk', $new_kode_mk)
+            ->pluck('id_cpmk')
+            ->unique();
 
-        // Debug: Log data yang diambil
-        Log::info('Data untuk update cpl_cpmk:', [
-            'old_kode_mk' => $old_kode_mk,
-            'new_kode_mk' => $new_kode_mk,
-            'cpls' => $cpls->toArray(),
-            'relatedCpmks' => $relatedCpmks,
-            'cpmksFromMk' => $cpmksFromMk->toArray(),
-            'input_id_bks' => $request->id_bks
-        ]);
+        Log::info('Final related CPMKs from cpmk_mk only:', $relatedCpmks->toArray());
 
-        // Update kode_mk di tabel cpmk_mk jika ada dan berbeda
-        if ($old_kode_mk !== $new_kode_mk && !$cpmksFromMk->isEmpty()) {
-            $updatedRows = DB::table('cpmk_mk')
-                ->where('kode_mk', $old_kode_mk)
-                ->update(['kode_mk' => $new_kode_mk]);
-            Log::info('Updated cpmk_mk rows: ' . $updatedRows);
-        }
+        // Hapus relasi cpl_cpmk HANYA untuk CPMK dari MK ini
+        DB::table('cpl_cpmk')->whereIn('id_cpmk', $relatedCpmks)->delete();
+        Log::info('Deleted cpl_cpmk rows:', ['count' => count($relatedCpmks)]);
 
-        // Proses update cpl_cpmk
-        if (!empty($relatedCpmks)) {
-            // Hapus relasi lama untuk CPMK yang ditemukan
-            $deletedRows = DB::table('cpl_cpmk')->whereIn('id_cpmk', $relatedCpmks)->delete();
-            Log::info('Deleted cpl_cpmk rows: ' . $deletedRows);
-
-            // Insert ulang relasi cpl_cpmk berdasarkan cpmk dan cpl (dari BK yang dipilih)
-            $insertedData = [];
-            foreach ($relatedCpmks as $id_cpmk) {
-                foreach ($cpls as $id_cpl) {
-                    $data = [
-                        'id_cpmk' => $id_cpmk,
-                        'id_cpl' => $id_cpl,
-                    ];
-                    DB::table('cpl_cpmk')->insert($data);
-                    $insertedData[] = $data;
-                }
+        // Insert ulang relasi cpl_cpmk untuk CPMK dari MK ini ke CPL dari BK terpilih
+        $insertedData = [];
+        foreach ($relatedCpmks as $id_cpmk) {
+            foreach ($cpls as $id_cpl) {
+                $insertedData[] = [
+                    'id_cpmk' => $id_cpmk,
+                    'id_cpl' => $id_cpl,
+                ];
             }
+        }
+
+        if (!empty($insertedData)) {
+            DB::table('cpl_cpmk')->insert($insertedData);
             Log::info('Inserted cpl_cpmk data:', $insertedData);
-        } else {
-            Log::warning('No related CPMK found for mata kuliah old: ' . $old_kode_mk . ', new: ' . $new_kode_mk);
         }
 
         return redirect()->route('admin.matakuliah.index')->with('success', 'Matakuliah berhasil diperbarui.');

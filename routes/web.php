@@ -62,7 +62,7 @@ use App\Http\Controllers\Wadir1PemetaanBkMkController;
 use App\Http\Controllers\Wadir1PemetaanCplBkMkController;
 use App\Http\Controllers\Wadir1CapaianPembelajaranMatakuliahController;
 use App\Http\Controllers\HomepageController;
-use App\Http\Controllers\Wadir\WadirNoteController;
+use App\Http\Controllers\WadirNoteController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -196,7 +196,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pemetaanmkcpmksubcpmk', [AdminSubCpmkController::class, 'pemetaanmkcpmksubcpmk'])->name('pemetaanmkcpmksubcpmk.index');
         Route::get('/export/excel', [TimExportController::class, 'export'])->name('export.excel');
         Route::post('/ajax/get-cpl-by-bk', [AdminMataKuliahController::class, 'getCplByBk'])->name('matakuliah.getCplByBk');
-        Route::post('/ajax/get-cpl-by-mk', [AdminCapaianPembelajaranMataKuliahController::class, 'getCplByMk'])->name('capaianpembelajaranmatakuliah.getCPLByMK');
+        Route::post('/ajax/get-cpmk-by-bk', [AdminSubCpmkController::class, 'getCpmkByMataKuliah'])->name('subcpmk.getCpmkByMataKuliah');
+        Route::post('/ajax/get-cpl-by-mk', [AdminCapaianPembelajaranMataKuliahController::class, 'getMkByCpl'])->name('capaianpembelajaranmatakuliah.getMKByCPL');
     });
 
     // Grup Route Wadir1

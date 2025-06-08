@@ -96,7 +96,8 @@
                     <thead class="bg-green-800 text-white">
                         <tr>
                             <th class="py-3 px-4 text-center border-r border-gray-200 font-bold uppercase">No</th>
-                            <th class="py-3 px-4 text-center border-r border-gray-200 font-bold uppercase">CPMK</th>
+                            <th class="py-3 px-4 text-center border-r border-gray-200 font-bold uppercase">Kode CPMK</th>
+                            <th class="py-3 px-4 text-center border-r border-gray-200 font-bold uppercase">Deskripsi CPMK</th>
                             <th class="py-3 px-4 text-center border-r border-gray-200 font-bold uppercase">SUB CPMK</th>
                             <th class="py-3 px-4 text-center border-r border-gray-200 font-bold uppercase">Uraian Sub CPMK</th>
                             <th class="py-3 px-4 text-center font-bold uppercase">Aksi</th>
@@ -106,7 +107,8 @@
                         @foreach($subcpmks as $index => $subcpmk)
                             <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200">
                                 <td class="py-3 px-4 text-center border border-gray-200">{{ $index + 1 }}</td>
-                                <td class="py-3 px-4 text-center border border-gray-200">{{ $subcpmk->CapaianPembelajaranMataKuliah->deskripsi_cpmk ?? '-' }}</td>
+                                <td class="py-3 px-4 text-center border border-gray-200">{{ $subcpmk->kode_cpmk }}</td>
+                                <td class="py-3 px-4 text-center border border-gray-200">{{ $subcpmk->deskripsi_cpmk ?? '-' }}</td>
                                 <td class="py-3 px-4 text-center border border-gray-200">{{ $subcpmk->sub_cpmk }}</td>
                                 <td class="py-3 px-4 text-center border border-gray-200">{{ $subcpmk->uraian_cpmk }}</td>
                                 <td class="py-3 px-4 border border-gray-200">

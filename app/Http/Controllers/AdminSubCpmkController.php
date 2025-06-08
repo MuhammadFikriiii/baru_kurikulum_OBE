@@ -23,7 +23,6 @@ class AdminSubCpmkController extends Controller
             ]);
         }
 
-
         $prodi = $prodis->where('kode_prodi', $kode_prodi)->first();
 
         $subcpmks = DB::table('sub_cpmks as sub')
@@ -34,7 +33,7 @@ class AdminSubCpmkController extends Controller
             ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->where('pl.kode_prodi', $kode_prodi)
             ->select(
-                'sub.id_sub_cpmk',
+                'sub.id_sub_cpmk','kode_cpmk',
                 'sub.sub_cpmk',
                 'sub.uraian_cpmk',
                 'cpmk.deskripsi_cpmk'
@@ -43,39 +42,100 @@ class AdminSubCpmkController extends Controller
 
         return view('admin.subcpmk.index', compact('subcpmks', 'prodis', 'kode_prodi'));
     }
+
     public function create()
     {
-        $cpmks = CapaianPembelajaranMataKuliah::all();
-        return view('admin.subcpmk.create', compact('cpmks'));
+        // Ambil semua mata kuliah
+        $mataKuliahs = DB::table('mata_kuliahs')->orderBy('kode_mk')->get();
+        return view('admin.subcpmk.create', compact('mataKuliahs'));
+    }
+
+    public function getCpmkByMataKuliah(Request $request)
+    {
+        $kode_mk = $request->kode_mk;
+
+        // Ambil CPMK yang terkait dengan mata kuliah
+        $cpmks = DB::table('capaian_pembelajaran_mata_kuliahs as cpmk')
+            ->join('cpmk_mk', 'cpmk.id_cpmk', '=', 'cpmk_mk.id_cpmk')
+            ->where('cpmk_mk.kode_mk', $kode_mk)
+            ->select('cpmk.id_cpmk', 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk')
+            ->orderBy('cpmk.kode_cpmk')
+            ->get();
+
+        return response()->json($cpmks);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'id_cpmk' => 'exists:capaian_pembelajaran_mata_kuliahs,id_cpmk',
+            'id_cpmk' => 'required|array',
+            'id_cpmk.*' => 'exists:capaian_pembelajaran_mata_kuliahs,id_cpmk',
             'sub_cpmk' => 'required|string|max:10',
             'uraian_cpmk' => 'required|string|max:255'
         ]);
 
-        SubCpmk::create($request->all());
-        return redirect()->route('admin.subcpmk.index')->with('success', 'subcpmk berhasil dibuat');
+        // Jika multiple CPMK dipilih, buat Sub CPMK untuk setiap CPMK
+        foreach ($request->id_cpmk as $cpmk_id) {
+            SubCpmk::create([
+                'id_cpmk' => $cpmk_id,
+                'sub_cpmk' => $request->sub_cpmk,
+                'uraian_cpmk' => $request->uraian_cpmk
+            ]);
+        }
+
+        return redirect()->route('admin.subcpmk.index')->with('success', 'Sub CPMK berhasil dibuat untuk ' . count($request->id_cpmk) . ' CPMK');
     }
 
     public function edit(SubCpmk $subcpmk)
     {
-        $cpmks = CapaianPembelajaranMataKuliah::all();
-        return view('admin.subcpmk.edit', compact('cpmks', 'subcpmk'));
+        // Ambil semua mata kuliah
+        $mataKuliahs = DB::table('mata_kuliahs')->orderBy('kode_mk')->get();
+
+        // Ambil mata kuliah yang terkait dengan CPMK dari sub CPMK ini
+        $selectedMataKuliah = DB::table('cpmk_mk')
+            ->join('mata_kuliahs as mk', 'cpmk_mk.kode_mk', '=', 'mk.kode_mk')
+            ->where('cpmk_mk.id_cpmk', $subcpmk->id_cpmk)
+            ->select('mk.kode_mk', 'mk.nama_mk')
+            ->first();
+
+        // Ambil semua CPMK yang terkait dengan mata kuliah tersebut
+        $cpmks = collect();
+        if ($selectedMataKuliah) {
+            $cpmks = DB::table('capaian_pembelajaran_mata_kuliahs as cpmk')
+                ->join('cpmk_mk', 'cpmk.id_cpmk', '=', 'cpmk_mk.id_cpmk')
+                ->where('cpmk_mk.kode_mk', $selectedMataKuliah->kode_mk)
+                ->select('cpmk.id_cpmk', 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk')
+                ->orderBy('cpmk.kode_cpmk')
+                ->get();
+        }
+
+        return view('admin.subcpmk.edit', compact('mataKuliahs', 'subcpmk', 'selectedMataKuliah', 'cpmks'));
     }
 
     public function update(Request $request, SubCpmk $subcpmk)
     {
         $request->validate([
-            'id_cpmk' => 'exists:capaian_pembelajaran_mata_kuliahs,id_cpmk',
+            'id_cpmk' => 'required|array',
+            'id_cpmk.*' => 'exists:capaian_pembelajaran_mata_kuliahs,id_cpmk',
             'sub_cpmk' => 'required|string|max:10',
             'uraian_cpmk' => 'required|string|max:255'
         ]);
-        $subcpmk->update($request->all());
-        return redirect()->route('admin.subcpmk.index')->with('success', 'sub cpmk berhasil diperbaharui');
+
+        // Hapus sub CPMK yang lama dengan sub_cpmk dan uraian_cpmk yang sama
+        SubCpmk::where('sub_cpmk', $subcpmk->sub_cpmk)
+            ->where('uraian_cpmk', $subcpmk->uraian_cpmk)
+            ->delete();
+
+        // Buat sub CPMK baru untuk setiap CPMK yang dipilih
+        foreach ($request->id_cpmk as $cpmk_id) {
+            SubCpmk::create([
+                'id_cpmk' => $cpmk_id,
+                'sub_cpmk' => $request->sub_cpmk,
+                'uraian_cpmk' => $request->uraian_cpmk
+            ]);
+        }
+
+        return redirect()->route('admin.subcpmk.index')->with('success', 'Sub CPMK berhasil diperbaharui untuk ' . count($request->id_cpmk) . ' CPMK');
     }
 
     public function destroy(SubCpmk $subcpmk)

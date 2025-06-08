@@ -42,19 +42,19 @@ class AdminCapaianPembelajaranMataKuliahController extends Controller
         return view('admin.capaianpembelajaranmatakuliah.index', compact('cpmks', 'prodis', 'kode_prodi', 'prodi'));
     }
 
-    public function getCplByMk(Request $request)
+    public function getMkByCpl(Request $request)
     {
-        $kode_mks = $request->kode_mks ?? [];
+        $id_cpls = $request->id_cpls ?? [];
 
-        $cpls = DB::table('cpl_mk')
-            ->join('capaian_profil_lulusans as cpl', 'cpl_mk.id_cpl', '=', 'cpl.id_cpl')
-            ->whereIn('cpl_mk.kode_mk', $kode_mks)
-            ->select('cpl.id_cpl', 'cpl.kode_cpl', 'cpl.deskripsi_cpl')
+        $mks = DB::table('cpl_mk')
+            ->join('mata_kuliahs as mk', 'cpl_mk.kode_mk', '=', 'mk.kode_mk')
+            ->whereIn('cpl_mk.id_cpl', $id_cpls)
+            ->select('mk.kode_mk', 'mk.nama_mk')
             ->distinct()
-            ->orderBy('cpl.kode_cpl')
+            ->orderBy('mk.kode_mk')
             ->get();
 
-        return response()->json($cpls);
+        return response()->json($mks);
     }
 
     public function create()
@@ -69,87 +69,113 @@ class AdminCapaianPembelajaranMataKuliahController extends Controller
         $request->validate([
             'kode_cpmk' => 'required|string|max:10',
             'deskripsi_cpmk' => 'required|string|max:255',
-            'kode_mks' => 'required|array',
+            'id_cpls' => 'required|array',
+            'selected_mks' => 'required|array', // Validasi MK yang dipilih
         ]);
 
         $cpmk = CapaianPembelajaranMataKuliah::create($request->only(['kode_cpmk', 'deskripsi_cpmk']));
 
-        $cpls = DB::table('cpl_mk')
-            ->whereIn('kode_mk', $request->kode_mks)
-            ->select('id_cpl')
-            ->distinct()
-            ->pluck('id_cpl');
-
-        foreach ($cpls as $id_cpl) {
+        // Insert ke tabel cpl_cpmk berdasarkan CPL yang dipilih
+        foreach ($request->id_cpls as $id_cpl) {
             DB::table('cpl_cpmk')->insert([
                 'id_cpmk' => $cpmk->id_cpmk,
                 'id_cpl' => $id_cpl,
             ]);
         }
 
-        foreach ($request->kode_mks as $kode_mk) {
+        // Insert ke tabel cpmk_mk berdasarkan MK yang dipilih user
+        foreach ($request->selected_mks as $kode_mk) {
             DB::table('cpmk_mk')->insert([
                 'id_cpmk' => $cpmk->id_cpmk,
                 'kode_mk' => $kode_mk,
             ]);
         }
+
         return redirect()->route('admin.capaianpembelajaranmatakuliah.index')->with('success', 'Capaian Pembelajaran Mata Kuliah berhasil ditambahkan.');
     }
 
     public function edit($id_cpmk)
     {
         $cpmks = CapaianPembelajaranMataKuliah::findOrFail($id_cpmk);
-        $capaianprofillulusans = DB::table('capaian_profil_lulusans')->get();
+        $capaianProfilLulusans = DB::table('capaian_profil_lulusans')->get();
         $mataKuliahs = DB::table('mata_kuliahs')->get();
 
+        // Ambil CPL yang terkait dengan CPMK ini
         $selectedCpls = DB::table('cpl_cpmk')
             ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
             ->where('cpl_cpmk.id_cpmk', $cpmks->id_cpmk)
+            ->select('cpl.id_cpl', 'cpl.kode_cpl', 'cpl.deskripsi_cpl')
             ->orderBy('cpl.kode_cpl')
             ->get();
 
-        $selectedMKs = DB::table('cpmk_mk')
+        // Ambil ID CPL yang dipilih untuk keperluan JavaScript
+        $selectedCplIds = $selectedCpls->pluck('id_cpl')->toArray();
+
+        // Ambil SEMUA MK yang terkait dengan CPL yang dipilih (bukan hanya yang sudah dipilih untuk CPMK)
+        $availableMKs = collect();
+        if (!empty($selectedCplIds)) {
+            $availableMKs = DB::table('cpl_mk')
+                ->join('mata_kuliahs as mk', 'cpl_mk.kode_mk', '=', 'mk.kode_mk')
+                ->whereIn('cpl_mk.id_cpl', $selectedCplIds)
+                ->select('mk.kode_mk', 'mk.nama_mk')
+                ->distinct()
+                ->orderBy('mk.kode_mk')
+                ->get();
+        }
+
+        // Ambil kode MK yang sudah dipilih untuk CPMK ini (untuk menandai yang sudah ter-check)
+        $selectedMKCodes = DB::table('cpmk_mk')
             ->where('id_cpmk', $id_cpmk)
             ->pluck('kode_mk')
             ->toArray();
 
-        return view('admin.capaianpembelajaranmatakuliah.edit', compact('cpmks', 'capaianprofillulusans', 'mataKuliahs', 'selectedCpls', 'selectedMKs'));
+        return view('admin.capaianpembelajaranmatakuliah.edit', compact(
+            'cpmks',
+            'capaianProfilLulusans',
+            'mataKuliahs',
+            'selectedCpls',
+            'selectedCplIds',
+            'availableMKs',
+            'selectedMKCodes'
+        ));
     }
 
     public function update(Request $request, $id_cpmk)
     {
-        request()->validate([
+        $request->validate([
             'kode_cpmk' => 'required|string|max:10',
-            'deskripsi_cpmk' => 'required',
+            'deskripsi_cpmk' => 'required|string|max:255',
+            'id_cpls' => 'required|array',
+            'selected_mks' => 'required|array', // Validasi MK yang dipilih
         ]);
 
         $cpmk = CapaianPembelajaranMataKuliah::findOrFail($id_cpmk);
 
+        // Update data CPMK
         $cpmk->update($request->only(['kode_cpmk', 'deskripsi_cpmk']));
 
+        // Hapus relasi lama
         DB::table('cpl_cpmk')->where('id_cpmk', $cpmk->id_cpmk)->delete();
         DB::table('cpmk_mk')->where('id_cpmk', $cpmk->id_cpmk)->delete();
 
-        $cpls = DB::table('cpl_mk')
-            ->whereIn('kode_mk', $request->kode_mks)
-            ->select('id_cpl')
-            ->distinct()
-            ->pluck('id_cpl');
-
-        foreach ($cpls as $id_cpl) {
+        // Insert relasi CPL-CPMK berdasarkan CPL yang dipilih
+        foreach ($request->id_cpls as $id_cpl) {
             DB::table('cpl_cpmk')->insert([
                 'id_cpmk' => $cpmk->id_cpmk,
                 'id_cpl' => $id_cpl,
             ]);
         }
 
-        foreach ($request->kode_mks as $kode_mk) {
+        // Insert relasi CPMK-MK berdasarkan MK yang dipilih user
+        foreach ($request->selected_mks as $kode_mk) {
             DB::table('cpmk_mk')->insert([
                 'id_cpmk' => $cpmk->id_cpmk,
                 'kode_mk' => $kode_mk,
             ]);
         }
-        return redirect()->route('admin.capaianpembelajaranmatakuliah.index')->with('success', 'CPMK berhasil diperbarui.');
+
+        return redirect()->route('admin.capaianpembelajaranmatakuliah.index')
+            ->with('success', 'CPMK berhasil diperbarui.');
     }
 
     public function detail($id_cpmk)
