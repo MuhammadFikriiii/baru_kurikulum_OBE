@@ -21,6 +21,17 @@
     @csrf
     @method('PUT')
 
+    <label for="id_tahun" class="text-xl font-semibold">Tahun:</label>
+<select name="id_tahun" id="id_tahun" class="mt-1 p-3 border border-black rounded-lg w-full mb-3" required>
+    <option value="" disabled selected>Pilih Tahun</option>
+    @foreach ($tahuns as $tahun)
+        <option value="{{ $tahun->id_tahun }}" {{ $tahun->id_tahun == $profillulusan->id_tahun ? 'selected' : '' }}>
+            {{ $tahun->tahun }}
+        </option>
+    @endforeach
+</select>
+<br>
+
     <label for="kode_pl" class="text-xl font-semibold">Kode Profil Lulusan:</label>
     <input type="text" name="kode_pl" id="kode_pl" value="{{ old('kode_pl', $profillulusan->kode_pl) }}" class="mt-1 p-3 border border-black rounded-lg w-full mb-3" required>
     <br>

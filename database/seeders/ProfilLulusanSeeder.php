@@ -15,6 +15,7 @@ class ProfilLulusanSeeder extends Seeder
     {
         ProfilLulusan::insert([
             [
+                'id_tahun' => 1,
                 'kode_pl' => 'PL01',
                 'kode_prodi' => 'C0303',
                 'deskripsi_pl' => '(IABEE) Lulusan menguasai konsep dasar persoalan computing serta menerapkan prinsip-prinsip computing dan disiplin ilmu relevan lainnya untuk mengidentifikasi solusi bagi organisasi. (Pengetahuan)',
@@ -28,6 +29,7 @@ class ProfilLulusanSeeder extends Seeder
                 'sumber_pl' => '19 Jan 2023 V 1.1 - PANDUAN KURIKULUM BERBASIS OBE INFORMATIKA Hal.65'
             ],
             [
+                'id_tahun' => 1,
                 'kode_pl' => 'PL02',
                 'kode_prodi' => 'C0303',
                 'deskripsi_pl' => '(IABEE) Lulusan memiliki kemampuan untuk mendesain dan mengimplementasikan solusi menggunakan perangkat lunak yang memenuhi kebutuhan pengguna dengan pendekatan yang sesuai di bidang industri pengolahan. (Keterampilan Khusus)',
@@ -41,6 +43,7 @@ class ProfilLulusanSeeder extends Seeder
                 'sumber_pl' => '19 Jan 2023 V 1.1 - PANDUAN KURIKULUM BERBASIS OBE INFORMATIKA Hal.66'
             ],
             [
+                'id_tahun' => 1,
                 'kode_pl' => 'PL03',
                 'kode_prodi' => 'C0303',
                 'deskripsi_pl' => '(IABEE) Lulusan memiliki kemampuan untuk mendesain dan mengimplementasikan solusi permasalahan pada sistem jaringan di bidang industri pengolahan. (Keterampilan Khusus)',
@@ -54,6 +57,7 @@ class ProfilLulusanSeeder extends Seeder
                 'sumber_pl' => 'Permen No. 53 Tahun 2023 dan PENGEMBANGAN KURIKULUM KKNI BERDASARKAN OBE - BIDANG ILMU INFORMATIKA DAN KOMPUTER 2019 Hal. 26'
             ],
             [
+                'id_tahun' => 1,
                 'kode_pl' => 'PL04',
                 'kode_prodi' => 'C0303',
                 'deskripsi_pl' => '(KKNI) Lulusan mampu bekerjasama, berkomunikasi, dan berinovasi dalam perkerjaannya.',

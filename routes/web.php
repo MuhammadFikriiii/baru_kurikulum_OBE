@@ -63,6 +63,7 @@ use App\Http\Controllers\Wadir1PemetaanCplBkMkController;
 use App\Http\Controllers\Wadir1CapaianPembelajaranMatakuliahController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\WadirNoteController;
+use App\Http\Controllers\AdminTahunController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -121,6 +122,13 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/prodi/{prodi}', [AdminProdiController::class, 'update'])->name('prodi.update');
         Route::get('/prodi/{prodi}/detail', [AdminProdiController::class, 'detail'])->name('prodi.detail');
         Route::delete('/prodi/{prodi}', [AdminProdiController::class, 'destroy'])->name('prodi.destroy');
+
+        Route::get('/tahun', [AdminTahunController::class, 'index'])->name('tahun.index');
+        Route::get('/tahun/create', [AdminTahunController::class, 'create'])->name('tahun.create');
+        Route::post('/tahun', [AdminTahunController::class, 'store'])->name('tahun.store');
+        Route::get('/tahun/{id_tahun}/edit', [AdminTahunController::class, 'edit'])->name('tahun.edit');
+        Route::put('/tahun/{id_tahun}', [AdminTahunController::class, 'update'])->name('tahun.update');
+        Route::delete('/tahun/{id_tahun}', [AdminTahunController::class, 'destroy'])->name('tahun.destroy');
 
         Route::get('/profillulusan', [AdminProfilLulusanController::class, 'index'])->name('profillulusan.index');
         Route::get('/profillulusan/create', [AdminProfilLulusanController::class, 'create'])->name('profillulusan.create');
@@ -198,6 +206,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/ajax/get-cpl-by-bk', [AdminMataKuliahController::class, 'getCplByBk'])->name('matakuliah.getCplByBk');
         Route::post('/ajax/get-cpmk-by-bk', [AdminSubCpmkController::class, 'getCpmkByMataKuliah'])->name('subcpmk.getCpmkByMataKuliah');
         Route::post('/ajax/get-cpl-by-mk', [AdminCapaianPembelajaranMataKuliahController::class, 'getMkByCpl'])->name('capaianpembelajaranmatakuliah.getMKByCPL');
+
     });
 
     // Grup Route Wadir1

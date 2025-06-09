@@ -14,6 +14,7 @@ class ProfilLulusan extends Model
     protected $fillable = [
         'kode_pl',
         'kode_prodi',
+        'id_tahun',
         'deskripsi_pl',
         'profesi_pl',
         'unsur_pl',
@@ -27,5 +28,10 @@ class ProfilLulusan extends Model
     public function capaianProfilLulusans()
     {
         return $this->belongsToMany(CapaianProfilLulusan::class, 'cpl_pl', 'id_pl', 'id_cpl');
+    }
+
+    public function tahun()
+    {
+        return $this->belongsTo(Tahun::class, 'id_tahun', 'id_tahun');
     }
 }
