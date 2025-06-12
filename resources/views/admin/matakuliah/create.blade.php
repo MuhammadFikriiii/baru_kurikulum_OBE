@@ -27,7 +27,7 @@
                 class="border border-black p-3 mb-1 w-full rounded-lg mt-1" multiple required>
                 @foreach ($bahanKajians as $bk)
                     <option value="{{ $bk->id_bk }}" title="{{ $bk->kode_bk }} - {{ $bk->nama_bk }}">
-                        {{ $bk->kode_bk }} - {{ $bk->nama_bk }}
+                        {{ $bk->tahun }}:{{ $bk->nama_prodi }}: {{ $bk->kode_bk }}: {{ $bk->nama_bk }}
                     </option>
                 @endforeach
             </select>

@@ -27,8 +27,8 @@
                 <option value="" disabled selected>Pilih PL</option>
                 @foreach ($profilLulusans as $pl)
                     <option value="{{ $pl->id_pl }}"
-                        title="{{ $pl->nama_prodi }} - {{ $pl->kode_pl }} - {{ $pl->deskripsi_pl }}">
-                        {{ $pl->nama_prodi }} - {{ $pl->kode_pl }} - {{ $pl->deskripsi_pl }}
+                        title="{{ $pl->tahun }}: {{ $pl->nama_prodi }}: {{ $pl->kode_pl }}: {{ $pl->deskripsi_pl }}">
+                        {{ $pl->tahun }}: {{ $pl->nama_prodi }}: {{ $pl->kode_pl }}: {{ $pl->deskripsi_pl }}
                     </option>
                 @endforeach
             </select>

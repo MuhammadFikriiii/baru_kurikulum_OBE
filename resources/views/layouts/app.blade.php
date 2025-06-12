@@ -140,6 +140,12 @@
                     <span class="ml-2">Prodi</span>
                 </a>
             </li>
+            <li data-title="Prodi">
+                <a href="{{ route('admin.tahun.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="bi bi-mortarboard"></i>
+                    <span class="ml-2">Tahun</span>
+                </a>
+            </li>
             <li data-title="Profil Lulusan">
                 <a href="{{ route('admin.profillulusan.index') }}"
                     class="flex items-center p-3 hover:bg-gray-700 rounded">

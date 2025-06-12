@@ -24,8 +24,8 @@
                 class="border border-black p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]"
                 multiple required>
                 @foreach ($capaianProfilLulusans as $cpl)
-                    <option value="{{ $cpl->id_cpl }}" title="{{ $cpl->kode_cpl }} - {{ $cpl->deskripsi_cpl }}">
-                        {{ $cpl->kode_cpl }} - {{ $cpl->deskripsi_cpl }}
+                    <option value="{{ $cpl->id_cpl }}" title="{{ $cpl->tahun }}: {{ $cpl->nama_prodi }}: {{ $cpl->kode_cpl }}: {{ $cpl->deskripsi_cpl }}">
+                        {{ $cpl->tahun }}: {{ $cpl->nama_prodi }}: {{ $cpl->kode_cpl }}: {{ $cpl->deskripsi_cpl }}
                     </option>
                 @endforeach
             </select>

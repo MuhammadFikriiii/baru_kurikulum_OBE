@@ -13,10 +13,13 @@ class AdminCapaianProfilLulusanController extends Controller
     public function index(Request $request)
     {
         $kode_prodi = $request->get('kode_prodi');
+        $id_tahun = $request->get('id_tahun');
         $prodis = DB::table('prodis')->get();
 
         if (!$kode_prodi) {
-            return view("admin.capaianprofillulusan.index", compact("prodis", "kode_prodi"));
+            // Ambil tahun-tahun yang tersedia dari tabel tahun
+            $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+            return view("admin.capaianprofillulusan.index", compact("prodis", "kode_prodi", "id_tahun", "tahun_tersedia"));
         }
 
         $query = DB::table('capaian_profil_lulusans')
@@ -31,22 +34,30 @@ class AdminCapaianProfilLulusanController extends Controller
             $query->where('prodis.kode_prodi', $kode_prodi);
         }
 
+        // Filter berdasarkan tahun jika ada
+        if ($id_tahun) {
+            $query->where('profil_lulusans.id_tahun', $id_tahun);
+        }
+
         $capaianprofillulusans = $query->get();
+
+        // Ambil tahun-tahun yang tersedia dari tabel tahun
+        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
 
         $dataKosong = $capaianprofillulusans->isEmpty() && $kode_prodi;
 
-        return view("admin.capaianprofillulusan.index", compact("capaianprofillulusans", "prodis", "kode_prodi", "dataKosong"));
+        return view("admin.capaianprofillulusan.index", compact("capaianprofillulusans", "prodis", "kode_prodi", "id_tahun", "tahun_tersedia", "dataKosong"));
     }
-
 
     public function create()
     {
         $profilLulusans = DB::table('profil_lulusans')
             ->join('prodis', 'profil_lulusans.kode_prodi', '=', 'prodis.kode_prodi')
-            ->select('profil_lulusans.id_pl', 'profil_lulusans.kode_pl', 'profil_lulusans.deskripsi_pl', 'prodis.nama_prodi')
+            ->join('tahun', 'profil_lulusans.id_tahun', '=', 'tahun.id_tahun')
+            ->select('profil_lulusans.id_pl', 'profil_lulusans.kode_pl', 'profil_lulusans.deskripsi_pl', 'prodis.nama_prodi', 'tahun.tahun')
             ->orderBy('prodis.nama_prodi')
             ->get();
-        return view("admin.capaianprofillulusan.create", compact("profilLulusans"));
+        return view("admin.capaianprofillulusan.create", compact('profilLulusans'));
     }
 
     public function store(Request $request)
@@ -73,7 +84,13 @@ class AdminCapaianProfilLulusanController extends Controller
     {
         $capaianprofillulusan = CapaianProfilLulusan::findOrFail($id_cpl);
 
-        $profilLulusans = ProfilLulusan::all();
+        $profilLulusans = DB::table('profil_lulusans')
+            ->join('prodis', 'profil_lulusans.kode_prodi', '=', 'prodis.kode_prodi')
+            ->join('tahun', 'profil_lulusans.id_tahun', '=', 'tahun.id_tahun')
+            ->select('profil_lulusans.id_pl', 'profil_lulusans.kode_pl', 'profil_lulusans.deskripsi_pl', 'prodis.nama_prodi', 'tahun.tahun')
+            ->orderBy('prodis.nama_prodi')
+            ->get();
+            
         $selectedProfilLulusans = DB::table('cpl_pl')
             ->where('id_cpl', $id_cpl)
             ->pluck('id_pl')

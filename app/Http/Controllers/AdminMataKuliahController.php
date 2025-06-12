@@ -15,7 +15,13 @@ class AdminMataKuliahController extends Controller
     public function index(Request $request)
     {
         $kode_prodi = $request->get('kode_prodi');
+        $id_tahun = $request->get('id_tahun');
         $prodis = DB::table('prodis')->get();
+
+        if (!$kode_prodi) {
+            $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+            return view("admin.matakuliah.index", compact("prodis", "kode_prodi", "id_tahun", "tahun_tersedia"));
+        }
 
         $query = DB::table('mata_kuliahs as mk')
             ->select(
@@ -25,22 +31,32 @@ class AdminMataKuliahController extends Controller
                 'mk.sks_mk',
                 'mk.semester_mk',
                 'mk.kompetensi_mk',
-                'prodis.nama_prodi'
+                'prodis.nama_prodi',
+                'tahun.tahun',
             )
             ->leftJoin('cpl_mk', 'mk.kode_mk', '=', 'cpl_mk.kode_mk')
             ->leftJoin('capaian_profil_lulusans as cpl', 'cpl_mk.id_cpl', '=', 'cpl.id_cpl')
             ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->join('tahun', 'pl.id_tahun', '=', 'tahun.id_tahun')
             ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
-            ->groupBy('mk.kode_mk', 'mk.nama_mk', 'mk.jenis_mk', 'mk.sks_mk', 'mk.semester_mk', 'mk.kompetensi_mk', 'prodis.nama_prodi');
+            ->groupBy('mk.kode_mk', 'mk.nama_mk', 'mk.jenis_mk', 'mk.sks_mk', 'mk.semester_mk', 'mk.kompetensi_mk', 'prodis.nama_prodi', 'tahun.tahun');
 
-        if ($kode_prodi && $kode_prodi !== 'all') {
+        if ($kode_prodi) {
             $query->where('prodis.kode_prodi', $kode_prodi);
-            $mata_kuliahs = $query->get();
         }
+
+        if ($id_tahun) {
+            $query->where('pl.id_tahun', $id_tahun);
+        }
+
         $mata_kuliahs = $query->get();
 
-        return view("admin.matakuliah.index", compact("mata_kuliahs", 'kode_prodi', 'prodis'));
+        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+
+        $dataKosong = $mata_kuliahs->isEmpty() && $kode_prodi;
+
+        return view("admin.matakuliah.index", compact("mata_kuliahs", 'kode_prodi', 'prodis', 'id_tahun', 'tahun_tersedia', 'dataKosong'));
     }
 
     public function getCplByBk(Request $request)
@@ -62,7 +78,18 @@ class AdminMataKuliahController extends Controller
     {
         $capaianProfilLulusans = CapaianProfilLulusan::orderBy('kode_cpl', 'asc')->get();
 
-        $bahanKajians = DB::table('bahan_kajians')->get();
+        $bahanKajians = DB::table('bahan_kajians')
+            ->join('cpl_bk', 'bahan_kajians.id_bk', '=', 'cpl_bk.id_bk')
+            ->join('capaian_profil_lulusans as cpl', 'cpl_bk.id_cpl', '=', 'cpl.id_cpl')
+            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
+            ->join('tahun', 'pl.id_tahun', '=', 'tahun.id_tahun')
+            ->select('kode_bk', 'bahan_kajians.id_bk', 'bahan_kajians.nama_bk', 'bahan_kajians.deskripsi_bk', 'prodis.nama_prodi', 'tahun.tahun')
+            ->orderBy('bahan_kajians.kode_bk', 'asc')
+            ->distinct()
+            ->get();
+
         return view("admin.matakuliah.create",  compact("capaianProfilLulusans", "bahanKajians"));
     }
 
@@ -238,9 +265,14 @@ class AdminMataKuliahController extends Controller
 
     public function organisasi_mk(Request $request)
     {
+        $kode_prodi = $request->get('kode_prodi');
+        $id_tahun = $request->get('id_tahun');
         $prodis = DB::table('prodis')->get();
 
-        $kode_prodi = $request->input('kode_prodi', 'all');
+        if (!$kode_prodi) {
+            $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+            return view("admin.matakuliah.organisasimk", compact("prodis", "kode_prodi", "id_tahun", "tahun_tersedia"));
+        }
 
         $query = DB::table('mata_kuliahs as mk')
             ->select(
@@ -251,12 +283,14 @@ class AdminMataKuliahController extends Controller
                 'mk.semester_mk',
                 'mk.kompetensi_mk',
                 'prodis.nama_prodi',
-                'prodis.kode_prodi'
+                'prodis.kode_prodi',
+                'tahun.tahun',
             )
             ->leftJoin('cpl_mk', 'mk.kode_mk', '=', 'cpl_mk.kode_mk')
             ->leftJoin('capaian_profil_lulusans as cpl', 'cpl_mk.id_cpl', '=', 'cpl.id_cpl')
             ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->join('tahun', 'pl.id_tahun', '=', 'tahun.id_tahun')
             ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
             ->groupBy(
                 'mk.kode_mk',
@@ -266,11 +300,16 @@ class AdminMataKuliahController extends Controller
                 'mk.semester_mk',
                 'mk.kompetensi_mk',
                 'prodis.nama_prodi',
-                'prodis.kode_prodi'
+                'prodis.kode_prodi',
+                'tahun.tahun'
             );
 
-        if ($kode_prodi != 'all') {
+        if ($kode_prodi) {
             $query->where('prodis.kode_prodi', $kode_prodi);
+        }
+
+        if ($id_tahun) {
+            $query->where('pl.id_tahun', $id_tahun);
         }
 
         $matakuliah = $query->get();
@@ -285,6 +324,10 @@ class AdminMataKuliahController extends Controller
             ];
         });
 
-        return view('admin.matakuliah.organisasimk', compact('organisasiMK', 'prodis', 'kode_prodi'));
+        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+
+        $dataKosong = $matakuliah->isEmpty() && $kode_prodi;
+
+        return view('admin.matakuliah.organisasimk', compact('organisasiMK', 'prodis', 'kode_prodi', 'id_tahun', 'tahun_tersedia', 'dataKosong'));
     }
 }

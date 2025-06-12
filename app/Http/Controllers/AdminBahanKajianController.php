@@ -15,9 +15,11 @@ class AdminBahanKajianController extends Controller
     public function index(Request $request)
     {
         $kode_prodi = $request->get('kode_prodi');
+        $id_tahun = $request->get('id_tahun');
         $prodis = DB::table('prodis')->get();
         if (!$kode_prodi) {
-            return view("admin.bahankajian.index", compact("prodis", "kode_prodi"));
+            $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+            return view("admin.bahankajian.index", compact("prodis", "kode_prodi", "id_tahun", "tahun_tersedia"));
         }
 
         $query = DB::table('bahan_kajians as bk')
@@ -29,12 +31,14 @@ class AdminBahanKajianController extends Controller
                 'bk.referensi_bk',
                 'bk.status_bk',
                 'bk.knowledge_area',
-                'prodis.nama_prodi'
+                'prodis.nama_prodi',
+                'tahun.tahun',
             )
             ->leftJoin('cpl_bk', 'bk.id_bk', '=', 'cpl_bk.id_bk')
             ->leftJoin('capaian_profil_lulusans as cpl', 'cpl_bk.id_cpl', '=', 'cpl.id_cpl')
             ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->leftJoin('tahun', 'pl.id_tahun', '=', 'tahun.id_tahun')
             ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
             ->groupBy(
                 'bk.id_bk',
@@ -44,6 +48,7 @@ class AdminBahanKajianController extends Controller
                 'bk.referensi_bk',
                 'bk.status_bk',
                 'bk.knowledge_area',
+                'tahun.tahun',
                 'prodis.nama_prodi'
             );
 
@@ -51,17 +56,31 @@ class AdminBahanKajianController extends Controller
             $query->where('prodis.kode_prodi', $kode_prodi);
         }
 
+        if ($id_tahun) {
+            $query->where('pl.id_tahun', $id_tahun);
+        }
+
         $bahankajians = $query->get();
+
+        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
 
         $dataKosong = $bahankajians->isEmpty() && $kode_prodi;
 
-        return view('admin.bahankajian.index', compact('bahankajians', 'prodis', 'kode_prodi', 'dataKosong'));
+        return view('admin.bahankajian.index', compact('bahankajians', 'prodis', 'kode_prodi', 'dataKosong', 'id_tahun', 'tahun_tersedia'));
     }
 
 
     public function create()
     {
-        $capaianProfilLulusans = DB::table('capaian_profil_lulusans')->get();
+        $capaianProfilLulusans = DB::table('capaian_profil_lulusans')
+        ->join('cpl_pl', 'capaian_profil_lulusans.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
+            ->join('tahun', 'profil_lulusans.id_tahun', '=', 'tahun.id_tahun')
+            ->join('prodis', 'profil_lulusans.kode_prodi', '=', 'prodis.kode_prodi')
+            ->select('capaian_profil_lulusans.id_cpl', 'capaian_profil_lulusans.deskripsi_cpl', 'capaian_profil_lulusans.kode_cpl', 'prodis.nama_prodi', 'tahun.tahun')
+            ->orderBy('prodis.nama_prodi')
+            ->get();
+
         return view('admin.bahankajian.create', compact('capaianProfilLulusans'));
     }
 
@@ -91,7 +110,15 @@ class AdminBahanKajianController extends Controller
     {
         $bahankajian = BahanKajian::findOrFail($id_bk);
 
-        $capaianprofillulusans = CapaianProfilLulusan::all();
+        $capaianprofillulusans = DB::table('capaian_profil_lulusans')
+        ->join('cpl_pl', 'capaian_profil_lulusans.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
+            ->join('tahun', 'profil_lulusans.id_tahun', '=', 'tahun.id_tahun')
+            ->join('prodis', 'profil_lulusans.kode_prodi', '=', 'prodis.kode_prodi')
+            ->select('capaian_profil_lulusans.id_cpl', 'capaian_profil_lulusans.deskripsi_cpl', 'capaian_profil_lulusans.kode_cpl', 'prodis.nama_prodi', 'tahun.tahun')
+            ->orderBy('prodis.nama_prodi')
+            ->get();
+
         $selectedCapaianProfilLulusans = DB::table('cpl_bk')
             ->where('id_bk', $id_bk)
             ->pluck('id_cpl')

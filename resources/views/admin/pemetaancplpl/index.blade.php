@@ -19,10 +19,10 @@
         @endif
 
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-3 gap-4">
-            <form method="GET" action="{{ route('admin.pemetaancplpl.index') }}" class="w-full md:w-64">
+            <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                 <select id="prodi" name="kode_prodi"
-                    class="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                    onchange="this.form.submit()">
+                    class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    onchange="updateFilter()">
                     <option value="" {{ empty($kode_prodi) ? 'selected' : '' }} disabled>Pilih Prodi</option>
                     @foreach ($prodis as $prodi)
                         <option value="{{ $prodi->kode_prodi }}" {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
@@ -30,8 +30,45 @@
                         </option>
                     @endforeach
                 </select>
-            </form>
+
+                <select id="tahun" name="id_tahun"
+                    class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    onchange="updateFilter()">
+                    <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
+                    @if (isset($tahun_tersedia))
+                        @foreach ($tahun_tersedia as $thn)
+                            <option value="{{ $thn->id_tahun }}" {{ $id_tahun == $thn->id_tahun ? 'selected' : '' }}>
+                                {{ $thn->nama_kurikulum }} - {{ $thn->tahun }}
+                            </option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
         </div>
+
+        @if ($kode_prodi || $id_tahun)
+            <div class="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
+                <div class="flex flex-wrap gap-2 items-center">
+                    <span class="text-sm text-blue-800 font-medium">Filter aktif:</span>
+                    @if ($kode_prodi)
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            Prodi: {{ $prodis->where('kode_prodi', $kode_prodi)->first()->nama_prodi ?? $kode_prodi }}
+                        </span>
+                    @endif
+                    @if ($id_tahun)
+                        @php
+                            $selected_tahun = $tahun_tersedia->where('id_tahun', $id_tahun)->first();
+                        @endphp
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            Tahun: {{ $selected_tahun ? $selected_tahun->nama_kurikulum . ' - ' . $selected_tahun->tahun : $id_tahun }}
+                        </span>
+                    @endif
+                    <a href="{{ route('admin.pemetaancplpl.index') }}" class="text-xs text-blue-600 hover:text-blue-800 underline">
+                        Reset filter
+                    </a>
+                </div>
+            </div>
+        @endif
 
         <!-- Table -->
         <div class="bg-white rounded-lg shadow overflow-visible">
@@ -62,55 +99,81 @@
                 </style>
 
                 <div class="">
-                <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-visible">
-                <thead class="bg-green-800 text-white">
-                    <tr>
-                        <th class="px-4 py-2 text-left"></th>
-                        @foreach ($pls as $pl)
-                            <th class="px-2 py-2 relative group">
-                                <span class="cursor-help">{{ $pl->kode_pl }}</span>
-                                <div
-                                    class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
-                                    <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
-                                        {{ $pl->prodi->nama_prodi }}
-                                    </div>
-                                    <div class="mt-3 px-2 text-justify">
-                                        {{ $pl->deskripsi_pl }}
-                                    </div>
-                                </div>
-                            </th>
-                        @endforeach
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($cpls as $index => $cpl)
-                        <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border">
-                            <td class="px-4 py-2 relative group">
-                                <span class="cursor-help">{{ $cpl->kode_cpl }}</span>
-                                <div
-                                    class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
-
-                                    <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
-                                        {{ $prodiByCpl[$cpl->id_cpl] }}
-                                    </div>
-                                    <div class="mt-3 px-2 text-justify">
-                                        {{ $cpl->deskripsi_cpl }}
-                                    </div>
-                                </div>
-                            </td>
-                            @foreach ($pls as $pl)
-                                <td class="px-4 py-2 text-center">
-                                    <input type="checkbox" disabled
-                                        {{ isset($relasi[$pl->id_pl]) && in_array($cpl->id_cpl, $relasi[$pl->id_pl]->pluck('id_cpl')->toArray()) ? 'checked' : '' }}
-                                        class="h-5 w-5 mx-auto appearance-none rounded border-2 border-blue-600 bg-white checked:bg-white-600 checked:border-blue-600 disabled:opacity-100 disabled:cursor-default relative">
-                                </td>
+                    <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-visible">
+                        <thead class="bg-green-800 text-white">
+                            <tr>
+                                <th class="px-4 py-2 text-left"></th>
+                                @foreach ($pls as $pl)
+                                    <th class="px-2 py-2 relative group">
+                                        <span class="cursor-help">{{ $pl->kode_pl }}</span>
+                                        <div class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+                                            <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
+                                                {{ $pl->prodi->nama_prodi }}
+                                            </div>
+                                            <div class="mt-3 px-2 text-justify">
+                                                {{ $pl->deskripsi_pl }}
+                                            </div>
+                                        </div>
+                                    </th>
+                                @endforeach
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($cpls as $index => $cpl)
+                                <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border">
+                                    <td class="px-4 py-2 relative group">
+                                        <span class="cursor-help">{{ $cpl->kode_cpl }}</span>
+                                        <div class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+                                            <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
+                                                {{ $prodiByCpl[$cpl->id_cpl] }}
+                                            </div>
+                                            <div class="mt-3 px-2 text-justify">
+                                                {{ $cpl->deskripsi_cpl }}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    @foreach ($pls as $pl)
+                                        <td class="px-4 py-2 text-center">
+                                            <input type="checkbox" disabled
+                                                {{ isset($relasi[$pl->id_pl]) && in_array($cpl->id_cpl, $relasi[$pl->id_pl]->pluck('id_cpl')->toArray()) ? 'checked' : '' }}
+                                                class="h-5 w-5 mx-auto appearance-none rounded border-2 border-blue-600 bg-white checked:bg-white-600 checked:border-blue-600 disabled:opacity-100 disabled:cursor-default relative">
+                                        </td>
+                                    @endforeach
+                                </tr>
                             @endforeach
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
                 </div>
             @endif
         </div>
     </div>
+
+    <script>
+        function updateFilter() {
+            const prodiSelect = document.getElementById('prodi');
+            const tahunSelect = document.getElementById('tahun');
+
+            const kodeProdi = prodiSelect.value;
+            const idTahun = tahunSelect.value;
+
+            // Buat URL dengan parameter yang sesuai
+            let url = "{{ route('admin.pemetaancplpl.index') }}";
+            let params = [];
+
+            if (kodeProdi) {
+                params.push('kode_prodi=' + encodeURIComponent(kodeProdi));
+            }
+
+            if (idTahun) {
+                params.push('id_tahun=' + encodeURIComponent(idTahun));
+            }
+
+            if (params.length > 0) {
+                url += '?' + params.join('&');
+            }
+
+            // Redirect ke URL dengan parameter yang benar
+            window.location.href = url;
+        }
+    </script>
 @endsection

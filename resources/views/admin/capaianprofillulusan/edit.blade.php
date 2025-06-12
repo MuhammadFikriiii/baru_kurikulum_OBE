@@ -27,8 +27,8 @@
                 required>
                 @foreach ($profilLulusans as $pl)
                     <option value="{{ $pl->id_pl }}" @if (in_array($pl->id_pl, old('id_pls', $selectedProfilLulusans ?? []))) selected @endif
-                        title="{{ $pl->kode_pl }} - {{ $pl->deskripsi_pl }}">
-                        {{ $pl->kode_pl }} - {{ $pl->deskripsi_pl }}
+                        title="{{ $pl->tahun }}: {{ $pl->kode_pl }}: {{ $pl->deskripsi_pl }}">
+                        {{ $pl->tahun }}: {{ $pl->nama_prodi }}: {{ $pl->kode_pl }}: {{ $pl->deskripsi_pl }}
                     </option>
                 @endforeach
             </select>
