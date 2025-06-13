@@ -144,20 +144,30 @@ class AdminCapaianProfilLulusanController extends Controller
 
     public function peta_pemenuhan_cpl(Request $request)
     {
-        $kode_prodi = $request->get('kode_prodi', 'all');
+        $kode_prodi = $request->get('kode_prodi');
+        $id_tahun = $request->get('id_tahun');
+        $prodis = DB::table('prodis')->get();
+        if (!$kode_prodi) {
+            $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+            return view("admin.pemenuhancpl.index", compact("prodis", "kode_prodi", "id_tahun", "tahun_tersedia"));
+        }
 
         $query = DB::table('capaian_profil_lulusans as cpl')
             ->join('cpl_pl as cplpl', 'cpl.id_cpl', '=', 'cplpl.id_cpl')
             ->join('profil_lulusans as pl', 'cplpl.id_pl', '=', 'pl.id_pl')
+            ->Join('tahun', 'pl.id_tahun', '=', 'tahun.id_tahun')
             ->join('prodis as ps', 'pl.kode_prodi', '=', 'ps.kode_prodi')
             ->leftJoin('cpl_mk as cmk', 'cpl.id_cpl', '=', 'cmk.id_cpl')
             ->leftJoin('mata_kuliahs as mk', 'cmk.kode_mk', '=', 'mk.kode_mk')
-            ->select('cpl.id_cpl', 'cpl.kode_cpl', 'mk.semester_mk', 'mk.kode_mk', 'mk.nama_mk', 'ps.kode_prodi')
+            ->select('cpl.id_cpl', 'cpl.kode_cpl', 'mk.semester_mk', 'mk.kode_mk', 'mk.nama_mk', 'ps.kode_prodi', 'tahun.tahun', 'ps.nama_prodi')
             ->distinct();
 
-
-        if ($kode_prodi !== 'all') {
+        if ($kode_prodi) {
             $query->where('ps.kode_prodi', $kode_prodi);
+        }
+
+        if ($id_tahun) {
+            $query->where('pl.id_tahun', $id_tahun);
         }
 
         $data = $query
@@ -175,8 +185,10 @@ class AdminCapaianProfilLulusanController extends Controller
             $petaCPL[$row->id_cpl]['semester'][$semester][] = $namamk; // pengelompokan tetap pakai id
         }
 
-        $prodis = DB::table('prodis')->get();
+        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
 
-        return view('admin.pemenuhancpl.index', compact('petaCPL', 'prodis', 'kode_prodi'));
+        $dataKosong = $data->isEmpty() && $kode_prodi;
+
+        return view('admin.pemenuhancpl.index', compact('petaCPL', 'prodis', 'kode_prodi', 'id_tahun', 'tahun_tersedia', 'dataKosong'));
     }
 }
