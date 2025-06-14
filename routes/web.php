@@ -64,6 +64,7 @@ use App\Http\Controllers\Wadir1CapaianPembelajaranMatakuliahController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\WadirNoteController;
 use App\Http\Controllers\AdminTahunController;
+use App\Http\Controllers\TimTahunController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -336,5 +337,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pemetaanmkcpmksubcpmk', [TimSubCpmkController::class, 'pemetaanmkcpmksubcpmk'])->name('pemetaanmkcpmksubcpmk.index');
         Route::post('/ajax/get-cpl-by-bk', [TimMataKuliahController::class, 'getCplByBk'])->name('matakuliah.getCplByBk');
         Route::post('/ajax/get-cpl-by-mk', [TimCapaianPembelajaranMataKuliahController::class, 'getCplByMk'])->name('capaianpembelajaranmatakuliah.getCPLByMK');
+        Route::get('/tahun', [TimTahunController::class, 'index'])->name('tahun.index');
+        Route::get('/tahun/create', [TimTahunController::class, 'create'])->name('tahun.create');
+        Route::post('/tahun', [TimTahunController::class, 'store'])->name('tahun.store');
+        Route::get('/tahun/{id_tahun}/edit', [TimTahunController::class, 'edit'])->name('tahun.edit');
+        Route::put('/tahun/{id_tahun}', [TimTahunController::class, 'update'])->name('tahun.update');
+        Route::delete('/tahun/{id_tahun}', [TimTahunController::class, 'destroy'])->name('tahun.destroy');
     });
 });

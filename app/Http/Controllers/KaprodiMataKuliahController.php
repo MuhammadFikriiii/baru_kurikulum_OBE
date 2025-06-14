@@ -11,11 +11,20 @@ use App\Models\MataKuliah;
 
 class KaprodiMataKuliahController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $kodeProdi = Auth::user()->kode_prodi;
+        $user = Auth::user();
 
-        $mata_kuliahs = DB::table('mata_kuliahs as mk')
+        if (!$user || !$user->kode_prodi) {
+            abort(404);
+        }
+
+        $kodeProdi = $user->kode_prodi;
+        $id_tahun = $request->get('id_tahun');
+
+        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+
+        $query = DB::table('mata_kuliahs as mk')
             ->select(
                 'mk.kode_mk',
                 'mk.nama_mk',
@@ -39,10 +48,13 @@ class KaprodiMataKuliahController extends Controller
                 'mk.semester_mk',
                 'mk.kompetensi_mk',
                 'prodis.nama_prodi'
-            )
-            ->get();
+            );
+        if ($id_tahun) {
+            $query->where('pl.id_tahun', $id_tahun);
+        }
+        $mata_kuliahs = $query->get();
 
-        return view('kaprodi.matakuliah.index', compact('mata_kuliahs'));
+        return view('kaprodi.matakuliah.index', compact('mata_kuliahs', 'id_tahun', 'tahun_tersedia'));
     }
 
     public function detail(MataKuliah $matakuliah)
@@ -86,7 +98,15 @@ class KaprodiMataKuliahController extends Controller
 
     public function organisasi_mk(Request $request)
     {
-        $kodeProdi = Auth::user()->kode_prodi;
+        $user = Auth::user();
+
+        if (!$user || !$user->kode_prodi) {
+            abort(403);
+        }
+
+        $kodeProdi = $user->kode_prodi;
+        $id_tahun = request()->get('id_tahun');
+        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
 
         $query = DB::table('mata_kuliahs as mk')
             ->select(
@@ -104,17 +124,23 @@ class KaprodiMataKuliahController extends Controller
             ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
-            ->where('prodis.kode_prodi', '=', $kodeProdi)
-            ->groupBy(
-                'mk.kode_mk',
-                'mk.nama_mk',
-                'mk.jenis_mk',
-                'mk.sks_mk',
-                'mk.semester_mk',
-                'mk.kompetensi_mk',
-                'prodis.nama_prodi',
-                'prodis.kode_prodi'
-            );
+            ->where('prodis.kode_prodi', '=', $kodeProdi);
+
+        // Tambahkan filter tahun jika ada
+        if ($id_tahun) {
+            $query->where('pl.id_tahun', $id_tahun);
+        }
+
+        $query->groupBy(
+            'mk.kode_mk',
+            'mk.nama_mk',
+            'mk.jenis_mk',
+            'mk.sks_mk',
+            'mk.semester_mk',
+            'mk.kompetensi_mk',
+            'prodis.nama_prodi',
+            'prodis.kode_prodi'
+        );
 
         $matakuliah = $query->get();
 
@@ -127,6 +153,7 @@ class KaprodiMataKuliahController extends Controller
                 'mata_kuliah' => $items,
             ];
         });
-        return view('kaprodi.matakuliah.organisasimk', compact('organisasiMK', 'kodeProdi'));
+
+        return view('kaprodi.matakuliah.organisasimk', compact('organisasiMK', 'kodeProdi', 'id_tahun', 'tahun_tersedia'));
     }
 }

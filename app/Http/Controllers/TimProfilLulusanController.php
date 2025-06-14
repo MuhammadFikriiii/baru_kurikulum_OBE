@@ -9,17 +9,30 @@ use App\Models\Prodi;
 
 class TimProfilLulusanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
 
         if (!$user || !$user->kode_prodi) {
             abort(404);
         }
-        $kodeProdi = $user->kode_prodi;
 
-        $profillulusans = ProfilLulusan::where('kode_prodi', $kodeProdi)->with('prodi')->get();
-        return view('tim.profillulusan.index', compact('profillulusans'));
+        $kodeProdi = $user->kode_prodi;
+        $id_tahun = $request->get('id_tahun');
+
+        $tahun_tersedia = \App\Models\Tahun::whereHas('profillulusans', function ($query) use ($kodeProdi) {
+            $query->where('kode_prodi', $kodeProdi);
+        })->orderBy('tahun', 'desc')->get();
+
+        $query = ProfilLulusan::where('kode_prodi', $kodeProdi)->with(['prodi', 'tahun']);
+
+        if ($id_tahun) {
+            $query->where('id_tahun', $id_tahun);
+        }
+
+        $profillulusans = $query->orderBy('kode_pl', 'asc')->get();
+
+        return view('tim.profillulusan.index', compact('profillulusans', 'id_tahun', 'tahun_tersedia'));
     }
 
     public function create()
@@ -58,7 +71,7 @@ class TimProfilLulusanController extends Controller
         return redirect()->route('tim.profillulusan.index')->with('success', 'Profil Lulusan berhasil ditambahkan!');
     }
 
-    public function edit ($id_pl)
+    public function edit($id_pl)
     {
         $user = Auth::user();
 
@@ -66,9 +79,9 @@ class TimProfilLulusanController extends Controller
             ->where('kode_prodi', $user->kode_prodi)
             ->first();
 
-    if (!$profillulusan) {
-        abort(403, 'Akses ditolak');
-    }
+        if (!$profillulusan) {
+            abort(403, 'Akses ditolak');
+        }
         $prodis = Prodi::all();
         $profillulusan = ProfilLulusan::findOrFail($id_pl);
         return view('tim.profillulusan.edit', compact('profillulusan', 'prodis'));
@@ -82,8 +95,8 @@ class TimProfilLulusanController extends Controller
             abort(403);
         }
         $profillulusan = ProfilLulusan::where('id_pl', $id_pl)
-        ->where('kode_prodi', $user->kode_prodi)
-        ->first();
+            ->where('kode_prodi', $user->kode_prodi)
+            ->first();
 
         if (!$profillulusan) {
             abort(403, 'Akses ditolak');
@@ -107,9 +120,9 @@ class TimProfilLulusanController extends Controller
     {
         $user = Auth::user();
 
-    if (!$user || !$user->kode_prodi || $id_pl->kode_prodi !== $user->kode_prodi) {
-        abort(403, 'Akses ditolak');
-    }
+        if (!$user || !$user->kode_prodi || $id_pl->kode_prodi !== $user->kode_prodi) {
+            abort(403, 'Akses ditolak');
+        }
 
         return view('tim.profillulusan.detail', compact('id_pl'));
     }
@@ -117,6 +130,6 @@ class TimProfilLulusanController extends Controller
     public function destroy(ProfilLulusan $id_pl)
     {
         $id_pl->delete();
-        return redirect()->route('tim.profillulusan.index')->with('sukses','Profil Lulusan Berhasil Dihapus');
+        return redirect()->route('tim.profillulusan.index')->with('sukses', 'Profil Lulusan Berhasil Dihapus');
     }
 }

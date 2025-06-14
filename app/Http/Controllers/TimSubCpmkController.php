@@ -9,11 +9,20 @@ use App\Models\SubCpmk;
 
 class TimSubCpmkController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $kodeProdi = Auth::user()->kode_prodi;
+        $user = Auth::user();
 
-        $subcpmks = DB::table('sub_cpmks as sc')
+        if (!$user || !$user->kode_prodi) {
+            abort(404);
+        }
+
+        $kodeProdi = $user->kode_prodi;
+        $id_tahun = $request->get('id_tahun');
+
+        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+
+        $query = DB::table('sub_cpmks as sc')
             ->join('capaian_pembelajaran_mata_kuliahs as cpmk', 'sc.id_cpmk', '=', 'cpmk.id_cpmk')
             ->join('cpl_cpmk as cplcpmk', 'cpmk.id_cpmk', '=', 'cplcpmk.id_cpmk')
             ->join('capaian_profil_lulusans as cpl', 'cplcpmk.id_cpl', '=', 'cpl.id_cpl')
@@ -21,10 +30,16 @@ class TimSubCpmkController extends Controller
             ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->select('sc.*', 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk', 'cpmk.kode_cpmk')
             ->where('pl.kode_prodi', $kodeProdi)
-            ->orderBy('sc.sub_cpmk')
-            ->get();
+            ->orderBy('sc.sub_cpmk');
 
-        return view('tim.subcpmk.index', compact('subcpmks'));
+        // Tambahkan filter tahun jika ada
+        if ($id_tahun) {
+            $query->where('pl.id_tahun', $id_tahun);
+        }
+
+        $subcpmks = $query->get();
+
+        return view('tim.subcpmk.index', compact('subcpmks', 'id_tahun', 'tahun_tersedia'));
     }
     public function create()
     {
@@ -105,11 +120,20 @@ class TimSubCpmkController extends Controller
         return redirect()->route('tim.subcpmk.index')->with('success', 'Sub CPMK berhasil diperbarui');
     }
 
-    public function pemetaanmkcpmksubcpmk()
+    public function pemetaanmkcpmksubcpmk(Request $request)
     {
-        $kodeProdi = Auth::user()->kode_prodi;
+        $user = Auth::user();
 
-        $data = DB::table('sub_cpmks as sub')
+        if (!$user || !$user->kode_prodi) {
+            abort(404);
+        }
+
+        $kodeProdi = $user->kode_prodi;
+        $id_tahun = $request->get('id_tahun');
+
+        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+
+        $query = DB::table('sub_cpmks as sub')
             ->join('capaian_pembelajaran_mata_kuliahs as cpmk', 'sub.id_cpmk', '=', 'cpmk.id_cpmk')
             ->join('cpl_cpmk', 'cpmk.id_cpmk', '=', 'cpl_cpmk.id_cpmk')
             ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
@@ -130,10 +154,16 @@ class TimSubCpmkController extends Controller
             )
             ->orderBy('mk.kode_mk')
             ->orderBy('cpmk.kode_cpmk')
-            ->distinct()
-            ->get();
+            ->distinct();
 
-        return view('tim.pemetaanmkcpmksubcpmk.index', compact('data'));
+        // Tambahkan filter tahun jika ada
+        if ($id_tahun) {
+            $query->where('pl.id_tahun', $id_tahun);
+        }
+
+        $data = $query->get();
+
+        return view('tim.pemetaanmkcpmksubcpmk.index', compact('data', 'id_tahun', 'tahun_tersedia'));
     }
 
     public function detail($id)

@@ -10,11 +10,19 @@ use App\Models\CapaianProfilLulusan;
 
 class TimBahanKajianController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $kodeProdi = Auth::user()->kode_prodi;
+        $user = Auth::user();
 
-        $bahankajians = DB::table('bahan_kajians as bk')
+        if (!$user || !$user->kode_prodi) {
+            abort(404);
+        }
+
+        $kodeProdi = $user->kode_prodi;
+        $id_tahun = $request->get('id_tahun');
+
+        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+        $query = DB::table('bahan_kajians as bk')
             ->select(
                 'bk.id_bk',
                 'bk.nama_bk',
@@ -30,7 +38,7 @@ class TimBahanKajianController extends Controller
             ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
-            ->where('prodis.kode_prodi', '=', $kodeProdi)
+            ->where('pl.kode_prodi', $kodeProdi)
             ->groupBy(
                 'bk.id_bk',
                 'bk.nama_bk',
@@ -39,12 +47,16 @@ class TimBahanKajianController extends Controller
                 'bk.referensi_bk',
                 'bk.status_bk',
                 'bk.knowledge_area',
-                'prodis.nama_prodi'
+                'prodis.nama_prodi',
             )
-            ->orderBy('bk.kode_bk', 'asc')
-            ->get();
+            ->orderBy('bk.kode_bk', 'asc');
 
-        return view('tim.bahankajian.index', compact('bahankajians'));
+        if ($id_tahun) {
+            $query->where('pl.id_tahun', $id_tahun);
+        }
+        $bahankajians = $query->get();
+
+        return view('tim.bahankajian.index', compact('bahankajians', 'id_tahun', 'tahun_tersedia'));
     }
 
     public function create()

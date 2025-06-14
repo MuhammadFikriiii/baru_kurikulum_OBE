@@ -17,7 +17,7 @@ class AdminProfilLulusanController extends Controller
         $prodis = Prodi::all();
 
         // Ambil tahun-tahun yang tersedia dari tabel tahun
-        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+        $tahun_tersedia = Tahun::orderBy('tahun', 'desc')->get();
 
         $query = ProfilLulusan::with(['prodi', 'tahun']);
 

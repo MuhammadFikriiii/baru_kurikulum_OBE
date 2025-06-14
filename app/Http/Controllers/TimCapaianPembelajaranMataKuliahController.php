@@ -11,9 +11,17 @@ class TimCapaianPembelajaranMataKuliahController extends Controller
 {
     public function index()
     {
-        $kodeProdi = Auth::user()->kode_prodi;
+        $user = Auth::user();
 
-        $capaianpembelajaranmatakuliahs = DB::table('capaian_pembelajaran_mata_kuliahs as cpmk')
+        if (!$user || !$user->kode_prodi) {
+            abort(403);
+        }
+
+        $kodeProdi = $user->kode_prodi;
+        $id_tahun = request()->get('id_tahun');
+        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+
+        $query = DB::table('capaian_pembelajaran_mata_kuliahs as cpmk')
             ->leftJoin('cpl_cpmk', 'cpmk.id_cpmk', '=', 'cpl_cpmk.id_cpmk')
             ->leftJoin('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
             ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
@@ -22,10 +30,16 @@ class TimCapaianPembelajaranMataKuliahController extends Controller
             ->where('prodis.kode_prodi', $kodeProdi)
             ->select('cpmk.id_cpmk', 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk', 'prodis.nama_prodi')
             ->groupBy('cpmk.id_cpmk', 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk', 'prodis.nama_prodi')
-            ->orderBy('cpmk.kode_cpmk', 'asc')
-            ->get();
+            ->orderBy('cpmk.kode_cpmk', 'asc');
 
-        return view("tim.capaianpembelajaranmatakuliah.index", compact("capaianpembelajaranmatakuliahs"));
+        // Tambahkan filter tahun jika ada
+        if ($id_tahun) {
+            $query->where('pl.id_tahun', $id_tahun);
+        }
+
+        $capaianpembelajaranmatakuliahs = $query->get();
+
+        return view("tim.capaianpembelajaranmatakuliah.index", compact("capaianpembelajaranmatakuliahs", "id_tahun", "tahun_tersedia"));
     }
 
     public function getCplByMk(Request $request)
@@ -139,7 +153,7 @@ class TimCapaianPembelajaranMataKuliahController extends Controller
             ->get();
 
         $selectedCpls = DB::table('cpl_cpmk')
-            ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl' ,'=', 'cpl.id_cpl')
+            ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
             ->where('cpl_cpmk.id_cpmk', $cpmks->id_cpmk)
             ->orderBy('cpl.kode_cpl')
             ->get();

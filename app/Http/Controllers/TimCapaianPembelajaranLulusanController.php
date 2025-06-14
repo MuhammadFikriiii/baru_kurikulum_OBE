@@ -11,20 +11,47 @@ use App\Models\UserProdi;
 
 class TimCapaianPembelajaranLulusanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $kodeProdi = Auth::user()->kode_prodi;
+        $user = Auth::user();
 
-        $capaianpembelajaranlulusans = DB::table('capaian_profil_lulusans')
+        if (!$user || !$user->kode_prodi) {
+            abort(404);
+        }
+
+        $kodeProdi = $user->kode_prodi;
+        $id_tahun = $request->get('id_tahun');
+
+        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+
+        $query = DB::table('capaian_profil_lulusans')
             ->leftJoin('cpl_pl', 'capaian_profil_lulusans.id_cpl', '=', 'cpl_pl.id_cpl')
             ->leftJoin('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
             ->leftJoin('prodis', 'profil_lulusans.kode_prodi', '=', 'prodis.kode_prodi')
+            ->select(
+                'capaian_profil_lulusans.id_cpl',
+                'capaian_profil_lulusans.deskripsi_cpl',
+                'capaian_profil_lulusans.kode_cpl',
+                'capaian_profil_lulusans.status_cpl',
+                'prodis.nama_prodi'
+            )
             ->where('profil_lulusans.kode_prodi', $kodeProdi)
-            ->select('capaian_profil_lulusans.id_cpl', 'capaian_profil_lulusans.deskripsi_cpl', 'capaian_profil_lulusans.kode_cpl', 'capaian_profil_lulusans.status_cpl', 'prodis.nama_prodi')
-            ->groupBy('capaian_profil_lulusans.id_cpl', 'capaian_profil_lulusans.deskripsi_cpl', 'capaian_profil_lulusans.kode_cpl', 'capaian_profil_lulusans.status_cpl', 'prodis.nama_prodi')
-            ->get();
+            ->groupBy(
+                'capaian_profil_lulusans.id_cpl',
+                'capaian_profil_lulusans.deskripsi_cpl',
+                'capaian_profil_lulusans.kode_cpl',
+                'capaian_profil_lulusans.status_cpl',
+                'prodis.nama_prodi'
+            )
+            ->orderBy('capaian_profil_lulusans.kode_cpl', 'asc');
 
-        return view("tim.capaianpembelajaranlulusan.index", compact("capaianpembelajaranlulusans"));
+        if ($id_tahun) {
+            $query->where('profil_lulusans.id_tahun', $id_tahun);
+        }
+
+        $capaianpembelajaranlulusans = $query->get();
+
+        return view("tim.capaianpembelajaranlulusan.index", compact("capaianpembelajaranlulusans", "id_tahun", "tahun_tersedia"));
     }
 
     public function create()
@@ -139,9 +166,17 @@ class TimCapaianPembelajaranLulusanController extends Controller
 
     public function pemenuhan_cpl()
     {
-        $kodeProdi = Auth::user()->kode_prodi;
+        $user = Auth::user();
 
-        $cpls = DB::table('capaian_profil_lulusans as cpl')
+        if (!$user || !$user->kode_prodi) {
+            abort(403);
+        }
+
+        $kodeProdi = $user->kode_prodi;
+        $id_tahun = request()->get('id_tahun');
+        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+
+        $query = DB::table('capaian_profil_lulusans as cpl')
             ->join('cpl_pl as cplpl', 'cpl.id_cpl', '=', 'cplpl.id_cpl')
             ->join('profil_lulusans as pl', 'cplpl.id_pl', '=', 'pl.id_pl')
             ->join('prodis as ps', 'pl.kode_prodi', '=', 'ps.kode_prodi')
@@ -151,7 +186,12 @@ class TimCapaianPembelajaranLulusanController extends Controller
             ->select('cpl.id_cpl', 'cpl.kode_cpl', 'deskripsi_cpl', 'ps.nama_prodi', 'mk.semester_mk', 'mk.kode_mk', 'mk.nama_mk', 'ps.kode_prodi')
             ->distinct();
 
-        $data = $cpls
+        // Tambahkan filter tahun jika ada
+        if ($id_tahun) {
+            $query->where('pl.id_tahun', $id_tahun);
+        }
+
+        $data = $query
             ->orderBy('cpl.kode_cpl', 'asc')
             ->orderBy('mk.semester_mk', 'asc')
             ->get();
@@ -167,6 +207,7 @@ class TimCapaianPembelajaranLulusanController extends Controller
             $petaCPL[$row->id_cpl]['prodi'] = $row->nama_prodi; // yang ditampilkan
             $petaCPL[$row->id_cpl]['semester'][$semester][] = $namamk; // pengelompokan tetap pakai id
         }
-        return view('tim.pemenuhancpl.index', compact('petaCPL'));
+
+        return view('tim.pemenuhancpl.index', compact('petaCPL', 'id_tahun', 'tahun_tersedia'));
     }
 }

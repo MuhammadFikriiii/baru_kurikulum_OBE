@@ -10,20 +10,47 @@ use App\Models\CapaianProfilLulusan;
 
 class KaprodiCapaianPembelajaranLulusanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $kodeProdi = Auth::user()->kode_prodi;
+        $user = Auth::user();
 
-        $capaianpembelajaranlulusans = DB::table('capaian_profil_lulusans')
+        if (!$user || !$user->kode_prodi) {
+            abort(404);
+        }
+
+        $kodeProdi = $user->kode_prodi;
+        $id_tahun = $request->get('id_tahun');
+
+        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+
+        $query = DB::table('capaian_profil_lulusans')
             ->leftJoin('cpl_pl', 'capaian_profil_lulusans.id_cpl', '=', 'cpl_pl.id_cpl')
             ->leftJoin('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
             ->leftJoin('prodis', 'profil_lulusans.kode_prodi', '=', 'prodis.kode_prodi')
+            ->select(
+                'capaian_profil_lulusans.id_cpl',
+                'capaian_profil_lulusans.deskripsi_cpl',
+                'capaian_profil_lulusans.kode_cpl',
+                'capaian_profil_lulusans.status_cpl',
+                'prodis.nama_prodi'
+            )
             ->where('profil_lulusans.kode_prodi', $kodeProdi)
-            ->select('capaian_profil_lulusans.id_cpl', 'capaian_profil_lulusans.deskripsi_cpl', 'capaian_profil_lulusans.kode_cpl', 'capaian_profil_lulusans.status_cpl', 'prodis.nama_prodi')
-            ->groupBy('capaian_profil_lulusans.id_cpl', 'capaian_profil_lulusans.deskripsi_cpl', 'capaian_profil_lulusans.kode_cpl', 'capaian_profil_lulusans.status_cpl', 'prodis.nama_prodi')
-            ->get();
+            ->groupBy(
+                'capaian_profil_lulusans.id_cpl',
+                'capaian_profil_lulusans.deskripsi_cpl',
+                'capaian_profil_lulusans.kode_cpl',
+                'capaian_profil_lulusans.status_cpl',
+                'prodis.nama_prodi'
+            )
+            ->orderBy('capaian_profil_lulusans.kode_cpl', 'asc');
 
-        return view("kaprodi.capaianpembelajaranlulusan.index", compact("capaianpembelajaranlulusans"));
+        if ($id_tahun) {
+            $query->where('profil_lulusans.id_tahun', $id_tahun);
+        }
+
+        $capaianpembelajaranlulusans = $query->get();
+
+        return view("kaprodi.capaianpembelajaranlulusan.index", compact("capaianpembelajaranlulusans", "id_tahun", "tahun_tersedia"));
     }
 
     public function detail(CapaianProfilLulusan $id_cpl)

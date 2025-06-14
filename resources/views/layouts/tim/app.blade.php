@@ -118,6 +118,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('tim.tahun.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="fas fa-user-graduate"></i>
+                    <span class="ml-2">Tahun</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('tim.profillulusan.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="fas fa-user-graduate"></i>
                     <span class="ml-2">Profil Lulusan</span>
