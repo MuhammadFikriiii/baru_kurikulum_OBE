@@ -14,7 +14,7 @@
                     <select name="prodi_id" id="prodi_id" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" required>
                         <option value="">Pilih Prodi</option>
                         @foreach($prodis as $prodi)
-                            <option value="{{ $prodi->id }}">{{ $prodi->nama_prodi }}</option>
+                            <option value="{{ $prodis->id }}">{{ $prodi->nama_prodi }}</option>
                         @endforeach
                     </select>
                     @error('prodi_id')

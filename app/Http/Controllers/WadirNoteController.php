@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\WadirNote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Prodi;
 
 class WadirNoteController extends Controller
 {
     public function index()
     {
-        $notes = WadirNote::with('author')
+        $notes = WadirNote::with('author', 'prodi')
             ->latest()
             ->paginate(10);
 
@@ -24,7 +25,8 @@ class WadirNoteController extends Controller
 
     public function create()
     {
-        return view('wadir1.notes.create');
+        $prodis = Prodi::all();
+        return view('wadir1.notes.create',compact('prodis'));
     }
 
     public function store(Request $request)

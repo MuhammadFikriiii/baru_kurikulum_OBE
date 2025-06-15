@@ -17,7 +17,6 @@ class WadirNote extends Model
 
     protected $fillable = [
         'note_content', 
-        'author_id',
         'title',       
         'category'     
     ];
