@@ -76,11 +76,25 @@ class KaprodiCapaianPembelajaranLulusanController extends Controller
         return view('kaprodi.capaianpembelajaranlulusan.detail', compact('id_cpl', 'selectedProfilLulusans', 'profilLulusans'));
     }
 
+    public function destroy(CapaianProfilLulusan $id_cpl)
+    {
+        $id_cpl->delete();
+        return redirect()->route('tim.capaianpembelajaranlulusan.index')->with('sukses', 'Capaian Pembelajaran lulusan berhasil dihapus.');
+    }
+
     public function pemenuhan_cpl()
     {
-        $kodeProdi = Auth::user()->kode_prodi;
+        $user = Auth::user();
 
-        $cpls = DB::table('capaian_profil_lulusans as cpl')
+        if (!$user || !$user->kode_prodi) {
+            abort(403);
+        }
+
+        $kodeProdi = $user->kode_prodi;
+        $id_tahun = request()->get('id_tahun');
+        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+
+        $query = DB::table('capaian_profil_lulusans as cpl')
             ->join('cpl_pl as cplpl', 'cpl.id_cpl', '=', 'cplpl.id_cpl')
             ->join('profil_lulusans as pl', 'cplpl.id_pl', '=', 'pl.id_pl')
             ->join('prodis as ps', 'pl.kode_prodi', '=', 'ps.kode_prodi')
@@ -90,7 +104,12 @@ class KaprodiCapaianPembelajaranLulusanController extends Controller
             ->select('cpl.id_cpl', 'cpl.kode_cpl', 'deskripsi_cpl', 'ps.nama_prodi', 'mk.semester_mk', 'mk.kode_mk', 'mk.nama_mk', 'ps.kode_prodi')
             ->distinct();
 
-        $data = $cpls
+        // Tambahkan filter tahun jika ada
+        if ($id_tahun) {
+            $query->where('pl.id_tahun', $id_tahun);
+        }
+
+        $data = $query
             ->orderBy('cpl.kode_cpl', 'asc')
             ->orderBy('mk.semester_mk', 'asc')
             ->get();
@@ -106,6 +125,7 @@ class KaprodiCapaianPembelajaranLulusanController extends Controller
             $petaCPL[$row->id_cpl]['prodi'] = $row->nama_prodi; // yang ditampilkan
             $petaCPL[$row->id_cpl]['semester'][$semester][] = $namamk; // pengelompokan tetap pakai id
         }
-        return view('kaprodi.pemenuhancpl.index', compact('petaCPL'));
+
+        return view('kaprodi.pemenuhancpl.index', compact('petaCPL', 'id_tahun', 'tahun_tersedia'));
     }
 }
