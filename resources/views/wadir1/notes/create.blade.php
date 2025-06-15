@@ -6,7 +6,7 @@
         <h1 class="text-2xl font-bold text-gray-800 mb-6">Tambah Catatan Baru</h1>
 
         <div class="bg-white rounded-lg shadow overflow-hidden p-6">
-            <form action="{{ route('wadir.notes.store') }}" method="POST">
+            <form action="{{ route('wadir1.notes.store') }}" method="POST">
                 @csrf
 
                 <div class="mb-4">
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <a href="{{ route('wadir.notes.index') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md mr-2">
+                    <a href="{{ route('wadir1.notes.index') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md mr-2">
                         Batal
                     </a>
                     <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">

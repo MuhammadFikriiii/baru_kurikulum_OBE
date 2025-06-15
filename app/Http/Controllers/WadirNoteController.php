@@ -2,65 +2,70 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Prodi;
-use App\Models\WadirNote; // Pastikan ini di-import
+use App\Models\WadirNote;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // Jangan lupa import Auth facade
+use Illuminate\Support\Facades\Auth;
 
 class WadirNoteController extends Controller
 {
     public function index()
     {
-        $notes = WadirNote::with(['prodi', 'author'])
+        $notes = WadirNote::with('author')
             ->latest()
             ->paginate(10);
 
-        return view('wadir.notes.index', compact('notes'));
+        return view('wadir1.notes.index', compact('notes'));
+    }
+
+    public function show(WadirNote $note)
+    {
+        return view('wadir1.notes.show', compact('note'));
     }
 
     public function create()
     {
-        $prodis = Prodi::all();
-        return view('wadir.notes.create', compact('prodis'));
+        return view('wadir1.notes.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'prodi_id' => 'required|exists:prodis,id',
-            'note' => 'required|string|min:10',
+            'note_content' => 'required|string|min:10',
+            'title' => 'nullable|string|max:255',
+            'category' => 'nullable|string|max:255',
         ]);
 
         WadirNote::create([
-            'prodi_id' => $request->prodi_id,
-            'note' => $request->note,
-            'created_by' => Auth::id(), 
+            'note_content' => $request->note_content,
+            'title' => $request->title,
+            'category' => $request->category,
+            'author_id' => Auth::id(),
         ]);
 
-        return redirect()->route('wadir.notes.index')
+        return redirect()->route('wadir1.notes.index')
             ->with('success', 'Catatan berhasil disimpan');
     }
 
     public function edit(WadirNote $note)
     {
-        $prodis = Prodi::all();
-        return view('wadir.notes.edit', compact('note', 'prodis'));
+        return view('wadir1.notes.edit', compact('note'));
     }
 
     public function update(Request $request, WadirNote $note)
     {
         $request->validate([
-            'prodi_id' => 'required|exists:prodis,id',
-            'note' => 'required|string|min:10',
+            'note_content' => 'required|string|min:10',
+            'title' => 'nullable|string|max:255',
+            'category' => 'nullable|string|max:255',
         ]);
 
         $note->update([
-            'prodi_id' => $request->prodi_id,
-            'note' => $request->note,
+            'note_content' => $request->note_content,
+            'title' => $request->title,
+            'category' => $request->category,
         ]);
 
-        return redirect()->route('wadir.notes.index')
+        return redirect()->route('wadir1.notes.index')
             ->with('success', 'Catatan berhasil diperbarui');
     }
 

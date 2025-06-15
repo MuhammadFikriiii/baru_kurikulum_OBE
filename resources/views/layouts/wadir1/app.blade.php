@@ -210,6 +210,13 @@
                     <span class="ml-2">CPMK</span>
                 </a>
             </li>
+            <li data-title="Notes">
+                <a href="{{ route('wadir1.notes.index') }}"
+                    class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="bi bi-folder2-open"></i>
+                    <span class="ml-2">Catatan</span>
+                </a>
+            </li>
             <li>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf

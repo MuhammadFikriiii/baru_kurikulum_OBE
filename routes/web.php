@@ -244,8 +244,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/notes/{note}/edit', [WadirNoteController::class, 'edit'])->name('notes.edit');
         Route::put('/notes/{note}', [WadirNoteController::class, 'update'])->name('notes.update');
         Route::delete('/notes/{note}', [WadirNoteController::class, 'destroy'])->name('notes.destroy');
-
-
     });
 
     // Grup Route Kaprodi

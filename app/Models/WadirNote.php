@@ -9,15 +9,21 @@ class WadirNote extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['prodi_id', 'note', 'created_by'];
+    protected $table = 'wadir_notes';
 
-    public function prodi()
-    {
-        return $this->belongsTo(Prodi::class);
-    }
+    protected $primaryKey = 'id_note';
+
+    public $timestamps = true;
+
+    protected $fillable = [
+        'note_content', 
+        'author_id',
+        'title',       
+        'category'     
+    ];
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(User::class, 'author_id');
     }
 }

@@ -2,9 +2,14 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-6">
-    <div class="flex justify-between items-center mb-6">
+
+    <div class="text-center mb-8">
         <h1 class="text-2xl font-bold text-gray-800">Catatan Wadir</h1>
-        <a href="{{ route('wadir.notes.create') }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">
+        <hr class="border-t-4 border-black my-4 mx-auto mb-4">
+    </div>
+
+    <div class="flex justify-between items-center mb-6">
+        <a href="{{ route('wadir1.notes.create') }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md">
             Tambah Catatan
         </a>
     </div>
@@ -16,9 +21,9 @@
                     <tr>
                         <th class="px-6 py-3 text-left font-medium uppercase tracking-wider">No</th>
                         <th class="px-6 py-3 text-left font-medium uppercase tracking-wider">Prodi</th>
-                        <th class="px-6 py-3 text-left font-medium uppercase tracking-wider">Catatan</th>
                         <th class="px-6 py-3 text-left font-medium uppercase tracking-wider">Dibuat Oleh</th>
                         <th class="px-6 py-3 text-left font-medium uppercase tracking-wider">Tanggal</th>
+                        <th class="px-6 py-3 text-left font-medium uppercase tracking-wider">Catatan</th>
                         <th class="px-6 py-3 text-left font-medium uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
@@ -27,9 +32,9 @@
                     <tr class="{{ $index % 2 == 0 ? 'bg-gray-50' : 'bg-white' }} hover:bg-gray-100">
                         <td class="px-6 py-4">{{ $notes->firstItem() + $index }}</td>
                         <td class="px-6 py-4">{{ $note->prodi->nama_prodi }}</td>
-                        <td class="px-6 py-4 whitespace-pre-line">{{ $note->note }}</td>
                         <td class="px-6 py-4">{{ $note->author->name }}</td>
                         <td class="px-6 py-4">{{ $note->created_at->format('d/m/Y H:i') }}</td>
+                        <td class="px-6 py-4 whitespace-pre-line">{{ $note->note }}</td>
                         <td class="px-6 py-4">
                             <div class="flex space-x-2">
                                 <a href="{{ route('wadir.notes.edit', $note->id) }}" 
