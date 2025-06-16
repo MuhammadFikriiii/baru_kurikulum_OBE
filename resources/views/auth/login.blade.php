@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body class="bg-gradient-to-br from-blue-300 to-gray-100 min-h-screen">
 
@@ -49,12 +50,22 @@
             <form action="{{ route('login.post') }}" method="POST" class="space-y-4">
                 @csrf
                 <div>
-                    <label class="block text-gray-700">Email</label>
-                    <input type="email" name="email" class="w-full border border-gray-300 rounded-lg px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-[#3094c6]" required placeholder="Masukkan Gmail">
+                    <label class="block text-[#87acd6]">Email</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none mt-1">
+                            <i class="fas fa-envelope text-gray-400"></i>
+                        </div>
+                        <input type="email" name="email" class="w-full border border-gray-300 rounded-lg px-3 py-2 mt-1 pl-10 focus:outline-none focus:ring-2 focus:ring-[#3094c6]" required placeholder="Masukkan Gmail">
+                    </div>
                 </div>
                 <div>
-                    <label class="block text-gray-700">Password</label>
-                    <input type="password" name="password" class="w-full border border-gray-300 rounded-lg px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-[#3094c6]" required placeholder="Masukkan Password">
+                    <label class="block text-[#87acd6]">Password</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none mt-1">
+                            <i class="fas fa-lock text-gray-400"></i>
+                        </div>
+                        <input type="password" name="password" class="w-full border border-gray-300 rounded-lg px-3 py-2 mt-1 pl-10 focus:outline-none focus:ring-2 focus:ring-[#3094c6]" required placeholder="Masukkan Password">
+                    </div>
                 </div>
                 <button href="/login" type="submit" class="w-full bg-[#3094c6] text-white py-2 rounded-lg hover:bg-[rgb(29,99,134)] transition-all">
                     Login
