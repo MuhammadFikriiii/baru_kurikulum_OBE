@@ -196,15 +196,14 @@
     </div>
 </div>
 
-<!-- Include Chart.js -->
+<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Prepare data from PHP/backend
+ 
         const prodis = {!! json_encode($prodis) !!};
         
-        // Extract data for chart
         const labels = prodis.map(prodi => prodi.nama_prodi);
         const datasets = [
             {
