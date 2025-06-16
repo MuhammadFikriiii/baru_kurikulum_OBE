@@ -46,7 +46,7 @@
           </div>
 
           <div class="mb-4">
-            <label class="block mb-1 text-gray-700">Program Studi</label>
+            <label class="block mb-1 text-[#87acd6]">Program Studi</label>
             <select name="kode_prodi" class="w-full border border-gray-300 py-2 px-3 rounded focus:outline-none focus:ring-2 focus:ring-[#3094c6] " required>
               <option value="">-- Pilih Prodi --</option>
               @foreach($prodis as $prodi)
@@ -56,7 +56,7 @@
           </div>
 
           <div class="mb-4">
-            <label class="block mb-1 text-gray-700">Peran</label>
+            <label class="block mb-1 text-[#87acd6]">Peran</label>
             <select name="role" class="w-full border border-gray-300 py-2 px-3 rounded focus:outline-none focus:ring-2 focus:ring-[#3094c6] " required>
               <option value="">-- Pilih Peran --</option>
               <option value="kaprodi" {{ old('role') == 'kaprodi' ? 'selected' : '' }}>Kaprodi</option>

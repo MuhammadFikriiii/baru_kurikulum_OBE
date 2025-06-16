@@ -91,7 +91,6 @@
         </div>
     </nav>
 
-
     <!-- Sidebar -->
     <aside id="sidebar"
         class="w-64 bg-[#201F31] text-white p-5  space-y-6 fixed top-0 left-0 h-full overflow-y-auto transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40">
@@ -275,6 +274,7 @@
             </li>
         </ul>
     </aside>
+
     <script>
         document.getElementById('searchInput').addEventListener('keyup', function() {
             const keyword = this.value.toLowerCase();
