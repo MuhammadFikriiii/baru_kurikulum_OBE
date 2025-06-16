@@ -184,5 +184,117 @@
             @endforeach
         </div>        
     </div>
+
+    <!-- Graphic Visualization Section -->
+<div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+    <h2 class="text-xl font-bold text-gray-800 mb-6">Detail Progress Per Komponen Kurikulum</h2>
+    
+    <div class="flex justify-center">
+        <div class="w-full" style="max-width: 800px; height: 400px;">
+            <canvas id="progressChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Include Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Prepare data from PHP/backend
+        const prodis = {!! json_encode($prodis) !!};
+        
+        // Extract data for chart
+        const labels = prodis.map(prodi => prodi.nama_prodi);
+        const datasets = [
+            {
+                label: 'PL',
+                data: prodis.map(prodi => prodi.progress_pl),
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'CPL',
+                data: prodis.map(prodi => prodi.progress_cpl),
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'BK',
+                data: prodis.map(prodi => prodi.progress_bk),
+                backgroundColor: 'rgba(255, 206, 86, 0.6)',
+                borderColor: 'rgba(255, 206, 86, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'MK',
+                data: prodis.map(prodi => prodi.progress_mk),
+                backgroundColor: 'rgba(153, 102, 255, 0.6)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'CPMK',
+                data: prodis.map(prodi => prodi.progress_cpmk),
+                backgroundColor: 'rgba(255, 159, 64, 0.6)',
+                borderColor: 'rgba(255, 159, 64, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'SUB_CPMK',
+                data: prodis.map(prodi => prodi.progress_subcpmk),
+                backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }
+        ];
+        
+        // Create chart
+        const ctx = document.getElementById('progressChart').getContext('2d');
+        const progressChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        stacked: false,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        stacked: false,
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.raw + '%';
+                            }
+                        }
+                    },
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+    });
+</script>
 </div>
 @endsection
