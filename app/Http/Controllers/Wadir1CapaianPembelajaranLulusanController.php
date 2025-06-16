@@ -12,10 +12,13 @@ class Wadir1CapaianPembelajaranLulusanController extends Controller
     public function index(Request $request)
     {
         $kode_prodi = $request->get('kode_prodi');
+        $id_tahun = $request->get('id_tahun');
         $prodis = DB::table('prodis')->get();
-        
+
         if (!$kode_prodi) {
-            return view("wadir1.capaianpembelajaranlulusan.index", compact("prodis", "kode_prodi"));
+            // Ambil tahun-tahun yang tersedia dari tabel tahun
+            $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+            return view("wadir1.capaianpembelajaranlulusan.index", compact("prodis", "kode_prodi", "id_tahun", "tahun_tersedia"));
         }
 
         $query = DB::table('capaian_profil_lulusans')
@@ -30,11 +33,19 @@ class Wadir1CapaianPembelajaranLulusanController extends Controller
             $query->where('prodis.kode_prodi', $kode_prodi);
         }
 
+        // Filter berdasarkan tahun jika ada
+        if ($id_tahun) {
+            $query->where('profil_lulusans.id_tahun', $id_tahun);
+        }
+
         $capaianprofillulusans = $query->get();
+
+        // Ambil tahun-tahun yang tersedia dari tabel tahun
+        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
 
         $dataKosong = $capaianprofillulusans->isEmpty() && $kode_prodi;
 
-        return view("wadir1.capaianpembelajaranlulusan.index", compact("capaianprofillulusans", "prodis", "kode_prodi", "dataKosong"));
+        return view("wadir1.capaianpembelajaranlulusan.index", compact("capaianprofillulusans", "prodis", "kode_prodi", "id_tahun", "tahun_tersedia", "dataKosong"));
     }
 
 

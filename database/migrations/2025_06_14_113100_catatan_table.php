@@ -6,20 +6,25 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Schema::create('wadir_notes', function (Blueprint $table) {
+        Schema::create('notes', function (Blueprint $table) {
             $table->id('id_note');
+            $table->unsignedBigInteger('user_id');
+            $table->string('kode_prodi', 10)->nullable();
             $table->text('note_content');
             $table->string('title')->nullable();
             $table->string('category')->nullable();
-            $table->foreignId('author_id')->constrained('users')->onDelete('cascade');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('kode_prodi')->references('kode_prodi')->on('prodis')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
 
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('wadir_notes');
+        Schema::dropIfExists('notes');
     }
 };

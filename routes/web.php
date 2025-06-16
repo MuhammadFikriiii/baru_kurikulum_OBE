@@ -62,7 +62,7 @@ use App\Http\Controllers\Wadir1PemetaanBkMkController;
 use App\Http\Controllers\Wadir1PemetaanCplBkMkController;
 use App\Http\Controllers\Wadir1CapaianPembelajaranMatakuliahController;
 use App\Http\Controllers\HomepageController;
-use App\Http\Controllers\WadirNoteController;
+use App\Http\Controllers\Wadir1NotesController;
 use App\Http\Controllers\AdminTahunController;
 use App\Http\Controllers\TimTahunController;
 
@@ -237,13 +237,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/capaianpembelajaranmatakuliah/{id_cpmk}/detail', [Wadir1CapaianPembelajaranMatakuliahController::class, 'detail'])->name('capaianpembelajaranmatakuliah.detail');
     
         //catatan
-        Route::get('/notes', [WadirNoteController::class, 'index'])->name('notes.index');
-        Route::get('/notes/create', [WadirNoteController::class, 'create'])->name('notes.create');
-        Route::post('/notes', [WadirNoteController::class, 'store'])->name('notes.store');
-        Route::get('/notes/{note}', [WadirNoteController::class, 'show'])->name('notes.show');
-        Route::get('/notes/{note}/edit', [WadirNoteController::class, 'edit'])->name('notes.edit');
-        Route::put('/notes/{note}', [WadirNoteController::class, 'update'])->name('notes.update');
-        Route::delete('/notes/{note}', [WadirNoteController::class, 'destroy'])->name('notes.destroy');
+        Route::get('/notes', [Wadir1NotesController::class, 'index'])->name('notes.index');
+        Route::get('/notes/create', [Wadir1NotesController::class, 'create'])->name('notes.create');
+        Route::post('/notes', [Wadir1NotesController::class, 'store'])->name('notes.store');
+        // Route::get('/notes/{note}', [Wadir1NotesController::class, 'show'])->name('notes.show');
+        // Route::get('/notes/{note}/edit', [Wadir1NotesController::class, 'edit'])->name('notes.edit');
+        // Route::put('/notes/{note}', [Wadir1NotesController::class, 'update'])->name('notes.update');
+        // Route::delete('/notes/{note}', [Wadir1NotesController::class, 'destroy'])->name('notes.destroy');
     });
 
     // Grup Route Kaprodi
@@ -272,8 +272,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/subcpmk', [KaprodiSubCpmkController::class, 'index'])->name('subcpmk.index');
         Route::get('/subcpmk/{id_sub_cpmk}/detail', [KaprodiSubCpmkController::class, 'detail'])->name('subcpmk.detail');
         Route::get('/pemetaanmkcpmksubcpmk', [KaprodiSubCpmkController::class, 'pemetaanmkcpmksubcpmk'])->name('pemetaanmkcpmksubcpmk.index');
-        Route::get('/penilaian', [KaprodiPenilaianController::class, 'index'])->name('penilaian.index');
-        Route::get('/penilaian/{penilaian}/detail', [KaprodiPenilaianController::class, 'detail'])->name('penilaian.detail');
     });
 
     // Grup Route Tim
