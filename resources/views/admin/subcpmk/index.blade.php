@@ -64,6 +64,7 @@
         </div>
     </div>
 
+<div class="mx-5 md:mx-20 my-10">
     @if ($kode_prodi || $id_tahun)
         <div class="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
             <div class="flex flex-wrap gap-2 items-center">
