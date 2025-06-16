@@ -21,7 +21,7 @@
             @csrf
             @method('PUT')
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
                 <!-- Kolom Pertama -->
                 <div class="space-y-4">
                     <!-- Nama -->
