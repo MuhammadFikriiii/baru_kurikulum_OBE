@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SignUp</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+
 <body class="bg-gradient-to-br  from-blue-300 to-gray-100">
 
   <div class="min-h-screen flex items-center justify-center py-6 px-4">
@@ -18,20 +20,29 @@
       
       
       <div class="md:w-1/2 w-full py-8 px-6 sm:px-12">
-        <h2 class="text-3xl font-bold text-gray-800 mb-4">Sign-Up</h2>
-        <p class="mb-6 text-gray-600">Buat akunmu sekarang.</p>
+        <h2 class="text-3xl font-bold text-gray-800 mb-2">Sign-Up</h2>
+        <p class="mb-4 text-gray-600">Buat akunmu sekarang.</p>
         <form action="{{ route('signup.store') }}" method="POST">
           @csrf
-          <div class="mb-4">
-            <input type="text" name="name" placeholder="Nama Lengkap" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#3094c6] " value="{{ old('name') }}" required>
+          <div class="mb-4 relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i class="fas fa-user text-gray-400"></i>
+            </div>
+            <input type="text" name="name" placeholder="Nama Lengkap" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#3094c6] pl-10" value="{{ old('name') }}" required>
           </div>
-
-          <div class="mb-4">
-            <input type="text" name="email" placeholder="Email" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#3094c6] " value="{{ old('email') }}" required>
+          
+          <div class="mb-4 relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i class="fas fa-envelope text-gray-400"></i>
+            </div>
+            <input type="text" name="email" placeholder="Email" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#3094c6] pl-10" value="{{ old('email') }}" required>
           </div>
-
-          <div class="mb-4">
-            <input type="password" name="password" placeholder="Masukkan Password" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#3094c6]  required>
+          
+          <div class="mb-4 relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i class="fas fa-lock text-gray-400"></i>
+            </div>
+            <input type="password" name="password" placeholder="Masukkan Password" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#3094c6] pl-10" required>
           </div>
 
           <div class="mb-4">
