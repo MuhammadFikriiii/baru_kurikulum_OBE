@@ -38,13 +38,13 @@
                         <td class="px-6 py-4 whitespace-pre-line text-center border border-gray-200">{{ $note->note_content }}</td>
                         <td class="px-6 py-4 text-center border border-gray-200">
                             <div class="flex justify-center space-x-2">
-                                <a href="#" 
+                                <a href="{{ route('wadir1.notes.detail', ['note' => $note->id_note]) }}" 
                                    class="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md inline-flex items-center justify-center" title="Detail">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-9-3a1 1 0 112 0 1 1 0 01-2 0zm2 5a1 1 0 10-2 0v2a1 1 0 102 0v-2z" clip-rule="evenodd" />
                                     </svg>
                                 </a>
-                                <a href="#" 
+                                <a href="{{ route('wadir1.notes.edit', ['note' => $note->id_note]) }}" 
                                    class="bg-blue-600 hover:bg-blue-800 text-white p-2 rounded-md inline-flex items-center justify-center" title="Edit">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
