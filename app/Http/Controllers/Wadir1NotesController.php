@@ -12,25 +12,28 @@ class Wadir1NotesController extends Controller
     public function index()
     {
         $notes = Notes::with(['prodi', 'user'])->get();
-
         return view('wadir1.notes.index', compact('notes'));
+        
     }
 
     public function create()
     {
         $prodis = Prodi::all();
         return view('wadir1.notes.create', compact('prodis'));
+        
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'kode_prodi' => 'required|exists:prodis,kode_prodi',
+            'title' => 'required|string',
             'note_content' => 'required|string',
         ]);
 
         Notes::create([
             'kode_prodi'   => $request->kode_prodi,
+            'title'        => $request->title,
             'note_content' => $request->note_content,
             'user_id'      => Auth::id(),
         ]);
@@ -74,7 +77,7 @@ class Wadir1NotesController extends Controller
         $note = Notes::findOrFail($note);
         $note->update($request->all());
 
-        return redirect()->route('wadir1.notes.show', $note->id_note)
+        return redirect()->route('wadir1.notes.index', $note->id_note)
             ->with('success', 'Catatan berhasil diperbarui.');
     }
 }

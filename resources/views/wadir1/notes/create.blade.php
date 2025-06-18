@@ -40,15 +40,27 @@
             @error('title')
                 <p class="text-red-500 text-sm mb-2">{{ $message }}</p>
             @enderror
+            
 
             <!-- Field Kategori (Baru Ditambahkan) -->
-            <label for="category" class="text-2xl font-semibold mb-2">Kategori:</label>
-            <input type="text" id="category" name="category" value="{{ old('category') }}"
-                class="border border-black p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]"
-                placeholder="Masukkan kategori catatan">
+            {{-- <label for="category" class="text-2xl font-semibold mb-2">Kategori:</label>
+            <select id="category" name="category" class="border border-black p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]">
+                <option value="">Pilih Kategori</option>
+                <option value="Profil Lulusan" {{ old('category') == 'Profil Lulusan' ? 'selected' : '' }}>Profil Lulusan</option>
+                <option value="Capaian Profil Lulusan" {{ old('category') == 'Capaian Profil Lulusan' ? 'selected' : '' }}>Capaian Profil Lulusan</option>
+                <option value="Pemetaan CPL-PL" {{ old('category') == 'Pemetaan CPL-PL' ? 'selected' : '' }}>Pemetaan CPL-PL</option>
+                <option value="Bahan Kajian" {{ old('category') == 'Bahan Kajian' ? 'selected' : '' }}>Bahan Kajian</option>
+                <option value="Pemetaan CPL-BK" {{ old('category') == 'Pemetaan CPL-BK' ? 'selected' : '' }}>Pemetaan CPL-BK</option>
+                <option value="Mata Kuliah" {{ old('category') == 'Mata Kuliah' ? 'selected' : '' }}>Mata Kuliah</option>
+                <option value="Pemetaan CPL-MK" {{ old('category') == 'Pemetaan CPL-MK' ? 'selected' : '' }}>Pemetaan CPL-MK</option>
+                <option value="Pemetaan BK-MK" {{ old('category') == 'Pemetaan BK-MK' ? 'selected' : '' }}>Pemetaan BK-MK</option>
+                <option value="Pemetaan CPL-BK-MK" {{ old('category') == 'Pemetaan CPL-BK-MK' ? 'selected' : '' }}>Pemetaan CPL-BK-MK</option>
+                <option value="Orginsasi MK" {{ old('category') == 'Orginsasi MK' ? 'selected' : '' }}>Orginsasi MK</option>
+                <option value="CPMK" {{ old('category') == 'CPMK' ? 'selected' : '' }}>CPMK</option>
+            </select>
             @error('category')
                 <p class="text-red-500 text-sm mb-2">{{ $message }}</p>
-            @enderror
+            @enderror --}}
 
             <!-- Field Isi Catatan -->
             <label for="note_content" class="text-2xl font-semibold mb-2">Catatan:</label>

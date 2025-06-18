@@ -47,7 +47,7 @@
                 @enderror
             </div>
 
-            <div class="mb-4">
+            {{-- <div class="mb-4">
                 <label for="category" class="text-2xl font-semibold mb-2">Kategori:</label>
                 <input type="text" id="category" name="category" value="{{ old('category', $note->category) }}"
                     class="border border-black p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]"
@@ -55,7 +55,7 @@
                 @error('category')
                     <p class="text-red-500 text-sm mb-2">{{ $message }}</p>
                 @enderror
-            </div>
+            </div> --}}
 
             <div class="mb-4">
                 <label for="note_content" class="text-2xl font-semibold mb-2">Catatan:</label>

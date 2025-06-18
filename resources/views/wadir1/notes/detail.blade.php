@@ -16,10 +16,10 @@
                 <p class="text-lg">{{ $note->title ?? 'Tidak ada judul' }}</p>
             </div>
 
-            <div class="mb-4">
+            {{-- <div class="mb-4">
                 <h3 class="text-2xl font-semibold mb-2">Kategori:</h3>
                 <p class="text-lg">{{ $note->category ?? 'Tidak ada kategori' }}</p>
-            </div>
+            </div> --}}
 
             <div class="mb-6">
                 <h3 class="text-2xl font-semibold mb-2">Isi Catatan:</h3>
@@ -29,13 +29,7 @@
             </div>
 
             <div class="flex justify-between items-center">
-                <div class="text-sm text-gray-500">
-                    Dibuat pada: {{ $note->created_at->format('d M Y H:i') }}
-                    @if($note->created_at != $note->updated_at)
-                        <br>Diupdate pada: {{ $note->updated_at->format('d M Y H:i') }}
-                    @endif
-                </div>
-
+  
                 <div class="flex space-x-3">
                     <a href="{{ route('wadir1.notes.edit', $note->id_note) }}" 
                        class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg transition duration-200">
@@ -54,7 +48,7 @@
             </div>
         </div>
 
-        <div class="mt-6 pl-6">
+        <div class="flex justify-end space-x-5 pt-6">
             <a href="{{ route('wadir1.notes.index') }}" 
               class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition duration-200">
                   Kembali
