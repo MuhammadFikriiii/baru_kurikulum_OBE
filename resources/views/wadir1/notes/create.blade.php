@@ -39,15 +39,17 @@
                 <p class="text-red-500 text-sm mb-2">{{ $message }}</p>
             @enderror
 
-            <div class="flex justify-start gap-2">
-                <button type="submit"
-                    class="btn btn-primary bg-green-400 hover:bg-green-800 px-5 py-2 rounded-lg text-white font-semibold">
-                    Simpan
-                </button>
-                <a href="{{ route('wadir1.notes.index') }}"
-                    class="bg-blue-400 hover:bg-blue-800 rounded-lg px-5 py-2 text-white font-semibold">
+     
+             <!-- Tombol Aksi -->
+            <div class="flex justify-end space-x-5 pt-6">
+                <a href="{{ route('wadir1.notes.index') }}" 
+                class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition duration-200">
                     Kembali
                 </a>
+                <button type="submit" 
+                        class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-200">
+                    Simpan
+                </button>
             </div>
         </form>
     </div>

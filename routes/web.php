@@ -240,10 +240,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/notes', [Wadir1NotesController::class, 'index'])->name('notes.index');
         Route::get('/notes/create', [Wadir1NotesController::class, 'create'])->name('notes.create');
         Route::post('/notes', [Wadir1NotesController::class, 'store'])->name('notes.store');
+        Route::delete('/notes/{note}', [Wadir1NotesController::class, 'destroy'])->name('notes.destroy');
+    
         // Route::get('/notes/{note}', [Wadir1NotesController::class, 'show'])->name('notes.show');
         // Route::get('/notes/{note}/edit', [Wadir1NotesController::class, 'edit'])->name('notes.edit');
         // Route::put('/notes/{note}', [Wadir1NotesController::class, 'update'])->name('notes.update');
-        // Route::delete('/notes/{note}', [Wadir1NotesController::class, 'destroy'])->name('notes.destroy');
     });
 
     // Grup Route Kaprodi

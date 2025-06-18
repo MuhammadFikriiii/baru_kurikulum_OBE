@@ -89,7 +89,7 @@
             </div>
 
         </div>
-    </nav>
+    </nav> 
 
     <!-- Sidebar -->
     <aside id="sidebar"

@@ -37,4 +37,14 @@ class Wadir1NotesController extends Controller
 
         return redirect()->route('wadir1.notes.index')->with('success', 'Catatan berhasil ditambahkan.');
     }
+
+    public function destroy($note)  // Change $id to $note to match route parameter
+    {
+        $note = Notes::findOrFail($note);
+        $note->delete();
+        return redirect()->route('wadir1.notes.index')
+            ->with('success', 'Catatan berhasil dihapus.');
+    }
+    
+
 }
