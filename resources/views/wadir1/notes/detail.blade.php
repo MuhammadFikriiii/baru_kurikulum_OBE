@@ -39,7 +39,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit" 
-                                class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition duration-200"
+                                class="px-4 py-2 bg-red-600 hover:bg-red-800 text-white font-semibold rounded-lg transition duration-200"
                                 onclick="return confirm('Apakah Anda yakin ingin menghapus catatan ini?')">
                             Hapus
                         </button>

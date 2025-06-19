@@ -4,6 +4,8 @@
     <div class="mr-20 ml-20">
         <h2 class="text-4xl text-center font-extrabold mb-4">Edit Catatan Wadir</h2>
         <hr class="w-full border border-black mb-4">
+    
+    <div class="bg-white p-6 rounded-lg shadow-md">
 
         @if ($errors->any())
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
@@ -22,7 +24,7 @@
             <div class="mb-4">
                 <label for="kode_prodi" class="text-2xl font-semibold mb-2">Program Studi:</label>
                 <select id="kode_prodi" name="kode_prodi"
-                    class="border border-black p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]"
+                    class="w-full p-3 border border-gray-300 rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]"
                     required>
                     <option value="" disabled>Pilih Prodi</option>
                     @foreach ($prodis as $prodi)
@@ -40,7 +42,7 @@
             <div class="mb-4">
                 <label for="title" class="text-2xl font-semibold mb-2">Judul:</label>
                 <input type="text" id="title" name="title" value="{{ old('title', $note->title) }}"
-                    class="border border-black p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]"
+                    class="w-full p-3 border border-gray-300 rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]f7fffb]"
                     placeholder="Masukkan judul catatan">
                 @error('title')
                     <p class="text-red-500 text-sm mb-2">{{ $message }}</p>
@@ -50,7 +52,7 @@
             {{-- <div class="mb-4">
                 <label for="category" class="text-2xl font-semibold mb-2">Kategori:</label>
                 <input type="text" id="category" name="category" value="{{ old('category', $note->category) }}"
-                    class="border border-black p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]"
+                    class="w-full p-3 border border-gray-300 rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#f7fffb]"
                     placeholder="Masukkan kategori catatan">
                 @error('category')
                     <p class="text-red-500 text-sm mb-2">{{ $message }}</p>
@@ -60,7 +62,7 @@
             <div class="mb-4">
                 <label for="note_content" class="text-2xl font-semibold mb-2">Catatan:</label>
                 <textarea id="note_content" name="note_content" rows="6"
-                    class="border border-black p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]"
+                    class="w-full p-3 border border-gray-300 rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#f7fffb]"
                     placeholder="Tulis catatan di sini..." required>{{ old('note_content', $note->note_content) }}</textarea>
                 @error('note_content')
                     <p class="text-red-500 text-sm mb-2">{{ $message }}</p>
@@ -79,5 +81,6 @@
               </button>
           </div>
         </form>
+    </div>
     </div>
 @endsection
