@@ -16,7 +16,7 @@
                 </div>
             @endif
 
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+            <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto pt-4">
                 <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                     <select id="prodi" name="kode_prodi"
                         class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -72,7 +72,8 @@
                     </div>
                 </div>
             @endif
-
+            
+            <div class="bg-white rounded-lg shadow overflow-hidden mt-3">
             @if (!request()->has('kode_prodi') || empty($kode_prodi))
                 <div class="p-8 text-center text-gray-600">
                     Silakan pilih prodi terlebih dahulu untuk melihat data pemetaan.

@@ -71,7 +71,7 @@
         @endif
 
         <!-- Table -->
-        <div class="bg-white rounded-lg shadow overflow-visible">
+        <div class="bg-white rounded-lg shadow overflow-visible mt-6">
             @if (empty($kode_prodi))
                 <div class="p-8 text-center text-gray-600">
                     Silakan pilih prodi terlebih dahulu.
