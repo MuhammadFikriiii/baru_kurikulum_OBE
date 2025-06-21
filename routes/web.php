@@ -65,6 +65,7 @@ use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\Wadir1NotesController;
 use App\Http\Controllers\AdminTahunController;
 use App\Http\Controllers\TimTahunController;
+use App\Http\Controllers\AdminBobotController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -207,6 +208,14 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/ajax/get-cpl-by-bk', [AdminMataKuliahController::class, 'getCplByBk'])->name('matakuliah.getCplByBk');
         Route::post('/ajax/get-cpmk-by-bk', [AdminSubCpmkController::class, 'getCpmkByMataKuliah'])->name('subcpmk.getCpmkByMataKuliah');
         Route::post('/ajax/get-cpl-by-mk', [AdminCapaianPembelajaranMataKuliahController::class, 'getMkByCpl'])->name('capaianpembelajaranmatakuliah.getMKByCPL');
+        Route::get('/bobot/create', [AdminBobotController::class, 'create'])->name('bobot.create');
+        Route::post('/bobot', [AdminBobotController::class, 'store'])->name('bobot.store');
+        Route::get('/bobot', [AdminBobotController::class, 'index'])->name('bobot.index');
+        Route::get('/bobot/{bobot}/edit', [AdminBobotController::class, 'edit'])->name('bobot.edit');
+        Route::put('/bobot/{bobot}', [AdminBobotController::class, 'update'])->name('bobot.update');
+        Route::get('/bobot/{bobot}/detail', [AdminBobotController::class, 'detail'])->name('bobot.detail');
+        Route::delete('/bobot/{bobot}', [AdminBobotController::class, 'destroy'])->name('bobot.destroy');
+        Route::post('ajax-getmkbycpl', [AdminBobotController::class, 'getmkbycpl'])->name('bobot.getmkbycpl');
 
     });
 
