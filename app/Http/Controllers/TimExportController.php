@@ -12,9 +12,10 @@ class TimExportController extends Controller
     public function export(Request $request)
     {
         $user = Auth::user();
-        $kodeProdi = $user->role === 'admin'
+        $kodeProdi = in_array($user->role, ['admin', 'wadir1'])
             ? $request->kode_prodi
             : $user->kode_prodi;
+
 
         if (!$kodeProdi) {
             return back()->with('error', 'Kode prodi harus dipilih.');

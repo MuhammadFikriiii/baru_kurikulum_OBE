@@ -247,7 +247,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/organisasimk', [Wadir1MataKuliahController::class, 'organisasi_mk'])->name('matakuliah.organisasimk');
         Route::get('/capaianpembelajaranmatakuliah', [Wadir1CapaianPembelajaranMatakuliahController::class, 'index'])->name('capaianpembelajaranmatakuliah.index');
         Route::get('/capaianpembelajaranmatakuliah/{id_cpmk}/detail', [Wadir1CapaianPembelajaranMatakuliahController::class, 'detail'])->name('capaianpembelajaranmatakuliah.detail');
-    
+        Route::get('/export/excel', [TimExportController::class, 'export'])->name('export.excel');
         //catatan
         Route::get('/notes', [Wadir1NotesController::class, 'index'])->name('notes.index');
         Route::get('/notes/create', [Wadir1NotesController::class, 'create'])->name('notes.create');
