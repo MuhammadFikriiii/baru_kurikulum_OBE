@@ -66,6 +66,9 @@ use App\Http\Controllers\Wadir1NotesController;
 use App\Http\Controllers\AdminTahunController;
 use App\Http\Controllers\TimTahunController;
 use App\Http\Controllers\AdminBobotController;
+use App\Http\Controllers\Wadir1BobotController;
+use App\Http\Controllers\TimBobotController;
+use App\Http\Controllers\KaprodiBobotController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -256,8 +259,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/notes/{note}/edit', [Wadir1NotesController::class, 'edit'])->name('notes.edit');
         Route::put('/notes/{note}', [Wadir1NotesController::class, 'update'])->name('notes.update');
         Route::delete('/notes/{note}', [Wadir1NotesController::class, 'destroy'])->name('notes.destroy');
-        
- 
+
+        Route::get('/bobot', [Wadir1BobotController::class, 'index'])->name('bobot.index');
+        Route::get('/bobot/{bobot}/detail', [Wadir1BobotController::class, 'detail'])->name('bobot.detail');
     });
 
     // Grup Route Kaprodi
@@ -286,6 +290,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/subcpmk', [KaprodiSubCpmkController::class, 'index'])->name('subcpmk.index');
         Route::get('/subcpmk/{id_sub_cpmk}/detail', [KaprodiSubCpmkController::class, 'detail'])->name('subcpmk.detail');
         Route::get('/pemetaanmkcpmksubcpmk', [KaprodiSubCpmkController::class, 'pemetaanmkcpmksubcpmk'])->name('pemetaanmkcpmksubcpmk.index');
+        Route::get('/bobot', [KaprodiBobotController::class, 'index'])->name('bobot.index');
+        Route::get('/bobot/{bobot}/detail', [KaprodiBobotController::class, 'detail'])->name('bobot.detail');
     });
 
     // Grup Route Tim
@@ -353,5 +359,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/tahun/{id_tahun}/edit', [TimTahunController::class, 'edit'])->name('tahun.edit');
         Route::put('/tahun/{id_tahun}', [TimTahunController::class, 'update'])->name('tahun.update');
         Route::delete('/tahun/{id_tahun}', [TimTahunController::class, 'destroy'])->name('tahun.destroy');
+        Route::get('/bobot', [TimBobotController::class, 'index'])->name('bobot.index');
+        Route::get('/bobot/create', [TimBobotController::class, 'create'])->name('bobot.create');
+        Route::post('/bobot', [TimBobotController::class, 'store'])->name('bobot.store');
+        Route::get('/bobot/{bobot}/edit', [TimBobotController::class, 'edit'])->name('bobot.edit');
+        Route::put('/bobot/{bobot}', [TimBobotController::class, 'update'])->name('bobot.update');
+        Route::get('/bobot/{bobot}/detail', [TimBobotController::class, 'detail'])->name('bobot.detail');
+        Route::delete('/bobot/{bobot}', [TimBobotController::class, 'destroy'])->name('bobot.destroy');
+        Route::post('ajax-getmkbycpl', [TimBobotController::class, 'getmkbycpl'])->name('bobot.getmkbycpl');
     });
 });

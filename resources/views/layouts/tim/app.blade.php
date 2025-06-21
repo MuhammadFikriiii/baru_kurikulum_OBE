@@ -226,6 +226,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('tim.bobot.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="fas fa-share-alt"></i>
+                    <span class="ml-2">Bobot</span>
+                </a>
+            </li>
+            <li>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="w-full flex items-center p-3 hover:bg-gray-700 rounded text-left">
