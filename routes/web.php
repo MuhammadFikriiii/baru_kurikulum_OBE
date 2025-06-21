@@ -69,6 +69,8 @@ use App\Http\Controllers\AdminBobotController;
 use App\Http\Controllers\Wadir1BobotController;
 use App\Http\Controllers\TimBobotController;
 use App\Http\Controllers\KaprodiBobotController;
+use App\Http\Controllers\KaprodiNotesController;
+use App\Http\Controllers\TimNotesController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -293,6 +295,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/bobot', [KaprodiBobotController::class, 'index'])->name('bobot.index');
         Route::get('/bobot/{bobot}/detail', [KaprodiBobotController::class, 'detail'])->name('bobot.detail');
         Route::get('/export/excel', [TimExportController::class, 'export'])->name('export.excel');
+        Route::get('/notes', [KaprodiNotesController::class, 'index'])->name('notes.index');
+        Route::get('/notes/create', [KaprodiNotesController::class, 'create'])->name('notes.create');
+        Route::post('/notes', [KaprodiNotesController::class, 'store'])->name('notes.store');
+        Route::get('/notes/{note}/detail', [KaprodiNotesController::class, 'detail'])->name('notes.detail');
+        Route::get('/notes/{note}/edit', [KaprodiNotesController::class, 'edit'])->name('notes.edit');
+        Route::put('/notes/{note}', [KaprodiNotesController::class, 'update'])->name('notes.update');
+        Route::delete('/notes/{note}', [KaprodiNotesController::class, 'destroy'])->name('notes.destroy');
     });
 
     // Grup Route Tim
@@ -368,5 +377,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/bobot/{bobot}/detail', [TimBobotController::class, 'detail'])->name('bobot.detail');
         Route::delete('/bobot/{bobot}', [TimBobotController::class, 'destroy'])->name('bobot.destroy');
         Route::post('ajax-getmkbycpl', [TimBobotController::class, 'getmkbycpl'])->name('bobot.getmkbycpl');
+        Route::get('/notes', [TimNotesController::class, 'index'])->name('notes.index');
+        Route::get('/notes/{note}/detail', [TimNotesController::class, 'detail'])->name('notes.detail');
     });
 });
