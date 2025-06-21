@@ -292,6 +292,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pemetaanmkcpmksubcpmk', [KaprodiSubCpmkController::class, 'pemetaanmkcpmksubcpmk'])->name('pemetaanmkcpmksubcpmk.index');
         Route::get('/bobot', [KaprodiBobotController::class, 'index'])->name('bobot.index');
         Route::get('/bobot/{bobot}/detail', [KaprodiBobotController::class, 'detail'])->name('bobot.detail');
+        Route::get('/export/excel', [TimExportController::class, 'export'])->name('export.excel');
     });
 
     // Grup Route Tim
