@@ -142,11 +142,10 @@ class AdminBobotController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id_cpl)
     {
-        $bobot = Bobot::findOrFail($id);
-        $bobot->delete();
+        Bobot::where('id_cpl', $id_cpl)->delete();
 
-        return redirect()->route('admin.bobot.index')->with('success', 'Bobot berhasil dihapus.');
+        return redirect()->route('admin.bobot.index')->with('success', 'Semua bobot untuk CPL ini berhasil dihapus.');
     }
 }
