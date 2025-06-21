@@ -31,110 +31,113 @@
         </div>
     </div>
 
-    <!-- Summary Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <div class="bg-white rounded-lg shadow p-5 border-l-4 border-blue-500">
-            <div class="flex justify-between">
-                <div>
-                    <p class="text-sm text-gray-500">Total Program Studi</p>
-                    <h2 class="text-2xl font-bold text-gray-800">{{ $prodicount }}</h2>
-                </div>
-                <div class="bg-blue-100 p-2 rounded-full">
-                    <i class="fas fa-graduation-cap text-blue-500"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-lg shadow p-5 border-l-4 border-green-500">
-            <div class="flex justify-between">
-                <div>
-                    <p class="text-sm text-gray-500">Sudah Selesai</p>
-                    <h2 class="text-2xl font-bold text-gray-800">{{ $ProdiSelesai }}</h2>
-                </div>
-                <div class="bg-green-100 p-2 rounded-full">
-                    <i class="fas fa-check-circle text-green-500"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-lg shadow p-5 border-l-4 border-yellow-500">
-            <div class="flex justify-between">
-                <div>
-                    <p class="text-sm text-gray-500">Proses Implementasi</p>
-                    <h2 class="text-2xl font-bold text-gray-800">{{ $ProdiProgress }}</h2>
-                </div>
-                <div class="bg-yellow-100 p-2 rounded-full">
-                    <i class="fas fa-cog text-yellow-500"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-lg shadow p-5 border-l-4 border-red-500">
-            <div class="flex justify-between">
-                <div>
-                    <p class="text-sm text-gray-500">Belum Dimulai</p>
-                    <h2 class="text-2xl font-bold text-gray-800">{{ $ProdiBelumMulai }}</h2>
-                </div>
-                <div class="bg-red-100 p-2 rounded-full">
-                    <i class="fas fa-exclamation-circle text-red-500"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Progress Bar Per Prodi -->
+    <!-- Graphic Visualization Section -->
     <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-        <h2 class="text-xl font-bold text-gray-800 mb-4">Progress Penyusunan Kurikulum OBE</h2>
+        <h2 class="text-xl font-bold text-gray-800 mb-6">Detail Progress Per Komponen Kurikulum</h2>
 
-        <!-- Prodi item -->
-        <div class="space-y-6">
-            @foreach($prodis as $prodi)
-                <div class="border-b pb-5 prodi-card">
-                    <div class="flex justify-between items-center mb-2">
-                        <div>
-                            <h3 class="font-semibold text-gray-800">{{ $prodi->nama_prodi }}</h3>
-                        </div>
-                        <div class="bg-green-100 text-green-700 text-sm font-medium px-3 py-1 rounded-full">
-                            {{ $prodi->avg_progress }}% Selesai
-                        </div>
-                    </div>
-
-                    <div class="w-full bg-gray-200 rounded-full h-2.5">
-                        <div class="bg-green-500 h-2.5 rounded-full" style="width: {{ $prodi->avg_progress }}%"></div>
-                    </div>
-
-                    <div class="flex justify-between mt-2 text-xs text-gray-500">
-                        <div class="flex space-x-6">
-                            <span class="flex items-center">
-                                <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-                                PL ({{ $prodi->progress_pl }}%)
-                            </span>
-                            <span class="flex items-center">
-                                <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-                                CPL ({{ $prodi->progress_cpl }}%)
-                            </span>
-                            <span class="flex items-center">
-                                <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-                                BK ({{ $prodi->progress_bk }}%)
-                            </span>
-                            <span class="flex items-center">
-                                <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-                                MK ({{ $prodi->progress_mk }}%)
-                            </span>
-                            <span class="flex items-center">
-                                <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-                                CPMK ({{ $prodi->progress_cpmk }}%)
-                            </span>
-                            <span class="flex items-center">
-                                <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-                                SUB_CPMK ({{ $prodi->progress_subcpmk }}%)
-                            </span>
-                        </div>
-                        <a href="#" class="text-blue-500 hover:text-blue-700">Detail</a>
-                    </div>
-                </div>
-            @endforeach
-        </div>        
+        <div class="w-full" style="height: 400px;">
+            <canvas id="progressChart"></canvas>
+        </div>
     </div>
 </div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    const prodis = {!! json_encode($prodis) !!};
+
+    const labels = prodis.map(prodi => prodi.nama_prodi);
+    const datasets = [
+        {
+            label: 'PL',
+            data: prodis.map(prodi => prodi.progress_pl),
+            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+        },
+        {
+            label: 'CPL',
+            data: prodis.map(prodi => prodi.progress_cpl),
+            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        },
+        {
+            label: 'BK',
+            data: prodis.map(prodi => prodi.progress_bk),
+            backgroundColor: 'rgba(255, 206, 86, 0.6)',
+            borderColor: 'rgba(255, 206, 86, 1)',
+            borderWidth: 1
+        },
+        {
+            label: 'SKS_MK',
+            data: prodis.map(prodi => prodi.progress_sks_mk),
+            backgroundColor: 'rgba(153, 102, 255, 0.6)',
+            borderColor: 'rgba(153, 102, 255, 1)',
+            borderWidth: 1
+        },
+        {
+            label: 'CPMK',
+            data: prodis.map(prodi => prodi.progress_cpmk),
+            backgroundColor: 'rgba(255, 159, 64, 0.6)',
+            borderColor: 'rgba(255, 159, 64, 1)',
+            borderWidth: 1
+        },
+        {
+            label: 'SUB_CPMK',
+            data: prodis.map(prodi => prodi.progress_subcpmk),
+            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+        }
+    ];
+
+    // Create chart
+    const ctx = document.getElementById('progressChart').getContext('2d');
+    const progressChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    stacked: false,
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    stacked: false,
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: function(value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.dataset.label + ': ' + context.raw + '%';
+                        }
+                    }
+                },
+                legend: {
+                    position: 'top',
+                }
+            }
+        }
+    });
+});
+</script>
 @endsection
