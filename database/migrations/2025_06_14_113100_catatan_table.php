@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('kode_prodi', 10)->nullable();
             $table->text('note_content');
             $table->string('title')->nullable();
-            $table->string('category')->nullable();
+            // $table->string('category')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('kode_prodi')->references('kode_prodi')->on('prodis')->onDelete('cascade');

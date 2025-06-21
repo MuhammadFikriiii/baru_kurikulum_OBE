@@ -146,9 +146,11 @@
                 <p class="mt-3 italic text-red-500">*arahkan cursor pada kode cpl atau kode mk untuk melihat deskripsi*</p>
             </div>
         @else
+        <div class="bg-white rounded-lg shadow overflow-hidden mt-1">
             <div class="p-8 text-center text-gray-600">
                 Silakan pilih prodi terlebih dahulu.
             </div>
+        </div>
         @endif
     </div>
     <script>

@@ -287,7 +287,7 @@
             industri, teknologi, dan pembangunan daerah melalui pendidikan berbasis praktik, inovasi, serta kerja sama dengan berbagai 
             mitra industri baik di dalam maupun luar negeri.
           </p>
-          <a href="#" class="inline-flex items-center bg-sky-500 hover:bg-sky-700 text-white mt-4 px-5 py-3 rounded-full shadow transition">
+          <a href="{{ route('login') }}" class="inline-flex items-center bg-sky-500 hover:bg-sky-700 text-white mt-4 px-5 py-3 rounded-full shadow transition">
             Tentang Website <i class="ri-eye-line ms-2"></i>
           </a>
         </div>

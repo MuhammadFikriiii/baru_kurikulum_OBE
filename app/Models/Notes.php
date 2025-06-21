@@ -19,7 +19,7 @@ class Notes extends Model
         'note_content',
         'kode_prodi',
         'title',
-        'category',
+        // 'category',
         'user_id', // ⬅️ WAJIB DIISI
     ];
 
