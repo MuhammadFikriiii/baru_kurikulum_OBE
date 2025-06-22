@@ -49,7 +49,7 @@
 <body class="">
 
     <!-- Navbar -->
-    <nav class="bg-gray-900 text-white px-6 py-1 flex items-center justify-between  fixed top-0 left-0 w-full z-50 shadow">
+    <nav class="bg-gray-900 text-white px-6 py-1.5 flex items-center justify-between  fixed top-0 left-0 w-full z-50 shadow">
         <div class="flex items-center space-x-6">
             <span class="font-bold text-xl uppercase">Poliban OBE</span>
         </div>
@@ -97,9 +97,9 @@
     </nav>
 
     <!-- Sidebar -->
-    <aside id="sidebar" class="w-64 bg-gray-800 text-white p-5 space-y-6 fixed top-0 left-0 h-full transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-40 overflow-auto">
+    <aside id="sidebar" class="w-64 bg-[#201F31] text-white p-5  space-y-6 fixed top-0 left-0 h-full overflow-y-auto transform -translate-x-full md:translate-x-0 transition-transform duration-300 mt-20">
         <!-- Header -->
-        <div class="flex items-center justify-between mb-4 pt-2 mt-16 ">
+        <div class="flex items-center justify-between mb-4 pt-2">
             <h2 class="text-xl font-bold">Dashboard Tim</h2>
             <button class="md:hidden" onclick="toggleSidebar()">✖</button>
         </div>
