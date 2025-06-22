@@ -346,7 +346,7 @@
   <div class="flex flex-wrap justify-center mb-8 gap-2" id="program-tabs-container">
       @foreach ($prodis as $index => $prodi)
       <button onclick="showSlide({{ $index }})" class="program-tab px-6 py-3 rounded-lg font-medium shadow-md transition hover:bg-gray-200 {{ $index === 0 ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-gray-100' }}">
-          {{ $prodi->nama_jurusan }}
+        {{ $prodi->jurusan->nama_jurusan }}
       </button>
       @endforeach
   </div>
