@@ -53,7 +53,7 @@
 <body class="">
     <!-- Navbar -->
     <nav
-        class="bg-gray-900 text-white px-6 py-1 flex items-center justify-between  fixed top-0 left-0 w-full z-50 shadow">
+        class="bg-gray-900 text-white px-6 py-2 pb-24 flex items-center justify-between  fixed top-0 left-0 w-full z-50 shadow">
         <div class="flex items-center space-x-6">
             <span class="font-bold text-xl uppercase">Poliban OBE</span>
         </div>

@@ -355,13 +355,14 @@
   <div class="relative">
 
       <!-- Slides -->
-      <div class="overflow-x-auto hide-scrollbar">
-        <div id="program-slider" class="flex space-x-6 w-max">
+      <div class="overflow-x-auto hide-scrollbar ">
+        <div id="program-slider" class="flex space-x-6 w-max border">
           @foreach ($prodis as $prodi)
+          {{-- card --}}
           <div class="w-80 shrink-0 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer border border-gray-100" onclick="window.location.href='#'">
             
             <!-- Header dengan gradient -->
-            <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-6 text-white">
+            <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-6 text-white ">
               <div class="flex items-center justify-between mb-3">
                 <div class="bg-white bg-opacity-20 p-3 rounded-xl">
                   <i class="fas fa-graduation-cap text-2xl"></i>
