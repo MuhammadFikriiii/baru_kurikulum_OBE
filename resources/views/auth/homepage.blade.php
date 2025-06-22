@@ -98,174 +98,168 @@
 
 <body class="bg-gray-100 text-gray-800">
 
-<header class="bg-white shadow-md w-full fixed top-0 z-50" x-data="{ open: false }">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
-      <!-- Logo -->
-      <a href="index.html" class="flex items-start">
-        <img src="/image/Logo.png" alt="Logo" class="h-10">
-      </a>
-      <!-- Desktop Menu -->
-      <nav class="hidden md:flex space-x-6 items-center">
-        <a href="#beranda" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
-        before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
-        before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
-        Beranda </a>
-        <a href="#services"  class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
-        before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
-        before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
-        Profil</a>
-        <a href="#video" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
-        before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
-        before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
-        Akademik</a>
-        <a href="#about" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
-        before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
-        before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
-        Team</a>
-        <a href="#contact" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300 
-        before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px] 
-        before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
-        Contact Us</a>
-        <a href="{{ route('login') }}" class="text-[#3094c6] font-medium px-3 py-1 rounded-xl border-2 border-[#3094c6] hover:bg-[#3094c6] hover:text-white transition flex items-center">
-          <i class="bi bi-person"></i>
-          <span class="ml-2">Login</span>
+  <header class="bg-white shadow-md w-full fixed top-0 z-50" x-data="{ open: false }">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-start">
+          <img src="/image/Logo.png" alt="Logo" class="h-10">
         </a>
-      </nav>
-
-      <!-- Toggle Button (Mobile Only) -->
-      <button class="md:hidden text-gray-700 focus:outline-none" @click="open = !open">
-        <svg class="w-6 h-6 transition-all duration-2500 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <!-- Garis Menu (Hanya muncul ketika open = false) -->
-          <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16" />
-          <!-- Ikon X (Hanya muncul ketika open = true) -->
-          <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-
+  
+        <!-- Desktop Menu -->
+        <nav class="hidden md:flex space-x-6 items-center">
+          <a href="#beranda" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300
+            before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px]
+            before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
+            Beranda
+          </a>
+          <a href="#services" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300
+            before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px]
+            before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
+            Profil
+          </a>
+          <a href="#video" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300
+            before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px]
+            before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
+            Akademik
+          </a>
+          <a href="#about" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300
+            before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px]
+            before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
+            Team
+          </a>
+          <a href="#contact" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300
+            before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px]
+            before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
+            Contact Us
+          </a>
+          <a href="{{ route('login') }}" class="text-[#3094c6] font-medium px-3 py-1 rounded-xl border-2 border-[#3094c6] hover:bg-[#3094c6] hover:text-white transition flex items-center">
+            <i class="bi bi-person"></i>
+            <span class="ml-2">Login</span>
+          </a>
+        </nav>
+  
+        <!-- Toggle Button (Mobile Only) -->
+        <button class="md:hidden text-gray-700 focus:outline-none" @click="open = !open">
+          <template x-if="!open">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </template>
+          <template x-if="open">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </template>
+        </button>
+      </div>
+  
+      <!-- Mobile Menu -->
+      <div class="md:hidden" x-show="open" @click.away="open = false" x-transition>
+        <nav class="flex flex-col bg-[#6988db] text-white p-4 mt-2 rounded-3xl space-y-2 shadow-lg">
+          <a href="#beranda" class="flex items-center justify-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
+            <span>Beranda</span>
+          </a>
+          <a href="#services" class="flex items-center justify-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
+            <span>Profil</span>
+          </a>
+          <a href="#video" class="flex items-center justify-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
+            <span>Akademik</span>
+          </a>
+          <a href="#about" class="flex items-center justify-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
+            <span>Team</span>
+          </a>
+          <a href="#contact" class="flex items-center justify-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
+            <span>Contact Us</span>
+          </a>
+          <a href="{{ route('login') }}" class="flex items-center justify-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#313874]">
+            <i class="bi bi-person text-white opacity-70"></i>
+            <span class="ml-1">Login</span>
+          </a>
+        </nav>
+      </div>
     </div>
-
-    <!-- Mobile Menu -->
-    <div class="md:hidden" x-show="open" @click.away="open = false" x-transition>
-      <nav class="flex flex-col bg-[#6988db] text-white p-3 mb-6 mt-1 mx-5 rounded-3xl space-y-1">
-        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
-          </i><span>Beranda</span>
-        </a>
-        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
-          </i><span>Profil</span>
-        </a>
-        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
-        </i><span>Akademik</span>
-        </a>
-        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
-        </i><span>Team</span>
-        </a>
-        <a href="#" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
-        </i><span>Contact Us</span>
-        </a>
-        <a href="{{ route('login') }}" class="w-full flex justify-center items-center gap-2 p-3 hover:bg-[#586da7]rounded-2xl border-b border-[#313874]">
-          <i class="bi bi-person text-white opacity-70"></i>
-          <span class="ml-1">Login</span>
-        </a>
-      </nav>
-    </div>
-    
-  </div>
-</header>
+  </header>
+  
 
  <!-- Page Home -->
- <section class="w-full h-[650px] bg-cover bg-center flex items-center justify-center text-white" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/image/poliban.jpeg'); background-position: center;" id="top">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-1mn2">
-        <div class="row">
-          <div class="col-lg-6 align-self-center">
-            <div class="owl-carousel owl-banner">
-              <!-- Slide 1: Selamat Datang -->
-              <div class="item header-text">
-                <h6 class="text-2xl font-semibold text-white">KURIKULUM OBE</h6>
-                <h2 class="text-5xl font-bold">
-                  <span class="text-[#f3f3f3]">Politeknik</span>
-                  <em class="text-sky-500">Negeri</em>
-                  <span class="text-[#f3f3f3]">Banjarmasin</span>
-                </h2>
-                <p class="text-lg text-blue-100 mb-6 mt-3">
-                  Selamat Datang di Website Kurikulum Berbasis Outcome-Based Education (OBE)
-                </p>
-                <div class="down-buttons">
-                  <div class="ml-1 main-blue-button-hover bg-blue-600 text-white shadow-lg hover:bg-blue-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
-                    <a href="#services" class="text-lg font-semibold py-2 px-10 inline-block">Mulai</a>
-                  </div>
-                  <div  class="ml-5 call-button bg-green-600 text-white shadow-lg hover:bg-green-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
-                    <a id="openPopup" target="_blank" class="text-lg font-semibold py-2 px-8 inline-block">
-                      <i class="fa fa-envelope mr-3"></i>Email
-                    </a>
-                  </div>
-                </div>
-              </div>
-            
-              <!-- Slide 2: Visi dan Misi -->
-              <div class="item header-text">
-                <h6 class="text-2xl font-semibold text-white">VISI & MISI</h6>
-                <h2 class="text-4xl font-bold text-white">
-                  Mewujudkan Lulusan Unggul <em class="text-sky-500">Berbasis</em> Outcome-Based Education
-                </h2>
-                <p class="text-lg text-blue-100 mb-6 mt-3">
-                  Visi kami adalah mencetak lulusan yang siap kerja, kompeten, dan adaptif terhadap perkembangan industri.
-                </p>
-                <div class="down-buttons">
-                  <div class="ml-1 main-blue-button-hover bg-blue-600 text-white shadow-lg hover:bg-blue-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
-                    <a href="#visi" class="text-lg font-semibold py-2 px-10 inline-block">Lihat Visi</a>
-                  </div>
-                  <div class="ml-5 call-button bg-green-600 text-white shadow-lg hover:bg-green-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
-                    <a href="kontak-poliban.vcf" download class="text-lg font-semibold py-2 px-8 inline-block bg-green-600 text-white rounded-full hover:bg-green-700">
-                      <i class="fa fa-phone mr-2"></i>Kontak Kami
-                    </a>
-                  </div>
-                </div>
-              </div>
-            
-              <!-- Slide 3: Profil Jurusan -->
-              <div class="item header-text">
-                <h6 class="text-2xl font-semibold text-white">PROFIL JURUSAN</h6>
-                <h2 class="text-4xl font-bold text-white">
-                  Program Studi Unggulan <em class="text-sky-500">Siap</em> Meningkatkan Mutu Pendidikan
-                </h2>
-                <p class="text-lg text-blue-100 mb-6 mt-3">
-                  Kenali lebih jauh jurusan dan program studi di Poliban yang mendukung sistem pembelajaran OBE.
-                </p>
-                <div class="down-buttons">
-                  <div class="ml-1 main-blue-button-hover bg-blue-600 text-white shadow-lg hover:bg-blue-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
-                    <a href="#jurusan" class="text-lg font-semibold py-2 px-10 inline-block">Lihat Jurusan</a>
-                  </div>
-                  <div class="ml-5 call-button bg-green-600 text-white shadow-lg hover:bg-green-700 transform transition-all duration-300 hover:scale-110 rounded-full inline-block">
-                    <a href="https://wa.me/62511326179" class="text-lg font-semibold py-2 px-8 inline-block"><i class="fa fa-comment mr-2"></i>Hubungi Kami</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-              </div>
-              <!-- tombol slide -->
-              <div class="flex justify-left gap-2 mt-2">
-                <button class="owl-dot group w-10 h-10 border-2 border-white text-white rounded-full flex justify-center items-center font-bold text-base cursor-pointer transition-all duration-300 ease-in-out">
-                  <span class="group-hover:text-blue-500">1</span>
-                </button>
-                <button class="owl-dot group w-10 h-10 border-2 border-white text-white rounded-full flex justify-center items-center font-bold text-base cursor-pointer transition-all duration-300 ease-in-out">
-                  <span class="group-hover:text-blue-500">2</span>
-                </button>
-                <button class="owl-dot group w-10 h-10 border-2 border-white text-white rounded-full flex justify-center items-center font-bold text-base cursor-pointer transition-all duration-300 ease-in-out">
-                  <span class="group-hover:text-blue-500">3</span>
-                </button>
-              </div>
-        
+ <section class="w-full h-screen md:h-[650px] bg-cover bg-center flex items-center justify-center text-white" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/image/poliban.jpeg');" id="top">
+  <div class="container mx-auto px-4">
+    <div class="owl-carousel owl-banner">
+      
+      <!-- Slide 1 -->
+      <div class="text-center md:text-left">
+        <h6 class="text-xl md:text-2xl font-semibold text-white">KURIKULUM OBE</h6>
+        <h2 class="text-3xl md:text-5xl font-bold leading-tight mt-2">
+          <span class="text-[#f3f3f3]">Politeknik</span>
+          <em class="text-sky-500">Negeri</em>
+          <span class="text-[#f3f3f3]">Banjarmasin</span>
+        </h2>
+        <p class="text-base md:text-lg text-blue-100 mb-6 mt-3">
+          Selamat Datang di Website Kurikulum Berbasis Outcome-Based Education (OBE)
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-4 ml-2 mb-3">
+          <a href="#services" class="bg-blue-600 text-white font-semibold py-2 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-110">
+            Mulai
+          </a>
+          <a id="openPopup" target="_blank" class="bg-green-600 text-white font-semibold py-2 px-8 rounded-full shadow-lg hover:bg-green-700 transition duration-300 transform hover:scale-110">
+            <i class="fa fa-envelope mr-2"></i>Email
+          </a>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="text-center md:text-left">
+        <h6 class="text-xl md:text-2xl font-semibold text-white">VISI & MISI</h6>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">
+          Mewujudkan Lulusan Unggul <em class="text-sky-500">Berbasis</em> Outcome-Based Education
+        </h2>
+        <p class="text-base md:text-lg text-blue-100 mb-6 mt-3">
+          Visi kami adalah mencetak lulusan yang siap kerja, kompeten, dan adaptif terhadap perkembangan industri.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-4 ml-2 mb-3">
+          <a href="#visi" class="bg-blue-600 text-white font-semibold py-2 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-110">
+            Lihat Visi
+          </a>
+          <a href="kontak-poliban.vcf" download class="bg-green-600 text-white font-semibold py-2 px-8 rounded-full shadow-lg hover:bg-green-700 transition duration-300 transform hover:scale-110">
+            <i class="fa fa-phone mr-2"></i>Kontak Kami
+          </a>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="text-center md:text-left">
+        <h6 class="text-xl md:text-2xl font-semibold text-white">PROFIL JURUSAN</h6>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">
+          Program Studi Unggulan <em class="text-sky-500">Siap</em> Meningkatkan Mutu Pendidikan
+        </h2>
+        <p class="text-base md:text-lg text-blue-100 mb-6 mt-3">
+          Kenali lebih jauh jurusan dan program studi di Poliban yang mendukung sistem pembelajaran OBE.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-4 ml-2 mb-3">
+          <a href="#jurusan" class="bg-blue-600 text-white font-semibold py-2 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-110">
+            Lihat Jurusan
+          </a>
+          <a href="https://wa.me/62511326179" class="bg-green-600 text-white font-semibold py-2 px-8 rounded-full shadow-lg hover:bg-green-700 transition duration-300 transform hover:scale-110">
+            <i class="fa fa-comment mr-2"></i>Hubungi Kami
+          </a>
         </div>
       </div>
     </div>
+
+
+<!-- Navigasi Slide -->
+<div class="flex justify-center md:justify-start gap-2 mt-3">
+  <button class="owl-dot w-10 h-10 border-2 border-white text-white rounded-full flex justify-center items-center font-bold text-base hover:text-blue-500 transition-all duration-300">1</button>
+  <button class="owl-dot w-10 h-10 border-2 border-white text-white rounded-full flex justify-center items-center font-bold text-base hover:text-blue-500 transition-all duration-300">2</button>
+  <button class="owl-dot w-10 h-10 border-2 border-white text-white rounded-full flex justify-center items-center font-bold text-base hover:text-blue-500 transition-all duration-300">3</button>
+</div>
+
   </div>
 </section>
+
 
   <!-- Beranda -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
@@ -300,44 +294,6 @@
 
   
 <!-- Daftar Kurikulum dan Program Studi -->
-<!-- Jurusan -->
-<style>
-  .program-slider {
-      scroll-behavior: smooth;
-      transition: transform 0.5s ease-in-out;
-  }
-  .program-card {
-      transition: all 0.3s ease;
-      cursor: pointer;
-  }
-  .program-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-  }
-  .program-tab.active {
-      background-color: #2563eb;
-      color: white;
-  }
-  .indicator-dot.active {
-      background-color: #2563eb;
-  }
-  /* Hide scrollbar tapi tetap bisa di-scroll */
-  .hide-scrollbar {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;  /* IE and Edge */
-  }
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-  }
-  /* Tambahan untuk responsivitas */
-  @media (max-width: 640px) {
-    .program-tab {
-      padding: 0.5rem 0.75rem;
-      font-size: 0.875rem;
-    }
-  }
-</style>
-
 <div class="container mx-auto px-4 py-12">
   <h1 class="text-3xl text-center font-bold text-indigo-800 mb-2">Program Studi</h1>
   <p class="text-lg text-center text-gray-600 mb-8">Temukan program studi yang sesuai dengan minat Anda</p>
@@ -351,76 +307,113 @@
       @endforeach
   </div>
   
+  <style>
+    .program-slider {
+        scroll-behavior: smooth;
+        transition: transform 0.5s ease-in-out;
+    }
+    .program-card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    .program-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+    .program-tab.active {
+        background-color: #2563eb;
+        color: white;
+    }
+    .indicator-dot.active {
+        background-color: #2563eb;
+    }
+    /* Hide scrollbar tapi tetap bisa di-scroll */
+    .hide-scrollbar {
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;  /* IE and Edge */
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+    /* Tambahan untuk responsivitas */
+    @media (max-width: 640px) {
+      .program-tab {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+      }
+    }
+  </style>
+
   <!-- Slider Content -->
   <div class="relative">
-
       <!-- Slides -->
-      <div class="overflow-x-auto hide-scrollbar ">
-        <div id="program-slider" class="flex space-x-6 w-max border">
-          @foreach ($prodis as $prodi)
-          {{-- card --}}
-          <div class="w-80 shrink-0 bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer border border-gray-100" onclick="window.location.href='#'">
-            
-            <!-- Header dengan gradient -->
-            <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-6 text-white ">
-              <div class="flex items-center justify-between mb-3">
-                <div class="bg-white bg-opacity-20 p-3 rounded-xl">
-                  <i class="fas fa-graduation-cap text-2xl"></i>
-                </div>
-                <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-medium">
-                  {{ $prodi->jenjang_pendidikan }}
-                </span>
+  <div class="overflow-x-auto hide-scrollbar">
+    <div id="program-slider" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      @foreach ($prodis as $prodi)
+      <!-- Card -->
+      <div class="program-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer border border-gray-100"
+          onclick="window.location.href='#'">
+        
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-6 text-white">
+          <div class="flex items-center justify-between mb-3">
+            <div class="bg-white bg-opacity-20 p-3 rounded-xl">
+              <i class="fas fa-graduation-cap text-2xl"></i>
+            </div>
+            <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-medium">
+              {{ $prodi->jenjang_pendidikan }}
+            </span>
+          </div>
+          <h3 class="text-xl font-bold mb-2">{{ $prodi->nama_prodi }}</h3>
+          <p class="text-blue-100 text-sm">{{ $prodi->gelar_lulusan }}</p>
+        </div>
+
+        <!-- Content -->
+        <div class="p-6">
+          <div class="flex items-center mb-4">
+            <div class="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+              <i class="fas fa-award mr-2"></i>
+              Akreditasi {{ $prodi->peringkat_akreditasi }}
+            </div>
+          </div>
+
+          <div class="space-y-3 mb-6">
+            <div class="flex items-center text-gray-600">
+              <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                <i class="fas fa-calendar-alt text-blue-600"></i>
               </div>
-              <h3 class="text-xl font-bold mb-2">{{ $prodi->nama_prodi }}</h3>
-              <p class="text-blue-100 text-sm">{{ $prodi->gelar_lulusan }}</p>
+              <div>
+                <span class="text-sm text-gray-500">Berdiri</span>
+                <p class="font-medium">{{ date('d M Y', strtotime($prodi->tgl_berdiri_prodi)) }}</p>
+              </div>
             </div>
 
-            <!-- Content -->
-            <div class="p-6">
-              <div class="flex items-center mb-4">
-                <div class="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
-                  <i class="fas fa-award mr-2"></i>
-                  Akreditasi {{ $prodi->peringkat_akreditasi }}
-                </div>
+            <div class="flex items-center text-gray-600">
+              <div class="bg-green-100 p-2 rounded-lg mr-3">
+                <i class="fas fa-phone text-green-600"></i>
               </div>
-
-              <div class="space-y-3 mb-6">
-                <div class="flex items-center text-gray-600">
-                  <div class="bg-blue-100 p-2 rounded-lg mr-3">
-                    <i class="fas fa-calendar-alt text-blue-600"></i>
-                  </div>
-                  <div>
-                    <span class="text-sm text-gray-500">Berdiri</span>
-                    <p class="font-medium">{{ date('d M Y', strtotime($prodi->tgl_berdiri_prodi)) }}</p>
-                  </div>
-                </div>
-
-                <div class="flex items-center text-gray-600">
-                  <div class="bg-green-100 p-2 rounded-lg mr-3">
-                    <i class="fas fa-phone text-green-600"></i>
-                  </div>
-                  <div>
-                    <span class="text-sm text-gray-500">Kontak</span>
-                    <p class="font-medium">{{ $prodi->telepon_prodi }}</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Footer Actions -->
-              <div class="flex justify-between items-center pt-4 border-t border-gray-100">
-                <button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105" 
-                        onclick="event.stopPropagation(); window.open('{{ $prodi->website_prodi }}', '_blank')">
-                  <i class="fas fa-external-link-alt mr-2"></i>
-                  Lihat Detail
-                </button>
+              <div>
+                <span class="text-sm text-gray-500">Kontak</span>
+                <p class="font-medium">{{ $prodi->telepon_prodi }}</p>
               </div>
             </div>
           </div>
-          @endforeach
+
+          <!-- Footer -->
+          <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+            <button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105" 
+                    onclick="event.stopPropagation(); window.open('{{ $prodi->website_prodi }}', '_blank')">
+              <i class="fas fa-external-link-alt mr-2"></i>
+              Lihat Detail
+            </button>
+          </div>
         </div>
       </div>
-      
+      @endforeach
+    </div>
   </div>
+
+</div>
   
   <!-- Slide Indicators - Diubah menjadi dinamis -->
   <div class="flex justify-center mt-8 gap-2" id="indicator-dots-container">
@@ -698,7 +691,7 @@
 
 
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-12 mt-20">
+ <footer class="bg-gray-800 text-white py-12 mt-20">
     <div class="container mx-auto px-6">
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
         <!-- About Section -->
