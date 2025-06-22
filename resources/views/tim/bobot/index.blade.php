@@ -1,7 +1,7 @@
 @extends('layouts.tim.app')
 
 @section('content')
-    <div class="mx-5 md:mx-20 my-10">
+    <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
         <h2 class="text-4xl font-extrabold text-center mb-4">Daftar Bobot CPL - MK</h2>
         <hr class="w-full border border-black mb-6">
 

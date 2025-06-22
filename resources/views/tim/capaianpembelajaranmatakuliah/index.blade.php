@@ -1,7 +1,7 @@
 @extends('layouts.tim.app')
 @section('content')
 
-    <div class="mr-20 ml-20">
+    <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
         <h2 class="text-4xl font-bold text-center">Daftar CPMK</h2>
         <hr class="border-t-4 border-black my-8">
         @if (session('success'))

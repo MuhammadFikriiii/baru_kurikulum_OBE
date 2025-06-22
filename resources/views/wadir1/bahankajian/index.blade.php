@@ -1,7 +1,7 @@
 @extends('layouts.wadir1.app')
 
 @section('content')
-    <div class="container mx-auto px-4">
+    <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
 
         <div class="text-center mb-8">
             <h1 class="text-2xl font-bold text-gray-800">Daftar Bahan Kajian</h1>

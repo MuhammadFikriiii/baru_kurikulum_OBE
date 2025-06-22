@@ -1,7 +1,7 @@
 @extends('layouts.kaprodi.app')
 
 @section('content')
-    <div class="ml-20 mr-20">
+    <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
         <h1 class="text-2xl font-bold text-gray-700 mb-4 text-center">Daftar Sub Cpmk</h1>
         <hr class="border-t-4 border-black my-8">
 

@@ -1,7 +1,7 @@
 @extends('layouts.wadir1.app')
 
 @section('content')
-    <div class="mr-20 ml-20">
+    <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
         <h2 class="text-4xl font-extrabold text-center mb-4">Daftar Capaian Pembelajaran Matakuliah</h2>
         <hr class="w-full border border-black mb-4">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
