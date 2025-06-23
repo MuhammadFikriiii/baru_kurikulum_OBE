@@ -291,21 +291,64 @@
                 </button>
             </form>
             <script>
-                function clearSidebarState() {
-                    localStorage.removeItem('activeSidebarItem');
-                }
+                 function clearSidebarState() {
+                        localStorage.removeItem('activeSidebarItem');
+                        localStorage.removeItem('sidebarScroll'); // Tambahan untuk reset posisi scroll
+                    }
             </script>
         </li>
     </ul>
 </aside>
 
-   <!-- Simpan Warna Klik -->
+<!-- Simpan Warna Klik -->
 <style>
     .sidebar-active {
         background-color: #374151; /* bg-gray-700 */
         font-weight: bold;
     }
 </style> 
+
+<!-- Simpan Posisis Sidebar -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const sidebar = document.getElementById('sidebar');
+
+        // Set scroll dari localStorage
+        const savedScrollTop = localStorage.getItem('sidebarScroll');
+        if (savedScrollTop) {
+            sidebar.scrollTop = parseInt(savedScrollTop);
+        }
+
+        // Simpan scroll saat digulir
+        sidebar.addEventListener('scroll', function () {
+            localStorage.setItem('sidebarScroll', sidebar.scrollTop);
+        });
+    });
+</script>
+
+<style>
+    /* Tambahkan transition untuk smooth scrolling */
+    #sidebar {
+        scroll-behavior: smooth;
+    }
+    .sidebar-active {
+        background-color: #374151;
+        font-weight: bold;
+        position: relative;
+    }
+    
+    /* Optional: tambahkan indicator untuk active item */
+    .sidebar-active::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background-color: #3B82F6;
+    }
+</style>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const menuItems = document.querySelectorAll('#sidebar ul li[data-title] a');
