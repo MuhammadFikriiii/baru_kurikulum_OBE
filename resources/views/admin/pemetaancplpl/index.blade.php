@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="mx-5 md:mx-20 my-10">
+    <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
         <div class="text-center mb-8">
             <h1 class="text-2xl font-bold text-gray-800">Pemetaan CPL - PL</h1>
             <hr class="border-t-4 border-black my-4 mx-auto mb-4">

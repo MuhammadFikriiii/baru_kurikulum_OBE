@@ -29,7 +29,6 @@
             </div>
 
             <div class="flex justify-between items-center">
-  
                 <div class="flex space-x-3">
                     <a href="{{ route('wadir1.notes.edit', $note->id_note) }}" 
                        class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg transition duration-200">

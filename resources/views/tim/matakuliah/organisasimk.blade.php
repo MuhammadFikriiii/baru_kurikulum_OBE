@@ -1,7 +1,7 @@
 @extends('layouts.tim.app')
 
 @section('content')
-    <div class="mr-20 ml-20">
+    <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
         <h2 class="text-4xl font-extrabold text-center mb-4">Organisasi MK</h2>
         <hr class="border border-black mb-4">
         <!-- Filter Tahun -->
@@ -95,6 +95,7 @@
             </tbody>
         </table>
     </div>
+    
     <script>
         function updateFilter() {
             const tahunSelect = document.getElementById('tahun');

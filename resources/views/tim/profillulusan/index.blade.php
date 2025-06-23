@@ -1,7 +1,7 @@
 @extends('layouts.tim.app')
 
 @section('content')
-    <div class="mr-20 ml-20">
+    <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
         <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Daftar Profil Lulusan</h2>
         <hr class="border-t-4 border-black my-8">
 

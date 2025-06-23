@@ -7,6 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
     @vite(['resources/js/app.js'])
     <script>
         function toggleSidebar() {
@@ -48,34 +50,26 @@
 </head>
 <body class="">
 
-    <!-- Navbar -->
-    <nav class="bg-gray-900 text-white px-6 py-1.5 flex items-center justify-between  fixed top-0 left-0 w-full z-50 shadow">
-        <div class="flex items-center space-x-6">
-            <span class="font-bold text-xl uppercase">Poliban OBE</span>
-        </div>
-        <div class="hidden md:flex space-x-6 items-center">
-            <span class="relative group text-2xl">
+<!-- Navbar -->
+<nav class="bg-gray-900 text-white px-6 py-4 flex items-center justify-between fixed top-0 left-0 w-full z-50 shadow-md">
+    <!-- Logo -->
+    <div class="flex items-center space-x-4">
+        <span class="font-bold text-xl uppercase">Poliban OBE</span>
+    </div>
+    
+    <!-- User Menu -->
+    <div class="flex items-center space-x-4 mr-6">
+            <span class="hidden md:inline-block font-medium text-lg">
                 {{ auth()->user()->name }}
-                <span class="absolute left-0 bottom-0 block w-0 h-[2px] bg-white"></span>
             </span>
-            
-           <div class="relative ">
-                <div id="dropdownMenu" class="absolute hidden bg-white text-gray-900 rounded-lg shadow-md mt-2 w-32 z-50 border border-gray-300">
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-300 rounded-lg">PDF</a>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-300 rounded-lg">DOCX</a>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-300 rounded-lg">Excel</a>
-                </div>
-            </div>
-
-            <div class="relative p-4">
-                <button onclick="toggleDropdownProfil()" class="flex items-center space-x-2 focus:outline-none">
-                    <img src="https://i.pravatar.cc/40" alt="User" class="w-10 h-10 rounded-full">
+            <div class="relative">
+                <button onclick="toggleDropdownProfil()" class="flex items-center focus:outline-none">
+                    <i class="bi bi-person-circle text-white text-2xl"></i>
                     <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414L10 13.414 5.293 8.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
                     </svg>
                 </button>
-    
-                <div id="userDropdown" class="absolute right-0 mt-2  bg-white text-black rounded-md shadow-lg py-2 hidden w-48 z-50">
+                <div id="userDropdown" class="absolute right-0 mt-2 bg-white text-black rounded-md shadow-lg py-2 hidden w-48 z-50">
                     <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100">
                         <i class="fas fa-sliders-h mr-2"></i> Account
                     </a>
@@ -83,171 +77,324 @@
                         <i class="fas fa-cog mr-2"></i> Settings
                     </a>
                     <div class="border-t my-1"></div>
-                    <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="flex items-center px-4 py-2 hover:bg-gray-100 text-red-600">
-                        <i class="fas fa-sign-out-alt mr-2"></i>
-                        <span class="ml-2">Logout</span>
-                    </button>
-                </form>
+                    <form action="{{ route('logout') }}" method="POST" onsubmit="clearSidebarState()">
+                        @csrf
+                        <button type="submit" class="w-full flex items-center px-4 py-2 hover:bg-gray-100 text-red-600 text-left">
+                            <i class="fas fa-sign-out-alt mr-2"></i>
+                            <span>Logout</span>
+                        </button>
+                    </form>
                 </div>
-            </div>
-
+         
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <!-- Sidebar -->
-    <aside id="sidebar" class="w-64 bg-[#201F31] text-white p-5  pb-24 space-y-6 fixed top-0 left-0 h-full overflow-y-auto transform -translate-x-full md:translate-x-0 transition-transform duration-300 mt-20 ">
-        <!-- Header -->
-        <div class="flex items-center justify-between mb-4 pt-2">
-            <h2 class="text-xl font-bold">Dashboard Tim</h2>
-            <button class="md:hidden" onclick="toggleSidebar()">✖</button>
-        </div>
+<!-- Sidebar -->
+<aside id="sidebar" 
+    class="w-[276px] bg-[#201F31] text-white p-5 pb-24 space-y-6 fixed top-16 left-0 h-[calc(100vh-4rem)] overflow-y-auto transform -translate-x-full md:translate-x-0 transition-transform duration-300">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-4 pt-2">
+        <h2 class="text-xl font-bold">Dashboard Tim</h2>
+        <button class="md:hidden" onclick="toggleSidebar()">✖</button>
+    </div>
 
-        <!-- Search bar -->
-        <div>
-            <input type="text" id="search-sidebar" placeholder="Search..." class="w-full p-2 rounded bg-gray-700 placeholder-gray-400 text-white focus:outline-none">
-        </div>
+    <!-- Search bar -->
+    <div class="mb-4">
+        <input id="searchInput" type="text" placeholder="Search..."
+            class="w-full p-2 rounded bg-[#2c2b43] placeholder-gray-400 text-white focus:outline-none">
+    </div>
 
-        <!-- Navigation -->
-        <ul class="space-y-1">
-            <li>
-                <a href="{{ route('tim.dashboard') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span class="ml-2">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.tahun.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-user-graduate"></i>
-                    <span class="ml-2">Tahun</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.profillulusan.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-user-graduate"></i>
-                    <span class="ml-2">Profil Lulusan</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.capaianpembelajaranlulusan.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-book-open"></i>
-                    <span class="ml-2">CPL Prodi</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.pemetaancplpl.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-project-diagram"></i>
-                    <span class="ml-2">CPL - PL</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.bahankajian.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                    <span class="ml-2">Bahan Kajian</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.pemetaancplbk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-link"></i>
-                    <span class="ml-2">CPL - BK</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.matakuliah.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-book"></i>
-                    <span class="ml-2">Mata Kuliah</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.pemetaanbkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-share-alt"></i>
-                    <span class="ml-2">BK - MK</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.pemetaancplmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-stream"></i>
-                    <span class="ml-2">CPL - MK</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.pemetaancplmkbk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-link"></i>
-                    <span class="ml-2">CPL - MK - BK</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.matakuliah.organisasimk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                    <span class="ml-2">Organisasi MK</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.capaianpembelajaranmatakuliah.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-sliders-h"></i>
-                    <span class="ml-2">CPMK</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.pemenuhancpl.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-share-alt"></i>
-                    <span class="ml-2">Pemenuhan CPL</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.pemetaancplcpmkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-sliders-h"></i>
-                    <span class="ml-2">Pemetaan CPL - CPMK - MK</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.pemetaancplcpmkmk.pemenuhancplcpmkmk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-share-alt"></i>
-                    <span class="ml-2">Pemenuhan CPL - CPMK - MK</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.pemetaancplcpmkmk.pemetaanmkcplcpmk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-share-alt"></i>
-                    <span class="ml-2">Pemetaan CPL - MK - CPMK</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.subcpmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-share-alt"></i>
-                    <span class="ml-2">SUB CPMK</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.pemetaanmkcpmksubcpmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-share-alt"></i>
-                    <span class="ml-2">Pemetaan MK - CPMK - SubCPMK</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.bobot.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-share-alt"></i>
-                    <span class="ml-2">Bobot</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('tim.notes.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                    <i class="fas fa-share-alt"></i>
-                    <span class="ml-2">Catatan</span>
-                </a>
-            </li>
-            <li>
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="w-full flex items-center p-3 hover:bg-gray-700 rounded text-left">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span class="ml-2">Logout</span>
-                    </button>
-                </form>
-            </li>            
-        </ul>
-    </aside>
+    <!-- Navigation -->
+    <ul class="space-y-2">
+        <li data-title="Dashboard">
+            <a href="{{ route('tim.dashboard') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                <i class="bi bi-house-door mr-3"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        <li class="border-t border-gray-700 my-2"></li>
+
+        <!-- Tahun & Profil -->
+        <li>
+            <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Program Setup</p>
+            <ul class="ml-2 space-y-1">
+                <li data-title="Tahun">
+                    <a href="{{ route('tim.tahun.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-calendar mr-3"></i>
+                        <span>Tahun</span>
+                    </a>
+                </li>
+                <li data-title="Profil Lulusan">
+                    <a href="{{ route('tim.profillulusan.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-file-earmark-person mr-3"></i>
+                        <span>Profil Lulusan</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="border-t border-gray-700 my-2"></li>
+
+        <!-- Learning Outcomes -->
+        <li>
+            <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Learning Outcomes</p>
+            <ul class="ml-2 space-y-1">
+                <li data-title="CPL Prodi">
+                    <a href="{{ route('tim.capaianpembelajaranlulusan.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-check2-square mr-3"></i>
+                        <span>CPL Prodi</span>
+                    </a>
+                </li>
+                <li data-title="CPL - PL">
+                    <a href="{{ route('tim.pemetaancplpl.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-diagram-3 mr-3"></i>
+                        <span>CPL - PL</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="border-t border-gray-700 my-2"></li>
+
+        <!-- Curriculum Development -->
+        <li>
+            <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Curriculum</p>
+            <ul class="ml-2 space-y-1">
+                <li data-title="Bahan Kajian">
+                    <a href="{{ route('tim.bahankajian.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-journal-bookmark mr-3"></i>
+                        <span>Bahan Kajian</span>
+                    </a>
+                </li>
+                <li data-title="CPL - BK">
+                    <a href="{{ route('tim.pemetaancplbk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-pin-map mr-3"></i>
+                        <span>CPL - BK</span>
+                    </a>
+                </li>
+                <li data-title="Mata Kuliah">
+                    <a href="{{ route('tim.matakuliah.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-book mr-3"></i>
+                        <span>Mata Kuliah</span>
+                    </a>
+                </li>
+                <li data-title="BK - MK">
+                    <a href="{{ route('tim.pemetaanbkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-link-45deg mr-3"></i>
+                        <span>BK - MK</span>
+                    </a>
+                </li>
+                <li data-title="CPL - MK">
+                    <a href="{{ route('tim.pemetaancplmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-bar-chart mr-3"></i>
+                        <span>CPL - MK</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="border-t border-gray-700 my-2"></li>
+
+        <!-- Advanced Mapping -->
+        <li>
+            <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Advanced Mapping</p>
+            <ul class="ml-2 space-y-1">
+                <li data-title="CPL - MK - BK">
+                    <a href="{{ route('tim.pemetaancplmkbk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-diagram-3 mr-3"></i>
+                        <span>CPL - MK - BK</span>
+                    </a>
+                </li>
+                <li data-title="Organisasi MK">
+                    <a href="{{ route('tim.matakuliah.organisasimk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-columns mr-3"></i>
+                        <span>Organisasi MK</span>
+                    </a>
+                </li>
+                <li data-title="CPMK">
+                    <a href="{{ route('tim.capaianpembelajaranmatakuliah.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-list-check mr-3"></i>
+                        <span>CPMK</span>
+                    </a>
+                </li>
+                <li data-title="SUB CPMK">
+                    <a href="{{ route('tim.subcpmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-list-ol mr-3"></i>
+                        <span>SUB CPMK</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="border-t border-gray-700 my-2"></li>
+
+        <!-- Reports & Analysis -->
+        <li>
+            <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Reports & Analysis</p>
+            <ul class="ml-2 space-y-1">
+                <li data-title="Pemenuhan CPL">
+                    <a href="{{ route('tim.pemenuhancpl.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-percent mr-3"></i>
+                        <span>Pemenuhan CPL</span>
+                    </a>
+                </li>
+                <li data-title="Pemetaan CPL - CPMK - MK">
+                    <a href="{{ route('tim.pemetaancplcpmkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-node-plus mr-3"></i>
+                        <span>CPL - CPMK - MK</span>
+                    </a>
+                </li>
+                <li data-title="Pemenuhan CPL - CPMK - MK">
+                    <a href="{{ route('tim.pemetaancplcpmkmk.pemenuhancplcpmkmk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-pie-chart mr-3"></i>
+                        <span>Pemenuhan CPL-CPMK-MK</span>
+                    </a>
+                </li>
+                <li data-title="Pemetaan CPL - MK - CPMK">
+                    <a href="{{ route('tim.pemetaancplcpmkmk.pemetaanmkcplcpmk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-graph-up mr-3"></i>
+                        <span>CPL - MK - CPMK</span>
+                    </a>
+                </li>
+                <li data-title="Pemetaan MK - CPMK - SubCPMK">
+                    <a href="{{ route('tim.pemetaanmkcpmksubcpmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-diagram-2 mr-3"></i>
+                        <span>MK - CPMK - SubCPMK</span>
+                    </a>
+                </li>
+                <li data-title="Bobot">
+                    <a href="{{ route('tim.bobot.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-speedometer2 mr-3"></i>
+                        <span>Bobot</span>
+                    </a>
+                </li>
+                <li data-title="Catatan">
+                    <a href="{{ route('tim.notes.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-sticky mr-3"></i>
+                        <span>Catatan</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="border-t border-gray-700 my-2"></li>
+
+        <!-- Logout -->
+        <li>
+            <form action="{{ route('logout') }}" method="POST" onsubmit="clearSidebarState()">
+                @csrf
+                <button type="submit" class="w-full flex items-center p-3 hover:bg-gray-700 rounded">
+                    <i class="fas fa-sign-out-alt mr-3"></i>
+                    <span>Logout</span>
+                </button>
+            </form>
+            <script>
+                 function clearSidebarState() {
+                        localStorage.removeItem('activeSidebarItem');
+                        localStorage.removeItem('sidebarScroll'); // Tambahan untuk reset posisi scroll
+                    }
+            </script>
+        </li>
+    </ul>
+</aside>
+
+<!-- Simpan Warna Klik -->
+<style>
+    .sidebar-active {
+        background-color: #374151; /* bg-gray-700 */
+        font-weight: bold;
+    }
+</style> 
+
+<!-- Simpan Posisis Sidebar -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const sidebar = document.getElementById('sidebar');
+
+        // Set scroll dari localStorage
+        const savedScrollTop = localStorage.getItem('sidebarScroll');
+        if (savedScrollTop) {
+            sidebar.scrollTop = parseInt(savedScrollTop);
+        }
+
+        // Simpan scroll saat digulir
+        sidebar.addEventListener('scroll', function () {
+            localStorage.setItem('sidebarScroll', sidebar.scrollTop);
+        });
+    });
+</script>
+
+<style>
+    /* Tambahkan transition untuk smooth scrolling */
+    #sidebar {
+        scroll-behavior: smooth;
+    }
+    .sidebar-active {
+        background-color: #374151;
+        font-weight: bold;
+        position: relative;
+    }
+    
+    /* Optional: tambahkan indicator untuk active item */
+    .sidebar-active::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background-color: #3B82F6;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuItems = document.querySelectorAll('#sidebar ul li[data-title] a');
+
+        // Ambil item aktif dari localStorage, jika tidak ada, default ke "Dashboard"
+        let activeTitle = localStorage.getItem('activeSidebarItem');
+        if (!activeTitle) {
+            activeTitle = "Dashboard";
+            localStorage.setItem('activeSidebarItem', activeTitle);
+        }
+
+         // Highlight item yang sesuai
+         menuItems.forEach(item => {
+            if (item.parentElement.getAttribute('data-title') === activeTitle) {
+                item.classList.add('sidebar-active');
+            } else {
+                item.classList.remove('sidebar-active');
+            }
+        });
+
+        // Event saat diklik
+        menuItems.forEach(item => {
+            item.addEventListener('click', function () {
+                const title = item.parentElement.getAttribute('data-title');
+                localStorage.setItem('activeSidebarItem', title);
+            });
+        });
+    });
+</script>
+
+<!-- Search Java -->
+<script>
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+        const keyword = this.value.toLowerCase();
+        const items = document.querySelectorAll('#sidebar ul li[data-title]');
+
+        items.forEach(item => {
+            const title = item.getAttribute('data-title').toLowerCase();
+            if (title.includes(keyword)) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+</script>
 
     <!-- Konetn utama -->
     <div class="flex-1 md:ml-64 p-6 pt-28">
