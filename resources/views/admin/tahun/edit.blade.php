@@ -1,13 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="mr-20 ml-20">
-
-        <h2 class="text-4xl font-extrabold mb-4 text-center">Edit Tahun Ajaran</h2>
-        <hr class="w-full border border-black mb-4">
-
+<div class="mr-20 ml-20">
+    <h2 class="text-4xl font-extrabold mb-4 text-center">Edit Tahun Ajaran</h2>
+    <hr class="w-full border border-black mb-4">
+    <div class="bg-white p-6 rounded-lg shadow-md">
         @if ($errors->any())
-            <div style="color: red;">
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -16,29 +15,45 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.tahun.update', $tahun->id_tahun) }}" method="POST">
+        <form action="{{ route('admin.tahun.update', $tahun->id_tahun) }}" method="POST" class="space-y-6">
             @csrf
             @method('PUT')
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Kolom Kiri -->
+                <div class="space-y-4">
+                    <div>
+                        <label for="tahun" class="block text-xl font-semibold mb-2">Tahun Ajaran</label>
+                        <input type="number" id="tahun" name="tahun" 
+                               class="border border-black p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               placeholder="Contoh: 2024/2025" 
+                               value="{{ old('tahun', $tahun->tahun) }}" required>
+                    </div>
+                </div>
+                
+                <!-- Kolom Kanan -->
+                <div class="space-y-4">
+                    <div>
+                        <label for="nama_kurikulum" class="block text-xl font-semibold mb-2">Nama Kurikulum</label>
+                        <input type="text" id="nama_kurikulum" name="nama_kurikulum"
+                               class="border border-black p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                               placeholder="Contoh: Kurikulum OBE 2023"
+                               value="{{ old('nama_kurikulum', $tahun->nama_kurikulum) }}" required>
+                    </div>
+                </div>
+            </div>
 
-            <label for="tahun" class="text-xl font-semibold mb-2">Tahun Ajaran</label>
-            <input type="number" id="tahun" name="tahun" class="border border-black p-3 w-full rounded-lg mt-1 mb-3"
-                placeholder="Contoh: 2024/2025" value="{{ old('tahun', $tahun->tahun) }}" required>
-
-            <label for="nama_kurikulum" class="text-xl font-semibold mb-2">Nama Kurikulum</label>
-            <input type="text" id="nama_kurikulum" name="nama_kurikulum"
-                class="border border-black p-3 w-full rounded-lg mt-1 mb-3" placeholder="Contoh: Kurikulum OBE 2023"
-                value="{{ old('nama_kurikulum', $tahun->nama_kurikulum) }}" required>
-
-            <div class="flex justify-end space-x-5 mt-[50px]">
-                <a href="{{ route('admin.tahun.index') }}"
-                    class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition duration-200">
+            <div class="flex justify-end space-x-5 pt-6 border-t border-gray-200">
+                <a href="{{ route('admin.tahun.index') }}" 
+                   class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition duration-200">
                     Kembali
                 </a>
-                <button type="submit"
-                    class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-200">
-                    Update
+                <button type="submit" 
+                        class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-200">
+                    Simpan Perubahan
                 </button>
             </div>
         </form>
     </div>
+</div>
 @endsection
