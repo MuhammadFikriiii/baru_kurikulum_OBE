@@ -80,7 +80,7 @@
                         <i class="fas fa-cog mr-2"></i> Settings
                     </a>
                     <div class="border-t my-1"></div>
-                    <a href="/" class="flex items-center px-4 py-2 hover:bg-gray-100 text-red-600">
+                    <a href="/" onclick="clearSidebarState()" class="flex items-center px-4 py-2 hover:bg-gray-100 text-red-600">
                         <i class="fas fa-sign-out-alt mr-2"></i> Log Out
                     </a>
                 </div>
@@ -338,50 +338,60 @@
 
             <!-- Logout -->
             <li>
-                <form action="{{ route('logout') }}" method="POST">
+                <form action="{{ route('logout') }}" method="POST" onsubmit="clearSidebarState()">
                     @csrf
                     <button type="submit" class="w-full flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="fas fa-sign-out-alt mr-3"></i>
                         <span>Logout</span>
                     </button>
                 </form>
+                <script>
+                    function clearSidebarState() {
+                        localStorage.removeItem('activeSidebarItem');
+                    }
+                </script>
             </li>
         </ul>
     </aside>
 
     <!-- Simpan Warna Klik -->
-    <style>
-        .sidebar-active {
-            background-color: #374151;
-            font-weight: bold;
+<style>
+    .sidebar-active {
+        background-color: #374151; /* bg-gray-700 */
+        font-weight: bold;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuItems = document.querySelectorAll('#sidebar ul li[data-title] a');
+
+        // Ambil item aktif dari localStorage, jika tidak ada, default ke "Dashboard"
+        let activeTitle = localStorage.getItem('activeSidebarItem');
+        if (!activeTitle) {
+            activeTitle = "Dashboard";
+            localStorage.setItem('activeSidebarItem', activeTitle);
         }
-    </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const menuItems = document.querySelectorAll('#sidebar ul li[data-title] a');
 
-            // Cek apakah ada item aktif di localStorage
-            const activeTitle = localStorage.getItem('activeSidebarItem');
-
-            if (activeTitle) {
-                menuItems.forEach(item => {
-                    if (item.parentElement.getAttribute('data-title') === activeTitle) {
-                        item.classList.add('sidebar-active');
-                    } else {
-                        item.classList.remove('sidebar-active');
-                    }
-                });
+        // Highlight item yang sesuai
+        menuItems.forEach(item => {
+            if (item.parentElement.getAttribute('data-title') === activeTitle) {
+                item.classList.add('sidebar-active');
+            } else {
+                item.classList.remove('sidebar-active');
             }
+        });
 
-            // Event saat diklik
-            menuItems.forEach(item => {
-                item.addEventListener('click', function () {
-                    const title = item.parentElement.getAttribute('data-title');
-                    localStorage.setItem('activeSidebarItem', title);
-                });
+        // Simpan item yang diklik
+        menuItems.forEach(item => {
+            item.addEventListener('click', function () {
+                const title = item.parentElement.getAttribute('data-title');
+                localStorage.setItem('activeSidebarItem', title);
             });
         });
-    </script>
+    });
+</script>
+
 
     <script>
         document.getElementById('searchInput').addEventListener('keyup', function () {

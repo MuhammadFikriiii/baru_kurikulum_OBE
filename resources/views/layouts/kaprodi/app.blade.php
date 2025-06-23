@@ -77,7 +77,7 @@
                     <i class="fas fa-cog mr-2"></i> Settings
                 </a>
                 <div class="border-t my-1"></div>
-                <form action="{{ route('logout') }}" method="POST">
+                <form action="{{ route('logout') }}" method="POST" onsubmit="clearSidebarState()">
                     @csrf
                     <button type="submit" class="w-full flex items-center px-4 py-2 hover:bg-gray-100 text-red-600 text-left">
                         <i class="fas fa-sign-out-alt mr-2"></i>
@@ -265,13 +265,18 @@
 
         <!-- Logout -->
         <li>
-            <form action="{{ route('logout') }}" method="POST">
+            <form action="{{ route('logout') }}" method="POST" onsubmit="clearSidebarState()">
                 @csrf
                 <button type="submit" class="w-full flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="fas fa-sign-out-alt mr-3"></i>
                     <span>Logout</span>
                 </button>
             </form>
+            <script>
+                function clearSidebarState() {
+                    localStorage.removeItem('activeSidebarItem');
+                }
+            </script>
         </li>
     </ul>
 </aside>
@@ -287,18 +292,24 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const menuItems = document.querySelectorAll('#sidebar ul li[data-title] a');
-        const activeTitle = localStorage.getItem('activeSidebarItem');
 
-        if (activeTitle) {
-            menuItems.forEach(item => {
-                if (item.parentElement.getAttribute('data-title') === activeTitle) {
-                    item.classList.add('sidebar-active');
-                } else {
-                    item.classList.remove('sidebar-active');
-                }
-            });
+        // Ambil item aktif dari localStorage, jika tidak ada, default ke "Dashboard"
+        let activeTitle = localStorage.getItem('activeSidebarItem');
+        if (!activeTitle) {
+            activeTitle = "Dashboard";
+            localStorage.setItem('activeSidebarItem', activeTitle);
         }
 
+         // Highlight item yang sesuai
+         menuItems.forEach(item => {
+            if (item.parentElement.getAttribute('data-title') === activeTitle) {
+                item.classList.add('sidebar-active');
+            } else {
+                item.classList.remove('sidebar-active');
+            }
+        });
+
+        // Event saat diklik
         menuItems.forEach(item => {
             item.addEventListener('click', function () {
                 const title = item.parentElement.getAttribute('data-title');
@@ -306,14 +317,6 @@
             });
         });
     });
-
-    function toggleDropdownProfil() {
-        document.getElementById('userDropdown').classList.toggle('hidden');
-    }
-
-    function toggleSidebar() {
-        document.getElementById('sidebar').classList.toggle('-translate-x-full');
-    }
 </script>
 
 
