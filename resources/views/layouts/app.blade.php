@@ -68,7 +68,6 @@
                     </svg>
                 </button>
                 <div id="userDropdown" class="absolute right-0 mt-2 bg-white text-black rounded-md shadow-lg py-2 hidden w-48 z-50">
-                    <!-- Dropdown items -->
                 </div>
             </div>
         </div>
@@ -89,7 +88,7 @@
 
         <!-- Navigation -->
         <ul class="space-y-2">
-            <!-- Dashboard -->
+          
             <li data-title="Dashboard">
                 <a href="{{ route('admin.dashboard') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                     <i class="bi bi-house-door mr-3"></i>
@@ -97,7 +96,7 @@
                 </a>
             </li>
 
-            <!-- Divider -->
+         
             <li class="border-t border-gray-700 my-2"></li>
 
             <!-- User Management -->
