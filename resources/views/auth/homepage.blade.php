@@ -26,6 +26,8 @@
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
+  
+
   <!-- Swiper homepage  -->
   <script>
     $(document).ready(function () {
@@ -60,7 +62,7 @@
     });
   </script>
 
-  <!-- Swiper -->
+  <!-- Swiper homepage 2 -->
   <script>
     const carousel = document.getElementById('carousel');
     const indicators = document.querySelectorAll('#indicators button');
@@ -102,13 +104,14 @@
 <body class="bg-gray-100 text-gray-800">
 
   <header class="bg-white shadow-md w-full fixed top-0 z-50" x-data="{ open: false }">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-20">
       <div class="flex items-center justify-between h-16">
-        <!-- Logo -->
-        <a href="index.html" class="flex items-start">
-          <img src="/image/Logo.png" alt="Logo" class="h-10">
-        </a>
-
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center space-x-2">
+        <img src="/image/Logo.png" alt="Logo" class="h-9 object-contain">
+        <span class="text-xl font-semibold text-gray-800 leading-none">Poliban OBE</span>
+      </a>
+    
         <!-- Desktop Menu -->
         <nav class="hidden md:flex space-x-6 items-center">
           <a href="#beranda" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300
@@ -196,9 +199,8 @@
   <section class="w-full h-screen md:h-[650px] bg-cover bg-center flex items-center justify-center text-white"
     style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/image/poliban.jpeg');"
     id="top">
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
       <div class="owl-carousel owl-banner">
-
         <!-- Slide 1 -->
         <div class="text-center md:text-left">
           <h6 class="text-xl md:text-2xl font-semibold text-white">KURIKULUM OBE</h6>
@@ -279,7 +281,6 @@
     </div>
   </section>
 
-
   <!-- Beranda -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
@@ -287,13 +288,13 @@
     mirror: true
   </script>
   <div id="beranda" class="homepage pb-10">
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
       <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-10 pt-12">
         <div data-aos="fade-right" data-aos-once="false" data-aos-duration="1000">
           <h1 class="text-4xl md:text-5xl font-semibold leading-tight mb-10">
             Profil Kurikulum OBE <span class="text-sky-500">Poliban</span>
           </h1>
-          <p class="text-base text-gray-700 leading-relaxed mb-6">
+          <p class="text-justify text-base text-gray-700 leading-relaxed mb-6">
             Politeknik Negeri Banjarmasin (POLIBAN) merupakan perguruan tinggi vokasi di Kalimantan Selatan
             yang berfokus pada pendidikan terapan. Kampus ini memiliki berbagai jurusan dan program studi unggulan yang
             mendukung perkembangan teknologi dan industri di Indonesia. POLIBAN berperan aktif dalam mendukung
@@ -314,227 +315,141 @@
     </div>
   </div>
 
-  <div id="prodi">
-    <!-- Daftar Kurikulum dan Program Studi -->
-    <div class="container mx-auto px-4 py-12">
-      <h1 class="text-3xl text-center font-bold text-indigo-800 mb-2">Program Studi</h1>
-      <p class="text-lg text-center text-gray-600 mb-8">Temukan program studi yang sesuai dengan minat Anda</p>
 
-      <!-- Navigation Tabs - Diubah menjadi dinamis -->
-      <div class="flex flex-wrap justify-center mb-8 gap-2" id="program-tabs-container">
-        @foreach ($prodis as $index => $prodi)
-      <button onclick="showSlide({{ $index }})"
-        class="program-tab px-6 py-3 rounded-lg font-medium shadow-md transition hover:bg-gray-200 {{ $index === 0 ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-gray-100' }}">
-        {{ $prodi->jurusan->nama_jurusan }}
+<!-- Program Studi Section -->
+<section class="py-12 bg-gray-50" id="prodi">
+  <div class="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
+    <h1 class="text-3xl text-center font-bold text-indigo-800 mb-2">Program Studi</h1>
+    <p class="text-lg text-center text-gray-600 mb-8">Temukan program studi yang sesuai dengan minat Anda</p>
+
+    <!-- Navigation Tabs -->
+    <div class="flex flex-wrap justify-center mb-8 gap-2" id="program-tabs-container">
+      <button class="program-tab px-6 py-3 rounded-lg font-medium shadow-md transition bg-blue-600 text-white hover:bg-blue-700"
+              data-jurusan="semua">
+        Semua Program
       </button>
-    @endforeach
-      </div>
-
-      <style>
-        .program-slider {
-          scroll-behavior: smooth;
-          transition: transform 0.5s ease-in-out;
-        }
-
-        .program-card {
-          transition: all 0.3s ease;
-          cursor: pointer;
-        }
-
-        .program-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-
-        .program-tab.active {
-          background-color: #2563eb;
-          color: white;
-        }
-
-        .indicator-dot.active {
-          background-color: #2563eb;
-        }
-
-        /* Hide scrollbar tapi tetap bisa di-scroll */
-        .hide-scrollbar {
-          scrollbar-width: none;
-          /* Firefox */
-          -ms-overflow-style: none;
-          /* IE and Edge */
-        }
-
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-          /* Chrome, Safari, Opera */
-        }
-
-        /* Tambahan untuk responsivitas */
-        @media (max-width: 640px) {
-          .program-tab {
-            padding: 0.5rem 0.75rem;
-            font-size: 0.875rem;
-          }
-        }
-      </style>
-
-      <!-- Slider Content -->
-      <div class="relative">
-        <!-- Slides -->
-        <div class="overflow-x-auto hide-scrollbar">
-          <div id="program-slider" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            @foreach ($prodis as $prodi)
-        <!-- Card -->
-        <div
-          class="program-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer border border-gray-100"
-          onclick="window.location.href='#'">
-
-          <!-- Header -->
-          <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-6 text-white">
-          <div class="flex items-center justify-between mb-3">
-            <div class="bg-white bg-opacity-20 p-3 rounded-xl">
-            <i class="fas fa-graduation-cap text-2xl"></i>
-            </div>
-            <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-medium">
-            {{ $prodi->jenjang_pendidikan }}
-            </span>
-          </div>
-          <h3 class="text-xl font-bold mb-2">{{ $prodi->nama_prodi }}</h3>
-          <p class="text-blue-100 text-sm">{{ $prodi->gelar_lulusan }}</p>
-          </div>
-
-          <!-- Content -->
-          <div class="p-6">
-          <div class="flex items-center mb-4">
-            <div
-            class="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
-            <i class="fas fa-award mr-2"></i>
-            Akreditasi {{ $prodi->peringkat_akreditasi }}
-            </div>
-          </div>
-
-          <div class="space-y-3 mb-6">
-            <div class="flex items-center text-gray-600">
-            <div class="bg-blue-100 p-2 rounded-lg mr-3">
-              <i class="fas fa-calendar-alt text-blue-600"></i>
-            </div>
-            <div>
-              <span class="text-sm text-gray-500">Berdiri</span>
-              <p class="font-medium">{{ date('d M Y', strtotime($prodi->tgl_berdiri_prodi)) }}</p>
-            </div>
-            </div>
-
-            <div class="flex items-center text-gray-600">
-            <div class="bg-green-100 p-2 rounded-lg mr-3">
-              <i class="fas fa-phone text-green-600"></i>
-            </div>
-            <div>
-              <span class="text-sm text-gray-500">Kontak</span>
-              <p class="font-medium">{{ $prodi->telepon_prodi }}</p>
-            </div>
-            </div>
-          </div>
-
-          <!-- Footer -->
-          <div class="flex justify-between items-center pt-4 border-t border-gray-100">
-            <button
-            class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105"
-            onclick="event.stopPropagation(); window.open('{{ $prodi->website_prodi }}', '_blank')">
-            <i class="fas fa-external-link-alt mr-2"></i>
-            Lihat Detail
-            </button>
-          </div>
-          </div>
-        </div>
+      @foreach ($prodis->pluck('jurusan.nama_jurusan')->unique() as $namaJurusan)
+        <button class="program-tab px-6 py-3 rounded-lg font-medium shadow-md transition hover:bg-gray-200 bg-gray-100"
+                data-jurusan="{{ $namaJurusan }}">
+          {{ $namaJurusan }}
+        </button>
       @endforeach
+    </div>
+
+    <!-- Swiper Card Slider -->
+    <div class="swiper mySwiper pb-20" id="prodi-container">
+      <div class="swiper-wrapper">
+        @foreach ($prodis as $prodi)
+        <div class="swiper-slide">
+          <div class="program-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer border border-gray-100"
+               data-jurusan="{{ $prodi->jurusan->nama_jurusan }}">
+
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-6 text-white">
+              <div class="flex items-center justify-between mb-3">
+                <div class="bg-white bg-opacity-20 p-3 rounded-xl">
+                  <i class="fas fa-graduation-cap text-2xl"></i>
+                </div>
+                <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-medium">
+                  {{ $prodi->jenjang_pendidikan }}
+                </span>
+              </div>
+              <h3 class="text-xl font-bold mb-2">{{ $prodi->nama_prodi }}</h3>
+              <p class="text-blue-100 text-sm">{{ $prodi->gelar_lulusan }}</p>
+            </div>
+
+            <!-- Content -->
+            <div class="p-6">
+              <div class="flex items-center mb-4">
+                <div class="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                  <i class="fas fa-award mr-2"></i>
+                  Akreditasi {{ $prodi->peringkat_akreditasi }}
+                </div>
+              </div>
+
+              <div class="space-y-3 mb-6">
+                <div class="flex items-center text-gray-600">
+                  <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                    <i class="fas fa-calendar-alt text-blue-600"></i>
+                  </div>
+                  <div>
+                    <span class="text-sm text-gray-500">Berdiri</span>
+                    <p class="font-medium">{{ date('d M Y', strtotime($prodi->tgl_berdiri_prodi)) }}</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center text-gray-600">
+                  <div class="bg-green-100 p-2 rounded-lg mr-3">
+                    <i class="fas fa-phone text-green-600"></i>
+                  </div>
+                  <div>
+                    <span class="text-sm text-gray-500">Kontak</span>
+                    <p class="font-medium">{{ $prodi->telepon_prodi ?? '-' }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Footer -->
+              <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+                <a class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105"
+                   href="{{ $prodi->website_prodi ?? '#' }}" target="_blank">
+                  <i class="fas fa-external-link-alt mr-2"></i>
+                  Lihat Detail
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-
+        @endforeach
       </div>
-
-      <!-- Slide Indicators - Diubah menjadi dinamis -->
-      <div class="flex justify-center mt-8 gap-2" id="indicator-dots-container">
-        @foreach ($prodis as $index => $prodi)
-      <button onclick="showSlide({{ $index }})"
-        class="w-3 h-3 rounded-full indicator-dot {{ $index === 0 ? 'bg-blue-600 active' : 'bg-gray-300' }}"></button>
-    @endforeach
-      </div>
+      <div class="swiper-pagination mt-14 flex justify-center"></div>
     </div>
   </div>
+</section>
 
-  <script>
-    let currentSlide = 0;
-    const totalSlides = {{ count($prodis) }};
-    let autoSlideInterval;
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    function updateSlider() {
-      const slider = document.getElementById('program-slider');
-      const cardWidth = document.querySelector('.program-card').offsetWidth + 24; // width + gap
-      slider.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const swiper = new Swiper(".mySwiper", {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        640: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+        1280: { slidesPerView: 4 },
+      }
+    });
 
-      // Update tab buttons
-      document.querySelectorAll('.program-tab').forEach((tab, index) => {
-        if (index === currentSlide) {
-          tab.classList.remove('bg-gray-100', 'hover:bg-gray-200');
-          tab.classList.add('bg-blue-600', 'text-white', 'hover:bg-blue-700');
-        } else {
-          tab.classList.remove('bg-blue-600', 'text-white', 'hover:bg-blue-700');
-          tab.classList.add('bg-gray-100', 'hover:bg-gray-200');
-        }
-      });
+    const tabs = document.querySelectorAll('.program-tab');
+    const slides = document.querySelectorAll('.swiper-slide');
 
-      // Update indicator dots
-      document.querySelectorAll('.indicator-dot').forEach((dot, index) => {
-        if (index === currentSlide) {
-          dot.classList.add('bg-blue-600', 'active');
-          dot.classList.remove('bg-gray-300');
-        } else {
-          dot.classList.remove('bg-blue-600', 'active');
-          dot.classList.add('bg-gray-300');
-        }
-      });
-    }
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const jurusan = tab.dataset.jurusan;
 
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % totalSlides;
-      updateSlider();
-      resetAutoSlide();
-    }
+        slides.forEach(slide => {
+          const cardJurusan = slide.querySelector('.program-card').dataset.jurusan;
+          slide.style.display = (jurusan === 'semua' || jurusan === cardJurusan) ? 'block' : 'none';
+        });
 
-    function prevSlide() {
-      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-      updateSlider();
-      resetAutoSlide();
-    }
+        swiper.update();
 
-    function showSlide(index) {
-      currentSlide = index;
-      updateSlider();
-      resetAutoSlide();
-    }
-
-    function startAutoSlide() {
-      autoSlideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
-    }
-
-    function resetAutoSlide() {
-      clearInterval(autoSlideInterval);
-      startAutoSlide();
-    }
-
-    // Initialize
-    document.addEventListener('DOMContentLoaded', () => {
-      updateSlider();
-      startAutoSlide();
-
-      // Handle window resize
-      window.addEventListener('resize', () => {
-        updateSlider();
+        tabs.forEach(t => t.classList.remove('bg-blue-600', 'text-white'));
+        tab.classList.add('bg-blue-600', 'text-white');
       });
     });
-  </script>
+  });
+</script>
+
 
   <!-- Team -->
-  <div class="p-6 max-w-7xl mx-auto">
+  <div class="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
     <!-- Header: Judul dan Indikator -->
     <div class="flex flex-col sm:flex-row justify-between items-center mb-4 px-4">
       <h2 class="text-2xl font-bold text-indigo-800 mb-4 sm:mb-0">Team Kurikulum</h2>
