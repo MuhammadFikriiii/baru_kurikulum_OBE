@@ -316,7 +316,11 @@
   </div>
 
 
-<!-- Program Studi Section -->
+
+
+<!-- Swiper & Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
 <section class="py-12 bg-gray-50" id="prodi">
   <div class="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
     <h1 class="text-3xl text-center font-bold text-indigo-800 mb-2">Program Studi</h1>
@@ -337,8 +341,8 @@
     </div>
 
     <!-- Swiper Card Slider -->
-    <div class="swiper mySwiper pb-20" id="prodi-container">
-      <div class="swiper-wrapper">
+    <div class="relative swiper mySwiper pb-20" id="prodi-container">
+      <div class="swiper-wrapper ">
         @foreach ($prodis as $prodi)
         <div class="swiper-slide">
           <div class="program-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer border border-gray-100"
@@ -402,14 +406,21 @@
         </div>
         @endforeach
       </div>
-      <div class="swiper-pagination mt-14 flex justify-center"></div>
+
+      <!-- Tombol Geser Kanan-Kiri -->
+      <div class="swiper-button-prev !text-indigo-600"></div>
+      <div class="swiper-button-next !text-indigo-600"></div>
+
+      <!-- Pagination Bulat -->
+      <div class="swiper-pagination pt-8 mt-14 flex justify-center"></div>
     </div>
   </div>
 </section>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+<!-- Script Slider + Filter -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const swiper = new Swiper(".mySwiper", {
@@ -418,6 +429,10 @@
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
       },
       breakpoints: {
         640: { slidesPerView: 2 },
@@ -446,6 +461,34 @@
     });
   });
 </script>
+
+<!-- Style Geser -->
+<style>
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    font-size: 20px !important; /* atau 12px untuk lebih kecil lagi */
+    color: #4f46e5 !important;  /* pastikan warnanya indigo */
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 9999px;
+    top: 45%;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  .swiper-button-prev:hover,
+  .swiper-button-next:hover {
+    background: #4f46e5;
+  }
+</style>
+
+
+
+
 
 
   <!-- Team -->
