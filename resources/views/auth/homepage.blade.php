@@ -338,6 +338,25 @@
           </button>
         @endforeach
       </div>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const buttons = document.querySelectorAll(".program-tab");
+      
+          buttons.forEach(button => {
+            button.addEventListener("click", function () {
+              // Hapus class aktif dari semua tombol
+              buttons.forEach(btn => {
+                btn.classList.remove("bg-blue-600", "text-white");
+                btn.classList.add("bg-gray-100");
+              });
+      
+              // Tambahkan class aktif ke tombol yang diklik
+              this.classList.remove("bg-gray-100");
+              this.classList.add("bg-blue-600", "text-white");
+            });
+          });
+        });
+      </script>
 
 
       <!-- Swiper Card Slider -->

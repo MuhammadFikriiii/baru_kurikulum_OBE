@@ -1,8 +1,11 @@
 @extends('layouts.app')
 @section('content')
-    <div class="mx-5 md:mx-20 my-10">
-        <h2 class="text-4xl font-extrabold text-center mb-4">Pemetaan MK - CPL - CPMK</h2>
-        <hr class="border border-black mb-4">
+<div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
+    <div class="">
+        <div class="text-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-800">Pemetaan MK - CPL - CPMK</h1>
+            <hr class="border-t-4 border-black my-4 mx-auto mb-4">
+        </div>
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
             <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                 <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
@@ -110,7 +113,8 @@
                 </tbody>
             </table>
         </div>
-    </div>
+</div>
+</div>
     <script>
         function updateFilter() {
             const prodiSelect = document.getElementById('prodi');
