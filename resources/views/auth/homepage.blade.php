@@ -26,7 +26,8 @@
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-  
+  <!-- Swiper & Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <!-- Swiper homepage  -->
   <script>
@@ -129,7 +130,7 @@
             before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
             Program Studi
           </a>
-          <a href="#about" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300
+          <a href="#team" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300
             before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px]
             before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
             Team
@@ -176,7 +177,7 @@
             class="flex items-center justify-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
             <span>Program Studi</span>
           </a>
-          <a href="#about"
+          <a href="#team"
             class="flex items-center justify-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
             <span>Team</span>
           </a>
@@ -318,9 +319,7 @@
 
 <!-- Program STudi-->
 <div id="prodi" class="scroll-mt-24 mb-20">
-  <!-- Swiper & Font Awesome CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
+  
   <section class="py-12 bg-gray-50" >
     <div class="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
       <h1 class="text-3xl text-center font-bold text-indigo-800 mb-2">Program Studi</h1>
@@ -488,134 +487,105 @@
   </style>
 </div>
 
-  <!-- Team -->
+<!-- Team Kurikulum -->
+<section id="team" class="">
   <div class="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
-    <!-- Header: Judul dan Indikator -->
-    <div class="flex flex-col sm:flex-row justify-between items-center mb-4 px-4">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
       <h2 class="text-2xl font-bold text-indigo-800 mb-4 sm:mb-0">Team Kurikulum</h2>
-      <!-- Indicators -->
-      <div class="flex items-center space-x-2" id="indicators">
-        @for ($i = 0; $i < ceil(count($tim_users) / 4); $i++)
-      <button
-        class="h-2 rounded-full bg-gray-300 focus:outline-none transition-all duration-300 {{ $i === 0 ? 'w-6 bg-indigo-600' : 'w-2' }}"
-        onclick="goToSlide({{ $i }})"></button>
-    @endfor
+    </div>
+    
+
+    <!-- Swiper Wrapper -->
+    <div class="swiper teamSwiper relative pb-10">
+      <div class="swiper-wrapper">
+        @foreach ($tim_users as $user)
+          <div class="swiper-slide">
+            <div class="bg-white rounded-xl overflow-hidden shadow-md w-full px-2 transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg">
+              <div class="w-full h-1 bg-gradient-to-r from-purple-400 to-pink-500"></div>
+              <div class="p-4">
+                <span class="text-xs bg-green-600 text-white px-3 py-1 rounded-full shadow-sm">TEAM KURIKULUM</span>
+                <h3 class="font-bold text-lg text-gray-800 mt-2">{{ $user->name }}</h3>
+                <p class="text-sm text-gray-600">Program Studi: {{ $user->prodi?->nama_prodi ?? '-' }}</p>
+                <div class="mt-4 pt-4 border-t border-gray-100">
+                  <div class="flex flex-wrap gap-2">
+                    <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">#MerdekaBelajar</span>
+                    <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">#KampusMerdeka</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        @endforeach
       </div>
+
+      <!-- Arrow Buttons -->
+      <div class="swiper-button-prev !text-indigo-600"></div>
+      <div class="swiper-button-next !text-indigo-600"></div>
+
+      <!-- Pagination -->
+      <div class="swiper-pagination pt-4 flex justify-center"></div>
     </div>
 
-    <!-- Carousel wrapper -->
-    <div class="relative overflow-hidden">
-      <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
-        <div class="flex gap-4 sm:gap-7 overflow-x-auto hide-scrollbar px-4 py-4 w-full">
-          @foreach ($tim_users as $user)
-        <div
-        class="bg-white rounded-xl overflow-hidden shadow-lg flex-shrink-0 w-[calc(100%-2rem)] sm:w-[calc(50%-1.75rem)] md:w-[calc(33.333%-1.75rem)] lg:w-[calc(25%-1.75rem)] transform hover:scale-[1.03] hover:shadow-xl transition-all duration-300">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-pink-500"></div>
-        <div class="p-4">
-          <span class="text-xs bg-green-600 text-white px-3 py-1 rounded-full shadow-sm">TEAM KURIKULUM</span>
-          <h3 class="font-bold text-lg text-gray-800 mt-2">{{ $user->name }}</h3>
-          <p class="text-sm text-gray-600">Program Studi: {{ $user->prodi?->nama_prodi ?? '-' }}</p>
-          <div class="mt-4 pt-4 border-t border-gray-100">
-          <div class="flex flex-wrap gap-2">
-            <span
-            class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">#MerdekaBelajar</span>
-            <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">#KampusMerdeka</span>
-          </div>
-          </div>
-        </div>
-        </div>
-      @endforeach
-        </div>
-      </div>
-    </div>
   </div>
+</section>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const carousel = document.getElementById('carousel');
-      const cards = document.querySelectorAll('#carousel > div > div');
-      const indicators = document.querySelectorAll('#indicators button');
 
-      let currentIndex = 0;
-      const cardCount = cards.length;
-      const maxVisibleCards = () => window.innerWidth < 640 ? 1 : window.innerWidth < 768 ? 2 : window.innerWidth < 1024 ? 3 : 4;
-      let isAnimating = false;
+<style>
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    font-size: 20px !important;
+    color: #4f46e5 !important;
+  }
 
-      function updateCarousel() {
-        if (isAnimating) return;
-        isAnimating = true;
+  .swiper-button-prev,
+  .swiper-button-next {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 9999px;
+    top: 45%;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  }
 
-        const visibleCards = maxVisibleCards();
-        const cardWidth = cards[0].offsetWidth + (window.innerWidth < 640 ? 16 : 28);
-        const containerWidth = visibleCards * cardWidth;
+  .swiper-button-prev:hover,
+  .swiper-button-next:hover {
+    background: #4f46e5;
+  }
+</style>
 
-        carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
 
-        setTimeout(() => {
-          isAnimating = false;
-        }, 500);
-
-        updateIndicators();
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    new Swiper(".teamSwiper", {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        640: { slidesPerView: 1 },
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+        1280: { slidesPerView: 4 },
       }
-
-      function updateIndicators() {
-        const visibleCards = maxVisibleCards();
-        const activeIndicator = Math.floor(currentIndex / visibleCards);
-
-        indicators.forEach((indicator, index) => {
-          if (index === activeIndicator) {
-            indicator.classList.remove('w-2', 'bg-gray-300');
-            indicator.classList.add('w-6', 'bg-indigo-600');
-          } else {
-            indicator.classList.remove('w-6', 'bg-indigo-600');
-            indicator.classList.add('w-2', 'bg-gray-300');
-          }
-        });
-      }
-
-      function goToSlide(slideIndex) {
-        const visibleCards = maxVisibleCards();
-        currentIndex = slideIndex * visibleCards;
-        if (currentIndex > cardCount - visibleCards) {
-          currentIndex = cardCount - visibleCards;
-        }
-        updateCarousel();
-      }
-
-      function nextCard() {
-        const visibleCards = maxVisibleCards();
-        if (currentIndex < cardCount - visibleCards) {
-          currentIndex++;
-        } else {
-          currentIndex = 0;
-        }
-        updateCarousel();
-      }
-
-      function prevCard() {
-        const visibleCards = maxVisibleCards();
-        if (currentIndex > 0) {
-          currentIndex--;
-        } else {
-          currentIndex = cardCount - visibleCards;
-        }
-        updateCarousel();
-      }
-
-      // Initialize
-      updateCarousel();
-
-      // Responsive adjustments
-      function handleResize() {
-        updateCarousel();
-      }
-
-      window.addEventListener('resize', handleResize);
     });
-  </script>
+  });
+</script>
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-12 mt-20">
+
+
+
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-12 mt-20">
     <div class="container mx-auto px-6">
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
         <!-- About Section -->
@@ -831,9 +801,7 @@
         <p>Copyright &copy; 2025 Fikri & Habibie., All Rights Reserved.</p>
       </div>
     </div>
-  </footer>
-
-
+</footer>
 
 </body>
 
