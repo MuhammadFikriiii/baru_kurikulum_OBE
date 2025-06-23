@@ -345,6 +345,7 @@
     });
 </script>
 
+<!-- Search Java -->
 <script>
         document.getElementById('searchInput').addEventListener('keyup', function() {
             const keyword = this.value.toLowerCase();
