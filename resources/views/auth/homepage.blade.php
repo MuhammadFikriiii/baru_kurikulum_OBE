@@ -328,17 +328,18 @@
 
     <!-- Navigation Tabs -->
     <div class="flex flex-wrap justify-center mb-8 gap-2" id="program-tabs-container">
-      <button class="program-tab px-6 py-3 rounded-lg font-medium shadow-md transition bg-blue-600 text-white hover:bg-blue-700"
+      <button class="program-tab px-6 py-3 rounded-lg font-medium shadow-md transition duration-75 ease-in-out bg-blue-600 text-white hover:bg-blue-200"
               data-jurusan="semua">
         Semua Program
       </button>
       @foreach ($prodis->pluck('jurusan.nama_jurusan')->unique() as $namaJurusan)
-        <button class="program-tab px-6 py-3 rounded-lg font-medium shadow-md transition hover:bg-gray-200 bg-gray-100"
+        <button class="program-tab px-6 py-3 rounded-lg font-medium shadow-md transition duration-75 ease-in-out bg-gray-100 hover:bg-blue-200"
                 data-jurusan="{{ $namaJurusan }}">
           {{ $namaJurusan }}
         </button>
       @endforeach
     </div>
+
 
     <!-- Swiper Card Slider -->
     <div class="relative swiper mySwiper pb-20" id="prodi-container">
