@@ -59,7 +59,7 @@
     
     <!-- User Menu -->
     <div class="flex items-center space-x-4 mr-6">
-        <span class="hidden md:inline-block font-medium">
+        <span class="hidden md:inline-block font-medium text-lg">
             {{ auth()->user()->name }}
         </span>
         <div class="relative">

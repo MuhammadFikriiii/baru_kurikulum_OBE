@@ -58,10 +58,8 @@
     </div>
     
     <!-- User Menu -->
-    <div class="flex items-center space-x-6 mr-6">
-        <!-- User Dropdown -->
-        <div class="flex items-center space-x-2">
-            <span class="hidden md:inline-block font-medium">
+    <div class="flex items-center space-x-4 mr-6">
+            <span class="hidden md:inline-block font-medium text-lg">
                 {{ auth()->user()->name }}
             </span>
             <div class="relative">
@@ -87,7 +85,7 @@
                         </button>
                     </form>
                 </div>
-            </div>
+         
         </div>
     </div>
 </nav>
