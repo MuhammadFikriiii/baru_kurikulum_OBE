@@ -73,7 +73,7 @@
                 </div>
             @endif
             
-            <div class="bg-white rounded-lg shadow overflow-hidden mt-3">
+            <div class="bg-white rounded-lg shadow  mt-3">
             @if (!request()->has('kode_prodi') || empty($kode_prodi))
                 <div class="p-8 text-center text-gray-600">
                     Silakan pilih prodi terlebih dahulu untuk melihat data pemetaan.
