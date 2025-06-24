@@ -55,7 +55,7 @@
                             {{ $selected_tahun ? $selected_tahun->nama_kurikulum . ' - ' . $selected_tahun->tahun : $id_tahun }}
                         </span>
                     @endif
-                    <a href="{{ route('tim.capaianpembelajaranlulusan.index') }}"
+                    <a href="{{ route('tim.pemetaancplpl.index') }}"
                         class="text-xs text-blue-600 hover:text-blue-800 underline">
                         Reset filter
                     </a>
@@ -118,7 +118,7 @@
             const tahunSelect = document.getElementById('tahun');
             const idTahun = tahunSelect.value;
 
-            let url = "{{ route('tim.capaianpembelajaranlulusan.index') }}";
+            let url = "{{ route('tim.pemetaancplpl.index') }}";
 
             if (idTahun) {
                 url += '?id_tahun=' + encodeURIComponent(idTahun);
