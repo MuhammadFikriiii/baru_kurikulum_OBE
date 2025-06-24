@@ -4,21 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Prodi;
-use Illuminate\Support\Facades\DB;
 use App\Models\Tahun;
+use Illuminate\Support\Facades\DB;
 
 class AdminDashboardController extends Controller
 {
     public function dashboard(Request $request)
     {
-        $id_tahun = $request->get('id_tahun');
+        $id_tahun = $request->get('id_tahun'); // untuk export Excel
+        $tahun_progress = $request->get('tahun_progress'); // untuk progress bar
 
         $availableYears = Tahun::orderBy('tahun', 'desc')->get();
-
-        // Ambil semua prodi
-        $prodis = Prodi::with(['profillulusans' => function ($query) use ($id_tahun) {
-            if ($id_tahun) {
-                $query->where('id_tahun', $id_tahun);
+        $prodis = Prodi::with(['profillulusans' => function ($query) use ($tahun_progress) {
+            if ($tahun_progress) {
+                $query->where('id_tahun', $tahun_progress);
             }
         }])->get();
 
@@ -35,7 +34,7 @@ class AdminDashboardController extends Controller
             $prodi->cpl_count = DB::table('cpl_pl')
                 ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
                 ->whereIn('pl.id_pl', $plIds)
-                ->when($id_tahun, fn($q) => $q->where('pl.id_tahun', $id_tahun))
+                ->when($tahun_progress, fn($q) => $q->where('pl.id_tahun', $tahun_progress))
                 ->distinct()
                 ->count('id_cpl');
 
@@ -44,19 +43,19 @@ class AdminDashboardController extends Controller
                 ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
                 ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
                 ->whereIn('pl.id_pl', $plIds)
-                ->when($id_tahun, fn($q) => $q->where('pl.id_tahun', $id_tahun))
+                ->when($tahun_progress, fn($q) => $q->where('pl.id_tahun', $tahun_progress))
                 ->distinct()
                 ->count('cpl_bk.id_bk');
 
             $prodi->sks_mk = DB::table('mata_kuliahs')
-                ->whereIn('kode_mk', function ($query) use ($plIds, $id_tahun) {
+                ->whereIn('kode_mk', function ($query) use ($plIds, $tahun_progress) {
                     $query->select('cpl_mk.kode_mk')
                         ->from('cpl_mk')
                         ->join('capaian_profil_lulusans as cpl', 'cpl_mk.id_cpl', '=', 'cpl.id_cpl')
                         ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
                         ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
                         ->whereIn('pl.id_pl', $plIds)
-                        ->when($id_tahun, fn($q) => $q->where('pl.id_tahun', $id_tahun))
+                        ->when($tahun_progress, fn($q) => $q->where('pl.id_tahun', $tahun_progress))
                         ->distinct();
                 })
                 ->sum('sks_mk');
@@ -66,7 +65,7 @@ class AdminDashboardController extends Controller
                 ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
                 ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
                 ->whereIn('pl.id_pl', $plIds)
-                ->when($id_tahun, fn($q) => $q->where('pl.id_tahun', $id_tahun))
+                ->when($tahun_progress, fn($q) => $q->where('pl.id_tahun', $tahun_progress))
                 ->distinct()
                 ->count('cpl_cpmk.id_cpmk');
 
@@ -76,7 +75,7 @@ class AdminDashboardController extends Controller
                 ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
                 ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
                 ->whereIn('pl.id_pl', $plIds)
-                ->when($id_tahun, fn($q) => $q->where('pl.id_tahun', $id_tahun))
+                ->when($tahun_progress, fn($q) => $q->where('pl.id_tahun', $tahun_progress))
                 ->distinct()
                 ->count('sub_cpmks.id_sub_cpmk');
 
@@ -96,21 +95,22 @@ class AdminDashboardController extends Controller
             $progress_cpmk = $prodi->cpmk_count > 0 ? min(100, round(($prodi->cpmk_count / $target_cpmk) * 100)) : 0;
             $progress_subcpmk = $prodi->subcpmk_count > 0 ? min(100, round(($prodi->subcpmk_count / $target_subcpmk) * 100)) : 0;
 
+            $avg = round(($progress_pl + $progress_cpl + $progress_bk + $progress_sks_mk + $progress_cpmk + $progress_subcpmk) / 6);
+
             $prodi->progress_pl = $progress_pl;
             $prodi->progress_cpl = $progress_cpl;
             $prodi->progress_bk = $progress_bk;
             $prodi->progress_sks_mk = $progress_sks_mk;
             $prodi->progress_cpmk = $progress_cpmk;
             $prodi->progress_subcpmk = $progress_subcpmk;
-
-            $avg = round(($progress_pl + $progress_cpl + $progress_bk + $progress_sks_mk + $progress_cpmk + $progress_subcpmk) / 6);
             $prodi->avg_progress = $avg;
 
-            if ($progress_pl == 100 && $progress_cpl == 100 && $progress_bk == 100 && $progress_sks_mk == 100 && $progress_cpmk == 100 && $progress_subcpmk == 100) {
+            // Hitung status
+            if ($avg == 100) {
                 $ProdiSelesai++;
-            } elseif ($avg > 0 && $avg < 100) {
+            } elseif ($avg > 0) {
                 $ProdiProgress++;
-            } elseif ($avg == 0) {
+            } else {
                 $ProdiBelumMulai++;
             }
         }
@@ -122,6 +122,7 @@ class AdminDashboardController extends Controller
             'ProdiProgress',
             'ProdiBelumMulai',
             'id_tahun',
+            'tahun_progress',
             'availableYears'
         ));
     }

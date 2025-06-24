@@ -125,60 +125,81 @@
             </div>
         </div>
 
-        <!-- Progress Bar Per Prodi -->
-        <div class="bg-white rounded-lg shadow-lg p-2 mb-8">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">Progress Penyusunan Kurikulum OBE</h2>
-
-            <!-- Prodi item -->
-            <div class="space-y-6">
-                @foreach ($prodis as $prodi)
-                    <div class="border-b pb-5 prodi-card">
-                        <div class="flex justify-between items-center mb-2">
-                            <div>
-                                <h3 class="font-semibold text-gray-800">{{ $prodi->nama_prodi }}</h3>
-                            </div>
-                            <div class="bg-green-100 text-green-700 text-sm font-medium px-3 py-1 rounded-full">
-                                {{ $prodi->avg_progress }}% Selesai
-                            </div>
-                        </div>
-
-                        <div class="w-full bg-gray-200 rounded-full h-2.5">
-                            <div class="bg-green-500 h-2.5 rounded-full" style="width: {{ $prodi->avg_progress }}%"></div>
-                        </div>
-
-                        <div class="flex justify-between mt-2 text-xs text-gray-500">
-                            <div class="flex space-x-6">
-                                <span class="flex items-center">
-                                    <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-                                    PL ({{ $prodi->progress_pl }}%)
-                                </span>
-                                <span class="flex items-center">
-                                    <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-                                    CPL ({{ $prodi->progress_cpl }}%)
-                                </span>
-                                <span class="flex items-center">
-                                    <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-                                    BK ({{ $prodi->progress_bk }}%)
-                                </span>
-                                <span class="flex items-center">
-                                    <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-                                    SKS ({{ $prodi->progress_sks_mk }}%)
-                                </span>
-                                <span class="flex items-center">
-                                    <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-                                    CPMK ({{ $prodi->progress_cpmk }}%)
-                                </span>
-                                <span class="flex items-center">
-                                    <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
-                                    SUB_CPMK ({{ $prodi->progress_subcpmk }}%)
-                                </span>
-                            </div>
-                            <a href="#" class="text-blue-500 hover:text-blue-700">Detail</a>
-                        </div>
-                    </div>
+        <!-- Filter Tahun untuk Progress -->
+        <form method="GET" action="{{ route('admin.dashboard') }}" class="flex items-center">
+            <label for="tahun_progress" class="mr-2 text-gray-600 text-sm">Tahun Progress:</label>
+            <select name="tahun_progress" id="tahun_progress"
+                class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                required onchange="this.form.submit()">
+                <option value="" disabled selected>Pilih Tahun</option>
+                @foreach ($availableYears as $th)
+                    <option value="{{ $th->id_tahun }}"
+                        {{ request('tahun_progress') == $th->id_tahun ? 'selected' : '' }}>
+                        {{ $th->tahun }}
+                    </option>
                 @endforeach
-            </div>
-        </div>
-    </div>
+            </select>
+        </form>
 
+
+        <!-- Progress Bar Per Prodi -->
+        @if (request()->filled('tahun_progress'))
+            <div class="bg-white rounded-lg shadow-lg p-2 mb-8">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">Progress Penyusunan Kurikulum OBE</h2>
+
+                <div class="space-y-6">
+                    @foreach ($prodis as $prodi)
+                        <div class="border-b pb-5 prodi-card">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="font-semibold text-gray-800">{{ $prodi->nama_prodi }}</h3>
+                                <div class="bg-green-100 text-green-700 text-sm font-medium px-3 py-1 rounded-full">
+                                    {{ $prodi->avg_progress }}% Selesai
+                                </div>
+                            </div>
+
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-green-500 h-2.5 rounded-full" style="width: {{ $prodi->avg_progress }}%">
+                                </div>
+                            </div>
+
+                            <div class="flex justify-between mt-2 text-xs text-gray-500">
+                                <div class="flex space-x-6">
+                                    <span class="flex items-center">
+                                        <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+                                        PL ({{ $prodi->progress_pl }}%)
+                                    </span>
+                                    <span class="flex items-center">
+                                        <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+                                        CPL ({{ $prodi->progress_cpl }}%)
+                                    </span>
+                                    <span class="flex items-center">
+                                        <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+                                        BK ({{ $prodi->progress_bk }}%)
+                                    </span>
+                                    <span class="flex items-center">
+                                        <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+                                        SKS ({{ $prodi->progress_sks_mk }}%)
+                                    </span>
+                                    <span class="flex items-center">
+                                        <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+                                        CPMK ({{ $prodi->progress_cpmk }}%)
+                                    </span>
+                                    <span class="flex items-center">
+                                        <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>
+                                        SUB_CPMK ({{ $prodi->progress_subcpmk }}%)
+                                    </span>
+                                </div>
+                                <a href="#" class="text-blue-500 hover:text-blue-700">Detail</a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @else
+            <div class="bg-white p-8 text-center text-gray-600 rounded-lg shadow mb-8">
+                <strong>Silakan pilih tahun progress terlebih dahulu untuk menampilkan data.</strong>
+            </div>
+        @endif
+
+    </div>
 @endsection
