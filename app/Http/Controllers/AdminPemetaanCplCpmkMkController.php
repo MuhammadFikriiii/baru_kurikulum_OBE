@@ -191,20 +191,16 @@ class AdminPemetaanCplCpmkMkController extends Controller
                 'matrix' => [],
                 'semuaCpl' => collect(),
                 'semuaMk' => collect(),
-                'id_tahun' => '',
-                'tahun_tersedia' => collect(),
+                'id_tahun' => $id_tahun,
+                'tahun_tersedia' => $tahun_tersedia,
             ]);
         }
 
         $prodi = $prodis->where('kode_prodi', $kode_prodi)->first();
 
-        // Query untuk mendapatkan tahun yang tersedia untuk prodi yang dipilih
-        $tahun_tersedia = DB::table('profil_lulusans as pl')
-            ->join('tahun', 'pl.id_tahun', '=', 'tahun.id_tahun')
-            ->where('pl.kode_prodi', $kode_prodi)
-            ->select('tahun.id_tahun', 'tahun.nama_kurikulum', 'tahun.tahun')
-            ->distinct()
-            ->orderBy('tahun.tahun', 'desc')
+        $tahun_tersedia = DB::table('tahun')
+            ->select('id_tahun', 'nama_kurikulum', 'tahun')
+            ->orderBy('tahun', 'desc')
             ->get();
 
         // Get all CPL for the selected prodi dengan filter tahun

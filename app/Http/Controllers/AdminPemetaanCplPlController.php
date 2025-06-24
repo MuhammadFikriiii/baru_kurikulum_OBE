@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\CapaianProfilLulusan;
 use App\Models\ProfilLulusan;
 use App\Models\Prodi;
+use App\Models\Tahun; // Tambahkan import model Tahun
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,6 +18,9 @@ class AdminPemetaanCplPlController extends Controller
         $id_tahun = $request->get('id_tahun');
 
         $prodis = Prodi::all();
+
+        // Ambil SEMUA tahun yang tersedia (tidak tergantung prodi)
+        $tahun_tersedia = Tahun::orderBy('tahun', 'desc')->get();
 
         // Ambil PL berdasarkan prodi dan tahun
         $pls = ProfilLulusan::when($kode_prodi, function ($query) use ($kode_prodi) {
@@ -52,18 +56,6 @@ class AdminPemetaanCplPlController extends Controller
         if (empty($kode_prodi)) {
             $pls = collect();
             $cpls = collect();
-        }
-
-        // Ambil tahun yang tersedia berdasarkan prodi yang dipilih
-        $tahun_tersedia = collect();
-        if ($kode_prodi) {
-            $tahun_tersedia = DB::table('profil_lulusans as pl')
-                ->join('tahun', 'pl.id_tahun', '=', 'tahun.id_tahun')
-                ->where('pl.kode_prodi', $kode_prodi)
-                ->select('tahun.id_tahun', 'tahun.nama_kurikulum', 'tahun.tahun')
-                ->distinct()
-                ->orderBy('tahun.tahun', 'desc')
-                ->get();
         }
 
         // Mapping prodi berdasarkan CPL

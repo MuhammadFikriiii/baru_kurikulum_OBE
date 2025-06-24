@@ -51,7 +51,8 @@
                 <div class="flex flex-wrap gap-2 items-center">
                     <span class="text-sm text-blue-800 font-medium">Filter aktif:</span>
                     @if ($kode_prodi)
-                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                        <span
+                            class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                             Prodi: {{ $prodis->where('kode_prodi', $kode_prodi)->first()->nama_prodi ?? $kode_prodi }}
                         </span>
                     @endif
@@ -59,11 +60,14 @@
                         @php
                             $selected_tahun = $tahun_tersedia->where('id_tahun', $id_tahun)->first();
                         @endphp
-                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                            Tahun: {{ $selected_tahun ? $selected_tahun->nama_kurikulum . ' - ' . $selected_tahun->tahun : $id_tahun }}
+                        <span
+                            class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            Tahun:
+                            {{ $selected_tahun ? $selected_tahun->nama_kurikulum . ' - ' . $selected_tahun->tahun : $id_tahun }}
                         </span>
                     @endif
-                    <a href="{{ route('admin.pemetaancplpl.index') }}" class="text-xs text-blue-600 hover:text-blue-800 underline">
+                    <a href="{{ route('admin.pemetaancplpl.index') }}"
+                        class="text-xs text-blue-600 hover:text-blue-800 underline">
                         Reset filter
                     </a>
                 </div>
@@ -106,7 +110,8 @@
                                 @foreach ($pls as $pl)
                                     <th class="px-2 py-2 relative group">
                                         <span class="cursor-help">{{ $pl->kode_pl }}</span>
-                                        <div class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+                                        <div
+                                            class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
                                             <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
                                                 {{ $pl->prodi->nama_prodi }}
                                             </div>
@@ -123,7 +128,8 @@
                                 <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border">
                                     <td class="px-4 py-2 relative group">
                                         <span class="cursor-help">{{ $cpl->kode_cpl }}</span>
-                                        <div class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+                                        <div
+                                            class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
                                             <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
                                                 {{ $prodiByCpl[$cpl->id_cpl] }}
                                             </div>
@@ -172,7 +178,7 @@
                 url += '?' + params.join('&');
             }
 
-            // Redirect ke URL dengan parameter yang benar
+            // Redirect ke URL dengan parameter yang becar
             window.location.href = url;
         }
     </script>

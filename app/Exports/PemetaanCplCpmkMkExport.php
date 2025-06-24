@@ -18,12 +18,15 @@ class PemetaanCplCpmkMkExport implements FromArray, WithHeadings, WithStyles, Wi
 {
     protected $matrix;
     protected $kodeProdi;
+    protected $idTahun;
 
-    public function __construct($kodeProdi)
+    public function __construct($kodeProdi, $idTahun)
     {
         $this->kodeProdi = $kodeProdi;
+        $this->idTahun = $idTahun;
         $this->matrix = $this->buildMatrix();
     }
+
 
     /**
      * Build matrix data dari database
@@ -52,6 +55,9 @@ class PemetaanCplCpmkMkExport implements FromArray, WithHeadings, WithStyles, Wi
                     'mk.nama_mk'
                 )
                 ->where('prodis.kode_prodi', $this->kodeProdi)
+                ->when($this->idTahun, function ($query) {
+                    $query->where('pl.id_tahun', $this->idTahun);
+                })
                 ->orderBy('cpl.kode_cpl', 'asc')
                 ->orderBy('cpmk.id_cpmk', 'asc')
                 ->get();

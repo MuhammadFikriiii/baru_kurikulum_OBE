@@ -16,20 +16,22 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 
-class BahanKajianExport implements 
-    FromCollection, 
-    WithHeadings, 
-    WithStyles, 
-    WithColumnWidths, 
+class BahanKajianExport implements
+    FromCollection,
+    WithHeadings,
+    WithStyles,
+    WithColumnWidths,
     WithTitle,
     WithMapping,
     WithEvents
 {
     protected $kodeProdi;
+    protected $idTahun;
 
-    public function __construct($kodeProdi)
+    public function __construct($kodeProdi, $idTahun)
     {
         $this->kodeProdi = $kodeProdi;
+        $this->idTahun = $idTahun;
     }
 
     public function collection()
@@ -50,6 +52,9 @@ class BahanKajianExport implements
             ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
             ->where('prodis.kode_prodi', $this->kodeProdi)
+            ->when($this->idTahun, function ($query) {
+                $query->where('pl.id_tahun', $this->idTahun);
+            })
             ->groupBy(
                 'bk.kode_bk',
                 'bk.nama_bk',
@@ -126,11 +131,12 @@ class BahanKajianExport implements
             'alignment' => ['vertical' => Alignment::VERTICAL_CENTER, 'wrapText' => true],
         ];
 
-        $sheet->getStyle('A2:H2')->applyFromArray($headerStyle); // Header row
-        $sheet->getStyle('A3:H' . $lastRow)->applyFromArray($dataStyle); // Data rows
+        $sheet->getStyle('A2:H2')->applyFromArray($headerStyle);
+        $sheet->getStyle('A3:H' . $lastRow)->applyFromArray($dataStyle);
 
-        $sheet->getRowDimension(1)->setRowHeight(15); // Judul
+        $sheet->getRowDimension(1)->setRowHeight(15);
         $sheet->getRowDimension(2)->setRowHeight(30);
+
         for ($i = 3; $i <= $lastRow; $i++) {
             $descLength = strlen($sheet->getCell('E' . $i)->getValue());
             if ($descLength > 200) {
@@ -138,8 +144,7 @@ class BahanKajianExport implements
             } elseif ($descLength > 100) {
                 $sheet->getRowDimension($i)->setRowHeight(60);
             }
-            
-            // Alternating background
+
             if ($i % 2 == 0) {
                 $sheet->getStyle("A{$i}:H{$i}")->getFill()
                     ->setFillType(Fill::FILL_SOLID)
@@ -150,11 +155,12 @@ class BahanKajianExport implements
         $sheet->getStyle('A3:A' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('B3:B' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('C3:C' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle('G3:G' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('D3:D' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle('F3:F' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle('H3:H' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('E3:E' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('F3:F' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('G3:G' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('H3:H' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
         return [];
     }
 

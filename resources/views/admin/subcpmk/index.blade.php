@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- mx-5 md:mx-20 my-10 --}}
     <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
         <div class="text-center mb-8">
             <h1 class="text-2xl font-bold text-gray-800">Daftar Sub Cpmk</h1>
@@ -22,32 +21,29 @@
             </div>
 
             <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-                <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-                    <select id="prodi" name="kode_prodi"
-                        class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                        onchange="updateFilter()">
-                        <option value="" {{ empty($kode_prodi) ? 'selected' : '' }} disabled>Pilih Prodi</option>
-                        @foreach ($prodis as $prodi)
-                            <option value="{{ $prodi->kode_prodi }}"
-                                {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
-                                {{ $prodi->nama_prodi }}
+                <select id="prodi" name="kode_prodi"
+                    class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    onchange="updateFilter()">
+                    <option value="" {{ empty($kode_prodi) ? 'selected' : '' }} disabled>Pilih Prodi</option>
+                    @foreach ($prodis as $prodi)
+                        <option value="{{ $prodi->kode_prodi }}" {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
+                            {{ $prodi->nama_prodi }}
+                        </option>
+                    @endforeach
+                </select>
+
+                <select id="tahun" name="id_tahun"
+                    class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    onchange="updateFilter()">
+                    <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
+                    @if ($tahun_tersedia->isNotEmpty())
+                        @foreach ($tahun_tersedia as $thn)
+                            <option value="{{ $thn->id_tahun }}" {{ $id_tahun == $thn->id_tahun ? 'selected' : '' }}>
+                                {{ $thn->nama_kurikulum }} - {{ $thn->tahun }}
                             </option>
                         @endforeach
-                    </select>
-
-                    <select id="tahun" name="id_tahun"
-                        class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                        onchange="updateFilter()">
-                        <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
-                        @if (isset($tahun_tersedia))
-                            @foreach ($tahun_tersedia as $thn)
-                                <option value="{{ $thn->id_tahun }}" {{ $id_tahun == $thn->id_tahun ? 'selected' : '' }}>
-                                    {{ $thn->nama_kurikulum }} - {{ $thn->tahun }}
-                                </option>
-                            @endforeach
-                        @endif
-                    </select>
-                </div>
+                    @endif
+                </select>
             </div>
 
             <div class="relative w-full md:w-64">
@@ -65,60 +61,49 @@
         </div>
     </div>
 
-<div class="mx-5 md:mx-20 my-10">
-    @if ($kode_prodi || $id_tahun)
-        <div class="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
-            <div class="flex flex-wrap gap-2 items-center">
-                <span class="text-sm text-blue-800 font-medium">Filter aktif:</span>
-                @if ($kode_prodi)
-                    <span
-                        class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                        Prodi: {{ $prodis->where('kode_prodi', $kode_prodi)->first()->nama_prodi ?? $kode_prodi }}
-                    </span>
-                @endif
-                @if ($id_tahun)
-                    @php
-                        $selected_tahun = $tahun_tersedia->where('id_tahun', $id_tahun)->first();
-                    @endphp
-                    <span
-                        class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                        Tahun:
-                        {{ $selected_tahun ? $selected_tahun->nama_kurikulum . ' - ' . $selected_tahun->tahun : $id_tahun }}
-                    </span>
-                @endif
-                <a href="{{ route('admin.subcpmk.index') }}" class="text-xs text-blue-600 hover:text-blue-800 underline">
-                    Reset filter
-                </a>
+    <div class="mx-5 md:mx-20 my-10">
+        @if ($kode_prodi || $id_tahun)
+            <div class="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
+                <div class="flex flex-wrap gap-2 items-center">
+                    <span class="text-sm text-blue-800 font-medium">Filter aktif:</span>
+                    @if ($kode_prodi)
+                        <span
+                            class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            Prodi: {{ $prodis->where('kode_prodi', $kode_prodi)->first()->nama_prodi ?? $kode_prodi }}
+                        </span>
+                    @endif
+                    @if ($id_tahun)
+                        @php
+                            $selected_tahun = $tahun_tersedia->where('id_tahun', $id_tahun)->first();
+                        @endphp
+                        <span
+                            class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            Tahun:
+                            {{ $selected_tahun ? $selected_tahun->nama_kurikulum . ' - ' . $selected_tahun->tahun : $id_tahun }}
+                        </span>
+                    @endif
+                    <a href="{{ route('admin.subcpmk.index') }}"
+                        class="text-xs text-blue-600 hover:text-blue-800 underline">
+                        Reset filter
+                    </a>
+                </div>
             </div>
-        </div>
-    @endif
+        @endif
 
-    @if (session('success'))
-        <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
-            <span class="font-bold">{{ session('success') }}</span>
-            <button onclick="document.getElementById('alert').style.display='none'"
-                class="absolute top-1 right-3 text-white font-bold text-lg">
-                &times;
-            </button>
-        </div>
-    @endif
+        @if (session('success'))
+            <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
+                <span class="font-bold">{{ session('success') }}</span>
+                <button onclick="document.getElementById('alert').style.display='none'"
+                    class="absolute top-1 right-3 text-white font-bold text-lg">&times;</button>
+            </div>
+        @endif
 
-    @if (session('sukses'))
-        <div id="alert" class="bg-red-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
-            <span class="font-bold">{{ session('sukses') }}</span>
-            <button onclick="document.getElementById('alert').style.display='none'"
-                class="absolute top-1 right-3 text-white font-bold text-lg">
-                &times;
-            </button>
-        </div>
-    @endif
-
-    @if (empty($kode_prodi))
-        <div class="text-center p-8 bg-white rounded-lg shadow">
-            <p class="text-gray-600 text-lg">Silakan pilih program studi terlebih dahulu untuk melihat data Sub CPMK.</p>
-        </div>
-    @else
-        @if ($subcpmks->isEmpty())
+        @if (empty($kode_prodi))
+            <div class="text-center p-8 bg-white rounded-lg shadow">
+                <p class="text-gray-600 text-lg">Silakan pilih program studi terlebih dahulu untuk melihat data Sub CPMK.
+                </p>
+            </div>
+        @elseif ($subcpmks->isEmpty())
             <div class="text-center p-8 bg-white rounded-lg shadow">
                 <p class="text-gray-600 text-lg">Tidak ada data Sub CPMK untuk program studi yang dipilih.</p>
             </div>
@@ -169,9 +154,9 @@
                                             @csrf @method('DELETE')
                                             <button type="submit"
                                                 class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-md"
-                                                title="Hapus" onclick="return confirm('Hapus user ini?')">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-                                                    viewBox="0 0 20 20" fill="currentColor">
+                                                onclick="return confirm('Hapus Sub CPMK ini?')" title="Hapus">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                                    fill="currentColor">
                                                     <path fill-rule="evenodd"
                                                         d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
                                                         clip-rule="evenodd" />
@@ -186,34 +171,31 @@
                 </table>
             </div>
         @endif
-    @endif
     </div>
+
     <script>
         function updateFilter() {
             const prodiSelect = document.getElementById('prodi');
             const tahunSelect = document.getElementById('tahun');
 
+            // Ambil parameter URL sekarang
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Ambil nilai baru dari dropdown
             const kodeProdi = prodiSelect.value;
             const idTahun = tahunSelect.value;
 
-            // Buat URL dengan parameter yang sesuai
-            let url = "{{ route('admin.subcpmk.index') }}";
-            let params = [];
-
+            // Set nilai baru tanpa menghapus yang lain
             if (kodeProdi) {
-                params.push('kode_prodi=' + encodeURIComponent(kodeProdi));
+                urlParams.set('kode_prodi', kodeProdi);
             }
 
             if (idTahun) {
-                params.push('id_tahun=' + encodeURIComponent(idTahun));
+                urlParams.set('id_tahun', idTahun);
             }
 
-            if (params.length > 0) {
-                url += '?' + params.join('&');
-            }
-
-            // Redirect ke URL dengan parameter yang benar
-            window.location.href = url;
+            const newUrl = `{{ route('admin.subcpmk.index') }}?${urlParams.toString()}`;
+            window.location.href = newUrl;
         }
     </script>
 @endsection

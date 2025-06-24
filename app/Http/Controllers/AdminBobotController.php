@@ -22,13 +22,22 @@ class AdminBobotController extends Controller
         return view('admin.bobot.index', compact('bobots'));
     }
 
-    public function getmkbycpl()
+    public function getmkbycpl(Request $request)
     {
-        $id_cpls = $request->id_cpls ?? [];
+        $id_cpl = $request->id_cpls[0] ?? null;
 
+        if (!$id_cpl) return response()->json([]);
+
+        // Ambil kode MK yang sudah diberi bobot
+        $existingMK = DB::table('bobots')
+            ->where('id_cpl', $id_cpl)
+            ->pluck('kode_mk');
+
+        // Ambil MK dari relasi CPL yang belum diberi bobot
         $mks = DB::table('cpl_mk')
             ->join('mata_kuliahs as mk', 'cpl_mk.kode_mk', '=', 'mk.kode_mk')
-            ->whereIn('cpl_mk.id_cpl', $id_cpls)
+            ->where('cpl_mk.id_cpl', $id_cpl)
+            ->whereNotIn('cpl_mk.kode_mk', $existingMK)
             ->select('mk.kode_mk', 'mk.nama_mk')
             ->distinct()
             ->orderBy('mk.kode_mk')
@@ -36,6 +45,7 @@ class AdminBobotController extends Controller
 
         return response()->json($mks);
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -43,6 +53,7 @@ class AdminBobotController extends Controller
     {
         $capaianProfilLulusans = CapaianProfilLulusan::all();
         $mataKuliahs = MataKuliah::all();
+
         return view('admin.bobot.create', compact('capaianProfilLulusans', 'mataKuliahs'));
     }
 
@@ -60,6 +71,15 @@ class AdminBobotController extends Controller
         ]);
 
         foreach ($request->kode_mk as $kode_mk) {
+            // Cek apakah bobot untuk id_cpl dan kode_mk ini sudah ada
+            $existing = Bobot::where('id_cpl', $request->id_cpl)
+                ->where('kode_mk', $kode_mk)
+                ->exists();
+
+            if ($existing) {
+                return redirect()->back()->withErrors(['msg' => 'Bobot untuk CPL dan MK tersebut sudah ada.'])->withInput();
+            }
+
             Bobot::create([
                 'id_cpl' => $request->id_cpl,
                 'kode_mk' => $kode_mk,
@@ -69,7 +89,6 @@ class AdminBobotController extends Controller
 
         return redirect()->route('admin.bobot.index')->with('success', 'Bobot berhasil ditambahkan.');
     }
-
 
     /**
      * Display the specified resource.
@@ -97,17 +116,13 @@ class AdminBobotController extends Controller
      */
     public function edit(string $id_cpl)
     {
-        // Ambil semua MK yang terkait dengan CPL ini dari pivot
         $mk_terkait = DB::table('cpl_mk')
             ->join('mata_kuliahs', 'cpl_mk.kode_mk', '=', 'mata_kuliahs.kode_mk')
             ->where('cpl_mk.id_cpl', $id_cpl)
             ->select('mata_kuliahs.kode_mk', 'mata_kuliahs.nama_mk')
             ->get();
 
-        // Ambil semua bobot yang sudah disimpan untuk CPL ini
         $bobots = Bobot::where('id_cpl', $id_cpl)->get();
-
-        // Konversi ke array [kode_mk => bobot]
         $existingBobots = $bobots->pluck('bobot', 'kode_mk')->toArray();
 
         return view('admin.bobot.edit', [

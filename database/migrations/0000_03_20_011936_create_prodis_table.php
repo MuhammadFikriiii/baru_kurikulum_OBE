@@ -15,14 +15,13 @@ return new class extends Migration
             $table->string('kode_prodi', 10)->primary();
             $table->unsignedBigInteger('id_jurusan');
             $table->string('nama_prodi', 50);
-            $table->string('pt_prodi', 100);
             $table->date('tgl_berdiri_prodi');
             $table->date('penyelenggaraan_prodi');
             $table->string('nomor_sk');
             $table->date('tanggal_sk');
-            $table->string('peringkat_akreditasi');
+            $table->enum('peringkat_akreditasi', ['A', 'B', 'C']);
             $table->string('nomor_sk_banpt');
-            $table->string('jenjang_pendidikan');
+            $table->enum('jenjang_pendidikan', ['D3', 'D4']);
             $table->string('gelar_lulusan');
             $table->string('telepon_prodi')->nullable();
             $table->string('faksimili_prodi')->nullable();

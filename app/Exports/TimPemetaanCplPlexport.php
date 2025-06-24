@@ -18,22 +18,27 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 class TimPemetaanCplPlExport implements FromArray, WithTitle, WithStyles, WithColumnWidths, ShouldAutoSize
 {
     protected $kodeProdi;
+    protected $idTahun;
 
-    public function __construct($kodeProdi)
+    public function __construct($kodeProdi, $idTahun)
     {
         $this->kodeProdi = $kodeProdi;
+        $this->idTahun = $idTahun;
     }
 
     public function array(): array
     {
         // Get profile lulusan data based on kode_prodi
         $pls = ProfilLulusan::where('kode_prodi', $this->kodeProdi)->get();
-        
+
         // Get CPLs related to this prodi through the relationships
         $cpls = DB::table('capaian_profil_lulusans')
             ->join('cpl_pl', 'capaian_profil_lulusans.id_cpl', '=', 'cpl_pl.id_cpl')
             ->join('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
             ->where('profil_lulusans.kode_prodi', $this->kodeProdi)
+            ->when($this->idTahun, function ($query) {
+                $query->where('profil_lulusans.id_tahun', $this->idTahun);
+            })
             ->select('capaian_profil_lulusans.*')
             ->distinct()
             ->orderBy('capaian_profil_lulusans.kode_cpl')
@@ -44,9 +49,12 @@ class TimPemetaanCplPlExport implements FromArray, WithTitle, WithStyles, WithCo
             ->join('capaian_profil_lulusans', 'cpl_pl.id_cpl', '=', 'capaian_profil_lulusans.id_cpl')
             ->join('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
             ->where('profil_lulusans.kode_prodi', $this->kodeProdi)
+            ->when($this->idTahun, function ($query) {
+                $query->where('profil_lulusans.id_tahun', $this->idTahun);
+            })
             ->select('cpl_pl.id_cpl', 'cpl_pl.id_pl')
             ->get();
-            
+
         // Create mapping matrix
         $pemetaanMatrix = [];
         foreach ($pemetaan as $map) {
@@ -55,13 +63,13 @@ class TimPemetaanCplPlExport implements FromArray, WithTitle, WithStyles, WithCo
 
         // Title row (row 1)
         $title = ['3. Pemetaan CPL dan PL', '', '', '', '', ''];
-        
+
         // Header row (row 2)
         $header = ['Kode', 'CPL'];
         foreach ($pls as $pl) {
             $header[] = $pl->kode_pl ?? $pl->kode;
         }
-        
+
         // Start with empty row and then add title and header rows
         $data = [
             $title,
@@ -73,8 +81,8 @@ class TimPemetaanCplPlExport implements FromArray, WithTitle, WithStyles, WithCo
             $row = [
                 $cpl->kode_cpl,                // First column is CPL code
                 $cpl->deskripsi_cpl ?? ''      // Second column is CPL description
-            ]; 
-            
+            ];
+
             foreach ($pls as $pl) {
                 // Check if there's a mapping between CPL and PL
                 $row[] = isset($pemetaanMatrix[$cpl->id_cpl][$pl->id_pl]) ? 'v' : '';
@@ -92,10 +100,10 @@ class TimPemetaanCplPlExport implements FromArray, WithTitle, WithStyles, WithCo
         $sheet->mergeCells('A1:F1');
         $sheet->getStyle('A1')->getFont()->setSize(12);
         $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
-        
+
         // Style for the header row (row 2)
         $lastCol = $sheet->getHighestColumn();
-        
+
         // Style for column headers (row 2)
         $sheet->getStyle('A2:' . $lastCol . '2')->applyFromArray([
             'fill' => [
@@ -119,7 +127,7 @@ class TimPemetaanCplPlExport implements FromArray, WithTitle, WithStyles, WithCo
 
         // Center alignment for header cells and "v" cells
         $sheet->getStyle('C2:' . $lastCol . $sheet->getHighestRow())->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        
+
         // Add borders to all data cells
         $sheet->getStyle('A1:' . $lastCol . $sheet->getHighestRow())->applyFromArray([
             'borders' => [
@@ -128,7 +136,7 @@ class TimPemetaanCplPlExport implements FromArray, WithTitle, WithStyles, WithCo
                 ],
             ],
         ]);
-        
+
         // Add light blue background to the row indices and code column as shown in the image
         $sheet->getStyle('A3:A' . $sheet->getHighestRow())->applyFromArray([
             'fill' => [
@@ -141,10 +149,10 @@ class TimPemetaanCplPlExport implements FromArray, WithTitle, WithStyles, WithCo
 
         // Vertical alignment for all cells
         $sheet->getStyle('A1:' . $lastCol . $sheet->getHighestRow())->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
-        
+
         // Wrap text for CPL descriptions
         $sheet->getStyle('B3:B' . $sheet->getHighestRow())->getAlignment()->setWrapText(true);
-        
+
         return [
             // Add additional styling if needed
         ];

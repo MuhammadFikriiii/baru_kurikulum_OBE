@@ -16,11 +16,15 @@ class TimExportController extends Controller
             ? $request->kode_prodi
             : $user->kode_prodi;
 
+        $idTahun = $request->id_tahun;
 
-        if (!$kodeProdi) {
-            return back()->with('error', 'Kode prodi harus dipilih.');
+        if (!$kodeProdi || !$idTahun) {
+            return back()->with('error', 'Kode prodi dan tahun harus dipilih.');
         }
 
-        return Excel::download(new MultipleSheetExcel($kodeProdi), 'profil_dan_cpl_' . $kodeProdi . '.xlsx');
+        return Excel::download(
+            new MultipleSheetExcel($kodeProdi, $idTahun),
+            'profil_dan_cpl_' . $kodeProdi . '_tahun_' . $idTahun . '.xlsx'
+        );
     }
 }

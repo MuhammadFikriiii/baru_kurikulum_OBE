@@ -17,10 +17,12 @@ use Illuminate\Support\Facades\Auth;
 class PemetaanMkCplCpmkExport implements FromArray, WithHeadings, WithStyles, WithColumnWidths, WithTitle
 {
     protected $kodeProdi;
+    protected $idTahun;
 
-    public function __construct($kodeProdi)
+    public function __construct($kodeProdi, $idTahun)
     {
         $this->kodeProdi = $kodeProdi;
+        $this->idTahun = $idTahun;
     }
 
     /**
@@ -34,6 +36,9 @@ class PemetaanMkCplCpmkExport implements FromArray, WithHeadings, WithStyles, Wi
         ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
         ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
         ->where('prodis.kode_prodi', $this->kodeProdi)
+        ->when($this->idTahun, function ($query) {
+                      $query->where('pl.id_tahun', $this->idTahun);
+                  })
         ->select('cpl.id_cpl', 'cpl.kode_cpl', 'cpl.deskripsi_cpl', 'prodis.nama_prodi')
         ->orderBy('cpl.kode_cpl')
         ->get();
@@ -48,6 +53,9 @@ class PemetaanMkCplCpmkExport implements FromArray, WithHeadings, WithStyles, Wi
         ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
         ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
         ->where('prodis.kode_prodi', $this->kodeProdi)
+        ->when($this->idTahun, function ($query) {
+                      $query->where('pl.id_tahun', $this->idTahun);
+                  })
         ->select(
             'mk.kode_mk',
             'mk.nama_mk',
@@ -71,6 +79,9 @@ class PemetaanMkCplCpmkExport implements FromArray, WithHeadings, WithStyles, Wi
         ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
         ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
         ->where('pl.kode_prodi', $this->kodeProdi)
+        ->when($this->idTahun, function ($query) {
+                      $query->where('pl.id_tahun', $this->idTahun);
+                  })
         ->pluck('cpl_mk.kode_mk')
         ->unique();
 
@@ -169,6 +180,9 @@ private function getDataRowCount(): int
         ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
         ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
         ->where('prodis.kode_prodi', $this->kodeProdi)
+        ->when($this->idTahun, function ($query) {
+                      $query->where('pl.id_tahun', $this->idTahun);
+                  })
         ->pluck('mk.kode_mk')
         ->unique();
 
@@ -178,6 +192,9 @@ private function getDataRowCount(): int
         ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
         ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
         ->where('pl.kode_prodi', $this->kodeProdi)
+        ->when($this->idTahun, function ($query) {
+                      $query->where('pl.id_tahun', $this->idTahun);
+                  })
         ->pluck('cpl_mk.kode_mk')
         ->unique();
 
@@ -196,6 +213,9 @@ private function getDataRowCount(): int
             ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
             ->where('prodis.kode_prodi', $this->kodeProdi)
+            ->when($this->idTahun, function ($query) {
+                      $query->where('pl.id_tahun', $this->idTahun);
+                  })
             ->select('cpl.kode_cpl')
             ->orderBy('cpl.kode_cpl')
             ->get();
@@ -221,6 +241,9 @@ private function getDataRowCount(): int
             ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
             ->where('prodis.kode_prodi', $this->kodeProdi)
+            ->when($this->idTahun, function ($query) {
+                      $query->where('pl.id_tahun', $this->idTahun);
+                  })
             ->count();
 
         $lastColumn = $this->getColumnLetter(2 + $cplCount); // 2 for Kode MK and Nama MK + CPL columns
@@ -279,6 +302,9 @@ private function getDataRowCount(): int
             ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
             ->where('prodis.kode_prodi', $this->kodeProdi)
+            ->when($this->idTahun, function ($query) {
+                      $query->where('pl.id_tahun', $this->idTahun);
+                  })
             ->count();
 
         $widths = [

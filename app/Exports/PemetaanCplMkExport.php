@@ -26,46 +26,46 @@ class PemetaanCplMkExport implements FromCollection, WithHeadings, WithCustomSta
     protected $cpls;
     protected $mks;
     protected $relasi;
-    
-    public function __construct($kodeProdi)
+    protected $idTahun;
+
+    public function __construct($kodeProdi, $idTahun)
     {
         $this->kodeProdi = $kodeProdi;
+        $this->idTahun = $idTahun;
         $this->namaProdi = DB::table('prodis')->where('kode_prodi', $kodeProdi)->value('nama_prodi');
-        
+
         // Get CPLs for this program
         $this->cpls = CapaianProfilLulusan::whereIn('id_cpl', function ($query) use ($kodeProdi) {
             $query->select('id_cpl')
                   ->from('cpl_pl')
                   ->join('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
-                  ->where('profil_lulusans.kode_prodi', $kodeProdi);
-        })
-        ->orderBy('kode_cpl', 'asc')
-        ->get();
+                  ->where('profil_lulusans.kode_prodi', $kodeProdi)
+                  ->when($this->idTahun, function ($query) {
+                      $query->where('profil_lulusans.id_tahun', $this->idTahun);
+                  });
+        })->orderBy('kode_cpl', 'asc')->get();
 
         // Get MKs for this program
         $this->mks = MataKuliah::whereIn('kode_mk', function ($query) use ($kodeProdi) {
             $query->select('kode_mk')
-                ->from('cpl_mk')
-                ->join('capaian_profil_lulusans', 'cpl_mk.id_cpl', '=', 'capaian_profil_lulusans.id_cpl')
-                ->join('cpl_pl', 'capaian_profil_lulusans.id_cpl', '=', 'cpl_pl.id_cpl')
-                ->join('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
-                ->where('profil_lulusans.kode_prodi', $kodeProdi);
-        })
-        ->orderBy('kode_mk', 'asc')
-        ->get();
-        
+                  ->from('cpl_mk')
+                  ->join('capaian_profil_lulusans', 'cpl_mk.id_cpl', '=', 'capaian_profil_lulusans.id_cpl')
+                  ->join('cpl_pl', 'capaian_profil_lulusans.id_cpl', '=', 'cpl_pl.id_cpl')
+                  ->join('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
+                  ->where('profil_lulusans.kode_prodi', $kodeProdi)
+                  ->when($this->idTahun, function ($query) {
+                      $query->where('profil_lulusans.id_tahun', $this->idTahun);
+                  });
+        })->orderBy('kode_mk', 'asc')->get();
+
         // Get mapping relations
         $this->relasi = DB::table('cpl_mk')->get()->groupBy('kode_mk');
     }
 
-    /**
-    * @return \Illuminate\Support\Collection
-    */
     public function collection()
     {
         $data = new Collection();
-        
-        // For each MK, create a row with CPLs mapping
+
         foreach ($this->mks as $mk) {
             $row = [
                 'Prodi' => $this->namaProdi,
@@ -73,45 +73,35 @@ class PemetaanCplMkExport implements FromCollection, WithHeadings, WithCustomSta
                 'Mata Kuliah' => $mk->nama_mk,
                 'Wajib' => ($mk->kompetensi_mk === 'utama') ? 'v' : '',
             ];
-            
-            // Add each CPL mapping
+
             foreach ($this->cpls as $cpl) {
-                // Check if relation exists
-                $terkait = isset($this->relasi[$mk->kode_mk]) && 
-                         in_array($cpl->id_cpl, $this->relasi[$mk->kode_mk]->pluck('id_cpl')->toArray());
-                
+                $terkait = isset($this->relasi[$mk->kode_mk]) &&
+                           in_array($cpl->id_cpl, $this->relasi[$mk->kode_mk]->pluck('id_cpl')->toArray());
+
                 $row[$cpl->kode_cpl] = $terkait ? 'v' : '';
             }
-            
+
             $data[] = $row;
         }
-        
-        return new Collection($data);
+
+        return $data;
     }
-    
-    /**
-     * @return array
-     */
+
     public function headings(): array
     {
-        // Row 1: Judul
         $row1 = ['7. Pemetaan CPL-MK', '', '', '', ''];
         foreach ($this->cpls as $cpl) {
             $row1[] = '';
         }
-        
-        // Row 2: Header kolom
+
         $row2 = ['Prodi', 'Kode', 'Mata Kuliah', 'Wajib'];
         foreach ($this->cpls as $cpl) {
             $row2[] = $cpl->kode_cpl;
         }
 
-        return [
-            $row1,
-            $row2
-        ];
+        return [$row1, $row2];
     }
-    
+
     public function startCell(): string
     {
         return 'A1';
@@ -121,19 +111,17 @@ class PemetaanCplMkExport implements FromCollection, WithHeadings, WithCustomSta
     {
         return 'Pemetaan CPL-MK';
     }
-    
+
     public function styles(Worksheet $sheet)
     {
-        $totalCols = count($this->headings()[1]);  // Jumlah kolom dari header baris kedua
+        $totalCols = count($this->headings()[1]);
         $lastColumn = Coordinate::stringFromColumnIndex($totalCols);
         $lastRow = $sheet->getHighestRow();
 
-        // Styling untuk judul (baris 1)
         $sheet->mergeCells("A1:{$lastColumn}1");
         $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(12);
         $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
-        
-        // Styling untuk header (baris 2)
+
         $sheet->getStyle("A2:{$lastColumn}2")->applyFromArray([
             'font' => [
                 'bold' => true,
@@ -145,7 +133,7 @@ class PemetaanCplMkExport implements FromCollection, WithHeadings, WithCustomSta
             ],
             'fill' => [
                 'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => '2F6739'],  // Dark green seperti BkMkExport
+                'startColor' => ['rgb' => '2F6739'],
             ],
             'borders' => [
                 'allBorders' => [
@@ -153,8 +141,7 @@ class PemetaanCplMkExport implements FromCollection, WithHeadings, WithCustomSta
                 ],
             ],
         ]);
-        
-        // Styling untuk konten (baris 3 dan seterusnya)
+
         $sheet->getStyle("A3:{$lastColumn}{$lastRow}")->applyFromArray([
             'borders' => [
                 'allBorders' => [
@@ -165,41 +152,29 @@ class PemetaanCplMkExport implements FromCollection, WithHeadings, WithCustomSta
                 'vertical' => Alignment::VERTICAL_CENTER,
             ],
         ]);
-        
-        // Center align untuk sebagian besar kolom, kecuali "Mata Kuliah" dan "Prodi"
-        $sheet->getStyle("B3:B{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Kode
-        $sheet->getStyle("E3:{$lastColumn}{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Wajib & CPL
-        $sheet->getStyle("A3:A{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Prodi
-        $sheet->getStyle("D3:D{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); // Mata Kuliah
-        
-        // Border untuk seluruh tabel
-        $sheet->getStyle("A1:{$lastColumn}{$lastRow}")->applyFromArray([
-            'borders' => [
-                'allBorders' => [
-                    'borderStyle' => Border::BORDER_THIN,
-                ],
-            ],
-        ]);
 
-        return $sheet;
+        $sheet->getStyle("A3:A{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("B3:B{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("D3:D{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("E3:{$lastColumn}{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+        return [];
     }
-    
+
     public function registerEvents(): array
     {
         return [
             AfterSheet::class => function (AfterSheet $event) {
                 $sheet = $event->sheet->getDelegate();
-                $totalCols = count($this->headings()[1]);  // Jumlah kolom dari header baris kedua
+                $totalCols = count($this->headings()[1]);
                 $lastColumn = Coordinate::stringFromColumnIndex($totalCols);
-                
-                // Set lebar kolom
-                $sheet->getColumnDimension('A')->setWidth(20); // Prodi
-                $sheet->getColumnDimension('B')->setWidth(15); // Kode
-                $sheet->getColumnDimension('C')->setWidth(35); // Mata Kuliah
-                $sheet->getColumnDimension('D')->setWidth(10); // Wajib
-                
-                // Set lebar untuk kolom kode CPL
-                for ($i = 6; $i <= $totalCols; $i++) {
+
+                $sheet->getColumnDimension('A')->setWidth(20);
+                $sheet->getColumnDimension('B')->setWidth(15);
+                $sheet->getColumnDimension('C')->setWidth(35);
+                $sheet->getColumnDimension('D')->setWidth(10);
+
+                for ($i = 5; $i <= $totalCols; $i++) {
                     $col = Coordinate::stringFromColumnIndex($i);
                     $sheet->getColumnDimension($col)->setWidth(8);
                 }

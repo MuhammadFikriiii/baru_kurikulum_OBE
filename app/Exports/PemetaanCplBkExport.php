@@ -16,13 +16,15 @@ use Maatwebsite\Excel\Events\AfterSheet;
 class PemetaanCplBkExport implements FromArray, WithHeadings, WithTitle, WithEvents
 {
     protected $kodeProdi;
+    protected $idTahun;
     protected $bks;
     protected $cpls;
     protected $relasi;
 
-    public function __construct($kodeProdi)
+    public function __construct($kodeProdi, $idTahun)
     {
         $this->kodeProdi = $kodeProdi;
+        $this->idTahun = $idTahun;
 
         $this->bks = DB::table('bahan_kajians as bk')
             ->select('bk.id_bk', 'bk.kode_bk')
@@ -31,6 +33,9 @@ class PemetaanCplBkExport implements FromArray, WithHeadings, WithTitle, WithEve
             ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->where('pl.kode_prodi', $this->kodeProdi)
+            ->when($this->idTahun, function ($query) {
+                $query->where('pl.id_tahun', $this->idTahun);
+            })
             ->distinct()
             ->orderBy('bk.kode_bk')
             ->get();
@@ -40,6 +45,9 @@ class PemetaanCplBkExport implements FromArray, WithHeadings, WithTitle, WithEve
             ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->where('pl.kode_prodi', $this->kodeProdi)
+            ->when($this->idTahun, function ($query) {
+                $query->where('pl.id_tahun', $this->idTahun);
+            })
             ->distinct()
             ->orderBy('cpl.kode_cpl')
             ->get();
@@ -62,9 +70,8 @@ class PemetaanCplBkExport implements FromArray, WithHeadings, WithTitle, WithEve
 
             foreach ($this->bks as $bk) {
                 $hasRelasi = isset($this->relasi[$cpl->id_cpl]) &&
-                             $this->relasi[$cpl->id_cpl]->pluck('id_bk')->contains($bk->id_bk);
-
-                $row[] = $hasRelasi ? 'v' : '';
+                    $this->relasi[$cpl->id_cpl]->pluck('id_bk')->contains($bk->id_bk);
+                $row[] = $hasRelasi ? '✓' : '';
             }
 
             $data[] = $row;
@@ -91,14 +98,9 @@ class PemetaanCplBkExport implements FromArray, WithHeadings, WithTitle, WithEve
     {
         return [
             BeforeSheet::class => function (BeforeSheet $event) {
-                // Set title in A1
                 $event->sheet->setCellValue('A1', '5. Pemetaan CPL - BK');
-
-                // Merge the cells for the title
                 $lastColumn = $event->sheet->getHighestColumn();
                 $event->sheet->mergeCells("A1:{$lastColumn}1");
-
-                // Set the title style
                 $event->sheet->getStyle("A1")->getFont()->setBold(true)->setSize(10);
             },
 
@@ -109,55 +111,29 @@ class PemetaanCplBkExport implements FromArray, WithHeadings, WithTitle, WithEve
                 $totalRows = count($this->cpls) + 2;
                 $lastCol = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($totalCols);
 
-                // Heading style
                 $sheet->getStyle("A2:{$lastCol}2")->applyFromArray([
-                    'font' => [
-                        'bold' => true,
-                        'color' => ['rgb' => 'FFFFFF'],
-                    ],
-                    'alignment' => [
-                        'horizontal' => Alignment::HORIZONTAL_CENTER,
-                        'vertical' => Alignment::VERTICAL_CENTER,
-                    ],
-                    'fill' => [
-                        'fillType' => Fill::FILL_SOLID,
-                        'startColor' => ['rgb' => '1E5631'],
-                    ],
-                    'borders' => [
-                        'allBorders' => [
-                            'borderStyle' => Border::BORDER_THIN,
-                            'color' => ['rgb' => '000000'],
-                        ],
-                    ],
+                    'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF']],
+                    'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER],
+                    'fill' => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '1E5631']],
+                    'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => '000000']]],
                 ]);
 
-                // Data style
                 $sheet->getStyle("A3:{$lastCol}{$totalRows}")->applyFromArray([
-                    'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER,
-                                    'vertical' => Alignment::VERTICAL_CENTER],
-                    'borders' => [
-                        'allBorders' => [
-                            'borderStyle' => Border::BORDER_THIN,
-                            'color' => ['rgb' => '000000'],
-                        ],
-                    ],
+                    'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER],
+                    'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => '000000']]],
                 ]);
 
-                // Wrap text untuk kolom A
                 $sheet->getStyle("A3:A{$totalRows}")
                     ->getAlignment()
                     ->setHorizontal(Alignment::HORIZONTAL_JUSTIFY)
                     ->setWrapText(true);
 
-                // Atur tinggi baris agar teks bisa turun ke bawah
                 for ($row = 3; $row <= $totalRows; $row++) {
-                    $sheet->getRowDimension($row)->setRowHeight(90); // Sesuaikan jika perlu
+                    $sheet->getRowDimension($row)->setRowHeight(90);
                 }
 
-                // Set kolom A dengan lebar tetap
                 $sheet->getColumnDimension('A')->setWidth(50);
 
-                // Kolom lainnya autoSize
                 for ($i = 2; $i <= $totalCols; $i++) {
                     $col = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($i);
                     $sheet->getColumnDimension($col)->setAutoSize(true);

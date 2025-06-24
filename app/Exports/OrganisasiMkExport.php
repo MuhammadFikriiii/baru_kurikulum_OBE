@@ -13,21 +13,29 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
-class OrganisasiMkExport implements FromArray, WithTitle, ShouldAutoSize, WithEvents
+class OrganisasiMkExport implements FromArray, WithTitle, WithHeadings, ShouldAutoSize, WithEvents
 {
     protected $kodeProdi;
+    protected $idTahun;
 
-    public function __construct($kodeProdi)
+    public function __construct($kodeProdi, $idTahun)
     {
         $this->kodeProdi = $kodeProdi;
+        $this->idTahun = $idTahun;
     }
 
     public function array(): array
     {
         $query = DB::table('mata_kuliahs as mk')
             ->select(
-                'mk.kode_mk', 'mk.nama_mk', 'mk.jenis_mk', 'mk.sks_mk',
-                'mk.semester_mk', 'mk.kompetensi_mk', 'prodis.nama_prodi', 'prodis.kode_prodi'
+                'mk.kode_mk',
+                'mk.nama_mk',
+                'mk.jenis_mk',
+                'mk.sks_mk',
+                'mk.semester_mk',
+                'mk.kompetensi_mk',
+                'prodis.nama_prodi',
+                'prodis.kode_prodi'
             )
             ->leftJoin('cpl_mk', 'mk.kode_mk', '=', 'cpl_mk.kode_mk')
             ->leftJoin('capaian_profil_lulusans as cpl', 'cpl_mk.id_cpl', '=', 'cpl.id_cpl')
@@ -35,9 +43,18 @@ class OrganisasiMkExport implements FromArray, WithTitle, ShouldAutoSize, WithEv
             ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
             ->where('prodis.kode_prodi', '=', $this->kodeProdi)
+            ->when($this->idTahun, function ($query) {
+                $query->where('pl.id_tahun', $this->idTahun);
+            })
             ->groupBy(
-                'mk.kode_mk', 'mk.nama_mk', 'mk.jenis_mk', 'mk.sks_mk',
-                'mk.semester_mk', 'mk.kompetensi_mk', 'prodis.nama_prodi', 'prodis.kode_prodi'
+                'mk.kode_mk',
+                'mk.nama_mk',
+                'mk.jenis_mk',
+                'mk.sks_mk',
+                'mk.semester_mk',
+                'mk.kompetensi_mk',
+                'prodis.nama_prodi',
+                'prodis.kode_prodi'
             );
 
         $matakuliah = $query->get();
@@ -52,10 +69,8 @@ class OrganisasiMkExport implements FromArray, WithTitle, ShouldAutoSize, WithEv
         });
 
         $rows = [];
-
-        // Tambah judul di atas heading
-        $rows[] = ['10. Organisasi Matakuliah']; // A1, merged nanti
-        $rows[] = ['Semester', 'Total SKS', 'Jumlah MK', 'Daftar MK']; // Heading di A2:D2
+        $rows[] = ['10. Organisasi Matakuliah']; // Judul di A1
+        $rows[] = ['Semester', 'Total SKS', 'Jumlah MK', 'Daftar MK']; // Header di A2:D2
 
         $totalSks = 0;
         $totalMk = 0;
@@ -79,10 +94,15 @@ class OrganisasiMkExport implements FromArray, WithTitle, ShouldAutoSize, WithEv
             ];
         }
 
-        // Baris total
         $rows[] = ['Total', $totalSks, $totalMk, ''];
 
         return $rows;
+    }
+
+    public function headings(): array
+    {
+        // Supaya tidak error, headings harus tetap didefinisikan walau judul ditaruh manual
+        return []; // Kosong karena baris pertama dan kedua sudah dihandle di array() return
     }
 
     public function title(): string
@@ -96,21 +116,25 @@ class OrganisasiMkExport implements FromArray, WithTitle, ShouldAutoSize, WithEv
             AfterSheet::class => function (AfterSheet $event) {
                 $sheet = $event->sheet->getDelegate();
 
-                // Merge untuk judul
+                // Merge A1:D1 untuk judul
+                $sheet->mergeCells('A1:D1');
+
+                // Style judul
                 $sheet->getStyle('A1')->applyFromArray([
                     'font' => ['bold' => true, 'size' => 14],
                     'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
                 ]);
 
-                // Style header (baris ke-2)
+                // Style header A2:D2
                 $sheet->getStyle('A2:D2')->applyFromArray([
                     'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF']],
                     'fill' => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '166534']],
                     'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
                 ]);
 
-                // Style seluruh tabel (mulai dari A2)
+                // Border dan wrap semua isi tabel (A2:D...)
                 $lastRow = $sheet->getHighestRow();
+
                 $sheet->getStyle("A2:D{$lastRow}")->applyFromArray([
                     'borders' => [
                         'allBorders' => [
@@ -124,7 +148,7 @@ class OrganisasiMkExport implements FromArray, WithTitle, ShouldAutoSize, WithEv
                     ],
                 ]);
 
-                // Baris total di akhir
+                // Style khusus untuk baris terakhir (total)
                 $sheet->getStyle("A{$lastRow}:D{$lastRow}")->applyFromArray([
                     'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF']],
                     'fill' => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '000000']],

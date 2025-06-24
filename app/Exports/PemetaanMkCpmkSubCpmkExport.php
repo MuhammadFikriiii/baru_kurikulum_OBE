@@ -20,10 +20,12 @@ class PemetaanMkCpmkSubCpmkExport implements FromCollection, WithHeadings, WithM
 {
     protected $data;
     protected $kodeProdi;
+    protected $idTahun;
 
-    public function __construct($kodeProdi = null)
+    public function __construct($kodeProdi, $idTahun)
     {
         $this->kodeProdi = $kodeProdi;
+        $this->idTahun = $idTahun;
         $this->data = $this->getData();
     }
 
@@ -52,6 +54,9 @@ class PemetaanMkCpmkSubCpmkExport implements FromCollection, WithHeadings, WithM
             ->leftJoin('capaian_pembelajaran_mata_kuliahs as cpmk', 'cpmk_mk.id_cpmk', '=', 'cpmk.id_cpmk')
             ->leftJoin('sub_cpmks as sub', 'sub.id_cpmk', '=', 'cpmk.id_cpmk')
             ->where('prodis.kode_prodi', $kodeProdi)
+            ->when($this->idTahun, function ($query) {
+                      $query->where('pl.id_tahun', $this->idTahun);
+                  })
             ->select(
                 'mk.kode_mk',
                 'mk.nama_mk',

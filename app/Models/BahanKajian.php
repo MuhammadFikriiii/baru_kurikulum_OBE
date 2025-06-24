@@ -19,8 +19,6 @@ class BahanKajian extends Model
         'referensi_bk',
         'status_bk',
         'knowledge_area',
-        'max_bk',
-        'min_bk'
     ];
     public function capaianprofilLulusans()
     {

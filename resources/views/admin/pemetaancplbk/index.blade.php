@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
-
         <div class="text-center mb-8">
             <h1 class="text-2xl font-bold text-gray-800">Pemetaan CPL - BK</h1>
             <hr class="border-t-4 border-black my-4 mx-auto mb-4">
@@ -19,7 +18,6 @@
             </div>
         @endif
 
-        <!-- Prodi -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-3 gap-4">
             <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                 <select id="prodi" name="kode_prodi"
@@ -37,13 +35,11 @@
                     class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     onchange="updateFilter()">
                     <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
-                    @if (isset($tahun_tersedia))
-                        @foreach ($tahun_tersedia as $thn)
-                            <option value="{{ $thn->id_tahun }}" {{ $id_tahun == $thn->id_tahun ? 'selected' : '' }}>
-                                {{ $thn->nama_kurikulum }} - {{ $thn->tahun }}
-                            </option>
-                        @endforeach
-                    @endif
+                    @foreach ($tahun_tersedia as $thn)
+                        <option value="{{ $thn->id_tahun }}" {{ $id_tahun == $thn->id_tahun ? 'selected' : '' }}>
+                            {{ $thn->nama_kurikulum }} - {{ $thn->tahun }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -76,20 +72,24 @@
             </div>
         @endif
 
-        <!-- Table -->
         <div class="bg-white rounded-lg shadow overflow-visible mt-6">
             @if (empty($kode_prodi))
                 <div class="p-8 text-center text-gray-600">
                     Silakan pilih prodi terlebih dahulu.
                 </div>
-            @elseif($cpls->isEmpty())
+            @elseif ($cpls->isEmpty())
                 <div class="p-8 text-center text-gray-600">
                     <strong>Data belum dibuat untuk prodi ini.</strong>
                 </div>
             @else
                 <style>
+                    input[type="checkbox"]:checked {
+                        background-color: #2563eb;
+                        border-color: #2563eb;
+                    }
+
                     input[type="checkbox"]:checked::before {
-                        content: "✔";
+                        content: "✓";
                         color: white;
                         font-size: 1rem;
                         position: absolute;
@@ -103,9 +103,9 @@
                     <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-visible">
                         <thead class="bg-green-800 text-white">
                             <tr>
-                                <th class="px-4 py-3 text-left"></th>
+                                <th class="px-4 py-2 text-left"></th>
                                 @foreach ($bks as $bk)
-                                    <th class="px-2 py-3 relative group">
+                                    <th class="px-2 py-2 relative group">
                                         <span class="cursor-help">{{ $bk->kode_bk }}</span>
                                         <div
                                             class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
@@ -123,13 +123,12 @@
                         <tbody>
                             @foreach ($cpls as $index => $cpl)
                                 <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border">
-                                    <td class="px-4 py-4 relative group">
+                                    <td class="px-4 py-2 relative group">
                                         <span class="cursor-help">{{ $cpl->kode_cpl }}</span>
                                         <div
                                             class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
-
                                             <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
-                                                {{ $prodiByCpl[$cpl->id_cpl] }}
+                                                {{ $prodiByCpl[$cpl->id_cpl] ?? '-' }}
                                             </div>
                                             <div class="mt-3 px-2 text-justify">
                                                 {{ $cpl->deskripsi_cpl }}
@@ -137,7 +136,7 @@
                                         </div>
                                     </td>
                                     @foreach ($bks as $bk)
-                                        <td class="px-4 py-4 text-center">
+                                        <td class="px-4 py-2 text-center">
                                             <input type="checkbox" disabled
                                                 {{ isset($relasi[$bk->id_bk]) && in_array($cpl->id_cpl, $relasi[$bk->id_bk]->pluck('id_cpl')->toArray()) ? 'checked' : '' }}
                                                 class="h-5 w-5 mx-auto appearance-none rounded border-2 border-blue-600 bg-white checked:bg-white-600 checked:border-blue-600 disabled:opacity-100 disabled:cursor-default relative">
@@ -151,6 +150,7 @@
             @endif
         </div>
     </div>
+
     <script>
         function updateFilter() {
             const prodiSelect = document.getElementById('prodi');
@@ -159,7 +159,6 @@
             const kodeProdi = prodiSelect.value;
             const idTahun = tahunSelect.value;
 
-            // Buat URL dengan parameter yang sesuai
             let url = "{{ route('admin.pemetaancplbk.index') }}";
             let params = [];
 
@@ -175,7 +174,6 @@
                 url += '?' + params.join('&');
             }
 
-            // Redirect ke URL dengan parameter yang benar
             window.location.href = url;
         }
     </script>

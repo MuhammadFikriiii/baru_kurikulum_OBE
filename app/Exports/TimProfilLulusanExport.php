@@ -3,6 +3,8 @@
 namespace App\Exports;
 
 use App\Models\ProfilLulusan;
+use App\Models\Tahun;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
@@ -16,37 +18,39 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 
-class TimProfilLulusanExport implements 
-    FromCollection, 
-    WithHeadings, 
-    WithStyles, 
+class TimProfilLulusanExport implements
+    FromCollection,
+    WithHeadings,
+    WithStyles,
     WithColumnWidths,
     WithTitle,
     WithMapping,
     WithEvents
 {
     protected $kodeProdi;
+    protected $idTahun;
 
-    public function __construct($kodeProdi)
+    public function __construct($kodeProdi, $idTahun)
     {
         $this->kodeProdi = $kodeProdi;
+        $this->idTahun = $idTahun;
     }
 
     public function collection()
     {
         $data = ProfilLulusan::where('kode_prodi', $this->kodeProdi)
+            ->where('id_tahun', $this->idTahun)
             ->with('prodi')
             ->get();
-            
-        // Add row number to each item
+
         $counter = 1;
-        $data->each(function($item) use (&$counter) {
+        $data->each(function ($item) use (&$counter) {
             $item->row_num = $counter++;
         });
-        
+
         return $data;
     }
-    
+
     public function map($item): array
     {
         return [
@@ -72,32 +76,27 @@ class TimProfilLulusanExport implements
             'SUMBER'
         ];
     }
-    
-    // Menentukan lebar kolom spesifik berdasarkan konten
+
     public function columnWidths(): array
     {
         return [
-            'A' => 12,     // Kode Profil Lulusan
-            'B' => 20,     // Prodi
-            'C' => 40,     // Deskripsi Profil Lulusan
-            'D' => 35,     // Profesi
-            'E' => 12,     // Unsur
-            'F' => 25,     // Keterangan
-            'G' => 15,     // Sumber
+            'A' => 12,
+            'B' => 20,
+            'C' => 40,
+            'D' => 35,
+            'E' => 12,
+            'F' => 25,
+            'G' => 15,
         ];
     }
 
     public function styles(Worksheet $sheet)
     {
-        // Get last row
         $lastRow = $sheet->getHighestRow();
-        
+
         // Style for headers
-        $headerStyle = [
-            'font' => [
-                'bold' => true,
-                'color' => ['rgb' => 'FFFFFF'],
-            ],
+        $sheet->getStyle('A2:G2')->applyFromArray([
+            'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF']],
             'alignment' => [
                 'horizontal' => Alignment::HORIZONTAL_CENTER,
                 'vertical' => Alignment::VERTICAL_CENTER,
@@ -105,86 +104,67 @@ class TimProfilLulusanExport implements
             ],
             'fill' => [
                 'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => '1E6F41'], // Dark green like in the screenshot
+                'startColor' => ['rgb' => '1E6F41'],
             ],
-            'borders' => [
-                'allBorders' => [
-                    'borderStyle' => Border::BORDER_THIN,
-                ],
-            ],
-        ];
-        
-        // Style for data rows
-        $dataStyle = [
-            'borders' => [
-                'allBorders' => [
-                    'borderStyle' => Border::BORDER_THIN,
-                ],
-            ],
-            'alignment' => [
-                'vertical' => Alignment::VERTICAL_TOP,
-                'wrapText' => true, // This makes text wrap instead of overflow
-            ],
-        ];
-        
-        // Apply styles
-        $sheet->getStyle('A2:G2')->applyFromArray($headerStyle);
-        $sheet->getStyle('A3:G' . $lastRow)->applyFromArray($dataStyle);
-        
+            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]],
+        ]);
+
+        // Style for data
+        $sheet->getStyle("A3:G{$lastRow}")->applyFromArray([
+            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]],
+            'alignment' => ['vertical' => Alignment::VERTICAL_TOP, 'wrapText' => true],
+        ]);
+
         // Set row height for header
         $sheet->getRowDimension(2)->setRowHeight(30);
-        
-        // Set dynamic row height for data rows based on content length
+
+        // Dynamic height
         for ($i = 3; $i <= $lastRow; $i++) {
-            // Check for text length in columns with potentially long content (C and D)
-            $descriptionLength = strlen($sheet->getCell('C' . $i)->getValue());
-            $professionLength = strlen($sheet->getCell('D' . $i)->getValue());
-            
-            // Set higher rows for longer content
-            $maxLength = max($descriptionLength, $professionLength);
-            if ($maxLength > 300) {
+            $desc = strlen($sheet->getCell("C{$i}")->getValue());
+            $prof = strlen($sheet->getCell("D{$i}")->getValue());
+            $max = max($desc, $prof);
+
+            if ($max > 300) {
                 $sheet->getRowDimension($i)->setRowHeight(120);
-            } elseif ($maxLength > 200) {
+            } elseif ($max > 200) {
                 $sheet->getRowDimension($i)->setRowHeight(100);
-            } elseif ($maxLength > 100) {
+            } elseif ($max > 100) {
                 $sheet->getRowDimension($i)->setRowHeight(80);
             } else {
                 $sheet->getRowDimension($i)->setRowHeight(60);
             }
         }
-        
-        // Add alternating row colors
+
+        // Alternating row color
         for ($i = 3; $i <= $lastRow; $i++) {
             if ($i % 2 == 0) {
-                $sheet->getStyle('A' . $i . ':G' . $i)->getFill()
-                    ->setFillType(Fill::FILL_SOLID)
+                $sheet->getStyle("A{$i}:G{$i}")->getFill()->setFillType(Fill::FILL_SOLID)
                     ->getStartColor()->setRGB('F0F0F0');
             }
         }
-        
-        // Center align specific columns
-        $sheet->getStyle('A3:A' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle('E3:E' . $lastRow)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        
+
+        // Alignment khusus untuk kolom tertentu
+        $sheet->getStyle("A3:A{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle("E3:E{$lastRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
         return [];
     }
-    
+
     public function title(): string
     {
         return 'Profil Lulusan';
     }
 
-    /**
-     * Register events
-     */
     public function registerEvents(): array
     {
         return [
-            BeforeSheet::class => function(BeforeSheet $event) {
+            BeforeSheet::class => function (BeforeSheet $event) {
+                $tahun = Tahun::find($this->idTahun);
+                $namaTahun = $tahun->tahun ?? 'Tahun Tidak Dikenal';
+                $kurikulum = $tahun->nama_kurikulum ?? '-';
+
                 $sheet = $event->sheet;
-                
-                // Title in the first row
-                $sheet->setCellValue('A1', '1. Profil Lulusan');
+                $sheet->setCellValue('A1', "1. Profil Lulusan - Tahun: {$namaTahun} - Kurikulum: {$kurikulum}");
                 $sheet->mergeCells('A1:G1');
                 $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(12);
                 $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);

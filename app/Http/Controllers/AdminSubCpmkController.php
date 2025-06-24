@@ -6,6 +6,7 @@ use App\Models\CapaianPembelajaranMataKuliah;
 use Illuminate\Http\Request;
 use App\Models\SubCpmk;
 use Illuminate\Support\Facades\DB;
+use App\Models\Tahun;
 
 class AdminSubCpmkController extends Controller
 {
@@ -15,22 +16,18 @@ class AdminSubCpmkController extends Controller
         $kode_prodi = $request->get('kode_prodi');
         $id_tahun = $request->get('id_tahun');
 
-        $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
+        $tahun_tersedia = Tahun::orderBy('tahun', 'desc')->get();
+
         if (empty($kode_prodi)) {
             return view('admin.subcpmk.index', [
                 'kode_prodi' => '',
                 'prodis' => $prodis,
                 'prodi' => null,
                 'subcpmks' => [],
-                'id_tahun' => '',
-                'tahun_tersedia' => collect(),
+                'id_tahun' => $id_tahun,
+                'tahun_tersedia' => $tahun_tersedia,
+                'dataKosong' => true,
             ]);
-        }
-
-        if (!$kode_prodi) {
-            // Jika tidak ada prodi dipilih, kirim data kosong untuk cpmks
-            $cpmks = collect(); // Collection kosong
-            return view("admin.subcpmk.index", compact("prodis", "kode_prodi", "id_tahun", "tahun_tersedia", "subcpmks"));
         }
 
         $query = DB::table('sub_cpmks as sub')
@@ -49,23 +46,26 @@ class AdminSubCpmkController extends Controller
                 'sub.uraian_cpmk',
                 'cpmk.deskripsi_cpmk',
                 'prodis.nama_prodi',
-                'tahun.tahun',
+                'tahun.tahun'
             );
 
-        if ($kode_prodi) {
-            $query->where('prodis.kode_prodi', $kode_prodi);
-        }
-
-        // Filter berdasarkan tahun jika ada
         if ($id_tahun) {
             $query->where('pl.id_tahun', $id_tahun);
         }
 
         $subcpmks = $query->get();
-        $dataKosong = $subcpmks->isEmpty() && $kode_prodi;
+        $dataKosong = $subcpmks->isEmpty();
 
-        return view('admin.subcpmk.index', compact('subcpmks', 'prodis', 'kode_prodi', 'id_tahun', 'tahun_tersedia', 'dataKosong'));
+        return view('admin.subcpmk.index', compact(
+            'subcpmks',
+            'prodis',
+            'kode_prodi',
+            'id_tahun',
+            'tahun_tersedia',
+            'dataKosong'
+        ));
     }
+
 
     public function create()
     {
@@ -188,7 +188,7 @@ class AdminSubCpmkController extends Controller
                 'prodis' => $prodis,
                 'prodi' => null,
                 'query' => [],
-                'id_tahun' => '',
+                'id_tahun' => $id_tahun,
                 'tahun_tersedia' => $tahun_tersedia, // Ubah dari collect() menjadi $tahun_tersedia
             ]);
         }

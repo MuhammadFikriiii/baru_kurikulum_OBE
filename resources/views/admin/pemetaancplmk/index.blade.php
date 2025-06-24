@@ -35,13 +35,11 @@
                     class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     onchange="updateFilter()">
                     <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
-                    @if (isset($tahun_tersedia))
-                        @foreach ($tahun_tersedia as $thn)
-                            <option value="{{ $thn->id_tahun }}" {{ $id_tahun == $thn->id_tahun ? 'selected' : '' }}>
-                                {{ $thn->nama_kurikulum }} - {{ $thn->tahun }}
-                            </option>
-                        @endforeach
-                    @endif
+                    @foreach ($tahun_tersedia as $thn)
+                        <option value="{{ $thn->id_tahun }}" {{ $id_tahun == $thn->id_tahun ? 'selected' : '' }}>
+                            {{ $thn->nama_kurikulum }} - {{ $thn->tahun }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -58,7 +56,7 @@
                     @endif
                     @if ($id_tahun)
                         @php
-                            $selected_tahun = $tahun_tersedia->where('id_tahun', $id_tahun)->first();
+                            $selected_tahun = $tahun_tersedia->firstWhere('id_tahun', $id_tahun);
                         @endphp
                         <span
                             class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
@@ -146,13 +144,14 @@
                 <p class="mt-3 italic text-red-500">*arahkan cursor pada kode cpl atau kode mk untuk melihat deskripsi*</p>
             </div>
         @else
-        <div class="bg-white rounded-lg shadow overflow-hidden mt-1">
-            <div class="p-8 text-center text-gray-600">
-                Silakan pilih prodi terlebih dahulu.
+            <div class="bg-white rounded-lg shadow overflow-hidden mt-1">
+                <div class="p-8 text-center text-gray-600">
+                    Silakan pilih prodi terlebih dahulu.
+                </div>
             </div>
-        </div>
         @endif
     </div>
+
     <script>
         function updateFilter() {
             const prodiSelect = document.getElementById('prodi');
@@ -161,7 +160,6 @@
             const kodeProdi = prodiSelect.value;
             const idTahun = tahunSelect.value;
 
-            // Buat URL dengan parameter yang sesuai
             let url = "{{ route('admin.pemetaancplmk.index') }}";
             let params = [];
 
@@ -177,7 +175,6 @@
                 url += '?' + params.join('&');
             }
 
-            // Redirect ke URL dengan parameter yang benar
             window.location.href = url;
         }
     </script>

@@ -24,21 +24,19 @@ class AdminProdiController extends Controller
         return view('admin.prodi.create', compact('jurusans'));
     }
 
-
     public function store(Request $request)
     {
         $request->validate([
             'kode_prodi' => 'required|string|max:10|unique:prodis,kode_prodi',
-            'id_jurusan' => 'exists:jurusans,id_jurusan',
+            'id_jurusan' => 'required|exists:jurusans,id_jurusan',
             'nama_prodi' => 'required|string|max:100',
-            'pt_prodi' => 'required|string|max:100',
             'tgl_berdiri_prodi' => 'required|date',
             'penyelenggaraan_prodi' => 'required|date',
             'nomor_sk' => 'required|string',
             'tanggal_sk' => 'required|date',
-            'peringkat_akreditasi' => 'required|string',
+            'peringkat_akreditasi' => ['required', Rule::in(['A', 'B', 'C'])],
             'nomor_sk_banpt' => 'required|string',
-            'jenjang_pendidikan' => 'required|string',
+            'jenjang_pendidikan' => ['required', Rule::in(['D3', 'D4'])],
             'gelar_lulusan' => 'required|string',
             'telepon_prodi' => 'nullable|string',
             'faksimili_prodi' => 'nullable|string',
@@ -60,16 +58,15 @@ class AdminProdiController extends Controller
     {
         $request->validate([
             'kode_prodi' => ['required', 'string', 'max:10', Rule::unique('prodis', 'kode_prodi')->ignore($prodi->kode_prodi, 'kode_prodi')],
-            'id_jurusan' => 'exists:jurusans,id_jurusan',
+            'id_jurusan' => 'required|exists:jurusans,id_jurusan',
             'nama_prodi' => 'required|string|max:100',
-            'pt_prodi' => 'required|string|max:100',
             'tgl_berdiri_prodi' => 'required|date',
             'penyelenggaraan_prodi' => 'required|date',
             'nomor_sk' => 'required|string',
             'tanggal_sk' => 'required|date',
-            'peringkat_akreditasi' => 'nullable|string',
+            'peringkat_akreditasi' => ['required', Rule::in(['A', 'B', 'C'])],
             'nomor_sk_banpt' => 'required|string',
-            'jenjang_pendidikan' => 'required|string',
+            'jenjang_pendidikan' => ['required', Rule::in(['D3', 'D4'])],
             'gelar_lulusan' => 'required|string',
             'telepon_prodi' => 'nullable|string',
             'faksimili_prodi' => 'nullable|string',
@@ -98,7 +95,6 @@ class AdminProdiController extends Controller
             ->unique();
 
         DB::table('cpl_pl')->whereIn('id_pl', $plIds)->delete();
-
         ProfilLulusan::whereIn('id_pl', $plIds)->delete();
 
         foreach ($cplIds as $id_cpl) {
@@ -107,8 +103,9 @@ class AdminProdiController extends Controller
                 CapaianProfilLulusan::where('id_cpl', $id_cpl)->delete();
             }
         }
+
         DB::table('prodis')->where('kode_prodi', $kode_prodi)->delete();
 
-        return redirect()->route('admin.prodi.index')->with('sukses', 'Prodi Berhasil Dihapus Beserta Data Terkait Juga');
+        return redirect()->route('admin.prodi.index')->with('sukses', 'Prodi berhasil dihapus beserta data terkait.');
     }
 }

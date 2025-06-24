@@ -43,7 +43,7 @@
 
             <label for="deskripsi_bk">Deskripsi Bahan Kajian:</label>
             <input id="deskripsi_bk" type="text" name="deskripsi_bk"
-                class="border border-black p-3 w-full mt-1 mb-3 rounded-lg" required>
+                class="border border-black p-3 w-full mt-1 mb-3 rounded-lg">
             <br>
 
             <label for="referensi_bk">Referensi Bahan Kajian:</label>
@@ -60,7 +60,7 @@
 
             <label for="knowledge_area">knowledge Area Bahan Kajian:</label>
             <input id="knowledge_area" type="text" name="knowledge_area"
-                class="border border-black p-3 w-full mt-1 mb-3 rounded-lg" required>
+                class="border border-black p-3 w-full mt-1 mb-3 rounded-lg">
             <br>
 
             <button type="submit"

@@ -17,20 +17,22 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 
-class TimCapaianPembelajaranLulusanExport implements 
-    FromCollection, 
-    WithHeadings, 
-    WithStyles, 
-    WithColumnWidths, 
+class TimCapaianPembelajaranLulusanExport implements
+    FromCollection,
+    WithHeadings,
+    WithStyles,
+    WithColumnWidths,
     WithTitle,
     WithMapping,
     WithEvents
 {
     protected $kodeProdi;
+    protected $idTahun;
 
-    public function __construct($kodeProdi)
+    public function __construct($kodeProdi, $idTahun)
     {
         $this->kodeProdi = $kodeProdi;
+        $this->idTahun = $idTahun;
     }
 
     public function collection()
@@ -41,6 +43,9 @@ class TimCapaianPembelajaranLulusanExport implements
             ->join('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
             ->join('prodis', 'profil_lulusans.kode_prodi', '=', 'prodis.kode_prodi')
             ->where('profil_lulusans.kode_prodi', $this->kodeProdi)
+            ->when($this->idTahun, function ($query) {
+                $query->where('profil_lulusans.id_tahun', $this->idTahun);
+            })
             ->select(
                 'prodis.nama_prodi as prodi',
                 'capaian_profil_lulusans.kode_cpl',
@@ -168,9 +173,9 @@ class TimCapaianPembelajaranLulusanExport implements
     public function registerEvents(): array
     {
         return [
-            BeforeSheet::class => function(BeforeSheet $event) {
+            BeforeSheet::class => function (BeforeSheet $event) {
                 $sheet = $event->sheet;
-                
+
                 // Title in the first row
                 $sheet->setCellValue('A1', '2. CPL Kompetensi Utama Program Studi Vokasi Teknik Informatika');
                 $sheet->mergeCells('A1:E1');

@@ -4,42 +4,40 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Tahun;
 
 class AdminPemetaanCplBkController extends Controller
 {
     public function index(Request $request)
     {
-        $prodis = DB::table('prodis')->get();
         $kode_prodi = $request->get('kode_prodi');
         $id_tahun = $request->get('id_tahun');
 
+        // Ambil semua prodi
+        $prodis = DB::table('prodis')->get();
+
+        // Ambil semua tahun yang tersedia (tidak tergantung prodi)
+        $tahun_tersedia = Tahun::orderBy('tahun', 'desc')->get();
+
+        // Jika belum pilih prodi, kosongkan CPL & BK
         if (empty($kode_prodi)) {
             return view('admin.pemetaancplbk.index', [
                 'cpls' => collect(),
                 'bks' => collect(),
                 'relasi' => [],
                 'kode_prodi' => '',
-                'id_tahun' => '',
+                'id_tahun' => $id_tahun,
                 'prodis' => $prodis,
                 'prodi_aktif' => null,
                 'prodiByCpl' => [],
-                'tahun_tersedia' => collect(),
+                'tahun_tersedia' => $tahun_tersedia,
             ]);
         }
 
-        // Ambil prodi aktif
+        // Ambil data prodi aktif
         $prodi_aktif = $prodis->where('kode_prodi', $kode_prodi)->first();
 
-        // Ambil tahun yang tersedia berdasarkan prodi yang dipilih
-        $tahun_tersedia = DB::table('profil_lulusans as pl')
-            ->join('tahun', 'pl.id_tahun', '=', 'tahun.id_tahun')
-            ->where('pl.kode_prodi', $kode_prodi)
-            ->select('tahun.id_tahun', 'tahun.nama_kurikulum', 'tahun.tahun')
-            ->distinct()
-            ->orderBy('tahun.tahun', 'desc')
-            ->get();
-
-        // Ambil semua nama prodi per id_cpl (untuk tooltip di tabel)
+        // Ambil semua nama prodi per id_cpl (tooltip di tabel)
         $prodiByCpl = DB::table('cpl_pl')
             ->join('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
             ->join('prodis', 'profil_lulusans.kode_prodi', '=', 'prodis.kode_prodi')
@@ -67,14 +65,13 @@ class AdminPemetaanCplBkController extends Controller
 
         $cplIds = $cpls->pluck('id_cpl');
 
-        // Relasi CPL - BK
+        // Ambil relasi dan data BK
         if ($cplIds->isNotEmpty()) {
             $relasi = DB::table('cpl_bk')
                 ->whereIn('id_cpl', $cplIds)
                 ->get()
                 ->groupBy('id_bk');
 
-            // Ambil BK yang terhubung dengan CPL prodi tersebut
             $bks = DB::table('bahan_kajians as bk')
                 ->join('cpl_bk as cb', 'bk.id_bk', '=', 'cb.id_bk')
                 ->whereIn('cb.id_cpl', $cplIds)

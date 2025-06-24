@@ -92,7 +92,7 @@ class AdminBahanKajianController extends Controller
             'deskripsi_bk' => 'nullable|string',
             'referensi_bk' => 'required|string|max:50',
             'status_bk' => 'required|in:core,elective',
-            'knowledge_area' => 'required|string',
+            'knowledge_area' => 'nullable|string',
         ]);
 
         $bk = BahanKajian::create($request->only(['kode_bk', 'nama_bk', 'deskripsi_bk', 'referensi_bk', 'status_bk', 'knowledge_area']));
@@ -135,7 +135,7 @@ class AdminBahanKajianController extends Controller
             'deskripsi_bk' => 'nullable|string',
             'referensi_bk' => 'required|string|max:50',
             'status_bk' => 'required|in:core,elective',
-            'knowledge_area' => 'required|string',
+            'knowledge_area' => 'nullable|string',
         ]);
 
         $bahankajian = BahanKajian::findOrFail($id_bk);
