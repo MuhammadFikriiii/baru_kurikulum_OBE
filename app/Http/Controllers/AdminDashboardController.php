@@ -15,18 +15,31 @@ class AdminDashboardController extends Controller
         $tahun_progress = $request->get('tahun_progress'); // untuk progress bar
 
         $availableYears = Tahun::orderBy('tahun', 'desc')->get();
+
         $prodis = Prodi::with(['profillulusans' => function ($query) use ($tahun_progress) {
             if ($tahun_progress) {
                 $query->where('id_tahun', $tahun_progress);
             }
         }])->get();
 
-        $prodicount = Prodi::count();
+        // Hitung total prodi hanya jika pilih tahun, agar summary 0 semua sebelum difilter
+        $prodicount = $tahun_progress ? Prodi::count() : 0;
         $ProdiSelesai = 0;
         $ProdiProgress = 0;
         $ProdiBelumMulai = 0;
 
         foreach ($prodis as $prodi) {
+            if (!$tahun_progress) {
+                $prodi->avg_progress = 0;
+                $prodi->progress_pl = 0;
+                $prodi->progress_cpl = 0;
+                $prodi->progress_bk = 0;
+                $prodi->progress_sks_mk = 0;
+                $prodi->progress_cpmk = 0;
+                $prodi->progress_subcpmk = 0;
+                continue;
+            }
+
             $plIds = $prodi->profillulusans->pluck('id_pl')->toArray();
 
             $prodi->pl_count = count($plIds);
@@ -34,7 +47,9 @@ class AdminDashboardController extends Controller
             $prodi->cpl_count = DB::table('cpl_pl')
                 ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
                 ->whereIn('pl.id_pl', $plIds)
-                ->when($tahun_progress, fn($q) => $q->where('pl.id_tahun', $tahun_progress))
+                ->when($tahun_progress, function ($q) use ($tahun_progress) {
+                    return $q->where('pl.id_tahun', $tahun_progress);
+                })
                 ->distinct()
                 ->count('id_cpl');
 
