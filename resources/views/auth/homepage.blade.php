@@ -23,6 +23,9 @@
   <link rel="stylesheet" type="text/css"
     href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
+    <!-- Pastikan ini ada sebelum script Anda -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
@@ -98,7 +101,6 @@
       goToSlide(currentSlide);
     }, 5000); // Auto slide setiap 5 detik
   </script>
-
 
 </head>
 
@@ -550,7 +552,6 @@
   </div>
 </section>
 
-
 <style>
   .swiper-button-prev::after,
   .swiper-button-next::after {
@@ -573,7 +574,6 @@
     background: #4f46e5;
   }
 </style>
-
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
@@ -651,7 +651,7 @@
         </div>
 
         <!-- Email -->
-        <div class="footer-item">
+<div class="footer-item">
           <h4 class="font-semibold text-lg mb-6">Tentang Informasi</h4>
           <p class="text-gray-400 mb-4">Dapatkan informasi, Tim kami siap menjawab pertanyaan Anda via email.</p>
           <div action="#" method="get" class="flex items-center space-x-2">
@@ -754,65 +754,74 @@
             }
           </style>
 
-          <!-- Button to trigger popup -->
-          <button id="openPopup" type="button"
+      
+          <button id="footerPopup" type="button"
             class=" bg-[#5460B5] text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition transform hover:scale-[1.03] shadow-md flex items-center">
             <i class="fas fa-envelope mr-2 flex items-center"></i> Hubungi Kami
           </button>
 
-          <!-- JavaScript to handle popup -->
+         
           <script>
-            // Inisialisasi EmailJS dengan Public Key Anda
+            
             emailjs.init("MkDTippaiZtJd2cUV"); // Gunakan public key yang sesuai dengan akun Anda
 
             document.addEventListener('DOMContentLoaded', function () {
-              const popupOverlay = document.getElementById('popupOverlay');
-              const openPopup = document.getElementById('openPopup');
-              const closePopup = document.getElementById('closePopup');
-              const emailForm = document.getElementById('emailForm');
 
-              // Open popup with animation
-              openPopup.addEventListener('click', function () {
-                popupOverlay.classList.remove('hidden');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling
-              });
+            emailjs.init("MkDTippaiZtJd2cUV");
 
-              // Close popup
-              closePopup.addEventListener('click', function () {
-                popupOverlay.classList.add('hidden');
-                document.body.style.overflow = ''; // Re-enable scrolling
-              });
+            // Tangani popup hero section
+            const heroPopupBtn = document.getElementById('openPopup');
+            const footerPopupBtn = document.getElementById('footerPopup');
+            const popupOverlay = document.getElementById('popupOverlay');
+            const closePopup = document.getElementById('closePopup');
+            const emailForm = document.getElementById('emailForm');
 
-              // Close when clicking outside
-              popupOverlay.addEventListener('click', function (e) {
-                if (e.target === popupOverlay) {
-                  popupOverlay.classList.add('hidden');
-                  document.body.style.overflow = ''; // Re-enable scrolling
-                }
-              });
+            
+            function openPopup() {
+              popupOverlay.classList.remove('hidden');
+              document.body.style.overflow = 'hidden';
+            }
 
-              // Event listener untuk submit form
-              emailForm.addEventListener("submit", function (event) {
-                event.preventDefault(); // Mencegah form melakukan reload halaman
-                // Kirim email menggunakan EmailJS dengan ID form dan template
-                emailjs.sendForm("service_rw9xkqw", "template_z37v5ih", this).then(
-                  function (response) {
-                    alert("Pesan berhasil dikirim!");
-                    emailForm.reset(); // Reset form setelah berhasil mengirim
-                    popupOverlay.classList.add('hidden');
-                    document.body.style.overflow = ''; // Re-enable scrolling
-                  },
-                  function (error) {
-                    alert("Terjadi kesalahan: " + error.text);
-                  }
-                );
-              });
+            
+            function closePopupFunc() {
+              popupOverlay.classList.add('hidden');
+              document.body.style.overflow = '';
+            }
+
+          
+            if (heroPopupBtn) heroPopupBtn.addEventListener('click', openPopup);
+            if (footerPopupBtn) footerPopupBtn.addEventListener('click', openPopup);
+            if (closePopup) closePopup.addEventListener('click', closePopupFunc);
+
+            popupOverlay.addEventListener('click', function(e) {
+              if (e.target === popupOverlay) {
+                closePopupFunc();
+              }
             });
+
+            if (emailForm) {
+              emailForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+                emailjs.sendForm("service_rw9xkqw", "template_z37v5ih", this)
+                  .then(
+                    function(response) {
+                      alert("Pesan berhasil dikirim!");
+                      emailForm.reset();
+                      closePopupFunc();
+                    },
+                    function(error) {
+                      alert("Terjadi kesalahan: " + error.text);
+                    }
+                  );
+              });
+            }
+          });
+          
           </script>
 
         </div>
 
-      </div>
+</div>
 
       <hr class="mt-10 border-gray-400">
       <!-- Copyright Section -->
