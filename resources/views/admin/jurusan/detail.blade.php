@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="mx-20">
-    <h2 class="font-extrabold text-4xl mb-6 text-center">Detail Jurusan</h2>
-    <hr class="w-full border border-black mb-4">
+<div class="mx-20 mt-6">
+    <h2 class="font-extrabold text-3xl mb-5 text-center">Detail Jurusan</h2>
+    <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
 
-    <div class="bg-white p-6 rounded-lg shadow-md">
+    <div class="bg-white px-6 pb-6 rounded-lg shadow-md">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
             <!-- Kolom Pertama -->
             <div class="space-y-4">

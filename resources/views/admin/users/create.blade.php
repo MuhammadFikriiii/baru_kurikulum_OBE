@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="mx-20">
-    <h2 class="font-extrabold text-4xl mb-6 text-center">Tambah User</h2>
-    <hr class="w-full border border-black mb-4">
+<div class="mx-20 mt-6">
+    <h2 class="font-extrabold text-3xl mb-5 text-center">Tambah User</h2>
+    <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
 
-<div class="bg-white p-6 rounded-lg shadow-md">
+<div class="bg-white px-6 pb-6 rounded-lg shadow-md">
     
     @if ($errors->any())
     <div style="color: red;">
@@ -90,11 +90,11 @@
         <!-- Tombol Aksi -->
         <div class="flex justify-end space-x-5 pt-6">
             <a href="{{ route('admin.users.index') }}" 
-               class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition duration-200">
+               class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-200">
                 Kembali
             </a>
             <button type="submit" 
-                    class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-200">
+                    class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition duration-200">
                 Simpan
             </button>
         </div>

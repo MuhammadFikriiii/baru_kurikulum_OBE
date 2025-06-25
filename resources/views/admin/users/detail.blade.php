@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="mx-20">
-    <h2 class="font-extrabold text-4xl mb-6 text-center">Detail User</h2>
-    <hr class="w-full border border-black mb-4">
+<div class="mx-20 mt-6">
+    <h2 class="font-extrabold text-3xl mb-5 text-center">Detail User</h2>
+    <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 bg-white p-6 rounded-lg shadow-md">
         <!-- Kolom Pertama -->
