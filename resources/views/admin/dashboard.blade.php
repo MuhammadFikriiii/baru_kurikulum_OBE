@@ -12,24 +12,25 @@
             <hr class="border-t-4 border-black my-5">
         </div>
 
+
         <!-- Filter dan Pencarian -->
-        <div class="flex flex-col md:flex-row justify-between mb-6">
-            <div class="flex space-x-2 mb-3 md:mb-0">
+        <div class="mb-10 flex flex-col sm:flex-row sm:items-center flex-wrap gap-4 justify-between">
+            <div class="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-5 items-stretch">
                 @if (Auth::user()->role === 'admin' && isset($prodis))
                     <form id="exportForm" action="{{ route('admin.export.excel') }}" method="GET"
-                        class="flex items-center gap-4">
+                        class="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-4 items-stretch">
                         <!-- Select Prodi -->
                         <select name="kode_prodi" id="prodiSelect" required
-                            class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                            class="min-w-[250px] flex-1 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
                             <option value="" selected disabled>Pilih Prodi</option>
                             @foreach ($prodis as $prodi)
                                 <option value="{{ $prodi->kode_prodi }}">{{ $prodi->nama_prodi }}</option>
                             @endforeach
                         </select>
-
+        
                         <!-- Select Tahun -->
                         <select name="id_tahun" id="tahunSelect" required
-                            class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                            class="min-w-[170px] flex-1 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
                             <option value="" disabled {{ empty($id_tahun) ? 'selected' : '' }}>Pilih Tahun</option>
                             @foreach ($availableYears as $th)
                                 <option value="{{ $th->id_tahun }}" {{ $id_tahun == $th->id_tahun ? 'selected' : '' }}>
@@ -37,17 +38,18 @@
                                 </option>
                             @endforeach
                         </select>
-
+        
                         <!-- Tombol Export -->
                         <button type="submit"
-                            class="bg-green-600 text-white px-5 font-bold py-2 rounded-md hover:bg-green-800">
+                            class="bg-green-600 text-white px-4 sm:px-5 font-bold py-2 rounded-md hover:bg-green-800 whitespace-nowrap">
                             <i class="fas fa-file-excel mr-2"></i>Excel
                         </button>
                     </form>
                 @else
-                    <form action="{{ route('tim.export.excel') }}" method="GET" class="flex gap-4 items-center">
+                    <form action="{{ route('tim.export.excel') }}" method="GET"
+                        class="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-4 items-stretch">
                         <select name="id_tahun" id="tahunSelect" required
-                            class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                            class="min-w-0 flex-1 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
                             <option value="" disabled {{ empty($id_tahun) ? 'selected' : '' }}>Pilih Tahun</option>
                             @foreach ($availableYears as $th)
                                 <option value="{{ $th->id_tahun }}" {{ $id_tahun == $th->id_tahun ? 'selected' : '' }}>
@@ -55,24 +57,29 @@
                                 </option>
                             @endforeach
                         </select>
-
+        
                         <button type="submit"
-                            class="bg-green-600 text-white px-5 font-bold py-2 rounded-md hover:bg-green-800">
+                            class="bg-green-600 text-white px-4 sm:px-5 font-bold py-2 rounded-md hover:bg-green-800 whitespace-nowrap">
                             <i class="fas fa-file-excel mr-2"></i>Excel
                         </button>
                     </form>
                 @endif
             </div>
-
-            <!-- Search -->
-            <div class="relative ">
-                <input type="text" id="search-prodi-dashboard" placeholder="Search..."
-                    class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md pl-10 focus:outline-none focus:ring-2 focus:ring-green-500">
-                <span class="absolute left-3 top-2.5 text-gray-400">
+        
+       <!-- Search -->
+        <div class="sm:min-w-[250px] w-full sm:w-auto">
+            <div class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
+                <span class="pl-3 text-gray-400">
                     <i class="fas fa-search"></i>
                 </span>
+                <input type="text" id="search-prodi-dashboard" placeholder="Search..."
+                    class="px-3 py-2 w-full focus:outline-none bg-transparent" />
             </div>
         </div>
+
+        </div>
+        
+
 
         <!-- Summary Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
