@@ -55,11 +55,11 @@
 
             <!-- Tombol Aksi -->
             <div class="flex justify-end items-end pt-10">
-                <a href="" 
+                <a href="{{ route('admin.profillulusan.edit', $id_pl->id_pl) }}" 
                    class="px-5 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg transition duration-200">
                     Edit
                 </a>
-                <form action="" method="POST" class="ml-4">
+                <form action="{{ route('admin.profillulusan.destroy', $id_pl->id_pl) }}" method="POST" class="ml-4">
                     @csrf
                     @method('DELETE')
                     <button type="submit"
