@@ -2,10 +2,9 @@
 
 @section('content')
 
-    <div class="mr-20 ml-20">
-
-        <h2 class="text-4xl font-extrabold mb-4 text-center">Tambah Capaian Pembelajaran Lulusan</h2>
-        <hr class="w-full border border-black mb-4">
+<div class="mx-20 mt-6">
+    <h2 class="font-extrabold text-3xl mb-5 text-center">Tambah Capaian Pembelajaran Lulusan</h2>
+    <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
 
         @if ($errors->any())
             <div style="color: red;">

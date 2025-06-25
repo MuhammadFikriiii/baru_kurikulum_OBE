@@ -2,13 +2,11 @@
 
 @section('content')
 <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
-    
-    <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-gray-800">Daftar Capaian Pembelajaran Lulusan</h1>
+    <div class="text-center mb-6 md:mb-8">
+        <h1 class="text-xl md:text-3xl font-bold text-gray-700">Daftar Capaian Pembelajaran Lulusan</h1>
         <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
     </div>
 
-    
     @if(session('success'))
     <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-6 text-center relative max-w-4xl mx-auto">
         <span class="font-bold">{{ session('success') }}</span>
