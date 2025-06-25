@@ -763,11 +763,11 @@
          
           <script>
             
-            emailjs.init("MkDTippaiZtJd2cUV"); // Gunakan public key yang sesuai dengan akun Anda
+            emailjs.init("ifTKxlRZB0TeAe3c2"); // Gunakan public key yang sesuai dengan akun Anda
 
             document.addEventListener('DOMContentLoaded', function () {
 
-            emailjs.init("MkDTippaiZtJd2cUV");
+            emailjs.init("ifTKxlRZB0TeAe3c2");
 
             // Tangani popup hero section
             const heroPopupBtn = document.getElementById('openPopup');
@@ -802,7 +802,7 @@
             if (emailForm) {
               emailForm.addEventListener("submit", function(event) {
                 event.preventDefault();
-                emailjs.sendForm("service_rw9xkqw", "template_z37v5ih", this)
+                emailjs.sendForm("service_juidzkf", "template_u1onvyd", this)
                   .then(
                     function(response) {
                       alert("Pesan berhasil dikirim!");

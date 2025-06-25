@@ -2,8 +2,13 @@
 
 @section('content')
     <div class="mr-20 ml-20">
+
         <h2 class="text-4xl font-extrabold text-center mb-4">Detail Profil Lulusan</h2>
         <hr class="w-full border border-black mb-4">
+
+        <label for="tahun" class="block text-lg font-semibold mb-2 text-gray-700">Tahun</label>
+        <input type="text" id="tahun" value="{{ $id_pl->tahun->tahun }}" readonly
+            class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none">
 
         <label for="nama_prodi" class="block text-xl font-semibold">Nama Prodi</label>
         <input type="text" name="nama_prodi" id="nama_prodi" value="{{ $id_pl->prodi->nama_prodi }}" readonly

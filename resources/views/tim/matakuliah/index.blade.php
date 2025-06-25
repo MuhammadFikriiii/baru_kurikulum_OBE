@@ -78,7 +78,6 @@
             <thead class="bg-green-800 text-white border-b">
                 <tr>
                     <th class="py-2 px-3 text-center w-3 font-bold uppercase truncate">No</th>
-                    <th class="py-2 px-3 text-center w-8 font-bold uppercase">Prodi</th>
                     <th class="py-2 px-3 text-center font-bold uppercase">Kode MK</th>
                     <th class="py-2 px-3 text-center font-bold uppercase">Nama MK</th>
                     <th class="py-2 px-3 text-center font-bold uppercase">Jenis MK</th>
@@ -94,7 +93,6 @@
                 @foreach ($mata_kuliahs as $index => $mata_kuliah)
                     <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
                         <td class="py-2 px-3 text-center">{{ $index + 1 }}</td>
-                        <td class="py-3 px-6 text-center">{{ $mata_kuliah->nama_prodi }}</td>
                         <td class="py-2 px-3 text-center">{{ $mata_kuliah->kode_mk }}</td>
                         <td class="py-2 px-3 text-center">{{ $mata_kuliah->nama_mk }}</td>
                         <td class="py-2 px-3 text-center">{{ $mata_kuliah->jenis_mk }}</td>

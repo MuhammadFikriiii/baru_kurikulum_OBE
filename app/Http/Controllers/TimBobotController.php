@@ -9,7 +9,7 @@ use App\Models\{Bobot, CapaianProfilLulusan, MataKuliah};
 
 class TimBobotController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
 
@@ -18,6 +18,10 @@ class TimBobotController extends Controller
         }
 
         $kodeProdi = $user->kode_prodi;
+        $id_tahun = $request->get('id_tahun');
+
+        // Ambil daftar tahun tersedia
+        $tahun_tersedia = DB::table('tahun')->orderBy('tahun', 'desc')->get();
 
         $query = DB::table('bobots')
             ->join('capaian_profil_lulusans as cpl', 'bobots.id_cpl', '=', 'cpl.id_cpl')
@@ -32,13 +36,17 @@ class TimBobotController extends Controller
                 'bobots.bobot',
                 'cpl.kode_cpl',
                 'cpl.deskripsi_cpl',
+                'pl.id_tahun',
                 'prodis.nama_prodi'
-            )
-            ->orderBy('bobots.id_cpl');
+            );
 
-        $bobots = $query->get();
+        if ($id_tahun) {
+            $query->where('pl.id_tahun', $id_tahun);
+        }
 
-        return view('tim.bobot.index', compact('bobots'));
+        $bobots = $query->orderBy('bobots.id_cpl')->get();
+
+        return view('tim.bobot.index', compact('bobots', 'id_tahun', 'tahun_tersedia'));
     }
 
     public function getmkbycpl(Request $request)
@@ -101,6 +109,7 @@ class TimBobotController extends Controller
             'bobot.*' => 'integer|min:0|max:100',
         ]);
 
+        // Validasi bahwa CPL dimiliki oleh prodi saat ini
         $valid = DB::table('capaian_profil_lulusans as cpl')
             ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
@@ -113,6 +122,17 @@ class TimBobotController extends Controller
         }
 
         foreach ($request->kode_mk as $kode_mk) {
+            // Cek apakah kombinasi sudah ada
+            $exists = Bobot::where('id_cpl', $request->id_cpl)
+                ->where('kode_mk', $kode_mk)
+                ->exists();
+
+            if ($exists) {
+                return redirect()->back()
+                    ->withErrors(['msg' => "Bobot untuk CPL dan MK {$kode_mk} sudah ada."])
+                    ->withInput();
+            }
+
             Bobot::create([
                 'id_cpl' => $request->id_cpl,
                 'kode_mk' => $kode_mk,

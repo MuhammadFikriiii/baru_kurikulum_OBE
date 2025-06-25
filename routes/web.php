@@ -362,7 +362,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pemetaanmkcpmkcpl', [TimPemetaanCplCpmkMkController::class, 'pemetaanmkcplcpmk'])->name('pemetaancplcpmkmk.pemetaanmkcplcpmk');
         Route::get('/pemetaanmkcpmksubcpmk', [TimSubCpmkController::class, 'pemetaanmkcpmksubcpmk'])->name('pemetaanmkcpmksubcpmk.index');
         Route::post('/ajax/get-cpl-by-bk', [TimMataKuliahController::class, 'getCplByBk'])->name('matakuliah.getCplByBk');
-        Route::post('/ajax/get-cpl-by-mk', [TimCapaianPembelajaranMataKuliahController::class, 'getCplByMk'])->name('capaianpembelajaranmatakuliah.getCPLByMK');
+        Route::post('/ajax/get-mk-by-cpl', [TimCapaianPembelajaranMataKuliahController::class, 'getMKByCPL'])->name('capaianpembelajaranmatakuliah.getMKByCPL');
         Route::get('/tahun', [TimTahunController::class, 'index'])->name('tahun.index');
         Route::get('/tahun/create', [TimTahunController::class, 'create'])->name('tahun.create');
         Route::post('/tahun', [TimTahunController::class, 'store'])->name('tahun.store');

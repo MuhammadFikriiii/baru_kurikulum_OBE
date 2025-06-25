@@ -166,7 +166,7 @@ class LoginController extends Controller
         
         $passwordReset->delete();
         
-        return redirect()->route('login')->with('success', 'Password berhasil direset, silakan login.');        
+        return redirect()->route('forgot-password')->with('success', 'Password berhasil direset, silakan login.');        
     }    
 
     public function logout() {

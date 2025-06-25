@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
-    <h1 class="text-2xl font-bold mb-4 text-center">Catatan Wadir</h1>
+    <h1 class="text-2xl font-bold mb-4 text-center">Catatan</h1>
     <hr class="border-t-4 border-black my-4">
 
     @if($notes->isEmpty())

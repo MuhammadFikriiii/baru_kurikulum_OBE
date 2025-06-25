@@ -63,9 +63,9 @@
             </select>
             <br>
 
-            <label class="text-xl font-semibold" for="knowledge_area">Area Pengetahuan:</label>
+            <label class="text-xl font-semibold" for="knowledge_area">knowledge Area:</label>
             <input type="text" name="knowledge_area" id="knowledge_area"
-                value="{{ old('knowledge_area', $bahankajian->knowledge_area) }}" required
+                value="{{ old('knowledge_area', $bahankajian->knowledge_area) }}"
                 class="border border-black p-3 w-full mt-1 mb-3 rounded-lg">
             <br>
 

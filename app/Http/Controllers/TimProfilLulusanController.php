@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ProfilLulusan;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Prodi;
+use App\Models\Tahun;
 
 class TimProfilLulusanController extends Controller
 {
@@ -37,13 +38,14 @@ class TimProfilLulusanController extends Controller
 
     public function create()
     {
+        $tahuns = Tahun::all();
         $user = Auth::user();
 
         if (!$user || !$user->kode_prodi) {
             abort(404);
         }
 
-        return view('tim.profillulusan.create');
+        return view('tim.profillulusan.create', compact('tahuns'));
     }
 
     public function store(Request $request)
@@ -57,6 +59,7 @@ class TimProfilLulusanController extends Controller
         $request->merge(['kode_prodi' => $user->kode_prodi]);
 
         $request->validate([
+            'id_tahun' => 'required|exists:tahun,id_tahun',
             'kode_pl' => 'required|string',
             'kode_prodi' => 'required|string',
             'deskripsi_pl' => 'required|string',
@@ -73,6 +76,7 @@ class TimProfilLulusanController extends Controller
 
     public function edit($id_pl)
     {
+        $tahuns = Tahun::all();
         $user = Auth::user();
 
         $profillulusan = ProfilLulusan::where('id_pl', $id_pl)
@@ -84,7 +88,7 @@ class TimProfilLulusanController extends Controller
         }
         $prodis = Prodi::all();
         $profillulusan = ProfilLulusan::findOrFail($id_pl);
-        return view('tim.profillulusan.edit', compact('profillulusan', 'prodis'));
+        return view('tim.profillulusan.edit', compact('profillulusan', 'prodis', 'tahuns'));
     }
 
     public function update(Request $request, $id_pl)
@@ -103,6 +107,7 @@ class TimProfilLulusanController extends Controller
         }
         $request->merge(['kode_prodi' => $user->kode_prodi]);
         $request->validate([
+            'id_tahun' => 'required|exists:tahun,id_tahun',
             'kode_pl' => 'required|string|max:10',
             'kode_prodi' => 'required|string|max:10',
             'deskripsi_pl' => 'required',
@@ -118,13 +123,14 @@ class TimProfilLulusanController extends Controller
 
     public function detail(ProfilLulusan $id_pl)
     {
+        $tahuns = Tahun::all();
         $user = Auth::user();
 
         if (!$user || !$user->kode_prodi || $id_pl->kode_prodi !== $user->kode_prodi) {
             abort(403, 'Akses ditolak');
         }
 
-        return view('tim.profillulusan.detail', compact('id_pl'));
+        return view('tim.profillulusan.detail', compact('id_pl', 'tahuns'));
     }
 
     public function destroy(ProfilLulusan $id_pl)

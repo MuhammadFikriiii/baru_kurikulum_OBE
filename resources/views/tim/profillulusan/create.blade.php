@@ -18,6 +18,16 @@
 
         <form action="{{ route('tim.profillulusan.store') }}" method="POST">
             @csrf
+            <div>
+                <label for="id_tahun" class="block text-lg font-semibold mb-2 text-gray-700">Tahun</label>
+                <select id="id_tahun" name="id_tahun" required
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
+                    <option value="" selected disabled>Pilih Tahun</option>
+                    @foreach ($tahuns as $tahun)
+                        <option value="{{ $tahun->id_tahun }}">{{ $tahun->tahun }}</option>
+                    @endforeach
+                </select>
+            </div>
 
             <label class="text-xl font-semibold">Program Studi:</label>
             <input type="text" class="mt-1 w-full p-3 border border-black rounded-lg mb-3 bg-gray-100"

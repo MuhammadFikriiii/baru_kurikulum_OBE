@@ -83,7 +83,6 @@
                     <tr class="text-center">
                         <th class="py-3 px-4 w-10 text-center">No.</th>
                         <th class="px-4 py-2 text-center w-16">Kode PL</th>
-                        <th class="px-4 py-2 text-center w-24">Prodi</th>
                         <th class="px-4 py-2 text-center w-64">Deskripsi</th>
                         <th class="px-4 py-2 text-center max-w-96">Profesi</th>
                         <th class="px-4 py-2 text-center w-32">Unsur</th>
@@ -99,7 +98,6 @@
                             class="align-top {{ $index % 2 == 0 ? 'bg-gray-200' : 'bg-white' }} hover:bg-gray-200 border-b">
                             <td class="px-4 py-2 w-28 text-center">{{ $index + 1 }}</td>
                             <td class="px-4 py-2 w-28 text-center">{{ $profillulusan->kode_pl }}</td>
-                            <td class="px-4 py-2 w-24 text-center">{{ $profillulusan->prodi->nama_prodi ?? '-' }}</td>
                             <td class="px-4 py-2 w-70 whitespace-pre-line text-justify">{{ $profillulusan->deskripsi_pl }}
                             </td>
                             <td class="px-4 py-2 max-w-96 whitespace-pre-line">{{ $profillulusan->profesi_pl }}</td>

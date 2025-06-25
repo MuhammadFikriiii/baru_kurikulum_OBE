@@ -82,7 +82,7 @@ class TimBahanKajianController extends Controller
             'deskripsi_bk' => 'nullable|string',
             'referensi_bk' => 'required|string|max:50',
             'status_bk' => 'required|in:core,elective',
-            'knowledge_area' => 'required|string',
+            'knowledge_area' => 'nullable|string',
         ]);
 
         $bk = BahanKajian::create($request->all());
@@ -136,7 +136,7 @@ class TimBahanKajianController extends Controller
             'deskripsi_bk' => 'nullable|string',
             'referensi_bk' => 'required|string|max:50',
             'status_bk' => 'required|in:core,elective',
-            'knowledge_area' => 'required|string',
+            'knowledge_area' => 'nullable|string',
         ]);
 
         $bahankajian = BahanKajian::findOrFail($id_bk);
