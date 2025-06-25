@@ -331,7 +331,7 @@
                         </a>
                     </li>
                     <li data-title="Catatan">
-                        <a href="" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <a href="{{ route('admin.notes.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-sticky mr-3"></i>
                             <span>Catatan</span>
                         </a>

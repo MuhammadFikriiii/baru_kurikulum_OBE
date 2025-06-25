@@ -66,6 +66,7 @@ use App\Http\Controllers\Wadir1NotesController;
 use App\Http\Controllers\AdminTahunController;
 use App\Http\Controllers\TimTahunController;
 use App\Http\Controllers\AdminBobotController;
+use App\Http\Controllers\AdminNotesController;
 use App\Http\Controllers\Wadir1BobotController;
 use App\Http\Controllers\TimBobotController;
 use App\Http\Controllers\KaprodiBobotController;
@@ -221,7 +222,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/bobot/{bobot}/detail', [AdminBobotController::class, 'detail'])->name('bobot.detail');
         Route::delete('/bobot/{bobot}', [AdminBobotController::class, 'destroy'])->name('bobot.destroy');
         Route::post('ajax-getmkbycpl', [AdminBobotController::class, 'getmkbycpl'])->name('bobot.getmkbycpl');
-
+        Route::get('/notes', [AdminNotesController::class, 'index'])->name('notes.index');
+        Route::get('/notes/{note}/detail', [AdminNotesController::class, 'detail'])->name('notes.detail');
     });
 
     // Grup Route Wadir1
