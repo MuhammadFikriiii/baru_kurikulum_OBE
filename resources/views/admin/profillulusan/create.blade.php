@@ -5,7 +5,7 @@
     <h2 class="font-extrabold text-3xl mb-5 text-center">Tambah Profil Lulusan</h2>
     <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
 
-    <div class="bg-white px-6 pb-6 rounded-lg shadow-md">
+    <div class="bg-white px-6 pb-6  rounded-lg shadow-md">
         @if ($errors->any())
         <div class="text-red-600 mb-4">
             <ul class="list-disc list-inside">
@@ -53,18 +53,6 @@
                             class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
                     </div>
 
-              <!-- Deskripsi PL -->
-              <div>
-                <label for="deskripsi_pl" class="block text-lg font-semibold mb-2 text-gray-700">Deskripsi</label>
-                <textarea id="deskripsi_pl" name="deskripsi_pl" rows="3" required
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]"></textarea>
-            </div>
-                      
-     
-                </div>
-
-                <!-- Kolom Kedua -->
-                <div class="space-y-4">
                     <!-- Unsur PL -->
                     <div>
                         <label for="unsur_pl" class="block text-lg font-semibold mb-2 text-gray-700">Unsur PL</label>
@@ -76,26 +64,36 @@
                             <option value="Sikap dan Keterampilan Umum">Sikap dan Keterampilan Umum</option>
                         </select>
                     </div>
-                                   <!-- Keterangan PL -->
-                                   <div>
-                                    <label for="keterangan_pl" class="block text-lg font-semibold mb-2 text-gray-700">Keterangan</label>
-                                    <select id="keterangan_pl" name="keterangan_pl" required
-                                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
-                                        <option value="" selected disabled>Pilih Keterangan</option>
-                                        <option value="Kompetensi Utama Bidang">Kompetensi Utama Bidang</option>
-                                        <option value="Kompetensi Tambahan">Kompetensi Tambahan</option>
-                                    </select>
-                                </div>
+
+                    <!-- Keterangan PL -->
+                    <div>
+                        <label for="keterangan_pl" class="block text-lg font-semibold mb-2 text-gray-700">Keterangan</label>
+                        <select id="keterangan_pl" name="keterangan_pl" required
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
+                            <option value="" selected disabled>Pilih Keterangan</option>
+                            <option value="Kompetensi Utama Bidang">Kompetensi Utama Bidang</option>
+                            <option value="Kompetensi Tambahan">Kompetensi Tambahan</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Kolom Kedua -->
+                <div class="space-y-4">
+                    <!-- Deskripsi PL -->
+                    <div>
+                        <label for="deskripsi_pl" class="block text-lg font-semibold mb-2 text-gray-700">Deskripsi</label>
+                        <textarea id="deskripsi_pl" name="deskripsi_pl" rows="3" required
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]"></textarea>
+                    </div>
 
                     <!-- Profesi -->
                     <div>
                         <label for="profesi_pl" class="block text-lg font-semibold mb-2 text-gray-700">Profesi</label>
-                        <input id="profesi_pl" name="profesi_pl" rows="3" required
-                            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]"></input>
-                    
-                        </div>
-                    
-                  <!-- Sumber -->
+                        <textarea id="profesi_pl" name="profesi_pl" rows="3" required
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]"></textarea>
+                    </div>
+
+                    <!-- Sumber -->
                     <div>
                         <label for="sumber_pl" class="block text-lg font-semibold mb-2 text-gray-700">Sumber</label>
                         <textarea id="sumber_pl" name="sumber_pl" rows="3" required
