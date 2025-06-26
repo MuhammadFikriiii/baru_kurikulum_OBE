@@ -4,6 +4,7 @@
     <div class="mx-20">
         <h2 class="text-4xl font-extrabold text-center mb-4">Tambah Bobot CPL-MK</h2>
         <hr class="w-full border border-black mb-4">
+
         @if ($errors->any())
             <div id="alert"
                 class="bg-red-500 text-white px-4 py-2 rounded-md mb-6 text-center relative max-w-4xl mx-auto">
@@ -30,7 +31,6 @@
                 @endforeach
             </select>
 
-            {{-- Notifikasi jika semua MK sudah diberi bobot --}}
             <div id="notifSudahAda"
                 class="hidden bg-red-500 text-white px-4 py-2 rounded-md mb-6 text-center relative max-w-4xl mx-auto">
                 <span class="font-bold">Bobot untuk CPL ini sudah ditambahkan sebelumnya.</span>
@@ -58,8 +58,16 @@
         </form>
     </div>
 
+    @php
+        $mkByCplUrl = request()->isSecure()
+            ? secure_url(route('admin.capaianpembelajaranmatakuliah.getMKByCPL', [], false))
+            : route('admin.capaianpembelajaranmatakuliah.getMKByCPL');
+    @endphp
+
     @push('scripts')
         <script>
+            const endpointGetMK = "{{ $mkByCplUrl }}";
+
             const cplSelect = document.getElementById('id_cpl');
             const mkList = document.getElementById('mkList');
             const mkSection = document.getElementById('mkSection');
@@ -84,7 +92,7 @@
                 mkList.innerHTML = '';
                 notifSudahAda.classList.add('hidden');
 
-                fetch("{{ secure_url(route('admin.capaianpembelajaranmatakuliah.getMKByCPL', [], false)) }}", {
+                fetch(endpointGetMK, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -105,32 +113,28 @@
                             notifSudahAda.classList.remove('hidden');
                             submitBtn.disabled = true;
                             return;
-                        } else {
-                            notifSudahAda.classList.add('hidden');
                         }
 
-                        data.forEach((mk, index) => {
+                        data.forEach(mk => {
                             const mkItem = document.createElement('div');
                             mkItem.className =
                                 'mb-3 flex items-center justify-between bg-white p-3 border rounded hover:bg-blue-50';
-
                             mkItem.innerHTML = `
-                    <div>
-                        <strong>${mk.kode_mk}</strong> - ${mk.nama_mk}
-                    </div>
-                    <input type="number" name="bobot[${mk.kode_mk}]" min="0" max="100" value="0"
-                        class="w-24 p-2 border rounded text-center bobot-input">
-                    <input type="hidden" name="kode_mk[]" value="${mk.kode_mk}">
-                `;
-
+                                <div>
+                                    <strong>${mk.kode_mk}</strong> - ${mk.nama_mk}
+                                </div>
+                                <input type="number" name="bobot[${mk.kode_mk}]" min="0" max="100" value="0"
+                                    class="w-24 p-2 border rounded text-center bobot-input">
+                                <input type="hidden" name="kode_mk[]" value="${mk.kode_mk}">
+                            `;
                             mkList.appendChild(mkItem);
                         });
 
                         mkList.innerHTML += `
-                <div class="mt-4">
-                    <button type="button" id="distributeBtn"
-                        class="text-sm text-yellow-600 hover:text-yellow-800">Bagi Rata</button>
-                </div>`;
+                            <div class="mt-4">
+                                <button type="button" id="distributeBtn"
+                                    class="text-sm text-yellow-600 hover:text-yellow-800">Bagi Rata</button>
+                            </div>`;
 
                         document.querySelectorAll('.bobot-input').forEach(input => {
                             input.addEventListener('input', updateTotal);
@@ -144,6 +148,9 @@
                             inputs.forEach((input, i) => input.value = equal + (i < rem ? 1 : 0));
                             updateTotal();
                         });
+
+                        notifSudahAda.classList.add('hidden');
+                        updateTotal();
                     })
                     .catch(err => {
                         loadingMK.classList.add('hidden');
