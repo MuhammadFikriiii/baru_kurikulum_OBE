@@ -72,6 +72,7 @@ use App\Http\Controllers\TimBobotController;
 use App\Http\Controllers\KaprodiBobotController;
 use App\Http\Controllers\KaprodiNotesController;
 use App\Http\Controllers\TimNotesController;
+use App\Http\Controllers\KaprodiTahunController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -304,6 +305,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/notes/{note}/edit', [KaprodiNotesController::class, 'edit'])->name('notes.edit');
         Route::put('/notes/{note}', [KaprodiNotesController::class, 'update'])->name('notes.update');
         Route::delete('/notes/{note}', [KaprodiNotesController::class, 'destroy'])->name('notes.destroy');
+        Route::get('/tahun', [KaprodiTahunController::class, 'index'])->name('tahun.index');
     });
 
     // Grup Route Tim
