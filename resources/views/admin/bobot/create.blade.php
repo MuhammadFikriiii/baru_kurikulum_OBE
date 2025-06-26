@@ -10,9 +10,7 @@
                 class="bg-red-500 text-white px-4 py-2 rounded-md mb-6 text-center relative max-w-4xl mx-auto">
                 <span class="font-bold">{{ $errors->first() }}</span>
                 <button onclick="document.getElementById('alert').style.display='none'"
-                    class="absolute top-1 right-3 text-white font-bold text-lg">
-                    &times;
-                </button>
+                    class="absolute top-1 right-3 text-white font-bold text-lg">&times;</button>
             </div>
         @endif
 
@@ -25,9 +23,7 @@
                 required>
                 <option value="">-- Pilih CPL --</option>
                 @foreach ($capaianProfilLulusans as $cpl)
-                    <option value="{{ $cpl->id_cpl }}">
-                        {{ $cpl->kode_cpl }} - {{ $cpl->deskripsi_cpl }}
-                    </option>
+                    <option value="{{ $cpl->id_cpl }}">{{ $cpl->kode_cpl }} - {{ $cpl->deskripsi_cpl }}</option>
                 @endforeach
             </select>
 
@@ -35,9 +31,7 @@
                 class="hidden bg-red-500 text-white px-4 py-2 rounded-md mb-6 text-center relative max-w-4xl mx-auto">
                 <span class="font-bold">Bobot untuk CPL ini sudah ditambahkan sebelumnya.</span>
                 <button onclick="document.getElementById('notifSudahAda').style.display='none'"
-                    class="absolute top-1 right-3 text-white font-bold text-lg">
-                    &times;
-                </button>
+                    class="absolute top-1 right-3 text-white font-bold text-lg">&times;</button>
             </div>
 
             <div id="mkSection" class="mt-6 hidden">
@@ -66,8 +60,6 @@
 
     @push('scripts')
         <script>
-            const endpointGetMK = "{{ $mkByCplUrl }}";
-
             const cplSelect = document.getElementById('id_cpl');
             const mkList = document.getElementById('mkList');
             const mkSection = document.getElementById('mkSection');
@@ -92,7 +84,7 @@
                 mkList.innerHTML = '';
                 notifSudahAda.classList.add('hidden');
 
-                fetch(endpointGetMK, {
+                fetch("{{ $mkByCplUrl }}", {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -120,21 +112,20 @@
                             mkItem.className =
                                 'mb-3 flex items-center justify-between bg-white p-3 border rounded hover:bg-blue-50';
                             mkItem.innerHTML = `
-                                <div>
-                                    <strong>${mk.kode_mk}</strong> - ${mk.nama_mk}
-                                </div>
-                                <input type="number" name="bobot[${mk.kode_mk}]" min="0" max="100" value="0"
-                                    class="w-24 p-2 border rounded text-center bobot-input">
-                                <input type="hidden" name="kode_mk[]" value="${mk.kode_mk}">
-                            `;
+                            <div><strong>${mk.kode_mk}</strong> - ${mk.nama_mk}</div>
+                            <input type="number" name="bobot[${mk.kode_mk}]" min="0" max="100" value="0"
+                                class="w-24 p-2 border rounded text-center bobot-input">
+                            <input type="hidden" name="kode_mk[]" value="${mk.kode_mk}">
+                        `;
                             mkList.appendChild(mkItem);
                         });
 
                         mkList.innerHTML += `
-                            <div class="mt-4">
-                                <button type="button" id="distributeBtn"
-                                    class="text-sm text-yellow-600 hover:text-yellow-800">Bagi Rata</button>
-                            </div>`;
+                        <div class="mt-4">
+                            <button type="button" id="distributeBtn"
+                                class="text-sm text-yellow-600 hover:text-yellow-800">Bagi Rata</button>
+                        </div>
+                    `;
 
                         document.querySelectorAll('.bobot-input').forEach(input => {
                             input.addEventListener('input', updateTotal);
@@ -148,9 +139,6 @@
                             inputs.forEach((input, i) => input.value = equal + (i < rem ? 1 : 0));
                             updateTotal();
                         });
-
-                        notifSudahAda.classList.add('hidden');
-                        updateTotal();
                     })
                     .catch(err => {
                         loadingMK.classList.add('hidden');
