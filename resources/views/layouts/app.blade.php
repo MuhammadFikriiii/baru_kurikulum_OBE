@@ -80,7 +80,7 @@
                         <i class="fas fa-cog mr-2"></i> Settings
                     </a>
                     <div class="border-t my-1"></div>
-                    <a href="/" onclick="clearSidebarState()" class="flex items-center px-4 py-2 hover:bg-gray-100 text-red-600">
+                    <a href="{{ route('logout') }}" method="POST" onclick="clearSidebarState()" class="flex items-center px-4 py-2 hover:bg-gray-100 text-red-600">
                         <i class="fas fa-sign-out-alt mr-2"></i> Log Out
                     </a>
                 </div>
