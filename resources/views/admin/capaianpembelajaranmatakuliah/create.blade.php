@@ -7,7 +7,7 @@
 
         <form action="{{ route('admin.capaianpembelajaranmatakuliah.store') }}" method="POST">
             @csrf
-            
+
             <label for="id_cpls" class="text-xl font-semibold mb-2">CPL Terkait</label>
             <select id="id_cpls" name="id_cpls[]" size="4"
                 class="border border-black p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]"
@@ -22,7 +22,9 @@
 
             <div id="mkContainer" class="mt-3">
                 <label class="text-xl font-semibold">MK Terkait (Pilih yang akan dikaitkan dengan CPMK):</label>
-                <div id="mkList" class="mt-1 w-full p-3 border border-black rounded-lg min-h-[80px] bg-gray-50 max-h-[300px] overflow-y-auto"></div>
+                <div id="mkList"
+                    class="mt-1 w-full p-3 border border-black rounded-lg min-h-[80px] bg-gray-50 max-h-[300px] overflow-y-auto">
+                </div>
                 <p class="italic text-blue-600 text-sm mt-1">*Pilih mata kuliah yang akan dikaitkan dengan CPMK ini</p>
             </div>
 
@@ -53,7 +55,8 @@
                     // Tampilkan loading state
                     mkList.innerHTML = '<div class="text-blue-500 italic">Memuat mata kuliah...</div>';
 
-                    fetch("{{ secure_url(route('admin.capaianpembelajaranmatakuliah.getMKByCPL', [], false)) }}", {
+                    // SOLUSI: Menggunakan protokol relatif untuk menghindari mixed content error
+                    fetch("{{ str_replace(['http://', 'https://'], '//', url(route('admin.capaianpembelajaranmatakuliah.getMKByCPL'))) }}", {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -66,14 +69,16 @@
                         .then(response => response.json())
                         .then(data => {
                             mkList.innerHTML = "";
-                            
+
                             if (data.length === 0) {
-                                mkList.innerHTML = '<div class="text-red-500 italic">Tidak ada mata kuliah terkait dengan CPL yang dipilih</div>';
+                                mkList.innerHTML =
+                                    '<div class="text-red-500 italic">Tidak ada mata kuliah terkait dengan CPL yang dipilih</div>';
                             } else {
                                 data.forEach((mk, index) => {
                                     const mkItem = document.createElement('div');
-                                    mkItem.className = 'mb-2 p-3 bg-white rounded border hover:bg-blue-50 transition-colors';
-                                    
+                                    mkItem.className =
+                                        'mb-2 p-3 bg-white rounded border hover:bg-blue-50 transition-colors';
+
                                     mkItem.innerHTML = `
                                         <label class="flex items-center cursor-pointer">
                                             <input type="checkbox" 
@@ -86,7 +91,7 @@
                                             </span>
                                         </label>
                                     `;
-                                    
+
                                     mkList.appendChild(mkItem);
                                 });
 
@@ -117,7 +122,8 @@
                         })
                         .catch(error => {
                             console.error('Error:', error);
-                            mkList.innerHTML = '<div class="text-red-500 italic">Terjadi kesalahan saat memuat data</div>';
+                            mkList.innerHTML =
+                                '<div class="text-red-500 italic">Terjadi kesalahan saat memuat data</div>';
                         });
                 });
 
@@ -127,7 +133,7 @@
                 // Validasi form sebelum submit
                 document.querySelector('form').addEventListener('submit', function(e) {
                     const selectedMKs = document.querySelectorAll('input[name="selected_mks[]"]:checked');
-                    
+
                     if (selectedMKs.length === 0) {
                         e.preventDefault();
                         alert('Pilih minimal satu mata kuliah yang akan dikaitkan dengan CPMK ini!');
