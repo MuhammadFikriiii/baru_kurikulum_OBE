@@ -79,8 +79,8 @@
                     return;
                 }
 
-                // Fetch CPMK berdasarkan mata kuliah yang dipilih
-                fetch("{{ route('admin.subcpmk.getCpmkByMataKuliah') }}", {
+                // SOLUSI 1: Menggunakan helper url() - Berfungsi untuk local dan hosting
+                fetch("{{ url(route('admin.subcpmk.getCpmkByMataKuliah')) }}", {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
