@@ -73,6 +73,9 @@ use App\Http\Controllers\KaprodiBobotController;
 use App\Http\Controllers\KaprodiNotesController;
 use App\Http\Controllers\TimNotesController;
 use App\Http\Controllers\KaprodiTahunController;
+use App\Http\Controllers\Wadir1TahunController;
+use App\Http\Controllers\Wadir1SubCpmkController;
+use App\Http\Controllers\Wadir1PemetaanCplCpmkMkController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -267,6 +270,15 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/bobot', [Wadir1BobotController::class, 'index'])->name('bobot.index');
         Route::get('/bobot/{bobot}/detail', [Wadir1BobotController::class, 'detail'])->name('bobot.detail');
+        Route::get('/tahun', [Wadir1TahunController::class, 'index'])->name('tahun.index');
+        Route::get('/subcpmk', [Wadir1SubCpmkController::class, 'index'])->name('subcpmk.index');
+        Route::get('/subcpmk/{subcpmk}/detail', [Wadir1SubCpmkController::class, 'detail'])->name('subcpmk.detail');
+        Route::get('/pemetaancplcpmkmk', [Wadir1PemetaanCplCpmkMkController::class, 'index'])->name('pemetaancplcpmkmk.index');
+        Route::get('/pemetaanmkcplcpmk', [Wadir1PemetaanCplCpmkMkController::class, 'pemetaanmkcpmkcpl'])->name('pemetaancplcpmkmk.pemetaanmkcplcpmk');
+        Route::get('/pemenuhancpl', [Wadir1CapaianPembelajaranLulusanController::class, 'peta_pemenuhan_cpl'])->name('pemenuhancpl.index');
+        Route::get('/pemenuhancplcpmkmk', [Wadir1PemetaanCplCpmkMkController::class, 'pemenuhancplcpmkmk'])->name('pemetaancplcpmkmk.pemenuhancplcpmkmk');
+        Route::get('/pemetaanmkcpmkcpl', [Wadir1PemetaanCplCpmkMkController::class, 'pemetaanmkcpmkcpl'])->name('pemetaancplcpmkmk.pemetaanmkcpmkcpl');
+        Route::get('/pemetaanmkcpmksubcpmk', [Wadir1SubCpmkController::class, 'pemetaanmkcpmksubcpmk'])->name('pemetaanmkcpmksubcpmk.index');
     });
 
     // Grup Route Kaprodi
