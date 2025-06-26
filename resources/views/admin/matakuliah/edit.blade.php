@@ -30,7 +30,7 @@
             </div>
 
             <label for="id_bks" class="text-xl font-semibold">BK</label>
-            <select name="id_bks[]" id="id_bks" size="2" multiple
+            <select name="id_bks[]" id="id_bks" size="4" multiple
                 class="border border-black p-3 w-full mt-1 mb-3 rounded-lg">
                 @foreach ($bahanKajians as $bk)
                     <option value="{{ $bk->id_bk }}" @if (in_array($bk->id_bk, $selectedBahanKajian ?? [])) selected @endif>

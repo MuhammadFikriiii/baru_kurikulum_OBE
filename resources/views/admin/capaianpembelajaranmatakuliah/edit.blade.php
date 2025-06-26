@@ -10,7 +10,7 @@
             @method('PUT')
 
             <label for="id_cpls" class="text-xl font-semibold mb-2">CPL Terkait</label>
-            <select id="id_cpls" name="id_cpls[]" size="3"
+            <select id="id_cpls" name="id_cpls[]" size="4"
                 class="border border-black p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]"
                 multiple required>
                 @foreach ($capaianProfilLulusans as $cpl)
