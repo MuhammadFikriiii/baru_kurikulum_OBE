@@ -106,6 +106,7 @@
 
 <body class="bg-gray-100 text-gray-800">
 
+  <!-- Header -->
   <header class="bg-white shadow-md w-full fixed top-0 z-50" x-data="{ open: false }">
     <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-20">
       <div class="flex items-center justify-between h-16">
@@ -121,11 +122,6 @@
             before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px]
             before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
             Beranda
-          </a>
-          <a href="#services" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300
-            before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px]
-            before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
-            Profil
           </a>
           <a href="#prodi" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300
             before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px]
@@ -170,10 +166,6 @@
           <a href="#beranda"
             class="flex items-center justify-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
             <span>Beranda</span>
-          </a>
-          <a href="#services"
-            class="flex items-center justify-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
-            <span>Profil</span>
           </a>
           <a href="#prodi"
             class="flex items-center justify-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
