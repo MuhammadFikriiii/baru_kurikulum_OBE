@@ -79,8 +79,8 @@
                     return;
                 }
 
-                // SOLUSI 1: Menggunakan helper url() - Berfungsi untuk local dan hosting
-                fetch("{{ url(route('admin.subcpmk.getCpmkByMataKuliah')) }}", {
+                // SOLUSI: Menggunakan protokol relatif untuk menghindari mixed content error
+                fetch("{{ str_replace(['http://', 'https://'], '//', url(route('admin.subcpmk.getCpmkByMataKuliah'))) }}", {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
