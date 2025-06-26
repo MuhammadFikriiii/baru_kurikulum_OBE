@@ -192,7 +192,7 @@
 
   <!-- Page Home -->
   <section class="w-full h-screen md:h-[650px] bg-cover bg-center flex items-center justify-center text-white"
-    style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/image/poliban.jpeg');"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/image/Poliban.jpeg');"
     id="top">
     <div class="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
       <div class="owl-carousel owl-banner">

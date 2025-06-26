@@ -21,7 +21,7 @@
       <div class="w-full max-w-4xl bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
         
         <!-- Gambar -->
-        <div class="md:w-1/2 w-full h-64 md:h-auto bg-cover bg-center relative" style="background-image: url('/image/poliban.jpeg');">
+        <div class="md:w-1/2 w-full h-64 md:h-auto bg-cover bg-center relative" style="background-image: url('/image/Poliban.jpeg');">
         
             <div class="absolute inset-0 bg-black bg-opacity-30"></div>
          
