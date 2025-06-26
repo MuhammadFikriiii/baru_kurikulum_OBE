@@ -53,7 +53,7 @@
                     // Tampilkan loading state
                     mkList.innerHTML = '<div class="text-blue-500 italic">Memuat mata kuliah...</div>';
 
-                    fetch("{{ route('admin.capaianpembelajaranmatakuliah.getMKByCPL') }}", {
+                    fetch("{{ secure_url(route('admin.capaianpembelajaranmatakuliah.getMKByCPL', [], false)) }}", {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',

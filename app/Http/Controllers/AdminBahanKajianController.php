@@ -60,7 +60,7 @@ class AdminBahanKajianController extends Controller
             $query->where('pl.id_tahun', $id_tahun);
         }
 
-        $bahankajians = $query->get();
+        $bahankajians = $query->orderBy('bk.kode_bk', 'asc')->get();
 
         $tahun_tersedia = \App\Models\Tahun::orderBy('tahun', 'desc')->get();
 
@@ -78,7 +78,8 @@ class AdminBahanKajianController extends Controller
             ->join('tahun', 'profil_lulusans.id_tahun', '=', 'tahun.id_tahun')
             ->join('prodis', 'profil_lulusans.kode_prodi', '=', 'prodis.kode_prodi')
             ->select('capaian_profil_lulusans.id_cpl', 'capaian_profil_lulusans.deskripsi_cpl', 'capaian_profil_lulusans.kode_cpl', 'prodis.nama_prodi', 'tahun.tahun')
-            ->orderBy('prodis.nama_prodi')
+            ->orderBy('prodis.nama_prodi','asc')
+            ->orderBy('capaian_profil_lulusans.kode_cpl', 'asc')
             ->get();
 
         return view('admin.bahankajian.create', compact('capaianProfilLulusans'));
@@ -117,6 +118,7 @@ class AdminBahanKajianController extends Controller
             ->join('prodis', 'profil_lulusans.kode_prodi', '=', 'prodis.kode_prodi')
             ->select('capaian_profil_lulusans.id_cpl', 'capaian_profil_lulusans.deskripsi_cpl', 'capaian_profil_lulusans.kode_cpl', 'prodis.nama_prodi', 'tahun.tahun')
             ->orderBy('prodis.nama_prodi')
+            ->orderBy('capaian_profil_lulusans.kode_cpl', 'asc')
             ->get();
 
         $selectedCapaianProfilLulusans = DB::table('cpl_bk')
