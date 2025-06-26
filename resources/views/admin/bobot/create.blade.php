@@ -53,9 +53,7 @@
     </div>
 
     @php
-        $mkByCplUrl = request()->isSecure()
-            ? secure_url(route('admin.capaianpembelajaranmatakuliah.getMKByCPL', [], false))
-            : route('admin.capaianpembelajaranmatakuliah.getMKByCPL');
+        $mkByCplUrl = route('admin.capaianpembelajaranmatakuliah.getMKByCPL');
     @endphp
 
     @push('scripts')
