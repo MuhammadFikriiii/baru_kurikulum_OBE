@@ -37,17 +37,17 @@
                 Tambah
             </a>
         </div>
-        <div class="w-full md:w-auto">
-            <div class="relative">
-                <input type="text" id="search" placeholder="Search..." 
-                    class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md pl-10 focus:outline-none focus:ring-2 focus:ring-green-500">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                    </svg>
+
+             <!-- Search -->
+             <div class="sm:min-w-[250px] w-full sm:w-auto">
+                <div class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
+                    <span class="pl-3 text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <input type="text" id="search" placeholder="Search..."
+                        class="px-3 py-2 w-full focus:outline-none bg-transparent" />
                 </div>
             </div>
-        </div>
     </div>
 
     <!-- Table -->

@@ -65,9 +65,19 @@
             </select>
             <span class="text-gray-600">entries</span>
             <div class="ml-auto justify-between">
-                <input type="text" id="search" placeholder="Search..."
-                    class="border border-gray-300 px-3 py-2 rounded-md">
+                
+                  <!-- Search -->
+                  <div class="sm:min-w-[250px] w-full sm:w-auto">
+                    <div class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
+                        <span class="pl-3 text-gray-400">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" id="search" placeholder="Search..."
+                            class="px-3 py-2 w-full focus:outline-none bg-transparent" />
+                    </div>
+                </div>
             </div>
+            
         </div>
 
         <!-- Filter Info -->
