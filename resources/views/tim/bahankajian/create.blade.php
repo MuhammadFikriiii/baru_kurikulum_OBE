@@ -21,7 +21,7 @@
 
             <label for="id_cpls" class="text-xl font-semibold mb-2">Capaian Profil Lulusan Terkait:</label>
             <select id="id_cpls" name="id_cpls[]" size="2"
-                class="border border-black p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]"
+                class=" border border-black p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]"
                 multiple required>
                 @foreach ($capaianProfilLulusans as $cpl)
                     <option value="{{ $cpl->id_cpl }}" title="{{ $cpl->kode_cpl }} - {{ $cpl->deskripsi_cpl }}">

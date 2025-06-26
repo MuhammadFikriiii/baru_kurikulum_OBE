@@ -189,7 +189,6 @@
     </div>
   </header>
 
-
   <!-- Page Home -->
   <section class="w-full h-screen md:h-[650px] bg-cover bg-center flex items-center justify-center text-white"
     style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/image/Poliban.jpeg');"
@@ -311,176 +310,244 @@
   </div>
 
 
-<!-- Program STudi-->
-<div id="prodi" class="scroll-mt-24 mb-20">
-  
-  <section class="py-12 bg-gray-50" >
-    <div class="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
-      <h1 class="text-3xl text-center font-bold text-indigo-800 mb-2">Program Studi</h1>
-      <p class="text-lg text-center text-gray-600 mb-8">Temukan program studi yang sesuai dengan minat Anda</p>
+  <!-- Program STudi-->
+  <div id="prodi" class="scroll-mt-24 mb-20">
+    
+    <section class="py-12 bg-gray-50" >
+      <div class="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
+        <h1 class="text-3xl text-center font-bold text-indigo-800 mb-2">Program Studi</h1>
+        <p class="text-lg text-center text-gray-600 mb-8">Temukan program studi yang sesuai dengan minat Anda</p>
 
-      <!-- Navigation Tabs -->
-      <div class="flex flex-wrap justify-center mb-8 gap-2" id="program-tabs-container">
-        <button class="program-tab px-6 py-3 rounded-lg font-medium shadow-md transition duration-75 ease-in-out bg-blue-600 text-white hover:bg-blue-200"
-                data-jurusan="semua">
-          Semua Program
-        </button>
-        @foreach ($prodis->pluck('jurusan.nama_jurusan')->unique() as $namaJurusan)
-          <button class="program-tab px-6 py-3 rounded-lg font-medium shadow-md transition duration-75 ease-in-out bg-gray-100 hover:bg-blue-200"
-                  data-jurusan="{{ $namaJurusan }}">
-            {{ $namaJurusan }}
+        <!-- Navigation Tabs -->
+        <div class="flex flex-wrap justify-center mb-8 gap-2" id="program-tabs-container">
+          <button class="program-tab px-6 py-3 rounded-lg font-medium shadow-md transition duration-75 ease-in-out bg-blue-600 text-white hover:bg-blue-200"
+                  data-jurusan="semua">
+            Semua Program
           </button>
-        @endforeach
-      </div>
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          const buttons = document.querySelectorAll(".program-tab");
-      
-          buttons.forEach(button => {
-            button.addEventListener("click", function () {
-              // Hapus class aktif dari semua tombol
-              buttons.forEach(btn => {
-                btn.classList.remove("bg-blue-600", "text-white");
-                btn.classList.add("bg-gray-100");
+          @foreach ($prodis->pluck('jurusan.nama_jurusan')->unique() as $namaJurusan)
+            <button class="program-tab px-6 py-3 rounded-lg font-medium shadow-md transition duration-75 ease-in-out bg-gray-100 hover:bg-blue-200"
+                    data-jurusan="{{ $namaJurusan }}">
+              {{ $namaJurusan }}
+            </button>
+          @endforeach
+        </div>
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            const buttons = document.querySelectorAll(".program-tab");
+        
+            buttons.forEach(button => {
+              button.addEventListener("click", function () {
+                // Hapus class aktif dari semua tombol
+                buttons.forEach(btn => {
+                  btn.classList.remove("bg-blue-600", "text-white");
+                  btn.classList.add("bg-gray-100");
+                });
+        
+                // Tambahkan class aktif ke tombol yang diklik
+                this.classList.remove("bg-gray-100");
+                this.classList.add("bg-blue-600", "text-white");
               });
-      
-              // Tambahkan class aktif ke tombol yang diklik
-              this.classList.remove("bg-gray-100");
-              this.classList.add("bg-blue-600", "text-white");
             });
           });
-        });
-      </script>
+        </script>
 
 
-      <!-- Swiper Card Slider -->
-      <div class="relative swiper mySwiper pb-20" id="prodi-container">
-        <div class="swiper-wrapper ">
-          @foreach ($prodis as $prodi)
-          <div class="swiper-slide">
-            <div class="program-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer border border-gray-100"
-                data-jurusan="{{ $prodi->jurusan->nama_jurusan }}">
+        <!-- Swiper Card Slider -->
+        <div class="relative swiper mySwiper pb-20" id="prodi-container">
+          <div class="swiper-wrapper ">
+            @foreach ($prodis as $prodi)
+            <div class="swiper-slide">
+              <div class="program-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer border border-gray-100"
+                  data-jurusan="{{ $prodi->jurusan->nama_jurusan }}">
 
-              <!-- Header -->
-              <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-6 text-white">
-                <div class="flex items-center justify-between mb-3">
-                  <div class="bg-white bg-opacity-20 p-3 rounded-xl">
-                    <i class="fas fa-graduation-cap text-2xl"></i>
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-6 text-white">
+                  <div class="flex items-center justify-between mb-3">
+                    <div class="bg-white bg-opacity-20 p-3 rounded-xl">
+                      <i class="fas fa-graduation-cap text-2xl"></i>
+                    </div>
+                    <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-medium">
+                      {{ $prodi->jenjang_pendidikan }}
+                    </span>
                   </div>
-                  <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-medium">
-                    {{ $prodi->jenjang_pendidikan }}
-                  </span>
-                </div>
-                <h3 class="text-xl font-bold mb-2">{{ $prodi->nama_prodi }}</h3>
-                <p class="text-blue-100 text-sm">{{ $prodi->gelar_lulusan }}</p>
-              </div>
-
-              <!-- Content -->
-              <div class="p-6">
-                <div class="flex items-center mb-4">
-                  <div class="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
-                    <i class="fas fa-award mr-2"></i>
-                    Akreditasi {{ $prodi->peringkat_akreditasi }}
-                  </div>
+                  <h3 class="text-xl font-bold mb-2">{{ $prodi->nama_prodi }}</h3>
+                  <p class="text-blue-100 text-sm">{{ $prodi->gelar_lulusan }}</p>
                 </div>
 
-                <div class="space-y-3 mb-6">
-                  <div class="flex items-center text-gray-600">
-                    <div class="bg-blue-100 p-2 rounded-lg mr-3">
-                      <i class="fas fa-calendar-alt text-blue-600"></i>
-                    </div>
-                    <div>
-                      <span class="text-sm text-gray-500">Berdiri</span>
-                      <p class="font-medium">{{ date('d M Y', strtotime($prodi->tgl_berdiri_prodi)) }}</p>
+                <!-- Content -->
+                <div class="p-6">
+                  <div class="flex items-center mb-4">
+                    <div class="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                      <i class="fas fa-award mr-2"></i>
+                      Akreditasi {{ $prodi->peringkat_akreditasi }}
                     </div>
                   </div>
 
-                  <div class="flex items-center text-gray-600">
-                    <div class="bg-green-100 p-2 rounded-lg mr-3">
-                      <i class="fas fa-phone text-green-600"></i>
+                  <div class="space-y-3 mb-6">
+                    <div class="flex items-center text-gray-600">
+                      <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                        <i class="fas fa-calendar-alt text-blue-600"></i>
+                      </div>
+                      <div>
+                        <span class="text-sm text-gray-500">Berdiri</span>
+                        <p class="font-medium">{{ date('d M Y', strtotime($prodi->tgl_berdiri_prodi)) }}</p>
+                      </div>
                     </div>
-                    <div>
-                      <span class="text-sm text-gray-500">Kontak</span>
-                      <p class="font-medium">{{ $prodi->telepon_prodi ?? '-' }}</p>
+
+                    <div class="flex items-center text-gray-600">
+                      <div class="bg-green-100 p-2 rounded-lg mr-3">
+                        <i class="fas fa-phone text-green-600"></i>
+                      </div>
+                      <div>
+                        <span class="text-sm text-gray-500">Kontak</span>
+                        <p class="font-medium">{{ $prodi->telepon_prodi ?? '-' }}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <!-- Footer -->
-                <div class="flex justify-between items-center pt-4 border-t border-gray-100">
-                  <a class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105"
-                    href="{{ $prodi->website_prodi ?? '#' }}" target="_blank">
-                    <i class="fas fa-external-link-alt mr-2"></i>
-                    Lihat Detail
-                  </a>
+                  <!-- Footer -->
+                  <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+                    <a class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-200 transform hover:scale-105"
+                      href="{{ $prodi->website_prodi ?? '#' }}" target="_blank">
+                      <i class="fas fa-external-link-alt mr-2"></i>
+                      Lihat Detail
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
+            @endforeach
           </div>
+
+          <!-- Tombol Geser Kanan-Kiri -->
+          <div class="swiper-button-prev !text-indigo-600"></div>
+          <div class="swiper-button-next !text-indigo-600"></div>
+
+          <!-- Pagination Bulat -->
+          <div class="swiper-pagination pt-8 mt-14 flex justify-center"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Script Slider + Filter -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const swiper = new Swiper(".mySwiper", {
+          slidesPerView: 1,
+          spaceBetween: 20,
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+          breakpoints: {
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+            1280: { slidesPerView: 4 },
+          }
+        });
+
+        const tabs = document.querySelectorAll('.program-tab');
+        const slides = document.querySelectorAll('.swiper-slide');
+
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            const jurusan = tab.dataset.jurusan;
+
+            slides.forEach(slide => {
+              const cardJurusan = slide.querySelector('.program-card').dataset.jurusan;
+              slide.style.display = (jurusan === 'semua' || jurusan === cardJurusan) ? 'block' : 'none';
+            });
+
+            swiper.update();
+
+            tabs.forEach(t => t.classList.remove('bg-blue-600', 'text-white'));
+            tab.classList.add('bg-blue-600', 'text-white');
+          });
+        });
+      });
+    </script>
+
+    <!-- Style Geser -->
+    <style>
+      .swiper-button-prev::after,
+      .swiper-button-next::after {
+        font-size: 20px !important; /* atau 12px untuk lebih kecil lagi */
+        color: #4f46e5 !important;  /* pastikan warnanya indigo */
+      }
+
+      .swiper-button-prev,
+      .swiper-button-next {
+        width: 28px;
+        height: 28px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 9999px;
+        top: 45%;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+      }
+
+      .swiper-button-prev:hover,
+      .swiper-button-next:hover {
+        background: #4f46e5;
+      }
+    </style>
+  </div>
+
+  <!-- Team Kurikulum -->
+  <section id="team" class="">
+    <div class="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
+
+      <!-- Header -->
+      <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-indigo-800 mb-4 sm:mb-0">Team Kurikulum</h2>
+      </div>
+      
+
+      <!-- Swiper Wrapper -->
+      <div class="swiper teamSwiper relative pb-10">
+        <div class="swiper-wrapper">
+          @foreach ($tim_users as $user)
+            <div class="swiper-slide">
+              <div class="bg-white rounded-xl overflow-hidden shadow-md w-full px-2 transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg">
+                <div class="w-full h-1 bg-gradient-to-r from-purple-400 to-pink-500"></div>
+                <div class="p-4">
+                  <span class="text-xs bg-green-600 text-white px-3 py-1 rounded-full shadow-sm">TEAM KURIKULUM</span>
+                  <h3 class="font-bold text-lg text-gray-800 mt-2">{{ $user->name }}</h3>
+                  <p class="text-sm text-gray-600">Program Studi: {{ $user->prodi?->nama_prodi ?? '-' }}</p>
+                  <div class="mt-4 pt-4 border-t border-gray-100">
+                    <div class="flex flex-wrap gap-2">
+                      <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">#MerdekaBelajar</span>
+                      <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">#KampusMerdeka</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           @endforeach
         </div>
 
-        <!-- Tombol Geser Kanan-Kiri -->
+        <!-- Arrow Buttons -->
         <div class="swiper-button-prev !text-indigo-600"></div>
         <div class="swiper-button-next !text-indigo-600"></div>
 
-        <!-- Pagination Bulat -->
-        <div class="swiper-pagination pt-8 mt-14 flex justify-center"></div>
+        <!-- Pagination -->
+        <div class="swiper-pagination pt-4 flex justify-center"></div>
       </div>
+
     </div>
   </section>
 
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-  <!-- Script Slider + Filter -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const swiper = new Swiper(".mySwiper", {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-        breakpoints: {
-          640: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
-          1280: { slidesPerView: 4 },
-        }
-      });
-
-      const tabs = document.querySelectorAll('.program-tab');
-      const slides = document.querySelectorAll('.swiper-slide');
-
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          const jurusan = tab.dataset.jurusan;
-
-          slides.forEach(slide => {
-            const cardJurusan = slide.querySelector('.program-card').dataset.jurusan;
-            slide.style.display = (jurusan === 'semua' || jurusan === cardJurusan) ? 'block' : 'none';
-          });
-
-          swiper.update();
-
-          tabs.forEach(t => t.classList.remove('bg-blue-600', 'text-white'));
-          tab.classList.add('bg-blue-600', 'text-white');
-        });
-      });
-    });
-  </script>
-
-  <!-- Style Geser -->
   <style>
     .swiper-button-prev::after,
     .swiper-button-next::after {
-      font-size: 20px !important; /* atau 12px untuk lebih kecil lagi */
-      color: #4f46e5 !important;  /* pastikan warnanya indigo */
+      font-size: 20px !important;
+      color: #4f46e5 !important;
     }
 
     .swiper-button-prev,
@@ -498,98 +565,30 @@
       background: #4f46e5;
     }
   </style>
-</div>
 
-<!-- Team Kurikulum -->
-<section id="team" class="">
-  <div class="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
-
-    <!-- Header -->
-    <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
-      <h2 class="text-2xl font-bold text-indigo-800 mb-4 sm:mb-0">Team Kurikulum</h2>
-    </div>
-    
-
-    <!-- Swiper Wrapper -->
-    <div class="swiper teamSwiper relative pb-10">
-      <div class="swiper-wrapper">
-        @foreach ($tim_users as $user)
-          <div class="swiper-slide">
-            <div class="bg-white rounded-xl overflow-hidden shadow-md w-full px-2 transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg">
-              <div class="w-full h-1 bg-gradient-to-r from-purple-400 to-pink-500"></div>
-              <div class="p-4">
-                <span class="text-xs bg-green-600 text-white px-3 py-1 rounded-full shadow-sm">TEAM KURIKULUM</span>
-                <h3 class="font-bold text-lg text-gray-800 mt-2">{{ $user->name }}</h3>
-                <p class="text-sm text-gray-600">Program Studi: {{ $user->prodi?->nama_prodi ?? '-' }}</p>
-                <div class="mt-4 pt-4 border-t border-gray-100">
-                  <div class="flex flex-wrap gap-2">
-                    <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">#MerdekaBelajar</span>
-                    <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">#KampusMerdeka</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        @endforeach
-      </div>
-
-      <!-- Arrow Buttons -->
-      <div class="swiper-button-prev !text-indigo-600"></div>
-      <div class="swiper-button-next !text-indigo-600"></div>
-
-      <!-- Pagination -->
-      <div class="swiper-pagination pt-4 flex justify-center"></div>
-    </div>
-
-  </div>
-</section>
-
-<style>
-  .swiper-button-prev::after,
-  .swiper-button-next::after {
-    font-size: 20px !important;
-    color: #4f46e5 !important;
-  }
-
-  .swiper-button-prev,
-  .swiper-button-next {
-    width: 28px;
-    height: 28px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 9999px;
-    top: 45%;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
-  }
-
-  .swiper-button-prev:hover,
-  .swiper-button-next:hover {
-    background: #4f46e5;
-  }
-</style>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    new Swiper(".teamSwiper", {
-      slidesPerView: 1,
-      spaceBetween: 20,
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      breakpoints: {
-        640: { slidesPerView: 1 },
-        768: { slidesPerView: 2 },
-        1024: { slidesPerView: 3 },
-        1280: { slidesPerView: 4 },
-      }
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      new Swiper(".teamSwiper", {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+          1280: { slidesPerView: 4 },
+        }
+      });
     });
-  });
-</script>
+  </script>
 
 
 
