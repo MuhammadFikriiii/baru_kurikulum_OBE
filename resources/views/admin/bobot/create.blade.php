@@ -84,7 +84,7 @@
                 mkList.innerHTML = '';
                 notifSudahAda.classList.add('hidden');
 
-                fetch("{{ route('admin.capaianpembelajaranmatakuliah.getMKByCPL') }}", {
+                fetch("{{ secure_url(route('admin.capaianpembelajaranmatakuliah.getMKByCPL', [], false)) }}", {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
