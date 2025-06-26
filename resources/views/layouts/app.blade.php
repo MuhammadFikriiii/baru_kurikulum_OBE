@@ -79,10 +79,13 @@
                     <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100">
                         <i class="fas fa-cog mr-2"></i> Settings
                     </a>
-                    <div class="border-t my-1"></div>
-                    <a href="{{ route('logout') }}" method="POST" onclick="clearSidebarState()" class="flex items-center px-4 py-2 hover:bg-gray-100 text-red-600">
-                        <i class="fas fa-sign-out-alt mr-2"></i> Log Out
-                    </a>
+                    <form action="{{ route('logout') }}" method="POST" onsubmit="clearSidebarState()">
+                    @csrf
+                    <button type="submit" class="flex items-center px-4 py-2 hover:bg-gray-100 text-red-600">
+                        <i class="fas fa-sign-out-alt mr-2"></i>
+                        <span>Logout</span>
+                    </button>
+                </form>
                 </div>
             </div>
         </div>
