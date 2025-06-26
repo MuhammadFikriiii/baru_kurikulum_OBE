@@ -29,7 +29,7 @@
                     </option>
                 @endforeach
             </select>
-            <p class="italic text-red-700 mb-2">*Tekan tombol Ctrl dan klik untuk memilih lebih dari satu item.</p>
+            <p class="italic text-red-700 mb-2">*Tahan tombol Ctrl atau klik untuk memilih lebih dari satu item.</p>
 
             <label for="kode_bk">Kode Bahan Kajian:</label>
             <input id="kode_bk" type="text" name="kode_bk" class="border border-black p-3 w-full mt-1 mb-3 rounded-lg"
