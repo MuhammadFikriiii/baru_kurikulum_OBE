@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\CapaianProfilLulusan;
 use App\Models\ProfilLulusan;
 use App\Models\Prodi;
-use App\Models\Tahun; // Tambahkan import model Tahun
+use App\Models\Tahun;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
