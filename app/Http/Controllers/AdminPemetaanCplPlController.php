@@ -40,7 +40,7 @@ class AdminPemetaanCplPlController extends Controller
                 ->pluck('id_cpl')
                 ->unique();
 
-            $cpls = CapaianProfilLulusan::whereIn('id_cpl', $cplIds)->orderBy('id_cpl', 'asc')->get();
+            $cpls = CapaianProfilLulusan::whereIn('id_cpl', $cplIds)->orderBy('kode_cpl', 'asc')->get();
         } else {
             $cpls = collect();
         }
