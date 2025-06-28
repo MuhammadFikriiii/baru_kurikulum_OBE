@@ -45,7 +45,7 @@
             <label for="status_cpl" class="text-xl font-semibold">Status CPL</label>
             <select id="status_cpl" name="status_cpl" class="border border-black p-3 w-full rounded-lg mt-1 mb-3" required>
                 <option value="" selected disabled>Pilih Status CPL</option>
-                <option value="Kompetensi Utama Bidang">Kompetensi Utama</option>
+                <option value="Kompetensi Utama Bidang">Kompetensi Utama Bidang</option>
                 <option value="Kompetensi Tambahan">Kompetensi Tambahan</option>
             </select>
             <br>
