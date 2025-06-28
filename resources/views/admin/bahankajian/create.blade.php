@@ -2,71 +2,101 @@
 
 @section('content')
 
-    <div class="mr-20 ml-20">
-        <h2 class="text-4xl text-center font-extrabold mb-4">Tambah Bahan Kajian</h2>
-        <hr class="w-full border border-black mb-4">
+<div class="mx-20 mt-6">
+    <h2 class="text-3xl font-extrabold text-center mb-4">Tambah Bahan Kajian</h2>
+    <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
 
-        @if ($errors->any())
-            <div style="color: red;">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form action="{{ route('admin.bahankajian.store') }}" method="POST">
-            @csrf
-
-            <label for="id_cpls" class="text-2xl font-semibold mb-2">Capaian Pembelajaran Lulusan Terkait:</label>
-            <select id="id_cpls" name="id_cpls[]" size="4"
-                class="border border-black p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]"
-                multiple required>
-                @foreach ($capaianProfilLulusans as $cpl)
-                    <option value="{{ $cpl->id_cpl }}" title="{{ $cpl->tahun }}: {{ $cpl->nama_prodi }}: {{ $cpl->kode_cpl }}: {{ $cpl->deskripsi_cpl }}">
-                        {{ $cpl->tahun }}: {{ $cpl->nama_prodi }}: {{ $cpl->kode_cpl }}: {{ $cpl->deskripsi_cpl }}
-                    </option>
+    @if ($errors->any())
+        <div class="text-red-600 mb-4">
+            <ul class="list-disc pl-5">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
                 @endforeach
-            </select>
-            <p class="italic text-red-700 mb-2">*Tahan tombol Ctrl atau klik untuk memilih lebih dari satu item.</p>
+            </ul>
+        </div>
+    @endif
 
-            <label for="kode_bk">Kode Bahan Kajian:</label>
-            <input id="kode_bk" type="text" name="kode_bk" class="border border-black p-3 w-full mt-1 mb-3 rounded-lg"
-                required>
-            <br>
+    <form action="{{ route('admin.bahankajian.store') }}" method="POST">
+        @csrf
 
-            <label for="nama_bk">Nama Bahan Kajian:</label>
-            <input id="nama_bk" type="text" name="nama_bk" class="border border-black p-3 w-full mt-1 mb-3 rounded-lg"
-                required>
-            <br>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-lg shadow-md">
 
-            <label for="deskripsi_bk">Deskripsi Bahan Kajian:</label>
-            <input id="deskripsi_bk" type="text" name="deskripsi_bk"
-                class="border border-black p-3 w-full mt-1 mb-3 rounded-lg">
-            <br>
+            <!-- CPL Terkait -->
+            <div class="md:col-span-2">
+                <label for="id_cpls" class="block text-xl font-semibold mb-2">Capaian Profil Lulusan Terkait:</label>
+                <select id="id_cpls" name="id_cpls[]" size="4"
+                    class="border border-black p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]"
+                    multiple required>
+                    @foreach ($capaianProfilLulusans as $cpl)
+                        <option value="{{ $cpl->id_cpl }}"
+                            title="{{ $cpl->tahun }}: {{ $cpl->nama_prodi }}: {{ $cpl->kode_cpl }}: {{ $cpl->deskripsi_cpl }}">
+                            {{ $cpl->tahun }}: {{ $cpl->nama_prodi }}: {{ $cpl->kode_cpl }}: {{ $cpl->deskripsi_cpl }}
+                        </option>
+                    @endforeach
+                </select>
+                <p class="italic text-red-700 mt-1">*Tahan tombol Ctrl atau klik untuk memilih lebih dari satu item.</p>
+            </div>
 
-            <label for="referensi_bk">Referensi Bahan Kajian:</label>
-            <input id="referensi_bk" type="text" name="referensi_bk"
-                class="border border-black p-3 w-full mt-1 mb-3 rounded-lg" required>
-            <br>
+            <!-- Kode BK -->
+            <div>
+                <label for="kode_bk" class="block text-xl font-semibold">Kode BK</label>
+                <input id="kode_bk" type="text" name="kode_bk"
+                    class="w-full p-3 border border-black rounded-lg" required>
+            </div>
 
-            <label for="status_bk">Status BK</label>
-            <select id="status_bk" name="status_bk" class="border border-black p-3 w-full mt-1 mb-3 rounded-lg" required>
-                <option value="" selected disabled>Pilih Status BK</option>
-                <option value="core">Core</option>
-                <option value="elective">Elective</option>
-            </select>
+            <!-- Nama BK -->
+            <div>
+                <label for="nama_bk" class="block text-xl font-semibold">Nama BK</label>
+                <input id="nama_bk" type="text" name="nama_bk"
+                    class="w-full p-3 border border-black rounded-lg" required>
+            </div>
 
-            <label for="knowledge_area">knowledge Area Bahan Kajian:</label>
-            <input id="knowledge_area" type="text" name="knowledge_area"
-                class="border border-black p-3 w-full mt-1 mb-3 rounded-lg">
-            <br>
+            <!-- Referensi BK -->
+            <div>
+                <label for="referensi_bk" class="block text-xl font-semibold">Referensi BK</label>
+                <input id="referensi_bk" type="text" name="referensi_bk"
+                    class="w-full p-3 border border-black rounded-lg" required>
+            </div>
 
-            <button type="submit"
-                class="btn btn-primary bg-green-400 hover:bg-green-800 px-5 py-2 rounded-lg">Simpan</button>
-            <a href="{{ route('admin.bahankajian.index') }}"
-                class="bg-blue-400 hover:bg-blue-800 rounded-lg px-5 py-2">Kembali</a>
-        </form>
-    </div>
+            <!-- Status BK -->
+            <div>
+                <label for="status_bk" class="block text-xl font-semibold">Status BK</label>
+                <select id="status_bk" name="status_bk"
+                    class="w-full p-3 border border-black rounded-lg" required>
+                    <option value="" selected disabled>Pilih Status BK</option>
+                    <option value="core">Core</option>
+                    <option value="elective">Elective</option>
+                </select>
+            </div>
+
+            <!-- Deskripsi BK & Knowledge Area -->
+            <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="deskripsi_bk" class="block text-xl font-semibold">Deskripsi BK</label>
+                    <textarea id="deskripsi_bk" name="deskripsi_bk"
+                        class="w-full p-3 border border-black rounded-lg h-32 resize-none"></textarea>
+                </div>
+
+                <div>
+                    <label for="knowledge_area" class="block text-xl font-semibold">Knowledge Area</label>
+                    <textarea id="knowledge_area" name="knowledge_area"
+                        class="w-full p-3 border border-black rounded-lg h-32 resize-none"></textarea>
+                </div>
+            </div>
+
+            <!-- Tombol Aksi -->
+            <div class="md:col-span-2 flex justify-end items-end pt-6 space-x-4">
+                <a href="{{ route('admin.bahankajian.index') }}"
+                   class="px-6 py-2 bg-blue-600 hover:bg-blue-900 text-white font-semibold rounded-lg transition duration-200">
+                    Kembali
+                </a>
+                <button type="submit"
+                    class="px-6 py-2 bg-green-600 hover:bg-green-800 text-white font-semibold rounded-lg transition duration-200">
+                    Simpan
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
 @endsection
