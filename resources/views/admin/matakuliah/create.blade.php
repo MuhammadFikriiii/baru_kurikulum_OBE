@@ -117,8 +117,18 @@
                 // Tampilkan loading
                 cplList.innerHTML = '<li class="text-blue-500">Memuat data CPL...</li>';
 
-                // URL yang dinamis berdasarkan environment
-                const url = "{{ url(route('admin.matakuliah.getCplByBk', [], false)) }}";
+                // URL yang otomatis menyesuaikan protokol dan environment
+                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ||
+                    window.location.hostname.includes('local');
+                let url;
+
+                if (isLocal) {
+                    url = "{{ route('admin.matakuliah.getCplByBk') }}";
+                } else {
+                    // Untuk hosting, gunakan URL lengkap dengan protokol yang sama
+                    url = window.location.protocol + '//' + window.location.host +
+                        "{{ route('admin.matakuliah.getCplByBk', [], false) }}";
+                }
 
                 console.log('Fetch URL:', url); // Debug URL
 
@@ -127,8 +137,10 @@
                         headers: {
                             'Content-Type': 'application/json',
                             'X-CSRF-TOKEN': "{{ csrf_token() }}",
-                            'Accept': 'application/json'
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
                         },
+                        credentials: 'same-origin',
                         body: JSON.stringify({
                             id_bks: selectedBKs
                         })
