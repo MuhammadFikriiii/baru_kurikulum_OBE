@@ -12,15 +12,15 @@
 
 ## 🚀 Fitur Utama
 
-- 🔐 Autentikasi dan otorisasi berdasarkan role (Admin, Tim Prodi, Wadir 1)
+- 🔐 Autentikasi dan otorisasi berdasarkan role (Admin, Tim, Kaprodi dan Wadir 1)
 - 📅 Manajemen Tahun Akademik
 - 🏫 Jurusan dan Program Studi
 - 🎯 Profil Lulusan (PL) dan Capaian Pembelajaran Lulusan (CPL)
 - 🧠 Bidang Kajian (BK) dan Mata Kuliah (MK)
 - 📘 Capaian Pembelajaran Mata Kuliah (CPMK) & Sub-CPMK
 - ⚖️ Pengelolaan Bobot CPL–MK
-- 📝 Manajemen Catatan Tim Prodi
-- 🧭 Pemetaan CPL–CPMK–MK
+- 📝 Manajemen Catatan Wadir dan Kaprodi
+- 🧭 Pemetaan CPL-PL, Pemetaan BK-MK, Pemetaan CPL-MK dan pemetaan lainnya
 - 📊 Grafik visualisasi pemenuhan CPL per tahun
 - 📥 Ekspor data ke Excel
 
