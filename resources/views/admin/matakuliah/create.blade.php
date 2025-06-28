@@ -117,8 +117,8 @@
                 // Tampilkan loading
                 cplList.innerHTML = '<li class="text-blue-500">Memuat data CPL...</li>';
 
-                // Pastikan URL menggunakan protokol yang sama (HTTPS)
-                const url = "{{ secure_url(route('admin.matakuliah.getCplByBk', [], false)) }}";
+                // URL yang dinamis berdasarkan environment
+                const url = "{{ url(route('admin.matakuliah.getCplByBk', [], false)) }}";
 
                 console.log('Fetch URL:', url); // Debug URL
 
