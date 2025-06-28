@@ -96,9 +96,9 @@ class AdminMataKuliahController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode_mk' => 'required|string|max:10|unique:mata_kuliahs,kode_mk',
-            'nama_mk' => 'required|string|max:50',
-            'jenis_mk' => 'required|string|max:50',
+            'kode_mk' => 'required|string|max:20|unique:mata_kuliahs,kode_mk',
+            'nama_mk' => 'required|string|max:100',
+            'jenis_mk' => 'required|string|max:100',
             'sks_mk' => 'required|integer',
             'semester_mk' => 'required|integer|in:1,2,3,4,5,6,7,8',
             'kompetensi_mk' => 'required|string|in:pendukung,utama',
@@ -150,11 +150,11 @@ class AdminMataKuliahController extends Controller
             'kode_mk' => [
                 'required',
                 'string',
-                'max:10',
+                'max:20',
                 Rule::unique('mata_kuliahs', 'kode_mk')->ignore($matakuliah->kode_mk, 'kode_mk'),
             ],
-            'nama_mk' => 'required|string|max:50',
-            'jenis_mk' => 'required|string|max:50',
+            'nama_mk' => 'required|string|max:100',
+            'jenis_mk' => 'required|string|max:100',
             'sks_mk' => 'required|integer',
             'semester_mk' => 'required|integer|in:1,2,3,4,5,6,7,8',
             'kompetensi_mk' => 'required|string|in:pendukung,utama',

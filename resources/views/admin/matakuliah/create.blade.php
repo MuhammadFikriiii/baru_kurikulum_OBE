@@ -105,11 +105,14 @@
             bkSelect.addEventListener('change', function() {
                 const selectedBKs = Array.from(this.selectedOptions).map(opt => opt.value);
 
+                const url = "{{ secure_url(route('admin.matakuliah.getCplByBk', [], false)) }}";
+
                 fetch("{{ route('admin.matakuliah.getCplByBk') }}", {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                            'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                            'Accept': 'application/json'
                         },
                         body: JSON.stringify({
                             id_bks: selectedBKs
