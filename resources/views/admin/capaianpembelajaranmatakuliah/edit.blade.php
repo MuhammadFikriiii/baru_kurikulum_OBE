@@ -71,16 +71,17 @@
                 class="border border-gray-300 p-3 w-full rounded-lg mt-1 mb-3 focus:outline-none focus:ring-2 focus:ring-[#5460B5] focus:bg-[#f7faff]"
                 required>{{ old('deskripsi_cpmk', $cpmks->deskripsi_cpmk) }}</textarea>
 
-            <div class="flex gap-3">
-                <button type="submit"
-                    class="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-200">
-                    Simpan Perubahan
-                </button>
-                <a href="{{ route('admin.capaianpembelajaranmatakuliah.index') }}"
-                    class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition duration-200">
-                    Batal
-                </a>
-            </div>
+           <!-- Tombol Aksi -->
+           <div class="md:col-span-2 flex justify-end items-end pt-6 space-x-4">
+            <a href="{{ route('admin.capaianpembelajaranmatakuliah.index') }}"
+               class="px-6 py-2 bg-blue-600 hover:bg-blue-900 text-white font-semibold rounded-lg transition duration-200">
+                Kembali
+            </a>
+            <button type="submit"
+                class="px-6 py-2 bg-green-600 hover:bg-green-800 text-white font-semibold rounded-lg transition duration-200">
+                Simpan
+            </button>
+             </div>
         </form>
     </div>
 

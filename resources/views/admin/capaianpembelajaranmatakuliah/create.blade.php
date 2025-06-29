@@ -36,7 +36,17 @@
             <input type="text" name="deskripsi_cpmk" id="deskripsi_cpmk"
                 class="border border-black p-3 w-full rounded-lg mt-1 mb-3" required>
 
-            <button type="submit" class="px-4 py-2 bg-green-400 rounded-lg hover:bg-green-600 mt-4">Simpan</button>
+                <!-- Tombol Aksi -->
+            <div class="md:col-span-2 flex justify-end items-end pt-6 space-x-4">
+                <a href="{{ route('admin.capaianpembelajaranmatakuliah.index') }}"
+                   class="px-6 py-2 bg-blue-600 hover:bg-blue-900 text-white font-semibold rounded-lg transition duration-200">
+                    Kembali
+                </a>
+                <button type="submit"
+                    class="px-6 py-2 bg-green-600 hover:bg-green-800 text-white font-semibold rounded-lg transition duration-200">
+                    Simpan
+                </button>
+            </div>
         </form>
 
         @push('scripts')

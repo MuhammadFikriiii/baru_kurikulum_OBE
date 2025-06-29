@@ -116,21 +116,21 @@
     <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
         <thead class="bg-green-800 text-white border-b uppercase">
             <tr>
-                <th class="py-3 px-6 text-center">No</th>
-                <th class="py-3 px-6 text-center">Prodi</th>
-                <th class="py-3 px-6 text-center">Kode CPMK</th>
-                <th class="py-3 px-6 text-center">Deskripsi CPMK</th>
-                <th class="py-3 px-6 text-center">Aksi</th>
+                <th class="py-3 px-6 text-center border border-gray-300">No</th>
+                <th class="py-3 px-6 text-center border border-gray-300">Prodi</th>
+                <th class="py-3 px-6 text-center border border-gray-300">Kode CPMK</th>
+                <th class="py-3 px-6 text-center border border-gray-300">Deskripsi CPMK</th>
+                <th class="py-3 px-6 text-center border border-gray-300">Aksi</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="bg-white divide-y divide-gray-200">
             @foreach ($cpmks as $index => $cpmk)
                 <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
-                    <td class="py-3 px-6 text-center">{{ $index + 1 }}</td>
-                    <td class="py-3 px-6 text-center">{{ $cpmk->nama_prodi ?? 'Tidak ada prodi' }}</td>
-                    <td class="py-3 px-6 text-center">{{ $cpmk->kode_cpmk }}</td>
-                    <td class="py-3 px-6">{{ $cpmk->deskripsi_cpmk }}</td>
-                    <td class="py-2 px-3 flex justify-center items-center space-x-2">
+                    <td class="py-3 px-6 text-center border border-gray-300">{{ $index + 1 }}</td>
+                    <td class="py-3 px-6 text-center border border-gray-300">{{ $cpmk->nama_prodi ?? 'Tidak ada prodi' }}</td>
+                    <td class="py-3 px-6 text-center border border-gray-300">{{ $cpmk->kode_cpmk }}</td>
+                    <td class="py-3 px-6 border border-gray-300">{{ $cpmk->deskripsi_cpmk }}</td>
+                    <td class="py-2 px-3 flex justify-center items-center space-x-2 border border-gray-300">
                         <div class="flex justify-center space-x-2">
                             <a href="{{ route('admin.capaianpembelajaranmatakuliah.detail', $cpmk->id_cpmk) }}"
                                 class="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md inline-flex items-center justify-center"
