@@ -112,7 +112,7 @@
       <div class="flex items-center justify-between h-16">
       <!-- Logo -->
       <a href="index.html" class="flex items-center space-x-2">
-        <img src="/image/Logo.png" alt="Logo" class="h-9 object-contain">
+        <img  src="/image/Logo.png" alt="Logo" class="h-9 object-contain">
         <span class="text-xl font-semibold text-gray-800 leading-none">Poliban OBE</span>
       </a>
     
@@ -601,7 +601,7 @@
         <!-- About Section -->
         <div class="footer-item">
           <div class="logo mb-4">
-            <a href="#"><img src="/image/Logo.png" class="h-24" alt="Onix Digital TemplateMo" class="w-32 h-auto"></a>
+            <a href="https://poliban.ac.id/"><img src="/image/Logo.png" class="h-24" alt="Onix Digital TemplateMo" class="w-32 h-auto"></a>
             <a href="mailto:info@company.com" class="block mb-2 mt-5 text-sm">info@poliban.ac.id</a>
           </div>
 
