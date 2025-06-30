@@ -75,7 +75,7 @@
                 </div>
             @else
             <div class="overflow-x-auto w-full">
-                <table class="table-auto border border-gray-300 w-full">
+                <table class="table-auto border border-gray-300 w-full relative overflow-visible">
                     <thead class="bg-green-800 text-white">
                         <tr>
                             <th class="px-4 py-3 text-left border-r border-white whitespace-nowrap">CPL / BK</th>
@@ -83,11 +83,11 @@
                                 <th class="px-4 py-3 border-r border-white relative group whitespace-nowrap">
                                     <span class="cursor-help">{{ $bk->kode_bk }}</span>
                                     <div
-                                        class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+                                        class="absolute top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg break-words">
                                         <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
                                             {{ $prodi->nama_prodi }}
                                         </div>
-                                        <div class="mt-3 px-2 text-center">
+                                        <div class="mt-3 px-2 text-center whitespace-normal">
                                             {{ $bk->nama_bk }}
                                         </div>
                                     </div>
@@ -108,9 +108,9 @@
                                     <div class="mt-3 px-2 text-justify whitespace-normal">
                                         {{ $cpl->deskripsi_cpl }}
                                     </div>
-                                </div>
-                                
+                                  </div> 
                                 </td>
+                                
                                 @foreach ($bks as $bk)
                                     <td class="px-4 py-4 border border-gray-200 align-top">
                                         @if (isset($matrix[$cpl->id_cpl][$bk->id_bk]))
@@ -128,6 +128,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                
             </div>
             
             @endif
