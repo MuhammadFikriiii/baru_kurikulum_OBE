@@ -119,7 +119,7 @@
                                         <td class="px-4 py-2 relative group">
                                             <span class="cursor-help">{{ $cpl->kode_cpl }}</span>
                                             <div
-                                                class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+                                                class="absolute top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
                                                 <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
                                                     {{ $prodiByCpl[$cpl->id_cpl] ?? 'Program Studi Tidak Ditemukan' }}
                                                 </div>

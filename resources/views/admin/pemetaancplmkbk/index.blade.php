@@ -101,14 +101,15 @@
                                 <td class="px-4 py-4 font-semibold border border-gray-200 relative group whitespace-nowrap">
                                     <span class="cursor-help">{{ $cpl->kode_cpl ?? $cpl->id_cpl }}</span>
                                     <div
-                                        class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
-                                        <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
-                                            {{ $prodiByCpl[$cpl->id_cpl] }}
-                                        </div>
-                                        <div class="mt-3 px-2 text-justify">
-                                            {{ $cpl->deskripsi_cpl }}
-                                        </div>
+                                    class="absolute top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg break-words">
+                                    <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
+                                        {{ $prodiByCpl[$cpl->id_cpl] }}
                                     </div>
+                                    <div class="mt-3 px-2 text-justify whitespace-normal">
+                                        {{ $cpl->deskripsi_cpl }}
+                                    </div>
+                                </div>
+                                
                                 </td>
                                 @foreach ($bks as $bk)
                                     <td class="px-4 py-4 border border-gray-200 align-top">
