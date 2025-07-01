@@ -65,6 +65,7 @@
 
             cplSelect.addEventListener('change', function() {
                 const selectedCPLs = Array.from(this.selectedOptions).map(opt => opt.value);
+
                 if (selectedCPLs.length === 0) {
                     mkList.innerHTML = '<div class="text-gray-500 italic">Pilih CPL terlebih dahulu</div>';
                     return;
@@ -72,37 +73,54 @@
 
                 mkList.innerHTML = '<div class="text-blue-500 italic">Memuat mata kuliah...</div>';
 
-                fetch("{{ route('tim.capaianpembelajaranmatakuliah.getMKByCPL') }}", {
+                // Deteksi apakah localhost atau production
+                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ||
+                    window.location.hostname.includes('local');
+                let url;
+
+                if (isLocal) {
+                    url = "{{ route('tim.capaianpembelajaranmatakuliah.getMKByCPL') }}";
+                } else {
+                    url = window.location.protocol + '//' + window.location.host +
+                        "{{ route('tim.capaianpembelajaranmatakuliah.getMKByCPL', [], false) }}";
+                }
+
+                fetch(url, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                            'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
                         },
+                        credentials: 'same-origin',
                         body: JSON.stringify({
                             id_cpls: selectedCPLs
                         })
                     })
-                    .then(response => response.json())
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
                     .then(data => {
                         mkList.innerHTML = "";
-                        if (data.length === 0) {
-                            mkList.innerHTML = '<div class="text-red-500 italic">Tidak ada MK terkait</div>';
-                        } else {
-                            data.forEach((mk, index) => {
+
+                        if (Array.isArray(data) && data.length > 0) {
+                            data.forEach((mk) => {
                                 mkList.innerHTML += `
-                                <label class="block my-1">
-                                    <input type="checkbox" name="selected_mks[]" value="${mk.kode_mk}" class="mr-2">
-                                    ${mk.kode_mk} - ${mk.nama_mk}
-                                </label>
-                            `;
+                        <label class="block my-1">
+                            <input type="checkbox" name="selected_mks[]" value="${mk.kode_mk}" class="mr-2">
+                            ${mk.kode_mk} - ${mk.nama_mk}
+                        </label>`;
                             });
 
                             mkList.innerHTML += `
-                            <div class="mt-3 pt-2 border-t">
-                                <button type="button" id="selectAllMK" class="text-sm text-blue-600 mr-3">Pilih Semua</button>
-                                <button type="button" id="deselectAllMK" class="text-sm text-red-600">Hapus Semua</button>
-                            </div>
-                        `;
+                    <div class="mt-3 pt-2 border-t">
+                        <button type="button" id="selectAllMK" class="text-sm text-blue-600 mr-3">Pilih Semua</button>
+                        <button type="button" id="deselectAllMK" class="text-sm text-red-600">Hapus Semua</button>
+                    </div>`;
 
                             document.getElementById('selectAllMK').addEventListener('click', () => {
                                 mkList.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked =
@@ -113,15 +131,21 @@
                                 mkList.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked =
                                     false);
                             });
+                        } else {
+                            mkList.innerHTML = '<div class="text-red-500 italic">Tidak ada MK terkait</div>';
                         }
                     })
-                    .catch(() => {
-                        mkList.innerHTML = '<div class="text-red-500 italic">Gagal memuat MK</div>';
+                    .catch(error => {
+                        console.error('Fetch Error:', error);
+                        mkList.innerHTML =
+                            `<div class="text-red-500 italic">Gagal memuat MK: ${error.message}</div>`;
                     });
             });
 
+            // Inisialisasi awal
             mkList.innerHTML = '<div class="text-gray-500 italic">Pilih CPL terlebih dahulu</div>';
 
+            // Validasi sebelum submit (wajib pilih MK)
             document.querySelector('form').addEventListener('submit', function(e) {
                 if (document.querySelectorAll('input[name="selected_mks[]"]:checked').length === 0) {
                     e.preventDefault();
