@@ -59,44 +59,51 @@
     </form>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const cpmkSelect = document.getElementById('id_cpmk');
-    const mkSelect = document.getElementById('kode_mk');
+$(document).ready(function() {
+    const cpmkSelect = $('#id_cpmk');
+    const mkSelect = $('#kode_mk');
 
-    cpmkSelect.addEventListener('change', function() {
-        const cpmkId = this.value;
+    cpmkSelect.on('change', function() {
+        const cpmkId = $(this).val();
         
         if (cpmkId) {
             // Reset MK dropdown
-            mkSelect.innerHTML = '<option value="" selected disabled>Loading...</option>';
-            mkSelect.disabled = true;
+            mkSelect.html('<option value="" selected disabled>Loading...</option>');
+            mkSelect.prop('disabled', true);
 
-            // Fetch MK berdasarkan CPMK
-            fetch(`{{ route('tim.subcpmk.getMkByCpmk') }}?id_cpmk=${cpmkId}`)
-                .then(response => response.json())
-                .then(data => {
-                    mkSelect.innerHTML = '<option value="" selected disabled>Pilih Mata Kuliah</option>';
+            // Fetch MK berdasarkan CPMK menggunakan jQuery AJAX
+            $.ajax({
+                url: '{{ route("tim.subcpmk.getMkByCpmk") }}',
+                type: 'GET',
+                data: {
+                    id_cpmk: cpmkId,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(data) {
+                    mkSelect.html('<option value="" selected disabled>Pilih Mata Kuliah</option>');
                     
-                    if (data.length > 0) {
-                        data.forEach(mk => {
-                            const option = document.createElement('option');
-                            option.value = mk.kode_mk;
-                            option.textContent = `${mk.kode_mk} - ${mk.nama_mk}`;
-                            mkSelect.appendChild(option);
+                    if (data && data.length > 0) {
+                        $.each(data, function(index, mk) {
+                            mkSelect.append('<option value="' + mk.kode_mk + '">' + mk.kode_mk + ' - ' + mk.nama_mk + '</option>');
                         });
-                        mkSelect.disabled = false;
+                        mkSelect.prop('disabled', false);
                     } else {
-                        mkSelect.innerHTML = '<option value="" selected disabled>Tidak ada mata kuliah tersedia</option>';
+                        mkSelect.html('<option value="" selected disabled>Tidak ada mata kuliah tersedia</option>');
                     }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    mkSelect.innerHTML = '<option value="" selected disabled>Error loading mata kuliah</option>';
-                });
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', error);
+                    console.error('Status:', status);
+                    console.error('Response:', xhr.responseText);
+                    mkSelect.html('<option value="" selected disabled>Error loading mata kuliah</option>');
+                }
+            });
         } else {
-            mkSelect.innerHTML = '<option value="" selected disabled>Pilih CPMK terlebih dahulu</option>';
-            mkSelect.disabled = true;
+            mkSelect.html('<option value="" selected disabled>Pilih CPMK terlebih dahulu</option>');
+            mkSelect.prop('disabled', true);
         }
     });
 });
