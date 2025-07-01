@@ -82,17 +82,21 @@
         </form>
         @push('scripts')
             <script>
+
+                window.cplByBkUrl = "{{ route('tim.matakuliah.getCplByBk') }}";
+                window.csrfToken = "{{ csrf_token() }}";
+
                 const cplList = document.getElementById('cplList');
                 const bkSelect = document.getElementById('id_bks');
 
                 bkSelect.addEventListener('change', function() {
                     const selectedBKs = Array.from(this.selectedOptions).map(opt => opt.value);
 
-                    fetch("{{ route('tim.matakuliah.getCplByBk') }}", {
+                    fetch(window.cplByBkUrl, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                                'X-CSRF-TOKEN': window.csrfToken
                             },
                             body: JSON.stringify({
                                 id_bks: selectedBKs
