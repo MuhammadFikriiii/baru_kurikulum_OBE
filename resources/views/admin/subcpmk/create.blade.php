@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.tim.app')
 
 @section('content')
     <div class="mx-20">
@@ -15,104 +15,84 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.subcpmk.store') }}" method="POST">
+        <form action="{{ route('tim.subcpmk.store') }}" method="POST">
             @csrf
 
+            {{-- Pilih Mata Kuliah --}}
             <div>
                 <label for="kode_mk" class="text-xl font-semibold">Mata Kuliah:</label>
-                <select name="kode_mk" id="kode_mk" required
-                    class="w-full mt-1 p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500 mb-5">
+                <select name="kode_mk" id="kode_mk" required class="w-full mt-1 p-3 border border-black rounded-lg mb-5">
                     <option value="" selected disabled>Pilih Mata Kuliah</option>
-                    @foreach ($mataKuliahs as $mk)
+                    @foreach ($mks as $mk)
                         <option value="{{ $mk->kode_mk }}">{{ $mk->kode_mk }} - {{ $mk->nama_mk }}</option>
                     @endforeach
                 </select>
             </div>
 
+            {{-- CPMK (otomatis muncul, pilih 1) --}}
             <div>
-                <label for="id_cpmk" class="text-xl font-semibold">CPMK:</label>
-                <select name="id_cpmk[]" id="id_cpmk" multiple required
-                    class="w-full mt-1 p-3 border border-black rounded-lg focus:ring-blue-500 focus:border-blue-500 mb-5 min-h-[120px]">
-                    <option value="" disabled>Pilih Mata Kuliah terlebih dahulu</option>
+                <label for="id_cpmk" class="text-xl font-semibold">CPMK Terkait:</label>
+                <select name="id_cpmk" id="id_cpmk" required class="w-full mt-1 p-3 border border-black rounded-lg mb-5">
+                    <option>Pilih Mata Kuliah terlebih dahulu</option>
                 </select>
-                <p class="text-sm text-gray-600 mb-3">*Pilih mata kuliah terlebih dahulu untuk melihat CPMK yang tersedia.
-                    Semua CPMK akan otomatis terpilih.</p>
             </div>
 
+            {{-- Sub CPMK --}}
             <div>
                 <label for="sub_cpmk" class="text-xl font-semibold">Sub CPMK:</label>
                 <input type="text" name="sub_cpmk" id="sub_cpmk" required
-                    class="w-full mt-1 p-3 border border-black rounded-lg mb-5" placeholder="Contoh: Sub CPMK 011">
+                    class="w-full mt-1 p-3 border border-black rounded-lg mb-5">
             </div>
 
+            {{-- Uraian CPMK --}}
             <div>
                 <label for="uraian_cpmk" class="text-xl font-semibold">Uraian CPMK:</label>
-                <textarea name="uraian_cpmk" id="uraian_cpmk" required rows="3"
-                    class="w-full mt-1 p-3 border border-black rounded-lg mb-5" placeholder="Masukkan uraian atau deskripsi sub CPMK"></textarea>
+                <input type="text" name="uraian_cpmk" id="uraian_cpmk" required
+                    class="w-full mt-1 p-3 border border-black rounded-lg mb-5">
             </div>
 
+            {{-- Tombol --}}
             <div class="mt-6">
-                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white px-6 py-2 rounded-lg">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-800 text-white px-5 py-2 font-bold rounded-lg">
                     Simpan
                 </button>
-                <a href="{{ route('admin.subcpmk.index') }}"
-                    class="bg-blue-500 hover:bg-blue-700 text-white px-6 py-2 rounded-lg ml-4">
+                <a href="{{ route('tim.subcpmk.index') }}"
+                    class="bg-gray-600 hover:bg-gray-700 text-white px-5 font-bold py-2 rounded-lg ml-2">
                     Kembali
                 </a>
             </div>
         </form>
     </div>
+@endsection
 
-    @push('scripts')
-        <script>
-            const mkSelect = document.getElementById('kode_mk');
+@push('scripts')
+    <script>
+        document.getElementById('kode_mk').addEventListener('change', function() {
+            const kodeMk = this.value;
             const cpmkSelect = document.getElementById('id_cpmk');
 
-            mkSelect.addEventListener('change', function() {
-                const selectedMK = this.value;
+            cpmkSelect.innerHTML = '<option disabled>Memuat CPMK...</option>';
 
-                // Reset CPMK select
-                cpmkSelect.innerHTML = '<option value="" disabled>Memuat CPMK...</option>';
-
-                if (!selectedMK) {
-                    cpmkSelect.innerHTML = '<option value="" disabled>Pilih Mata Kuliah terlebih dahulu</option>';
-                    return;
-                }
-
-                // SOLUSI: Menggunakan protokol relatif untuk menghindari mixed content error
-                fetch("{{ str_replace(['http://', 'https://'], '//', url(route('admin.subcpmk.getCpmkByMataKuliah'))) }}", {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                        },
-                        body: JSON.stringify({
-                            kode_mk: selectedMK
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        cpmkSelect.innerHTML = '';
-
-                        if (data.length === 0) {
-                            cpmkSelect.innerHTML =
-                                '<option value="" disabled>Tidak ada CPMK untuk mata kuliah ini</option>';
-                        } else {
-                            data.forEach(cpmk => {
-                                const option = document.createElement('option');
-                                option.value = cpmk.id_cpmk;
-                                option.textContent = `${cpmk.kode_cpmk} - ${cpmk.deskripsi_cpmk}`;
-                                option.selected = true; // Auto select semua CPMK
-                                cpmkSelect.appendChild(option);
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        cpmkSelect.innerHTML =
-                            '<option value="" disabled>Terjadi kesalahan saat memuat CPMK</option>';
-                    });
-            });
-        </script>
-    @endpush
-@endsection
+            fetch(`/tim/subcpmk/getCpmkByMk?kode_mk=${kodeMk}`)
+                .then(res => res.json())
+                .then(data => {
+                    cpmkSelect.innerHTML = '';
+                    if (data.length === 0) {
+                        cpmkSelect.innerHTML = '<option disabled>Tidak ada CPMK untuk MK ini</option>';
+                    } else {
+                        cpmkSelect.innerHTML = '<option selected disabled>Pilih CPMK</option>';
+                        data.forEach(cpmk => {
+                            const option = document.createElement('option');
+                            option.value = cpmk.id_cpmk;
+                            option.textContent = `${cpmk.kode_cpmk} - ${cpmk.deskripsi_cpmk}`;
+                            cpmkSelect.appendChild(option);
+                        });
+                    }
+                })
+                .catch(err => {
+                    cpmkSelect.innerHTML = '<option disabled>Gagal memuat CPMK</option>';
+                    console.error(err);
+                });
+        });
+    </script>
+@endpush
