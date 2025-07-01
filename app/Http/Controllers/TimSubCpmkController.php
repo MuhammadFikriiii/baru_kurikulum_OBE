@@ -41,6 +41,35 @@ class TimSubCpmkController extends Controller
 
         return view('tim.subcpmk.index', compact('subcpmks', 'id_tahun', 'tahun_tersedia'));
     }
+
+    // Tambahkan method ini ke dalam TimSubCpmkController
+
+    public function getMkByCpmk(Request $request)
+    {
+        $id_cpmk = $request->get('id_cpmk');
+        $kodeProdi = Auth::user()->kode_prodi;
+
+        if (!$id_cpmk) {
+            return response()->json([]);
+        }
+
+        $matakuliahs = DB::table('cpmk_mk')
+            ->join('mata_kuliahs as mk', 'cpmk_mk.kode_mk', '=', 'mk.kode_mk')
+            ->join('capaian_pembelajaran_mata_kuliahs as cpmk', 'cpmk_mk.id_cpmk', '=', 'cpmk.id_cpmk')
+            ->join('cpl_cpmk', 'cpmk.id_cpmk', '=', 'cpl_cpmk.id_cpmk')
+            ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
+            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->where('cpmk_mk.id_cpmk', $id_cpmk)
+            ->where('pl.kode_prodi', $kodeProdi)
+            ->select('mk.kode_mk', 'mk.nama_mk')
+            ->distinct()
+            ->orderBy('mk.kode_mk')
+            ->get();
+
+        return response()->json($matakuliahs);
+    }
+
     public function create()
     {
         $kodeProdi = Auth::user()->kode_prodi;
