@@ -253,7 +253,7 @@
               class="bg-blue-600 text-white font-semibold py-2 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-110">
               Lihat Jurusan
             </a>
-            <a href="https://wa.me/62511326179"
+            <a href="https://wa.me/05113305052"
               class="bg-green-600 text-white font-semibold py-2 px-8 rounded-full shadow-lg hover:bg-green-700 transition duration-300 transform hover:scale-110">
               <i class="fa fa-comment mr-2"></i>Hubungi Kami
             </a>
