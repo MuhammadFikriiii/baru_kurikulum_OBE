@@ -61,8 +61,8 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    // Ambil URL route dari Blade ke variabel JavaScript
-    const getMkByCpmkUrl = "{{ route('tim.subcpmk.getMkByCpmk') }}";
+    // Gunakan URL relatif agar aman dari mixed content (http/https)
+    const getMkByCpmkUrl = "{{ route('tim.subcpmk.getMkByCpmk', [], false) }}";
 
     $(document).ready(function () {
         const cpmkSelect = $('#id_cpmk');
@@ -72,17 +72,13 @@
             const cpmkId = $(this).val();
 
             if (cpmkId) {
-                // Reset dan disable dropdown MK
                 mkSelect.html('<option value="" selected disabled>Loading...</option>');
                 mkSelect.prop('disabled', true);
 
-                // Kirim AJAX ke route Laravel
                 $.ajax({
                     url: getMkByCpmkUrl,
                     type: 'GET',
-                    data: {
-                        id_cpmk: cpmkId
-                    },
+                    data: { id_cpmk: cpmkId },
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
@@ -90,7 +86,7 @@
                     success: function (data) {
                         mkSelect.html('<option value="" selected disabled>Pilih Mata Kuliah</option>');
 
-                        if (data && data.length > 0) {
+                        if (data.length > 0) {
                             $.each(data, function (index, mk) {
                                 mkSelect.append('<option value="' + mk.kode_mk + '">' + mk.kode_mk + ' - ' + mk.nama_mk + '</option>');
                             });
@@ -111,4 +107,5 @@
         });
     });
 </script>
+
 @endsection
