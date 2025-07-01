@@ -86,24 +86,71 @@
             bkSelect.addEventListener('change', function() {
                 const selectedBKs = Array.from(this.selectedOptions).map(opt => opt.value);
 
-                fetch("{{ route('tim.matakuliah.getCplByBk') }}", {
+                // Tampilkan loading
+                cplList.innerHTML = '<li class="text-blue-500">Memuat data CPL...</li>';
+
+                // Tentukan URL fetch (local atau production)
+                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ||
+                    window.location.hostname.includes('local');
+                let url;
+
+                if (isLocal) {
+                    url = "{{ route('tim.matakuliah.getCplByBk') }}";
+                } else {
+                    url = window.location.protocol + '//' + window.location.host +
+                        "{{ route('tim.matakuliah.getCplByBk', [], false) }}";
+                }
+
+                fetch(url, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                            'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
                         },
+                        credentials: 'same-origin',
                         body: JSON.stringify({
                             id_bks: selectedBKs
                         })
                     })
-                    .then(response => response.json())
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
                     .then(data => {
                         cplList.innerHTML = "";
-                        data.forEach(cpl => {
+
+                        if (Array.isArray(data) && data.length > 0) {
+                            data.forEach(cpl => {
+                                const li = document.createElement('li');
+                                li.textContent = `${cpl.kode_cpl} - ${cpl.deskripsi_cpl}`;
+                                li.className = 'mb-1 p-2 bg-gray-50 rounded';
+                                cplList.appendChild(li);
+                            });
+                        } else if (data && data.cpls && Array.isArray(data.cpls)) {
+                            data.cpls.forEach(cpl => {
+                                const li = document.createElement('li');
+                                li.textContent = `${cpl.kode_cpl} - ${cpl.deskripsi_cpl}`;
+                                li.className = 'mb-1 p-2 bg-gray-50 rounded';
+                                cplList.appendChild(li);
+                            });
+                        } else {
                             const li = document.createElement('li');
-                            li.textContent = `${cpl.kode_cpl} - ${cpl.deskripsi_cpl}`;
+                            li.textContent = 'Tidak ada CPL yang ditemukan untuk BK yang dipilih';
+                            li.className = 'text-gray-500 italic';
                             cplList.appendChild(li);
-                        });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Fetch Error:', error);
+                        cplList.innerHTML = "";
+                        const li = document.createElement('li');
+                        li.textContent = `Terjadi kesalahan: ${error.message}`;
+                        li.className = 'text-red-500';
+                        cplList.appendChild(li);
                     });
             });
         </script>
