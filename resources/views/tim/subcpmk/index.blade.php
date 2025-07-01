@@ -93,10 +93,11 @@
                                 class="bg-gray-600 font-bold text-white px-5 py-2 rounded-md hover:bg-gray-700">🛈</a>
                             <a href="{{ route('tim.subcpmk.edit', $subcpmk->id_sub_cpmk) }}"
                                 class="bg-blue-600 text-white font-bold px-5 py-2 rounded-md hover:bg-blue-800">✏️</a>
-                            <form action="#" method="POST">
-                                @csrf @method('DELETE')
-                                <button class="bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-800"
-                                    onclick="return confirm('Hapus Sub Cpmk ini?')">
+                            <form action="{{ route('tim.subcpmk.destroy', $subcpmk->id_sub_cpmk) }}" method="POST"
+                                onsubmit="return confirm('Hapus Sub Cpmk ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button class="bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-800">
                                     🗑️
                                 </button>
                             </form>
