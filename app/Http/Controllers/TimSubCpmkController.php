@@ -239,4 +239,32 @@ class TimSubCpmkController extends Controller
 
         return view('tim.subcpmk.detail', compact('subcpmk'));
     }
+
+    public function destroy($id)
+    {
+        $kodeProdi = Auth::user()->kode_prodi;
+
+        // Pastikan Sub CPMK milik prodi user
+        $akses = DB::table('sub_cpmks as sc')
+            ->join('capaian_pembelajaran_mata_kuliahs as cpmk', 'sc.id_cpmk', '=', 'cpmk.id_cpmk')
+            ->join('cpl_cpmk as cplcpmk', 'cpmk.id_cpmk', '=', 'cplcpmk.id_cpmk')
+            ->join('capaian_profil_lulusans as cpl', 'cplcpmk.id_cpl', '=', 'cpl.id_cpl')
+            ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+            ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
+            ->where('sc.id_sub_cpmk', $id)
+            ->where('pl.kode_prodi', $kodeProdi)
+            ->exists();
+
+        if (!$akses) {
+            abort(403, 'Akses ditolak');
+        }
+
+        $deleted = SubCpmk::where('id_sub_cpmk', $id)->delete();
+
+        if (!$deleted) {
+            return redirect()->back()->with('error', 'Gagal menghapus Sub CPMK.');
+        }
+
+        return redirect()->route('tim.subcpmk.index')->with('success', 'Sub CPMK berhasil dihapus.');
+    }
 }
