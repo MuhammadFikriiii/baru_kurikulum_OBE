@@ -180,13 +180,13 @@ class TimSubCpmkController extends Controller
 
         $query = DB::table('sub_cpmks as sub')
             ->join('capaian_pembelajaran_mata_kuliahs as cpmk', 'sub.id_cpmk', '=', 'cpmk.id_cpmk')
+            ->join('cpmk_mk', 'cpmk.id_cpmk', '=', 'cpmk_mk.id_cpmk')
+            ->join('mata_kuliahs as mk', 'cpmk_mk.kode_mk', '=', 'mk.kode_mk')
             ->join('cpl_cpmk', 'cpmk.id_cpmk', '=', 'cpl_cpmk.id_cpmk')
             ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
             ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
-            ->join('cpmk_mk', 'cpmk.id_cpmk', '=', 'cpmk_mk.id_cpmk')
-            ->join('mata_kuliahs as mk', 'cpmk_mk.kode_mk', '=', 'mk.kode_mk')
             ->where('prodis.kode_prodi', $kodeProdi)
             ->select(
                 'mk.kode_mk',
@@ -195,13 +195,13 @@ class TimSubCpmkController extends Controller
                 'cpmk.deskripsi_cpmk',
                 'sub.id_sub_cpmk',
                 'sub.sub_cpmk',
-                'sub.uraian_cpmk',
+                'sub.uraian_cpmk'
             )
             ->orderBy('mk.kode_mk')
             ->orderBy('cpmk.kode_cpmk')
             ->distinct();
 
-        // Tambahkan filter tahun jika ada
+        // Tambahkan filter tahun jika tersedia
         if ($id_tahun) {
             $query->where('pl.id_tahun', $id_tahun);
         }
