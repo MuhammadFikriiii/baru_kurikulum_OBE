@@ -61,51 +61,54 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
-    const cpmkSelect = $('#id_cpmk');
-    const mkSelect = $('#kode_mk');
+    // Ambil URL route dari Blade ke variabel JavaScript
+    const getMkByCpmkUrl = "{{ route('tim.subcpmk.getMkByCpmk') }}";
 
-    cpmkSelect.on('change', function() {
-        const cpmkId = $(this).val();
-        
-        if (cpmkId) {
-            // Reset MK dropdown
-            mkSelect.html('<option value="" selected disabled>Loading...</option>');
-            mkSelect.prop('disabled', true);
+    $(document).ready(function () {
+        const cpmkSelect = $('#id_cpmk');
+        const mkSelect = $('#kode_mk');
 
-            // Fetch MK berdasarkan CPMK menggunakan jQuery AJAX
-            $.ajax({
-                url: '{{ route("tim.subcpmk.getMkByCpmk") }}',
-                type: 'GET',
-                data: {
-                    id_cpmk: cpmkId,
-                    _token: '{{ csrf_token() }}'
-                },
-                dataType: 'json',
-                success: function(data) {
-                    mkSelect.html('<option value="" selected disabled>Pilih Mata Kuliah</option>');
-                    
-                    if (data && data.length > 0) {
-                        $.each(data, function(index, mk) {
-                            mkSelect.append('<option value="' + mk.kode_mk + '">' + mk.kode_mk + ' - ' + mk.nama_mk + '</option>');
-                        });
-                        mkSelect.prop('disabled', false);
-                    } else {
-                        mkSelect.html('<option value="" selected disabled>Tidak ada mata kuliah tersedia</option>');
+        cpmkSelect.on('change', function () {
+            const cpmkId = $(this).val();
+
+            if (cpmkId) {
+                // Reset dan disable dropdown MK
+                mkSelect.html('<option value="" selected disabled>Loading...</option>');
+                mkSelect.prop('disabled', true);
+
+                // Kirim AJAX ke route Laravel
+                $.ajax({
+                    url: getMkByCpmkUrl,
+                    type: 'GET',
+                    data: {
+                        id_cpmk: cpmkId
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        mkSelect.html('<option value="" selected disabled>Pilih Mata Kuliah</option>');
+
+                        if (data && data.length > 0) {
+                            $.each(data, function (index, mk) {
+                                mkSelect.append('<option value="' + mk.kode_mk + '">' + mk.kode_mk + ' - ' + mk.nama_mk + '</option>');
+                            });
+                            mkSelect.prop('disabled', false);
+                        } else {
+                            mkSelect.html('<option value="" selected disabled>Tidak ada mata kuliah tersedia</option>');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('AJAX Error:', error);
+                        mkSelect.html('<option value="" selected disabled>Error saat memuat mata kuliah</option>');
                     }
-                },
-                error: function(xhr, status, error) {
-                    console.error('AJAX Error:', error);
-                    console.error('Status:', status);
-                    console.error('Response:', xhr.responseText);
-                    mkSelect.html('<option value="" selected disabled>Error loading mata kuliah</option>');
-                }
-            });
-        } else {
-            mkSelect.html('<option value="" selected disabled>Pilih CPMK terlebih dahulu</option>');
-            mkSelect.prop('disabled', true);
-        }
+                });
+            } else {
+                mkSelect.html('<option value="" selected disabled>Pilih CPMK terlebih dahulu</option>');
+                mkSelect.prop('disabled', true);
+            }
+        });
     });
-});
 </script>
 @endsection
