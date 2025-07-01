@@ -32,7 +32,7 @@
 
 
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-            <div class="flex space-x-2">
+            {{-- <div class="flex space-x-2">
                 <a href="{{ route('admin.bahankajian.create') }}"
                     class="bg-green-600 hover:bg-green-800 text-white font-bold px-4 py-2 rounded-md inline-flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24"
@@ -42,7 +42,7 @@
                     </svg>
                     Tambah
                 </a>
-            </div>
+            </div> --}}
 
             <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                 <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
@@ -72,10 +72,11 @@
                     </select>
                 </div>
 
-       
-                  <!-- Search -->
-                  <div class="sm:min-w-[250px] w-full sm:w-auto">
-                    <div class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
+
+                <!-- Search -->
+                <div class="sm:min-w-[250px] w-full sm:w-auto">
+                    <div
+                        class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
                         <span class="pl-3 text-gray-400">
                             <i class="fas fa-search"></i>
                         </span>
@@ -129,33 +130,59 @@
                     <table class="min-w-full table-fixed">
                         <thead class="bg-green-800 text-white">
                             <tr>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">No</th>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">Prodi</th>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">Kode BK</th>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">Nama BK</th>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">Deskripsi BK
+                                <th
+                                    class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">
+                                    No</th>
+                                <th
+                                    class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">
+                                    Prodi</th>
+                                <th
+                                    class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">
+                                    Kode BK</th>
+                                <th
+                                    class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">
+                                    Nama BK</th>
+                                <th
+                                    class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">
+                                    Deskripsi BK
                                 </th>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">Referensi BK
+                                <th
+                                    class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">
+                                    Referensi BK
                                 </th>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">Status BK
+                                <th
+                                    class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">
+                                    Status BK
                                 </th>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">Knowledge
+                                <th
+                                    class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">
+                                    Knowledge
                                     Area</th>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">Aksi</th>
+                                <th
+                                    class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider border border-gray-300">
+                                    Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($bahankajians as $index => $bahankajian)
                                 <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-100">
-                                    <td class="px-4 py-4 text-center text-sm border border-gray-300">{{ $index + 1 }}</td>
-                                    <td class="px-4 py-4 text-center text-sm border border-gray-300">{{ $bahankajian->nama_prodi }}</td>
-                                    <td class="px-4 py-4 text-center text-sm border border-gray-300">{{ $bahankajian->kode_bk }}</td>
-                                    <td class="px-4 py-4 text-center text-sm border border-gray-300">{{ $bahankajian->nama_bk }}</td>
-                                    <td class="px-4 py-4 text-sm border border-gray-300">{{ $bahankajian->deskripsi_bk }}</td>
-                                    <td class="px-4 py-4 text-center text-sm border border-gray-300">{{ $bahankajian->referensi_bk }}</td>
-                                    <td class="px-4 py-4 text-center text-sm border border-gray-300">{{ $bahankajian->status_bk }}</td>
-                                    <td class="px-4 py-4 text-center text-sm border border-gray-300">{{ $bahankajian->knowledge_area }}</td>
-                                    <td class="px-4 py-4 border border-gray-300">                              
+                                    <td class="px-4 py-4 text-center text-sm border border-gray-300">{{ $index + 1 }}
+                                    </td>
+                                    <td class="px-4 py-4 text-center text-sm border border-gray-300">
+                                        {{ $bahankajian->nama_prodi }}</td>
+                                    <td class="px-4 py-4 text-center text-sm border border-gray-300">
+                                        {{ $bahankajian->kode_bk }}</td>
+                                    <td class="px-4 py-4 text-center text-sm border border-gray-300">
+                                        {{ $bahankajian->nama_bk }}</td>
+                                    <td class="px-4 py-4 text-sm border border-gray-300">{{ $bahankajian->deskripsi_bk }}
+                                    </td>
+                                    <td class="px-4 py-4 text-center text-sm border border-gray-300">
+                                        {{ $bahankajian->referensi_bk }}</td>
+                                    <td class="px-4 py-4 text-center text-sm border border-gray-300">
+                                        {{ $bahankajian->status_bk }}</td>
+                                    <td class="px-4 py-4 text-center text-sm border border-gray-300">
+                                        {{ $bahankajian->knowledge_area }}</td>
+                                    <td class="px-4 py-4 border border-gray-300">
                                         <div class="flex justify-center space-x-2">
                                             <a href="{{ route('admin.bahankajian.detail', $bahankajian->id_bk) }}"
                                                 class="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md inline-flex items-center justify-center"
@@ -167,7 +194,7 @@
                                                         clip-rule="evenodd" />
                                                 </svg>
                                             </a>
-                                            <a href="{{ route('admin.bahankajian.edit', $bahankajian->id_bk) }}"
+                                            {{-- <a href="{{ route('admin.bahankajian.edit', $bahankajian->id_bk) }}"
                                                 class="bg-blue-600 hover:bg-blue-800 text-white p-2 rounded-md inline-flex items-center justify-center"
                                                 title="Edit">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20"
@@ -190,7 +217,7 @@
                                                             clip-rule="evenodd" />
                                                     </svg>
                                                 </button>
-                                            </form>
+                                            </form> --}}
                                         </div>
                                     </td>
                                 </tr>

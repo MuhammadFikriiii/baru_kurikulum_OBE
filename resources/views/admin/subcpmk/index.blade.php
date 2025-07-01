@@ -8,7 +8,7 @@
         </div>
 
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-            <div class="flex space-x-2">
+            {{-- <div class="flex space-x-2">
                 <a href="{{ route('admin.subcpmk.create') }}"
                     class="bg-green-600 hover:bg-green-800 text-white font-bold px-4 py-2 rounded-md inline-flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
@@ -18,7 +18,7 @@
                     </svg>
                     Tambah
                 </a>
-            </div>
+            </div> --}}
 
             <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                 <select id="prodi" name="kode_prodi"
@@ -44,13 +44,10 @@
                         @endforeach
                     @endif
                 </select>
-            </div>
-
-
-
-                  <!-- Search -->
-                  <div class="sm:min-w-[250px] w-full sm:w-auto">
-                    <div class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
+                <!-- Search -->
+                <div class="sm:min-w-[250px] w-full sm:w-auto">
+                    <div
+                        class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
                         <span class="pl-3 text-gray-400">
                             <i class="fas fa-search"></i>
                         </span>
@@ -58,7 +55,7 @@
                             class="px-3 py-2 w-full focus:outline-none bg-transparent" />
                     </div>
                 </div>
-
+            </div>
         </div>
     </div>
 
@@ -142,7 +139,7 @@
                                                     d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                                             </svg>
                                         </a>
-                                        <a href="{{ route('admin.subcpmk.edit', $subcpmk->id_sub_cpmk) }}"
+                                        {{-- <a href="{{ route('admin.subcpmk.edit', $subcpmk->id_sub_cpmk) }}"
                                             class="bg-blue-600 hover:bg-blue-800 text-white p-2 rounded-md" title="Edit">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                                 fill="currentColor">
@@ -163,7 +160,7 @@
                                                         clip-rule="evenodd" />
                                                 </svg>
                                             </button>
-                                        </form>
+                                        </form> --}}
                                     </div>
                                 </td>
                             </tr>
