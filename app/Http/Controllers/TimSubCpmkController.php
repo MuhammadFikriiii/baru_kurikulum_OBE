@@ -92,14 +92,31 @@ class TimSubCpmkController extends Controller
     {
         $request->validate([
             'id_cpmk' => 'required|exists:capaian_pembelajaran_mata_kuliahs,id_cpmk',
+            'kode_mk' => 'required|string',
             'sub_cpmk' => 'required|string|max:10',
             'uraian_cpmk' => 'required|string|max:255'
         ]);
 
-        SubCpmk::create($request->all());
+        $existing = DB::table('sub_cpmks as sc')
+            ->join('cpmk_mk', 'sc.id_cpmk', '=', 'cpmk_mk.id_cpmk')
+            ->where('sc.id_cpmk', $request->id_cpmk)
+            ->where('cpmk_mk.kode_mk', $request->kode_mk)
+            ->where('sc.sub_cpmk', $request->sub_cpmk)
+            ->exists();
+
+        if ($existing) {
+            return back()->withErrors(['Sub CPMK ini sudah pernah ditambahkan untuk MK tersebut.']);
+        }
+
+        SubCpmk::create([
+            'id_cpmk' => $request->id_cpmk,
+            'sub_cpmk' => $request->sub_cpmk,
+            'uraian_cpmk' => $request->uraian_cpmk,
+        ]);
 
         return redirect()->route('tim.subcpmk.index')->with('success', 'Sub CPMK berhasil dibuat');
     }
+
 
     public function edit(SubCpmk $id_sub_cpmk)
     {
