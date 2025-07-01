@@ -395,7 +395,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('ajax-getmkbycpl', [TimBobotController::class, 'getmkbycpl'])->name('bobot.getmkbycpl');
         Route::get('/notes', [TimNotesController::class, 'index'])->name('notes.index');
         Route::get('/notes/{note}/detail', [TimNotesController::class, 'detail'])->name('notes.detail');
-        Route::get('/subcpmk/getCpmkByMk', [TimSubCpmkController::class, 'getCpmkByMk'])->name('subcpmk.getCpmkByMk');
+        Route::get('/subcpmk/getMkByCpmk', [TimSubCpmkController::class, 'getMkByCpmk'])->name('subcpmk.getMkByCpmk');
         Route::delete('/subcpmk/{id}', [TimSubCpmkController::class, 'destroy'])->name('subcpmk.destroy');
     });
 });

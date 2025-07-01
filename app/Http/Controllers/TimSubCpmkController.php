@@ -42,24 +42,24 @@ class TimSubCpmkController extends Controller
         return view('tim.subcpmk.index', compact('subcpmks', 'id_tahun', 'tahun_tersedia'));
     }
 
-    public function getCpmkByMk(Request $request)
+    public function getMkByCpmk(Request $request)
     {
-        $kodeMk = $request->kode_mk;
+        $id_cpmk = $request->id_cpmk;
         $kodeProdi = Auth::user()->kode_prodi;
 
-        $cpmks = DB::table('cpmk_mk')
+        $mk = DB::table('cpmk_mk')
+            ->join('mata_kuliahs as mk', 'cpmk_mk.kode_mk', '=', 'mk.kode_mk')
             ->join('capaian_pembelajaran_mata_kuliahs as cpmk', 'cpmk_mk.id_cpmk', '=', 'cpmk.id_cpmk')
             ->join('cpl_cpmk', 'cpmk.id_cpmk', '=', 'cpl_cpmk.id_cpmk')
             ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
             ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
-            ->where('cpmk_mk.kode_mk', $kodeMk)
+            ->where('cpmk.id_cpmk', $id_cpmk)
             ->where('pl.kode_prodi', $kodeProdi)
-            ->select('cpmk.id_cpmk', 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk')
-            ->distinct()
-            ->get();
+            ->select('mk.kode_mk', 'mk.nama_mk')
+            ->first();
 
-        return response()->json($cpmks);
+        return response()->json($mk);
     }
 
     public function create()
@@ -97,37 +97,13 @@ class TimSubCpmkController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode_mk' => 'required|exists:mata_kuliahs,kode_mk',
             'id_cpmk' => 'required|exists:capaian_pembelajaran_mata_kuliahs,id_cpmk',
+            'kode_mk' => 'required|exists:mata_kuliahs,kode_mk',
             'sub_cpmk' => 'required|string|max:10',
             'uraian_cpmk' => 'required|string|max:255'
         ]);
 
-        // Validasi bahwa MK dan CPMK benar-benar berelasi (harus ada di tabel pivot)
-        $relasiValid = DB::table('cpmk_mk')
-            ->where('kode_mk', $request->kode_mk)
-            ->where('id_cpmk', $request->id_cpmk)
-            ->exists();
-
-        if (!$relasiValid) {
-            return redirect()->back()
-                ->withErrors(['CPMK yang dipilih tidak terkait dengan Mata Kuliah ini.'])
-                ->withInput();
-        }
-
-        // Cek duplikasi (jika perlu)
-        $duplikat = DB::table('sub_cpmks')
-            ->where('kode_mk', $request->kode_mk)
-            ->where('id_cpmk', $request->id_cpmk)
-            ->where('sub_cpmk', $request->sub_cpmk)
-            ->exists();
-
-        if ($duplikat) {
-            return redirect()->back()
-                ->withErrors(['Sub CPMK ini sudah ada untuk kombinasi MK dan CPMK tersebut.'])
-                ->withInput();
-        }
-
+        // Simpan ke tabel sub_cpmks
         SubCpmk::create([
             'id_cpmk' => $request->id_cpmk,
             'kode_mk' => $request->kode_mk,

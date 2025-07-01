@@ -18,41 +18,38 @@
         <form action="{{ route('tim.subcpmk.store') }}" method="POST">
             @csrf
 
-            {{-- Pilih Mata Kuliah --}}
+            {{-- Pilih CPMK --}}
             <div>
-                <label for="kode_mk" class="text-xl font-semibold">Mata Kuliah:</label>
-                <select name="kode_mk" id="kode_mk" required class="w-full mt-1 p-3 border border-black rounded-lg mb-5">
-                    <option value="" selected disabled>Pilih Mata Kuliah</option>
-                    @foreach ($mks as $mk)
-                        <option value="{{ $mk->kode_mk }}">{{ $mk->kode_mk }} - {{ $mk->nama_mk }}</option>
+                <label for="id_cpmk" class="text-xl font-semibold">CPMK:</label>
+                <select name="id_cpmk" id="id_cpmk" required class="w-full mt-1 p-3 border border-black rounded-lg mb-5">
+                    <option value="" selected disabled>Pilih CPMK</option>
+                    @foreach ($cpmks as $cpmk)
+                        <option value="{{ $cpmk->id_cpmk }}">
+                            {{ $cpmk->kode_cpmk }} - {{ $cpmk->deskripsi_cpmk }}
+                        </option>
                     @endforeach
                 </select>
             </div>
 
-            {{-- CPMK (otomatis dari MK) --}}
             <div>
-                <label for="id_cpmks" class="text-xl font-semibold">CPMK Terkait:</label>
-                <select name="id_cpmks[]" id="id_cpmks" required multiple
-                    class="w-full mt-1 p-3 border border-black rounded-lg mb-5 h-40">
-                    <option>Pilih Mata Kuliah terlebih dahulu</option>
+                <label for="kode_mk" class="text-xl font-semibold">Mata Kuliah:</label>
+                <select name="kode_mk" id="kode_mk" required class="w-full mt-1 p-3 border border-black rounded-lg mb-5">
+                    <option value="" selected disabled>Pilih CPMK terlebih dahulu</option>
                 </select>
             </div>
 
-            {{-- Sub CPMK --}}
             <div>
                 <label for="sub_cpmk" class="text-xl font-semibold">Sub CPMK:</label>
                 <input type="text" name="sub_cpmk" id="sub_cpmk" required
                     class="w-full mt-1 p-3 border border-black rounded-lg mb-5">
             </div>
 
-            {{-- Uraian CPMK --}}
             <div>
                 <label for="uraian_cpmk" class="text-xl font-semibold">Uraian CPMK:</label>
                 <input type="text" name="uraian_cpmk" id="uraian_cpmk" required
                     class="w-full mt-1 p-3 border border-black rounded-lg mb-5">
             </div>
 
-            {{-- Tombol --}}
             <div class="mt-6">
                 <button type="submit" class="bg-blue-600 hover:bg-blue-800 text-white px-5 py-2 font-bold rounded-lg">
                     Simpan
@@ -68,30 +65,32 @@
 
 @push('scripts')
     <script>
-        document.getElementById('kode_mk').addEventListener('change', function() {
-            const kodeMk = this.value;
-            const cpmkSelect = document.getElementById('id_cpmks');
+        document.getElementById('id_cpmk').addEventListener('change', function() {
+            const idCpmk = this.value;
+            const mkSelect = document.getElementById('kode_mk');
 
-            cpmkSelect.innerHTML = '<option disabled>Memuat CPMK...</option>';
+            mkSelect.innerHTML = '<option disabled selected>Memuat MK...</option>';
 
-            fetch(`/tim/subcpmk/getCpmkByMk?kode_mk=${kodeMk}`)
+            fetch(`/tim/subcpmk/getMkByCpmk?id_cpmk=${idCpmk}`)
                 .then(res => res.json())
                 .then(data => {
-                    cpmkSelect.innerHTML = '';
-                    if (data.length === 0) {
-                        cpmkSelect.innerHTML = '<option disabled>Tidak ada CPMK untuk MK ini</option>';
+                    mkSelect.innerHTML = ''; // kosongkan dulu
+                    if (data && data.kode_mk) {
+                        const option = document.createElement('option');
+                        option.value = data.kode_mk;
+                        option.textContent = `${data.kode_mk} - ${data.nama_mk}`;
+                        mkSelect.appendChild(option);
+                        option.selected = true;
                     } else {
-                        data.forEach(cpmk => {
-                            const option = document.createElement('option');
-                            option.value = cpmk.id_cpmk;
-                            option.textContent = `${cpmk.kode_cpmk} - ${cpmk.deskripsi_cpmk}`;
-                            cpmkSelect.appendChild(option);
-                        });
+                        const option = document.createElement('option');
+                        option.textContent = 'MK tidak ditemukan';
+                        option.disabled = true;
+                        mkSelect.appendChild(option);
                     }
                 })
                 .catch(err => {
-                    cpmkSelect.innerHTML = '<option disabled>Gagal memuat CPMK</option>';
                     console.error(err);
+                    mkSelect.innerHTML = '<option disabled selected>Gagal memuat MK</option>';
                 });
         });
     </script>
