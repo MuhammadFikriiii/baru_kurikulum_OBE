@@ -97,17 +97,17 @@ class TimSubCpmkController extends Controller
             'uraian_cpmk' => 'required|string|max:255'
         ]);
 
-        $existing = DB::table('sub_cpmks as sc')
-            ->join('cpmk_mk', 'sc.id_cpmk', '=', 'cpmk_mk.id_cpmk')
-            ->where('sc.id_cpmk', $request->id_cpmk)
-            ->where('cpmk_mk.kode_mk', $request->kode_mk)
-            ->where('sc.sub_cpmk', $request->sub_cpmk)
+        // Cek apakah sub_cpmk ini sudah ada di CPMK tersebut (apapun MK-nya)
+        $existing = DB::table('sub_cpmks')
+            ->where('id_cpmk', $request->id_cpmk)
+            ->where('sub_cpmk', $request->sub_cpmk)
             ->exists();
 
         if ($existing) {
-            return back()->withErrors(['Sub CPMK ini sudah pernah ditambahkan untuk MK tersebut.']);
+            return back()->withErrors(['Sub CPMK ini sudah pernah ditambahkan ke CPMK tersebut.']);
         }
 
+        // Simpan
         SubCpmk::create([
             'id_cpmk' => $request->id_cpmk,
             'sub_cpmk' => $request->sub_cpmk,
@@ -116,7 +116,6 @@ class TimSubCpmkController extends Controller
 
         return redirect()->route('tim.subcpmk.index')->with('success', 'Sub CPMK berhasil dibuat');
     }
-
 
     public function edit(SubCpmk $id_sub_cpmk)
     {
