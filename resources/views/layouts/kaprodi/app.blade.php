@@ -76,12 +76,12 @@
                 </button>
                 <div id="userDropdown"
                     class="absolute right-0 mt-2 bg-white text-black rounded-md shadow-lg py-2 hidden w-48 z-50">
-                    <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100">
+                    {{-- <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100">
                         <i class="fas fa-sliders-h mr-2"></i> Account
                     </a>
                     <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100">
                         <i class="fas fa-cog mr-2"></i> Settings
-                    </a>
+                    </a> --}}
                     <div class="border-t my-1"></div>
                     <form action="{{ route('logout') }}" method="POST" onsubmit="clearSidebarState()">
                         @csrf
