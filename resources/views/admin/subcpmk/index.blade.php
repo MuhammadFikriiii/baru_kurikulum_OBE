@@ -59,7 +59,7 @@
         </div>
     </div>
 
-    <div class="mx-5 md:mx-20 my-10">
+    <div class="">
         @if ($kode_prodi || $id_tahun)
             <div class="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
                 <div class="flex flex-wrap gap-2 items-center">
@@ -96,16 +96,17 @@
             </div>
         @endif
 
-        @if (empty($kode_prodi))
-            <div class="text-center p-8 bg-white rounded-lg shadow">
-                <p class="text-gray-600 text-lg">Silakan pilih prodi terlebih dahulu.
-                </p>
-            </div>
-        @elseif ($subcpmks->isEmpty())
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+            @if (empty($kode_prodi))
+                <div class="p-8 text-center text-gray-600">
+                    Silakan pilih prodi terlebih dahulu.
+                </div>
+            @elseif ($subcpmks->isEmpty())
             <div class="text-center p-8 bg-white rounded-lg shadow">
                 <p class="text-gray-600 text-lg">Tidak ada data Sub CPMK untuk program studi yang dipilih.</p>
             </div>
-        @else
+        </div> 
+     @else
             <div class="overflow-x-auto">
                 <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
                     <thead class="bg-green-800 text-white">
