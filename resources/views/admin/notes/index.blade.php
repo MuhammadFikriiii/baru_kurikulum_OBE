@@ -6,7 +6,7 @@
         <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
 
         @if ($notes->isEmpty())
-            <div class="bg-white rounded-lg shadow p-6 text-center text-gray-500">
+            <div class="bg-white rounded-lg shadow p-8 mt-8 text-center text-gray-500">
                 Belum ada catatan yang diberikan.
             </div>
         @else
