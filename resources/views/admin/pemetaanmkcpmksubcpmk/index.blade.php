@@ -3,8 +3,8 @@
 <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
     <div class="">
         <div class="text-center mb-8">
-            <h2 class="text-2xl font-bold text-gray-800">Pemetaan MK - CPMK - SUBCPMK</h2>
-            <hr class="border-t-4 border-black my-4 mx-auto mb-4">
+            <h2 class="text-3xl font-bold text-gray-800">Pemetaan MK - CPMK - SUBCPMK</h2>
+            <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
         </div>
             <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                 <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">

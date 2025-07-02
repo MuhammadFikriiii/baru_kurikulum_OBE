@@ -5,7 +5,7 @@
 
     <div class="text-center mb-8">
         <h1 class="text-3xl font-bold text-gray-800">Daftar Jurusan</h1>
-        <hr class="border-t-4 border-black my-4 mx-auto mb-4">
+        <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
     </div>
 
     @if(session('success'))
