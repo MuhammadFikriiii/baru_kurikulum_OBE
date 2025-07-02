@@ -370,7 +370,7 @@
                       {{ $prodi->jenjang_pendidikan }}
                     </span>
                   </div>
-                  <h3 class="text-xl font-bold mb-2">{{ $prodi->nama_prodi }}</h3>
+                  <h3 class="text-[15px] font-bold mb-2">{{ $prodi->nama_prodi }}</h3>
                   <p class="text-blue-100 text-sm">{{ $prodi->gelar_lulusan }}</p>
                 </div>
 

@@ -64,13 +64,56 @@
             </select>
           </div>
 
+          {{-- <div>
+          <!-- CHECK -->
           <div class="mb-4 flex items-start gap-2">
-            <input type="checkbox" class="mt-1">
+            <input type="checkbox" id="agreeCheckbox" class="mt-1" required disabled>
             <p class="text-sm text-gray-600">
-              Saya menerima <a href="#" class="text-[#3094c6] font-semibold">Ketentuan Penggunaan</a> & 
-              <a href="#" class="text-[#3094c6]  font-semibold">Kebijakan Privasi</a>.
+              Saya menerima 
+              <button type="button" onclick="openModal()" class="text-[#3094c6] font-semibold underline">Ketentuan Penggunaan</button> & 
+              <button type="button" onclick="openModal()" class="text-[#3094c6] font-semibold underline">Kebijakan Privasi</button>.
             </p>
           </div>
+
+          <!-- Modal -->
+          <div id="termsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white p-6 rounded-xl max-w-xl w-full shadow-lg relative">
+              <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-600 hover:text-black">&times;</button>
+              <h3 class="text-xl font-bold mb-4 text-gray-800">Ketentuan Penggunaan & Kebijakan Privasi</h3>
+              <div class="overflow-y-auto max-h-64 text-sm text-gray-700">
+                <p class="mb-2 font-semibold">Ketentuan Penggunaan:</p>
+                <p class="mb-4">
+                  Dengan mendaftar, Anda menyetujui bahwa informasi yang Anda berikan adalah benar dan Anda akan mematuhi aturan penggunaan sistem ini.
+                </p>
+                <p class="mb-2 font-semibold">Kebijakan Privasi:</p>
+                <p>
+                  Data pribadi Anda akan digunakan hanya untuk keperluan sistem dan tidak akan dibagikan kepada pihak ketiga tanpa izin Anda.
+                </p>
+              </div>
+              <div class="mt-6 text-right">
+                <button onclick="agreeTerms()" class="bg-[#3094c6] hover:bg-[rgb(29,99,134)] text-white px-4 py-2 rounded-lg">Saya Setuju</button>
+              </div>
+            </div>
+          </div>
+          
+          <script>
+            function openModal() {
+              document.getElementById('termsModal').classList.remove('hidden');
+            }
+          
+            function closeModal() {
+              document.getElementById('termsModal').classList.add('hidden');
+            }
+          
+            function agreeTerms() {
+              const checkbox = document.getElementById('agreeCheckbox');
+              checkbox.checked = true;
+              checkbox.disabled = false;
+              closeModal();
+            }
+          </script>
+          </div> --}}
+
 
           <div class="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <button type="submit" class="bg-[#3094c6] hover:bg-[rgb(29,99,134)]  text-white font-semibold py-2 px-7 rounded-lg transition duration-300 w-full sm:w-auto">
