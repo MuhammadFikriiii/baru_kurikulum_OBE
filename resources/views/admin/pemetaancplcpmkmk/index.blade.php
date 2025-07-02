@@ -29,10 +29,7 @@
     @endif
 
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-        <div class="flex space-x-2">
-            <!-- Add any additional buttons here if needed -->
-        </div>
-        
+
         <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
             <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                 <select id="prodi" name="kode_prodi"
