@@ -106,14 +106,14 @@
                                 <tr>
                                     <th class="px-6 py-3 text-left font-semibold"></th>
                                     @foreach ($mks as $mk)
-                                        <th class="px-4 py-3 relative group text-center">
+                                        <th class="px-4 py-3 relative group text-center whitespace-nowrap">
                                             <span class="cursor-help">{{ $mk->kode_mk }}</span>
                                             <div
-                                                class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+                                                class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg break-words">
                                                 <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
                                                     {{ $mk->nama_prodi }}
                                                 </div>
-                                                <div class="mt-3 px-2 text-center">
+                                                <div class="mt-3 px-2 text-center whitespace-normal">
                                                     {{ $mk->nama_mk }}
                                                 </div>
                                             </div>
@@ -127,11 +127,11 @@
                                         <td class="px-6 py-4 whitespace-nowrap relative group">
                                             <span class="cursor-help font-medium">{{ $bk->kode_bk }}</span>
                                             <div
-                                                class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
-                                                <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
+                                                class="absolute left-0 ml-4 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-left shadow-lg break-words">
+                                                <div class="bg-gray-600 rounded-t px-2 py-1 font-bold text-center">
                                                     {{ $bk->nama_prodi }}
                                                 </div>
-                                                <div class="mt-3 px-2 text-center">
+                                                <div class="mt-3 px-2 text-justify whitespace-normal">
                                                     {{ $bk->nama_bk }}
                                                 </div>
                                             </div>
@@ -147,6 +147,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        
                     </div>
                 @endif
             </div>

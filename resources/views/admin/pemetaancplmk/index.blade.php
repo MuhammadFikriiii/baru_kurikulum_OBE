@@ -91,16 +91,16 @@
                         }
                     </style>
 
-                    <div class="">
+                    <div class="overflow-x-auto w-full">
                         <table class="w-full border border-gray-300 shadow-md rounded-lg">
                             <thead class="bg-green-800 text-white">
                                 <tr>
                                     <th class="px-4 py-2 text-left"></th>
                                     @foreach ($mks as $mk)
-                                        <th class="px-2 py-2 relative group">
+                                        <th class="px-2 py-2 relative group whitespace-nowrap">
                                             <span class="cursor-help">{{ $mk->kode_mk }}</span>
                                             <div
-                                                class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+                                                class="absolute top-full mb-4 left-1/2 -translate-x-1/2 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg break-words">
                                                 <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
                                                     {{ $mk->nama_prodi }}
                                                 </div>
@@ -114,16 +114,15 @@
                             </thead>
                             <tbody>
                                 @foreach ($cpls as $index => $cpl)
-                                    <tr
-                                        class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border">
-                                        <td class="px-4 py-2 relative group">
+                                    <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border">
+                                        <td class="px-4 py-2 relative group whitespace-nowrap">
                                             <span class="cursor-help">{{ $cpl->kode_cpl }}</span>
                                             <div
-                                                class="absolute top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+                                                class="absolute top-full left-0 ml-4 mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg break-words">
                                                 <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
                                                     {{ $prodiByCpl[$cpl->id_cpl] ?? 'Program Studi Tidak Ditemukan' }}
                                                 </div>
-                                                <div class="mt-3 px-2 text-justify">
+                                                <div class="mt-3 px-2 text-justify whitespace-normal">
                                                     {{ $cpl->deskripsi_cpl }}
                                                 </div>
                                             </div>
@@ -139,6 +138,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        
                     </div>
                 @endif
                 <p class="mt-3 italic text-red-500">*arahkan cursor pada kode cpl atau kode mk untuk melihat deskripsi*</p>
