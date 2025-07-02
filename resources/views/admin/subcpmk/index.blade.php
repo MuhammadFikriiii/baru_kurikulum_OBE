@@ -55,7 +55,7 @@
                             class="px-3 py-2 w-full focus:outline-none bg-transparent" />
                     </div>
                 </div>
-            </div>
+         
         </div>
     </div>
 
@@ -98,7 +98,7 @@
 
         @if (empty($kode_prodi))
             <div class="text-center p-8 bg-white rounded-lg shadow">
-                <p class="text-gray-600 text-lg">Silakan pilih program studi terlebih dahulu untuk melihat data Sub CPMK.
+                <p class="text-gray-600 text-lg">Silakan pilih prodi terlebih dahulu.
                 </p>
             </div>
         @elseif ($subcpmks->isEmpty())
@@ -168,7 +168,9 @@
                     </tbody>
                 </table>
             </div>
+        </div>
         @endif
+    
     </div>
 
     <script>

@@ -109,7 +109,7 @@
         <div class="bg-white rounded-lg shadow overflow-hidden">
             @if (empty($kode_prodi))
                 <div class="p-8 text-center text-gray-600">
-                    Silakan pilih Prodi terlebih dahulu untuk melihat data CPMK.
+                    Silakan pilih prodi terlebih dahulu.
                 </div>
             @elseif ($cpmks->isEmpty())
                 <div class="p-8 text-center text-gray-600">

@@ -3,7 +3,7 @@
 @section('content')
     <div class="mr-20 ml-20">
 
-        <h2 class="text-4xl font-extrabold mb-4 text-center">Edit Tahun Ajaran</h2>
+        <h2 class="text-4xl font-extrabold mb-4 text-center">Edit Tahun Kurikulum</h2>
         <hr class="w-full border border-black mb-4">
 
         @if ($errors->any())
