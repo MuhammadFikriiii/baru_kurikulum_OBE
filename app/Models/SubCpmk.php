@@ -10,7 +10,7 @@ class SubCpmk extends Model
     protected $primaryKey = 'id_sub_cpmk';
     public $incrementing = true;
     public $timestamps = true;
-    protected $fillable = ['sub_cpmk', 'id_cpmk', 'uraian_cpmk'];
+    protected $fillable = ['sub_cpmk', 'id_cpmk', 'uraian_cpmk', 'kode_mk'];
 
     public function CapaianPembelajaranMataKuliah()
     {
