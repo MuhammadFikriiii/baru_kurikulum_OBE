@@ -71,7 +71,6 @@
                     </select>
                 </div>
 
-
                 <!-- Search -->
                 <div class="sm:min-w-[250px] w-full sm:w-auto">
                     <div
