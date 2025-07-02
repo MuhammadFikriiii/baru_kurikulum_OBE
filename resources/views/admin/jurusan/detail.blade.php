@@ -17,27 +17,7 @@
                 </div>
             </div>
 
-            <!-- Kolom Kedua (bisa ditambahkan data lain di sini jika perlu) -->
-            <div class="space-y-4">
-                <!-- Kosong sementara -->
-                <div class="flex justify-end items-end">
-                    <div class="flex items-end space-x-4 pt-10 ">
-                        <a href="{{ route('admin.jurusan.edit', $jurusan->id_jurusan) }}" 
-                           class="px-5 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg transition duration-200">
-                            Edit
-                        </a>
-                        <form action="{{ route('admin.jurusan.destroy', $jurusan->id_jurusan) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" 
-                                    class="px-4 py-2 bg-red-600 hover:bg-red-800 text-white font-semibold rounded-lg transition duration-200"
-                                    onclick="return confirm('Apakah Anda yakin ingin menghapus catatan ini?')">
-                                Hapus
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        
         </div>
 
         <!-- Tombol Aksi -->

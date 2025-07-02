@@ -65,7 +65,7 @@
 </div>
 
 
-        <div class="md:col-span-2 flex justify-end items-end pt-6 space-x-4">
+        {{-- <div class="md:col-span-2 flex justify-end items-end pt-6 space-x-4">
             <a href="{{ route('admin.bahankajian.edit', $id_bk->id_bk) }}"
                class="px-5 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg transition duration-200">
                 Edit
@@ -79,7 +79,7 @@
                     Hapus
                 </button>
             </form>
-        </div>
+        </div> --}}
     </div>
 
     

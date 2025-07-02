@@ -46,15 +46,16 @@
                         class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none">
                 </div>
 
+       
+            </div>
+
+            <!-- Kolom Kedua -->
+            <div class="space-y-4">
                 <div>
                     <label for="sumber_pl" class="block text-lg font-semibold text-gray-700">Sumber PL</label>
                     <input type="text" id="sumber_pl" value="{{ $profillulusan->sumber_pl }}" readonly
                         class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none">
                 </div>
-            </div>
-
-            <!-- Kolom Kedua -->
-            <div class="space-y-4">
                 <div>
                     <label for="deskripsi_pl" class="block text-lg font-semibold text-gray-700">Deskripsi PL</label>
                     <textarea id="deskripsi_pl" readonly
@@ -68,7 +69,7 @@
                 </div>
 
                 <!-- Tombol Aksi -->
-                <div class="flex justify-end items-end pt-10">
+                {{-- <div class="flex justify-end items-end pt-10">
                     <a href="{{ route('admin.profillulusan.edit', $profillulusan->id_pl) }}"
                         class="px-5 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg transition duration-200">
                         Edit
@@ -82,7 +83,7 @@
                             Hapus
                         </button>
                     </form>
-                </div>
+                </div> --}}
             </div>
         </div>
 

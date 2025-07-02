@@ -98,22 +98,7 @@
                     class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none">
             </div>
 
-            <!-- Tombol Edit dan Hapus -->
-            <div class="flex justify-end items-end pt-10 space-x-4">
-                <a href="{{ route('admin.prodi.edit', $prodi->kode_prodi) }}" 
-                   class="px-5 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg transition duration-200">
-                    Edit
-                </a>
-                <form action="{{ route('admin.prodi.destroy', $prodi->kode_prodi) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" 
-                            class="px-4 py-2 bg-red-600 hover:bg-red-800 text-white font-semibold rounded-lg transition duration-200"
-                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                        Hapus
-                    </button>
-                </form>
-            </div>
+            
         </div>
     </div>
 
