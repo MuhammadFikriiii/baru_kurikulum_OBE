@@ -18,6 +18,16 @@
             @csrf
             @method('PUT')
 
+            <label for="id_bks" class="text-xl font-semibold">BK Terkait:</label>
+            <select name="id_bks[]" id="id_bks" size="5" multiple
+                class="border border-black p-3 w-full mt-1 mb-3 rounded-lg">
+                @foreach ($bahankajians as $bk)
+                    <option value="{{ $bk->id_bk }}" @if (in_array($bk->id_bk, $selectedBahanKajian ?? [])) selected @endif>
+                        {{ $bk->kode_bk }} - {{ $bk->nama_bk }}
+                    </option>
+                @endforeach
+            </select>
+
             <div id="cplContainer" class="mt-3">
                 <label class="text-xl font-semibold">CPL Terisi otomatis setelah memilih bk:</label>
                 <ul id="cplList" class="mt-1 w-full p-3 border border-black rounded-lg">
@@ -28,15 +38,6 @@
                 </ul>
             </div>
 
-            <label for="id_bks" class="text-xl font-semibold">BK</label>
-            <select name="id_bks[]" id="id_bks" size="2" multiple
-                class="border border-black p-3 w-full mt-1 mb-3 rounded-lg">
-                @foreach ($bahankajians as $bk)
-                    <option value="{{ $bk->id_bk }}" @if (in_array($bk->id_bk, $selectedBahanKajian ?? [])) selected @endif>
-                        {{ $bk->kode_bk }} - {{ $bk->nama_bk }}
-                    </option>
-                @endforeach
-            </select>
 
             <label for="kode_mk" class="text-xl font-semibold">Kode MK</label>
             <input type="text" name="kode_mk" id="kode_mk" value="{{ old('kode_mk', $matakuliah->kode_mk) }}"

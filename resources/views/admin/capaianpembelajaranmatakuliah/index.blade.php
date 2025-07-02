@@ -135,7 +135,7 @@
                             {{ $cpmk->nama_prodi ?? 'Tidak ada prodi' }}</td>
                         <td class="py-3 px-6 text-center border border-gray-300">{{ $cpmk->kode_cpmk }}</td>
                         <td class="py-3 px-6 border border-gray-300">{{ $cpmk->deskripsi_cpmk }}</td>
-                        <td class="py-2 px-3 flex justify-center items-center space-x-2 border border-gray-300">
+                        <td class="py-2 px-3 flex justify-center items-center space-x-2">
                             <div class="flex justify-center space-x-2">
                                 <a href="{{ route('admin.capaianpembelajaranmatakuliah.detail', $cpmk->id_cpmk) }}"
                                     class="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md inline-flex items-center justify-center"

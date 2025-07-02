@@ -81,10 +81,12 @@
                     </a>
                     <form action="{{ route('logout') }}" method="POST" onsubmit="clearSidebarState()">
                     @csrf
-                    <button type="submit" class="flex items-center px-4 py-2 hover:bg-gray-100 text-red-600">
-                        <i class="fas fa-sign-out-alt mr-2"></i>
-                        <span>Logout</span>
-                    </button>
+                    <div class="flex items-center px-4 py-2 hover:bg-gray-100">
+                        <button type="submit" class=" text-red-600">
+                            <i class="fas fa-sign-out-alt mr-2"></i>
+                            <span>Logout</span>
+                        </button>
+                    </div>
                 </form>
                 </div>
             </div>

@@ -23,7 +23,7 @@
             </div>
 
             <label for="id_bks" class="text-xl font-semibold mb-2">BK Terkait:</label>
-            <select id="id_bks" name="id_bks[]" size="4"
+            <select id="id_bks" name="id_bks[]" size="5"
                 class="border border-black p-3 mb-1 w-full rounded-lg mt-1" multiple required>
                 @foreach ($bahanKajians as $bk)
                     <option value="{{ $bk->id_bk }}" title="{{ $bk->kode_bk }} - {{ $bk->nama_bk }}">

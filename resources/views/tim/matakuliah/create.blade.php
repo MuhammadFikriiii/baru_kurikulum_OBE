@@ -18,13 +18,8 @@
         <form action="{{ route('tim.matakuliah.store') }}" method="POST">
             @csrf
 
-            <div id="cplContainer" class="mt-3">
-                <label class="text-xl font-semibold">CPL Terisi otomatis setelah memilih bk:</label>
-                <ul id="cplList" class="mt-1 w-full p-3 border border-black rounded-lg"></ul>
-            </div>
-
             <label for="id_bks" class="text-xl font-semibold mb-2">BK Terkait:</label>
-            <select id="id_bks" name="id_bks[]" size="3"
+            <select id="id_bks" name="id_bks[]" size="5"
                 class="border border-black p-3 mb-1 w-full rounded-lg mt-1" multiple required>
                 @foreach ($bahanKajians as $bk)
                     <option value="{{ $bk->id_bk }}" title="{{ $bk->kode_bk }} - {{ $bk->nama_bk }}">
@@ -32,7 +27,14 @@
                     </option>
                 @endforeach
             </select>
+            
             <p class="italic text-red-700 mb-2">*Tekan tombol Ctrl dan klik untuk memilih lebih dari satu item.</p>
+            <div id="cplContainer" class="mt-3">
+                <label class="text-xl font-semibold">CPL Terisi otomatis setelah memilih bk:</label>
+                <ul id="cplList" class="mt-1 w-full p-3 border border-black rounded-lg"></ul>
+            </div>
+
+        
 
             <div class="mt-3">
                 <label for="kode_mk" class="text-xl font-semibold">Kode Mata Kuliah</label>
