@@ -4,20 +4,7 @@
     <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
         <h2 class="text-4xl font-extrabold text-center mb-4">Daftar Capaian Pembelajaran Matakuliah</h2>
         <hr class="w-full border border-black mb-4">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-            <form method="GET" action="{{ route('wadir1.capaianpembelajaranmatakuliah.index') }}" class="w-full md:w-64">
-                <select name="kode_prodi" id="kode_prodi"
-                    class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                    onchange="this.form.submit()">
-                    <option value="">Pilih Prodi</option>
-                    @foreach ($prodis as $prodi)
-                        <option value="{{ $prodi->kode_prodi }}" {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
-                            {{ $prodi->nama_prodi }}
-                        </option>
-                    @endforeach
-                </select>
-            </form>
-        </div>
+
         @if (session('success'))
             <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
                 <span class="font-bold">{{ session('success') }}</span>
@@ -37,18 +24,31 @@
                 </button>
             </div>
         @endif
-        <div class="flex items-center justify-between mb-3">
-            <label for="entries" class="text-gray-600 mr-2">Show</label>
-            <select id="entries" class="border border-gray-300 px-3 py-2 rounded-md mr-2">
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
-            <span class="text-gray-600">entries</span>
-            <div class="ml-auto justify-between">
-                <input type="text" id="search" placeholder="Search..."
-                    class="border border-gray-300 px-3 py-2 rounded-md">
+
+        <div class="flex flex-col md:flex-row items-start md:items-center mb-6 gap-4">
+            <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+                <form method="GET" action="{{ route('wadir1.capaianpembelajaranmatakuliah.index') }}" class="w-full md:w-64">
+                    <select name="kode_prodi" id="kode_prodi"
+                        class="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                        onchange="this.form.submit()">
+                        <option value="">Pilih Prodi</option>
+                        @foreach ($prodis as $prodi)
+                            <option value="{{ $prodi->kode_prodi }}" {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
+                                {{ $prodi->nama_prodi }}
+                            </option>
+                        @endforeach
+                    </select>
+                </form>
+            </div>
+              <!-- Search -->
+              <div class="sm:min-w-[250px] w-full sm:w-auto">
+                <div class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
+                    <span class="pl-3 text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <input type="text" id="search" placeholder="Search..."
+                        class="px-3 py-2 w-full focus:outline-none bg-transparent" />
+                </div>
             </div>
         </div>
 
