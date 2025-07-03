@@ -11,6 +11,12 @@ class Wadir1PemetaanCplMkController extends Controller
     {
         $prodis = DB::table('prodis')->get();
         $kode_prodi = $request->get('kode_prodi');
+        $id_tahun = $request->get('id_tahun');
+
+        $tahun_tersedia = DB::table('tahun')
+            ->select('id_tahun', 'nama_kurikulum', 'tahun')
+            ->orderBy('tahun', 'desc')
+            ->get();
 
         if (empty($kode_prodi)) {
             return view('wadir1.pemetaancplmk.index', [
@@ -21,6 +27,8 @@ class Wadir1PemetaanCplMkController extends Controller
                 'prodis' => $prodis,
                 'prodi' => null,
                 'prodiByCpl' => collect(),
+                'id_tahun' => $id_tahun,
+                'tahun_tersedia' => $tahun_tersedia,
             ]);
         }
 
@@ -74,7 +82,9 @@ class Wadir1PemetaanCplMkController extends Controller
             'kode_prodi',
             'prodis',
             'prodi',
-            'prodiByCpl'
+            'prodiByCpl',
+            'id_tahun',
+            'tahun_tersedia'
         ));
     }
 }

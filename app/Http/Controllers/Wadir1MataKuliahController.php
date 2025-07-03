@@ -78,7 +78,14 @@ class Wadir1MataKuliahController extends Controller
     {
         $prodis = DB::table('prodis')->get();
 
-        $kode_prodi = $request->input('kode_prodi', 'all');
+        $kode_prodi = $request->get('kode_prodi');
+
+        $id_tahun = $request->get('id_tahun');
+
+        $tahun_tersedia = DB::table('tahun')
+            ->select('id_tahun', 'nama_kurikulum', 'tahun')
+            ->orderBy('tahun', 'desc')
+            ->get();
 
         $query = DB::table('mata_kuliahs as mk')
             ->select(
@@ -107,8 +114,18 @@ class Wadir1MataKuliahController extends Controller
                 'prodis.kode_prodi'
             );
 
-        if ($kode_prodi != 'all') {
-            $query->where('prodis.kode_prodi', $kode_prodi);
+        if (!$kode_prodi) {
+            return view('wadir1.matakuliah.organisasimk', [
+                'organisasiMK' => collect(),
+                'prodis' => $prodis,
+                'kode_prodi' => '',
+                'id_tahun' => $id_tahun,
+                'tahun_tersedia' => $tahun_tersedia,
+            ]);
+        }
+
+        if (!empty($id_tahun)) {
+            $query->where('pl.id_tahun', $id_tahun);
         }
 
         $matakuliah = $query->get();
@@ -123,6 +140,12 @@ class Wadir1MataKuliahController extends Controller
             ];
         });
 
-        return view('wadir1.matakuliah.organisasimk', compact('organisasiMK', 'prodis', 'kode_prodi'));
+        return view('wadir1.matakuliah.organisasimk', compact(
+            'organisasiMK',
+            'prodis',
+            'kode_prodi',
+            'id_tahun',
+            'tahun_tersedia'
+        ));
     }
 }

@@ -11,6 +11,12 @@ class Wadir1PemetaanCplBkMkController extends Controller
     {
         $prodis = DB::table('prodis')->get();
         $kode_prodi = $request->get('kode_prodi');
+        $id_tahun = $request->get('id_tahun');
+
+        $tahun_tersedia = DB::table('tahun')
+            ->select('id_tahun', 'nama_kurikulum', 'tahun')
+            ->orderBy('tahun', 'desc')
+            ->get();
 
         if (!$kode_prodi) {
             return view('wadir1.pemetaancplmkbk.index', [
@@ -21,6 +27,8 @@ class Wadir1PemetaanCplBkMkController extends Controller
                 'prodis' => $prodis,
                 'prodiByCpl' => [],
                 'prodi' => null,
+                'id_tahun' => $id_tahun,
+                'tahun_tersedia' => $tahun_tersedia,
             ]);
         }
 
@@ -32,6 +40,7 @@ class Wadir1PemetaanCplBkMkController extends Controller
             ->join('cpl_pl as cp', 'cpl.id_cpl', '=', 'cp.id_cpl')
             ->join('profil_lulusans as pl', 'cp.id_pl', '=', 'pl.id_pl')
             ->where('pl.kode_prodi', $kode_prodi)
+            ->when($id_tahun, fn($q) => $q->where('pl.id_tahun', $id_tahun))
             ->select('cpl.*')
             ->orderBy('cpl.id_cpl')
             ->get();
@@ -69,12 +78,21 @@ class Wadir1PemetaanCplBkMkController extends Controller
                 ->join('profil_lulusans', 'cpl_pl.id_pl', '=', 'profil_lulusans.id_pl')
                 ->join('prodis', 'profil_lulusans.kode_prodi', '=', 'prodis.kode_prodi')
                 ->where('cpl_pl.id_cpl', $cpl->id_cpl)
+                ->where('profil_lulusans.kode_prodi', $kode_prodi)
+                ->when($id_tahun, fn($q) => $q->where('profil_lulusans.id_tahun', $id_tahun))
                 ->value('prodis.nama_prodi');
         }
 
         return view('wadir1.pemetaancplmkbk.index', compact(
-            'cpls', 'bks', 'matrix',
-            'kode_prodi', 'prodis', 'prodiByCpl', 'prodi'
+            'cpls',
+            'bks',
+            'matrix',
+            'kode_prodi',
+            'prodis',
+            'prodiByCpl',
+            'prodi',
+            'id_tahun',
+            'tahun_tersedia'
         ));
     }
 }

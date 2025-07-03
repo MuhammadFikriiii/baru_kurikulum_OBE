@@ -12,6 +12,12 @@ class Wadir1CapaianPembelajaranMataKuliahController extends Controller
     {
         $prodis = DB::table('prodis')->get();
         $kode_prodi = $request->get('kode_prodi');
+        $id_tahun = $request->get('id_tahun');
+
+        $tahun_tersedia = DB::table('tahun')
+            ->select('id_tahun', 'nama_kurikulum', 'tahun')
+            ->orderBy('tahun', 'desc')
+            ->get();
 
         if (empty($kode_prodi)) {
             return view('wadir1.capaianpembelajaranmatakuliah.index', [
@@ -19,6 +25,8 @@ class Wadir1CapaianPembelajaranMataKuliahController extends Controller
                 'prodis' => $prodis,
                 'prodi' => null,
                 'cpmks' => [],
+                'id_tahun' => $id_tahun,
+                'tahun_tersedia' => $tahun_tersedia,
             ]);
         }
 
@@ -26,7 +34,8 @@ class Wadir1CapaianPembelajaranMataKuliahController extends Controller
 
         $cpmks = DB::table('capaian_pembelajaran_mata_kuliahs as cpmk')
             ->select(
-                'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk'
+                'cpmk.kode_cpmk',
+                'cpmk.deskripsi_cpmk'
             )
             ->leftJoin('cpl_cpmk', 'cpmk.id_cpmk', '=', 'cpl_cpmk.id_cpmk')
             ->leftJoin('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
@@ -36,9 +45,17 @@ class Wadir1CapaianPembelajaranMataKuliahController extends Controller
             ->select('cpmk.id_cpmk', 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk', 'prodis.nama_prodi')
             ->groupBy('cpmk.id_cpmk', 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk', 'prodis.nama_prodi')
             ->where('prodis.kode_prodi', $kode_prodi)
+            ->when($id_tahun, fn($q) => $q->where('pl.id_tahun', $id_tahun))
             ->orderBy('cpmk.kode_cpmk', 'asc')
             ->get();
-        return view('wadir1.capaianpembelajaranmatakuliah.index', compact('cpmks', 'prodis', 'kode_prodi', 'prodi'));
+        return view('wadir1.capaianpembelajaranmatakuliah.index', compact(
+            'cpmks',
+            'prodis',
+            'kode_prodi',
+            'prodi',
+            'id_tahun',
+            'tahun_tersedia'
+        ));
     }
 
     public function detail($id_cpmk)
@@ -48,7 +65,7 @@ class Wadir1CapaianPembelajaranMataKuliahController extends Controller
         $cpls = DB::table('cpl_cpmk')
             ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
             ->where('cpl_cpmk.id_cpmk', $id_cpmk)
-            ->select('cpl.id_cpl','cpl.kode_cpl', 'cpl.deskripsi_cpl')
+            ->select('cpl.id_cpl', 'cpl.kode_cpl', 'cpl.deskripsi_cpl')
             ->get();
 
         $mks = DB::table('cpmk_mk')
@@ -57,6 +74,6 @@ class Wadir1CapaianPembelajaranMataKuliahController extends Controller
             ->select('mk.kode_mk', 'mk.nama_mk')
             ->get();
 
-        return view('wadir1.capaianpembelajaranmatakuliah.detail', compact( 'cpls', 'mks', 'cpmk'));
+        return view('wadir1.capaianpembelajaranmatakuliah.detail', compact('cpls', 'mks', 'cpmk'));
     }
 }
