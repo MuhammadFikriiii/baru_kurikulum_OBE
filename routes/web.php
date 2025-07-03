@@ -41,7 +41,7 @@ use App\Http\Controllers\TimExportController;
 use App\Http\Controllers\TimPemetaanBkMkController;
 use App\Http\Controllers\TimPemetaanCplMkController;
 use App\Http\Controllers\TimPemetaanCplMkBkController;
-use App\Http\Controllers\TimCapaianPembelajaranMatakuliahController;
+use App\Http\Controllers\TimCapaianPembelajaranMataKuliahController;
 use App\Http\Controllers\TimPemetaanCplCpmkMkController;
 use App\Http\Controllers\TimSubCpmkController;
 use App\Http\Controllers\KaprodiCapaianPembelajaranLulusanController;
