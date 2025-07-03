@@ -26,7 +26,8 @@ class Wadir1CapaianPembelajaranMataKuliahController extends Controller
 
         $cpmks = DB::table('capaian_pembelajaran_mata_kuliahs as cpmk')
             ->select(
-                'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk'
+                'cpmk.kode_cpmk',
+                'cpmk.deskripsi_cpmk'
             )
             ->leftJoin('cpl_cpmk', 'cpmk.id_cpmk', '=', 'cpl_cpmk.id_cpmk')
             ->leftJoin('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
@@ -48,7 +49,7 @@ class Wadir1CapaianPembelajaranMataKuliahController extends Controller
         $cpls = DB::table('cpl_cpmk')
             ->join('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
             ->where('cpl_cpmk.id_cpmk', $id_cpmk)
-            ->select('cpl.id_cpl','cpl.kode_cpl', 'cpl.deskripsi_cpl')
+            ->select('cpl.id_cpl', 'cpl.kode_cpl', 'cpl.deskripsi_cpl')
             ->get();
 
         $mks = DB::table('cpmk_mk')
@@ -57,6 +58,6 @@ class Wadir1CapaianPembelajaranMataKuliahController extends Controller
             ->select('mk.kode_mk', 'mk.nama_mk')
             ->get();
 
-        return view('wadir1.capaianpembelajaranmatakuliah.detail', compact( 'cpls', 'mks', 'cpmk'));
+        return view('wadir1.capaianpembelajaranmatakuliah.detail', compact('cpls', 'mks', 'cpmk'));
     }
 }
