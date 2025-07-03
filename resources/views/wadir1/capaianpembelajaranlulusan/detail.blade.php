@@ -9,7 +9,7 @@
     @if($selectedProfilLulusans)
         <div class="mt-4">
             <h3 class="text-xl font-semibold mb-2">Detail Profil Lulusan Terkait:</h3>
-            <ul class="list-disc pl-5 text-gray-700">
+            <ul class="w-full p-3 border border-black rounded-lg mb-4 bg-gray-100">
                 @foreach($selectedProfilLulusans as $id_pl)
                     @php
                         $plDetail = $profilLulusans->firstWhere('id_pl', $id_pl);

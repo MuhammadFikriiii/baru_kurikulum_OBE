@@ -57,17 +57,18 @@
                     @endif
                 </select>
 
-                     <!-- Search -->
-                     <div class="sm:min-w-[250px] w-full sm:w-auto">
-                        <div class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
-                            <span class="pl-3 text-gray-400">
-                                <i class="fas fa-search"></i>
-                            </span>
-                            <input type="text" id="search" placeholder="Search..."
-                                class="px-3 py-2 w-full focus:outline-none bg-transparent" />
-                        </div>
+                <!-- Search -->
+                <div class="sm:min-w-[250px] w-full sm:w-auto">
+                    <div
+                        class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
+                        <span class="pl-3 text-gray-400">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" id="search" placeholder="Search..."
+                            class="px-3 py-2 w-full focus:outline-none bg-transparent" />
                     </div>
-                
+                </div>
+
             </div>
         </div>
         @if ($kode_prodi || $id_tahun)
@@ -138,20 +139,23 @@
                                     <td class="px-4 py-4 text-center text-sm">{{ $bahankajian->referensi_bk }}</td>
                                     <td class="px-4 py-4 text-center text-sm">{{ $bahankajian->status_bk }}</td>
                                     <td class="px-4 py-4 text-center text-sm">{{ $bahankajian->knowledge_area }}</td>
-                                    <div class="flex justify-center space-x-1 md:space-x-2">
+                                    <td class="flex justify-center space-x-1 md:space-x-2">
                                         <div class="flex justify-center space-x-2">
-                                            <a href="{{ route('wadir1.bahankajian.detail', $bahankajian->id_bk) }}" 
+                                            <a href="{{ route('wadir1.bahankajian.detail', $bahankajian->id_bk) }}"
                                                 class="bg-gray-600 hover:bg-gray-700 text-white p-1 md:p-2 rounded-md inline-flex items-center justify-center"
                                                 title="Detail">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-4 md:w-4" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-9-3a1 1 0 112 0 1 1 0 01-2 0zm2 5a1 1 0 10-2 0v2a1 1 0 102 0v-2z" clip-rule="evenodd" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-4 md:w-4"
+                                                    viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd"
+                                                        d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-9-3a1 1 0 112 0 1 1 0 01-2 0zm2 5a1 1 0 10-2 0v2a1 1 0 102 0v-2z"
+                                                        clip-rule="evenodd" />
                                                 </svg>
                                             </a>
                                         </div>
-                                    </td>
+                                        </td>
                                 </tr>
                             @endforeach
-                        </tbody> 
+                        </tbody>
                     </table>
                 </div>
             @endif

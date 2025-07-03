@@ -2,14 +2,14 @@
 
 @section('content')
 
-<div>
+<div class="ml-20 mr-20">
     <h2 class="text-2xl font-bold text-center">Detail Matakuliah</h2>
-    <hr class="border-t-2 border-gray-300 my-4">
+    <hr class="border-t-2 border-black my-4">
 
     @if($selectedCplIds)
         <div class="mt-4">
             <h3 class="text-xl font-semibold mb-2">Capaian Profil Lulusan Terkait:</h3>
-            <ul class="list-disc pl-5 text-gray-700">
+            <ul class="w-full p-3 border border-black rounded-lg mb-4 bg-gray-100">
                 @foreach($selectedCplIds as $id_cpl)
                     @php
                         $cplDetail = $capaianprofillulusans->firstWhere('id_cpl', $id_cpl);

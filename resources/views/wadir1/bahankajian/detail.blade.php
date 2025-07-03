@@ -3,13 +3,13 @@
 @section('content')
 
 <div class="mr-20 ml-20">
-    <h2 class="text-4xl font-extrabold text-center mb-4">Detail Capaian Pembelajaran Lulusan</h2>
+    <h2 class="text-4xl font-extrabold text-center mb-4">Detail Bahan Kajian</h2>
     <hr class="w-full border border-black mb-4">
 
     @if($selectedCapaianProfilLulusans)
         <div class="mt-4">
             <h3 class="text-xl font-semibold mb-2">Capaian Profil Lulusan Terkait:</h3>
-            <ul class="list-disc pl-5 text-gray-700">
+            <ul class="w-full p-3 border border-black rounded-lg mb-4 bg-gray-100">
                 @foreach($selectedCapaianProfilLulusans as $id_cpl)
                     @php
                         $cplDetail = $capaianprofillulusans->firstWhere('id_cpl', $id_cpl);
