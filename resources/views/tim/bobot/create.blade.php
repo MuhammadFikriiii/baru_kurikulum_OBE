@@ -77,7 +77,12 @@
                 mkList.innerHTML = '';
                 notifSudahAda.classList.add('hidden');
 
-                fetch("{{ route('tim.bobot.getmkbycpl') }}", {
+                // Use the same protocol as current page
+                const url = "{{ route('tim.bobot.getmkbycpl') }}";
+                const secureUrl = url.replace(/^http:/, 'https:');
+                const finalUrl = window.location.protocol === 'https:' ? secureUrl : url;
+                
+                fetch(finalUrl, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
