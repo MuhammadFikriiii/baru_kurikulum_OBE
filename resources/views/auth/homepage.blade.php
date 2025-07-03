@@ -104,11 +104,11 @@
 
 </head>
 
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-100 text-gray-800 ">
 
   <!-- Header -->
-  <header class="bg-white shadow-md w-full fixed top-0 z-50" x-data="{ open: false }">
-    <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-20">
+  <header class="bg-white shadow-md right-0 left-0 fixed top-0 z-50" x-data="{ open: false }">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 ">
       <div class="flex items-center justify-between h-16">
       <!-- Logo -->
       <a href="index.html" class="flex items-center space-x-2">
