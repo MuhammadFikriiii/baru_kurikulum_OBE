@@ -22,6 +22,16 @@
       <div class="md:w-1/2 w-full py-8 px-6 sm:px-12">
         <h2 class="text-3xl font-bold text-gray-800 mb-2">Sign-Up</h2>
         <p class="mb-4 text-gray-600">Buat akunmu sekarang.</p>
+        @if (session('success'))
+            <div id="alert"
+                class="bg-green-500 text-white px-4 py-2 rounded-md mb-6 text-center relative max-w-4xl mx-auto">
+                <span class="font-bold">{{ session('success') }}</span>
+                <button onclick="document.getElementById('alert').style.display='none'"
+                    class="absolute top-1 right-3 text-white font-bold text-lg">
+                    &times;
+                </button>
+            </div>
+        @endif
         <form action="{{ route('signup.store') }}" method="POST">
           @csrf
           <div class="mb-4 relative">
@@ -76,7 +86,7 @@
           </div>
 
           <!-- Modal -->
-          <div id="termsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+          <div id="termsModal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50 hidden">
             <div class="bg-white p-6 rounded-xl max-w-xl w-full shadow-lg relative">
               <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-600 hover:text-black">&times;</button>
               <h3 class="text-xl font-bold mb-4 text-gray-800">Ketentuan Penggunaan & Kebijakan Privasi</h3>

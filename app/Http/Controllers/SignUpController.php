@@ -34,6 +34,6 @@ class SignUpController extends Controller
             'status' => 'pending',
         ]);
 
-        return redirect()->route('login')->with('register', 'Pendaftaran berhasil. Menunggu persetujuan admin.');
+        return back()->with('success', 'Pendaftaran berhasil. Menunggu persetujuan admin.');
     }
 }
