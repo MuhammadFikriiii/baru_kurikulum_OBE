@@ -9,7 +9,7 @@ use App\Models\Bobot;
 
 class KaprodiBobotController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
 
@@ -18,6 +18,9 @@ class KaprodiBobotController extends Controller
         }
 
         $kodeProdi = $user->kode_prodi;
+        $id_tahun = $request->get('id_tahun');
+
+        $tahun_tersedia = DB::table('tahun')->orderBy('tahun', 'desc')->get();
 
         $query = DB::table('bobots')
             ->join('capaian_profil_lulusans as cpl', 'bobots.id_cpl', '=', 'cpl.id_cpl')
@@ -32,22 +35,23 @@ class KaprodiBobotController extends Controller
                 'bobots.bobot',
                 'cpl.kode_cpl',
                 'cpl.deskripsi_cpl',
+                'pl.id_tahun',
                 'prodis.nama_prodi'
-            )
-            ->orderBy('bobots.id_cpl');
+            );
 
-        $bobots = $query->get();
+        if ($id_tahun) {
+            $query->where('pl.id_tahun', $id_tahun);
+        }
 
-        return view('admin.bobot.index', compact('bobots'));
+        $bobots = $query->orderBy('bobots.id_cpl')->get();
+
+        return view('kaprodi.bobot.index', compact('bobots', 'id_tahun', 'tahun_tersedia'));
     }
 
     public function detail(string $id_cpl)
     {
         $user = Auth::user();
-
-        if (!$user || !$user->kode_prodi) {
-            abort(404);
-        }
+        if (!$user || !$user->kode_prodi) abort(404);
 
         $kodeProdi = $user->kode_prodi;
 
@@ -64,7 +68,7 @@ class KaprodiBobotController extends Controller
         $bobots = Bobot::where('id_cpl', $id_cpl)->get();
         $existingBobots = $bobots->pluck('bobot', 'kode_mk')->toArray();
 
-        return view('admin.bobot.detail', [
+        return view('kaprodi.bobot.detail', [
             'id_cpl' => $id_cpl,
             'mataKuliahs' => $mk_terkait,
             'existingBobots' => $existingBobots
