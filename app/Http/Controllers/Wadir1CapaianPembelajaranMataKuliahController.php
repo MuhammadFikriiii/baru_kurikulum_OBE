@@ -7,6 +7,7 @@ use App\Models\CapaianPembelajaranMataKuliah;
 use Illuminate\Http\Request;
 
 class Wadir1CapaianPembelajaranMataKuliahController extends Controller
+
 {
     public function index(Request $request)
     {
