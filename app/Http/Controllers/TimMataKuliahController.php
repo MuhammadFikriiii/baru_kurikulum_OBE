@@ -109,6 +109,7 @@ class TimMataKuliahController extends Controller
                 'bk.status_bk',
                 'bk.knowledge_area'
             )
+            ->orderBy('kode_bk', 'asc')
             ->get();
 
         return view('tim.matakuliah.create', compact('capaianProfilLulusans', 'bahanKajians'));
