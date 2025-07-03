@@ -28,7 +28,6 @@ class TimPemetaanCplPlExport implements FromArray, WithTitle, WithStyles, WithCo
 
     public function array(): array
     {
-        // Get profile lulusan data based on kode_prodi
         $pls = ProfilLulusan::where('kode_prodi', $this->kodeProdi)->get();
 
         // Get CPLs related to this prodi through the relationships
