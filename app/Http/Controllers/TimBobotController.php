@@ -130,7 +130,7 @@ class TimBobotController extends Controller
 
             if ($exists) {
                 return redirect()->back()
-                    ->withErrors(['msg' => "Bobot untuk CPL dan MK {$kode_mk} sudah ada."])
+                    ->withErrors(['msg' => "Bobot untuk CPL sudah ada."])
                     ->withInput();
             }
 
