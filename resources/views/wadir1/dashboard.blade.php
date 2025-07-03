@@ -121,6 +121,10 @@
             <div class="bg-white rounded-lg shadow-lg p-4 mb-8">
                 <h2 class="text-xl font-bold text-gray-800 mb-4">Progress Penyusunan Kurikulum OBE</h2>
                 <div class="space-y-6">
+                    {{-- Penjelasan minimal --}}
+                    <p class="text-sm text-gray-600 italic mb-4">
+                        Minimal: PL 3, CPL 9, BK 8, MK 108 SKS, CPMK 18, Sub CPMK 36
+                    </p>
                     @foreach ($prodis as $prodi)
                         <div class="border-b pb-5 prodi-card">
                             <div class="flex justify-between items-center mb-2">
@@ -139,7 +143,8 @@
                                 <div class="flex flex-wrap gap-4">
                                     <span class="flex items-center"><span
                                             class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>PL
-                                        ({{ $prodi->progress_pl }}%)</span>
+                                        ({{ $prodi->progress_pl }}%)
+                                    </span>
                                     <span class="flex items-center"><span
                                             class="w-2 h-2 bg-green-500 rounded-full mr-1"></span>CPL
                                         ({{ $prodi->progress_cpl }}%)</span>

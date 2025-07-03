@@ -27,7 +27,7 @@
                                 <option value="{{ $prodi->kode_prodi }}">{{ $prodi->nama_prodi }}</option>
                             @endforeach
                         </select>
-        
+
                         <!-- Select Tahun -->
                         <select name="id_tahun" id="tahunSelect" required
                             class="min-w-[170px] flex-1 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
@@ -38,7 +38,7 @@
                                 </option>
                             @endforeach
                         </select>
-        
+
                         <!-- Tombol Export -->
                         <button type="submit"
                             class="bg-green-600 text-white px-4 sm:px-5 font-bold py-2 rounded-md hover:bg-green-800 whitespace-nowrap">
@@ -57,7 +57,7 @@
                                 </option>
                             @endforeach
                         </select>
-        
+
                         <button type="submit"
                             class="bg-green-600 text-white px-4 sm:px-5 font-bold py-2 rounded-md hover:bg-green-800 whitespace-nowrap">
                             <i class="fas fa-file-excel mr-2"></i>Excel
@@ -65,20 +65,21 @@
                     </form>
                 @endif
             </div>
-        
-       <!-- Search -->
-        <div class="sm:min-w-[250px] w-full sm:w-auto">
-            <div class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
-                <span class="pl-3 text-gray-400">
-                    <i class="fas fa-search"></i>
-                </span>
-                <input type="text" id="search-prodi-dashboard" placeholder="Search..."
-                    class="px-3 py-2 w-full focus:outline-none bg-transparent" />
+
+            <!-- Search -->
+            <div class="sm:min-w-[250px] w-full sm:w-auto">
+                <div
+                    class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
+                    <span class="pl-3 text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <input type="text" id="search-prodi-dashboard" placeholder="Search..."
+                        class="px-3 py-2 w-full focus:outline-none bg-transparent" />
+                </div>
             </div>
-        </div>
 
         </div>
-        
+
 
 
         <!-- Summary Cards -->
@@ -155,6 +156,10 @@
                 <h2 class="text-xl font-bold text-gray-800 mb-4">Progress Penyusunan Kurikulum OBE</h2>
 
                 <div class="space-y-6">
+                    {{-- Penjelasan minimal --}}
+                    <p class="text-sm text-gray-600 italic mb-4">
+                        Minimal: PL 3, CPL 9, BK 8, MK 108 SKS, CPMK 18, Sub CPMK 36
+                    </p>
                     @foreach ($prodis as $prodi)
                         <div class="border-b pb-5 prodi-card">
                             <div class="flex justify-between items-center mb-2">

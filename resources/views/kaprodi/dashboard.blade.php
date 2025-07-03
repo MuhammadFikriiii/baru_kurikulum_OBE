@@ -50,7 +50,10 @@
         @if (request()->filled('tahun_progress'))
             <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
                 <h2 class="text-xl font-bold text-gray-800 mb-6">Detail Progress Per Komponen Kurikulum</h2>
-
+                {{-- Penjelasan minimal --}}
+                <p class="text-sm text-gray-600 italic mb-4">
+                    Minimal: PL 3, CPL 9, BK 8, MK 108 SKS, CPMK 18, Sub CPMK 36
+                </p>
                 <div class="w-full" style="height: 400px;">
                     <canvas id="progressChart"></canvas>
                 </div>
