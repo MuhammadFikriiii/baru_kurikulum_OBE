@@ -77,6 +77,7 @@ class TimBobotController extends Controller
             ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->where('pl.kode_prodi', $user->kode_prodi)
             ->select('cpl.id_cpl', 'cpl.kode_cpl', 'cpl.deskripsi_cpl')
+            ->orderBy('kode_cpl', 'asc')
             ->distinct()
             ->get();
 

@@ -31,15 +31,7 @@
                 @endforeach
             </select>
 
-            {{-- Notifikasi jika semua MK sudah diberi bobot --}}
-            <div id="notifSudahAda"
-                class="hidden bg-red-500 text-white px-4 py-2 rounded-md mb-6 text-center relative max-w-4xl mx-auto">
-                <span class="font-bold">Bobot untuk CPL ini sudah ditambahkan sebelumnya.</span>
-                <button onclick="document.getElementById('notifSudahAda').style.display='none'"
-                    class="absolute top-1 right-3 text-white font-bold text-lg">
-                    &times;
-                </button>
-            </div>
+            <div id="notifSudahAda" class="hidden"></div>
 
             <div id="mkSection" class="mt-6 hidden">
                 <label class="text-xl font-semibold">Atur Bobot Mata Kuliah (Total harus 100%)</label>
@@ -95,7 +87,12 @@
                             id_cpls: [idCPL]
                         })
                     })
-                    .then(res => res.json())
+                    .then(res => {
+                        if (!res.ok) {
+                            throw new Error(`HTTP error! status: ${res.status}`);
+                        }
+                        return res.json();
+                    })
                     .then(data => {
                         loadingMK.classList.add('hidden');
                         mkList.innerHTML = '';
@@ -106,6 +103,8 @@
                             notifSudahAda.classList.remove('hidden');
                             submitBtn.disabled = true;
                             return;
+                        } else {
+                            notifSudahAda.classList.add('hidden');
                         }
 
                         data.forEach((mk, index) => {
@@ -146,8 +145,8 @@
                     })
                     .catch(err => {
                         loadingMK.classList.add('hidden');
-                        mkList.innerHTML = '<div class="text-red-500 italic">Terjadi kesalahan</div>';
-                        console.error(err);
+                        mkList.innerHTML = '<div class="text-red-500 italic">Terjadi kesalahan: ' + err.message + '</div>';
+                        console.error('Error details:', err);
                     });
             });
 
