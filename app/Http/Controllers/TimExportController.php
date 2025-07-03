@@ -24,7 +24,7 @@ class TimExportController extends Controller
 
         return Excel::download(
             new MultipleSheetExcel($kodeProdi, $idTahun),
-            'profil_dan_cpl_' . $kodeProdi . '_tahun_' . $idTahun . '.xlsx'
+            'kurikulum_OBE' . $kodeProdi . '_tahun_' . $idTahun . '.xlsx'
         );
     }
 }
