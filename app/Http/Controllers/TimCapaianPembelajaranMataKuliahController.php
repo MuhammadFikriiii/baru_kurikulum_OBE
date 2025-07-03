@@ -52,6 +52,7 @@ class TimCapaianPembelajaranMataKuliahController extends Controller
             ->where('pl.kode_prodi', $kodeProdi)
             ->select('cpl.id_cpl', 'cpl.kode_cpl', 'cpl.deskripsi_cpl')
             ->distinct()
+            ->orderBy('kode_cpl', 'asc')
             ->get();
 
         return view('tim.capaianpembelajaranmatakuliah.create', compact('cpls'));
@@ -108,6 +109,7 @@ class TimCapaianPembelajaranMataKuliahController extends Controller
             ->where('pl.kode_prodi', $kodeProdi)
             ->select('cpl.id_cpl', 'cpl.kode_cpl', 'cpl.deskripsi_cpl')
             ->distinct()
+            ->orderBy('kode_cpl', 'asc')
             ->get();
 
         $selectedCpls = DB::table('cpl_cpmk')
