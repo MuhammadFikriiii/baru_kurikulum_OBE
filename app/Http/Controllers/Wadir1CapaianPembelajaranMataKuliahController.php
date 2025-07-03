@@ -12,34 +12,59 @@ class Wadir1CapaianPembelajaranMataKuliahController extends Controller
     {
         $prodis = DB::table('prodis')->get();
         $kode_prodi = $request->get('kode_prodi');
+        $id_tahun = $request->get('id_tahun');
 
+        $tahun_tersedia = DB::table('tahun')
+            ->select('id_tahun', 'nama_kurikulum', 'tahun')
+            ->orderBy('tahun', 'desc')
+            ->get();
+
+        // Jika prodi belum dipilih, tampilkan view kosong
         if (empty($kode_prodi)) {
             return view('wadir1.capaianpembelajaranmatakuliah.index', [
                 'kode_prodi' => '',
                 'prodis' => $prodis,
                 'prodi' => null,
                 'cpmks' => [],
+                'id_tahun' => $id_tahun,
+                'tahun_tersedia' => $tahun_tersedia,
             ]);
         }
 
         $prodi = $prodis->where('kode_prodi', $kode_prodi)->first();
 
-        $cpmks = DB::table('capaian_pembelajaran_mata_kuliahs as cpmk')
+        // Gunakan query builder agar filter tahun bisa diterapkan
+        $query = DB::table('capaian_pembelajaran_mata_kuliahs as cpmk')
             ->select(
+                'cpmk.id_cpmk',
                 'cpmk.kode_cpmk',
-                'cpmk.deskripsi_cpmk'
+                'cpmk.deskripsi_cpmk',
+                'prodis.nama_prodi'
             )
             ->leftJoin('cpl_cpmk', 'cpmk.id_cpmk', '=', 'cpl_cpmk.id_cpmk')
             ->leftJoin('capaian_profil_lulusans as cpl', 'cpl_cpmk.id_cpl', '=', 'cpl.id_cpl')
             ->leftJoin('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
-            ->select('cpmk.id_cpmk', 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk', 'prodis.nama_prodi')
-            ->groupBy('cpmk.id_cpmk', 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk', 'prodis.nama_prodi')
             ->where('prodis.kode_prodi', $kode_prodi)
-            ->orderBy('cpmk.kode_cpmk', 'asc')
-            ->get();
-        return view('wadir1.capaianpembelajaranmatakuliah.index', compact('cpmks', 'prodis', 'kode_prodi', 'prodi'));
+            ->groupBy('cpmk.id_cpmk', 'cpmk.kode_cpmk', 'cpmk.deskripsi_cpmk', 'prodis.nama_prodi')
+            ->orderBy('cpmk.kode_cpmk', 'asc');
+
+        // Filter tahun jika dipilih
+        if (!empty($id_tahun)) {
+            $query->where('pl.id_tahun', $id_tahun);
+        }
+
+        $cpmks = $query->get();
+
+        return view('wadir1.capaianpembelajaranmatakuliah.index', compact(
+            'cpmks',
+            'prodis',
+            'kode_prodi',
+            'prodi',
+            'id_tahun',
+            'tahun_tersedia'
+        ));
     }
 
     public function detail($id_cpmk)
