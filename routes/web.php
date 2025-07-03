@@ -60,7 +60,7 @@ use App\Http\Controllers\Wadir1MataKuliahController;
 use App\Http\Controllers\Wadir1PemetaanCplMkController;
 use App\Http\Controllers\Wadir1PemetaanBkMkController;
 use App\Http\Controllers\Wadir1PemetaanCplBkMkController;
-use App\Http\Controllers\Wadir1CapaianPembelajaranMatakuliahController;
+use App\Http\Controllers\Wadir1CapaianPembelajaranMataKuliahController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\Wadir1NotesController;
 use App\Http\Controllers\AdminTahunController;
