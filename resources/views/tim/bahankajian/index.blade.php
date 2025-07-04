@@ -29,6 +29,11 @@
             <div class="space-x-2">
                 <a href="{{ route('tim.bahankajian.create') }}"
                     class="bg-green-600 h-10 font-bold text-white px-5 inline-flex items-center py-2 rounded-md hover:bg-green-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                            clip-rule="evenodd" />
+                    </svg>
                     Tambah
                 </a>
             </div>
@@ -46,6 +51,7 @@
                     @endforeach
                 @endif
             </select>
+            
                      <!-- Search -->
                      <div class="sm:min-w-[250px] w-full sm:w-auto">
                         <div class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">

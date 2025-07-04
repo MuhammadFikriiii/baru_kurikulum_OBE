@@ -14,10 +14,19 @@
         @endif
 
         <!-- Filter Tahun & Tombol Tambah -->
-        <div class="flex justify-between items-center mb-4">
-            <a href="{{ route('tim.bobot.create') }}" class="px-4 py-2 bg-blue-500 text-white rounded-lg">
-                Tambah Bobot CPL-MK
-            </a>
+        <div class="flex flex-col md:flex-row items-start md:items-center mb-6 gap-4">
+
+            <div class="space-x-2">
+                <a href="{{ route('tim.bobot.create') }}"
+                    class="bg-green-600 inline-flex text-white font-bold px-4 py-2 rounded-md hover:bg-green-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    Tambah
+                </a>
+            </div>
 
             <select id="tahun" name="id_tahun"
                 class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
