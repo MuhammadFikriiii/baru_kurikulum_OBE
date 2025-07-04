@@ -63,6 +63,7 @@
         @endif
         <form action="{{ route('admin.pemetaanbkmk.store') }}" method="POST">
             @csrf
+            <div class="overflow-x-auto">
             <table class="w-full border border-gray-300 shadow-md rounded-lg">
                 <thead class="bg-green-800 text-white">
                     <tr>
@@ -110,6 +111,7 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
         </form>
         <p class="mt-3 italic text-red-500">*arahkan cursor pada bk atau mk untuk melihat deskripsi*</p>
     </div>
