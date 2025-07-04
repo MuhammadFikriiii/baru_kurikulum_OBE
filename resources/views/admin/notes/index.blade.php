@@ -29,12 +29,16 @@
                                     <td class="px-6 py-4 text-center">{{ $note->title ?? '-' }}</td>
                                     <td class="px-6 py-4 text-center">{{ $note->user->name ?? '-' }}</td>
                                     <td class="px-6 py-4 text-center">{{ Str::limit($note->note_content, 50) }}</td>
-                                    <td class="px-6 py-4 text-center">
-                                        <a href="{{ route('admin.notes.detail', $note->id_note) }}"
-                                            class="bg-blue-600 hover:bg-blue-800 text-white px-3 py-1 rounded-md text-sm">
-                                            Detail
-                                        </a>
-                                    </td>
+            
+                                    <td class="px-3 py-2 md:px-6 md:py-4 border border-gray-200">
+                                        <div class="flex justify-center space-x-1 md:space-x-2">
+                                            <a href="{{ route('admin.notes.detail', $note->id_note) }}"
+                                                class="bg-gray-600 hover:bg-gray-700 text-white p-1 md:p-2 rounded-md inline-flex items-center justify-center"
+                                                title="Detail">
+                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-4 md:w-4" viewBox="0 0 20 20" fill="currentColor">
+                                                     <path fill-rule="evenodd" d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-9-3a1 1 0 112 0 1 1 0 01-2 0zm2 5a1 1 0 10-2 0v2a1 1 0 102 0v-2z" clip-rule="evenodd" />
+                                                 </svg>
+                                            </a>
                                 </tr>
                             @endforeach
                         </tbody>
