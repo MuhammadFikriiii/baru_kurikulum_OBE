@@ -40,6 +40,7 @@
             </div>
         @endif
         <div class="overflow-auto border">
+            <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200 text-sm">
                 <thead class="bg-green-800 text-white uppercase">
                     <tr>
@@ -76,6 +77,7 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
     <script>
