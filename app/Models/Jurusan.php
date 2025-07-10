@@ -10,7 +10,7 @@ class Jurusan extends Model {
     protected $primaryKey = 'id_jurusan';
     public $incrementing = true;
     protected $keyType = 'string';
-    protected $fillable = ['nama_jurusan'];
+    protected $fillable = ['nama_kajur','nama_jurusan'];
 
     public function prodis() {
         return $this->hasMany(Prodi::class, 'id_jurusan', 'id_jurusan');

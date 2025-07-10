@@ -15,6 +15,8 @@ return new class extends Migration
             $table->string('kode_prodi', 10)->primary();
             $table->unsignedBigInteger('id_jurusan');
             $table->string('nama_prodi', 50);
+            $table->text('visi_prodi');
+            $table->string('nama_kaprodi', 50);
             $table->date('tgl_berdiri_prodi');
             $table->date('penyelenggaraan_prodi');
             $table->string('nomor_sk');

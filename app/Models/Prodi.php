@@ -10,7 +10,7 @@ class Prodi extends Model {
     protected $primaryKey = 'kode_prodi';
     public $incrementing = false;
     protected $keyType = 'string';
-    protected $fillable = ['kode_prodi', 'id_jurusan', 'nama_prodi',
+    protected $fillable = ['kode_prodi', 'id_jurusan', 'nama_prodi', 'nama_kaprodi', 'visi_prodi',
     'pt_prodi',
     'tgl_berdiri_prodi',
     'penyelenggaraan_prodi',

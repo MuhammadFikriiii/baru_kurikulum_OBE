@@ -24,6 +24,8 @@ class AdminUserController extends Controller {
     public function store(Request $request) {
         $request->validate([
             'name' => 'required',
+            'nip' => 'required|unique:users,nip',
+            'nohp' => 'required|unique:users,nohp',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
             'role' => 'required|in:admin,wadir1,tim,kaprodi',
@@ -54,6 +56,8 @@ class AdminUserController extends Controller {
         $user = User::findOrFail($id);
         $request->validate([
             'name' => 'required',
+            'nip' => ['required', Rule::unique('users', 'nip')->ignore($user->id)],
+            'nohp' => ['required', Rule::unique('users', 'nohp')->ignore($user->id)],
             'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
             'password' => 'nullable|min:6',
             'role' => 'required|in:admin,wadir1,tim,kaprodi',

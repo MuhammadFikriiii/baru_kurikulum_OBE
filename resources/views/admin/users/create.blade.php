@@ -28,6 +28,18 @@
                     <input type="text" id="name" name="name" value="{{ old('name') }}" required
                         class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
                 </div>
+                
+                <div>
+                    <label for="nip" class="block text-lg font-semibold mb-2 text-gray-700">NIP</label>
+                    <input type="text" id="nip" name="nip" value="{{ old('nip') }}" required
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
+                </div>
+
+                <div>
+                    <label for="nohp" class="block text-lg font-semibold mb-2 text-gray-700">No. HP</label>
+                    <input type="text" id="nohp" name="nohp" value="{{ old('nohp') }}" required
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
+                </div>
         
                 <!-- Email -->
                 <div>

@@ -17,6 +17,8 @@ class UserSeeder extends Seeder
             
             [
                 'name'=> 'Admin',
+                'nip' => null,
+                'nohp' => null,
                 'email'=> 'admin@gmail.com',
                 'password'=> bcrypt('123456'),
                 'kode_prodi' => null,

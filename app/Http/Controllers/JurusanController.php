@@ -22,6 +22,7 @@ class JurusanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'nama_kajur' => 'required|string|max:50',
             'nama_jurusan' => 'required|string|max:50',
         ]);
 
@@ -37,6 +38,7 @@ class JurusanController extends Controller
     public function update(Request $request, Jurusan $jurusan)
     {
         $request->validate([
+            'nama_kajur' => 'required|string|max:50',
             'nama_jurusan' => 'required|string|max:50',
         ]);
 
