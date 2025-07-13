@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -13,18 +14,22 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::insert([
-            
+        DB::table('users')->insert([
             [
-                'name'=> 'Admin',
+                'name' => 'Admin',
                 'nip' => null,
                 'nohp' => null,
-                'email'=> 'admin@gmail.com',
-                'password'=> bcrypt('123456'),
-                'kode_prodi' => null,
+                'email' => 'admin@gmail.com',
+                'email_verified_at' => now(),
+                'password' => Hash::make('123456'),
                 'role' => 'admin',
+                'kode_prodi' => null,
+                'status' => 'approved',
+                'remember_token' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
-            //  [
+            // [
             //     'name'=>'wadir1',
             //     'email'=>'wadir1@gmail.com',
             //     'password'=> bcrypt('123456'),
@@ -52,7 +57,7 @@ class UserSeeder extends Seeder
             //     'kode_prodi' => 'F0105',
             //     'role' => 'kaprodi',
             // ],
-            //             [
+            // [
             //     'name'=> 'Tim TL',
             //     'email'=> 'timtl@gmail.com',
             //     'password'=> bcrypt('123456'),

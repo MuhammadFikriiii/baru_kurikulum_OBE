@@ -76,6 +76,8 @@ use App\Http\Controllers\KaprodiTahunController;
 use App\Http\Controllers\Wadir1TahunController;
 use App\Http\Controllers\Wadir1SubCpmkController;
 use App\Http\Controllers\Wadir1PemetaanCplCpmkMkController;
+use App\Http\Controllers\AdminVisiMisiController;
+use App\Http\Controllers\ExportKptController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -106,7 +108,7 @@ Route::middleware(['guest'])->group(function () {
 // Rute yang memerlukan autentikasi
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
+        Route::get('/export/kpt', [ExportKptController::class, 'export'])->name('export.kpt');
     // Grup Route Admin
     Route::prefix('admin')->name('admin.')->middleware(['auth.admin'])->group(function () {
         Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
@@ -228,6 +230,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post('ajax-getmkbycpl', [AdminBobotController::class, 'getmkbycpl'])->name('bobot.getmkbycpl');
         Route::get('/notes', [AdminNotesController::class, 'index'])->name('notes.index');
         Route::get('/notes/{note}/detail', [AdminNotesController::class, 'detail'])->name('notes.detail');
+        Route::get('/visimisi/create', [AdminVisiMisiController::class, 'create'])->name('visimisi.create');
+        Route::post('/visimisi', [AdminVisiMisiController::class, 'store'])->name('visimisi.store');
+        Route::get('/visimisi', [AdminVisiMisiController::class, 'index'])->name('visi_misi.index');
+        Route::get('/visimisi/{visi_misi}/edit', [AdminVisiMisiController::class, 'edit'])->name('visimisi.edit');
+        Route::put('/visimisi/{visi_misi}', [AdminVisiMisiController::class, 'update'])->name('visimisi.update');
+        Route::get('/visimisi/{visi_misi}/detail', [AdminVisiMisiController::class, 'detail'])->name('visimisi.detail');
+        Route::delete('/visimisi/{visi_misi}', [AdminVisiMisiController::class, 'destroy'])->name('visimisi.destroy');
     });
 
     // Grup Route Wadir1

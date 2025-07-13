@@ -42,9 +42,10 @@ class AdminVisiMisiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function detail(string $id)
     {
-        //
+        $visiMisi = VisiMisi::findOrFail($id);
+        return view('admin.visi_misi.detail', compact('visiMisi'));
     }
 
     /**
