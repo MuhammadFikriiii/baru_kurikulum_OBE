@@ -14,20 +14,16 @@ class ExportKptController extends Controller
         $kodeProdi = $request->kode_prodi;
         $idTahun = $request->id_tahun;
 
-        // Ambil prodi dan nama jurusan
         $prodi = DB::table('prodis')
             ->join('jurusans', 'prodis.id_jurusan', '=', 'jurusans.id_jurusan')
             ->where('prodis.kode_prodi', $kodeProdi)
             ->select('prodis.*', 'jurusans.nama_jurusan')
             ->first();
 
-        // Tahun
         $tahun = DB::table('tahun')->where('id_tahun', $idTahun)->first();
 
-        // Visi Misi berdasarkan prodi
         $visiMisi = DB::table('visi_misi')->latest()->first();
 
-        // Profil Lulusan
         $pls = DB::table('profil_lulusans')
             ->where('kode_prodi', $kodeProdi)
             ->where('id_tahun', $idTahun)
@@ -35,7 +31,6 @@ class ExportKptController extends Controller
             ->orderBy('kode_pl')
             ->get();
 
-        // CPL - PERBAIKAN: Pastikan menggunakan DISTINCT untuk menghindari duplikasi
         $cpl = DB::table('cpl_pl')
             ->join('profil_lulusans as pl', 'pl.id_pl', '=', 'cpl_pl.id_pl')
             ->join('capaian_profil_lulusans as cpl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
@@ -47,7 +42,6 @@ class ExportKptController extends Controller
             ->orderBy('pl.kode_pl')
             ->get();
 
-        // BK via CPL - PERBAIKAN: Tambahkan DISTINCT dan error handling
         $bk = DB::table('bahan_kajians as bk')
             ->join('cpl_bk', 'bk.id_bk', '=', 'cpl_bk.id_bk')
             ->join('capaian_profil_lulusans as cpl', 'cpl.id_cpl', '=', 'cpl_bk.id_cpl')
@@ -60,7 +54,6 @@ class ExportKptController extends Controller
             ->orderBy('bk.kode_bk')
             ->get();
 
-        // PERBAIKAN: Mata Kuliah - Ambil semua mata kuliah yang terkait dengan prodi dan tahun
         $mk = DB::table('mata_kuliahs as mk')
             ->join('cpl_mk', 'mk.kode_mk', '=', 'cpl_mk.kode_mk')
             ->join('capaian_profil_lulusans as cpl', 'cpl.id_cpl', '=', 'cpl_mk.id_cpl')
@@ -76,7 +69,6 @@ class ExportKptController extends Controller
         $kodePlList = $pls->pluck('kode_pl')->values()->all();
         $kodeCplList = $cpl->pluck('kode_cpl')->values()->all();
 
-        // PERBAIKAN UTAMA: Siapkan data relasi CPL ↔ PL dengan query yang lebih sederhana
         $cplPlRel = DB::table('cpl_pl')
             ->join('profil_lulusans as pl', 'pl.id_pl', '=', 'cpl_pl.id_pl')
             ->join('capaian_profil_lulusans as cpl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
@@ -85,7 +77,6 @@ class ExportKptController extends Controller
             ->select('cpl.kode_cpl', 'pl.kode_pl')
             ->get();
 
-        // TAMBAHAN: Siapkan data relasi CPL ↔ MK
         $cplMkRel = DB::table('cpl_mk')
             ->join('mata_kuliahs as mk', 'mk.kode_mk', '=', 'cpl_mk.kode_mk')
             ->join('capaian_profil_lulusans as cpl', 'cpl.id_cpl', '=', 'cpl_mk.id_cpl')
@@ -97,7 +88,6 @@ class ExportKptController extends Controller
             ->distinct()
             ->get();
 
-        // Debug logging untuk memastikan data relasi benar
         Log::info('CPL Data: ' . json_encode($cpl->toArray()));
         Log::info('PL Data: ' . json_encode($pls->toArray()));
         Log::info('BK Data Count: ' . $bk->count());
@@ -105,10 +95,8 @@ class ExportKptController extends Controller
         Log::info('CPL-PL Relations Raw: ' . json_encode($cplPlRel->toArray()));
         Log::info('CPL-MK Relations Raw: ' . json_encode($cplMkRel->toArray()));
 
-        // Load template
         $template = new TemplateProcessor(storage_path('app/template/templateword.docx'));
 
-        // Isikan field dasar
         $template->setValue('nama_prodi', $prodi->nama_prodi ?? '-');
         $template->setValue('fakultas', $prodi->nama_jurusan ?? '-');
         $template->setValue('tahun', $tahun->tahun ?? '-');
@@ -200,15 +188,13 @@ class ExportKptController extends Controller
             $template->setValue('deskripsi_cpl', 'Tidak ada data CPL');
         }
 
-        // PERBAIKAN UTAMA: Handle matriks CPL-PL dengan logika yang diperbaiki
+        // Handle matriks CPL-PL
         if ($pls->count() > 0 && $cpl->count() > 0) {
 
-            // STEP 1: Isi header kolom PL
             foreach ($kodePlList as $i => $kodePl) {
                 $template->setValue("kode_pl#" . ($i + 1), $kodePl);
             }
 
-            // STEP 2: Buat mapping relasi CPL-PL untuk akses cepat
             $relationMap = [];
             foreach ($cplPlRel as $rel) {
                 $relationMap[$rel->kode_cpl][$rel->kode_pl] = true;
@@ -216,7 +202,6 @@ class ExportKptController extends Controller
 
             Log::info('Relation Map: ' . json_encode($relationMap));
 
-            // STEP 3: Buat data matriks CPL-PL
             $cplPlReplacements = [];
             foreach ($cpl as $index => $item) {
                 $row = [
@@ -224,15 +209,12 @@ class ExportKptController extends Controller
                     'kode_cpl' => $item->kode_cpl,
                 ];
 
-                // Isi kolom relasi untuk setiap PL
                 foreach ($kodePlList as $i => $kodePl) {
                     $key = 'pl_rel' . ($i + 1);
 
-                    // Cek apakah ada relasi antara CPL dan PL ini
                     $hasRelation = isset($relationMap[$item->kode_cpl][$kodePl]);
                     $row[$key] = $hasRelation ? 'v' : '';
 
-                    // Debug log untuk setiap relasi
                     Log::info("Checking relation: CPL={$item->kode_cpl}, PL={$kodePl}, Result=" . ($hasRelation ? 'TRUE' : 'FALSE'));
                 }
 
@@ -241,13 +223,11 @@ class ExportKptController extends Controller
 
             Log::info('CPL-PL Replacements: ' . json_encode($cplPlReplacements));
 
-            // STEP 4: Clone baris matriks CPL-PL
             try {
                 $template->cloneRowAndSetValues('no_cplpl', $cplPlReplacements);
             } catch (\Exception $e) {
                 Log::error('Error cloning CPL-PL matrix: ' . $e->getMessage());
 
-                // Fallback: clone row biasa
                 try {
                     $template->cloneRow('no_cplpl', count($cplPlReplacements));
 
@@ -260,7 +240,6 @@ class ExportKptController extends Controller
                 } catch (\Exception $e2) {
                     Log::error('Fallback cloning also failed: ' . $e2->getMessage());
 
-                    // Ultimate fallback: set single row
                     if (count($cplPlReplacements) > 0) {
                         $firstRow = $cplPlReplacements[0];
                         foreach ($firstRow as $key => $value) {
@@ -270,20 +249,16 @@ class ExportKptController extends Controller
                 }
             }
         } else {
-            // Jika tidak ada data CPL atau PL
             $template->setValue('no_cplpl', '-');
             $template->setValue('kode_cpl', '-');
 
-            // Set nilai default untuk kolom relasi
             for ($i = 1; $i <= 10; $i++) {
                 $template->setValue("pl_rel{$i}", '-');
             }
         }
 
-        // FIXED: Handle matriks CPL-MK dengan template yang sesuai
         if ($mk->count() > 0 && $cpl->count() > 0) {
 
-            // STEP 1: Set header CPL (maksimal 9 kolom sesuai template)
             $maxCplColumns = 9;
             for ($i = 1; $i <= $maxCplColumns; $i++) {
                 if (isset($kodeCplList[$i - 1])) {
@@ -312,11 +287,10 @@ class ExportKptController extends Controller
 
                     if (isset($kodeCplList[$i - 1])) {
                         $kodeCpl = $kodeCplList[$i - 1];
-                        // Cek apakah ada relasi antara MK dan CPL ini
+
                         $hasRelation = isset($cplMkRelationMap[$item->kode_mk][$kodeCpl]);
                         $row[$key] = $hasRelation ? 'v' : '';
 
-                        // Debug log untuk setiap relasi
                         Log::info("Checking CPL-MK relation: MK={$item->kode_mk}, CPL={$kodeCpl}, Result=" . ($hasRelation ? 'TRUE' : 'FALSE'));
                     } else {
                         $row[$key] = '';
@@ -354,7 +328,7 @@ class ExportKptController extends Controller
                 }
             }
         } else {
-            // Jika tidak ada data CPL atau MK
+
             $template->setValue('kode_mk', '-');
             $template->setValue('nama_mk', 'Tidak ada data mata kuliah');
 
@@ -428,6 +402,68 @@ class ExportKptController extends Controller
             $template->setValue('nama_bk', '-');
             $template->setValue('deskripsi_bk', '-');
         }
+
+        try {
+            Log::info('Memulai proses pengisian bahan kajian berdasarkan CPL Prodi.');
+
+            $cplBahanKajian = DB::table('capaian_profil_lulusans as cpl')
+                ->join('cpl_bk', 'cpl.id_cpl', '=', 'cpl_bk.id_cpl')
+                ->join('bahan_kajians as bk', 'cpl_bk.id_bk', '=', 'bk.id_bk')
+                ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+                ->join('profil_lulusans as pl', 'pl.id_pl', '=', 'cpl_pl.id_pl')
+                ->where('pl.kode_prodi', $kodeProdi)
+                ->where('pl.id_tahun', $idTahun)
+                ->select('cpl.kode_cpl', 'cpl.deskripsi_cpl', 'bk.nama_bk')
+                ->distinct()
+                ->orderBy('cpl.kode_cpl')
+                ->orderBy('bk.nama_bk')
+                ->get();
+
+            if ($cplBahanKajian->count() > 0) {
+        
+                $groupedData = [];
+                foreach ($cplBahanKajian as $item) {
+                    $key = $item->kode_cpl;
+                    if (!isset($groupedData[$key])) {
+                        $groupedData[$key] = [
+                            'kode_cpl' => $item->kode_cpl,
+                            'deskripsi_cpl' => htmlspecialchars($item->deskripsi_cpl, ENT_COMPAT, 'UTF-8'),
+                            'bahan_kajian' => [],
+                        ];
+                    }
+                    $groupedData[$key]['bahan_kajian'][] = htmlspecialchars($item->nama_bk, ENT_COMPAT, 'UTF-8');
+                }
+
+            
+                $replacements = [];
+                // Based on the user image, the placeholders are ${kode_cpl}, ${deskripsi_cpl}, ${nama_bk}
+                foreach ($groupedData as $data) {
+                    $replacements[] = [
+                        'kode_cpl' => $data['kode_cpl'],
+                        'deskripsi_cpl' => $data['deskripsi_cpl'],
+                        'nama_bk' => implode('<w:br/>', $data['bahan_kajian']),
+                    ];
+                }
+
+                Log::info('Data Bahan Kajian per CPL: ' . json_encode($replacements));
+
+                $template->cloneRowAndSetValues('kode_cpl', $replacements);
+                Log::info('Berhasil mengisi tabel bahan kajian berdasarkan CPL Prodi.');
+            } else {
+                Log::warning('Tidak ada data bahan kajian berdasarkan CPL Prodi ditemukan.');
+                $template->cloneRow('kode_cpl', 1);
+                $template->setValue('kode_cpl#1', 'Tidak ada data');
+                $template->setValue('deskripsi_cpl#1', '-');
+                $template->setValue('nama_bk#1', '-');
+            }
+        } catch (\Exception $e) {
+            Log::error('Gagal memproses tabel bahan kajian berdasarkan CPL Prodi: ' . $e->getMessage());
+            $template->cloneRow('kode_cpl', 1);
+            $template->setValue('kode_cpl#1', 'Error');
+            $template->setValue('deskripsi_cpl#1', 'Gagal memuat data');
+            $template->setValue('nama_bk#1', 'Error');
+        }
+
         try {
             $semuaMataKuliah = DB::table('mata_kuliahs as mk')
                 ->join('cpl_mk', 'mk.kode_mk', '=', 'cpl_mk.kode_mk')
@@ -522,18 +558,14 @@ class ExportKptController extends Controller
             $template->setValue('total_mk_pilihan', 'Err');
             $template->setValue('total_mkwm', 'Err');
         }
-        // ========================================================================
-        // ::: START: PENAMBAHAN LOGIKA DAFTAR MATA KULIAH PER SEMESTER :::
-        // ========================================================================
+
         try {
             Log::info('Memulai proses pengisian daftar mata kuliah per semester.');
             $grandTotalSks = 0;
 
-            for ($i = 1; $i <= 8; $i++) {
+            for ($i = 1; $i <= 2; $i++) {
                 Log::info("Memproses semester {$i}...");
 
-                // Ambil data mata kuliah untuk semester saat ini
-                // NOTE: Asumsi nama kolom SKS adalah sks_teori, sks_praktek, sks_lapangan. Sesuaikan jika berbeda.
                 $matakuliahSemester = DB::table('mata_kuliahs as mk')
                     ->join('cpl_mk', 'mk.kode_mk', '=', 'cpl_mk.kode_mk')
                     ->join('capaian_profil_lulusans as cpl', 'cpl.id_cpl', '=', 'cpl_mk.id_cpl')
@@ -545,10 +577,7 @@ class ExportKptController extends Controller
                     ->select(
                         'mk.kode_mk',
                         'mk.nama_mk',
-                        'mk.sks_mk',
-                        'mk.sks_teori',      // Asumsi untuk kolom Teori
-                        'mk.sks_praktek',    // Asumsi untuk kolom Praktikum
-                        'mk.sks_lapangan'    // Asumsi untuk kolom Praktek
+                        'mk.sks_mk'
                     )
                     ->distinct()
                     ->orderBy('mk.kode_mk')
@@ -563,41 +592,31 @@ class ExportKptController extends Controller
                             "s{$i}_no" => $no++,
                             "s{$i}_kode_mk" => $matkul->kode_mk ?? '-',
                             "s{$i}_nama_mk" => htmlspecialchars($matkul->nama_mk ?? '-', ENT_COMPAT, 'UTF-8'),
-                            "s{$i}_teori" => $matkul->sks_teori ?? '0',
-                            "s{$i}_praktikum" => $matkul->sks_praktek ?? '0',
-                            "s{$i}_praktek" => $matkul->sks_lapangan ?? '0',
-                            "s{$i}_jumlah" => $matkul->sks_mk ?? '0',
+
                         ];
                         $semesterTotalSks += (int)($matkul->sks_mk ?? 0);
                     }
 
-                    // Clone baris dan isi nilainya
                     $template->cloneRowAndSetValues("s{$i}_no", $replacements);
                     Log::info("Berhasil mengisi " . $matakuliahSemester->count() . " mata kuliah untuk semester {$i}.");
                 } else {
-                    // Jika tidak ada mata kuliah, isi dengan placeholder kosong
+           
                     $template->cloneRow("s{$i}_no", 1);
                     $template->setValue("s{$i}_no#1", '-');
                     $template->setValue("s{$i}_kode_mk#1", '-');
                     $template->setValue("s{$i}_nama_mk#1", 'Tidak ada mata kuliah');
-                    $template->setValue("s{$i}_teori#1", '-');
-                    $template->setValue("s{$i}_praktikum#1", '-');
-                    $template->setValue("s{$i}_praktek#1", '-');
-                    $template->setValue("s{$i}_jumlah#1", '-');
                     Log::warning("Tidak ada mata kuliah ditemukan untuk semester {$i}.");
                 }
 
-                // Set total SKS semester
                 $template->setValue("s{$i}_total_sks", $semesterTotalSks);
                 $grandTotalSks += $semesterTotalSks;
             }
 
-            // Set grand total SKS (jika ada placeholder-nya di template, misal: ${total_sks_keseluruhan})
             $template->setValue('total_sks_keseluruhan', $grandTotalSks);
             Log::info("Proses pengisian daftar mata kuliah per semester selesai. Grand total SKS: {$grandTotalSks}");
         } catch (\Exception $e) {
             Log::error('Gagal memproses Daftar Mata Kuliah per Semester: ' . $e->getMessage());
-            // Fallback jika terjadi error, agar dokumen tetap ter-generate
+         
             for ($i = 1; $i <= 8; $i++) {
                 $template->setValue("s{$i}_no", 'Error');
                 $template->setValue("s{$i}_kode_mk", 'Error');
@@ -605,15 +624,99 @@ class ExportKptController extends Controller
                 $template->setValue("s{$i}_total_sks", 'Err');
             }
         }
-        // ========================================================================
-        // ::: END: PENAMBAHAN LOGIKA :::
-        // ========================================================================
 
-        // Simpan dan download
+        try {
+            Log::info('Memulai proses pengisian tabel mata kuliah wajib prodi.');
+
+            $wajibMk = DB::table('mata_kuliahs as mk')
+                ->join('cpl_mk', 'mk.kode_mk', '=', 'cpl_mk.kode_mk')
+                ->join('capaian_profil_lulusans as cpl', 'cpl.id_cpl', '=', 'cpl_mk.id_cpl')
+                ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
+                ->join('profil_lulusans as pl', 'pl.id_pl', '=', 'cpl_pl.id_pl')
+                ->where('pl.kode_prodi', $kodeProdi)
+                ->where('pl.id_tahun', $idTahun)
+              
+                ->select('mk.kode_mk', 'mk.nama_mk', 'mk.sks_mk', 'mk.kompetensi_mk')
+                ->distinct()
+                ->orderBy('mk.kompetensi_mk', 'desc') // Urutkan utama dulu, lalu pendukung
+                ->orderBy('mk.kode_mk')
+                ->get();
+
+            Log::info('Data mata kuliah wajib ditemukan: ' . $wajibMk->count() . ' record(s)');
+
+            if ($wajibMk->count() > 0) {
+                $totalSksWajib = 0;
+                $totalSksUtama = 0;
+                $totalSksPendukung = 0;
+
+                $template->cloneRow('no_mk', $wajibMk->count());
+
+                foreach ($wajibMk as $index => $matkul) {
+                    $rowNum = $index + 1;
+
+                    // Debug: Log data untuk setiap mata kuliah
+                    Log::info("Processing MK #{$rowNum}: " . json_encode([
+                        'kode_mk' => $matkul->kode_mk,
+                        'nama_mk' => $matkul->nama_mk,
+                        'sks_mk' => $matkul->sks_mk,
+                        'kompetensi_mk' => $matkul->kompetensi_mk
+                    ]));
+
+                    $template->setValue("no_mk#{$rowNum}", $rowNum);
+                    $template->setValue("kode_mk#{$rowNum}", $matkul->kode_mk ?? '-');
+                    $template->setValue("nama_mk#{$rowNum}", htmlspecialchars($matkul->nama_mk ?? '-', ENT_COMPAT, 'UTF-8'));
+
+                    $sksValue = $matkul->sks_mk ?? 0;
+                    $kompetensiValue = $matkul->kompetensi_mk ?? 'utama';
+
+                    $template->setValue("sks_mk#{$rowNum}", (string)$sksValue);
+                    $template->setValue("kompetensi_mk#{$rowNum}", ucfirst($kompetensiValue));
+
+                    $totalSksWajib += (int)$sksValue;
+
+                    if ($kompetensiValue === 'utama') {
+                        $totalSksUtama += (int)$sksValue;
+                    } else {
+                        $totalSksPendukung += (int)$sksValue;
+                    }
+                }
+
+                $template->setValue('total_bobot_sks', $totalSksWajib);
+
+                if (method_exists($template, 'setValue')) {
+                    $template->setValue('total_sks_utama', $totalSksUtama);
+                    $template->setValue('total_sks_pendukung', $totalSksPendukung);
+                }
+
+                Log::info('Berhasil mengisi tabel mata kuliah wajib prodi. Total SKS: ' . $totalSksWajib . ' (Utama: ' . $totalSksUtama . ', Pendukung: ' . $totalSksPendukung . ')');
+            } else {
+                Log::warning('Tidak ada data mata kuliah wajib ditemukan.');
+
+                // Buat satu baris kosong
+                $template->cloneRow('no_mk', 1);
+                $template->setValue('no_mk#1', '-');
+                $template->setValue('kode_mk#1', '-');
+                $template->setValue('nama_mk#1', 'Tidak ada data mata kuliah wajib');
+                $template->setValue('sks_mk#1', '-');
+                $template->setValue('kompetensi_mk#1', '-');
+                $template->setValue('total_bobot_sks', '0');
+            }
+        } catch (\Exception $e) {
+            Log::error('Gagal memproses tabel mata kuliah wajib: ' . $e->getMessage());
+            Log::error('Stack trace: ' . $e->getTraceAsString());
+
+            $template->cloneRow('no_mk', 1);
+            $template->setValue('no_mk#1', 'Error');
+            $template->setValue('kode_mk#1', 'Error');
+            $template->setValue('nama_mk#1', 'Gagal memuat data');
+            $template->setValue('sks_mk#1', 'Err');
+            $template->setValue('kompetensi_mk#1', 'Err');
+            $template->setValue('total_bobot_sks', 'Err');
+        }
+
         $fileName = 'Export-KPT-' . ($prodi->nama_prodi ?? 'Unknown') . '-' . ($tahun->tahun ?? 'Unknown') . '.docx';
         $outputPath = storage_path('app/export/' . $fileName);
 
-        // Pastikan folder export ada
         $exportDir = storage_path('app/export');
         if (!file_exists($exportDir)) {
             mkdir($exportDir, 0755, true);
