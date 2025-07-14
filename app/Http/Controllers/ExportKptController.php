@@ -563,7 +563,7 @@ class ExportKptController extends Controller
             Log::info('Memulai proses pengisian daftar mata kuliah per semester.');
             $grandTotalSks = 0;
 
-            for ($i = 1; $i <= 2; $i++) {
+            for ($i = 1; $i <= 8; $i++) {
                 Log::info("Memproses semester {$i}...");
 
                 $matakuliahSemester = DB::table('mata_kuliahs as mk')
