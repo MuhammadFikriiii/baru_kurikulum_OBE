@@ -18,12 +18,14 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-         'name', 
-         'email', 
-         'password', 
-         'role', 
-         'kode_prodi', 
-         'status'
+        'name',
+        'email',
+        'nip',
+        'nohp',
+        'password',
+        'role',
+        'kode_prodi',
+        'status'
     ];
 
     /**
@@ -53,5 +55,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Prodi::class, 'kode_prodi', 'kode_prodi');
     }
-
 }

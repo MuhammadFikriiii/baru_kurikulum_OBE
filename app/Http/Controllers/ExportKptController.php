@@ -104,6 +104,7 @@ class ExportKptController extends Controller
         $template->setValue('peringkat_akreditasi', $prodi->peringkat_akreditasi ?? '-');
         $template->setValue('telepon_prodi', $prodi->telepon_prodi ?? '-');
         $template->setValue('website_prodi', $prodi->website_prodi ?? '-');
+        $template->setValue('nama_kaprodi', $prodi->nama_kaprodi ?? '-');
         $template->setValue('visi', $visiMisi->visi ?? '-');
         $template->setValue('misi', $visiMisi->misi ?? '-');
 

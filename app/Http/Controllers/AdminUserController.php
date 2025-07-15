@@ -25,7 +25,7 @@ class AdminUserController extends Controller {
         $request->validate([
             'name' => 'required',
             'nip' => 'required|unique:users,nip',
-            'nohp' => 'required|unique:users,nohp',
+            'nohp' => 'required|unique:users,nohp|min:6|max:15',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
             'role' => 'required|in:admin,wadir1,tim,kaprodi',
@@ -57,17 +57,17 @@ class AdminUserController extends Controller {
         $request->validate([
             'name' => 'required',
             'nip' => ['required', Rule::unique('users', 'nip')->ignore($user->id)],
-            'nohp' => ['required', Rule::unique('users', 'nohp')->ignore($user->id)],
+            'nohp' => ['required', 'min:6', 'max:15', Rule::unique('users', 'nohp')->ignore($user->id)],
             'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
             'password' => 'nullable|min:6',
             'role' => 'required|in:admin,wadir1,tim,kaprodi',
             'status' => 'required|in:approved,pending'
         ]);
 
-        $user = User::findOrFail($id);
-
         $data = [
             'name' => $request->name,
+            'nip' => $request->nip,
+            'nohp' => $request->nohp,
             'email' => $request->email,
             'role' => $request->role,
             'status' => $request->status

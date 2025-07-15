@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="mx-20 mt-6">
-        <h2 class="font-extrabold text-3xl mb-5 text-center">Tambah Jurusan</h2>
+        <h2 class="font-extrabold text-3xl mb-5 text-center">Edit Visi</h2>
         <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
 
-        <div class="bg-white px-6 pb-6 rounded-lg shadow-md">
+        <div class="bg-white px-6 pb-6 pt-2 rounded-lg shadow-md">
 
             @if ($errors->any())
                 <div class="mb-4 text-red-600">
@@ -17,24 +17,19 @@
                 </div>
             @endif
 
-            <form action="{{ route('admin.jurusan.store') }}" method="POST" class="space-y-6">
+            <form action="{{ route('admin.visi.update', $visi->id) }}" method="POST" class="space-y-6">
                 @csrf
-                <div>
-                    <label for="nama_kajur" class="block text-lg font-semibold mb-2">Nama Kajur</label>
-                    <input type="text" id="nama_kajur" name="nama_kajur" value="{{ old('nama_kajur') }}" required
-                        class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
-                </div>
+                @method('PUT')
 
                 <div>
-                    <label for="nama_jurusan" class="block text-lg font-semibold mb-2">Nama Jurusan</label>
-                    <input type="text" id="nama_jurusan" name="nama_jurusan" value="{{ old('nama_jurusan') }}" required
-                        class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
+                    <label for="visi" class="block text-lg font-semibold mb-2">Visi</label>
+                    <input type="text" id="visi" name="visi" value="{{ old('visi', $visi->visi) }}"
+                        class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]"
+                        required>
                 </div>
 
-
-                <!-- Tombol Aksi -->
                 <div class="flex justify-end space-x-5 pt-6">
-                    <a href="{{ route('admin.jurusan.index') }}"
+                    <a href="{{ route('admin.visi.index') }}"
                         class="px-6 py-2 bg-blue-600 hover:bg-blue-900 text-white font-semibold rounded-lg transition duration-200">
                         Kembali
                     </a>

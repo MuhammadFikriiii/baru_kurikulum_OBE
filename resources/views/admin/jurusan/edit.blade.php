@@ -23,11 +23,16 @@
             @csrf
             @method('PUT')
 
-            <!-- Nama Jurusan -->
             <div>
-                <label for="nama_jurusan" class="block text-lg font-semibold mb-2 text-gray-700">Nama Jurusan</label>
+                <label for="nama_jurusan" class="block text-lg font-semibold mb-2">Nama Jurusan</label>
                 <input type="text" id="nama_jurusan" name="nama_jurusan" value="{{ old('nama_jurusan', $jurusan->nama_jurusan) }}"
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]" required>
+                    class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]" required>
+            </div>
+
+            <div>
+                <label for="nama_kajur" class="block text-lg font-semibold mb-2">Nama Kajur</label>
+                <input type="text" id="nama_kajur" name="nama_kajur" value="{{ old('nama_kajur', $jurusan->nama_kajur) }}"
+                    class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]" required>
             </div>
 
                     <!-- Tombol Aksi -->

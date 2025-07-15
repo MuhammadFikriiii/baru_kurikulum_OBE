@@ -23,7 +23,7 @@
             menu.classList.toggle("hidden");
         }
 
-        document.addEventListener("click", function (e) {
+        document.addEventListener("click", function(e) {
             const button = e.target.closest("button");
             const dropdown = document.getElementById("dropdownMenu");
             if (!button && !e.target.closest("#dropdownMenu")) {
@@ -39,7 +39,7 @@
             dropdown.classList.toggle("hidden");
         }
 
-        document.addEventListener("click", function (event) {
+        document.addEventListener("click", function(event) {
             const button = event.target.closest("button");
             const dropdown = document.getElementById("userDropdown");
             if (!button && !event.target.closest("#userDropdown")) {
@@ -51,7 +51,8 @@
 </head>
 
 <body class="">
-    <nav class="bg-gray-900 text-white px-6 py-4 flex items-center justify-between fixed top-0 left-0 w-full z-50 shadow-md">
+    <nav
+        class="bg-gray-900 text-white px-6 py-4 flex items-center justify-between fixed top-0 left-0 w-full z-50 shadow-md">
         <!-- Logo & Toggle -->
         <div class="flex items-center space-x-4">
             <span class="font-bold text-xl uppercase">Poliban OBE</span>
@@ -81,21 +82,21 @@
                     </a> --}}
                     <div class="border-t my-1"></div>
                     <form action="{{ route('logout') }}" method="POST" onsubmit="clearSidebarState()">
-                    @csrf
-                    <div class="flex items-center px-4 py-2 hover:bg-gray-100">
-                        <button type="submit" class=" text-red-600">
-                            <i class="fas fa-sign-out-alt mr-2"></i>
-                            <span>Logout</span>
-                        </button>
-                    </div>
-                </form>
+                        @csrf
+                        <div class="flex items-center px-4 py-2 hover:bg-gray-100">
+                            <button type="submit" class=" text-red-600">
+                                <i class="fas fa-sign-out-alt mr-2"></i>
+                                <span>Logout</span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </nav>
 
-<!-- Sidebar -->
-<aside id="sidebar"
+    <!-- Sidebar -->
+    <aside id="sidebar"
         class="w-[276px] bg-[#201F31] text-white p-5 pb-24 space-y-6 fixed top-16 left-0 h-[calc(100vh-4rem)] overflow-y-auto transform -translate-x-full md:translate-x-0 transition-transform duration-300">
         <!-- Header -->
         <div class="flex items-center justify-between mb-4 pt-2">
@@ -163,6 +164,20 @@
                             <span>Prodi</span>
                         </a>
                     </li>
+                    <li data-title="visi">
+                        <a href="{{ route('admin.visi.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-mortarboard mr-3"></i>
+                            <span>Visi</span>
+                        </a>
+                    </li>
+                    <li data-title="misi">
+                        <a href="{{ route('admin.misi.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-mortarboard mr-3"></i>
+                            <span>Misi</span>
+                        </a>
+                    </li>
                     <li data-title="Tahun">
                         <a href="{{ route('admin.tahun.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
@@ -176,7 +191,6 @@
             <!-- Divider -->
             <li class="border-t border-gray-700 my-2"></li>
 
-
             <li>
                 <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Learning Outcomes</p>
                 <ul class="ml-2 space-y-1">
@@ -184,21 +198,21 @@
                         <a href="{{ route('admin.profillulusan.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-file-earmark-person mr-3"></i>
-                            <span>Profil Lulusan</span>
+                            <span>1. Profil Lulusan</span>
                         </a>
                     </li>
                     <li data-title="Capaian Profil Lulusan">
                         <a href="{{ route('admin.capaianprofillulusan.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-check2-square mr-3"></i>
-                            <span>Capaian Profil Lulusan</span>
+                            <span>2. CPL Prodi</span>
                         </a>
                     </li>
                     <li data-title="Pemetaan CPL-PL">
                         <a href="{{ route('admin.pemetaancplpl.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-diagram-3 mr-3"></i>
-                            <span>Pemetaan CPL-PL</span>
+                            <span>3. CPL-PL</span>
                         </a>
                     </li>
                 </ul>
@@ -215,43 +229,41 @@
                         <a href="{{ route('admin.bahankajian.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-journal-bookmark mr-3"></i>
-                            <span>Bahan Kajian</span>
+                            <span>4. Bahan Kajian</span>
                         </a>
                     </li>
                     <li data-title="Pemetaan CPL - BK">
                         <a href="{{ route('admin.pemetaancplbk.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-pin-map mr-3"></i>
-                            <span>Pemetaan CPL - BK</span>
+                            <span>5. CPL - BK</span>
                         </a>
                     </li>
                     <li data-title="Mata Kuliah">
                         <a href="{{ route('admin.matakuliah.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-book mr-3"></i>
-                            <span>Mata Kuliah</span>
-                        </a>
-                    </li>
-                    <li data-title="Pemetaan CPL - MK">
-                        <a href="{{ route('admin.pemetaancplmk.index') }}"
-                            class="flex items-center p-3 hover:bg-gray-700 rounded">
-                            <i class="bi bi-bar-chart mr-3"></i>
-                            <span>Pemetaan CPL - MK</span>
+                            <span>6. Susunan MK</span>
                         </a>
                     </li>
                     <li data-title="Pemetaan BK - MK">
                         <a href="{{ route('admin.pemetaanbkmk.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-link-45deg mr-3"></i>
-                            <span>Pemetaan BK - MK</span>
+                            <span>7. Pemetaan BK - MK</span>
+                        </a>
+                    </li>
+                    <li data-title="Pemetaan CPL - MK">
+                        <a href="{{ route('admin.pemetaancplmk.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-bar-chart mr-3"></i>
+                            <span>8. CPL - MK</span>
                         </a>
                     </li>
                 </ul>
             </li>
 
-
             <li class="border-t border-gray-700 my-2"></li>
-
 
             <li>
                 <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Advanced Mapping</p>
@@ -260,28 +272,28 @@
                         <a href="{{ route('admin.pemetaancplmkbk.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-diagram-3 mr-3"></i>
-                            <span>Pemetaan CPL - BK - MK</span>
+                            <span>9. CPL - BK - MK</span>
                         </a>
                     </li>
                     <li data-title="Organisasi MK">
                         <a href="{{ route('admin.matakuliah.organisasimk') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-columns mr-3"></i>
-                            <span>Organisasi MK</span>
+                            <span>10. Organisasi MK</span>
+                        </a>
+                    </li>
+                    <li data-title="PEMENUHAN CP">
+                        <a href="{{ route('admin.pemenuhancpl.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-percent mr-3"></i>
+                            <span>11. Pemenuhan CPL</span>
                         </a>
                     </li>
                     <li data-title="CPMK">
                         <a href="{{ route('admin.capaianpembelajaranmatakuliah.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-list-check mr-3"></i>
-                            <span>CPMK</span>
-                        </a>
-                    </li>
-                    <li data-title="Sub Cpmk">
-                        <a href="{{ route('admin.subcpmk.index') }}"
-                            class="flex items-center p-3 hover:bg-gray-700 rounded">
-                            <i class="bi bi-list-ol mr-3"></i>
-                            <span>Sub CPMK</span>
+                            <span>12. CPMK</span>
                         </a>
                     </li>
                 </ul>
@@ -298,48 +310,49 @@
                         <a href="{{ route('admin.pemetaancplcpmkmk.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-node-plus mr-3"></i>
-                            <span>Pemetaan CPL-CPMK-MK</span>
-                        </a>
-                    </li>
-                    <li data-title="PEMENUHAN CP">
-                        <a href="{{ route('admin.pemenuhancpl.index') }}"
-                            class="flex items-center p-3 hover:bg-gray-700 rounded">
-                            <i class="bi bi-percent mr-3"></i>
-                            <span>Pemenuhan CPL</span>
+                            <span>13. Pemetaan CPL-CPMK-MK</span>
                         </a>
                     </li>
                     <li data-title="Pemenuhan CPL - CPMK - MK">
                         <a href="{{ route('admin.pemetaancplcpmkmk.pemenuhancplcpmkmk') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-pie-chart mr-3"></i>
-                            <span>Pemenuhan CPL-CPMK-MK</span>
+                            <span>14. Pemenuhan CPL-CPMK-MK</span>
                         </a>
                     </li>
                     <li data-title="Pemenuhan MK - CPMK - CPL">
                         <a href="{{ route('admin.pemetaancplcpmkmk.pemetaanmkcpmkcpl') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-graph-up mr-3"></i>
-                            <span>Pemenuhan MK-CPMK-CPL</span>
+                            <span>15. Pemenuhan CPL-MK-CPMK</span>
+                        </a>
+                    </li>
+                    <li data-title="Sub Cpmk">
+                        <a href="{{ route('admin.subcpmk.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-list-ol mr-3"></i>
+                            <span>16. Sub CPMK</span>
                         </a>
                     </li>
                     <li data-title="Pemenuhan MK - CPMK - SubCPMK">
                         <a href="{{ route('admin.pemetaanmkcpmksubcpmk.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-diagram-2 mr-3"></i>
-                            <span>Pemenuhan MK-CPMK-SubCPMK</span>
+                            <span>17. Pemenuhan MK-CPMK-SubCPMK</span>
                         </a>
                     </li>
                     <li data-title="Bobot">
                         <a href="{{ route('admin.bobot.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-speedometer2 mr-3"></i>
-                            <span>Bobot</span>
-                        </a>
+                            <span>18. Bobot</span>
+                        </a>    
                     </li>
                     <li data-title="Catatan">
-                        <a href="{{ route('admin.notes.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <a href="{{ route('admin.notes.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-sticky mr-3"></i>
-                            <span>Catatan</span>
+                            <span>19. Catatan</span>
                         </a>
                     </li>
                 </ul>
@@ -358,97 +371,99 @@
                     </button>
                 </form>
                 <script>
-                     function clearSidebarState() {
+                    function clearSidebarState() {
                         localStorage.removeItem('activeSidebarItem');
                         localStorage.removeItem('sidebarScroll'); // Tambahan untuk reset posisi scroll
                     }
                 </script>
             </li>
         </ul>
-</aside>
+    </aside>
 
-<!-- Simpan Warna Klik -->
-<style>
-    .sidebar-active {
-        background-color: #374151; /* bg-gray-700 */
-        font-weight: bold;
-    }
-</style>
-
-<!-- Simpan Posisis Sidebar -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const sidebar = document.getElementById('sidebar');
-
-        // Set scroll dari localStorage
-        const savedScrollTop = localStorage.getItem('sidebarScroll');
-        if (savedScrollTop) {
-            sidebar.scrollTop = parseInt(savedScrollTop);
+    <!-- Simpan Warna Klik -->
+    <style>
+        .sidebar-active {
+            background-color: #374151;
+            /* bg-gray-700 */
+            font-weight: bold;
         }
+    </style>
 
-        // Simpan scroll saat digulir
-        sidebar.addEventListener('scroll', function () {
-            localStorage.setItem('sidebarScroll', sidebar.scrollTop);
-        });
-    });
-</script>
+    <!-- Simpan Posisis Sidebar -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const sidebar = document.getElementById('sidebar');
 
-<style>
-    /* Tambahkan transition untuk smooth scrolling */
-    #sidebar {
-        scroll-behavior: smooth;
-    }
-    .sidebar-active {
-        background-color: #374151;
-        font-weight: bold;
-        position: relative;
-    }
-    
-    /* Optional: tambahkan indicator untuk active item */
-    .sidebar-active::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 3px;
-        background-color: #3B82F6;
-    }
-</style>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const menuItems = document.querySelectorAll('#sidebar ul li[data-title] a');
-
-        // Ambil item aktif dari localStorage, jika tidak ada, default ke "Dashboard"
-        let activeTitle = localStorage.getItem('activeSidebarItem');
-        if (!activeTitle) {
-            activeTitle = "Dashboard";
-            localStorage.setItem('activeSidebarItem', activeTitle);
-        }
-
-        // Highlight item yang sesuai
-        menuItems.forEach(item => {
-            if (item.parentElement.getAttribute('data-title') === activeTitle) {
-                item.classList.add('sidebar-active');
-            } else {
-                item.classList.remove('sidebar-active');
+            // Set scroll dari localStorage
+            const savedScrollTop = localStorage.getItem('sidebarScroll');
+            if (savedScrollTop) {
+                sidebar.scrollTop = parseInt(savedScrollTop);
             }
-        });
 
-        // Simpan item yang diklik
-        menuItems.forEach(item => {
-            item.addEventListener('click', function () {
-                const title = item.parentElement.getAttribute('data-title');
-                localStorage.setItem('activeSidebarItem', title);
+            // Simpan scroll saat digulir
+            sidebar.addEventListener('scroll', function() {
+                localStorage.setItem('sidebarScroll', sidebar.scrollTop);
             });
         });
-    });
-</script>
+    </script>
 
-<!-- Search Java -->
-<script>
-        document.getElementById('searchInput').addEventListener('keyup', function () {
+    <style>
+        /* Tambahkan transition untuk smooth scrolling */
+        #sidebar {
+            scroll-behavior: smooth;
+        }
+
+        .sidebar-active {
+            background-color: #374151;
+            font-weight: bold;
+            position: relative;
+        }
+
+        /* Optional: tambahkan indicator untuk active item */
+        .sidebar-active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: #3B82F6;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuItems = document.querySelectorAll('#sidebar ul li[data-title] a');
+
+            // Ambil item aktif dari localStorage, jika tidak ada, default ke "Dashboard"
+            let activeTitle = localStorage.getItem('activeSidebarItem');
+            if (!activeTitle) {
+                activeTitle = "Dashboard";
+                localStorage.setItem('activeSidebarItem', activeTitle);
+            }
+
+            // Highlight item yang sesuai
+            menuItems.forEach(item => {
+                if (item.parentElement.getAttribute('data-title') === activeTitle) {
+                    item.classList.add('sidebar-active');
+                } else {
+                    item.classList.remove('sidebar-active');
+                }
+            });
+
+            // Simpan item yang diklik
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const title = item.parentElement.getAttribute('data-title');
+                    localStorage.setItem('activeSidebarItem', title);
+                });
+            });
+        });
+    </script>
+
+    <!-- Search Java -->
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function() {
             const keyword = this.value.toLowerCase();
             const items = document.querySelectorAll('#sidebar ul li[data-title]');
 
@@ -461,7 +476,7 @@
                 }
             });
         });
-</script>
+    </script>
 
     <!-- Konetn utama -->
     <div class="flex-1 md:ml-64 p-6 pt-24">

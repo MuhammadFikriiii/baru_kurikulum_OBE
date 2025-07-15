@@ -78,6 +78,8 @@ use App\Http\Controllers\Wadir1SubCpmkController;
 use App\Http\Controllers\Wadir1PemetaanCplCpmkMkController;
 use App\Http\Controllers\AdminVisiMisiController;
 use App\Http\Controllers\ExportKptController;
+use App\Http\Controllers\VisiController;
+use App\Http\Controllers\MisiController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -230,13 +232,20 @@ Route::middleware(['auth'])->group(function () {
         Route::post('ajax-getmkbycpl', [AdminBobotController::class, 'getmkbycpl'])->name('bobot.getmkbycpl');
         Route::get('/notes', [AdminNotesController::class, 'index'])->name('notes.index');
         Route::get('/notes/{note}/detail', [AdminNotesController::class, 'detail'])->name('notes.detail');
-        Route::get('/visimisi/create', [AdminVisiMisiController::class, 'create'])->name('visimisi.create');
-        Route::post('/visimisi', [AdminVisiMisiController::class, 'store'])->name('visimisi.store');
-        Route::get('/visimisi', [AdminVisiMisiController::class, 'index'])->name('visi_misi.index');
-        Route::get('/visimisi/{visi_misi}/edit', [AdminVisiMisiController::class, 'edit'])->name('visimisi.edit');
-        Route::put('/visimisi/{visi_misi}', [AdminVisiMisiController::class, 'update'])->name('visimisi.update');
-        Route::get('/visimisi/{visi_misi}/detail', [AdminVisiMisiController::class, 'detail'])->name('visimisi.detail');
-        Route::delete('/visimisi/{visi_misi}', [AdminVisiMisiController::class, 'destroy'])->name('visimisi.destroy');
+        Route::get('/visi/create', [VisiController::class, 'create'])->name('visi.create');
+        Route::post('/visi', [VisiController::class, 'store'])->name('visi.store');
+        Route::get('/visi', [VisiController::class, 'index'])->name('visi.index');
+        Route::get('/visi/{visi}/edit', [VisiController::class, 'edit'])->name('visi.edit');
+        Route::put('/visi/{visi}', [VisiController::class, 'update'])->name('visi.update');
+        Route::get('/visi/{visi}/detail', [VisiController::class, 'detail'])->name('visi.detail');
+        Route::delete('/visi/{visi}', [VisiController::class, 'destroy'])->name('visi.destroy');
+        Route::get('/misi/create', [MisiController::class, 'create'])->name('misi.create');
+        Route::post('/misi', [MisiController::class, 'store'])->name('misi.store');
+        Route::get('/misi', [MisiController::class, 'index'])->name('misi.index');
+        Route::get('/misi/{misi}/edit', [MisiController::class, 'edit'])->name('misi.edit');
+        Route::put('/misi/{misi}', [MisiController::class, 'update'])->name('misi.update');
+        Route::get('/misi/{misi}/detail', [MisiController::class, 'detail'])->name('misi.detail');
+        Route::delete('/misi/{misi}', [MisiController::class, 'destroy'])->name('misi.destroy');
     });
 
     // Grup Route Wadir1

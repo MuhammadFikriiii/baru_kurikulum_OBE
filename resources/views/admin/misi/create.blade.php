@@ -2,11 +2,10 @@
 
 @section('content')
     <div class="mx-20 mt-6">
-        <h2 class="font-extrabold text-3xl mb-5 text-center">Tambah Jurusan</h2>
+        <h2 class="font-extrabold text-3xl mb-5 text-center">Tambah Misi</h2>
         <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
 
         <div class="bg-white px-6 pb-6 rounded-lg shadow-md">
-
             @if ($errors->any())
                 <div class="mb-4 text-red-600">
                     <ul class="list-disc list-inside">
@@ -17,24 +16,30 @@
                 </div>
             @endif
 
-            <form action="{{ route('admin.jurusan.store') }}" method="POST" class="space-y-6">
+            <form action="{{ route('admin.misi.store') }}" method="POST" class="space-y-6">
                 @csrf
-                <div>
-                    <label for="nama_kajur" class="block text-lg font-semibold mb-2">Nama Kajur</label>
-                    <input type="text" id="nama_kajur" name="nama_kajur" value="{{ old('nama_kajur') }}" required
+
+                <div class="pt-6">
+                    <label for="visi_id" class="block text-lg font-semibold mb-2">Visi Terkait</label>
+                    <select name="visi_id" id="visi_id" required
                         class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
+                        <option value="" disabled selected>Pilih Visi</option>
+                        @foreach ($visis as $visi)
+                            <option value="{{ $visi->id }}" {{ old('visi_id') == $visi->id ? 'selected' : '' }}>
+                                {{ $visi->visi }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div>
-                    <label for="nama_jurusan" class="block text-lg font-semibold mb-2">Nama Jurusan</label>
-                    <input type="text" id="nama_jurusan" name="nama_jurusan" value="{{ old('nama_jurusan') }}" required
-                        class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
+                    <label for="misi" class="block text-lg font-semibold mb-2">Misi</label>
+                    <textarea id="misi" name="misi" rows="4" required
+                        class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">{{ old('misi') }}</textarea>
                 </div>
 
-
-                <!-- Tombol Aksi -->
                 <div class="flex justify-end space-x-5 pt-6">
-                    <a href="{{ route('admin.jurusan.index') }}"
+                    <a href="{{ route('admin.misi.index') }}"
                         class="px-6 py-2 bg-blue-600 hover:bg-blue-900 text-white font-semibold rounded-lg transition duration-200">
                         Kembali
                     </a>

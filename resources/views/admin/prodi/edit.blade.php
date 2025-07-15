@@ -26,8 +26,8 @@
                     <div class="space-y-4">
                         <!-- Jurusan -->
                         <div>
-                            <label for="id_jurusan" class="block text-lg font-semibold mb-2 text-gray-700">Jurusan</label>
-                            <select name="id_jurusan" id="id_jurusan" class="w-full p-3 border border-gray-300 rounded-lg"
+                            <label for="id_jurusan" class="block text-lg font-semibold mb-2">Jurusan</label>
+                            <select name="id_jurusan" id="id_jurusan" class="w-full p-3 border border-black rounded-lg"
                                 required>
                                 @foreach ($jurusans as $jurusan)
                                     <option value="{{ $jurusan->id_jurusan }}"
@@ -38,65 +38,55 @@
                             </select>
                         </div>
 
-                        <!-- Kode Prodi -->
                         <div>
-                            <label class="block text-lg font-semibold mb-2 text-gray-700">Kode Prodi</label>
+                            <label class="block text-lg font-semibold mb-2">Kode Prodi</label>
                             <input type="text" name="kode_prodi" value="{{ old('kode_prodi', $prodi->kode_prodi) }}"
-                                class="w-full p-3 border border-gray-300 rounded-lg" required>
+                                class="w-full p-3 border border-black rounded-lg" required>
                         </div>
 
-                        <!-- Nama Prodi -->
                         <div>
-                            <label class="block text-lg font-semibold mb-2 text-gray-700">Nama Prodi</label>
+                            <label class="block text-lg font-semibold mb-2">Nama Prodi</label>
                             <input type="text" name="nama_prodi" value="{{ old('nama_prodi', $prodi->nama_prodi) }}"
-                                class="w-full p-3 border border-gray-300 rounded-lg" required>
+                                class="w-full p-3 border border-black rounded-lg" required>
                         </div>
 
-                        <!-- Nama Prodi -->
                         <div>
-                            <label class="block text-lg font-semibold mb-2 text-gray-700">Nama Kaprodi</label>
+                            <label class="block text-lg font-semibold mb-2">Nama Kaprodi</label>
                             <input type="text" name="nama_kaprodi"
                                 value="{{ old('nama_kaprodi', $prodi->nama_kaprodi) }}"
-                                class="w-full p-3 border border-gray-300 rounded-lg" required>
+                                class="w-full p-3 border border-black rounded-lg" required>
                         </div>
 
-                        <!-- Nama Prodi -->
                         <div>
-                            <label class="block text-lg font-semibold mb-2 text-gray-700">Visi Keilmuan</label>
-                            <input type="text" name="visi_prodi" value="{{ old('visi_prodi', $prodi->visi_prodi) }}"
-                                class="w-full p-3 border border-gray-300 rounded-lg" required>
-                        </div>
-
-                        <!-- Tanggal Berdiri -->
-                        <div>
-                            <label class="block text-lg font-semibold mb-2 text-gray-700">Tanggal Berdiri</label>
+                            <label class="block text-lg font-semibold mb-2">Tanggal Berdiri</label>
                             <input type="date" name="tgl_berdiri_prodi"
                                 value="{{ old('tgl_berdiri_prodi', $prodi->tgl_berdiri_prodi) }}"
-                                class="w-full p-3 border border-gray-300 rounded-lg" required>
+                                class="w-full p-3 border border-black rounded-lg" required>
                         </div>
 
-                        <!-- Tanggal Penyelenggaraan -->
                         <div>
-                            <label class="block text-lg font-semibold mb-2 text-gray-700">Tanggal Penyelenggaraan</label>
+                            <label class="block text-lg font-semibold mb-2">Tanggal Penyelenggaraan</label>
                             <input type="date" name="penyelenggaraan_prodi"
                                 value="{{ old('penyelenggaraan_prodi', $prodi->penyelenggaraan_prodi) }}"
-                                class="w-full p-3 border border-gray-300 rounded-lg" required>
+                                class="w-full p-3 border border-black rounded-lg" required>
                         </div>
 
-                        <!-- Nomor SK -->
                         <div>
-                            <label class="block text-lg font-semibold mb-2 text-gray-700">Nomor SK</label>
+                            <label class="block text-lg font-semibold mb-2">Nomor SK</label>
                             <input type="text" name="nomor_sk" value="{{ old('nomor_sk', $prodi->nomor_sk) }}"
-                                class="w-full p-3 border border-gray-300 rounded-lg" required>
+                                class="w-full p-3 border border-black rounded-lg" required>
+                        </div>
+
+                        <div>
+                            <label class="block text-lg font-semibold mb-2">Visi Keilmuan</label>
+                            <textarea name="visi_prodi" class="w-full p-3 border border-black rounded-lg" required>{{ old('visi_prodi', $prodi->visi_prodi) }}</textarea>
                         </div>
                     </div>
 
                     <div class="space-y-4">
-                        <!-- Peringkat Akreditasi -->
                         <div>
-                            <label class="block text-lg font-semibold mb-2 text-gray-700">Peringkat Akreditasi</label>
-                            <select name="peringkat_akreditasi" class="w-full p-3 border border-gray-300 rounded-lg"
-                                required>
+                            <label class="block text-lg font-semibold mb-2">Peringkat Akreditasi</label>
+                            <select name="peringkat_akreditasi" class="w-full p-3 border border-black rounded-lg" required>
                                 <option value="A" {{ $prodi->peringkat_akreditasi == 'A' ? 'selected' : '' }}>A
                                 </option>
                                 <option value="B" {{ $prodi->peringkat_akreditasi == 'B' ? 'selected' : '' }}>B
@@ -106,18 +96,16 @@
                             </select>
                         </div>
 
-                        <!-- Nomor SK BAN-PT -->
                         <div>
-                            <label class="block text-lg font-semibold mb-2 text-gray-700">Nomor SK BAN-PT</label>
+                            <label class="block text-lg font-semibold mb-2">Nomor SK BAN-PT</label>
                             <input type="text" name="nomor_sk_banpt"
                                 value="{{ old('nomor_sk_banpt', $prodi->nomor_sk_banpt) }}"
-                                class="w-full p-3 border border-gray-300 rounded-lg" required>
+                                class="w-full p-3 border border-black rounded-lg" required>
                         </div>
 
-                        <!-- Jenjang Pendidikan -->
                         <div>
-                            <label class="block text-lg font-semibold mb-2 text-gray-700">Jenjang Pendidikan</label>
-                            <select name="jenjang_pendidikan" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                            <label class="block text-lg font-semibold mb-2">Jenjang Pendidikan</label>
+                            <select name="jenjang_pendidikan" class="w-full p-3 border border-black rounded-lg" required>
                                 <option value="D3" {{ $prodi->jenjang_pendidikan == 'D3' ? 'selected' : '' }}>D3
                                 </option>
                                 <option value="D4" {{ $prodi->jenjang_pendidikan == 'D4' ? 'selected' : '' }}>D4
@@ -125,42 +113,40 @@
                             </select>
                         </div>
 
-                        <!-- Gelar Lulusan -->
                         <div>
-                            <label class="block text-lg font-semibold mb-2 text-gray-700">Gelar/Sebutan Lulusan</label>
+                            <label class="block text-lg font-semibold mb-2">Gelar/Sebutan Lulusan</label>
                             <input type="text" name="gelar_lulusan"
                                 value="{{ old('gelar_lulusan', $prodi->gelar_lulusan) }}"
-                                class="w-full p-3 border border-gray-300 rounded-lg" required>
+                                class="w-full p-3 border border-black rounded-lg" required>
                         </div>
 
-                        <!-- Telepon -->
                         <div>
-                            <label class="block text-lg font-semibold mb-2 text-gray-700">No. Telepon</label>
+                            <label class="block text-lg font-semibold mb-2">No. Telepon</label>
                             <input type="text" name="telepon_prodi"
                                 value="{{ old('telepon_prodi', $prodi->telepon_prodi) }}"
-                                class="w-full p-3 border border-gray-300 rounded-lg">
+                                class="w-full p-3 border border-black rounded-lg">
                         </div>
 
                         <!-- Website -->
                         <div>
-                            <label class="block text-lg font-semibold mb-2 text-gray-700">Website</label>
+                            <label class="block text-lg font-semibold mb-2">Website</label>
                             <input type="text" name="website_prodi"
                                 value="{{ old('website_prodi', $prodi->website_prodi) }}"
-                                class="w-full p-3 border border-gray-300 rounded-lg">
+                                class="w-full p-3 border border-black rounded-lg">
                         </div>
 
                         <!-- Email -->
                         <div>
-                            <label class="block text-lg font-semibold mb-2 text-gray-700">Email</label>
+                            <label class="block text-lg font-semibold mb-2">Email</label>
                             <input type="email" name="email_prodi" value="{{ old('email_prodi', $prodi->email_prodi) }}"
-                                class="w-full p-3 border border-gray-300 rounded-lg">
+                                class="w-full p-3 border border-black rounded-lg">
                         </div>
 
                         <!-- Tanggal SK -->
                         <div>
-                            <label class="block text-lg font-semibold mb-2 text-gray-700">Tanggal SK</label>
+                            <label class="block text-lg font-semibold mb-2">Tanggal SK</label>
                             <input type="date" name="tanggal_sk" value="{{ old('tanggal_sk', $prodi->tanggal_sk) }}"
-                                class="w-full p-3 border border-gray-300 rounded-lg" required>
+                                class="w-full p-3 border border-black rounded-lg" required>
                         </div>
                     </div>
                 </div>

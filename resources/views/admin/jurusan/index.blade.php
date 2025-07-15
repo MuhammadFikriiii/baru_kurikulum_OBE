@@ -21,7 +21,7 @@
 
         @if (session('sukses'))
             <div id="alert"
-                class="bg-red-500 text-white px-4 py-2 rounded-md mb-6 text-center relative max-w-4xl mx-auto">
+                class="bg-red-500 text-white px-4 py-2 rounded-md mb-6 text-center relative w-full mx-auto">
                 <span class="font-bold">{{ session('sukses') }}</span>
                 <button onclick="document.getElementById('alert').style.display='none'"
                     class="absolute top-1 right-3 text-white font-bold text-lg">
@@ -34,18 +34,13 @@
             <div>
                 <a href="{{ route('admin.jurusan.create') }}"
                     class="bg-green-600 hover:bg-green-800 text-white font-bold px-4 py-2 rounded-md inline-flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                            clip-rule="evenodd" />
-                    </svg>
                     Tambah
                 </a>
             </div>
             <!-- Search -->
             <div class="sm:min-w-[250px] w-full sm:w-auto">
                 <div
-                    class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
+                    class="flex items-center border border-black rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
                     <span class="pl-3 text-gray-400">
                         <i class="fas fa-search"></i>
                     </span>
@@ -64,12 +59,12 @@
             @else
                 <div class="bg-white rounded-lg shadow overflow-hidden">
                     <div class="overflow-x-auto">
-                        <table class="w-full border border-gray-300 rounded-lg overflow-hidden shadow-md">
+                        <table class="w-full border border-black rounded-lg overflow-hidden shadow-md">
                             <thead class="bg-green-800 text-white">
                                 <tr>
                                     <th class="px-6 py-3 text-center font-medium uppercase border-r border-gray-200">No</th>
-                                    <th class="px-6 py-3 text-center font-medium uppercase border-r border-gray-200">Nama Kajur</th>
                                     <th class="px-6 py-3 text-center font-medium uppercase border-r border-gray-200">Nama Jurusan</th>
+                                    <th class="px-6 py-3 text-center font-medium uppercase border-r border-gray-200">Nama Kajur</th>
                                     <th class="px-6 py-3 text-center font-medium uppercase">Aksi</th>
                                 </tr>
                             </thead>

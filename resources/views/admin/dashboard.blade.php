@@ -21,7 +21,7 @@
                         class="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-4 items-stretch">
                         <!-- Select Prodi -->
                         <select name="kode_prodi" id="prodiSelect" required
-                            class="min-w-[250px] flex-1 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                            class="min-w-[150px] text-center flex-1 border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
                             <option value="" selected disabled>Pilih Prodi</option>
                             @foreach ($prodis as $prodi)
                                 <option value="{{ $prodi->kode_prodi }}">{{ $prodi->nama_prodi }}</option>
@@ -30,7 +30,7 @@
 
                         <!-- Select Tahun -->
                         <select name="id_tahun" id="tahunSelect" required
-                            class="min-w-[170px] flex-1 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                            class="min-w-[150px] text-center flex-1 border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
                             <option value="" disabled {{ empty($id_tahun) ? 'selected' : '' }}>Pilih Tahun</option>
                             @foreach ($availableYears as $th)
                                 <option value="{{ $th->id_tahun }}" {{ $id_tahun == $th->id_tahun ? 'selected' : '' }}>
@@ -55,7 +55,7 @@
                     <form action="{{ route('tim.export.excel') }}" method="GET"
                         class="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-4 items-stretch">
                         <select name="id_tahun" id="tahunSelect" required
-                            class="min-w-0 flex-1 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                            class="min-w-0 flex-1 border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
                             <option value="" disabled {{ empty($id_tahun) ? 'selected' : '' }}>Pilih Tahun</option>
                             @foreach ($availableYears as $th)
                                 <option value="{{ $th->id_tahun }}" {{ $id_tahun == $th->id_tahun ? 'selected' : '' }}>
@@ -75,7 +75,7 @@
             <!-- Search -->
             <div class="sm:min-w-[250px] w-full sm:w-auto">
                 <div
-                    class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
+                    class="flex items-center border border-black rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
                     <span class="pl-3 text-gray-400">
                         <i class="fas fa-search"></i>
                     </span>
@@ -143,7 +143,7 @@
         <form method="GET" action="{{ route('admin.dashboard') }}" class="flex items-center">
             <label for="tahun_progress" class="mr-2 text-gray-600 text-sm">Tahun Progress:</label>
             <select name="tahun_progress" id="tahun_progress"
-                class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                class="border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                 required onchange="this.form.submit()">
                 <option value="" disabled selected>Pilih Tahun</option>
                 @foreach ($availableYears as $th)

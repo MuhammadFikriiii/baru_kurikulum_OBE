@@ -25,7 +25,7 @@
                     <div>
                         <label for="tahun" class="block text-xl font-semibold mb-2">Tahun Ajaran</label>
                         <input type="number" id="tahun" name="tahun" 
-                               class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]"
+                               class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]"
                                placeholder="Contoh: 2024/2025" 
                                value="{{ old('tahun', $tahun->tahun) }}" required>
                     </div>
@@ -36,7 +36,7 @@
                     <div>
                         <label for="nama_kurikulum" class="block text-xl font-semibold mb-2">Nama Kurikulum</label>
                         <input type="text" id="nama_kurikulum" name="nama_kurikulum"
-                               class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]"
+                               class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]"
                                placeholder="Contoh: Kurikulum OBE 2023"
                                value="{{ old('nama_kurikulum', $tahun->nama_kurikulum) }}" required>
                     </div>

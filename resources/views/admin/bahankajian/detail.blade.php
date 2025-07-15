@@ -2,67 +2,59 @@
 
 @section('content')
 
-<div class="mx-20 mt-6">
-    <h2 class="text-3xl font-extrabold text-center mb-4">Detail Bahan Kajian</h2>
-    <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-lg shadow-md">
-      
-        @if($selectedCapaianProfilLulusans)
-            <div class="md:col-span-2">
+    <div class="mx-20 mt-6">
+        <h2 class="text-3xl font-extrabold text-center mb-4">Detail Bahan Kajian</h2>
+        <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
+        @if ($selectedCapaianProfilLulusans)
                 <h3 class="text-xl font-semibold mb-2">Capaian Profil Lulusan Terkait:</h3>
-                <ul class="list-disc pl-5 text-gray-700">
-                    @foreach($selectedCapaianProfilLulusans as $id_cpl)
+                <ul class="w-full p-3 border border-black rounded-lg mb-4">
+                    @foreach ($selectedCapaianProfilLulusans as $id_cpl)
                         @php
                             $cplDetail = $capaianprofillulusans->firstWhere('id_cpl', $id_cpl);
                         @endphp
-                        @if($cplDetail)
+                        @if ($cplDetail)
                             <li><strong>{{ $cplDetail->kode_cpl }}</strong>: {{ $cplDetail->deskripsi_cpl }}</li>
                         @endif
                     @endforeach
                 </ul>
-            </div>
         @endif
 
-     
-<div>
-    <label for="kode_bk" class="block text-xl font-semibold">Kode BK</label> 
-    <input type="text" id="kode_bk" value="{{ $id_bk->kode_bk }}" readonly
-        class="w-full p-3 border border-black rounded-lg bg-gray-100 mb-4">
-</div>
+        <div>
+            <label for="kode_bk" class="block text-xl font-semibold">Kode BK</label>
+            <input type="text" id="kode_bk" value="{{ $id_bk->kode_bk }}" readonly
+                class="w-full p-3 border border-black rounded-lg mb-4">
+        </div>
 
-<div>
-    <label for="nama_bk" class="block text-xl font-semibold">Nama BK</label> 
-    <input type="text" id="nama_bk" value="{{ $id_bk->nama_bk }}" readonly
-        class="w-full p-3 border border-black rounded-lg bg-gray-100 mb-4">
-</div>
+        <div>
+            <label for="nama_bk" class="block text-xl font-semibold">Nama BK</label>
+            <input type="text" id="nama_bk" value="{{ $id_bk->nama_bk }}" readonly
+                class="w-full p-3 border border-black rounded-lg mb-4">
+        </div>
 
-<div>
-    <label for="referensi_bk" class="block text-xl font-semibold">Referensi BK</label> 
-    <input type="text" id="referensi_bk" value="{{ $id_bk->referensi_bk }}" readonly
-        class="w-full p-3 border border-black rounded-lg bg-gray-100 mb-4">
-</div>
+        <div>
+            <label for="referensi_bk" class="block text-xl font-semibold">Referensi BK</label>
+            <input type="text" id="referensi_bk" value="{{ $id_bk->referensi_bk }}" readonly
+                class="w-full p-3 border border-black rounded-lg mb-4">
+        </div>
 
-<div>
-    <label for="status_bk" class="block text-xl font-semibold">Status BK</label> 
-    <input type="text" id="status_bk" value="{{ $id_bk->status_bk }}" readonly
-        class="w-full p-3 border border-black rounded-lg bg-gray-100 mb-4">
-</div>
+        <div>
+            <label for="status_bk" class="block text-xl font-semibold">Status BK</label>
+            <input type="text" id="status_bk" value="{{ $id_bk->status_bk }}" readonly
+                class="w-full p-3 border border-black rounded-lg mb-4">
+        </div>
 
 
-<div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div>
-        <label for="deskripsi_bk" class="block text-xl font-semibold">Deskripsi BK</label> 
-        <textarea id="deskripsi_bk" readonly
-            class="w-full p-3 border border-black rounded-lg bg-gray-100 h-32 resize-none">{{ $id_bk->deskripsi_bk }}</textarea>
-    </div>
+        <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="deskripsi_bk" class="block text-xl font-semibold">Deskripsi BK</label>
+                <textarea id="deskripsi_bk" readonly class="w-full p-3 border border-black rounded-lg h-24 resize-none">{{ $id_bk->deskripsi_bk }}</textarea>
+            </div>
 
-    <div>
-        <label for="knowledge_area" class="block text-xl font-semibold">Knowledge Area</label> 
-        <textarea id="knowledge_area" readonly
-            class="w-full p-3 border border-black rounded-lg bg-gray-100 h-32 resize-none">{{ $id_bk->knowledge_area }}</textarea>
-    </div>
-</div>
+            <div>
+                <label for="knowledge_area" class="block text-xl font-semibold">Knowledge Area</label>
+                <textarea id="knowledge_area" readonly class="w-full p-3 border border-black rounded-lg h-24 resize-none">{{ $id_bk->knowledge_area }}</textarea>
+            </div>
+        </div>
 
 
         {{-- <div class="md:col-span-2 flex justify-end items-end pt-6 space-x-4">
@@ -80,15 +72,14 @@
                 </button>
             </form>
         </div> --}}
-    </div>
 
-    
-    <div class="flex justify-start pt-6">
-        <a href="{{ route('admin.bahankajian.index') }}"
-           class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition duration-200">
-            Kembali
-        </a>
+
+        <div class="flex justify-start pt-6">
+            <a href="{{ route('admin.bahankajian.index') }}"
+                class="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition duration-200">
+                Kembali
+            </a>
+        </div>
     </div>
-</div>
 
 @endsection

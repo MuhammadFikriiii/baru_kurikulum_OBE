@@ -10,7 +10,7 @@
 
     <!-- Alert Messages -->
     @if(session('success'))
-    <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-6 text-center relative max-w-4xl mx-auto">
+    <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-6 text-center relative w-full mx-auto">
         <span class="font-bold">{{ session('success') }}</span>
         <button onclick="document.getElementById('alert').style.display='none'"
             class="absolute top-1 right-3 text-white font-bold text-lg">
@@ -20,7 +20,7 @@
     @endif
 
     @if(session('sukses'))
-    <div id="alert" class="bg-red-500 text-white px-4 py-2 rounded-md mb-6 text-center relative max-w-4xl mx-auto">
+    <div id="alert" class="bg-red-500 text-white px-4 py-2 rounded-md mb-6 text-center relative w-full mx-auto">
         <span class="font-bold">{{ session('sukses') }}</span>
         <button onclick="document.getElementById('alert').style.display='none'"
             class="absolute top-1 right-3 text-white font-bold text-lg">
