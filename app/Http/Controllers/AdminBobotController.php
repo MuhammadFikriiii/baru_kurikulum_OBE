@@ -97,15 +97,20 @@ class AdminBobotController extends Controller
     {
         $mk_terkait = DB::table('cpl_mk')
             ->join('mata_kuliahs', 'cpl_mk.kode_mk', '=', 'mata_kuliahs.kode_mk')
+            ->join('capaian_profil_lulusans', 'cpl_mk.id_cpl', '=', 'capaian_profil_lulusans.id_cpl')
             ->where('cpl_mk.id_cpl', $id_cpl)
-            ->select('mata_kuliahs.kode_mk', 'mata_kuliahs.nama_mk')
+            ->select('mata_kuliahs.kode_mk', 'mata_kuliahs.nama_mk', 'capaian_profil_lulusans.kode_cpl', 'capaian_profil_lulusans.deskripsi_cpl')
             ->get();
 
         $bobots = Bobot::where('id_cpl', $id_cpl)->get();
         $existingBobots = $bobots->pluck('bobot', 'kode_mk')->toArray();
+        $kode_cpl = $mk_terkait->first()->kode_cpl ?? '-';
+        $deskripsi_cpl = $mk_terkait->first()->deskripsi_cpl ?? '-';
 
         return view('admin.bobot.detail', [
             'id_cpl' => $id_cpl,
+            'kode_cpl' => $kode_cpl,
+            'deskripsi_cpl' => $deskripsi_cpl,
             'mataKuliahs' => $mk_terkait,
             'existingBobots' => $existingBobots
         ]);

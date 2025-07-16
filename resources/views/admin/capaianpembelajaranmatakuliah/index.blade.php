@@ -22,7 +22,7 @@
 
             <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                 <select id="prodi" name="kode_prodi"
-                    class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    class="w-full md:w-64 border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     onchange="updateFilter()">
                     <option value="" disabled {{ empty($kode_prodi) ? 'selected' : '' }}>Pilih Prodi</option>
                     @foreach ($prodis as $prodi)
@@ -33,7 +33,7 @@
                 </select>
 
                 <select id="tahun" name="id_tahun"
-                    class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    class="w-full md:w-64 border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     onchange="updateFilter()">
                     <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
                     @if (isset($tahun_tersedia))
@@ -44,16 +44,15 @@
                         @endforeach
                     @endif
                 </select>
-
-                <div class="sm:min-w-[250px] w-full sm:w-auto">
-                    <div
-                        class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
-                        <span class="pl-3 text-gray-400">
-                            <i class="fas fa-search"></i>
-                        </span>
-                        <input type="text" id="search" placeholder="Search..."
-                            class="px-3 py-2 w-full focus:outline-none bg-transparent" />
-                    </div>
+            </div>
+            <div class="sm:min-w-[250px] w-full sm:w-auto">
+                <div
+                    class="flex items-center border border-black rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
+                    <span class="pl-3 text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <input type="text" id="search" placeholder="Search..."
+                        class="px-3 py-2 w-full focus:outline-none bg-transparent" />
                 </div>
             </div>
         </div>
@@ -135,7 +134,7 @@
                             {{ $cpmk->nama_prodi ?? 'Tidak ada prodi' }}</td>
                         <td class="py-3 px-6 text-center border border-gray-300">{{ $cpmk->kode_cpmk }}</td>
                         <td class="py-3 px-6 border border-gray-300">{{ $cpmk->deskripsi_cpmk }}</td>
-                        <td class="py-2 px-3 flex justify-center items-center space-x-2">
+                        <td class="py-2 px-3 flex justify-center items-center space-x-2 br">
                             <div class="flex justify-center space-x-2">
                                 <a href="{{ route('admin.capaianpembelajaranmatakuliah.detail', $cpmk->id_cpmk) }}"
                                     class="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md inline-flex items-center justify-center"

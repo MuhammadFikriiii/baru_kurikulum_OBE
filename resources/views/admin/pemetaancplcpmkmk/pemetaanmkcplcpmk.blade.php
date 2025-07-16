@@ -10,7 +10,7 @@
                 <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                     <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                         <select id="prodi" name="kode_prodi"
-                            class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                            class="w-full md:w-64 border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                             onchange="updateFilter()">
                             <option value="" {{ empty($kode_prodi) ? 'selected' : '' }} disabled>Pilih Prodi</option>
                             @foreach ($prodis as $prodi)
@@ -22,7 +22,7 @@
                         </select>
 
                         <select id="tahun" name="id_tahun"
-                            class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                            class="w-full md:w-64 border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                             onchange="updateFilter()">
                             <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
                             @if (isset($tahun_tersedia))
@@ -72,7 +72,7 @@
                 </div>
             @else
                 <div class="overflow-auto border">
-                    <table class="min-w-full divide-y divide-gray-300 text-sm">
+                    <table class="min-w-full divide-y divide-black text-sm">
                         <thead class="bg-green-800 text-white text-center">
                             <tr>
                                 <th class="border px-4 py-2">Kode MK</th>

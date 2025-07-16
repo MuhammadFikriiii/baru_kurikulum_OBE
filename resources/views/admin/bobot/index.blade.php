@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
-    <h1 class="text-3xl font-bold mb-4 text-center">Daftar Bobot CPL - MK</h1>
-    <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
+    <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
+        <h1 class="text-3xl font-bold mb-4 text-center">Daftar Bobot CPL - MK</h1>
+        <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
 
 
         @if (session('success'))
@@ -70,7 +70,7 @@
                         <td class="py-3 px-6 text-center font-bold align-top">{{ $totalBobot }}%</td>
 
                         {{-- Aksi --}}
-                        <td class="px-3 py-2 md:px-6 md:py-4 border border-gray-200">
+                        <td class="px-3 py-2 md:px-6 md:py-4">
                             <div class="flex justify-center space-x-1 md:space-x-2">
                                 <a href="{{ route('admin.bobot.detail', $id_cpl) }}"
                                     class="bg-gray-600 hover:bg-gray-700 text-white p-1 md:p-2 rounded-md inline-flex items-center justify-center"
