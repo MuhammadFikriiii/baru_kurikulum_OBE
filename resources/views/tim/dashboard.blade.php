@@ -27,6 +27,10 @@
                 <button type="submit" class="bg-green-600 text-white px-5 font-bold py-2 rounded-md hover:bg-green-800">
                     <i class="fas fa-file-excel mr-2"></i>Excel
                 </button>
+                <button type="button" onclick="exportWord()"
+                    class="bg-blue-600 px-4 py-2 rounded-lg text-white hover:bg-blue-800">
+                    <i class="fas fa-file-word mr-2"></i>Word
+                </button>
             </form>
 
             <!-- Filter Tahun Grafik -->
