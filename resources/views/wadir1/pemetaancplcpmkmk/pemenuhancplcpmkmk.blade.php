@@ -12,7 +12,7 @@
             <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                 <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                     <select id="prodi" name="kode_prodi"
-                        class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                        class="w-full md:w-64 border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                         onchange="updateFilter()">
                         <option value="" {{ empty($kode_prodi) ? 'selected' : '' }} disabled>Pilih Prodi</option>
                         @foreach ($prodis as $prodi)
@@ -24,7 +24,7 @@
                     </select>
 
                     <select id="tahun" name="id_tahun"
-                        class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                        class="w-full md:w-64 border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                         onchange="updateFilter()">
                         <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
                         @if (isset($tahun_tersedia))
@@ -117,9 +117,11 @@
                                                 <td class="border px-4 py-2 text-center align-middle">
                                                     <div class="flex flex-col justify-center min-h-[3rem]">
                                                         @if (!empty($cpmk['semester'][$i]))
-                                                            @foreach ($cpmk['semester'][$i] as $item)
-                                                                <span class="py-1">{{ $item }}</span>
-                                                            @endforeach
+                                                            <ul class="list-disc list-inside text-center">
+                                                                @foreach ($cpmk['semester'][$i] as $item)
+                                                                    <li>{!! nl2br(e($item)) !!}</li>
+                                                                @endforeach
+                                                            </ul>
                                                         @else
                                                             <span class="text-gray-400 italic">-</span>
                                                         @endif

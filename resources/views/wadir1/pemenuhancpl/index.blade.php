@@ -87,7 +87,11 @@
                                         @for ($i = 1; $i <= 8; $i++)
                                             <td class="text-center px-4 py-4 border border-b">
                                                 @if (!empty($item['semester']['Semester ' . $i]))
-                                                    {!! implode('<br>', $item['semester']['Semester ' . $i]) !!}
+                                                    <ul class="list-disc list-inside">
+                                                        @foreach ($item['semester']['Semester ' . $i] as $mk)
+                                                            <li>{{ $mk }}</li>
+                                                        @endforeach
+                                                    </ul>
                                                 @else
                                                     -
                                                 @endif

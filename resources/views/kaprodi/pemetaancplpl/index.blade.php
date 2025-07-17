@@ -28,7 +28,7 @@
         </style>
         <!-- Filter Tahun -->
         <select id="tahun" name="id_tahun"
-            class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            class="border border-black text-center px-4 py-2 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-500"
             onchange="updateFilter()">
             <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
             @if (isset($tahun_tersedia))
@@ -62,7 +62,7 @@
             </div>
         @endif
         <form>
-            <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-visible">
+            <table class="w-full border border-black shadow-md rounded-lg overflow-visible">
                 <thead class="bg-green-800 text-white">
                     <tr>
                         <th class="px-4 py-2 text-left"></th>

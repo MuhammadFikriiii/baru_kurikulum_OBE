@@ -3,8 +3,8 @@
 @section('content')
     <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
         <div class="text-center mb-8">
-            <h1 class="text-2xl font-bold text-gray-800">Pemetaan CPL - MK</h1>
-            <hr class="border-t-4 border-black my-4 mx-auto mb-4">
+            <h1 class="text-3xl font-bold text-gray-800">Pemetaan CPL - MK</h1>
+            <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
         </div>
 
         @if (session('success'))
@@ -21,9 +21,9 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
             <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                 <select id="prodi" name="kode_prodi"
-                    class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    class="w-full md:w-64 border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     onchange="updateFilter()">
-                    <option value="">Pilih Prodi</option>
+                    <option value="" {{ empty($kode_prodi) ? 'selected' : '' }} disabled>Pilih Prodi</option>
                     @foreach ($prodis as $prodi)
                         <option value="{{ $prodi->kode_prodi }}" {{ $kode_prodi == $prodi->kode_prodi ? 'selected' : '' }}>
                             {{ $prodi->nama_prodi }}
@@ -32,7 +32,7 @@
                 </select>
 
                 <select id="tahun" name="id_tahun"
-                    class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    class="w-full md:w-64 border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     onchange="updateFilter()">
                     <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
                     @foreach ($tahun_tersedia as $thn)
@@ -91,16 +91,16 @@
                         }
                     </style>
 
-                    <div class="">
-                        <table class="w-full border border-gray-300 shadow-md rounded-lg">
+                    <div class="overflow-x-auto w-full">
+                        <table class="w-full border border-black shadow-md rounded-lg">
                             <thead class="bg-green-800 text-white">
                                 <tr>
                                     <th class="px-4 py-2 text-left"></th>
                                     @foreach ($mks as $mk)
-                                        <th class="px-2 py-2 relative group">
+                                        <th class="px-2 py-2 relative group whitespace-nowrap">
                                             <span class="cursor-help">{{ $mk->kode_mk }}</span>
                                             <div
-                                                class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+                                                class="absolute top-full mb-4 left-1/2 -translate-x-1/2 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg break-words">
                                                 <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
                                                     {{ $mk->nama_prodi }}
                                                 </div>
@@ -116,14 +116,14 @@
                                 @foreach ($cpls as $index => $cpl)
                                     <tr
                                         class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border">
-                                        <td class="px-4 py-2 relative group">
+                                        <td class="px-4 py-2 relative group whitespace-nowrap">
                                             <span class="cursor-help">{{ $cpl->kode_cpl }}</span>
                                             <div
-                                                class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+                                                class="absolute top-full left-0 ml-4 mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg break-words">
                                                 <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
                                                     {{ $prodiByCpl[$cpl->id_cpl] ?? 'Program Studi Tidak Ditemukan' }}
                                                 </div>
-                                                <div class="mt-3 px-2 text-justify">
+                                                <div class="mt-3 px-2 text-justify whitespace-normal">
                                                     {{ $cpl->deskripsi_cpl }}
                                                 </div>
                                             </div>
@@ -139,16 +139,20 @@
                                 @endforeach
                             </tbody>
                         </table>
+
                     </div>
                 @endif
                 <p class="mt-3 italic text-red-500">*arahkan cursor pada kode cpl atau kode mk untuk melihat deskripsi*</p>
             </div>
         @else
-            <div class="p-8 text-center text-gray-600">
-                Silakan pilih prodi terlebih dahulu.
+            <div class="bg-white rounded-lg shadow overflow-hidden mt-1">
+                <div class="p-8 text-center text-gray-600">
+                    Silakan pilih prodi terlebih dahulu.
+                </div>
             </div>
         @endif
     </div>
+
     <script>
         function updateFilter() {
             const prodiSelect = document.getElementById('prodi');

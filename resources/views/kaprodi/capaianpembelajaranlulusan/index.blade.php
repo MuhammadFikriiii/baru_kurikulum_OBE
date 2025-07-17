@@ -1,7 +1,7 @@
 @extends('layouts.kaprodi.app')
 
 @section('content')
-    <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
+    <div class="bg-white rounded-lg shadow-md mx-2 md:mx-0">
         <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Daftar Capaian Pembelajaran Lulusan</h2>
         <hr class="border-t-4 border-black my-8">
         @if (session('success'))
@@ -27,7 +27,7 @@
         <div class="flex justify-between mb-4">
             <!-- Filter Tahun -->
             <select id="tahun" name="id_tahun"
-                class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                class="border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                 onchange="updateFilter()">
                 <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
                 @if (isset($tahun_tersedia))
@@ -70,7 +70,6 @@
                 <thead class="bg-green-800 text-white border-b">
                     <tr>
                         <th class="py-3 px-4 min-w-[10px] text-center font-bold uppercase ">No.</th>
-                        <th class="py-3 px-6 min-w-[10px] text-center font-bold uppercase">Prodi</th>
                         <th class="py-3 px-6 min-w-[10px] text-center font-bold uppercase">Kode CPL</th>
                         <th class="py-3 px-6 min-w-[10px] text-center font-bold uppercase">Deskripsi CPL</th>
                         <th class="py-3 px-6 min-w-[10px] text-center font-bold uppercase">Status CPL</th>
@@ -81,8 +80,6 @@
                     @foreach ($capaianpembelajaranlulusans as $index => $capaianpembelajaranlulusan)
                         <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
                             <td class="py-3 px-6 min-w-[10px] text-center">{{ $index + 1 }}</td>
-                            <td class="py-3 px-6 min-w-[10px] text-center">
-                                {{ $capaianpembelajaranlulusan->nama_prodi ?? 'Tidak ada prodi' }}</td>
                             <td class="py-3 px-6 min-w-[10px] text-center">{{ $capaianpembelajaranlulusan->kode_cpl }}</td>
                             <td class="py-3 px-6 min-w-[10px] text-justify">
                                 {{ $capaianpembelajaranlulusan->deskripsi_cpl }}</td>

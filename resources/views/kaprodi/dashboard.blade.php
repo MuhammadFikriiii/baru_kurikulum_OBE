@@ -6,20 +6,18 @@
     <div class="container mx-auto px-4 py-8">
         <div class="mb-8">
             <h1 class="text-3xl font-bold text-gray-800">Dashboard Penyusunan Kurikulum OBE</h1>
-            <p class="text-gray-600 mt-2">Progress implementasi kurikulum berbasis Outcome-Based Education per Program Studi
+            <p class= "mt-2">Progress implementasi kurikulum berbasis Outcome-Based Education per Program Studi
             </p>
             <hr class="border-t-4 border-black my-8">
         </div>
 
-        <!-- Filter Tahun -->
         <div class="flex flex-col md:flex-row justify-between mb-6 gap-4">
-            <!-- Export Excel -->
-            <form action="{{ route('kaprodi.export.excel') }}" method="GET" class="flex gap-2 items-center">
+            <form id="exportForm" action="{{ route('kaprodi.export.excel') }}" method="GET" class="flex gap-2 items-center">
                 <select name="id_tahun" required
-                    class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                    class="border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
                     <option value="" disabled {{ empty($id_tahun) ? 'selected' : '' }}>Pilih Tahun Export</option>
                     @foreach ($availableYears as $th)
-                        <option value="{{ $th->id_tahun }}" {{ $id_tahun == $th->id_tahun ? 'selected' : '' }}>
+                        <option class="text-center" value="{{ $th->id_tahun }}" {{ $id_tahun == $th->id_tahun ? 'selected' : '' }}>
                             {{ $th->tahun }}
                         </option>
                     @endforeach
@@ -27,13 +25,16 @@
                 <button type="submit" class="bg-green-600 text-white px-5 font-bold py-2 rounded-md hover:bg-green-800">
                     <i class="fas fa-file-excel mr-2"></i>Excel
                 </button>
+                <button type="button" onclick="exportWord()"
+                    class="bg-blue-600 px-4 py-2 rounded-lg text-white hover:bg-blue-800">
+                    <i class="fas fa-file-word mr-2"></i>Word
+                </button>
             </form>
 
-            <!-- Filter Tahun Grafik -->
             <form method="GET" action="{{ route('kaprodi.dashboard') }}" class="flex items-center">
-                <label for="tahun_progress" class="mr-2 text-gray-600 text-sm">Tahun Grafik:</label>
+                <label for="tahun_progress" class="mr-2 text-sm">Tahun Grafik:</label>
                 <select name="tahun_progress" id="tahun_progress"
-                    class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    class="border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     required onchange="this.form.submit()">
                     <option value="" disabled selected>Pilih Tahun</option>
                     @foreach ($availableYears as $th)
@@ -46,12 +47,10 @@
             </form>
         </div>
 
-        <!-- Grafik Progress -->
         @if (request()->filled('tahun_progress'))
             <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
                 <h2 class="text-xl font-bold text-gray-800 mb-6">Detail Progress Per Komponen Kurikulum</h2>
-                {{-- Penjelasan minimal --}}
-                <p class="text-sm text-gray-600 italic mb-4">
+                <p class="text-sm italic mb-4">
                     Minimal: PL 3, CPL 9, BK 8, MK 108 SKS, CPMK 18, Sub CPMK 36
                 </p>
                 <div class="w-full" style="height: 400px;">
@@ -59,13 +58,12 @@
                 </div>
             </div>
         @else
-            <div class="bg-white p-8 text-center text-gray-600 rounded-lg shadow mb-8">
+            <div class="bg-white p-8 text-center rounded-lg shadow mb-8">
                 <strong>Silakan pilih tahun grafik terlebih dahulu untuk menampilkan visualisasi progress.</strong>
             </div>
         @endif
     </div>
 
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     @if (request()->filled('tahun_progress'))
@@ -163,4 +161,22 @@
             });
         </script>
     @endif
+
+    <script>
+        function exportWord() {
+            const form = document.getElementById('exportForm');
+            const tahun = form.querySelector('select[name="id_tahun"]').value;
+
+            if (!tahun) {
+                alert('Harap pilih Tahun terlebih dahulu.');
+                return;
+            }
+
+            const kodeProdi = '{{ Auth::user()->kode_prodi }}';
+
+            const url = `{{ url('/export/kpt') }}?kode_prodi=${kodeProdi}&id_tahun=${tahun}`;
+
+            window.open(url, '_blank');
+        }
+    </script>
 @endsection

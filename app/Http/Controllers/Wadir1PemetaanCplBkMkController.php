@@ -42,7 +42,7 @@ class Wadir1PemetaanCplBkMkController extends Controller
             ->where('pl.kode_prodi', $kode_prodi)
             ->when($id_tahun, fn($q) => $q->where('pl.id_tahun', $id_tahun))
             ->select('cpl.*')
-            ->orderBy('cpl.id_cpl')
+            ->orderByRaw("CAST(SUBSTRING(cpl.kode_cpl, 4) AS UNSIGNED)")
             ->get();
 
         $cplIds = $cpls->pluck('id_cpl');
@@ -53,7 +53,7 @@ class Wadir1PemetaanCplBkMkController extends Controller
             ->whereIn('cb.id_cpl', $cplIds)
             ->select('bk.*')
             ->distinct()
-            ->orderBy('bk.id_bk')
+            ->orderBy('bk.kode_bk')
             ->get();
 
         // Ambil MK yang berelasi dengan CPL & BK
