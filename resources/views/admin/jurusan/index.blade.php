@@ -9,8 +9,7 @@
         </div>
 
         @if (session('success'))
-            <div id="alert"
-                class="bg-green-500 text-white px-4 py-2 rounded-md mb-6 text-center w-full relative mx-auto">
+            <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-6 text-center w-full relative mx-auto">
                 <span class="font-bold">{{ session('success') }}</span>
                 <button onclick="document.getElementById('alert').style.display='none'"
                     class="absolute top-1 right-3 text-white font-bold text-lg">
@@ -20,8 +19,7 @@
         @endif
 
         @if (session('sukses'))
-            <div id="alert"
-                class="bg-red-500 text-white px-4 py-2 rounded-md mb-6 text-center relative w-full mx-auto">
+            <div id="alert" class="bg-red-500 text-white px-4 py-2 rounded-md mb-6 text-center relative w-full mx-auto">
                 <span class="font-bold">{{ session('sukses') }}</span>
                 <button onclick="document.getElementById('alert').style.display='none'"
                     class="absolute top-1 right-3 text-white font-bold text-lg">
@@ -63,8 +61,10 @@
                             <thead class="bg-green-800 text-white">
                                 <tr>
                                     <th class="px-6 py-3 text-center font-medium uppercase border-r border-gray-200">No</th>
-                                    <th class="px-6 py-3 text-center font-medium uppercase border-r border-gray-200">Nama Jurusan</th>
-                                    <th class="px-6 py-3 text-center font-medium uppercase border-r border-gray-200">Nama Kajur</th>
+                                    <th class="px-6 py-3 text-center font-medium uppercase border-r border-gray-200">Nama
+                                        Jurusan</th>
+                                    <th class="px-6 py-3 text-center font-medium uppercase border-r border-gray-200">Nama
+                                        Kajur</th>
                                     <th class="px-6 py-3 text-center font-medium uppercase">Aksi</th>
                                 </tr>
                             </thead>
@@ -72,8 +72,10 @@
                                 @foreach ($jurusans as $index => $jurusan)
                                     <tr class="{{ $index % 2 == 0 ? 'bg-gray-50' : 'bg-white' }} hover:bg-gray-100">
                                         <td class="px-6 py-4 text-center border border-gray-200">{{ $index + 1 }}</td>
-                                        <td class="px-6 py-4 text-center border border-gray-200">{{ $jurusan->nama_jurusan }}</td>
-                                        <td class="px-6 py-4 text-center border border-gray-200">{{ $jurusan->nama_kajur }}</td>
+                                        <td class="px-6 py-4 text-center border border-gray-200">
+                                            {{ $jurusan->nama_jurusan }}</td>
+                                        <td class="px-6 py-4 text-center border border-gray-200">{{ $jurusan->nama_kajur }}
+                                        </td>
                                         <td class="px-6 py-4 border border-gray-200">
                                             <div class="flex justify-center space-x-2">
                                                 <a href="{{ route('admin.jurusan.detail', $jurusan->id_jurusan) }}"

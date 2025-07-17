@@ -38,8 +38,10 @@ class Wadir1ProfilLulusanController extends Controller
         return view('wadir1.profillulusan.index', compact('profillulusans', 'prodis', 'kode_prodi', 'id_tahun', 'tahun_tersedia'));
     }
 
-    public function detail (ProfilLulusan $id_pl)
+    public function detail(Profillulusan $id_pl)
     {
-        return view('wadir1.profillulusan.detail', compact('id_pl'));
+        $tahuns = Tahun::all();
+        $profillulusan = $id_pl;
+        return view('wadir1.profillulusan.detail', compact('profillulusan', 'tahuns'));
     }
 }

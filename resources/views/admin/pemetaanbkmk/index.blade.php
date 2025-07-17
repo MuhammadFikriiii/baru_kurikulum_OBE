@@ -46,7 +46,7 @@
             </div>
 
             @if ($kode_prodi || $id_tahun)
-                <div class="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
+                <div class="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md mt-4">
                     <div class="flex flex-wrap gap-2 items-center">
                         <span class="text-sm text-blue-800 font-medium">Filter aktif:</span>
                         @if ($kode_prodi)

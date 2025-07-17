@@ -37,6 +37,7 @@ class Wadir1BahanKajianController extends Controller
             ->leftJoin('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->leftJoin('tahun', 'pl.id_tahun', '=', 'tahun.id_tahun')
             ->leftJoin('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
+            ->orderBy('bk.kode_bk', 'asc')
             ->groupBy(
                 'bk.id_bk',
                 'bk.nama_bk',

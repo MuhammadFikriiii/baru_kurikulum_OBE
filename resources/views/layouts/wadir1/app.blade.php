@@ -9,8 +9,6 @@
     @vite(['resources/js/app.js'])
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
@@ -53,7 +51,6 @@
 </head>
 
 <body class="">
-    <!-- Navbar -->
     <nav
         class="bg-gray-900 text-white px-6 py-4 flex items-center justify-between fixed top-0 left-0 w-full z-50 shadow-md">
         <!-- Logo & Toggle -->
@@ -86,11 +83,12 @@
                     <div class="border-t my-1"></div>
                     <form action="{{ route('logout') }}" method="POST" onsubmit="clearSidebarState()">
                         @csrf
-                        <button type="submit"
-                            class="w-full flex items-center px-4 py-2 hover:bg-gray-100 text-red-600 text-left">
-                            <i class="fas fa-sign-out-alt mr-2"></i>
-                            <span>Logout</span>
-                        </button>
+                        <div class="flex items-center px-4 py-2 hover:bg-gray-100">
+                            <button type="submit" class=" text-red-600">
+                                <i class="fas fa-sign-out-alt mr-2"></i>
+                                <span>Logout</span>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -102,7 +100,7 @@
         class="w-[276px] bg-[#201F31] text-white p-5 pb-24 space-y-6 fixed top-16 left-0 h-[calc(100vh-4rem)] overflow-y-auto transform -translate-x-full md:translate-x-0 transition-transform duration-300">
         <!-- Header -->
         <div class="flex items-center justify-between mb-4 pt-2">
-            <h2 class="text-xl font-bold">Dashboard Wadir1</h2>
+            <h2 class="text-xl font-bold">Dashboard wadir1</h2>
             <button class="md:hidden" onclick="toggleSidebar()">✖</button>
         </div>
 
@@ -121,7 +119,9 @@
                 </a>
             </li>
 
+
             <li class="border-t border-gray-700 my-2"></li>
+
 
             <li>
                 <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">User Management</p>
@@ -135,6 +135,7 @@
                     </li>
                 </ul>
             </li>
+
 
             <li class="border-t border-gray-700 my-2"></li>
 
@@ -156,17 +157,32 @@
                             <span>Prodi</span>
                         </a>
                     </li>
+                    {{-- <li data-title="visi">
+                        <a href="{{ route('wadir1.visi.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-mortarboard mr-3"></i>
+                            <span>Visi</span>
+                        </a>
+                    </li>
+                    <li data-title="misi">
+                        <a href="{{ route('wadir1.misi.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-mortarboard mr-3"></i>
+                            <span>Misi</span>
+                        </a>
+                    </li> --}}
                     <li data-title="Tahun">
                         <a href="{{ route('wadir1.tahun.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-calendar mr-3"></i>
                             <span>Tahun</span>
                         </a>
+                    </li>
                 </ul>
             </li>
 
+            <!-- Divider -->
             <li class="border-t border-gray-700 my-2"></li>
-
 
             <li>
                 <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Learning Outcomes</p>
@@ -175,25 +191,26 @@
                         <a href="{{ route('wadir1.profillulusan.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-file-earmark-person mr-3"></i>
-                            <span>Profil Lulusan</span>
+                            <span>1. Profil Lulusan</span>
                         </a>
                     </li>
                     <li data-title="Capaian Profil Lulusan">
                         <a href="{{ route('wadir1.capaianpembelajaranlulusan.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-check2-square mr-3"></i>
-                            <span>Capaian Profil Lulusan</span>
+                            <span>2. CPL Prodi</span>
                         </a>
                     </li>
                     <li data-title="Pemetaan CPL-PL">
                         <a href="{{ route('wadir1.pemetaancplpl.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-diagram-3 mr-3"></i>
-                            <span>Pemetaan CPL-PL</span>
+                            <span>3. CPL-PL</span>
                         </a>
                     </li>
                 </ul>
             </li>
+
 
             <li class="border-t border-gray-700 my-2"></li>
 
@@ -205,42 +222,41 @@
                         <a href="{{ route('wadir1.bahankajian.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-journal-bookmark mr-3"></i>
-                            <span>Bahan Kajian</span>
+                            <span>4. Bahan Kajian</span>
                         </a>
                     </li>
                     <li data-title="Pemetaan CPL - BK">
                         <a href="{{ route('wadir1.pemetaancplbk.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-pin-map mr-3"></i>
-                            <span>Pemetaan CPL - BK</span>
+                            <span>5. CPL - BK</span>
                         </a>
                     </li>
                     <li data-title="Mata Kuliah">
                         <a href="{{ route('wadir1.matakuliah.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-book mr-3"></i>
-                            <span>Mata Kuliah</span>
-                        </a>
-                    </li>
-                    <li data-title="Pemetaan CPL - MK">
-                        <a href="{{ route('wadir1.pemetaancplmk.index') }}"
-                            class="flex items-center p-3 hover:bg-gray-700 rounded">
-                            <i class="bi bi-bar-chart mr-3"></i>
-                            <span>Pemetaan CPL - MK</span>
+                            <span>6. Susunan MK</span>
                         </a>
                     </li>
                     <li data-title="Pemetaan BK - MK">
                         <a href="{{ route('wadir1.pemetaanbkmk.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-link-45deg mr-3"></i>
-                            <span>Pemetaan BK - MK</span>
+                            <span>7. Pemetaan BK - MK</span>
+                        </a>
+                    </li>
+                    <li data-title="Pemetaan CPL - MK">
+                        <a href="{{ route('wadir1.pemetaancplmk.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-bar-chart mr-3"></i>
+                            <span>8. CPL - MK</span>
                         </a>
                     </li>
                 </ul>
             </li>
 
             <li class="border-t border-gray-700 my-2"></li>
-
 
             <li>
                 <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Advanced Mapping</p>
@@ -249,89 +265,96 @@
                         <a href="{{ route('wadir1.pemetaancplmkbk.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-diagram-3 mr-3"></i>
-                            <span>Pemetaan CPL - BK - MK</span>
+                            <span>9. CPL - BK - MK</span>
                         </a>
                     </li>
                     <li data-title="Organisasi MK">
                         <a href="{{ route('wadir1.matakuliah.organisasimk') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-columns mr-3"></i>
-                            <span>Organisasi MK</span>
+                            <span>10. Organisasi MK</span>
+                        </a>
+                    </li>
+                    <li data-title="PEMENUHAN CP">
+                        <a href="{{ route('wadir1.pemenuhancpl.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-percent mr-3"></i>
+                            <span>11. Pemenuhan CPL</span>
                         </a>
                     </li>
                     <li data-title="CPMK">
                         <a href="{{ route('wadir1.capaianpembelajaranmatakuliah.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-list-check mr-3"></i>
-                            <span>CPMK</span>
+                            <span>12. CPMK</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="border-t border-gray-700 my-2"></li>
+
+
+            <li>
+                <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Reports</p>
+                <ul class="ml-2 space-y-1">
+                    <li data-title="PEMETAAN CPL-CPMK-MK">
+                        <a href="{{ route('wadir1.pemetaancplcpmkmk.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-node-plus mr-3"></i>
+                            <span>13. Pemetaan CPL-CPMK-MK</span>
+                        </a>
+                    </li>
+                    <li data-title="Pemenuhan CPL - CPMK - MK">
+                        <a href="{{ route('wadir1.pemetaancplcpmkmk.pemenuhancplcpmkmk') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-pie-chart mr-3"></i>
+                            <span>14. Pemenuhan CPL-CPMK-MK</span>
+                        </a>
+                    </li>
+                    <li data-title="Pemenuhan MK - CPMK - CPL">
+                        <a href="{{ route('wadir1.pemetaancplcpmkmk.pemetaanmkcpmkcpl') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-graph-up mr-3"></i>
+                            <span>15. Pemenuhan CPL-MK-CPMK</span>
                         </a>
                     </li>
                     <li data-title="Sub Cpmk">
                         <a href="{{ route('wadir1.subcpmk.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-list-ol mr-3"></i>
-                            <span>Sub CPMK</span>
+                            <span>16. Sub CPMK</span>
                         </a>
                     </li>
-                    <li>
-                        <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Reports</p>
-                        <ul class="ml-2 space-y-1">
-                            <li data-title="PEMETAAN CPL-CPMK-MK">
-                                <a href="{{ route('wadir1.pemetaancplcpmkmk.index') }}"
-                                    class="flex items-center p-3 hover:bg-gray-700 rounded">
-                                    <i class="bi bi-node-plus mr-3"></i>
-                                    <span>Pemetaan CPL-CPMK-MK</span>
-                                </a>
-                            </li>
-                            <li data-title="PEMENUHAN CP">
-                                <a href="{{ route('wadir1.pemenuhancpl.index') }}"
-                                    class="flex items-center p-3 hover:bg-gray-700 rounded">
-                                    <i class="bi bi-percent mr-3"></i>
-                                    <span>Pemenuhan CPL</span>
-                                </a>
-                            </li>
-                            <li data-title="Pemenuhan CPL - CPMK - MK">
-                                <a href="{{ route('wadir1.pemetaancplcpmkmk.pemenuhancplcpmkmk') }}"
-                                    class="flex items-center p-3 hover:bg-gray-700 rounded">
-                                    <i class="bi bi-pie-chart mr-3"></i>
-                                    <span>Pemenuhan CPL-CPMK-MK</span>
-                                </a>
-                            </li>
-                            <li data-title="Pemenuhan MK - CPMK - CPL">
-                                <a href="{{ route('wadir1.pemetaancplcpmkmk.pemetaanmkcpmkcpl') }}"
-                                    class="flex items-center p-3 hover:bg-gray-700 rounded">
-                                    <i class="bi bi-graph-up mr-3"></i>
-                                    <span>Pemenuhan MK-CPMK-CPL</span>
-                                </a>
-                            </li>
-                            <li data-title="Pemenuhan MK - CPMK - SubCPMK">
-                                <a href="{{ route('wadir1.pemetaanmkcpmksubcpmk.index') }}"
-                                    class="flex items-center p-3 hover:bg-gray-700 rounded">
-                                    <i class="bi bi-diagram-2 mr-3"></i>
-                                    <span>Pemenuhan MK-CPMK-SubCPMK</span>
-                                </a>
-                            </li>
-                            <li data-title="Bobot">
+                    <li data-title="Pemenuhan MK - CPMK - SubCPMK">
+                        <a href="{{ route('wadir1.pemetaanmkcpmksubcpmk.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-diagram-2 mr-3"></i>
+                            <span>17. Pemenuhan MK-CPMK-SubCPMK</span>
+                        </a>
+                    </li>
+                    <li data-title="Bobot">
                         <a href="{{ route('wadir1.bobot.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-speedometer2 mr-3"></i>
-                            <span>Bobot</span>
+                            <span>18. Bobot</span>
                         </a>
                     </li>
-                        </ul>
-                    <li data-title="Notes">
+                    <li data-title="Catatan">
                         <a href="{{ route('wadir1.notes.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
-                            <i class="bi bi-journal-text mr-3"></i>
-                            <span>Catatan</span>
+                            <i class="bi bi-sticky mr-3"></i>
+                            <span>19. Catatan</span>
                         </a>
                     </li>
                 </ul>
             </li>
 
+            <!-- Divider -->
             <li class="border-t border-gray-700 my-2"></li>
 
-
+            <!-- Logout -->
             <li>
                 <form action="{{ route('logout') }}" method="POST" onsubmit="clearSidebarState()">
                     @csrf
@@ -421,7 +444,7 @@
                 }
             });
 
-            // Event saat diklik
+            // Simpan item yang diklik
             menuItems.forEach(item => {
                 item.addEventListener('click', function() {
                     const title = item.parentElement.getAttribute('data-title');
@@ -449,16 +472,14 @@
     </script>
 
     <!-- Konetn utama -->
-    <div class="flex-1 md:ml-64 p-6 pt-28">
+    <div class="flex-1 md:ml-64 p-6 pt-24">
         <!-- Toggle Button (Mobile) -->
         <div class="md:hidden mb-4">
             <button onclick="toggleSidebar()" class="bg-gray-800 text-white px-4 py-2 rounded">☰ Menu</button>
         </div>
         @yield('content')
     </div>
-
-
-
+    @stack('scripts')
 </body>
 
 </html>

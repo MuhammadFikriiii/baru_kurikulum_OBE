@@ -3,8 +3,8 @@
 @section('content')
     <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
         <div class="text-center mb-8">
-            <h1 class="text-2xl font-bold text-gray-800">Pemetaan CPL - PL</h1>
-            <hr class="border-t-4 border-black my-4 mx-auto mb-4">
+            <h1 class="text-3xl font-bold text-gray-800">Pemetaan CPL - PL</h1>
+            <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
         </div>
 
         @if (session('success'))
@@ -21,7 +21,7 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-3 gap-4">
             <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                 <select id="prodi" name="kode_prodi"
-                    class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    class="w-full md:w-64 border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     onchange="updateFilter()">
                     <option value="" {{ empty($kode_prodi) ? 'selected' : '' }} disabled>Pilih Prodi</option>
                     @foreach ($prodis as $prodi)
@@ -32,7 +32,7 @@
                 </select>
 
                 <select id="tahun" name="id_tahun"
-                    class="w-full md:w-64 border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    class="w-full md:w-64 border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     onchange="updateFilter()">
                     <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
                     @if (isset($tahun_tersedia))
@@ -51,7 +51,8 @@
                 <div class="flex flex-wrap gap-2 items-center">
                     <span class="text-sm text-blue-800 font-medium">Filter aktif:</span>
                     @if ($kode_prodi)
-                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                        <span
+                            class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                             Prodi: {{ $prodis->where('kode_prodi', $kode_prodi)->first()->nama_prodi ?? $kode_prodi }}
                         </span>
                     @endif
@@ -59,11 +60,14 @@
                         @php
                             $selected_tahun = $tahun_tersedia->where('id_tahun', $id_tahun)->first();
                         @endphp
-                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                            Tahun: {{ $selected_tahun ? $selected_tahun->nama_kurikulum . ' - ' . $selected_tahun->tahun : $id_tahun }}
+                        <span
+                            class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            Tahun:
+                            {{ $selected_tahun ? $selected_tahun->nama_kurikulum . ' - ' . $selected_tahun->tahun : $id_tahun }}
                         </span>
                     @endif
-                    <a href="{{ route('wadir1.pemetaancplpl.index') }}" class="text-xs text-blue-600 hover:text-blue-800 underline">
+                    <a href="{{ route('wadir1.pemetaancplpl.index') }}"
+                        class="text-xs text-blue-600 hover:text-blue-800 underline">
                         Reset filter
                     </a>
                 </div>
@@ -71,7 +75,7 @@
         @endif
 
         <!-- Table -->
-        <div class="bg-white rounded-lg shadow overflow-visible">
+        <div class="bg-white rounded-lg shadow overflow-visible mt-6">
             @if (empty($kode_prodi))
                 <div class="p-8 text-center text-gray-600">
                     Silakan pilih prodi terlebih dahulu.
@@ -99,57 +103,57 @@
                 </style>
 
                 <div class="">
-                <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-visible">
-                <thead class="bg-green-800 text-white">
-                    <tr>
-                        <th class="px-4 py-2 text-left"></th>
-                        @foreach ($pls as $pl)
-                            <th class="px-2 py-2 relative group">
-                                <span class="cursor-help">{{ $pl->kode_pl }}</span>
-                                <div
-                                    class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
-                                    <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
-                                        {{ $pl->prodi->nama_prodi }}
-                                    </div>
-                                    <div class="mt-3 px-2 text-justify">
-                                        {{ $pl->deskripsi_pl }}
-                                    </div>
-                                </div>
-                            </th>
-                        @endforeach
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($cpls as $index => $cpl)
-                        <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border">
-                            <td class="px-4 py-2 relative group">
-                                <span class="cursor-help">{{ $cpl->kode_cpl }}</span>
-                                <div
-                                    class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
-
-                                    <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
-                                        {{ $prodiByCpl[$cpl->id_cpl] }}
-                                    </div>
-                                    <div class="mt-3 px-2 text-justify">
-                                        {{ $cpl->deskripsi_cpl }}
-                                    </div>
-                                </div>
-                            </td>
-                            @foreach ($pls as $pl)
-                                <td class="px-4 py-2 text-center">
-                                    <input type="checkbox" disabled
-                                        {{ isset($relasi[$pl->id_pl]) && in_array($cpl->id_cpl, $relasi[$pl->id_pl]->pluck('id_cpl')->toArray()) ? 'checked' : '' }}
-                                        class="h-5 w-5 mx-auto appearance-none rounded border-2 border-blue-600 bg-white checked:bg-white-600 checked:border-blue-600 disabled:opacity-100 disabled:cursor-default relative">
-                                </td>
+                    <table class="w-full border border-black shadow-md rounded-lg overflow-visible">
+                        <thead class="bg-green-800 text-white">
+                            <tr>
+                                <th class="px-4 py-2 text-left"></th>
+                                @foreach ($pls as $pl)
+                                    <th class="px-2 py-2 relative group">
+                                        <span class="cursor-help">{{ $pl->kode_pl }}</span>
+                                        <div
+                                            class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+                                            <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
+                                                {{ $pl->prodi->nama_prodi }}
+                                            </div>
+                                            <div class="mt-3 px-2 text-justify">
+                                                {{ $pl->deskripsi_pl }}
+                                            </div>
+                                        </div>
+                                    </th>
+                                @endforeach
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($cpls as $index => $cpl)
+                                <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border">
+                                    <td class="px-4 py-2 relative group">
+                                        <span class="cursor-help">{{ $cpl->kode_cpl }}</span>
+                                        <div
+                                            class="absolute left-1/2 -translate-x-1/2 top-full mb-4 hidden group-hover:block w-64 bg-black text-white text-sm rounded p-2 z-50 text-center shadow-lg">
+                                            <div class="bg-gray-600 rounded-t px-2 py-1 font-bold">
+                                                {{ $prodiByCpl[$cpl->id_cpl] }}
+                                            </div>
+                                            <div class="mt-3 px-2 text-justify">
+                                                {{ $cpl->deskripsi_cpl }}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    @foreach ($pls as $pl)
+                                        <td class="px-4 py-2 text-center">
+                                            <input type="checkbox" disabled
+                                                {{ isset($relasi[$pl->id_pl]) && in_array($cpl->id_cpl, $relasi[$pl->id_pl]->pluck('id_cpl')->toArray()) ? 'checked' : '' }}
+                                                class="h-5 w-5 mx-auto appearance-none rounded border-2 border-blue-600 bg-white checked:bg-white-600 checked:border-blue-600 disabled:opacity-100 disabled:cursor-default relative">
+                                        </td>
+                                    @endforeach
+                                </tr>
                             @endforeach
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
                 </div>
             @endif
         </div>
     </div>
+
     <script>
         function updateFilter() {
             const prodiSelect = document.getElementById('prodi');
@@ -174,7 +178,7 @@
                 url += '?' + params.join('&');
             }
 
-            // Redirect ke URL dengan parameter yang benar
+            // Redirect ke URL dengan parameter yang becar
             window.location.href = url;
         }
     </script>

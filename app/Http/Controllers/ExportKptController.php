@@ -22,7 +22,8 @@ class ExportKptController extends Controller
 
         $tahun = DB::table('tahun')->where('id_tahun', $idTahun)->first();
 
-        $visiMisi = DB::table('visi_misi')->latest()->first();
+        $Visi = DB::table('visis')->latest()->first();
+        $Misi = DB::table('Misis')->latest()->first();
 
         $pls = DB::table('profil_lulusans')
             ->where('kode_prodi', $kodeProdi)
@@ -105,8 +106,8 @@ class ExportKptController extends Controller
         $template->setValue('telepon_prodi', $prodi->telepon_prodi ?? '-');
         $template->setValue('website_prodi', $prodi->website_prodi ?? '-');
         $template->setValue('nama_kaprodi', $prodi->nama_kaprodi ?? '-');
-        $template->setValue('visi', $visiMisi->visi ?? '-');
-        $template->setValue('misi', $visiMisi->misi ?? '-');
+        $template->setValue('visi', $Visi->visi ?? '-');
+        $template->setValue('misi', $Misi->misi ?? '-');
 
         // Handle Profil Lulusan
         if ($pls->count() > 0) {
