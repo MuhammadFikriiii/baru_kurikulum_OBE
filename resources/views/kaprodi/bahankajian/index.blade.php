@@ -28,7 +28,7 @@
         <div class="flex justify-between mb-4">
             <!-- Filter Tahun -->
             <select id="tahun" name="id_tahun"
-                class="border border-black px-4 text-center py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                class="w-full md:w-64 border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                 onchange="updateFilter()">
                 <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
                 @if (isset($tahun_tersedia))

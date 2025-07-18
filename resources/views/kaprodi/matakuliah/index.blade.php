@@ -28,7 +28,7 @@
         <div class="flex justify-between mb-4">
             <!-- Filter Tahun -->
             <select id="tahun" name="id_tahun"
-                class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                class="w-full md:w-64 border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                 onchange="updateFilter()">
                 <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
                 @if (isset($tahun_tersedia))
@@ -66,47 +66,47 @@
                 </div>
             </div>
         @endif
-        <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
-            <thead class="bg-green-800 text-white border-b">
-                <tr>
-                    <th class="py-2 px-3 text-center w-3 font-bold uppercase truncate">No</th>
-                    <th class="py-2 px-3 text-center w-8 font-bold uppercase">Prodi</th>
-                    <th class="py-2 px-3 text-center font-bold uppercase">Kode MK</th>
-                    <th class="py-2 px-3 text-center font-bold uppercase">Nama MK</th>
-                    <th class="py-2 px-3 text-center font-bold uppercase">Jenis MK</th>
-                    <th class="py-2 px-3text-center font-bold uppercase">Sks MK</th>
-                    @for ($i = 1; $i <= 8; $i++)
-                        <th class="py-2 px-3">Smstr {{ $i }}</th>
-                    @endfor
-                    <th class="py-2 px-3 text-center font-bold uppercase">kompetensi MK</th>
-                    <th class="py-2 px-3 text-center font-bold uppercase">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($mata_kuliahs as $index => $mata_kuliah)
-                    <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
-                        <td class="py-2 px-3 text-center">{{ $index + 1 }}</td>
-                        <td class="py-3 px-6 text-center">{{ $mata_kuliah->nama_prodi }}</td>
-                        <td class="py-2 px-3 text-center">{{ $mata_kuliah->kode_mk }}</td>
-                        <td class="py-2 px-3 text-center">{{ $mata_kuliah->nama_mk }}</td>
-                        <td class="py-2 px-3 text-center">{{ $mata_kuliah->jenis_mk }}</td>
-                        <td class="py-2 px-3 text-center">{{ $mata_kuliah->sks_mk }}</td>
+        <div class="overflow-x-auto rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-green-800 text-white border-b">
+                    <tr>
+                        <th class="py-2 px-3 text-center w-3 font-bold uppercase truncate">No</th>
+                        <th class="py-2 px-3 text-center font-bold uppercase">Kode MK</th>
+                        <th class="py-2 px-3 text-center font-bold uppercase">Nama MK</th>
+                        <th class="py-2 px-3 text-center font-bold uppercase">Jenis MK</th>
+                        <th class="py-2 px-3 text-center font-bold uppercase">Sks MK</th>
                         @for ($i = 1; $i <= 8; $i++)
-                            <td class="py-2 px-4 items-center text-center">
-                                @if ($mata_kuliah->semester_mk == $i)
-                                    ✔️
-                                @endif
-                            </td>
+                            <th class="py-2 px-3">S{{ $i }}</th>
                         @endfor
-                        <td class="py-2 px-3 text-center">{{ $mata_kuliah->kompetensi_mk }}</td>
-                        <td class="py-2 px-3 flex justify-center items-center space-x-2">
-                            <a href="{{ route('kaprodi.matakuliah.detail', $mata_kuliah->kode_mk) }}"
-                                class="bg-gray-600 font-bold text-white px-5 py-2 rounded-md hover:bg-gray-700">🛈</a>
-                        </td>
+                        <th class="py-2 px-3 text-center font-bold uppercase">kompetensi MK</th>
+                        <th class="py-2 px-3 text-center font-bold uppercase">Aksi</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($mata_kuliahs as $index => $mata_kuliah)
+                        <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-200 border-b">
+                            <td class="py-2 px-3 text-center">{{ $index + 1 }}</td>
+                            <td class="py-2 px-3 text-center">{{ $mata_kuliah->kode_mk }}</td>
+                            <td class="py-2 px-3 text-center">{{ $mata_kuliah->nama_mk }}</td>
+                            <td class="py-2 px-3 text-center">{{ $mata_kuliah->jenis_mk }}</td>
+                            <td class="py-2 px-3 text-center">{{ $mata_kuliah->sks_mk }}</td>
+                            @for ($i = 1; $i <= 8; $i++)
+                                <td class="py-2 px-4 items-center text-center">
+                                    @if ($mata_kuliah->semester_mk == $i)
+                                        ✔️
+                                    @endif
+                                </td>
+                            @endfor
+                            <td class="py-2 px-3 text-center">{{ $mata_kuliah->kompetensi_mk }}</td>
+                            <td class="py-2 px-3 flex justify-center items-center space-x-2">
+                                <a href="{{ route('kaprodi.matakuliah.detail', $mata_kuliah->kode_mk) }}"
+                                    class="bg-gray-600 font-bold text-white px-5 py-2 rounded-md hover:bg-gray-700">🛈</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
     <script>
         function updateFilter() {
