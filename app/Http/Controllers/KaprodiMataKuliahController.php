@@ -84,6 +84,7 @@ class KaprodiMataKuliahController extends Controller
             ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
             ->where('bkmk.kode_mk', $matakuliah->kode_mk)
             ->where('prodis.kode_prodi', $kodeProdi)
+            ->orderBy('bk.kode_bk')
             ->pluck('bkmk.id_bk')
             ->unique()
             ->toArray();

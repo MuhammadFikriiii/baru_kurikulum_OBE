@@ -2,36 +2,41 @@
 
 @section('content')
 
-    <div class="mx-20 mt-6">
+    <div class="ml-2 mr-2">
         <h2 class="text-3xl font-extrabold text-center mb-4">Detail Mata Kuliah</h2>
         <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
 
         @if ($selectedCPL)
-                <h3 class="text-xl font-semibold mb-2">CPL Terkait:</h3>
-                <div class="w-full p-3 border border-black rounded-lg list-disc space-y-1 bg-white shadow-sm">
+            <h3 class="text-xl font-semibold mb-2">CPL Terkait:</h3>
+            <div class="w-full p-3 border border-black rounded-lg list-disc space-y-1 bg-white shadow-sm">
                 @foreach ($selectedCPL as $id_cpl)
                     @php
                         $cplDetail = $cplList->firstWhere('id_cpl', $id_cpl);
                     @endphp
                     @if ($cplDetail)
-                       </strong>{{ $cplDetail->kode_cpl }}</strong>: {{ $cplDetail->deskripsi_cpl }}
+                        <div class="mb-1">
+                            <strong>{{ $cplDetail->kode_cpl }}</strong>: {{ $cplDetail->deskripsi_cpl }}
+                        </div>
                     @endif
                 @endforeach
-                </div>
+            </div>
         @endif
 
         @if ($selectedBK)
             <div class="mt-4">
                 <h3 class="text-xl font-semibold mb-1">BK Terkait</h3>
-                @foreach ($selectedBK as $id_bk)
-                    @php
-                        $bkDetail = $bkList->firstWhere('id_bk', $id_bk);
-                    @endphp
-                    @if ($bkDetail)
-                        <input type="text" readonly class="w-full p-3 border border-black rounded-lg bg-gray-100 mb-2"
-                            value="{{ $bkDetail->kode_bk }}: {{ $bkDetail->nama_bk }}"></input>
-                    @endif
-                @endforeach
+                <div class="w-full p-3 border border-black rounded-lg bg-white shadow-sm space-y-1">
+                    @foreach ($selectedBK as $id_bk)
+                        @php
+                            $bkDetail = $bkList->firstWhere('id_bk', $id_bk);
+                        @endphp
+                        @if ($bkDetail)
+                            <div>
+                                <strong>{{ $bkDetail->kode_bk }}</strong>: {{ $bkDetail->nama_bk }}
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
             </div>
         @endif
 

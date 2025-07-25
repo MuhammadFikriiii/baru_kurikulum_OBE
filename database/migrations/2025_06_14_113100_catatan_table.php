@@ -17,7 +17,8 @@ return new class extends Migration
             // $table->string('category')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('kode_prodi')->references('kode_prodi')->on('prodis')->onDelete('cascade');
+            $table->foreign('kode_prodi')->references('kode_prodi')->on('prodis')->onUpdate('cascade')->onDelete('cascade');
+
 
             $table->timestamps();
         });

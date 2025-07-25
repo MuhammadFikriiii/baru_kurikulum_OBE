@@ -24,8 +24,8 @@ return new class extends Migration
             $table->enum('status', ['pending', 'approved'])->default('approved');
             $table->rememberToken();
             $table->timestamps();
-
-            $table->foreign('kode_prodi')->references('kode_prodi')->on('prodis')->onDelete('cascade');
+            
+            $table->foreign('kode_prodi')->references('kode_prodi')->on('prodis')->onUpdate('cascade')->onDelete('cascade');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
