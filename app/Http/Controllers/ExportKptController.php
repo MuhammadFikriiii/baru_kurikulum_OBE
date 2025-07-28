@@ -48,7 +48,7 @@ class ExportKptController extends Controller
             ->join('capaian_profil_lulusans as cpl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->where('pl.kode_prodi', $kodeProdi)
             ->where('pl.id_tahun', $idTahun)
-            ->select('cpl.kode_cpl', 'cpl.deskripsi_cpl')
+            ->select('cpl.kode_cpl', 'cpl.deskripsi_cpl', 'pl.kode_pl')
             ->distinct()
             ->orderBy('cpl.kode_cpl')
             ->orderBy('pl.kode_pl')
