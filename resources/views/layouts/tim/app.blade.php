@@ -120,6 +120,12 @@
         <li>
             <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Program Setup</p>
             <ul class="ml-2 space-y-1">
+                <li data-title="VisiMisi">
+                    <a href="{{ route('tim.visimisi.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-calendar mr-3"></i>
+                        <span>Visi Misi</span>
+                    </a>
+                </li>
                 <li data-title="Tahun">
                     <a href="{{ route('tim.tahun.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-calendar mr-3"></i>

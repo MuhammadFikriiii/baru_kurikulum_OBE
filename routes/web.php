@@ -80,6 +80,7 @@ use App\Http\Controllers\AdminVisiMisiController;
 use App\Http\Controllers\ExportKptController;
 use App\Http\Controllers\VisiController;
 use App\Http\Controllers\MisiController;
+use App\Http\Controllers\TimVisiMisiController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -415,5 +416,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/notes/{note}/detail', [TimNotesController::class, 'detail'])->name('notes.detail');
         Route::get('/subcpmk/getMkByCpmk', [TimSubCpmkController::class, 'getMkByCpmk'])->name('subcpmk.getMkByCpmk');
         Route::delete('/subcpmk/{id}', [TimSubCpmkController::class, 'destroy'])->name('subcpmk.destroy');
+        Route::get('/visimisi', [TimVisiMisiController::class, 'index'])->name('visimisi.index');
     });
 });
