@@ -22,8 +22,19 @@ class ExportKptController extends Controller
 
         $tahun = DB::table('tahun')->where('id_tahun', $idTahun)->first();
 
-        $Visi = DB::table('visis')->latest()->first();
-        $Misi = DB::table('Misis')->latest()->first();
+        // Mengambil visi yang pertama saja (sesuai permintaan)
+        $Visi = DB::table('visis')->first();
+        
+        // Inisialisasi koleksi Misi yang kosong
+        $AllMisi = collect();
+
+        // Jika Visi ditemukan, ambil Misi yang berelasi dengannya.
+        // Asumsi: tabel 'misis' memiliki kolom 'id_visi' yang merujuk ke primary key di tabel 'visis'.
+        if ($Visi) {
+            // Ganti 'id' dengan nama primary key yang benar dari tabel visi Anda jika berbeda.
+            $AllMisi = DB::table('misis')->where('visi_id', $Visi->id)->get();
+        }
+
 
         $pls = DB::table('profil_lulusans')
             ->where('kode_prodi', $kodeProdi)
@@ -106,8 +117,23 @@ class ExportKptController extends Controller
         $template->setValue('telepon_prodi', $prodi->telepon_prodi ?? '-');
         $template->setValue('website_prodi', $prodi->website_prodi ?? '-');
         $template->setValue('nama_kaprodi', $prodi->nama_kaprodi ?? '-');
-        $template->setValue('visi', $Visi->visi ?? '-');
-        $template->setValue('misi', $Misi->misi ?? '-');
+        
+        // Mengatur nilai visi (hanya satu, yang pertama)
+        $template->setValue('visi', $Visi->visi ?? 'Tidak ada data visi');
+
+        // Format misi menjadi list bernomor
+        $misiList = '';
+        if ($AllMisi->count() > 0) {
+            $misiItems = [];
+            foreach ($AllMisi as $index => $item) {
+                // Gunakan htmlspecialchars untuk keamanan dan <w:br/> untuk baris baru di Word
+                $misiItems[] = ($index + 1) . '. ' . htmlspecialchars($item->misi, ENT_COMPAT, 'UTF-8');
+            }
+            $misiList = implode('<w:br/>', $misiItems);
+        } else {
+            $misiList = 'Tidak ada data misi yang terkait dengan visi ini';
+        }
+        $template->setValue('misi', $misiList);
 
         // Handle Profil Lulusan
         if ($pls->count() > 0) {
@@ -422,7 +448,7 @@ class ExportKptController extends Controller
                 ->get();
 
             if ($cplBahanKajian->count() > 0) {
-        
+    
                 $groupedData = [];
                 foreach ($cplBahanKajian as $item) {
                     $key = $item->kode_cpl;
@@ -602,7 +628,7 @@ class ExportKptController extends Controller
                     $template->cloneRowAndSetValues("s{$i}_no", $replacements);
                     Log::info("Berhasil mengisi " . $matakuliahSemester->count() . " mata kuliah untuk semester {$i}.");
                 } else {
-           
+            
                     $template->cloneRow("s{$i}_no", 1);
                     $template->setValue("s{$i}_no#1", '-');
                     $template->setValue("s{$i}_kode_mk#1", '-');
@@ -618,7 +644,7 @@ class ExportKptController extends Controller
             Log::info("Proses pengisian daftar mata kuliah per semester selesai. Grand total SKS: {$grandTotalSks}");
         } catch (\Exception $e) {
             Log::error('Gagal memproses Daftar Mata Kuliah per Semester: ' . $e->getMessage());
-         
+        
             for ($i = 1; $i <= 8; $i++) {
                 $template->setValue("s{$i}_no", 'Error');
                 $template->setValue("s{$i}_kode_mk", 'Error');
@@ -637,7 +663,7 @@ class ExportKptController extends Controller
                 ->join('profil_lulusans as pl', 'pl.id_pl', '=', 'cpl_pl.id_pl')
                 ->where('pl.kode_prodi', $kodeProdi)
                 ->where('pl.id_tahun', $idTahun)
-              
+            
                 ->select('mk.kode_mk', 'mk.nama_mk', 'mk.sks_mk', 'mk.kompetensi_mk')
                 ->distinct()
                 ->orderBy('mk.kompetensi_mk', 'desc') // Urutkan utama dulu, lalu pendukung
