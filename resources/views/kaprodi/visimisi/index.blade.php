@@ -26,7 +26,7 @@
             <h1 class="text-2xl text-black text-center mt-10">Visi Keilmuan Prodi</h1>
             <ul class="list-disc ml-6 mt-4">
                 @foreach ($prodis as $prodi)
-                    <p>{{ $prodi->nama_prodi }}</p>
+                    <p class="mt-4">{{ $prodi->nama_prodi }}</p>
                     <p>{{ $prodi->visi_prodi }}</p>
                 @endforeach
             </ul>
