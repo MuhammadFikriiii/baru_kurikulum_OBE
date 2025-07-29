@@ -125,6 +125,12 @@
             <li>
                 <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Learning Outcomes</p>
                 <ul class="ml-2 space-y-1">
+                    <li data-title="visimisi">
+                        <a href="{{ route('kaprodi.visimisi.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-calendar mr-3"></i>
+                            <span>Visi & Misi</span>
+                        </a>
                     <li data-title="Tahun">
                         <a href="{{ route('kaprodi.tahun.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">

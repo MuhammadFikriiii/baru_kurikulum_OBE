@@ -178,6 +178,13 @@
                             <span>Misi</span>
                         </a>
                     </li>
+                    <li data-title="visimisi">
+                        <a href="{{ route('admin.visimisi.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-mortarboard mr-3"></i>
+                            <span>Visi & Misi</span>
+                        </a>
+                    </li>
                     <li data-title="Tahun">
                         <a href="{{ route('admin.tahun.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">

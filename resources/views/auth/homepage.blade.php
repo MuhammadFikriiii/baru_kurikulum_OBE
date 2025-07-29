@@ -310,6 +310,27 @@
     </div>
   </div>
 
+  {{-- visi misi --}}
+  <div class="bg-red-500 px-5">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-800">Visi Misi</h1>
+      <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
+  </div>
+
+  <div class="visi">
+      <h1 class="text-2xl text-black text-center">Visi Poliban</h1>
+      <p class="text-center mt-4">{{ $visis->visi }}</p>
+  </div>
+
+  <div class="misi">
+      <h1 class="text-2xl text-black text-center mt-10">Misi Poliban</h1>
+      <ol class="list-decimal ml-6 mt-4">
+          @foreach ($misis as $misi)
+              <li>{{ $misi->misi }}</li>
+          @endforeach
+      </ol>
+  </div>
+  </div>
   <!-- Program STudi-->
   <div id="prodi" class="scroll-mt-24 mb-20">
     

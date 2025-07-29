@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class TimVisiMisiController extends Controller
+class AdminVisiMisiController extends Controller
 {
     public function index()
     {
@@ -15,6 +15,6 @@ class TimVisiMisiController extends Controller
 
         $prodis = DB::table('prodis')->get();
 
-        return view('tim.visimisi.index', compact('visis', 'misis', 'prodis'));
+        return view('admin.visimisi.index', compact('visis', 'misis', 'prodis'));
     }
 }

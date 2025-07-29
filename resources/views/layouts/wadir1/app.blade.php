@@ -126,6 +126,12 @@
             <li>
                 <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">User Management</p>
                 <ul class="ml-2 space-y-1">
+                    <li data-title="visimisi">
+                        <a href="{{ route('wadir1.visimisi.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-people mr-3"></i>
+                            <span>Visi & Misi</span>
+                        </a>
                     <li data-title="Users">
                         <a href="{{ route('wadir1.users.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">

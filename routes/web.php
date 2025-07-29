@@ -76,11 +76,13 @@ use App\Http\Controllers\KaprodiTahunController;
 use App\Http\Controllers\Wadir1TahunController;
 use App\Http\Controllers\Wadir1SubCpmkController;
 use App\Http\Controllers\Wadir1PemetaanCplCpmkMkController;
-use App\Http\Controllers\AdminVisiMisiController;
+use App\Http\Controllers\KaprodiVisiMisiController;
 use App\Http\Controllers\ExportKptController;
 use App\Http\Controllers\VisiController;
 use App\Http\Controllers\MisiController;
 use App\Http\Controllers\TimVisiMisiController;
+use App\Http\Controllers\Wadir1VisiMisiController;
+use App\Http\Controllers\AdminVisiMisiController;
 
 // Rute untuk tamu (guest)
 Route::middleware(['guest'])->group(function () {
@@ -247,6 +249,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/misi/{misi}', [MisiController::class, 'update'])->name('misi.update');
         Route::get('/misi/{misi}/detail', [MisiController::class, 'detail'])->name('misi.detail');
         Route::delete('/misi/{misi}', [MisiController::class, 'destroy'])->name('misi.destroy');
+        Route::get('/visimisi', [AdminVisiMisiController::class, 'index'])->name('visimisi.index');
     });
 
     // Grup Route Wadir1
@@ -298,6 +301,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/pemenuhancplcpmkmk', [Wadir1PemetaanCplCpmkMkController::class, 'pemenuhancplcpmkmk'])->name('pemetaancplcpmkmk.pemenuhancplcpmkmk');
         Route::get('/pemetaanmkcpmkcpl', [Wadir1PemetaanCplCpmkMkController::class, 'pemetaanmkcpmkcpl'])->name('pemetaancplcpmkmk.pemetaanmkcpmkcpl');
         Route::get('/pemetaanmkcpmksubcpmk', [Wadir1SubCpmkController::class, 'pemetaanmkcpmksubcpmk'])->name('pemetaanmkcpmksubcpmk.index');
+        Route::get('/visimisi', [Wadir1VisiMisiController::class, 'index'])->name('visimisi.index');
     });
 
     // Grup Route Kaprodi
@@ -337,6 +341,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/notes/{note}', [KaprodiNotesController::class, 'update'])->name('notes.update');
         Route::delete('/notes/{note}', [KaprodiNotesController::class, 'destroy'])->name('notes.destroy');
         Route::get('/tahun', [KaprodiTahunController::class, 'index'])->name('tahun.index');
+        Route::get('/visimisi', [KaprodiVisiMisiController::class, 'index'])->name('visimisi.index');
     });
 
     // Grup Route Tim

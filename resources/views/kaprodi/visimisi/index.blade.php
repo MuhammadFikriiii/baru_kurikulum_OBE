@@ -1,4 +1,4 @@
-@extends('layouts.tim.app')
+@extends('layouts.kaprodi.app')
 
 @section('content')
     <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">

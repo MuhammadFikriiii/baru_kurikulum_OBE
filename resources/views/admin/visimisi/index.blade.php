@@ -1,4 +1,4 @@
-@extends('layouts.tim.app')
+@extends('layouts.app')
 
 @section('content')
     <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
@@ -21,7 +21,7 @@
                 @endforeach
             </ol>
         </div>
-
+        
         <div>
             <h1 class="text-2xl text-black text-center mt-10">Visi Keilmuan Prodi</h1>
             <ul class="list-disc ml-6 mt-4">
