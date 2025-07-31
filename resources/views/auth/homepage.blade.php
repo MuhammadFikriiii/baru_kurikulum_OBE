@@ -318,7 +318,7 @@
   
   {{-- visi misi --}}
   <div class="bg-gradient-to-br from-blue-400 to-indigo-700 py-24   px-4 sm:px-6 lg:px-8">
-    <div class="max-w-4xl mx-auto">
+    <div class="max-w-5xl mx-auto">
       <div class="text-center mb-12">
         <h1 class="text-4xl font-extrabold text-white sm:text-5xl">Visi & Misi</h1>
         <div class="w-24 h-1 bg-white mx-auto mt-4 rounded-full"></div>
