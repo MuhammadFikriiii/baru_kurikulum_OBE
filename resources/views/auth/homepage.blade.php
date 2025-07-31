@@ -129,6 +129,11 @@
             before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
             Beranda
           </a>
+          <a href="#visimisi" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300
+          before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px]
+          before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
+          Visi & Misi
+          </a>
           <a href="#prodi" class="relative text-gray-700 font-medium hover:text-blue-600 transition duration-300
             before:content-[''] before:absolute before:-bottom-1 before:left-0 before:w-0 before:h-[2px]
             before:bg-blue-600 before:transition-all before:duration-300 hover:before:w-full">
@@ -172,6 +177,10 @@
           <a href="#beranda"
             class="flex items-center justify-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
             <span>Beranda</span>
+          </a>
+          <a href="#visimisi">
+            class="flex items-center justify-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
+            <span>Visi & Misi</span>
           </a>
           <a href="#prodi"
             class="flex items-center justify-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
@@ -317,7 +326,7 @@
 
   
   {{-- visi misi --}}
-  <div class="bg-gradient-to-br from-blue-400 to-indigo-700 py-24   px-4 sm:px-6 lg:px-8">
+  <div id="visimisi" class="bg-gradient-to-br from-blue-400 to-indigo-700 py-24   px-4 sm:px-6 lg:px-8">
     <div class="max-w-5xl mx-auto">
       <div class="text-center mb-12">
         <h1 class="text-4xl font-extrabold text-white sm:text-5xl">Visi & Misi</h1>

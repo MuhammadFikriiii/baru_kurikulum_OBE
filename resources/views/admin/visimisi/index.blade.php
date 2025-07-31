@@ -8,27 +8,34 @@
             <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
         </div>
 
-        <div class="visi">
-            <h1 class="text-2xl text-black text-center">Visi Poliban</h1>
-            <p class="text-center mt-4">{{ $visis->visi }}</p>
+        {{-- Visi Poliban Section --}}
+        <div class="mb-8 p-6 bg-green-50 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-semibold text-blue-800 text-center mb-4">Visi Poliban</h2>
+            <p class="text-gray-700 text-center">{{ $visis->visi }}</p>
         </div>
 
-        <div class="misi">
-            <h1 class="text-2xl text-black text-center mt-10">Misi Poliban</h1>
-            <ol class="list-decimal ml-6 mt-4">
+        {{-- Misi Poliban Section --}}
+        <div class="mb-8 p-6 bg-green-50 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-semibold text-green-800 text-center mb-4">Misi Poliban</h2>
+            <ol class="list-decimal list-inside text-gray-700 space-y-2">
                 @foreach ($misis as $misi)
                     <li>{{ $misi->misi }}</li>
                 @endforeach
             </ol>
         </div>
-        
-        <div>
-            <h1 class="text-2xl text-black text-center mt-10">Visi Keilmuan Prodi</h1>
-            <ul class="list-disc ml-6 mt-4">
+
+        {{-- Visi Keilmuan Prodi Section --}}
+        <div class="p-6 bg-yellow-50 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-semibold text-yellow-800 text-center mb-6">Visi Keilmuan Prodi</h2>
+            <div class="space-y-6">
                 @foreach ($prodis as $prodi)
-                    <p class="mt-4">{{ $prodi->nama_prodi }}</p>
-                    <p>{{ $prodi->visi_prodi }}</p>
+                    <div class="text-center border-b border-yellow-50 pb-4 last:border-b-0">
+                        <h3 class="text-lg font-medium text-yellow-700 mb-2">{{ $prodi->nama_prodi }}</h3>
+                        <p class="text-gray-700">{{ $prodi->visi_prodi }}</p>
+                    </div>
                 @endforeach
-            </ul>
+            </div>
         </div>
+
+    </div>
 @endsection
