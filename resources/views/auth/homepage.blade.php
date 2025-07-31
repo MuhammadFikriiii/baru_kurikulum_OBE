@@ -222,7 +222,7 @@
             Selamat Datang di Website Kurikulum Berbasis Outcome-Based Education (OBE)
           </p>
           <div class="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-4 ml-2 mb-3">
-            <a href="#services"
+            <a href="{{ route('login') }}"
               class="bg-blue-600 text-white font-semibold py-2 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-110">
               Mulai
             </a>
@@ -243,7 +243,7 @@
             Visi kami adalah mencetak lulusan yang siap kerja, kompeten, dan adaptif terhadap perkembangan industri.
           </p>
           <div class="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-4 ml-2 mb-3">
-            <a href="#visi"
+            <a href="#visimisi"
               class="bg-blue-600 text-white font-semibold py-2 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-110">
               Lihat Visi
             </a>
@@ -264,7 +264,7 @@
             Kenali lebih jauh jurusan dan program studi di Poliban yang mendukung sistem pembelajaran OBE.
           </p>
           <div class="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-4 ml-2 mb-3">
-            <a href="#jurusan"
+            <a href="#prodi"
               class="bg-blue-600 text-white font-semibold py-2 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-110">
               Lihat Jurusan
             </a>
@@ -354,7 +354,7 @@
   </div>
   
   <!-- Program STudi-->
-  <div id="prodi" class="scroll-mt-24 mb-20 ">
+  <div id="prodi" class="scroll-mt-24 mb-10 ">
     <section class="py-12 bg-gray-50 pt-20" >
       <div class="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
         <h1 class="text-3xl text-center font-bold text-indigo-800 mb-2">Program Studi</h1>
@@ -417,7 +417,7 @@
                 </div>
 
                 <!-- Content -->
-                <div class="p-6">
+                <div  class="p-6">
                   <div class="flex items-center mb-4">
                     <div class="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
                       <i class="fas fa-award mr-2"></i>
@@ -544,13 +544,11 @@
   <!-- Team Kurikulum -->
   <section id="team" class="">
     <div class="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
-
       <!-- Header -->
       <div class="flex flex-col sm:flex-row justify-between items-center mb-6">
         <h2 class="text-2xl font-bold text-indigo-800 mb-4 sm:mb-0">Team Kurikulum</h2>
       </div>
-      
-
+    
       <!-- Swiper Wrapper -->
       <div class="swiper teamSwiper relative pb-10">
         <div class="swiper-wrapper">
@@ -635,7 +633,7 @@
 
 
 <!-- Footer -->
-<footer class="bg-gray-800 text-white py-12 mt-20">
+<footer id="contact" class="bg-gray-800 text-white py-12 mt-20">
     <div class="container mx-auto px-6">
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
         <!-- About Section -->
