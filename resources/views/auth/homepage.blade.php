@@ -23,8 +23,8 @@
   <link rel="stylesheet" type="text/css"
     href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
-    <!-- Pastikan ini ada sebelum script Anda -->
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <!-- Pastikan ini ada sebelum script Anda -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -102,6 +102,11 @@
     }, 5000); // Auto slide setiap 5 detik
   </script>
 
+  <style>
+    html {
+  scroll-behavior: smooth;
+}
+  </style>
 </head>
 
 <body class="bg-gray-100 text-gray-800 ">
@@ -310,31 +315,38 @@
     </div>
   </div>
 
+  
   {{-- visi misi --}}
-  <div class="bg-red-500 px-5">
-    <div class="text-center mb-8">
-      <h1 class="text-3xl font-bold text-gray-800">Visi Misi</h1>
-      <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
-  </div>
-
-  <div class="visi">
-      <h1 class="text-2xl text-black text-center">Visi Poliban</h1>
-      <p class="text-center mt-4">{{ $visis->visi }}</p>
-  </div>
-
-  <div class="misi">
-      <h1 class="text-2xl text-black text-center mt-10">Misi Poliban</h1>
-      <ol class="list-decimal ml-6 mt-4">
+  <div class="bg-gradient-to-br from-blue-400 to-indigo-700 py-24   px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-extrabold text-white sm:text-5xl">Visi & Misi</h1>
+        <div class="w-24 h-1 bg-white mx-auto mt-4 rounded-full"></div>
+      </div>
+  
+      <div class="bg-white rounded-xl shadow-2xl p-8 mb-10 transform hover:scale-105 transition duration-300 ease-in-out">
+        <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Visi Poliban</h2>
+        <p class="text-lg text-gray-700 leading-relaxed text-center">
+          {{ $visis->visi }}
+        </p>
+      </div>
+  
+      <div class="bg-white rounded-xl shadow-2xl p-8 transform hover:scale-105 transition duration-300 ease-in-out">
+        <h2 class="text-3xl font-bold text-gray-900 text-center mb-6">Misi Poliban</h2>
+        <ol class="list-decimal list-outside space-y-4 text-lg text-gray-700">
           @foreach ($misis as $misi)
-              <li>{{ $misi->misi }}</li>
+            <li class="ml-6 leading-relaxed text-justify"> {{-- Added text-justify here --}}
+                {{ $misi->misi }}
+            </li>
           @endforeach
-      </ol>
+        </ol>
+      </div>
+    </div>
   </div>
-  </div>
+  
   <!-- Program STudi-->
-  <div id="prodi" class="scroll-mt-24 mb-20">
-    
-    <section class="py-12 bg-gray-50" >
+  <div id="prodi" class="scroll-mt-24 mb-20 ">
+    <section class="py-12 bg-gray-50 pt-20" >
       <div class="container mx-auto px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
         <h1 class="text-3xl text-center font-bold text-indigo-800 mb-2">Program Studi</h1>
         <p class="text-lg text-center text-gray-600 mb-8">Temukan program studi yang sesuai dengan minat Anda</p>
@@ -610,8 +622,6 @@
       });
     });
   </script>
-
-
 
 
 
