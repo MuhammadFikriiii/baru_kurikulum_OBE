@@ -30,7 +30,7 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 md:mb-6 gap-3 md:gap-4">
             <div class="w-full md:w-auto mb-3 md:mb-0">
                 <a href="{{ route('admin.users.create') }}"
-                    class="w-full md:w-auto bg-green-600 hover:bg-green-800 text-white font-bold px-3 py-2 md:px-4 md:py-2 rounded-md inline-flex items-center justify-center text-sm md:text-base">
+                    class="w-full md:w-auto bg-green-600 hover:bg-green-800 text-white font-bold px-2 py-2 rounded-md inline-flex items-center justify-center text-sm md:text-base">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5 mr-1" viewBox="0 0 20 20"
                         fill="currentColor">
                         <path fill-rule="evenodd"
@@ -49,7 +49,7 @@
                         <i class="fas fa-search"></i>
                     </span>
                     <input type="text" id="search" placeholder="Search..."
-                        class="px-3 py-2 w-full focus:outline-none bg-transparent" />
+                        class="px-2 py-2 w-full focus:outline-none bg-transparent" />
                 </div>
             </div>
 
@@ -63,34 +63,34 @@
                 </div>
             @else
                 <div class="overflow-x-auto">
-                    <table class="w-full border border-black rounded-lg overflow-hidden shadow-md">
+                    <table class="w-full border border-black">
                         <thead class="bg-green-800 text-white">
                             <tr>
                                 <th
-                                    class="px-3 py-2 md:px-6 md:py-3 text-center text-xs md:text-sm font-medium uppercase border-r border-gray-200">
+                                    class="px-2 py-2 text-center text-xs md:text-sm font-medium uppercase border-r border-gray-200">
                                     No</th>
                                 <th
-                                    class="px-3 py-2 md:px-6 md:py-3 text-center text-xs md:text-sm font-medium uppercase border-r border-gray-200">
+                                    class="px-2 py-2 text-center text-xs md:text-sm font-medium uppercase border-r border-gray-200">
                                     NIP</th>
                                 <th
-                                    class="px-3 py-2 md:px-6 md:py-3 text-center text-xs md:text-sm font-medium uppercase border-r border-gray-200">
+                                    class="px-2 py-2 text-center text-xs md:text-sm font-medium uppercase border-r border-gray-200">
                                     Nama</th>
                                 <th
-                                    class="px-3 py-2 md:px-6 md:py-3 text-center text-xs md:text-sm font-medium uppercase border-r border-gray-200">
+                                    class="px-2 py-2 text-center text-xs md:text-sm font-medium uppercase border-r border-gray-200">
                                     NO HP</th>
                                 <th
-                                    class="px-3 py-2 md:px-6 md:py-3 text-center text-xs md:text-sm font-medium uppercase border-r border-gray-200">
+                                    class="px-2 py-2 text-center text-xs md:text-sm font-medium uppercase border-r border-gray-200">
                                     Email</th>
                                 <th
-                                    class="px-3 py-2 md:px-6 md:py-3 text-center text-xs md:text-sm font-medium uppercase border-r border-gray-200">
+                                    class="px-2 py-2 text-center text-xs md:text-sm font-medium uppercase border-r border-gray-200">
                                     Prodi</th>
                                 <th
-                                    class="px-3 py-2 md:px-6 md:py-3 text-center text-xs md:text-sm font-medium uppercase border-r border-gray-200">
+                                    class="px-2 py-2 text-center text-xs md:text-sm font-medium uppercase border-r border-gray-200">
                                     Role</th>
                                 <th
-                                    class="px-3 py-2 md:px-6 md:py-3 text-center text-xs md:text-sm font-medium uppercase border-r border-gray-200">
+                                    class="px-2 py-2 text-center text-xs md:text-sm font-medium uppercase border-r border-gray-200">
                                     Status</th>
-                                <th class="px-3 py-2 md:px-6 md:py-3 text-center text-xs md:text-sm font-medium uppercase">
+                                <th class="px-2 py-2 text-center text-xs md:text-sm font-medium uppercase">
                                     Aksi</th>
                             </tr>
                         </thead>
@@ -98,34 +98,34 @@
                             @foreach ($users as $index => $user)
                                 <tr class="{{ $index % 2 == 0 ? 'bg-gray-50' : 'bg-white' }} hover:bg-gray-100">
                                     <td
-                                        class="px-3 py-2 md:px-6 md:py-4 text-center border border-gray-200 text-xs md:text-sm">
+                                        class="px-2 py-2 text-center border border-gray-200 text-xs md:text-sm">
                                         {{ $index + 1 }}</td>
                                     <td
-                                        class="px-3 py-2 md:px-6 md:py-4 text-center border border-gray-200 text-xs md:text-sm">
+                                        class="px-2 py-2 text-center border border-gray-200 text-xs md:text-sm">
                                         {{ $user->nip }}</td>
                                     <td
-                                        class="px-3 py-2 md:px-6 md:py-4 text-center border border-gray-200 text-xs md:text-sm">
+                                        class="px-2 py-2 text-center border border-gray-200 text-xs md:text-sm">
                                         {{ $user->name }}</td>
                                     <td
-                                        class="px-3 py-2 md:px-6 md:py-4 text-center border border-gray-200 text-xs md:text-sm">
+                                        class="px-2 py-2 text-center border border-gray-200 text-xs md:text-sm">
                                         {{ $user->nohp }}</td>
                                     <td
-                                        class="px-3 py-2 md:px-6 md:py-4 text-center border border-gray-200 text-xs md:text-sm">
+                                        class="px-2 py-2 text-center border border-gray-200 text-xs md:text-sm">
                                         {{ $user->email }}</td>
                                     <td
-                                        class="px-3 py-2 md:px-6 md:py-4 text-center border border-gray-200 text-xs md:text-sm">
+                                        class="px-2 py-2 text-center border border-gray-200 text-xs md:text-sm">
                                         {{ $user->prodi->nama_prodi ?? '-' }}</td>
                                     <td
-                                        class="px-3 py-2 md:px-6 md:py-4 text-center border border-gray-200 text-xs md:text-sm">
+                                        class="px-2 py-2 text-center border border-gray-200 text-xs md:text-sm">
                                         {{ ucfirst($user->role) }}</td>
-                                    <td class="px-3 py-2 md:px-6 md:py-4 text-center border border-gray-200">
+                                    <td class="px-2 py-2 text-center border border-gray-200">
                                         <span
                                             class="px-2 py-1 text-xs rounded-full 
                                 {{ $user->status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
                                             {{ $user->status }}
                                         </span>
                                     </td>
-                                    <td class="px-3 py-2 md:px-6 md:py-4 border border-gray-200">
+                                    <td class="px-2 py-2 border border-gray-200">
                                         <div class="flex justify-center space-x-1 md:space-x-2">
                                             <a href="{{ route('admin.users.detail', $user->id) }}"
                                                 class="bg-gray-600 hover:bg-gray-700 text-white p-1 md:p-2 rounded-md inline-flex items-center justify-center"

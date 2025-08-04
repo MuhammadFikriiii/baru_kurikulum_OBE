@@ -23,6 +23,8 @@ class SignUpController extends Controller
             'password' => 'required|string|min:6',
             'role' => 'required|in:kaprodi,tim',
             'kode_prodi' => 'required|exists:prodis,kode_prodi',
+            'nip' => 'required|string|min:10|max:20',
+            'nohp' => 'required|string|min:10|max:15',
         ]);
 
         User::create([
@@ -32,6 +34,8 @@ class SignUpController extends Controller
             'role' => $request->role,
             'kode_prodi' => $request->kode_prodi,
             'status' => 'pending',
+            'nip' => $request->nip,
+            'nohp' => $request->nohp,
         ]);
 
         return back()->with('success', 'Pendaftaran berhasil. Menunggu persetujuan admin.');

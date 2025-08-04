@@ -40,6 +40,20 @@
             </div>
             <input type="text" name="name" placeholder="Nama Lengkap" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#3094c6] pl-10" value="{{ old('name') }}" required>
           </div>
+
+          <div class="mb-4 relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i class="fas fa-id-card text-gray-400"></i>
+            </div>
+            <input type="text" name="nip" placeholder="NIP" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#3094c6] pl-10" value="{{ old('nip') }}" required>
+          </div>
+
+          <div class="mb-4 relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i class="fas fa-phone text-gray-400"></i>
+            </div>
+            <input type="text" name="nohp" placeholder="Nomor HP" class="border border-gray-300 py-2 px-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-[#3094c6] pl-10" value="{{ old('nohp') }}" required>
+          </div>
           
           <div class="mb-4 relative">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
