@@ -12,7 +12,6 @@
             <hr class="border-t-4 border-black my-5">
         </div>
 
-
         <!-- Filter dan Pencarian -->
         <div class="mb-10 flex flex-col sm:flex-row sm:items-center flex-wrap gap-4 justify-between">
             <div class="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-5 items-stretch">
@@ -86,8 +85,6 @@
 
         </div>
 
-
-
         <!-- Summary Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             <div class="bg-white rounded-lg shadow p-5 border-l-4 border-blue-500">
@@ -155,7 +152,6 @@
             </select>
         </form>
 
-
         <!-- Progress Bar Per Prodi -->
         @if (request()->filled('tahun_progress'))
             <div class="bg-white rounded-lg shadow-lg p-2 mb-8">
@@ -220,6 +216,7 @@
         @endif
 
     </div>
+    
     <script>
         function exportWord(e) {
             event.preventDefault(); // ⬅️ cegah link langsung reload

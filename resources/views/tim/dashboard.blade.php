@@ -3,51 +3,57 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <div class="container mx-auto px-4 py-8">
-        <div class="mb-8">
+
+<div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
+    <div class="mb-8">
             <h1 class="text-3xl font-bold text-gray-800">Dashboard Penyusunan Kurikulum OBE</h1>
             <p class="text-gray-600 mt-2">Progress implementasi kurikulum berbasis Outcome-Based Education per Program Studi
             </p>
-            <hr class="border-t-4 border-black my-8">
+            <hr class="border-t-4 border-black my-5">
         </div>
 
         <!-- Filter Tahun -->
-        <div class="flex flex-col md:flex-row justify-between mb-6 gap-4">
-            <!-- Export Excel -->
-            <form action="{{ route('tim.export.excel') }}" method="GET" class="flex gap-2 items-center">
-                <select name="id_tahun" required
-                    class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
-                    <option value="" disabled {{ empty($id_tahun) ? 'selected' : '' }}>Pilih Tahun Export</option>
-                    @foreach ($availableYears as $th)
-                        <option value="{{ $th->id_tahun }}" {{ $id_tahun == $th->id_tahun ? 'selected' : '' }}>
-                            {{ $th->tahun }}
-                        </option>
-                    @endforeach
-                </select>
-                <button type="submit" class="bg-green-600 text-white px-5 font-bold py-2 rounded-md hover:bg-green-800">
-                    <i class="fas fa-file-excel mr-2"></i>Excel
-                </button>
-                <button type="button" onclick="exportWord()"
-                    class="bg-blue-600 px-4 py-2 rounded-lg text-white hover:bg-blue-800">
-                    <i class="fas fa-file-word mr-2"></i>Word
-                </button>
-            </form>
-
-            <!-- Filter Tahun Grafik -->
-            <form method="GET" action="{{ route('tim.dashboard') }}" class="flex items-center">
-                <label for="tahun_progress" class="mr-2 text-gray-600 text-sm">Tahun Grafik:</label>
-                <select name="tahun_progress" id="tahun_progress"
-                    class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                    required onchange="this.form.submit()">
-                    <option value="" disabled selected>Pilih Tahun</option>
-                    @foreach ($availableYears as $th)
-                        <option value="{{ $th->id_tahun }}"
-                            {{ request('tahun_progress') == $th->id_tahun ? 'selected' : '' }}>
-                            {{ $th->tahun }}
-                        </option>
-                    @endforeach
-                </select>
-            </form>
+        <div class="mb-10 flex flex-col sm:flex-row sm:items-center flex-wrap gap-4 justify-between">
+            <div class="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-5 items-stretch">
+                <form id="exportForm" action="{{ route('tim.export.excel') }}" method="GET"
+                    class="flex flex-col sm:flex-row flex-wrap gap-2 items-stretch">
+                    <select name="id_tahun" id="tahunSelect" required
+                        class="min-w-[150px] text-center border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <option value="" disabled {{ empty($id_tahun) ? 'selected' : '' }}>Pilih Tahun Export</option>
+                        @foreach ($availableYears as $th)
+                            <option value="{{ $th->id_tahun }}" {{ $id_tahun == $th->id_tahun ? 'selected' : '' }}>
+                                {{ $th->tahun }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <button type="submit"
+                            class="bg-green-600 text-white px-4 sm:px-5 font-bold py-2 rounded-md hover:bg-green-800 whitespace-nowrap">
+                            <i class="fas fa-file-excel mr-2"></i>Excel
+                        </button>
+                        <button type="button" onclick="exportWord()"
+                            class="bg-blue-600 px-4 py-2 rounded-lg text-white hover:bg-blue-800 whitespace-nowrap">
+                            <i class="fas fa-file-word mr-2"></i>Word
+                        </button>
+                    </div>
+                </form>
+        
+                <form method="GET" action="{{ route('tim.dashboard') }}"
+                    class="flex flex-col sm:flex-row flex-wrap gap-2 items-stretch sm:items-center">
+                    <label for="tahun_progress" class="text-gray-600 text-sm whitespace-nowrap">Tahun Grafik:</label>
+                    <select name="tahun_progress" id="tahun_progress"
+                        class="min-w-[150px] text-center border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                        required onchange="this.form.submit()">
+                        <option value="" disabled selected>Pilih Tahun</option>
+                        @foreach ($availableYears as $th)
+                            <option value="{{ $th->id_tahun }}"
+                                {{ request('tahun_progress') == $th->id_tahun ? 'selected' : '' }}>
+                                {{ $th->tahun }}
+                            </option>
+                        @endforeach
+                    </select>
+                </form>
+            </div>
         </div>
 
         <!-- Grafik Progress -->
@@ -67,11 +73,10 @@
                 <strong>Silakan pilih tahun grafik terlebih dahulu untuk menampilkan visualisasi progress.</strong>
             </div>
         @endif
-    </div>
+</div>
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     @if (request()->filled('tahun_progress'))
         <script>
             document.addEventListener('DOMContentLoaded', function() {

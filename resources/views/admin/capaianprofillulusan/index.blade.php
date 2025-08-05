@@ -31,7 +31,7 @@
 
 
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-            {{-- <div class="flex space-x-2">
+        {{-- <div class="flex space-x-2">
             <a href="{{ route('admin.capaianprofillulusan.create') }}" 
                class="bg-green-600 hover:bg-green-800 text-white font-bold px-4 py-2 rounded-md inline-flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
@@ -68,9 +68,10 @@
                         @endif
                     </select>
                 </div>
-
-                <!-- Search -->
-                <div class="sm:min-w-[250px] w-full sm:w-auto">
+            </div>
+            
+            <!-- Search -->
+            <div class="sm:min-w-[250px] w-full sm:w-auto">
                     <div
                         class="flex items-center border border-black rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
                         <span class="pl-3 text-gray-400">
@@ -79,8 +80,8 @@
                         <input type="text" id="search" placeholder="Search..."
                             class="px-3 py-2 w-full focus:outline-none bg-transparent" />
                     </div>
-                </div>
             </div>
+            
         </div>
 
         <!-- Filter Info -->
