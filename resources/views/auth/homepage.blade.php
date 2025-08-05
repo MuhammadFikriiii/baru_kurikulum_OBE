@@ -112,8 +112,7 @@
 <body class="bg-gray-100 text-gray-800 ">
 
   <!-- Header -->
-  <header class="bg-white shadow-md right-0 left-0 px-4 sm:px-6 md:px-16 lg:px-32 xl:px-52 fixed top-0 z-50" x-data="{ open: false }">
-
+  <header class="bg-white shadow-md" x-data="{ open: false }">
     <div class="mx-auto px-4 sm:px-6 lg:px-8 ">
       <div class="flex items-center justify-between h-16">
       <!-- Logo -->
@@ -178,7 +177,7 @@
             class="flex items-center justify-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
             <span>Beranda</span>
           </a>
-          <a href="#visimisi">
+          <a href="#visimisi"
             class="flex items-center justify-center gap-2 p-3 hover:bg-[#586da7] rounded-2xl border-b border-[#5067a5]">
             <span>Visi & Misi</span>
           </a>
