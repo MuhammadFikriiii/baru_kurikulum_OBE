@@ -1,9 +1,11 @@
 @extends('layouts.tim.app')
 
 @section('content')
-    <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
-        <h2 class="text-4xl font-extrabold text-center mb-4">Daftar Bobot CPL - MK</h2>
-        <hr class="w-full border border-black mb-6">
+<div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Daftar Bobot CPL - MK</h1>
+        <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
+    </div>
 
         @if (session('success'))
             <div class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">

@@ -1,9 +1,11 @@
 @extends('layouts.tim.app')
 
 @section('content')
-    <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
-        <h2 class="text-4xl font-extrabold text-center mb-4">Pemetaan BK - CPL</h2>
-        <hr class="w-full border border-black mb-4">
+<div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Pemetaan CPL - BK</h1>
+        <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
+    </div>
 
         @if (session('success'))
             <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
@@ -26,7 +28,10 @@
                 transform: translate(-50%, -55%);
             }
         </style>
+
         <!-- Filter Tahun -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-3 gap-4">
+        <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
         <select id="tahun" name="id_tahun"
             class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
             onchange="updateFilter()">
@@ -39,6 +44,9 @@
                 @endforeach
             @endif
         </select>
+        </div>
+        </div>
+
         <!-- Filter Info -->
         @if ($id_tahun)
             <div class="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
@@ -61,7 +69,27 @@
                 </div>
             </div>
         @endif
-        <form>
+
+        <div class="bg-white rounded-lg shadow overflow-visible mt-6">
+            @if (!empty($cpls) && $cpls->isNotEmpty())
+            <style>
+                input[type="checkbox"]:checked {
+                    background-color: #2563eb;
+                    border-color: #2563eb;
+                }
+
+                input[type="checkbox"]:checked::before {
+                    content: "✓";
+                    color: white;
+                    font-size: 1rem;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -55%);
+                }
+            </style>
+
+        <div class="">
             <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-visible">
                 <thead class="bg-green-800 text-white">
                     <tr>
@@ -108,9 +136,16 @@
                     @endforeach
                 </tbody>
             </table>
-        </form>
-        <p class="mt-3 italic text-red-500">*arahkan cursor pada kode BK atau kode CPL untuk melihat deskripsi*</p>
+        </div>
+        @else
+    <div class="p-8 text-center text-gray-600">
+       Data belum dibuat
     </div>
+@endif
+        <p class="mt-3 italic text-red-500">*arahkan cursor pada kode BK atau kode CPL untuk melihat deskripsi*</p>
+       </div>
+</div>
+
     <script>
         function updateFilter() {
             const tahunSelect = document.getElementById('tahun');

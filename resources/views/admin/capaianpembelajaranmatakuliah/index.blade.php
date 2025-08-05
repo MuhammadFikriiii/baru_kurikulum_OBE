@@ -18,7 +18,7 @@
                 </svg>
                 Tambah
             </a>
-        </div> --}}
+             </div> --}}
 
             <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                 <select id="prodi" name="kode_prodi"
@@ -45,6 +45,7 @@
                     @endif
                 </select>
             </div>
+            
             <div class="sm:min-w-[250px] w-full sm:w-auto">
                 <div
                     class="flex items-center border border-black rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">

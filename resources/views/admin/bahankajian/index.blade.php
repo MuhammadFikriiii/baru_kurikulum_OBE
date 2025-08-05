@@ -120,7 +120,7 @@
                 </div>
             @elseif($dataKosong)
                 <div class="p-8 text-center text-gray-600">
-                    <strong>Data belum dibuat untuk prodi ini.</strong>
+                    Data belum dibuat untuk prodi ini
                 </div>
             @else
                 <div class="w-full overflow-x-auto shadow-lg rounded-lg border border-gray-300">

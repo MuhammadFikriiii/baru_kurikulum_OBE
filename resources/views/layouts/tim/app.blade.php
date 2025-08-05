@@ -132,12 +132,7 @@
                         <span>Tahun</span>
                     </a>
                 </li>
-                <li data-title="Profil Lulusan">
-                    <a href="{{ route('tim.profillulusan.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                        <i class="bi bi-file-earmark-person mr-3"></i>
-                        <span>Profil Lulusan</span>
-                    </a>
-                </li>
+        
             </ul>
         </li>
 
@@ -147,16 +142,22 @@
         <li>
             <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Learning Outcomes</p>
             <ul class="ml-2 space-y-1">
+                <li data-title="Profil Lulusan">
+                    <a href="{{ route('tim.profillulusan.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-file-earmark-person mr-3"></i>
+                        <span>1. Profil Lulusan</span>
+                    </a>
+                </li>
                 <li data-title="CPL Prodi">
                     <a href="{{ route('tim.capaianpembelajaranlulusan.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-check2-square mr-3"></i>
-                        <span>CPL Prodi</span>
+                        <span>2. CPL Prodi</span>
                     </a>
                 </li>
                 <li data-title="CPL - PL">
                     <a href="{{ route('tim.pemetaancplpl.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-diagram-3 mr-3"></i>
-                        <span>CPL - PL</span>
+                        <span>3. CPL - PL</span>
                     </a>
                 </li>
             </ul>
@@ -171,31 +172,31 @@
                 <li data-title="Bahan Kajian">
                     <a href="{{ route('tim.bahankajian.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-journal-bookmark mr-3"></i>
-                        <span>Bahan Kajian</span>
+                        <span>4. Bahan Kajian</span>
                     </a>
                 </li>
                 <li data-title="CPL - BK">
                     <a href="{{ route('tim.pemetaancplbk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-pin-map mr-3"></i>
-                        <span>CPL - BK</span>
+                        <span>5. CPL - BK</span>
                     </a>
                 </li>
                 <li data-title="Mata Kuliah">
                     <a href="{{ route('tim.matakuliah.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-book mr-3"></i>
-                        <span>Mata Kuliah</span>
+                        <span>6. Mata Kuliah</span>
                     </a>
                 </li>
                 <li data-title="BK - MK">
                     <a href="{{ route('tim.pemetaanbkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-link-45deg mr-3"></i>
-                        <span>BK - MK</span>
+                        <span>7. BK - MK</span>
                     </a>
                 </li>
                 <li data-title="CPL - MK">
                     <a href="{{ route('tim.pemetaancplmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-bar-chart mr-3"></i>
-                        <span>CPL - MK</span>
+                        <span>8. CPL - MK</span>
                     </a>
                 </li>
             </ul>
@@ -210,25 +211,25 @@
                 <li data-title="CPL - MK - BK">
                     <a href="{{ route('tim.pemetaancplmkbk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-diagram-3 mr-3"></i>
-                        <span>CPL - MK - BK</span>
+                        <span>9. CPL - MK - BK</span>
                     </a>
                 </li>
                 <li data-title="Organisasi MK">
                     <a href="{{ route('tim.matakuliah.organisasimk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-columns mr-3"></i>
-                        <span>Organisasi MK</span>
+                        <span>10. Organisasi MK</span>
                     </a>
                 </li>
                 <li data-title="CPMK">
                     <a href="{{ route('tim.capaianpembelajaranmatakuliah.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-list-check mr-3"></i>
-                        <span>CPMK</span>
+                        <span>11. CPMK</span>
                     </a>
                 </li>
                 <li data-title="SUB CPMK">
                     <a href="{{ route('tim.subcpmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-list-ol mr-3"></i>
-                        <span>SUB CPMK</span>
+                        <span>12. SUB CPMK</span>
                     </a>
                 </li>
             </ul>
@@ -243,43 +244,43 @@
                 <li data-title="Pemenuhan CPL">
                     <a href="{{ route('tim.pemenuhancpl.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-percent mr-3"></i>
-                        <span>Pemenuhan CPL</span>
+                        <span>13. Pemenuhan CPL</span>
                     </a>
                 </li>
                 <li data-title="Pemetaan CPL - CPMK - MK">
                     <a href="{{ route('tim.pemetaancplcpmkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-node-plus mr-3"></i>
-                        <span>CPL - CPMK - MK</span>
+                        <span>14. CPL - CPMK - MK</span>
                     </a>
                 </li>
                 <li data-title="Pemenuhan CPL - CPMK - MK">
                     <a href="{{ route('tim.pemetaancplcpmkmk.pemenuhancplcpmkmk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-pie-chart mr-3"></i>
-                        <span>Pemenuhan CPL-CPMK-MK</span>
+                        <span>15. Pemenuhan CPL-CPMK-MK</span>
                     </a>
                 </li>
                 <li data-title="Pemetaan CPL - MK - CPMK">
                     <a href="{{ route('tim.pemetaancplcpmkmk.pemetaanmkcplcpmk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-graph-up mr-3"></i>
-                        <span>CPL - MK - CPMK</span>
+                        <span>16. CPL - MK - CPMK</span>
                     </a>
                 </li>
                 <li data-title="Pemetaan MK - CPMK - SubCPMK">
                     <a href="{{ route('tim.pemetaanmkcpmksubcpmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-diagram-2 mr-3"></i>
-                        <span>MK - CPMK - SubCPMK</span>
+                        <span>17. MK - CPMK - SubCPMK</span>
                     </a>
                 </li>
                 <li data-title="Bobot">
                     <a href="{{ route('tim.bobot.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-speedometer2 mr-3"></i>
-                        <span>Bobot</span>
+                        <span>18. Bobot</span>
                     </a>
                 </li>
                 <li data-title="Catatan">
                     <a href="{{ route('tim.notes.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-sticky mr-3"></i>
-                        <span>Catatan</span>
+                        <span>19. Catatan</span>
                     </a>
                 </li>
             </ul>

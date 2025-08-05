@@ -1,9 +1,12 @@
 @extends('layouts.tim.app')
 
 @section('content')
-    <div class="mx-5 md:mx-20 my-10">
-        <h2 class="text-4xl font-extrabold text-center mb-4">Pemetaan CPL - CPMK - MK Per Semester</h2>
-        <hr class="border border-black mb-4">
+<div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Pemetaan CPL - CPMK - MK Per Semester</h1>
+        <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
+    </div>
+
         <!-- Filter Tahun -->
         <select id="tahun" name="id_tahun"
             class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"

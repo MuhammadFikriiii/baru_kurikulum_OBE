@@ -2,9 +2,10 @@
 
 @section('content')
     <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
-        <h2 class="text-4xl font-extrabold text-center mb-4">Daftar Capaian Pembelajaran Matakuliah</h2>
-        <hr class="w-full border border-black mb-4">
-
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-800">Daftar Capaian Pembelajaran Matakuliah</h1>
+                <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
+            </div>
         @if (session('success'))
             <div id="alert" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
                 <span class="font-bold">{{ session('success') }}</span>
@@ -21,25 +22,35 @@
             </div>
         @endif
 
-        <div class="flex justify-between mb-4 flex-wrap gap-2">
-            <a href="{{ route('tim.capaianpembelajaranmatakuliah.create') }}"
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+
+            <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+                <a href="{{ route('tim.capaianpembelajaranmatakuliah.create') }}"
                 class="bg-green-600 inline-flex text-white font-bold px-4 py-2 rounded-md hover:bg-green-800">
                 Tambah CPMK
-            </a>
+            </a> 
+                <select id="tahun" name="id_tahun"
+                    class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    onchange="updateFilter()">
+                    <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
+                    @foreach ($tahun_tersedia as $thn)
+                        <option value="{{ $thn->id_tahun }}" {{ $id_tahun == $thn->id_tahun ? 'selected' : '' }}>
+                            {{ $thn->nama_kurikulum }} - {{ $thn->tahun }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-            <select id="tahun" name="id_tahun"
-                class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                onchange="updateFilter()">
-                <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
-                @foreach ($tahun_tersedia as $thn)
-                    <option value="{{ $thn->id_tahun }}" {{ $id_tahun == $thn->id_tahun ? 'selected' : '' }}>
-                        {{ $thn->nama_kurikulum }} - {{ $thn->tahun }}
-                    </option>
-                @endforeach
-            </select>
-
-            <input type="text" id="search" placeholder="Search..."
-                class="border border-black px-3 py-2 rounded-md ml-auto">
+            <div class="sm:min-w-[250px] w-full sm:w-auto">
+                <div
+                            class="flex items-center border border-black rounded-md focus-within:ring-2 focus-within:ring-green-500 bg-white">
+                            <span class="pl-3 text-gray-400">
+                                <i class="fas fa-search"></i>
+                            </span>
+                            <input type="text" id="search" placeholder="Search..."
+                                class="px-3 py-2 w-full focus:outline-none bg-transparent" />
+                </div>
+            </div>
         </div>
 
         @if ($id_tahun)
@@ -58,6 +69,7 @@
                         class="text-xs text-blue-600 hover:text-blue-800 underline">Reset filter</a>
                 </div>
             </div>
+            
         @endif
 
         <table class="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
