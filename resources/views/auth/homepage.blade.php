@@ -112,7 +112,7 @@
 <body class="bg-gray-100 text-gray-800 ">
 
   <!-- Header -->
-  <header class="bg-white shadow-md" x-data="{ open: false }">
+  <header class="bg-white shadow-md  px-4 sm:px-6 md:px-16 lg:px-32 " x-data="{ open: false }">
     <div class="mx-auto px-4 sm:px-6 lg:px-8 ">
       <div class="flex items-center justify-between h-16">
       <!-- Logo -->
