@@ -30,20 +30,15 @@
         @endif
 
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-            
+
             <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                 <div class="flex space-x-2">
                     <a href="{{ route('tim.profillulusan.create') }}"
                         class="bg-green-600 hover:bg-green-800 text-white font-bold px-4 py-2 rounded-md inline-flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                                clip-rule="evenodd" />
-                        </svg>
                         Tambah
                     </a>
                 </div>
-        
+
                 <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                     <select id="tahun" name="id_tahun"
                         class="w-full md:w-64 border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -59,7 +54,7 @@
                     </select>
                 </div>
             </div>
-            
+
             <!-- Search -->
             <div class="sm:min-w-[250px] w-full sm:w-auto">
                 <div
@@ -71,7 +66,7 @@
                         class="px-3 py-2 w-full focus:outline-none bg-transparent" />
                 </div>
             </div>
-            
+
         </div>
 
         <!-- Filter Info -->
@@ -107,15 +102,14 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-green-800 text-white">
                             <tr>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">No.</th>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Kode PL</th>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Deskripsi</th>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Profesi</th>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Unsur</th>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Keterangan</th>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Sumber</th>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Tahun/Kurikulum</th>
-                                <th class="px-4 py-3 text-center text-xs font-medium uppercase tracking-wider">Aksi</th>
+                                <th class="py-3 px-4 w-10 text-center border border-gray-300">No.</th>
+                                <th class="px-4 py-2 text-center w-16 border border-gray-300">Kode PL</th>
+                                <th class="px-4 py-2 text-center w-64 border border-gray-300">Deskripsi</th>
+                                <th class="px-4 py-2 text-center min-w-[200px] border border-gray-300">Profesi</th>
+                                <th class="px-4 py-2 text-center w-32 border border-gray-300">Unsur</th>
+                                <th class="px-4 py-2 text-center w-28 border border-gray-300">Keterangan</th>
+                                <th class="px-4 py-2 text-center w-40 border border-gray-300">Sumber</th>
+                                <th class="px-4 py-2 text-center w-32 border border-gray-300">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -123,14 +117,13 @@
                                 <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-white' }} hover:bg-gray-100">
                                     <td class="px-4 py-4 text-center text-sm">{{ $index + 1 }}</td>
                                     <td class="px-4 py-4 text-center text-sm">{{ $profillulusan->kode_pl }}</td>
-                                    <td class="px-4 py-4 text-sm whitespace-pre-line text-justify">{{ $profillulusan->deskripsi_pl }}</td>
-                                    <td class="px-4 py-4 text-sm whitespace-pre-line text-justify">{{ $profillulusan->profesi_pl }}</td>
+                                    <td class="px-4 py-4 text-sm whitespace-pre-line text-justify">
+                                        {{ $profillulusan->deskripsi_pl }}</td>
+                                    <td class="px-4 py-4 text-sm whitespace-pre-line text-justify">
+                                        {{ $profillulusan->profesi_pl }}</td>
                                     <td class="px-4 py-4 text-sm text-justify">{{ $profillulusan->unsur_pl }}</td>
                                     <td class="px-4 py-4 text-sm text-center">{{ $profillulusan->keterangan_pl }}</td>
                                     <td class="px-4 py-4 text-sm text-justify">{{ $profillulusan->sumber_pl }}</td>
-                                    <td class="px-4 py-4 text-sm text-center">
-                                        {{ $profillulusan->tahun ? $profillulusan->tahun->nama_kurikulum . ' - ' . $profillulusan->tahun->tahun : '-' }}
-                                    </td>
                                     <td class="px-4 py-4">
                                         <div class="flex justify-center space-x-2">
                                             <a href="{{ route('tim.profillulusan.detail', $profillulusan->id_pl) }}"
@@ -144,7 +137,8 @@
                                                 </svg>
                                             </a>
                                             <a href="{{ route('tim.profillulusan.edit', $profillulusan->id_pl) }}"
-                                                class="bg-blue-600 hover:bg-blue-800 text-white p-2 rounded-md" title="Edit">
+                                                class="bg-blue-600 hover:bg-blue-800 text-white p-2 rounded-md"
+                                                title="Edit">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                                     fill="currentColor">
                                                     <path

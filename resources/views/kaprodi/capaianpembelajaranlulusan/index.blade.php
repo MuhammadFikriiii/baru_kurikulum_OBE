@@ -1,7 +1,7 @@
 @extends('layouts.kaprodi.app')
 
 @section('content')
-    <div class="bg-white rounded-lg shadow-md mx-2 md:mx-0">
+    <div class="bg-white rounded-lg shadow-md mr-10 ml-10">
         <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Daftar Capaian Pembelajaran Lulusan</h2>
         <hr class="border-t-4 border-black my-8">
         @if (session('success'))

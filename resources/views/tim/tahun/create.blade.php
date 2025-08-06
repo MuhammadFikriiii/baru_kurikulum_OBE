@@ -21,11 +21,11 @@
 
             <label for="tahun" class="text-xl font-semibold mb-2">Tahun Ajaran</label>
             <input type="number" id="tahun" name="tahun" class="border border-black p-3 w-full rounded-lg mt-1 mb-3"
-                placeholder="Contoh: 2024/2025" required>
+                placeholder="Contoh: 2024" required>
 
             <label for="nama_kurikulum" class="text-xl font-semibold mb-2">Nama Kurikulum</label>
             <input type="text" id="nama_kurikulum" name="nama_kurikulum"
-                class="border border-black p-3 w-full rounded-lg mt-1 mb-3" placeholder="Contoh: Kurikulum OBE 2023"
+                class="border border-black p-3 w-full rounded-lg mt-1 mb-3" placeholder="Contoh: Kurikulum OBE 2024"
                 required>
 
             <div class="flex justify-end space-x-5 mt-[50px]">

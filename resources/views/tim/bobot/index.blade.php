@@ -1,11 +1,11 @@
 @extends('layouts.tim.app')
 
 @section('content')
-<div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
-    <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-gray-800">Daftar Bobot CPL - MK</h1>
-        <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
-    </div>
+    <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Daftar Bobot CPL - MK</h1>
+            <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
+        </div>
 
         @if (session('success'))
             <div class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center relative">
@@ -21,17 +21,12 @@
             <div class="space-x-2">
                 <a href="{{ route('tim.bobot.create') }}"
                     class="bg-green-600 inline-flex text-white font-bold px-4 py-2 rounded-md hover:bg-green-800">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                            clip-rule="evenodd" />
-                    </svg>
                     Tambah
                 </a>
             </div>
 
             <select id="tahun" name="id_tahun"
-                class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                class="border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                 onchange="updateFilter()">
                 <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
                 @foreach ($tahun_tersedia as $thn)

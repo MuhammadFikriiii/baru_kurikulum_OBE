@@ -1,14 +1,14 @@
 @extends('layouts.tim.app')
 
 @section('content')
-<div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
-    <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-gray-800">Organisasi MK</h1>
-        <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
-    </div>
+    <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Organisasi MK</h1>
+            <hr class="border-t-2 md:border-t-4 border-black my-3 md:my-4 mx-auto">
+        </div>
         <!-- Filter Tahun -->
         <select id="tahun" name="id_tahun"
-            class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            class="border border-black mb-4 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
             onchange="updateFilter()">
             <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
             @if (isset($tahun_tersedia))
@@ -97,7 +97,7 @@
             </tbody>
         </table>
     </div>
-    
+
     <script>
         function updateFilter() {
             const tahunSelect = document.getElementById('tahun');

@@ -4,8 +4,8 @@
 
 @section('content')
 
-<div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
-    <div class="mb-8">
+    <div class="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md mx-2 md:mx-0">
+        <div class="mb-8">
             <h1 class="text-3xl font-bold text-gray-800">Dashboard Penyusunan Kurikulum OBE</h1>
             <p class="text-gray-600 mt-2">Progress implementasi kurikulum berbasis Outcome-Based Education per Program Studi
             </p>
@@ -37,23 +37,22 @@
                         </button>
                     </div>
                 </form>
-        
-                <form method="GET" action="{{ route('tim.dashboard') }}"
-                    class="flex flex-col sm:flex-row flex-wrap gap-2 items-stretch sm:items-center">
-                    <label for="tahun_progress" class="text-gray-600 text-sm whitespace-nowrap">Tahun Grafik:</label>
-                    <select name="tahun_progress" id="tahun_progress"
-                        class="min-w-[150px] text-center border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                        required onchange="this.form.submit()">
-                        <option value="" disabled selected>Pilih Tahun</option>
-                        @foreach ($availableYears as $th)
-                            <option value="{{ $th->id_tahun }}"
-                                {{ request('tahun_progress') == $th->id_tahun ? 'selected' : '' }}>
-                                {{ $th->tahun }}
-                            </option>
-                        @endforeach
-                    </select>
-                </form>
             </div>
+            <form method="GET" action="{{ route('tim.dashboard') }}"
+                class="flex flex-col sm:flex-row flex-wrap gap-2 items-stretch sm:items-center">
+                <label for="tahun_progress" class="text-gray-600 text-sm whitespace-nowrap">Tahun Grafik:</label>
+                <select name="tahun_progress" id="tahun_progress"
+                    class="min-w-[150px] text-center border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    required onchange="this.form.submit()">
+                    <option value="" disabled selected>Pilih Tahun</option>
+                    @foreach ($availableYears as $th)
+                        <option value="{{ $th->id_tahun }}"
+                            {{ request('tahun_progress') == $th->id_tahun ? 'selected' : '' }}>
+                            {{ $th->tahun }}
+                        </option>
+                    @endforeach
+                </select>
+            </form>
         </div>
 
         <!-- Grafik Progress -->
@@ -73,7 +72,7 @@
                 <strong>Silakan pilih tahun grafik terlebih dahulu untuk menampilkan visualisasi progress.</strong>
             </div>
         @endif
-</div>
+    </div>
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
