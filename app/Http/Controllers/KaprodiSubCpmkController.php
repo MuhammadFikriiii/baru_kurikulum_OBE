@@ -90,8 +90,7 @@ class KaprodiSubCpmkController extends Controller
             ->join('cpl_pl', 'cpl.id_cpl', '=', 'cpl_pl.id_cpl')
             ->join('profil_lulusans as pl', 'cpl_pl.id_pl', '=', 'pl.id_pl')
             ->join('prodis', 'pl.kode_prodi', '=', 'prodis.kode_prodi')
-            ->join('cpmk_mk', 'cpmk.id_cpmk', '=', 'cpmk_mk.id_cpmk')
-            ->join('mata_kuliahs as mk', 'cpmk_mk.kode_mk', '=', 'mk.kode_mk')
+            ->join('mata_kuliahs as mk', 'sub.kode_mk', '=', 'mk.kode_mk') // <-- ambil dari sub_cpmk langsung
             ->where('prodis.kode_prodi', $kodeProdi)
             ->select(
                 'mk.kode_mk',

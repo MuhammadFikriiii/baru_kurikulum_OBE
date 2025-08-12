@@ -1,7 +1,7 @@
 @extends('layouts.tim.app')
 
 @section('content')
-    <div class=" ml-20  mr-20 container w-full">
+    <div class="ml-20 mr-20">
         <h2 class="font-extrabold text-4xl mb-6 text-center">Tambah MataKuliah</h2>
         <hr class="w-full border border-black mb-4">
 
@@ -82,6 +82,7 @@
                     class="bg-gray-600 hover:bg-gray-700 px-5 py-2 rounded-lg text-white font-bold ml-2">Kembali</a>
             </div>
         </form>
+    </div>
         @push('scripts')
             <script>
                 const cplList = document.getElementById('cplList');

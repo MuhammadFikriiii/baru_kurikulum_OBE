@@ -74,7 +74,7 @@
                                                 @method('DELETE')
                                                 <button type="submit"
                                                     class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-md"
-                                                    title="Hapus" onclick="return confirm('Hapus user ini?')">
+                                                    title="Hapus" onclick="return confirm('Hapus tahun ini?')">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
                                                         viewBox="0 0 20 20" fill="currentColor">
                                                         <path fill-rule="evenodd"

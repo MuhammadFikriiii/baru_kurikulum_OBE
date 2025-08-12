@@ -21,7 +21,7 @@
             <div>
                 <label for="id_tahun" class="block text-lg font-semibold mb-2 text-gray-700">Tahun</label>
                 <select id="id_tahun" name="id_tahun" required
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
+                    class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
                     <option value="" selected disabled>Pilih Tahun</option>
                     @foreach ($tahuns as $tahun)
                         <option value="{{ $tahun->id_tahun }}">{{ $tahun->tahun }}</option>

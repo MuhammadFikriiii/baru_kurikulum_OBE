@@ -31,7 +31,7 @@
                     Tambah CPMK
                 </a>
                 <select id="tahun" name="id_tahun"
-                    class="border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    class="border border-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     onchange="updateFilter()">
                     <option value="" {{ empty($id_tahun) ? 'selected' : '' }}>Semua Tahun</option>
                     @foreach ($tahun_tersedia as $thn)

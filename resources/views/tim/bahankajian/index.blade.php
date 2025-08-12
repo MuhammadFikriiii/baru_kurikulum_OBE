@@ -152,7 +152,7 @@
                                                 @csrf @method('DELETE')
                                                 <button type="submit"
                                                     class="bg-red-600 hover:bg-red-800 text-white p-1 md:p-2 rounded-md inline-flex items-center justify-center"
-                                                    title="Hapus" onclick="return confirm('Hapus prodi ini?')">
+                                                    title="Hapus" onclick="return confirm('Hapus bahan kajian ini?')">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 md:h-4 md:w-4"
                                                         viewBox="0 0 20 20" fill="currentColor">
                                                         <path fill-rule="evenodd"

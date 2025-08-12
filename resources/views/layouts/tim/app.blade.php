@@ -220,18 +220,6 @@
                         <span>10. Organisasi MK</span>
                     </a>
                 </li>
-                <li data-title="CPMK">
-                    <a href="{{ route('tim.capaianpembelajaranmatakuliah.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                        <i class="bi bi-list-check mr-3"></i>
-                        <span>11. CPMK</span>
-                    </a>
-                </li>
-                <li data-title="SUB CPMK">
-                    <a href="{{ route('tim.subcpmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
-                        <i class="bi bi-list-ol mr-3"></i>
-                        <span>12. SUB CPMK</span>
-                    </a>
-                </li>
             </ul>
         </li>
 
@@ -244,25 +232,37 @@
                 <li data-title="Pemenuhan CPL">
                     <a href="{{ route('tim.pemenuhancpl.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-percent mr-3"></i>
-                        <span>13. Pemenuhan CPL</span>
+                        <span>11. Pemenuhan CPL</span>
+                    </a>
+                </li>
+                <li data-title="CPMK">
+                    <a href="{{ route('tim.capaianpembelajaranmatakuliah.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-list-check mr-3"></i>
+                        <span>12. CPMK</span>
                     </a>
                 </li>
                 <li data-title="Pemetaan CPL - CPMK - MK">
                     <a href="{{ route('tim.pemetaancplcpmkmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-node-plus mr-3"></i>
-                        <span>14. CPL - CPMK - MK</span>
+                        <span>13. CPL - CPMK - MK</span>
                     </a>
                 </li>
                 <li data-title="Pemenuhan CPL - CPMK - MK">
                     <a href="{{ route('tim.pemetaancplcpmkmk.pemenuhancplcpmkmk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-pie-chart mr-3"></i>
-                        <span>15. Pemenuhan CPL-CPMK-MK</span>
+                        <span>14. Pemenuhan CPL-CPMK-MK</span>
                     </a>
                 </li>
                 <li data-title="Pemetaan CPL - MK - CPMK">
                     <a href="{{ route('tim.pemetaancplcpmkmk.pemetaanmkcplcpmk') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
                         <i class="bi bi-graph-up mr-3"></i>
-                        <span>16. CPL - MK - CPMK</span>
+                        <span>15. CPL - MK - CPMK</span>
+                    </a>
+                </li>
+                <li data-title="SUB CPMK">
+                    <a href="{{ route('tim.subcpmk.index') }}" class="flex items-center p-3 hover:bg-gray-700 rounded">
+                        <i class="bi bi-list-ol mr-3"></i>
+                        <span>16. SUB CPMK</span>
                     </a>
                 </li>
                 <li data-title="Pemetaan MK - CPMK - SubCPMK">
