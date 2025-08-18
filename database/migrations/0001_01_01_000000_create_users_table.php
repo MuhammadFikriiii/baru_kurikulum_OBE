@@ -19,13 +19,15 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role', ['admin', 'wadir1', 'kaprodi', 'tim']);
+            $table->enum('role', ['admin', 'wadir1', 'kaprodi', 'tim', 'kajur']);
             $table->string('kode_prodi')->nullable();
+            $table->unsignedBigInteger('id_jurusan')->nullable();
             $table->enum('status', ['pending', 'approved'])->default('approved');
             $table->rememberToken();
             $table->timestamps();
             
             $table->foreign('kode_prodi')->references('kode_prodi')->on('prodis')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_jurusan')->references('id_jurusan')->on('jurusans')->onUpdate('cascade')->onDelete('cascade');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

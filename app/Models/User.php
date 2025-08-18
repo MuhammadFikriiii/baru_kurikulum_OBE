@@ -25,6 +25,7 @@ class User extends Authenticatable
         'password',
         'role',
         'kode_prodi',
+        'id_jurusan',
         'status'
     ];
 
@@ -54,5 +55,10 @@ class User extends Authenticatable
     public function prodi()
     {
         return $this->belongsTo(Prodi::class, 'kode_prodi', 'kode_prodi');
+    }
+
+    public function jurusan()
+    {
+        return $this->belongsTo(Jurusan::class, 'id_jurusan', 'id_jurusan');
     }
 }

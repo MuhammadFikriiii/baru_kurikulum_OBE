@@ -15,4 +15,8 @@ class Jurusan extends Model {
     public function prodis() {
         return $this->hasMany(Prodi::class, 'id_jurusan', 'id_jurusan');
     }
+
+    public function users() {
+        return $this->hasMany(User::class, 'id_jurusan', 'id_jurusan');
+    }
 }

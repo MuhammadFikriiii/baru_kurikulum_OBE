@@ -16,11 +16,11 @@
                     </ul>
                 </div>
             @endif
+
             <form action="{{ route('admin.users.store') }}" method="POST" class="space-y-4">
                 @csrf
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
-                    <!-- Kolom Pertama -->
                     <div class="space-y-4">
                         <div>
                             <label for="name" class="block text-lg font-semibold mb-2">Nama</label>
@@ -47,7 +47,6 @@
                         </div>
                     </div>
 
-                    <!-- Kolom Kedua -->
                     <div class="space-y-4">
                         <div>
                             <label for="role" class="block text-lg font-semibold mb-2">Role</label>
@@ -58,10 +57,11 @@
                                 <option value="wadir1" {{ old('role') == 'wadir1' ? 'selected' : '' }}>Wadir 1</option>
                                 <option value="tim" {{ old('role') == 'tim' ? 'selected' : '' }}>Tim</option>
                                 <option value="kaprodi" {{ old('role') == 'kaprodi' ? 'selected' : '' }}>Kaprodi</option>
+                                <option value="kajur" {{ old('role') == 'kajur' ? 'selected' : '' }}>Kajur</option>
                             </select>
                         </div>
 
-                        <div>
+                        <div id="prodi-container" style="display: none;">
                             <label for="kode_prodi" class="block text-lg font-semibold mb-2">Prodi</label>
                             <select name="kode_prodi" id="kode_prodi"
                                 class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
@@ -73,7 +73,20 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <p class="text-sm text-gray-500 italic">*Kosongkan bila user admin/wadir1*</p>
+                        </div>
+
+                        <div id="jurusan-container" style="display: none;">
+                            <label for="id_jurusan" class="block text-lg font-semibold mb-2">Jurusan</label>
+                            <select name="id_jurusan" id="id_jurusan"
+                                class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
+                                <option value="">Pilih Jurusan</option>
+                                @foreach ($jurusans as $jurusan)
+                                    <option value="{{ $jurusan->id_jurusan }}"
+                                        {{ old('id_jurusan') == $jurusan->id_jurusan ? 'selected' : '' }}>
+                                        {{ $jurusan->nama_jurusan }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div>
@@ -87,7 +100,7 @@
                             </select>
                         </div>
 
-                        <div class="">
+                        <div>
                             <label for="password" class="block text-lg font-semibold mb-1">Password</label>
                             <input type="password" id="password" name="password" required
                                 class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
@@ -108,4 +121,33 @@
             </form>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function toggleDropdowns() {
+                let role = $('#role').val();
+
+                $('#prodi-container').hide();
+                $('#jurusan-container').hide();
+                $('#kode_prodi').prop('required', false);
+                $('#id_jurusan').prop('required', false);
+
+                if (role === 'tim' || role === 'kaprodi') {
+                    $('#prodi-container').show();
+                    $('#kode_prodi').prop('required', true);
+                } else if (role === 'kajur') {
+                    $('#jurusan-container').show();
+                    $('#id_jurusan').prop('required', true);
+                    $('#id_jurusan').val('');
+                }
+            }
+
+            toggleDropdowns();
+
+            $('#role').change(function() {
+                toggleDropdowns();
+            });
+        });
+    </script>
 @endsection

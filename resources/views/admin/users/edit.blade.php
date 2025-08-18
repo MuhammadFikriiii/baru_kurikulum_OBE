@@ -29,24 +29,28 @@
                         <div>
                             <label for="name" class="block text-lg font-semibold mb-2">Nama</label>
                             <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}"
+                                required
                                 class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
                         </div>
 
                         <div>
-                            <label for="nip" class="block text-lg font-semibold mb-2">Nip</label>
+                            <label for="nip" class="block text-lg font-semibold mb-2">NIP</label>
                             <input type="text" id="nip" name="nip" value="{{ old('nip', $user->nip) }}"
+                                required
                                 class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
                         </div>
 
                         <div>
-                            <label for="nohp" class="block text-lg font-semibold mb-2">No hp</label>
+                            <label for="nohp" class="block text-lg font-semibold mb-2">No. HP</label>
                             <input type="number" id="nohp" name="nohp" value="{{ old('nohp', $user->nohp) }}"
+                                required
                                 class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
                         </div>
 
                         <div>
                             <label for="email" class="block text-lg font-semibold mb-2">Email</label>
                             <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}"
+                                required
                                 class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
                         </div>
                     </div>
@@ -55,35 +59,53 @@
                     <div class="space-y-4">
                         <div>
                             <label for="role" class="block text-lg font-semibold mb-2">Role</label>
-                            <select id="role" name="role"
+                            <select id="role" name="role" required
                                 class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
-                                <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="wadir1" {{ $user->role === 'wadir1' ? 'selected' : '' }}>Wadir 1</option>
-                                <option value="tim" {{ $user->role === 'tim' ? 'selected' : '' }}>Tim</option>
-                                <option value="kaprodi" {{ $user->role === 'kaprodi' ? 'selected' : '' }}>Kaprodi</option>
+                                <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>Admin
+                                </option>
+                                <option value="wadir1" {{ old('role', $user->role) == 'wadir1' ? 'selected' : '' }}>Wadir 1
+                                </option>
+                                <option value="tim" {{ old('role', $user->role) == 'tim' ? 'selected' : '' }}>Tim
+                                </option>
+                                <option value="kaprodi" {{ old('role', $user->role) == 'kaprodi' ? 'selected' : '' }}>
+                                    Kaprodi</option>
+                                <option value="kajur" {{ old('role', $user->role) == 'kajur' ? 'selected' : '' }}>Kajur
+                                </option>
                             </select>
                         </div>
 
-                        <div>
+                        <div id="prodi-container" style="display: none;">
                             <label for="kode_prodi" class="block text-lg font-semibold mb-2">Prodi</label>
                             <select name="kode_prodi" id="kode_prodi"
                                 class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
                                 <option value="">Pilih Prodi</option>
                                 @foreach ($prodis as $prodi)
                                     <option value="{{ $prodi->kode_prodi }}"
-                                        @if (old('kode_prodi', $user->kode_prodi) == $prodi->kode_prodi) selected @endif>
+                                        {{ old('kode_prodi', $user->kode_prodi) == $prodi->kode_prodi ? 'selected' : '' }}>
                                         {{ $prodi->nama_prodi }}
                                     </option>
                                 @endforeach
                             </select>
-                            <p class=" text-sm text-gray-500 italic">*Kosongkan bila user admin/wadir1*</p>
+                        </div>
+
+                        <div id="jurusan-container" style="display: none;">
+                            <label for="id_jurusan" class="block text-lg font-semibold mb-2">Jurusan</label>
+                            <select name="id_jurusan" id="id_jurusan"
+                                class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
+                                <option value="">Pilih Jurusan</option>
+                                @foreach ($jurusans as $jurusan)
+                                    <option value="{{ $jurusan->id_jurusan }}"
+                                        {{ old('id_jurusan', $user->id_jurusan) == $jurusan->id_jurusan ? 'selected' : '' }}>
+                                        {{ $jurusan->nama_jurusan }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div>
                             <label for="status" class="block text-lg font-semibold">Status User</label>
-                            <select name="status" id="status"
-                                class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]"
-                                required>
+                            <select name="status" id="status" required
+                                class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
                                 <option value="" disabled {{ old('status', $user->status) == '' ? 'selected' : '' }}>
                                     Pilih Status</option>
                                 <option value="approved"
@@ -93,9 +115,8 @@
                             </select>
                         </div>
 
-                        <div class="">
-                            <label for="password" class="block text-lg font-semibold">Password
-                                (Opsional)</label>
+                        <div>
+                            <label for="password" class="block text-lg font-semibold">Password (Opsional)</label>
                             <input type="password" id="password" name="password"
                                 class="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-[#fbfffd]">
                             <p class="mt-2 text-sm text-gray-500 italic">*Kosongkan jika tidak ingin mengubah password*</p>
@@ -117,4 +138,32 @@
             </form>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function toggleDropdowns() {
+                let role = $('#role').val();
+
+                $('#prodi-container').hide();
+                $('#jurusan-container').hide();
+                $('#kode_prodi').prop('required', false);
+                $('#id_jurusan').prop('required', false);
+
+                if (role === 'tim' || role === 'kaprodi') {
+                    $('#prodi-container').show();
+                    $('#kode_prodi').prop('required', true);
+                } else if (role === 'kajur') {
+                    $('#jurusan-container').show();
+                    $('#id_jurusan').prop('required', true);
+                }
+            }
+
+            toggleDropdowns();
+
+            $('#role').change(function() {
+                toggleDropdowns();
+            });
+        });
+    </script>
 @endsection

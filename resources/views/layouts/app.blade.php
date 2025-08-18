@@ -124,7 +124,7 @@
 
 
             <li>
-                <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">User Management</p>
+                <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Fitur admin</p>
                 <ul class="ml-2 space-y-1">
                     <li data-title="Users">
                         <a href="{{ route('admin.users.index') }}"
@@ -141,14 +141,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
 
-
-            <li class="border-t border-gray-700 my-2"></li>
-
-
-            <li>
-                <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Program Management</p>
                 <ul class="ml-2 space-y-1">
                     <li data-title="Jurusan">
                         <a href="{{ route('admin.jurusan.index') }}"
@@ -199,7 +192,7 @@
             <li class="border-t border-gray-700 my-2"></li>
 
             <li>
-                <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Learning Outcomes</p>
+                <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">input</p>
                 <ul class="ml-2 space-y-1">
                     <li data-title="Profil Lulusan">
                         <a href="{{ route('admin.profillulusan.index') }}"
@@ -215,11 +208,32 @@
                             <span>2. CPL Prodi</span>
                         </a>
                     </li>
-                    <li data-title="Pemetaan CPL-PL">
-                        <a href="{{ route('admin.pemetaancplpl.index') }}"
+                    <li data-title="Bahan Kajian">
+                        <a href="{{ route('admin.bahankajian.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
-                            <i class="bi bi-diagram-3 mr-3"></i>
-                            <span>3. CPL-PL</span>
+                            <i class="bi bi-journal-bookmark mr-3"></i>
+                            <span>3. Bahan Kajian</span>
+                        </a>
+                    </li>
+                    <li data-title="Mata Kuliah">
+                        <a href="{{ route('admin.matakuliah.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-journal-bookmark mr-3"></i>
+                            <span>4. Mata Kuliah</span>
+                        </a>
+                    </li>
+                    <li data-title="CPMK">
+                        <a href="{{ route('admin.capaianpembelajaranmatakuliah.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-list-check mr-3"></i>
+                            <span>5. CPMK</span>
+                        </a>
+                    </li>
+                    <li data-title="Sub Cpmk">
+                        <a href="{{ route('admin.subcpmk.index') }}"
+                            class="flex items-center p-3 hover:bg-gray-700 rounded">
+                            <i class="bi bi-list-ol mr-3"></i>
+                            <span>6. Sub CPMK</span>
                         </a>
                     </li>
                 </ul>
@@ -230,13 +244,13 @@
 
 
             <li>
-                <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Curriculum</p>
+                <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Pemetaan</p>
                 <ul class="ml-2 space-y-1">
-                    <li data-title="Bahan Kajian">
-                        <a href="{{ route('admin.bahankajian.index') }}"
+                    <li data-title="Pemetaan CPL-PL">
+                        <a href="{{ route('admin.pemetaancplpl.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
-                            <i class="bi bi-journal-bookmark mr-3"></i>
-                            <span>4. Bahan Kajian</span>
+                            <i class="bi bi-diagram-3 mr-3"></i>
+                            <span>3. CPL-PL</span>
                         </a>
                     </li>
                     <li data-title="Pemetaan CPL - BK">
@@ -244,13 +258,6 @@
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
                             <i class="bi bi-pin-map mr-3"></i>
                             <span>5. CPL - BK</span>
-                        </a>
-                    </li>
-                    <li data-title="Mata Kuliah">
-                        <a href="{{ route('admin.matakuliah.index') }}"
-                            class="flex items-center p-3 hover:bg-gray-700 rounded">
-                            <i class="bi bi-book mr-3"></i>
-                            <span>6. Susunan MK</span>
                         </a>
                     </li>
                     <li data-title="Pemetaan BK - MK">
@@ -267,14 +274,6 @@
                             <span>8. CPL - MK</span>
                         </a>
                     </li>
-                </ul>
-            </li>
-
-            <li class="border-t border-gray-700 my-2"></li>
-
-            <li>
-                <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Advanced Mapping</p>
-                <ul class="ml-2 space-y-1">
                     <li data-title="Pemetaan CPL - BK - MK">
                         <a href="{{ route('admin.pemetaancplmkbk.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
@@ -296,23 +295,6 @@
                             <span>11. Pemenuhan CPL</span>
                         </a>
                     </li>
-                    <li data-title="CPMK">
-                        <a href="{{ route('admin.capaianpembelajaranmatakuliah.index') }}"
-                            class="flex items-center p-3 hover:bg-gray-700 rounded">
-                            <i class="bi bi-list-check mr-3"></i>
-                            <span>12. CPMK</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-
-            <li class="border-t border-gray-700 my-2"></li>
-
-
-            <li>
-                <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Reports</p>
-                <ul class="ml-2 space-y-1">
                     <li data-title="PEMETAAN CPL-CPMK-MK">
                         <a href="{{ route('admin.pemetaancplcpmkmk.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
@@ -334,13 +316,6 @@
                             <span>15. Pemenuhan CPL-MK-CPMK</span>
                         </a>
                     </li>
-                    <li data-title="Sub Cpmk">
-                        <a href="{{ route('admin.subcpmk.index') }}"
-                            class="flex items-center p-3 hover:bg-gray-700 rounded">
-                            <i class="bi bi-list-ol mr-3"></i>
-                            <span>16. Sub CPMK</span>
-                        </a>
-                    </li>
                     <li data-title="Pemenuhan MK - CPMK - SubCPMK">
                         <a href="{{ route('admin.pemetaanmkcpmksubcpmk.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
@@ -348,6 +323,14 @@
                             <span>17. Pemenuhan MK-CPMK-SubCPMK</span>
                         </a>
                     </li>
+                </ul>
+            </li>
+
+            <li class="border-t border-gray-700 my-2"></li>
+
+            <li>
+                <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Pembobotan</p>
+                <ul class="ml-2 space-y-1">
                     <li data-title="Bobot">
                         <a href="{{ route('admin.bobot.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
@@ -355,6 +338,14 @@
                             <span>18. Bobot</span>
                         </a>    
                     </li>
+                </ul>
+            </li>
+
+            <li class="border-t border-gray-700 my-2"></li>
+
+            <li>
+                <p class="text-gray-400 uppercase text-xs font-semibold px-3 py-2">Catatan</p>
+                <ul class="ml-2 space-y-1">
                     <li data-title="Catatan">
                         <a href="{{ route('admin.notes.index') }}"
                             class="flex items-center p-3 hover:bg-gray-700 rounded">
