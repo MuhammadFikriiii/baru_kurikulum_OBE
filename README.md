@@ -26,6 +26,9 @@
 
 ---
 
+project ini memiliki lisensi resmi
+hanya diperbolehkan untuk mempelajari
+---
 ## 🛠️ Instalasi
 
 ```bash
