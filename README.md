@@ -32,7 +32,7 @@ hanya diperbolehkan untuk mempelajari
 ## 🛠️ Instalasi
 
 ```bash
-git clone https://github.com/username/baru_kurikulum_OBE.git
+git clone https://github.com/MuhammadFikriiii/baru_kurikulum_OBE.git
 cd baru_kurikulum_OBE
 composer install
 cp .env.example .env
